@@ -9,15 +9,20 @@
 /* Begin PBXBuildFile section */
 		CC68EA96163DA07400D225C2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC68EA95163DA07400D225C2 /* main.cpp */; };
 		CC68EA98163DA07400D225C2 /* CMSTest.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = CC68EA97163DA07400D225C2 /* CMSTest.1 */; };
+		CC68EAAD163DB19F00D225C2 /* libactivemq-cpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC68EAAC163DB19F00D225C2 /* libactivemq-cpp.a */; };
+		CC68EAB0163DB2AE00D225C2 /* libactivemq-cpp.15.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = CC68EAAE163DB27F00D225C2 /* libactivemq-cpp.15.dylib */; };
+		CC68EAB4163DB36800D225C2 /* SimpleAsyncConsumer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC68EAB2163DB36800D225C2 /* SimpleAsyncConsumer.cpp */; };
+		CC68EAB7163DB42E00D225C2 /* SimpleAsyncProducer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC68EAB5163DB42E00D225C2 /* SimpleAsyncProducer.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		CC68EA8F163DA07400D225C2 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
+			dstPath = usr/share/man/man1;
 			dstSubfolderSpec = 0;
 			files = (
+				CC68EAB0163DB2AE00D225C2 /* libactivemq-cpp.15.dylib in CopyFiles */,
 				CC68EA98163DA07400D225C2 /* CMSTest.1 in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
@@ -28,6 +33,12 @@
 		CC68EA91163DA07400D225C2 /* CMSTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CMSTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC68EA95163DA07400D225C2 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		CC68EA97163DA07400D225C2 /* CMSTest.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = CMSTest.1; sourceTree = "<group>"; };
+		CC68EAAC163DB19F00D225C2 /* libactivemq-cpp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libactivemq-cpp.a"; path = "../Libraries/activemq-cpp/activemq-cpp/build/src/main/.libs/libactivemq-cpp.a"; sourceTree = "<group>"; };
+		CC68EAAE163DB27F00D225C2 /* libactivemq-cpp.15.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libactivemq-cpp.15.dylib"; path = "../Libraries/activemq-cpp/activemq-cpp/build/src/main/.libs/libactivemq-cpp.15.dylib"; sourceTree = "<group>"; };
+		CC68EAB2163DB36800D225C2 /* SimpleAsyncConsumer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleAsyncConsumer.cpp; sourceTree = "<group>"; };
+		CC68EAB3163DB36800D225C2 /* SimpleAsyncConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleAsyncConsumer.h; sourceTree = "<group>"; };
+		CC68EAB5163DB42E00D225C2 /* SimpleAsyncProducer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleAsyncProducer.cpp; sourceTree = "<group>"; };
+		CC68EAB6163DB42E00D225C2 /* SimpleAsyncProducer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleAsyncProducer.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC68EAAD163DB19F00D225C2 /* libactivemq-cpp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +56,7 @@
 		CC68EA86163DA07400D225C2 = {
 			isa = PBXGroup;
 			children = (
+				CC68EAB1163DB32600D225C2 /* Libraries */,
 				CC68EA94163DA07400D225C2 /* CMSTest */,
 				CC68EA92163DA07400D225C2 /* Products */,
 			);
@@ -62,8 +75,21 @@
 			children = (
 				CC68EA95163DA07400D225C2 /* main.cpp */,
 				CC68EA97163DA07400D225C2 /* CMSTest.1 */,
+				CC68EAB2163DB36800D225C2 /* SimpleAsyncConsumer.cpp */,
+				CC68EAB3163DB36800D225C2 /* SimpleAsyncConsumer.h */,
+				CC68EAB5163DB42E00D225C2 /* SimpleAsyncProducer.cpp */,
+				CC68EAB6163DB42E00D225C2 /* SimpleAsyncProducer.h */,
 			);
 			path = CMSTest;
+			sourceTree = "<group>";
+		};
+		CC68EAB1163DB32600D225C2 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				CC68EAAE163DB27F00D225C2 /* libactivemq-cpp.15.dylib */,
+				CC68EAAC163DB19F00D225C2 /* libactivemq-cpp.a */,
+			);
+			name = Libraries;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -118,6 +144,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC68EA96163DA07400D225C2 /* main.cpp in Sources */,
+				CC68EAB4163DB36800D225C2 /* SimpleAsyncConsumer.cpp in Sources */,
+				CC68EAB7163DB42E00D225C2 /* SimpleAsyncProducer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,13 +171,14 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
+				SDKROOT = macosx10.7;
 			};
 			name = Debug;
 		};
@@ -166,26 +195,41 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				SDKROOT = macosx;
+				SDKROOT = macosx10.7;
 			};
 			name = Release;
 		};
 		CC68EA9C163DA07400D225C2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				HEADER_SEARCH_PATHS = (
+					"/Users/rkieley/LocalProjects/bdi/OSX/Libraries/activemq-cpp/activemq-cpp/include/main",
+					"/opt/local/include/apr-1/",
+				);
+				LIBRARY_SEARCH_PATHS = "/Users/rkieley/LocalProjects/bdi/OSX/Libraries/activemq-cpp/activemq-cpp/build/src/main/.libs";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.7;
 			};
 			name = Debug;
 		};
 		CC68EA9D163DA07400D225C2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				HEADER_SEARCH_PATHS = (
+					"/Users/rkieley/LocalProjects/bdi/OSX/Libraries/activemq-cpp/activemq-cpp/include/main",
+					"/opt/local/include/apr-1/",
+				);
+				LIBRARY_SEARCH_PATHS = "/Users/rkieley/LocalProjects/bdi/OSX/Libraries/activemq-cpp/activemq-cpp/build/src/main/.libs";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.7;
 			};
 			name = Release;
 		};
@@ -208,6 +252,7 @@
 				CC68EA9D163DA07400D225C2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
