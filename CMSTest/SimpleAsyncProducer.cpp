@@ -22,6 +22,10 @@
 #include <cms/MapMessage.h>
 #include <cms/ExceptionListener.h>
 #include <cms/MessageListener.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <iostream>
+#include <memory>
 
 using namespace activemq;
 using namespace activemq::core;
@@ -108,8 +112,7 @@ void SimpleProducer::run()
         //string threadIdStr = Long::toString( Thread::getId() );
         long long llThreadId = Thread::currentThread()->getId();
         string threadIdStr = Long::toString( llThreadId );
-        
-        
+
         // Create a messages
         string text = (string)"Hello world! from thread " + threadIdStr;
         
@@ -122,8 +125,10 @@ void SimpleProducer::run()
             // Tell the producer to send the message
             printf( "Sent message #%d from thread %s\n", ix+1, threadIdStr.c_str() );
             producer->send( message );
+            //Thread::currentThread()->yield();
             
             delete message;
+            Thread::currentThread()->sleep(10);
         }
         
     }
@@ -132,8 +137,6 @@ void SimpleProducer::run()
         e.printStackTrace();
     }
 }
-
-
 
 void SimpleProducer::cleanup()
 {

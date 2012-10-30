@@ -28,34 +28,7 @@
  */
 
 #include <decaf/lang/Runnable.h>
-//#include <decaf/lang/Thread.h>
-//#include <decaf/util/concurrent/CountDownLatch.h>
-//#include <decaf/lang/Long.h>
-//#include <decaf/util/Date.h>
-//#include <activemq/core/ActiveMQConnectionFactory.h>
-//#include <activemq/util/Config.h>
-//#include <activemq/library/ActiveMQCPP.h>
-//#include <cms/Connection.h>
-//#include <cms/Session.h>
-//#include <cms/TextMessage.h>
-//#include <cms/BytesMessage.h>
-//#include <cms/MapMessage.h>
-//#include <cms/ExceptionListener.h>
-//#include <cms/MessageListener.h>
-
-#include <stdlib.h>
-#include <stdio.h>
-#include <iostream>
-#include <memory>
-
-//using namespace activemq;
-//using namespace activemq::core;
-//using namespace decaf;
-//using namespace decaf::lang;
-//using namespace decaf::util;
-//using namespace decaf::util::concurrent;
-//using namespace cms;
-//using namespace std;
+#include <string>
 
 namespace cms
 {
@@ -64,6 +37,7 @@ namespace cms
     class Destination;
     class MessageProducer;
 }
+
 
 class SimpleProducer :
     public decaf::lang::Runnable
@@ -79,24 +53,27 @@ private:
     unsigned int            numMessages;
     std::string             brokerURI;
     std::string             destURI;
+
+    // Helper(s)
+    void cleanup();
     
 public:
-    
-    SimpleProducer( const std::string& brokerURI,
+
+    // Constructor(s)
+    SimpleProducer(const std::string& brokerURI,
                    unsigned int numMessages,
                    const std::string& destURI,
                    bool useTopic = false,
-                   bool clientAck = false );
+                   bool clientAck = false);
     
+    // Destructor(s)
     virtual ~SimpleProducer();
     
-    void close();
-    
+    // Method(s)
     virtual void run();
     
-private:
-    
-    void cleanup();
+    // Function(s)
+    void close();
 };
 
 #endif /* defined(__CMSTest__SimpleAsyncProducer__) */

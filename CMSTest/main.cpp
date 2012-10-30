@@ -51,7 +51,7 @@ using namespace cms;
 using namespace std;
 
 
-#if 1
+#if 0
 ////////////////////////////////////////////////////////////////////////////////
 int main(int argc AMQCPP_UNUSED, char* argv[] AMQCPP_UNUSED) {
     
@@ -127,10 +127,10 @@ int main(int argc AMQCPP_UNUSED, char* argv[] AMQCPP_UNUSED) {
 }
 #endif
 
-#if 0
+#if 1
 ////////////////////////////////////////////////////////////////////////////////
-int main(int argc AMQCPP_UNUSED, char* argv[] AMQCPP_UNUSED) {
-    
+int main(int argc AMQCPP_UNUSED, char* argv[] AMQCPP_UNUSED)
+{    
     activemq::library::ActiveMQCPP::initializeLibrary();
     
     std::cout << "=====================================================\n";
@@ -181,16 +181,32 @@ int main(int argc AMQCPP_UNUSED, char* argv[] AMQCPP_UNUSED) {
     //============================================================
     bool useTopics = false;
     
-    // Create the producer and run it.
-    SimpleProducer producer( brokerURI, numMessages, destURI, useTopics );
-    producer.run();
-    producer.close();
     
+    
+    
+    // Create the producer and run it.
+//    SimpleProducer producer( brokerURI, numMessages, destURI, useTopics );
+//    producer.run();
+//    producer.close();
+    
+    SimpleProducer producer(brokerURI, numMessages, destURI, useTopics);
+    Thread pSimpleProducerThread(&producer, (char*)"MySimpleProducerThread");
+    pSimpleProducerThread.start();
+    //producer.run();
+    std::cout << "Waiting for the producer thread to terminate..." << std::endl;
+    while (Thread::TERMINATED != pSimpleProducerThread.getState())
+    {
+    }
+
     std::cout << "-----------------------------------------------------\n";
     std::cout << "Finished with the example." << std::endl;
+    std::cout << "Closing out the producer." << std::endl;
     std::cout << "=====================================================\n";
+    producer.close();
     
     activemq::library::ActiveMQCPP::shutdownLibrary();
+    
+    //delete pSimpleProducerThread;
 }
 #endif
 

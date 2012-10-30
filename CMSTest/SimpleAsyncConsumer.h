@@ -27,82 +27,67 @@
  * limitations under the License.
  */
 
-#include <decaf/lang/Thread.h>
 #include <decaf/lang/Runnable.h>
-#include <decaf/util/concurrent/CountDownLatch.h>
-#include <activemq/core/ActiveMQConnectionFactory.h>
-#include <activemq/core/ActiveMQConnection.h>
-#include <activemq/transport/DefaultTransportListener.h>
-#include <activemq/library/ActiveMQCPP.h>
-#include <decaf/lang/Integer.h>
-#include <activemq/util/Config.h>
-#include <decaf/util/Date.h>
-#include <cms/Connection.h>
-#include <cms/Session.h>
-#include <cms/TextMessage.h>
-#include <cms/BytesMessage.h>
-#include <cms/MapMessage.h>
 #include <cms/ExceptionListener.h>
 #include <cms/MessageListener.h>
-#include <decaf/net/URI.h>
+#include <activemq/transport/DefaultTransportListener.h>
+#include <string>
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <iostream>
+namespace cms
+{
+    class Connection;
+    class Session;
+    class Destination;
+    class MessageConsumer;
+    class Message;
+    class CMSException;
+}
 
-using namespace activemq;
-using namespace activemq::core;
-using namespace activemq::transport;
-using namespace decaf::lang;
-using namespace decaf::util;
-using namespace decaf::util::concurrent;
-using namespace cms;
-using namespace std;
 
-////////////////////////////////////////////////////////////////////////////////
 class SimpleAsyncConsumer :
-    public ExceptionListener,
-    public MessageListener,
-    public DefaultTransportListener
+    public cms::ExceptionListener,
+    public cms::MessageListener,
+    public activemq::transport::DefaultTransportListener
 {
 private:
     
-    Connection*         connection;
-    Session*            session;
-    Destination*        destination;
-    MessageConsumer*    consumer;
-    bool                useTopic;
-    bool                clientAck;
-    std::string         brokerURI;
-    std::string         destURI;
+    // Instance Data
+    cms::Connection*        connection;
+    cms::Session*           session;
+    cms::Destination*       destination;
+    cms::MessageConsumer*   consumer;
+    bool                    useTopic;
+    bool                    clientAck;
+    std::string             brokerURI;
+    std::string             destURI;
+    
+    // Helper(s)
+    void cleanup();
     
 public:
     
+    // Constructor(s)
     SimpleAsyncConsumer(const std::string& brokerURI,
                         const std::string& destURI,
                         bool useTopic = false,
                         bool clientAck = false);
     
+    // Destructor(s)
     virtual ~SimpleAsyncConsumer();
-    
-    void close();
-    
-    void runConsumer();
-    
+
+    // Method(s)
     // Called from the consumer since this class is a registered MessageListener.
-    virtual void onMessage( const Message* message );
+    virtual void onMessage(const cms::Message* message);
     
     // If something bad happens you see it here as this class is also been
     // registered as an ExceptionListener with the connection.
-    virtual void onException( const CMSException& ex AMQCPP_UNUSED );
-    
+    virtual void onException(const cms::CMSException& ex AMQCPP_UNUSED);
     virtual void transportInterrupted();
-    
     virtual void transportResumed();
-    
-private:
-    
-    void cleanup();
+
+    // Function(s)
+    void close();
+    void runConsumer();    
 };
 
 
