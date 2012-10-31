@@ -128,7 +128,7 @@ void SimpleProducer::run()
             //Thread::currentThread()->yield();
             
             delete message;
-            Thread::currentThread()->sleep(10);
+            Thread::currentThread()->sleep(1000);
         }
         
     }
