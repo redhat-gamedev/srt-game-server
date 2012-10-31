@@ -13,7 +13,26 @@
 		CC68EAB0163DB2AE00D225C2 /* libactivemq-cpp.15.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = CC68EAAE163DB27F00D225C2 /* libactivemq-cpp.15.dylib */; };
 		CC68EAB4163DB36800D225C2 /* SimpleAsyncConsumer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC68EAB2163DB36800D225C2 /* SimpleAsyncConsumer.cpp */; };
 		CC68EAB7163DB42E00D225C2 /* SimpleAsyncProducer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC68EAB5163DB42E00D225C2 /* SimpleAsyncProducer.cpp */; };
+		CCFB9DF11640ABF500F6DBA2 /* libBox2D-osx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CCFB9DE41640ABB900F6DBA2 /* libBox2D-osx.a */; };
+		CCFB9E101640AF8900F6DBA2 /* B2DWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCFB9E0E1640AF8900F6DBA2 /* B2DWorld.cpp */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CCFB9DE11640ABB900F6DBA2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CCFB9DDC1640ABB900F6DBA2 /* Box2D.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
+			remoteInfo = Box2D;
+		};
+		CCFB9DE31640ABB900F6DBA2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CCFB9DDC1640ABB900F6DBA2 /* Box2D.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CC2C7B8E15A9EF1000B59D3D;
+			remoteInfo = "Box2D-osx";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		CC68EA8F163DA07400D225C2 /* CopyFiles */ = {
@@ -39,6 +58,9 @@
 		CC68EAB3163DB36800D225C2 /* SimpleAsyncConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleAsyncConsumer.h; sourceTree = "<group>"; };
 		CC68EAB5163DB42E00D225C2 /* SimpleAsyncProducer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleAsyncProducer.cpp; sourceTree = "<group>"; };
 		CC68EAB6163DB42E00D225C2 /* SimpleAsyncProducer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleAsyncProducer.h; sourceTree = "<group>"; };
+		CCFB9DDC1640ABB900F6DBA2 /* Box2D.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Box2D.xcodeproj; path = ../../iPhone/Libraries/Box2D/Box2D.xcodeproj; sourceTree = "<group>"; };
+		CCFB9E0E1640AF8900F6DBA2 /* B2DWorld.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = B2DWorld.cpp; sourceTree = "<group>"; };
+		CCFB9E0F1640AF8900F6DBA2 /* B2DWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B2DWorld.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +69,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC68EAAD163DB19F00D225C2 /* libactivemq-cpp.a in Frameworks */,
+				CCFB9DF11640ABF500F6DBA2 /* libBox2D-osx.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +82,7 @@
 				CC68EAB1163DB32600D225C2 /* Libraries */,
 				CC68EA94163DA07400D225C2 /* CMSTest */,
 				CC68EA92163DA07400D225C2 /* Products */,
+				CCFB9DDC1640ABB900F6DBA2 /* Box2D.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -79,6 +103,8 @@
 				CC68EAB3163DB36800D225C2 /* SimpleAsyncConsumer.h */,
 				CC68EAB5163DB42E00D225C2 /* SimpleAsyncProducer.cpp */,
 				CC68EAB6163DB42E00D225C2 /* SimpleAsyncProducer.h */,
+				CCFB9E0E1640AF8900F6DBA2 /* B2DWorld.cpp */,
+				CCFB9E0F1640AF8900F6DBA2 /* B2DWorld.h */,
 			);
 			path = CMSTest;
 			sourceTree = "<group>";
@@ -90,6 +116,15 @@
 				CC68EAAC163DB19F00D225C2 /* libactivemq-cpp.a */,
 			);
 			name = Libraries;
+			sourceTree = "<group>";
+		};
+		CCFB9DDD1640ABB900F6DBA2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CCFB9DE21640ABB900F6DBA2 /* libBox2D.a */,
+				CCFB9DE41640ABB900F6DBA2 /* libBox2D-osx.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -131,12 +166,35 @@
 			mainGroup = CC68EA86163DA07400D225C2;
 			productRefGroup = CC68EA92163DA07400D225C2 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = CCFB9DDD1640ABB900F6DBA2 /* Products */;
+					ProjectRef = CCFB9DDC1640ABB900F6DBA2 /* Box2D.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				CC68EA90163DA07400D225C2 /* CMSTest */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		CCFB9DE21640ABB900F6DBA2 /* libBox2D.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libBox2D.a;
+			remoteRef = CCFB9DE11640ABB900F6DBA2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CCFB9DE41640ABB900F6DBA2 /* libBox2D-osx.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libBox2D-osx.a";
+			remoteRef = CCFB9DE31640ABB900F6DBA2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CC68EA8D163DA07400D225C2 /* Sources */ = {
@@ -146,6 +204,7 @@
 				CC68EA96163DA07400D225C2 /* main.cpp in Sources */,
 				CC68EAB4163DB36800D225C2 /* SimpleAsyncConsumer.cpp in Sources */,
 				CC68EAB7163DB42E00D225C2 /* SimpleAsyncProducer.cpp in Sources */,
+				CCFB9E101640AF8900F6DBA2 /* B2DWorld.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

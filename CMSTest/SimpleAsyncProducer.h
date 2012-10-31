@@ -38,12 +38,15 @@ namespace cms
     class MessageProducer;
 }
 
+class B2DWorld;
+
 
 class SimpleProducer :
     public decaf::lang::Runnable
 {
 private:
     
+    // ActiveMQ-CPP
     cms::Connection*        connection;
     cms::Session*           session;
     cms::Destination*       destination;
@@ -53,7 +56,10 @@ private:
     unsigned int            numMessages;
     std::string             brokerURI;
     std::string             destURI;
-
+    
+    // Box2D
+    B2DWorld*               m_pB2DWorld;
+    
     // Helper(s)
     void cleanup();
     

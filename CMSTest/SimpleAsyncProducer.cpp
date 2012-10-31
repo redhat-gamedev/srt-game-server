@@ -7,6 +7,7 @@
 //
 
 #include "SimpleAsyncProducer.h"
+#include "B2DWorld.h"
 #include <decaf/lang/Thread.h>
 //#include <decaf/lang/Runnable.h>
 #include <decaf/util/concurrent/CountDownLatch.h>
@@ -53,10 +54,13 @@ SimpleProducer::SimpleProducer(
     this->brokerURI = brokerURI;
     this->destURI = destURI;
     this->clientAck = clientAck;
+    
+    m_pB2DWorld = new B2DWorld();
 }
 
 SimpleProducer::~SimpleProducer()
 {
+    delete m_pB2DWorld;
     cleanup();
 }
 
@@ -114,21 +118,25 @@ void SimpleProducer::run()
         string threadIdStr = Long::toString( llThreadId );
 
         // Create a messages
-        string text = (string)"Hello world! from thread " + threadIdStr;
+        string text = "";//(string)"Hello world! from thread " + threadIdStr;
         
+        m_pB2DWorld->CreateBodiesAndShapes();
         for( unsigned int ix=0; ix<numMessages; ++ix )
         {
+            m_pB2DWorld->Update(text);
+            
             TextMessage* message = session->createTextMessage( text );
             
             message->setIntProperty( "Integer", ix );
             
             // Tell the producer to send the message
-            printf( "Sent message #%d from thread %s\n", ix+1, threadIdStr.c_str() );
+            //printf( "Sent message #%d from thread %s\n", ix+1, threadIdStr.c_str() );
+            //printf("%s\n", message->getText().c_str());
             producer->send( message );
             //Thread::currentThread()->yield();
             
             delete message;
-            Thread::currentThread()->sleep(1000);
+            Thread::currentThread()->sleep(10);
         }
         
     }
