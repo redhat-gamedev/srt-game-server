@@ -51,7 +51,65 @@ using namespace cms;
 using namespace std;
 
 
+
+#if 1
+////////////////////////////////////////////////////////////////////////////////
+int main(int argc AMQCPP_UNUSED, char* argv[] AMQCPP_UNUSED)
+{
+    bool            useTopics = false;
+    bool            clientAck = false;
+    unsigned int    numMessages = 20000;
+    std::string     strWorldSimulationURI = "WORLD.SIMULATION";
+    std::string     strInputURI = "CLIENT.INPUT";
+    std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp";
+    ///"failover:(tcp://127.0.0.1:61616"
+    //        "?wireFormat=openwire"
+    //        "&connection.useAsyncSend=true"
+    //        "&transport.commandTracingEnabled=true"
+    //        "&transport.tcpTracingEnabled=true"
+    //        "&wireFormat.tightEncodingEnabled=true"
+    ///")";
+    
+    std::cout << "Starting..." << std::endl;
+    activemq::library::ActiveMQCPP::initializeLibrary();
+
+    // Create the producer and run it.
+    //    SimpleProducer producer( brokerURI, numMessages, destURI, useTopics );
+    //    producer.run();
+    //    producer.close();
+    SimpleProducer producer(strBrokerURI, numMessages, strWorldSimulationURI, useTopics);
+    Thread pSimpleProducerThread(&producer, (char*)"MySimpleProducerThread");
+    
+    std::cout << "Starting the producer" << std::endl;
+    pSimpleProducerThread.start();
+    
+    SimpleAsyncConsumer consumer(strBrokerURI, strInputURI, useTopics, clientAck);
+    // Start it up and it will listen forever.
+    std::cout << "Starting the consumer" << std::endl;
+    consumer.runConsumer();
+    // Wait to exit.
+    std::cout << "Press 'q' to quit" << std::endl;
+    while( std::cin.get() != 'q') {}
+    
+    consumer.close();
+    
+//    std::cout << "Waiting for the producer thread to terminate..." << std::endl;
+//    while (Thread::TERMINATED != pSimpleProducerThread.getState())
+//    {
+//    }
+//    std::cout << "...Finished." << std::endl;
+
+    producer.close();
+    
+    activemq::library::ActiveMQCPP::shutdownLibrary();
+}
+#endif
+
+
+
 #if 0
+////////////////////////////////////////////////////////////////////////////////
+// Original Consumer main
 ////////////////////////////////////////////////////////////////////////////////
 int main(int argc AMQCPP_UNUSED, char* argv[] AMQCPP_UNUSED) {
     
@@ -127,7 +185,9 @@ int main(int argc AMQCPP_UNUSED, char* argv[] AMQCPP_UNUSED) {
 }
 #endif
 
-#if 1
+#if 0
+////////////////////////////////////////////////////////////////////////////////
+// Original Producer main
 ////////////////////////////////////////////////////////////////////////////////
 int main(int argc AMQCPP_UNUSED, char* argv[] AMQCPP_UNUSED)
 {    
@@ -192,6 +252,7 @@ int main(int argc AMQCPP_UNUSED, char* argv[] AMQCPP_UNUSED)
     SimpleProducer producer(brokerURI, numMessages, destURI, useTopics);
     Thread pSimpleProducerThread(&producer, (char*)"MySimpleProducerThread");
     pSimpleProducerThread.start();
+    
     //producer.run();
     std::cout << "Waiting for the producer thread to terminate..." << std::endl;
     while (Thread::TERMINATED != pSimpleProducerThread.getState())
@@ -210,6 +271,9 @@ int main(int argc AMQCPP_UNUSED, char* argv[] AMQCPP_UNUSED)
 }
 #endif
 
+////////////////////////////////////////////////////////////////////////////////
+// Original Box2D Hello World main
+////////////////////////////////////////////////////////////////////////////////
 #if 0
 /*
  * Copyright (c) 2006-2007 Erin Catto http://www.gphysics.com
