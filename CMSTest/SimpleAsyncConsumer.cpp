@@ -74,8 +74,7 @@ void SimpleAsyncConsumer::runConsumer()
         //connectionFactory->setBrokerURI(strBrokerURI);
         decaf::net::URI* uriBroker = new decaf::net::URI(strBrokerURI);
         connectionFactory->setBrokerURI(*uriBroker);
-        
-        
+
         // Create a Connection
         connection = connectionFactory->createConnection();
         delete connectionFactory;

@@ -27,8 +27,6 @@
  * limitations under the License.
  */
 
-#include "B2DWorld.h"
-#include "../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include "decaf/lang/Runnable.h"
 #include <string>
 
@@ -42,8 +40,7 @@ namespace cms
 
 
 class SimpleProducer :
-    public decaf::lang::Runnable,
-    public B2DWorld::ICallbacks
+    public decaf::lang::Runnable
 {
 private:
     
@@ -59,7 +56,8 @@ private:
     std::string             destURI;
     
     // Helper(s)
-    void cleanup();
+    void Setup();
+    void Teardown();
     
 public:
 
@@ -78,9 +76,7 @@ public:
     
     // Function(s)
     void close();
-    
-    // B2DWorld::ICallbacks implementation
-    void OnB2DWorldUpdate(b2Vec2& b2vNewPosition, float32& fNewAngle);
+    void Send(std::string& strToSend);
 };
 
 #endif /* defined(__CMSTest__SimpleAsyncProducer__) */

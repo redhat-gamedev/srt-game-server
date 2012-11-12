@@ -113,8 +113,6 @@ void B2DWorld::Update(std::string& strText)
 // decaf::lang::Runnable implementation
 void B2DWorld::run()
 {
-    static char m_szBuf[0xFF];
-
     while (true)
     {
         // Instruct the world to perform a single step of simulation.
@@ -125,15 +123,7 @@ void B2DWorld::run()
         position = body->GetPosition();
         angle = body->GetAngle();
 
-//        memset(m_szBuf, 0, sizeof(m_szBuf));
-//        //sprintf(m_szBuf, "%4.2f %4.2f %4.2f", position.x, position.y, angle);
-//        sprintf(m_szBuf, "%4.2f", position.y);
-//        printf("%s\n", m_szBuf);
-      
         Publisher.OnB2DWorldUpdate(position, angle);
-        decaf::lang::Thread::currentThread()->sleep(10);
+        decaf::lang::Thread::currentThread()->sleep(15);
     }
-    //Publisher.OnB2DWorldUpdate(position, angle);
-    
-    //decaf::lang::Thread::currentThread()->sleep(10);
 }

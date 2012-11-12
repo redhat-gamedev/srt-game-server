@@ -11,7 +11,12 @@
 
 #include "decaf/util/StlQueue.h"
 //#include "decaf/lang/Thread.h"
+//#include "decaf/util/Timer.h"
+#include "B2DWorld.h"
+#include "Heartbeat.h"
+#include "../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include <string>
+
 
 namespace decaf
 {
@@ -19,16 +24,23 @@ namespace decaf
     {
         class Thread;        
     }
+    namespace util
+    {
+        class Timer;
+    }
 }
 class SimpleProducer;
 class SimpleAsyncConsumer;
+class Heartbeat;
 class B2DWorld;
 
 using namespace decaf::lang;
 using namespace decaf::util;
 
 
-class Server
+class Server :
+    public B2DWorld::ICallbacks,
+    public Heartbeat::ICallbacks
 {
 // Class
 private:
@@ -43,10 +55,14 @@ public:
 private:
     
 protected:
-    SimpleProducer*         producer;
+    SimpleProducer*         m_pSimulationProducer;
+    SimpleProducer*         m_pHeartbeatProducer;
     Thread*                 pSimpleProducerThread;
     SimpleAsyncConsumer*    consumer;
     B2DWorld*               m_pB2DWorld;
+    Timer*                  m_pTimer;
+    Heartbeat*              m_pHeartbeat;
+    
     
     // Helper(s)
     void Setup();
@@ -62,6 +78,12 @@ public:
     // Method(s)
     void Run();
     
+    
+    // B2DWorld::ICallbacks implementation
+    void OnB2DWorldUpdate(b2Vec2& b2vNewPosition, float32& fNewAngle);
+    
+    // Heartbeat::ICallbacks implementation
+    void OnBeat(int iBeat);    
 };
 
 

@@ -10,6 +10,8 @@
 #include "SimpleAsyncConsumer.h"
 #include "SimpleAsyncProducer.h"
 #include "B2DWorld.h"
+#include "Heartbeat.h"
+#include "decaf/util/Timer.h"
 #include "decaf/lang/Thread.h"
 #include "decaf/lang/Runnable.h"
 #include "decaf/util/concurrent/CountDownLatch.h"
@@ -31,6 +33,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <iostream>
+#include <assert.h>
 
 StlQueue<std::string>      Server::s_ProducerQueue;
 StlQueue<std::string>      Server::s_ConsumerQueue;
@@ -48,10 +51,13 @@ using namespace std;
 
 // Constructor(s)
 Server::Server() :
-    producer(NULL),
+    m_pSimulationProducer(NULL),
+    m_pHeartbeatProducer(NULL),
     pSimpleProducerThread(NULL),
     consumer(NULL),
-    m_pB2DWorld(NULL)
+    m_pB2DWorld(NULL),
+    m_pTimer(NULL),
+    m_pHeartbeat(NULL)
 {
     Setup();
 }
@@ -70,6 +76,7 @@ void Server::Setup()
     unsigned int    numMessages = 20000;
     std::string     strName = "MySimpleProducerThread";
     std::string     strWorldSimulationURI = "WORLD.SIMULATION";
+    std::string     strHeartbeatURI = "HEARTBEAT";
     std::string     strInputURI = "CLIENT.INPUT";
     std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp";
     ///"failover:(tcp://127.0.0.1:61616"
@@ -86,24 +93,44 @@ void Server::Setup()
     
     m_pB2DWorld = new B2DWorld();
     m_pB2DWorld->CreateBodiesAndShapes();
-    //pSimpleProducerThread = new decaf::lang::Thread(producer, strName);
+    //pSimpleProducerThread = new decaf::lang::Thread(m_pSimulationProducer, strName);
     pSimpleProducerThread = new decaf::lang::Thread(m_pB2DWorld, strName);
     
-    producer = new SimpleProducer(strBrokerURI, numMessages, strWorldSimulationURI, useTopics);
+    m_pSimulationProducer = new SimpleProducer(strBrokerURI, numMessages, strWorldSimulationURI, useTopics);
+    m_pHeartbeatProducer = new SimpleProducer(strBrokerURI, numMessages, strHeartbeatURI, useTopics);
     consumer = new SimpleAsyncConsumer(strBrokerURI, strInputURI, useTopics, clientAck);
+    
+    m_pHeartbeat = new Heartbeat();
+    m_pTimer = new decaf::util::Timer();
+    
+    B2DWorld::Publisher.Attach(this);
+    Heartbeat::Publisher.Attach(this);
 }
 
 void Server::Teardown()
 {
     std::cout << "Teardown()..." << std::endl;
     
+    B2DWorld::Publisher.Detach(this);
+    Heartbeat::Publisher.Detach(this);
+    
+    delete m_pTimer;
+    m_pTimer = NULL;
+    
+    delete m_pHeartbeat;
+    m_pHeartbeat = NULL;
+    
     consumer->close();
     delete consumer;
     consumer = NULL;
-    
-    producer->close();
-    delete producer;
-    producer = NULL;
+
+    m_pHeartbeatProducer->close();
+    delete m_pHeartbeatProducer;
+    m_pHeartbeatProducer = NULL;
+
+    m_pSimulationProducer->close();
+    delete m_pSimulationProducer;
+    m_pSimulationProducer = NULL;
 
     delete pSimpleProducerThread;
     pSimpleProducerThread = NULL;
@@ -132,6 +159,56 @@ void Server::Run()
     // take world snapshot
     // Update clients if required
     
-    std::cout << "Starting the producer" << std::endl;
+    std::cout << "Starting the world simulation" << std::endl;
     pSimpleProducerThread->start();
+
+    std::cout << "Starting the heartbeat" << std::endl;
+    m_pTimer->schedule(m_pHeartbeat, 0, 1000);
+}
+
+// B2DWorld::ICallbacks implementation
+void Server::OnB2DWorldUpdate(b2Vec2& b2vNewPosition, float32& fNewAngle)
+{
+    assert(m_pSimulationProducer);
+    
+    static char m_szBuf[0xFF];
+    static std::string strText = "";
+    
+    try
+    {
+        memset(m_szBuf, 0, sizeof(m_szBuf));
+        //sprintf(m_szBuf, "%4.2f %4.2f %4.2f", position.x, position.y, angle);
+        sprintf(m_szBuf, "%4.2f", b2vNewPosition.y);
+        //printf("%s\n", m_szBuf);
+        strText = m_szBuf;
+
+        m_pSimulationProducer->Send(strText);
+        strText.clear();
+    }
+    catch ( CMSException& e )
+    {
+        e.printStackTrace();
+    }
+}
+
+// Heartbeat::ICallbacks implementation
+void Server::OnBeat(int iBeat)
+{
+    static char m_szBuf[0xFF];
+    static std::string strText = "";
+    
+    try
+    {
+        memset(m_szBuf, 0, sizeof(m_szBuf));
+        sprintf(m_szBuf, "%i", iBeat);
+        //printf("%s\n", m_szBuf);
+        strText = m_szBuf;
+        
+        m_pHeartbeatProducer->Send(strText);
+        strText.clear();
+    }
+    catch ( CMSException& e )
+    {
+        e.printStackTrace();
+    }
 }

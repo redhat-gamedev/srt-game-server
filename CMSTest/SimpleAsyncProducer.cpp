@@ -56,51 +56,7 @@ SimpleProducer::SimpleProducer(
     
     try
     {
-        // Create a ConnectionFactory
-        auto_ptr<ActiveMQConnectionFactory> connectionFactory(new ActiveMQConnectionFactory( brokerURI ) );
-        
-        // Create a Connection
-        try
-        {
-            connection = connectionFactory->createConnection();
-            connection->start();
-        }
-        catch( CMSException& e )
-        {
-            e.printStackTrace();
-            throw e;
-        }
-        
-        // Create a Session
-        if( clientAck )
-        {
-            session = connection->createSession( Session::CLIENT_ACKNOWLEDGE );
-        }
-        else
-        {
-            session = connection->createSession( Session::AUTO_ACKNOWLEDGE );
-        }
-        
-        // Create the destination (Topic or Queue)
-        if( useTopic )
-        {
-            destination = session->createTopic( destURI );
-        }
-        else
-        {
-            destination = session->createQueue( destURI );
-        }
-        
-        // Create a MessageProducer from the Session to the Topic or Queue
-        producer = session->createProducer( destination );
-        producer->setDeliveryMode( DeliveryMode::NON_PERSISTENT );
-        
-        // Create the Thread Id String
-        //string threadIdStr = Long::toString( Thread::getId() );
-        long long llThreadId = Thread::currentThread()->getId();
-        string threadIdStr = Long::toString( llThreadId );
-        
-        B2DWorld::Publisher.Attach(this);
+        Setup();
     }
     catch ( CMSException& e )
     {
@@ -111,56 +67,58 @@ SimpleProducer::SimpleProducer(
 
 SimpleProducer::~SimpleProducer()
 {
-    B2DWorld::Publisher.Detach(this);
-    cleanup();
+    Teardown();
 }
 
-void SimpleProducer::close()
+// Helper(s)
+void SimpleProducer::Setup()
 {
-    this->cleanup();
+    // Create a ConnectionFactory
+    auto_ptr<ActiveMQConnectionFactory> connectionFactory(new ActiveMQConnectionFactory( brokerURI ) );
+    
+    // Create a Connection
+    try
+    {
+        connection = connectionFactory->createConnection();
+        connection->start();
+    }
+    catch( CMSException& e )
+    {
+        e.printStackTrace();
+        throw e;
+    }
+    
+    // Create a Session
+    if( clientAck )
+    {
+        session = connection->createSession( Session::CLIENT_ACKNOWLEDGE );
+    }
+    else
+    {
+        session = connection->createSession( Session::AUTO_ACKNOWLEDGE );
+    }
+    
+    // Create the destination (Topic or Queue)
+    if( useTopic )
+    {
+        destination = session->createTopic( destURI );
+    }
+    else
+    {
+        destination = session->createQueue( destURI );
+    }
+    
+    // Create a MessageProducer from the Session to the Topic or Queue
+    producer = session->createProducer( destination );
+    producer->setDeliveryMode( DeliveryMode::NON_PERSISTENT );
+    
+    // Create the Thread Id String
+    //string threadIdStr = Long::toString( Thread::getId() );
+    //long long llThreadId = Thread::currentThread()->getId();
+    //string threadIdStr = Long::toString( llThreadId );
 }
 
-void SimpleProducer::run()
-{
-//    try
-//    {
-//        std::string text = "";
-//        TextMessage* message = NULL;
-//        int ix = 0;
-//        //for( unsigned int ix=0; ix<numMessages; ++ix )
-//        while (true)
-//        {
-//            // Receive incoming user commands
-//            
-//            // Run simulation step
-//            m_pB2DWorld->Update(text);
-//            
-//            // Check game rules
-//            
-//            // Update all object states
-//            
-//            //  if any client needs a world update
-//                // take world snapshot
-//                // Update clients if required
-//            message = session->createTextMessage( text );
-//            message->setIntProperty( "Integer", ix );
-//            //printf( "Sent message #%d from thread %s\n", ix+1, threadIdStr.c_str() );
-//            //printf("%s\n", message->getText().c_str());
-//            producer->send( message );
-//            //Thread::currentThread()->yield();
-//            
-//            delete message;
-//            Thread::currentThread()->sleep(10);
-//            ++ix;
-//        }        
-//    }
-//    catch ( CMSException& e )
-//    {
-//        e.printStackTrace();
-//    }
-}
-
-void SimpleProducer::cleanup()
+void SimpleProducer::Teardown()
 {
     // Destroy resources.
     try
@@ -218,40 +176,71 @@ void SimpleProducer::cleanup()
     {
         e.printStackTrace();
     }
-    connection = NULL;
+    connection = NULL;    
 }
 
-// B2DWorld::ICallbacks implementation
-void SimpleProducer::OnB2DWorldUpdate(b2Vec2& b2vNewPosition, float32& fNewAngle)
+void SimpleProducer::close()
+{
+    Teardown();
+}
+
+void SimpleProducer::run()
+{
+//    try
+//    {
+//        std::string text = "";
+//        TextMessage* message = NULL;
+//        int ix = 0;
+//        //for( unsigned int ix=0; ix<numMessages; ++ix )
+//        while (true)
+//        {
+//            // Receive incoming user commands
+//            
+//            // Run simulation step
+//            m_pB2DWorld->Update(text);
+//            
+//            // Check game rules
+//            
+//            // Update all object states
+//            
+//            //  if any client needs a world update
+//                // take world snapshot
+//                // Update clients if required
+//            message = session->createTextMessage( text );
+//            message->setIntProperty( "Integer", ix );
+//            //printf( "Sent message #%d from thread %s\n", ix+1, threadIdStr.c_str() );
+//            //printf("%s\n", message->getText().c_str());
+//            producer->send( message );
+//            //Thread::currentThread()->yield();
+//            
+//            delete message;
+//            Thread::currentThread()->sleep(10);
+//            ++ix;
+//        }        
+//    }
+//    catch ( CMSException& e )
+//    {
+//        e.printStackTrace();
+//    }
+}
+
+void SimpleProducer::Send(std::string& strToSend)
 {
     static int ix = 0;
-    static char m_szBuf[0xFF];
-
+    TextMessage* message = NULL;
+    
     try
     {
-        std::string strText = "";
-        TextMessage* message = NULL;
-
-        memset(m_szBuf, 0, sizeof(m_szBuf));
-        //sprintf(m_szBuf, "%4.2f %4.2f %4.2f", position.x, position.y, angle);
-        sprintf(m_szBuf, "%4.2f", b2vNewPosition.y);
-        printf("%s\n", m_szBuf);
-        strText = m_szBuf;
-        
-        message = session->createTextMessage( strText );
+        message = session->createTextMessage( strToSend );
         ++ix;
         message->setIntProperty( "Integer", ix );
-        //printf( "Sent message #%d from thread %s\n", ix+1, threadIdStr.c_str() );
-        //printf("%s\n", message->getText().c_str());
         producer->send( message );
-        //Thread::currentThread()->yield();
         
         delete message;
-        strText.clear();
-        //Thread::currentThread()->sleep(10);
     }
     catch ( CMSException& e )
     {
         e.printStackTrace();
     }
 }
+

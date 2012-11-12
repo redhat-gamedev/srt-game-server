@@ -18,6 +18,7 @@
 		CCE90879165165F8005F2E72 /* Server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE90877165165F8005F2E72 /* Server.cpp */; };
 		CCE9089216517138005F2E72 /* libPhoenix-osx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE908881651707A005F2E72 /* libPhoenix-osx.a */; };
 		CCE9089816517F96005F2E72 /* PublisherT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE9089616517F95005F2E72 /* PublisherT.cpp */; };
+		CCE9089B165192E8005F2E72 /* Heartbeat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE90899165192E8005F2E72 /* Heartbeat.cpp */; };
 		CCFB9E101640AF8900F6DBA2 /* B2DWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCFB9E0E1640AF8900F6DBA2 /* B2DWorld.cpp */; };
 /* End PBXBuildFile section */
 
@@ -102,6 +103,8 @@
 		CCE9087A16517079005F2E72 /* Phoenix.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Phoenix.xcodeproj; path = ../Libraries/Phoenix/Phoenix.xcodeproj; sourceTree = "<group>"; };
 		CCE9089616517F95005F2E72 /* PublisherT.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PublisherT.cpp; sourceTree = "<group>"; };
 		CCE9089716517F95005F2E72 /* PublisherT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublisherT.h; sourceTree = "<group>"; };
+		CCE90899165192E8005F2E72 /* Heartbeat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Heartbeat.cpp; sourceTree = "<group>"; };
+		CCE9089A165192E8005F2E72 /* Heartbeat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Heartbeat.h; sourceTree = "<group>"; };
 		CCFB9DDC1640ABB900F6DBA2 /* Box2D.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Box2D.xcodeproj; path = ../ThirdParty/box2d/Box2D/Build/xcode4/Box2D.xcodeproj; sourceTree = "<group>"; };
 		CCFB9E0E1640AF8900F6DBA2 /* B2DWorld.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = B2DWorld.cpp; sourceTree = "<group>"; };
 		CCFB9E0F1640AF8900F6DBA2 /* B2DWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B2DWorld.h; sourceTree = "<group>"; };
@@ -169,6 +172,8 @@
 				CCFB9E0F1640AF8900F6DBA2 /* B2DWorld.h */,
 				CCE90877165165F8005F2E72 /* Server.cpp */,
 				CCE90878165165F8005F2E72 /* Server.h */,
+				CCE90899165192E8005F2E72 /* Heartbeat.cpp */,
+				CCE9089A165192E8005F2E72 /* Heartbeat.h */,
 			);
 			path = CMSTest;
 			sourceTree = "<group>";
@@ -322,6 +327,7 @@
 				CCFB9E101640AF8900F6DBA2 /* B2DWorld.cpp in Sources */,
 				CCE90879165165F8005F2E72 /* Server.cpp in Sources */,
 				CCE9089816517F96005F2E72 /* PublisherT.cpp in Sources */,
+				CCE9089B165192E8005F2E72 /* Heartbeat.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
