@@ -15,6 +15,9 @@
 		CCE9086F16515D64005F2E72 /* libactivemq-cpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE9086E16515D33005F2E72 /* libactivemq-cpp.a */; };
 		CCE9087216516221005F2E72 /* libapr-1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE9087016516221005F2E72 /* libapr-1.dylib */; };
 		CCE9087316516221005F2E72 /* libaprutil-1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE9087116516221005F2E72 /* libaprutil-1.dylib */; };
+		CCE90879165165F8005F2E72 /* Server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE90877165165F8005F2E72 /* Server.cpp */; };
+		CCE9089216517138005F2E72 /* libPhoenix-osx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE908881651707A005F2E72 /* libPhoenix-osx.a */; };
+		CCE9089816517F96005F2E72 /* PublisherT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE9089616517F95005F2E72 /* PublisherT.cpp */; };
 		CCFB9E101640AF8900F6DBA2 /* B2DWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCFB9E0E1640AF8900F6DBA2 /* B2DWorld.cpp */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +57,20 @@
 			remoteGlobalIDString = CC489773164F15FF005078C3;
 			remoteInfo = "activemq-cpp";
 		};
+		CCE908851651707A005F2E72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CCE9087A16517079005F2E72 /* Phoenix.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
+			remoteInfo = Phoenix;
+		};
+		CCE908871651707A005F2E72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CCE9087A16517079005F2E72 /* Phoenix.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CCD5D5C61586C9E3007AC8C2;
+			remoteInfo = "Phoenix-osx";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -80,6 +97,11 @@
 		CCE9086616515D32005F2E72 /* activemq-cpp.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "activemq-cpp.xcodeproj"; path = "../ThirdParty/activemq-cpp/activemq-cpp/activemq-cpp/activemq-cpp.xcodeproj"; sourceTree = "<group>"; };
 		CCE9087016516221005F2E72 /* libapr-1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libapr-1.dylib"; path = "usr/lib/libapr-1.dylib"; sourceTree = SDKROOT; };
 		CCE9087116516221005F2E72 /* libaprutil-1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libaprutil-1.dylib"; path = "usr/lib/libaprutil-1.dylib"; sourceTree = SDKROOT; };
+		CCE90877165165F8005F2E72 /* Server.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Server.cpp; sourceTree = "<group>"; };
+		CCE90878165165F8005F2E72 /* Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
+		CCE9087A16517079005F2E72 /* Phoenix.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Phoenix.xcodeproj; path = ../Libraries/Phoenix/Phoenix.xcodeproj; sourceTree = "<group>"; };
+		CCE9089616517F95005F2E72 /* PublisherT.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PublisherT.cpp; sourceTree = "<group>"; };
+		CCE9089716517F95005F2E72 /* PublisherT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublisherT.h; sourceTree = "<group>"; };
 		CCFB9DDC1640ABB900F6DBA2 /* Box2D.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Box2D.xcodeproj; path = ../ThirdParty/box2d/Box2D/Build/xcode4/Box2D.xcodeproj; sourceTree = "<group>"; };
 		CCFB9E0E1640AF8900F6DBA2 /* B2DWorld.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = B2DWorld.cpp; sourceTree = "<group>"; };
 		CCFB9E0F1640AF8900F6DBA2 /* B2DWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B2DWorld.h; sourceTree = "<group>"; };
@@ -92,8 +114,9 @@
 			files = (
 				CCE9087216516221005F2E72 /* libapr-1.dylib in Frameworks */,
 				CCE9087316516221005F2E72 /* libaprutil-1.dylib in Frameworks */,
-				CC488D27164EB5FD005078C3 /* libBox2D.a in Frameworks */,
 				CCE9086F16515D64005F2E72 /* libactivemq-cpp.a in Frameworks */,
+				CC488D27164EB5FD005078C3 /* libBox2D.a in Frameworks */,
+				CCE9089216517138005F2E72 /* libPhoenix-osx.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,10 +138,11 @@
 			isa = PBXGroup;
 			children = (
 				CCE9086616515D32005F2E72 /* activemq-cpp.xcodeproj */,
+				CCFB9DDC1640ABB900F6DBA2 /* Box2D.xcodeproj */,
+				CCE9087A16517079005F2E72 /* Phoenix.xcodeproj */,
 				CC68EAB1163DB32600D225C2 /* Libraries */,
 				CC68EA94163DA07400D225C2 /* CMSTest */,
 				CC68EA92163DA07400D225C2 /* Products */,
-				CCFB9DDC1640ABB900F6DBA2 /* Box2D.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -133,6 +157,8 @@
 		CC68EA94163DA07400D225C2 /* CMSTest */ = {
 			isa = PBXGroup;
 			children = (
+				CCE9089616517F95005F2E72 /* PublisherT.cpp */,
+				CCE9089716517F95005F2E72 /* PublisherT.h */,
 				CC68EA95163DA07400D225C2 /* main.cpp */,
 				CC68EA97163DA07400D225C2 /* CMSTest.1 */,
 				CC68EAB2163DB36800D225C2 /* SimpleAsyncConsumer.cpp */,
@@ -141,6 +167,8 @@
 				CC68EAB6163DB42E00D225C2 /* SimpleAsyncProducer.h */,
 				CCFB9E0E1640AF8900F6DBA2 /* B2DWorld.cpp */,
 				CCFB9E0F1640AF8900F6DBA2 /* B2DWorld.h */,
+				CCE90877165165F8005F2E72 /* Server.cpp */,
+				CCE90878165165F8005F2E72 /* Server.h */,
 			);
 			path = CMSTest;
 			sourceTree = "<group>";
@@ -158,6 +186,15 @@
 			isa = PBXGroup;
 			children = (
 				CCE9086E16515D33005F2E72 /* libactivemq-cpp.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CCE9087B16517079005F2E72 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CCE908861651707A005F2E72 /* libPhoenix.a */,
+				CCE908881651707A005F2E72 /* libPhoenix-osx.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -210,6 +247,10 @@
 					ProductGroup = CC488D19164EB5DE005078C3 /* Products */;
 					ProjectRef = CCFB9DDC1640ABB900F6DBA2 /* Box2D.xcodeproj */;
 				},
+				{
+					ProductGroup = CCE9087B16517079005F2E72 /* Products */;
+					ProjectRef = CCE9087A16517079005F2E72 /* Phoenix.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -254,6 +295,20 @@
 			remoteRef = CCE9086D16515D33005F2E72 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		CCE908861651707A005F2E72 /* libPhoenix.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libPhoenix.a;
+			remoteRef = CCE908851651707A005F2E72 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CCE908881651707A005F2E72 /* libPhoenix-osx.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libPhoenix-osx.a";
+			remoteRef = CCE908871651707A005F2E72 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -265,6 +320,8 @@
 				CC68EAB4163DB36800D225C2 /* SimpleAsyncConsumer.cpp in Sources */,
 				CC68EAB7163DB42E00D225C2 /* SimpleAsyncProducer.cpp in Sources */,
 				CCFB9E101640AF8900F6DBA2 /* B2DWorld.cpp in Sources */,
+				CCE90879165165F8005F2E72 /* Server.cpp in Sources */,
+				CCE9089816517F96005F2E72 /* PublisherT.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

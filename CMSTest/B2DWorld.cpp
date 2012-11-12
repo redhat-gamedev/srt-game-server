@@ -7,6 +7,42 @@
 //
 
 #include "B2DWorld.h"
+#include "decaf/lang/Thread.h"
+
+B2DWorld::_Publisher                 B2DWorld::Publisher;
+
+
+// Constructor(s)
+/*
+ B2DWorld.h::_Publisher::_Publisher()
+ {
+ 
+ }
+ */
+
+// Destructor
+/*
+ B2DWorld.h::_Publisher::~_Publisher()
+ {
+ 
+ }
+ */
+
+// Method(s)
+void B2DWorld::_Publisher::OnB2DWorldUpdate(b2Vec2& b2vNewPosition, float32& fNewAngle)
+{
+    ICallbacks* pObjToCallback = NULL;
+    
+    //m_listSubscribersSwap = m_listSubscribers;
+    Clone(m_listSubscribersSwap);
+    while(!m_listSubscribersSwap.empty())
+    {
+        pObjToCallback = m_listSubscribersSwap.front();
+        m_listSubscribersSwap.pop_front();
+        assert(pObjToCallback);
+        pObjToCallback->OnB2DWorldUpdate(b2vNewPosition, fNewAngle);
+    }
+}
 
 
 // Constructor(s)
@@ -67,19 +103,37 @@ void B2DWorld::CreateBodiesAndShapes()
 
 void B2DWorld::Update(std::string& strText)
 {
-    // Instruct the world to perform a single step of simulation.
-    // It is generally best to keep the time step and iterations fixed.
-    world->Step(timeStep, velocityIterations, positionIterations);
-    
-    // Now print the position and angle of the body.
-    //b2Vec2
-    position = body->GetPosition();
-    //float32
-    angle = body->GetAngle();
-    
     memset(m_szBuf, 0, sizeof(m_szBuf));
     //sprintf(m_szBuf, "%4.2f %4.2f %4.2f", position.x, position.y, angle);
     sprintf(m_szBuf, "%4.2f", position.y);
     //printf("%s\n", m_szBuf);
     strText = m_szBuf;
+}
+
+// decaf::lang::Runnable implementation
+void B2DWorld::run()
+{
+    static char m_szBuf[0xFF];
+
+    while (true)
+    {
+        // Instruct the world to perform a single step of simulation.
+        // It is generally best to keep the time step and iterations fixed.
+        world->Step(timeStep, velocityIterations, positionIterations);
+        
+        // Now print the position and angle of the body.
+        position = body->GetPosition();
+        angle = body->GetAngle();
+
+//        memset(m_szBuf, 0, sizeof(m_szBuf));
+//        //sprintf(m_szBuf, "%4.2f %4.2f %4.2f", position.x, position.y, angle);
+//        sprintf(m_szBuf, "%4.2f", position.y);
+//        printf("%s\n", m_szBuf);
+      
+        Publisher.OnB2DWorldUpdate(position, angle);
+        decaf::lang::Thread::currentThread()->sleep(10);
+    }
+    //Publisher.OnB2DWorldUpdate(position, angle);
+    
+    //decaf::lang::Thread::currentThread()->sleep(10);
 }

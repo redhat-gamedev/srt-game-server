@@ -7,7 +7,6 @@
 //
 
 #include "SimpleAsyncProducer.h"
-#include "B2DWorld.h"
 #include "decaf/lang/Thread.h"
 //#include "decaf/lang/Runnable.h"
 #include "decaf/util/concurrent/CountDownLatch.h"
@@ -36,9 +35,6 @@ using namespace decaf::util;
 using namespace decaf::util::concurrent;
 using namespace cms;
 using namespace std;
-
-class B2DWorld;
-extern B2DWorld* m_pB2DWorld;
 
 
 SimpleProducer::SimpleProducer(
@@ -102,16 +98,20 @@ SimpleProducer::SimpleProducer(
         // Create the Thread Id String
         //string threadIdStr = Long::toString( Thread::getId() );
         long long llThreadId = Thread::currentThread()->getId();
-        string threadIdStr = Long::toString( llThreadId );        
+        string threadIdStr = Long::toString( llThreadId );
+        
+        B2DWorld::Publisher.Attach(this);
     }
     catch ( CMSException& e )
     {
         e.printStackTrace();
     }
+
 }
 
 SimpleProducer::~SimpleProducer()
 {
+    B2DWorld::Publisher.Detach(this);
     cleanup();
 }
 
@@ -122,42 +122,42 @@ void SimpleProducer::close()
 
 void SimpleProducer::run()
 {
-    try
-    {
-        std::string text = "";
-        TextMessage* message = NULL;
-        int ix = 0;
-        //for( unsigned int ix=0; ix<numMessages; ++ix )
-        while (true)
-        {
-            // Receive incoming user commands
-            
-            // Run simulation step
-            m_pB2DWorld->Update(text);
-            
-            // Check game rules
-            
-            // Update all object states
-            
-            //  if any client needs a world update
-                // take world snapshot
-                // Update clients if required
-            message = session->createTextMessage( text );
-            message->setIntProperty( "Integer", ix );
-            //printf( "Sent message #%d from thread %s\n", ix+1, threadIdStr.c_str() );
-            //printf("%s\n", message->getText().c_str());
-            producer->send( message );
-            //Thread::currentThread()->yield();
-            
-            delete message;
-            Thread::currentThread()->sleep(10);
-            ++ix;
-        }        
-    }
-    catch ( CMSException& e )
-    {
-        e.printStackTrace();
-    }
+//    try
+//    {
+//        std::string text = "";
+//        TextMessage* message = NULL;
+//        int ix = 0;
+//        //for( unsigned int ix=0; ix<numMessages; ++ix )
+//        while (true)
+//        {
+//            // Receive incoming user commands
+//            
+//            // Run simulation step
+//            m_pB2DWorld->Update(text);
+//            
+//            // Check game rules
+//            
+//            // Update all object states
+//            
+//            //  if any client needs a world update
+//                // take world snapshot
+//                // Update clients if required
+//            message = session->createTextMessage( text );
+//            message->setIntProperty( "Integer", ix );
+//            //printf( "Sent message #%d from thread %s\n", ix+1, threadIdStr.c_str() );
+//            //printf("%s\n", message->getText().c_str());
+//            producer->send( message );
+//            //Thread::currentThread()->yield();
+//            
+//            delete message;
+//            Thread::currentThread()->sleep(10);
+//            ++ix;
+//        }        
+//    }
+//    catch ( CMSException& e )
+//    {
+//        e.printStackTrace();
+//    }
 }
 
 void SimpleProducer::cleanup()
@@ -219,4 +219,39 @@ void SimpleProducer::cleanup()
         e.printStackTrace();
     }
     connection = NULL;
+}
+
+// B2DWorld::ICallbacks implementation
+void SimpleProducer::OnB2DWorldUpdate(b2Vec2& b2vNewPosition, float32& fNewAngle)
+{
+    static int ix = 0;
+    static char m_szBuf[0xFF];
+
+    try
+    {
+        std::string strText = "";
+        TextMessage* message = NULL;
+
+        memset(m_szBuf, 0, sizeof(m_szBuf));
+        //sprintf(m_szBuf, "%4.2f %4.2f %4.2f", position.x, position.y, angle);
+        sprintf(m_szBuf, "%4.2f", b2vNewPosition.y);
+        printf("%s\n", m_szBuf);
+        strText = m_szBuf;
+        
+        message = session->createTextMessage( strText );
+        ++ix;
+        message->setIntProperty( "Integer", ix );
+        //printf( "Sent message #%d from thread %s\n", ix+1, threadIdStr.c_str() );
+        //printf("%s\n", message->getText().c_str());
+        producer->send( message );
+        //Thread::currentThread()->yield();
+        
+        delete message;
+        strText.clear();
+        //Thread::currentThread()->sleep(10);
+    }
+    catch ( CMSException& e )
+    {
+        e.printStackTrace();
+    }
 }

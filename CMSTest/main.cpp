@@ -16,131 +16,25 @@
  * limitations under the License.
  */
 
-#include "SimpleAsyncConsumer.h"
-#include "SimpleAsyncProducer.h"
-#include "B2DWorld.h"
-
-#include <decaf/lang/Thread.h>
-#include <decaf/lang/Runnable.h>
-#include <decaf/util/concurrent/CountDownLatch.h>
-#include <activemq/core/ActiveMQConnectionFactory.h>
-#include <activemq/core/ActiveMQConnection.h>
-#include <activemq/transport/DefaultTransportListener.h>
-#include <activemq/library/ActiveMQCPP.h>
-#include <decaf/lang/Integer.h>
-#include <activemq/util/Config.h>
-#include <decaf/util/Date.h>
-#include <cms/Connection.h>
-#include <cms/Session.h>
-#include <cms/TextMessage.h>
-#include <cms/BytesMessage.h>
-#include <cms/MapMessage.h>
-#include <cms/ExceptionListener.h>
-#include <cms/MessageListener.h>
-#include <decaf/net/URI.h>
-#include <stdlib.h>
-#include <stdio.h>
+#include "Server.h"
 #include <iostream>
-
-using namespace activemq;
-using namespace activemq::core;
-using namespace activemq::transport;
-using namespace decaf::lang;
-using namespace decaf::util;
-using namespace decaf::util::concurrent;
-using namespace cms;
-using namespace std;
-
-//class B2DWorld;
-
-SimpleProducer*         producer = NULL;
-Thread*                 pSimpleProducerThread = NULL;
-SimpleAsyncConsumer*    consumer = NULL;
-B2DWorld*               m_pB2DWorld = NULL;
-
-
-void Setup()
-{
-    bool            useTopics = false;
-    bool            clientAck = false;
-    unsigned int    numMessages = 20000;
-    std::string     strName = "MySimpleProducerThread";
-    std::string     strWorldSimulationURI = "WORLD.SIMULATION";
-    std::string     strInputURI = "CLIENT.INPUT";
-    std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp";
-    ///"failover:(tcp://127.0.0.1:61616"
-    //        "?wireFormat=openwire"
-    //        "&connection.useAsyncSend=true"
-    //        "&transport.commandTracingEnabled=true"
-    //        "&transport.tcpTracingEnabled=true"
-    //        "&wireFormat.tightEncodingEnabled=true"
-    ///")";
- 
-    std::cout << "Setup()..." << std::endl;
-
-    activemq::library::ActiveMQCPP::initializeLibrary();
-
-    m_pB2DWorld = new B2DWorld();
-    m_pB2DWorld->CreateBodiesAndShapes();
-
-    producer = new SimpleProducer(strBrokerURI, numMessages, strWorldSimulationURI, useTopics);
-    pSimpleProducerThread = new Thread(producer, strName);
-    consumer = new SimpleAsyncConsumer(strBrokerURI, strInputURI, useTopics, clientAck);    
-}
-
-void Teardown()
-{
-    std::cout << "Teardown()..." << std::endl;
-
-    delete m_pB2DWorld;
-
-    consumer->close();
-    producer->close();
-
-    delete consumer;
-    consumer = NULL;
-    
-    delete pSimpleProducerThread;
-    pSimpleProducerThread = NULL;
-    
-    delete producer;
-    producer = NULL;
-    
-    activemq::library::ActiveMQCPP::shutdownLibrary();
-}
 
 
 #if 1
 ////////////////////////////////////////////////////////////////////////////////
-int main(int argc AMQCPP_UNUSED, char* argv[] AMQCPP_UNUSED)
+int main(int argc, char* argv[])
 {
     std::cout << "Starting..." << std::endl;
-    
-    Setup();
-    
-    // Receive incoming user commands
-    std::cout << "Starting the consumer" << std::endl;
-    consumer->runConsumer();
-    
-    // Run simulation step
-    //m_pB2DWorld->Update(text);
-    
-    // Check game rules
-    
-    // Update all object states
-    
-    //  if any client needs a world update
-        // take world snapshot
-        // Update clients if required
+    Server* pServer = new Server();
 
-    std::cout << "Starting the producer" << std::endl;
-    pSimpleProducerThread->start();
-
+    pServer->Run();
+    
     // Wait to exit.
     std::cout << "Press 'q' to quit" << std::endl;
     while( std::cin.get() != 'q') {}
     
-    Teardown();
+    delete pServer;
+    pServer = NULL;
 }
 #endif
 

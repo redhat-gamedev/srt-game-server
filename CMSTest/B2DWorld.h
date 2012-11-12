@@ -10,14 +10,45 @@
 #define __CMSTest__B2DWorld__
 
 #include "../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
+#include "decaf/lang/Runnable.h"
+#include "decaf/util/StlQueue.h"
+//#include "../../Libraries/Phoenix/source/PublisherT.cpp"
+#include "PublisherT.cpp"
 #include <string>
+#include <list>
 
 
 // This is a simple example of building and running a simulation
 // using Box2D. Here we create a large ground box and a small dynamic
 // box.
-class B2DWorld
+class B2DWorld :
+    public decaf::lang::Runnable
 {
+// Class
+public:
+    class ICallbacks
+    {
+    public:
+        virtual void OnB2DWorldUpdate(b2Vec2& b2vNewPosition, float32& fNewAngle) {};
+    };
+    
+protected:
+    class _Publisher :
+        public ICallbacks,
+        public PublisherT<ICallbacks*>
+    {
+    protected:
+        std::list<ICallbacks*>          m_listSubscribersSwap;
+    public:
+        virtual void OnB2DWorldUpdate(b2Vec2& b2vNewPosition, float32& fNewAngle);
+    };
+
+public:
+    static _Publisher               Publisher;
+    
+private:
+    
+// Instance
 private:
     
 protected:
@@ -50,6 +81,9 @@ public:
     // Method(s)
     void CreateBodiesAndShapes();
     void Update(std::string& strText);
+    
+    // decaf::lang::Runnable implementation
+    void run();
 };
 
 
