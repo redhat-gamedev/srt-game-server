@@ -10,10 +10,11 @@
 		CC488D27164EB5FD005078C3 /* libBox2D.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC488D20164EB5DE005078C3 /* libBox2D.a */; };
 		CC68EA96163DA07400D225C2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC68EA95163DA07400D225C2 /* main.cpp */; };
 		CC68EA98163DA07400D225C2 /* CMSTest.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = CC68EA97163DA07400D225C2 /* CMSTest.1 */; };
-		CC68EAAD163DB19F00D225C2 /* libactivemq-cpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC68EAAC163DB19F00D225C2 /* libactivemq-cpp.a */; };
-		CC68EAB0163DB2AE00D225C2 /* libactivemq-cpp.15.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = CC68EAAE163DB27F00D225C2 /* libactivemq-cpp.15.dylib */; };
 		CC68EAB4163DB36800D225C2 /* SimpleAsyncConsumer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC68EAB2163DB36800D225C2 /* SimpleAsyncConsumer.cpp */; };
 		CC68EAB7163DB42E00D225C2 /* SimpleAsyncProducer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC68EAB5163DB42E00D225C2 /* SimpleAsyncProducer.cpp */; };
+		CCE9086F16515D64005F2E72 /* libactivemq-cpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE9086E16515D33005F2E72 /* libactivemq-cpp.a */; };
+		CCE9087216516221005F2E72 /* libapr-1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE9087016516221005F2E72 /* libapr-1.dylib */; };
+		CCE9087316516221005F2E72 /* libaprutil-1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE9087116516221005F2E72 /* libaprutil-1.dylib */; };
 		CCFB9E101640AF8900F6DBA2 /* B2DWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCFB9E0E1640AF8900F6DBA2 /* B2DWorld.cpp */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +47,13 @@
 			remoteGlobalIDString = 80BB8918141C3E3600F1753A;
 			remoteInfo = Testbed;
 		};
+		CCE9086D16515D33005F2E72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CCE9086616515D32005F2E72 /* activemq-cpp.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CC489773164F15FF005078C3;
+			remoteInfo = "activemq-cpp";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -55,7 +63,6 @@
 			dstPath = usr/share/man/man1;
 			dstSubfolderSpec = 0;
 			files = (
-				CC68EAB0163DB2AE00D225C2 /* libactivemq-cpp.15.dylib in CopyFiles */,
 				CC68EA98163DA07400D225C2 /* CMSTest.1 in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
@@ -66,12 +73,13 @@
 		CC68EA91163DA07400D225C2 /* CMSTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CMSTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC68EA95163DA07400D225C2 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		CC68EA97163DA07400D225C2 /* CMSTest.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = CMSTest.1; sourceTree = "<group>"; };
-		CC68EAAC163DB19F00D225C2 /* libactivemq-cpp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libactivemq-cpp.a"; path = "../ThirdParty/activemq-cpp/activemq-cpp/build/src/main/.libs/libactivemq-cpp.a"; sourceTree = "<group>"; };
-		CC68EAAE163DB27F00D225C2 /* libactivemq-cpp.15.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libactivemq-cpp.15.dylib"; path = "../ThirdParty/activemq-cpp/activemq-cpp/build/src/main/.libs/libactivemq-cpp.15.dylib"; sourceTree = "<group>"; };
 		CC68EAB2163DB36800D225C2 /* SimpleAsyncConsumer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleAsyncConsumer.cpp; sourceTree = "<group>"; };
 		CC68EAB3163DB36800D225C2 /* SimpleAsyncConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleAsyncConsumer.h; sourceTree = "<group>"; };
 		CC68EAB5163DB42E00D225C2 /* SimpleAsyncProducer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleAsyncProducer.cpp; sourceTree = "<group>"; };
 		CC68EAB6163DB42E00D225C2 /* SimpleAsyncProducer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleAsyncProducer.h; sourceTree = "<group>"; };
+		CCE9086616515D32005F2E72 /* activemq-cpp.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "activemq-cpp.xcodeproj"; path = "../ThirdParty/activemq-cpp/activemq-cpp/activemq-cpp/activemq-cpp.xcodeproj"; sourceTree = "<group>"; };
+		CCE9087016516221005F2E72 /* libapr-1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libapr-1.dylib"; path = "usr/lib/libapr-1.dylib"; sourceTree = SDKROOT; };
+		CCE9087116516221005F2E72 /* libaprutil-1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libaprutil-1.dylib"; path = "usr/lib/libaprutil-1.dylib"; sourceTree = SDKROOT; };
 		CCFB9DDC1640ABB900F6DBA2 /* Box2D.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Box2D.xcodeproj; path = ../ThirdParty/box2d/Box2D/Build/xcode4/Box2D.xcodeproj; sourceTree = "<group>"; };
 		CCFB9E0E1640AF8900F6DBA2 /* B2DWorld.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = B2DWorld.cpp; sourceTree = "<group>"; };
 		CCFB9E0F1640AF8900F6DBA2 /* B2DWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B2DWorld.h; sourceTree = "<group>"; };
@@ -82,8 +90,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC68EAAD163DB19F00D225C2 /* libactivemq-cpp.a in Frameworks */,
+				CCE9087216516221005F2E72 /* libapr-1.dylib in Frameworks */,
+				CCE9087316516221005F2E72 /* libaprutil-1.dylib in Frameworks */,
 				CC488D27164EB5FD005078C3 /* libBox2D.a in Frameworks */,
+				CCE9086F16515D64005F2E72 /* libactivemq-cpp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +114,7 @@
 		CC68EA86163DA07400D225C2 = {
 			isa = PBXGroup;
 			children = (
+				CCE9086616515D32005F2E72 /* activemq-cpp.xcodeproj */,
 				CC68EAB1163DB32600D225C2 /* Libraries */,
 				CC68EA94163DA07400D225C2 /* CMSTest */,
 				CC68EA92163DA07400D225C2 /* Products */,
@@ -137,10 +148,18 @@
 		CC68EAB1163DB32600D225C2 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				CC68EAAE163DB27F00D225C2 /* libactivemq-cpp.15.dylib */,
-				CC68EAAC163DB19F00D225C2 /* libactivemq-cpp.a */,
+				CCE9087016516221005F2E72 /* libapr-1.dylib */,
+				CCE9087116516221005F2E72 /* libaprutil-1.dylib */,
 			);
 			name = Libraries;
+			sourceTree = "<group>";
+		};
+		CCE9086716515D32005F2E72 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CCE9086E16515D33005F2E72 /* libactivemq-cpp.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -184,6 +203,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = CCE9086716515D32005F2E72 /* Products */;
+					ProjectRef = CCE9086616515D32005F2E72 /* activemq-cpp.xcodeproj */;
+				},
+				{
 					ProductGroup = CC488D19164EB5DE005078C3 /* Products */;
 					ProjectRef = CCFB9DDC1640ABB900F6DBA2 /* Box2D.xcodeproj */;
 				},
@@ -222,6 +245,13 @@
 			fileType = "compiled.mach-o.executable";
 			path = Testbed;
 			remoteRef = CC488D25164EB5DE005078C3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CCE9086E16515D33005F2E72 /* libactivemq-cpp.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = "libactivemq-cpp.a";
+			remoteRef = CCE9086D16515D33005F2E72 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -297,30 +327,24 @@
 		CC68EA9C163DA07400D225C2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				HEADER_SEARCH_PATHS = (
-					"/Users/rkieley/LocalProjects/bdo/GeoFactions/ThirdParty/activemq-cpp/activemq-cpp/include/main",
-					"/opt/local/include/apr-1/",
-					/Users/rkieley/LocalProjects/bdo/GeoFactions/ThirdParty/box2d/Box2D,
-				);
-				LIBRARY_SEARCH_PATHS = "/Users/rkieley/LocalProjects/bdo/GeoFactions/ThirdParty/activemq-cpp/activemq-cpp/build/src/main/.libs";
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				HEADER_SEARCH_PATHS = "/opt/local/include/apr-1/";
+				LIBRARY_SEARCH_PATHS = /opt/local/lib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx10.7;
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../ThirdParty/activemq-cpp/activemq-cpp/src/main\" \"$(SRCROOT)/../ThirdParty/box2d/Box2D/\"";
 			};
 			name = Debug;
 		};
 		CC68EA9D163DA07400D225C2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				HEADER_SEARCH_PATHS = (
-					"/Users/rkieley/LocalProjects/bdo/GeoFactions/ThirdParty/activemq-cpp/activemq-cpp/include/main",
-					"/opt/local/include/apr-1/",
-					/Users/rkieley/LocalProjects/bdo/GeoFactions/ThirdParty/box2d/Box2D,
-				);
-				LIBRARY_SEARCH_PATHS = "/Users/rkieley/LocalProjects/bdo/GeoFactions/ThirdParty/activemq-cpp/activemq-cpp/build/src/main/.libs";
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				HEADER_SEARCH_PATHS = "/opt/local/include/apr-1/";
+				LIBRARY_SEARCH_PATHS = /opt/local/lib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx10.7;
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../ThirdParty/activemq-cpp/activemq-cpp/src/main\" \"$(SRCROOT)/../ThirdParty/box2d/Box2D/\"";
 			};
 			name = Release;
 		};

@@ -8,21 +8,21 @@
 
 #include "SimpleAsyncProducer.h"
 #include "B2DWorld.h"
-#include <decaf/lang/Thread.h>
-//#include <decaf/lang/Runnable.h>
-#include <decaf/util/concurrent/CountDownLatch.h>
-#include <decaf/lang/Long.h>
-#include <decaf/util/Date.h>
-#include <activemq/core/ActiveMQConnectionFactory.h>
-#include <activemq/util/Config.h>
-#include <activemq/library/ActiveMQCPP.h>
-#include <cms/Connection.h>
-#include <cms/Session.h>
-#include <cms/TextMessage.h>
-#include <cms/BytesMessage.h>
-#include <cms/MapMessage.h>
-#include <cms/ExceptionListener.h>
-#include <cms/MessageListener.h>
+#include "decaf/lang/Thread.h"
+//#include "decaf/lang/Runnable.h"
+#include "decaf/util/concurrent/CountDownLatch.h"
+#include "decaf/lang/Long.h"
+#include "decaf/util/Date.h"
+#include "activemq/core/ActiveMQConnectionFactory.h"
+#include "activemq/util/Config.h"
+#include "activemq/library/ActiveMQCPP.h"
+#include "cms/Connection.h"
+#include "cms/Session.h"
+#include "cms/TextMessage.h"
+#include "cms/BytesMessage.h"
+#include "cms/MapMessage.h"
+#include "cms/ExceptionListener.h"
+#include "cms/MessageListener.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <iostream>
@@ -36,6 +36,9 @@ using namespace decaf::util;
 using namespace decaf::util::concurrent;
 using namespace cms;
 using namespace std;
+
+class B2DWorld;
+extern B2DWorld* m_pB2DWorld;
 
 
 SimpleProducer::SimpleProducer(
@@ -55,22 +58,6 @@ SimpleProducer::SimpleProducer(
     this->destURI = destURI;
     this->clientAck = clientAck;
     
-    m_pB2DWorld = new B2DWorld();
-}
-
-SimpleProducer::~SimpleProducer()
-{
-    delete m_pB2DWorld;
-    cleanup();
-}
-
-void SimpleProducer::close()
-{
-    this->cleanup();
-}
-
-void SimpleProducer::run()
-{
     try
     {
         // Create a ConnectionFactory
@@ -115,30 +102,57 @@ void SimpleProducer::run()
         // Create the Thread Id String
         //string threadIdStr = Long::toString( Thread::getId() );
         long long llThreadId = Thread::currentThread()->getId();
-        string threadIdStr = Long::toString( llThreadId );
+        string threadIdStr = Long::toString( llThreadId );        
+    }
+    catch ( CMSException& e )
+    {
+        e.printStackTrace();
+    }
+}
 
-        // Create a messages
-        string text = "";//(string)"Hello world! from thread " + threadIdStr;
-        
-        m_pB2DWorld->CreateBodiesAndShapes();
-        for( unsigned int ix=0; ix<numMessages; ++ix )
+SimpleProducer::~SimpleProducer()
+{
+    cleanup();
+}
+
+void SimpleProducer::close()
+{
+    this->cleanup();
+}
+
+void SimpleProducer::run()
+{
+    try
+    {
+        std::string text = "";
+        TextMessage* message = NULL;
+        int ix = 0;
+        //for( unsigned int ix=0; ix<numMessages; ++ix )
+        while (true)
         {
+            // Receive incoming user commands
+            
+            // Run simulation step
             m_pB2DWorld->Update(text);
             
-            TextMessage* message = session->createTextMessage( text );
+            // Check game rules
             
+            // Update all object states
+            
+            //  if any client needs a world update
+                // take world snapshot
+                // Update clients if required
+            message = session->createTextMessage( text );
             message->setIntProperty( "Integer", ix );
-            
-            // Tell the producer to send the message
             //printf( "Sent message #%d from thread %s\n", ix+1, threadIdStr.c_str() );
             //printf("%s\n", message->getText().c_str());
             producer->send( message );
             //Thread::currentThread()->yield();
             
             delete message;
-            Thread::currentThread()->sleep(100);
-        }
-        
+            Thread::currentThread()->sleep(10);
+            ++ix;
+        }        
     }
     catch ( CMSException& e )
     {

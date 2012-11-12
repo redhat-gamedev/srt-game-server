@@ -12,28 +12,13 @@
 // Constructor(s)
 B2DWorld::B2DWorld()
 {
-    // Define the size of the world. Simulation will still work
-	// if bodies reach the end of the world, but it will be slower.
-	//b2AABB worldAABB;
-	worldAABB.lowerBound.Set(-100.0f, -100.0f);
-	worldAABB.upperBound.Set(100.0f, 100.0f);
-    
-	// Define the gravity vector.
-	//b2Vec2
-    gravity = new b2Vec2(0.0f, -9.81f);
-    
-	// Do we want to let bodies sleep?
-	//bool doSleep = true;
-    
-	// Construct a world object, which will hold and simulate the rigid bodies.
-	//b2World world
-    //world = new b2World(worldAABB, *gravity, doSleep);
+    gravity = new b2Vec2(0.0f, -9.81f);    
     world = new b2World(*gravity);
     
-	// Prepare for simulation. Typically we use a time step of 1/60 of a
-	// second (60Hz) and 10 iterations. This provides a high quality simulation
-	// in most game scenarios.
-	timeStep = 1.0f / 60.0f;
+    // As per https://developer.valvesoftware.com/wiki/Source_Multiplayer_Networking
+    // resulting in 15ms per timeStep or tick
+	timeStep = 1.0f / 66.0f;
+    
 	velocityIterations = 6;
 	positionIterations = 2;
 }

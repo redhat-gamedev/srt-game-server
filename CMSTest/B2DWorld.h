@@ -21,23 +21,18 @@ class B2DWorld
 private:
     
 protected:
-    b2AABB          worldAABB;
     b2World*        world;
     b2Vec2*         gravity;
     b2BodyDef       groundBodyDef;
     b2Body*         groundBody;
-    //b2ShapeDef    groundShapeDef;
     b2BodyDef       bodyDef;
     b2Body*         body;
-    //b2ShapeDef    shapeDef;
     b2Vec2          position;
     float32         angle;
     
-    b2PolygonShape groundBox;
-    b2PolygonShape dynamicBox;
-    b2FixtureDef fixtureDef;
-
-
+    b2PolygonShape  groundBox;
+    b2PolygonShape  dynamicBox;
+    b2FixtureDef    fixtureDef;
     
     float32         timeStep;// = 1.0f / 60.0f;
 	int32           velocityIterations;

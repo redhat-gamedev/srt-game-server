@@ -27,7 +27,7 @@
  * limitations under the License.
  */
 
-#include <decaf/lang/Runnable.h>
+#include "decaf/lang/Runnable.h"
 #include <string>
 
 namespace cms
@@ -37,8 +37,6 @@ namespace cms
     class Destination;
     class MessageProducer;
 }
-
-class B2DWorld;
 
 
 class SimpleProducer :
@@ -56,9 +54,6 @@ private:
     unsigned int            numMessages;
     std::string             brokerURI;
     std::string             destURI;
-    
-    // Box2D
-    B2DWorld*               m_pB2DWorld;
     
     // Helper(s)
     void cleanup();

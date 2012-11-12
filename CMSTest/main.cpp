@@ -18,6 +18,7 @@
 
 #include "SimpleAsyncConsumer.h"
 #include "SimpleAsyncProducer.h"
+#include "B2DWorld.h"
 
 #include <decaf/lang/Thread.h>
 #include <decaf/lang/Runnable.h>
@@ -50,15 +51,20 @@ using namespace decaf::util::concurrent;
 using namespace cms;
 using namespace std;
 
+//class B2DWorld;
+
+SimpleProducer*         producer = NULL;
+Thread*                 pSimpleProducerThread = NULL;
+SimpleAsyncConsumer*    consumer = NULL;
+B2DWorld*               m_pB2DWorld = NULL;
 
 
-#if 1
-////////////////////////////////////////////////////////////////////////////////
-int main(int argc AMQCPP_UNUSED, char* argv[] AMQCPP_UNUSED)
+void Setup()
 {
     bool            useTopics = false;
     bool            clientAck = false;
     unsigned int    numMessages = 20000;
+    std::string     strName = "MySimpleProducerThread";
     std::string     strWorldSimulationURI = "WORLD.SIMULATION";
     std::string     strInputURI = "CLIENT.INPUT";
     std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp";
@@ -69,39 +75,72 @@ int main(int argc AMQCPP_UNUSED, char* argv[] AMQCPP_UNUSED)
     //        "&transport.tcpTracingEnabled=true"
     //        "&wireFormat.tightEncodingEnabled=true"
     ///")";
-    
-    std::cout << "Starting..." << std::endl;
+ 
+    std::cout << "Setup()..." << std::endl;
+
     activemq::library::ActiveMQCPP::initializeLibrary();
 
-    // Create the producer and run it.
-    //    SimpleProducer producer( brokerURI, numMessages, destURI, useTopics );
-    //    producer.run();
-    //    producer.close();
-    SimpleProducer producer(strBrokerURI, numMessages, strWorldSimulationURI, useTopics);
-    Thread pSimpleProducerThread(&producer, (char*)"MySimpleProducerThread");
+    m_pB2DWorld = new B2DWorld();
+    m_pB2DWorld->CreateBodiesAndShapes();
+
+    producer = new SimpleProducer(strBrokerURI, numMessages, strWorldSimulationURI, useTopics);
+    pSimpleProducerThread = new Thread(producer, strName);
+    consumer = new SimpleAsyncConsumer(strBrokerURI, strInputURI, useTopics, clientAck);    
+}
+
+void Teardown()
+{
+    std::cout << "Teardown()..." << std::endl;
+
+    delete m_pB2DWorld;
+
+    consumer->close();
+    producer->close();
+
+    delete consumer;
+    consumer = NULL;
     
-    std::cout << "Starting the producer" << std::endl;
-    pSimpleProducerThread.start();
+    delete pSimpleProducerThread;
+    pSimpleProducerThread = NULL;
     
-    SimpleAsyncConsumer consumer(strBrokerURI, strInputURI, useTopics, clientAck);
-    // Start it up and it will listen forever.
+    delete producer;
+    producer = NULL;
+    
+    activemq::library::ActiveMQCPP::shutdownLibrary();
+}
+
+
+#if 1
+////////////////////////////////////////////////////////////////////////////////
+int main(int argc AMQCPP_UNUSED, char* argv[] AMQCPP_UNUSED)
+{
+    std::cout << "Starting..." << std::endl;
+    
+    Setup();
+    
+    // Receive incoming user commands
     std::cout << "Starting the consumer" << std::endl;
-    consumer.runConsumer();
+    consumer->runConsumer();
+    
+    // Run simulation step
+    //m_pB2DWorld->Update(text);
+    
+    // Check game rules
+    
+    // Update all object states
+    
+    //  if any client needs a world update
+        // take world snapshot
+        // Update clients if required
+
+    std::cout << "Starting the producer" << std::endl;
+    pSimpleProducerThread->start();
+
     // Wait to exit.
     std::cout << "Press 'q' to quit" << std::endl;
     while( std::cin.get() != 'q') {}
     
-    consumer.close();
-    
-//    std::cout << "Waiting for the producer thread to terminate..." << std::endl;
-//    while (Thread::TERMINATED != pSimpleProducerThread.getState())
-//    {
-//    }
-//    std::cout << "...Finished." << std::endl;
-
-    producer.close();
-    
-    activemq::library::ActiveMQCPP::shutdownLibrary();
+    Teardown();
 }
 #endif
 
