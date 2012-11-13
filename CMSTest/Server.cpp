@@ -114,11 +114,12 @@ void Server::Teardown()
     B2DWorld::Publisher.Detach(this);
     Heartbeat::Publisher.Detach(this);
     
-    delete m_pTimer;
-    m_pTimer = NULL;
-    
-    delete m_pHeartbeat;
+    m_pTimer->cancel();
+    //delete m_pHeartbeat;
     m_pHeartbeat = NULL;
+
+    delete m_pTimer;
+    m_pTimer = NULL;    
     
     consumer->close();
     delete consumer;

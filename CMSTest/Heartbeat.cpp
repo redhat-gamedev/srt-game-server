@@ -52,7 +52,8 @@ Heartbeat::Heartbeat()
 // Destructor(s)
 Heartbeat::~Heartbeat()
 {
-    
+    int i = 0;
+    ++i;
 }
 
 // Method(s)
