@@ -57,8 +57,8 @@ private:
 protected:
     SimpleProducer*         m_pSimulationProducer;
     SimpleProducer*         m_pHeartbeatProducer;
-    Thread*                 pSimpleProducerThread;
-    SimpleAsyncConsumer*    consumer;
+    Thread*                 m_pB2DWorldThread;
+    SimpleAsyncConsumer*    m_pCommandConsumer;
     B2DWorld*               m_pB2DWorld;
     Timer*                  m_pTimer;
     Heartbeat*              m_pHeartbeat;
@@ -85,6 +85,5 @@ public:
     // Heartbeat::ICallbacks implementation
     void OnBeat(int iBeat);    
 };
-
 
 #endif /* defined(__CMSTest__Server__) */

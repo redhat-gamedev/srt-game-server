@@ -45,15 +45,14 @@ class SimpleProducer :
 private:
     
     // ActiveMQ-CPP
-    cms::Connection*        connection;
-    cms::Session*           session;
-    cms::Destination*       destination;
-    cms::MessageProducer*   producer;
-    bool                    useTopic;
-    bool                    clientAck;
-    unsigned int            numMessages;
-    std::string             brokerURI;
-    std::string             destURI;
+    cms::Connection*        m_pConnection;
+    cms::Session*           m_pSession;
+    cms::Destination*       m_pDestination;
+    cms::MessageProducer*   m_pMessageProducer;
+    bool                    m_bUseTopic;
+    bool                    m_bClientAck;
+    std::string             m_strBrokerURI;
+    std::string             m_strDestinationURI;
     
     // Helper(s)
     void Setup();
@@ -62,11 +61,10 @@ private:
 public:
 
     // Constructor(s)
-    SimpleProducer(const std::string& brokerURI,
-                   unsigned int numMessages,
-                   const std::string& destURI,
-                   bool useTopic = false,
-                   bool clientAck = false);
+    SimpleProducer(const std::string& strBrokerURI,
+                   const std::string& strDestinationURI,
+                   bool bUseTopic = false,
+                   bool bClientAck = false);
     
     // Destructor(s)
     virtual ~SimpleProducer();

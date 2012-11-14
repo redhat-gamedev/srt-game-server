@@ -53,8 +53,8 @@ using namespace std;
 Server::Server() :
     m_pSimulationProducer(NULL),
     m_pHeartbeatProducer(NULL),
-    pSimpleProducerThread(NULL),
-    consumer(NULL),
+    m_pB2DWorldThread(NULL),
+    m_pCommandConsumer(NULL),
     m_pB2DWorld(NULL),
     m_pTimer(NULL),
     m_pHeartbeat(NULL)
@@ -73,7 +73,6 @@ void Server::Setup()
 {
     bool            useTopics = false;
     bool            clientAck = false;
-    unsigned int    numMessages = 20000;
     std::string     strName = "MySimpleProducerThread";
     std::string     strWorldSimulationURI = "WORLD.SIMULATION";
     std::string     strHeartbeatURI = "HEARTBEAT";
@@ -93,12 +92,11 @@ void Server::Setup()
     
     m_pB2DWorld = new B2DWorld();
     m_pB2DWorld->CreateBodiesAndShapes();
-    //pSimpleProducerThread = new decaf::lang::Thread(m_pSimulationProducer, strName);
-    pSimpleProducerThread = new decaf::lang::Thread(m_pB2DWorld, strName);
+    m_pB2DWorldThread = new decaf::lang::Thread(m_pB2DWorld, strName);
     
-    m_pSimulationProducer = new SimpleProducer(strBrokerURI, numMessages, strWorldSimulationURI, useTopics);
-    m_pHeartbeatProducer = new SimpleProducer(strBrokerURI, numMessages, strHeartbeatURI, useTopics);
-    consumer = new SimpleAsyncConsumer(strBrokerURI, strInputURI, useTopics, clientAck);
+    m_pSimulationProducer = new SimpleProducer(strBrokerURI, strWorldSimulationURI, useTopics);
+    m_pHeartbeatProducer = new SimpleProducer(strBrokerURI, strHeartbeatURI, useTopics);
+    m_pCommandConsumer = new SimpleAsyncConsumer(strBrokerURI, strInputURI, useTopics, clientAck);
     
     m_pHeartbeat = new Heartbeat();
     m_pTimer = new decaf::util::Timer();
@@ -121,9 +119,9 @@ void Server::Teardown()
     delete m_pTimer;
     m_pTimer = NULL;    
     
-    consumer->close();
-    delete consumer;
-    consumer = NULL;
+    m_pCommandConsumer->close();
+    delete m_pCommandConsumer;
+    m_pCommandConsumer = NULL;
 
     m_pHeartbeatProducer->close();
     delete m_pHeartbeatProducer;
@@ -133,8 +131,8 @@ void Server::Teardown()
     delete m_pSimulationProducer;
     m_pSimulationProducer = NULL;
 
-    delete pSimpleProducerThread;
-    pSimpleProducerThread = NULL;
+    delete m_pB2DWorldThread;
+    m_pB2DWorldThread = NULL;
     
     delete m_pB2DWorld;
     m_pB2DWorld = NULL;
@@ -146,11 +144,12 @@ void Server::Teardown()
 void Server::Run()
 {
     // Receive incoming user commands
-    std::cout << "Starting the consumer" << std::endl;
-    consumer->runConsumer();
+    std::cout << "Starting the m_pCommandConsumer" << std::endl;
+    m_pCommandConsumer->runConsumer();
     
     // Run simulation step
-    //m_pB2DWorld->Update(text);
+    std::cout << "Starting the world simulation" << std::endl;
+    m_pB2DWorldThread->start();
     
     // Check game rules
     
@@ -160,9 +159,6 @@ void Server::Run()
     // take world snapshot
     // Update clients if required
     
-    std::cout << "Starting the world simulation" << std::endl;
-    pSimpleProducerThread->start();
-
     std::cout << "Starting the heartbeat" << std::endl;
     m_pTimer->schedule(m_pHeartbeat, 0, 1000);
 }

@@ -38,21 +38,19 @@ using namespace std;
 
 
 SimpleProducer::SimpleProducer(
-                               const std::string& brokerURI,
-                               unsigned int numMessages,
-                               const std::string& destURI,
-                               bool useTopic,
-                               bool clientAck)
+                               const std::string& strBrokerURI,
+                               const std::string& strDestinationURI,
+                               bool bUseTopic,
+                               bool bClientAck)
 {
-    connection = NULL;
-    session = NULL;
-    destination = NULL;
-    producer = NULL;
-    this->numMessages = numMessages;
-    this->useTopic = useTopic;
-    this->brokerURI = brokerURI;
-    this->destURI = destURI;
-    this->clientAck = clientAck;
+    m_pConnection = NULL;
+    m_pSession = NULL;
+    m_pDestination = NULL;
+    m_pMessageProducer = NULL;
+    this->m_bUseTopic = bUseTopic;
+    this->m_strBrokerURI = strBrokerURI;
+    this->m_strDestinationURI = strDestinationURI;
+    this->m_bClientAck = bClientAck;
     
     try
     {
@@ -74,13 +72,13 @@ SimpleProducer::~SimpleProducer()
 void SimpleProducer::Setup()
 {
     // Create a ConnectionFactory
-    auto_ptr<ActiveMQConnectionFactory> connectionFactory(new ActiveMQConnectionFactory( brokerURI ) );
+    auto_ptr<ActiveMQConnectionFactory> m_pConnectionFactory(new ActiveMQConnectionFactory( m_strBrokerURI ) );
     
     // Create a Connection
     try
     {
-        connection = connectionFactory->createConnection();
-        connection->start();
+        m_pConnection = m_pConnectionFactory->createConnection();
+        m_pConnection->start();
     }
     catch( CMSException& e )
     {
@@ -89,28 +87,28 @@ void SimpleProducer::Setup()
     }
     
     // Create a Session
-    if( clientAck )
+    if( m_bClientAck )
     {
-        session = connection->createSession( Session::CLIENT_ACKNOWLEDGE );
+        m_pSession = m_pConnection->createSession( Session::CLIENT_ACKNOWLEDGE );
     }
     else
     {
-        session = connection->createSession( Session::AUTO_ACKNOWLEDGE );
+        m_pSession = m_pConnection->createSession( Session::AUTO_ACKNOWLEDGE );
     }
     
-    // Create the destination (Topic or Queue)
-    if( useTopic )
+    // Create the m_pDestination (Topic or Queue)
+    if( m_bUseTopic )
     {
-        destination = session->createTopic( destURI );
+        m_pDestination = m_pSession->createTopic( m_strDestinationURI );
     }
     else
     {
-        destination = session->createQueue( destURI );
+        m_pDestination = m_pSession->createQueue( m_strDestinationURI );
     }
     
     // Create a MessageProducer from the Session to the Topic or Queue
-    producer = session->createProducer( destination );
-    producer->setDeliveryMode( DeliveryMode::NON_PERSISTENT );
+    m_pMessageProducer = m_pSession->createProducer( m_pDestination );
+    m_pMessageProducer->setDeliveryMode( DeliveryMode::NON_PERSISTENT );
     
     // Create the Thread Id String
     //string threadIdStr = Long::toString( Thread::getId() );
@@ -123,33 +121,33 @@ void SimpleProducer::Teardown()
     // Destroy resources.
     try
     {
-        if( destination != NULL )
-            delete destination;
+        if( m_pDestination != NULL )
+            delete m_pDestination;
     }
     catch ( CMSException& e )
     {
         e.printStackTrace();
     }
-    destination = NULL;
+    m_pDestination = NULL;
     
     try
     {
-        if( producer != NULL )
-            delete producer;
+        if( m_pMessageProducer != NULL )
+            delete m_pMessageProducer;
     }
     catch ( CMSException& e )
     {
         e.printStackTrace();
     }
-    producer = NULL;
+    m_pMessageProducer = NULL;
     
     // Close open resources.
     try
     {
-        if( session != NULL )
-            session->close();
-        if( connection != NULL )
-            connection->close();
+        if( m_pSession != NULL )
+            m_pSession->close();
+        if( m_pConnection != NULL )
+            m_pConnection->close();
     }
     catch ( CMSException& e )
     {
@@ -158,25 +156,25 @@ void SimpleProducer::Teardown()
     
     try
     {
-        if( session != NULL )
-            delete session;
+        if( m_pSession != NULL )
+            delete m_pSession;
     }
     catch ( CMSException& e )
     {
         e.printStackTrace();
     }
-    session = NULL;
+    m_pSession = NULL;
     
     try
     {
-        if( connection != NULL )
-            delete connection;
+        if( m_pConnection != NULL )
+            delete m_pConnection;
     }
     catch ( CMSException& e )
     {
         e.printStackTrace();
     }
-    connection = NULL;    
+    m_pConnection = NULL;    
 }
 
 void SimpleProducer::close()
@@ -206,11 +204,11 @@ void SimpleProducer::run()
 //            //  if any client needs a world update
 //                // take world snapshot
 //                // Update clients if required
-//            message = session->createTextMessage( text );
+//            message = m_pSession->createTextMessage( text );
 //            message->setIntProperty( "Integer", ix );
 //            //printf( "Sent message #%d from thread %s\n", ix+1, threadIdStr.c_str() );
 //            //printf("%s\n", message->getText().c_str());
-//            producer->send( message );
+//            m_pMessageProducer->send( message );
 //            //Thread::currentThread()->yield();
 //            
 //            delete message;
@@ -227,16 +225,16 @@ void SimpleProducer::run()
 void SimpleProducer::Send(std::string& strToSend)
 {
     static int ix = 0;
-    TextMessage* message = NULL;
+    TextMessage* pTextMessage = NULL;
     
     try
     {
-        message = session->createTextMessage( strToSend );
+        pTextMessage = m_pSession->createTextMessage( strToSend );
         ++ix;
-        message->setIntProperty( "Integer", ix );
-        producer->send( message );
+        pTextMessage->setIntProperty( "Integer", ix );
+        m_pMessageProducer->send( pTextMessage );
         
-        delete message;
+        delete pTextMessage;
     }
     catch ( CMSException& e )
     {
