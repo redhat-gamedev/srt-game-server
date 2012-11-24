@@ -23,6 +23,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		CC3A5A851654679F00F30BA0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CC3A5A7A1654679E00F30BA0 /* b2dJson.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CC3A5A2C165465C900F30BA0;
+			remoteInfo = b2dJson;
+		};
 		CC488D1F164EB5DE005078C3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CCFB9DDC1640ABB900F6DBA2 /* Box2D.xcodeproj */;
@@ -88,6 +95,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CC3A5A7A1654679E00F30BA0 /* b2dJson.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = b2dJson.xcodeproj; path = ../ThirdParty/b2dJson/b2dJson.xcodeproj; sourceTree = "<group>"; };
 		CC68EA91163DA07400D225C2 /* CMSTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CMSTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC68EA95163DA07400D225C2 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		CC68EA97163DA07400D225C2 /* CMSTest.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = CMSTest.1; sourceTree = "<group>"; };
@@ -126,6 +134,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CC3A5A7B1654679E00F30BA0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CC3A5A861654679F00F30BA0 /* libb2dJson.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		CC488D19164EB5DE005078C3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -140,6 +156,7 @@
 		CC68EA86163DA07400D225C2 = {
 			isa = PBXGroup;
 			children = (
+				CC3A5A7A1654679E00F30BA0 /* b2dJson.xcodeproj */,
 				CCE9086616515D32005F2E72 /* activemq-cpp.xcodeproj */,
 				CCFB9DDC1640ABB900F6DBA2 /* Box2D.xcodeproj */,
 				CCE9087A16517079005F2E72 /* Phoenix.xcodeproj */,
@@ -249,6 +266,10 @@
 					ProjectRef = CCE9086616515D32005F2E72 /* activemq-cpp.xcodeproj */;
 				},
 				{
+					ProductGroup = CC3A5A7B1654679E00F30BA0 /* Products */;
+					ProjectRef = CC3A5A7A1654679E00F30BA0 /* b2dJson.xcodeproj */;
+				},
+				{
 					ProductGroup = CC488D19164EB5DE005078C3 /* Products */;
 					ProjectRef = CCFB9DDC1640ABB900F6DBA2 /* Box2D.xcodeproj */;
 				},
@@ -265,6 +286,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		CC3A5A861654679F00F30BA0 /* libb2dJson.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = libb2dJson.a;
+			remoteRef = CC3A5A851654679F00F30BA0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		CC488D20164EB5DE005078C3 /* libBox2D.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
