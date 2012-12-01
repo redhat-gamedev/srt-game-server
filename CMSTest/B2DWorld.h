@@ -30,6 +30,7 @@ public:
     {
     public:
         virtual void OnB2DWorldUpdate(b2Vec2& b2vNewPosition, float32& fNewAngle) {};
+        virtual void OnB2DWorldBodyUpdate(b2Body* pBody) {};
     };
     
 protected:
@@ -41,6 +42,7 @@ protected:
         std::list<ICallbacks*>          m_listSubscribersSwap;
     public:
         virtual void OnB2DWorldUpdate(b2Vec2& b2vNewPosition, float32& fNewAngle);
+        virtual void OnB2DWorldBodyUpdate(b2Body* pBody);
     };
 
 public:

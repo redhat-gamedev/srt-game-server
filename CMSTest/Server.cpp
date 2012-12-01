@@ -12,6 +12,7 @@
 #include "B2DWorld.h"
 #include "Heartbeat.h"
 #include "Addressbook.h"
+#include "box2d.pb.h"
 #include "decaf/util/Timer.h"
 #include "decaf/lang/Thread.h"
 #include "decaf/lang/Runnable.h"
@@ -112,14 +113,14 @@ void Server::Setup()
     
     B2DWorld::Publisher.Attach(this);
     Heartbeat::Publisher.Attach(this);
-    Addressbook::Publisher.Attach(this);
+    //Addressbook::Publisher.Attach(this);
 }
 
 void Server::Teardown()
 {
     std::cout << "Teardown()..." << std::endl;
     
-    Addressbook::Publisher.Detach(this);
+    //Addressbook::Publisher.Detach(this);
     Heartbeat::Publisher.Detach(this);
     B2DWorld::Publisher.Detach(this);
 
@@ -184,8 +185,8 @@ void Server::Run()
     std::cout << "Starting the heartbeat" << std::endl;
     m_pTimer->schedule(m_pHeartbeat, 0, 1000);
     
-    std::cout << "Starting the addressbook" << std::endl;
-    m_ptAddressbook->schedule(m_pAddressbook, 0, 2000);
+    //std::cout << "Starting the addressbook" << std::endl;
+    //m_ptAddressbook->schedule(m_pAddressbook, 0, 2000);
 }
 
 // B2DWorld::ICallbacks implementation
@@ -206,6 +207,54 @@ void Server::OnB2DWorldUpdate(b2Vec2& b2vNewPosition, float32& fNewAngle)
 
         m_pSimulationProducer->Send(strText);
         strText.clear();
+    }
+    catch ( CMSException& e )
+    {
+        e.printStackTrace();
+    }
+}
+
+void Server::OnB2DWorldBodyUpdate(b2Body* pBody)
+{
+    assert(m_pSimulationProducer);
+    assert(pBody);
+    
+    static std::string strText = "";
+    
+    try
+    {
+        ::box2d::PbBody aPbBody;
+        aPbBody.set_active(true);
+        ::box2d::PbBodyType aPbBodyType = ::box2d::PbBodyType_MIN;
+        //aPbBody.set_type(::box2d::PbBodyType::DYNAMIC);
+        aPbBody.set_type(aPbBodyType);
+        aPbBody.set_angle(pBody->GetAngle());
+        
+        ::box2d::PbVec2* pPbVec2 = new ::box2d::PbVec2();
+        pPbVec2->set_x(pBody->GetPosition().x);
+        pPbVec2->set_y(pBody->GetPosition().y);
+        aPbBody.set_allocated_position(pPbVec2);
+        
+        ::box2d::PbVec2* pPbVec2LV = new ::box2d::PbVec2();
+        pPbVec2LV->set_x(0.0f);
+        pPbVec2LV->set_y(0.0f);
+        aPbBody.set_allocated_linear_velocity(pPbVec2LV);
+
+        ::box2d::PbVec2* pPbVec2F = new ::box2d::PbVec2();
+        pPbVec2F->set_x(0.0f);
+        pPbVec2F->set_y(0.0f);
+        aPbBody.set_allocated_force(pPbVec2F);
+
+        //::box2d::PbFixture aPbFixture;
+        ::box2d::PbFixture* pPbFixture = aPbBody.add_fixtures();
+        pPbFixture->set_restitution(0.5f);
+        pPbFixture->set_density(0.6f);
+        //int iFixtures = aPbBody.fixtures_size();
+        
+        aPbBody.SerializeToString(&strText);
+        const char* pucText = strText.c_str();
+        unsigned long ulLength = strText.length();
+        m_pSimulationProducer->Send((const unsigned char*)pucText, (int)ulLength);
     }
     catch ( CMSException& e )
     {

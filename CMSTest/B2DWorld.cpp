@@ -11,7 +11,6 @@
 
 B2DWorld::_Publisher                 B2DWorld::Publisher;
 
-
 // Constructor(s)
 /*
  B2DWorld.h::_Publisher::_Publisher()
@@ -44,6 +43,20 @@ void B2DWorld::_Publisher::OnB2DWorldUpdate(b2Vec2& b2vNewPosition, float32& fNe
     }
 }
 
+void B2DWorld::_Publisher::OnB2DWorldBodyUpdate(b2Body* pBody)
+{
+    ICallbacks* pObjToCallback = NULL;
+    
+    //m_listSubscribersSwap = m_listSubscribers;
+    Clone(m_listSubscribersSwap);
+    while(!m_listSubscribersSwap.empty())
+    {
+        pObjToCallback = m_listSubscribersSwap.front();
+        m_listSubscribersSwap.pop_front();
+        assert(pObjToCallback);
+        pObjToCallback->OnB2DWorldBodyUpdate(pBody);
+    }
+}
 
 // Constructor(s)
 B2DWorld::B2DWorld()
@@ -113,17 +126,33 @@ void B2DWorld::Update(std::string& strText)
 // decaf::lang::Runnable implementation
 void B2DWorld::run()
 {
+    //static bool bOneTime = true;
+    static unsigned int ui = 0;
+
     while (true)
     {
+        //if (bOneTime)
+        //{
+            //bOneTime = false;
+            //body->ApplyForceToCenter(b2Vec2(20.0f, 0.0f), true);
+        //}
+        
+        if (ui < 100)
+        {
+            body->ApplyForceToCenter(b2Vec2(20.0f, 0.0f), true);
+            ++ui;
+        }
         // Instruct the world to perform a single step of simulation.
         // It is generally best to keep the time step and iterations fixed.
         world->Step(timeStep, velocityIterations, positionIterations);
         
         // Now print the position and angle of the body.
-        position = body->GetPosition();
-        angle = body->GetAngle();
+        //position = body->GetPosition();
+        //angle = body->GetAngle();
 
-        Publisher.OnB2DWorldUpdate(position, angle);
+        //Publisher.OnB2DWorldUpdate(position, angle);
+        Publisher.OnB2DWorldBodyUpdate(body);
+        
         decaf::lang::Thread::currentThread()->sleep(15);
     }
 }

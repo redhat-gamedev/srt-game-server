@@ -87,6 +87,7 @@ public:
     
     // B2DWorld::ICallbacks implementation
     void OnB2DWorldUpdate(b2Vec2& b2vNewPosition, float32& fNewAngle);
+    void OnB2DWorldBodyUpdate(b2Body* pBody);
     
     // Heartbeat::ICallbacks implementation
     void OnBeat(int iBeat);

@@ -15,6 +15,7 @@
 		CC68EA98163DA07400D225C2 /* CMSTest.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = CC68EA97163DA07400D225C2 /* CMSTest.1 */; };
 		CC68EAB4163DB36800D225C2 /* SimpleAsyncConsumer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC68EAB2163DB36800D225C2 /* SimpleAsyncConsumer.cpp */; };
 		CC68EAB7163DB42E00D225C2 /* SimpleAsyncProducer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC68EAB5163DB42E00D225C2 /* SimpleAsyncProducer.cpp */; };
+		CCA2F45C166AA72C00D62F5C /* box2d.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CC4FECE31662A4A4004810CC /* box2d.pb.cc */; };
 		CCE9086F16515D64005F2E72 /* libactivemq-cpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE9086E16515D33005F2E72 /* libactivemq-cpp.a */; };
 		CCE9087216516221005F2E72 /* libapr-1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE9087016516221005F2E72 /* libapr-1.dylib */; };
 		CCE9087316516221005F2E72 /* libaprutil-1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE9087116516221005F2E72 /* libaprutil-1.dylib */; };
@@ -384,6 +385,7 @@
 				CCE9089B165192E8005F2E72 /* Heartbeat.cpp in Sources */,
 				CC67E1E0166A4F6500BCB047 /* addressbook.pb.cc in Sources */,
 				CC67E1E4166A524400BCB047 /* Addressbook.cpp in Sources */,
+				CCA2F45C166AA72C00D62F5C /* box2d.pb.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
