@@ -11,6 +11,7 @@
 #include "SimpleAsyncProducer.h"
 #include "B2DWorld.h"
 #include "Heartbeat.h"
+#include "Addressbook.h"
 #include "decaf/util/Timer.h"
 #include "decaf/lang/Thread.h"
 #include "decaf/lang/Runnable.h"
@@ -53,11 +54,14 @@ using namespace std;
 Server::Server() :
     m_pSimulationProducer(NULL),
     m_pHeartbeatProducer(NULL),
+    m_pAddressbookProducer(NULL),
     m_pB2DWorldThread(NULL),
     m_pCommandConsumer(NULL),
     m_pB2DWorld(NULL),
     m_pTimer(NULL),
-    m_pHeartbeat(NULL)
+    m_ptAddressbook(NULL),
+    m_pHeartbeat(NULL),
+    m_pAddressbook(NULL)
 {
     Setup();
 }
@@ -76,6 +80,7 @@ void Server::Setup()
     std::string     strName = "MySimpleProducerThread";
     std::string     strWorldSimulationURI = "WORLD.SIMULATION";
     std::string     strHeartbeatURI = "HEARTBEAT";
+    std::string     strAddressURI = "ADDRESS";
     std::string     strInputURI = "CLIENT.INPUT";
     std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp";
     ///"failover:(tcp://127.0.0.1:61616"
@@ -96,21 +101,34 @@ void Server::Setup()
     
     m_pSimulationProducer = new SimpleProducer(strBrokerURI, strWorldSimulationURI, useTopics);
     m_pHeartbeatProducer = new SimpleProducer(strBrokerURI, strHeartbeatURI, useTopics);
+    m_pAddressbookProducer = new SimpleProducer(strBrokerURI, strAddressURI, useTopics);
     m_pCommandConsumer = new SimpleAsyncConsumer(strBrokerURI, strInputURI, useTopics, clientAck);
     
     m_pHeartbeat = new Heartbeat();
     m_pTimer = new decaf::util::Timer();
+
+    m_pAddressbook = new Addressbook();
+    m_ptAddressbook = new decaf::util::Timer();
     
     B2DWorld::Publisher.Attach(this);
     Heartbeat::Publisher.Attach(this);
+    Addressbook::Publisher.Attach(this);
 }
 
 void Server::Teardown()
 {
     std::cout << "Teardown()..." << std::endl;
     
-    B2DWorld::Publisher.Detach(this);
+    Addressbook::Publisher.Detach(this);
     Heartbeat::Publisher.Detach(this);
+    B2DWorld::Publisher.Detach(this);
+
+    m_ptAddressbook->cancel();
+    //delete m_pAddressbook;
+    m_pAddressbook = NULL;
+    
+    delete m_ptAddressbook;
+    m_ptAddressbook = NULL;
     
     m_pTimer->cancel();
     //delete m_pHeartbeat;
@@ -123,6 +141,10 @@ void Server::Teardown()
     delete m_pCommandConsumer;
     m_pCommandConsumer = NULL;
 
+    m_pAddressbookProducer->close();
+    delete m_pAddressbookProducer;
+    m_pAddressbookProducer = NULL;
+    
     m_pHeartbeatProducer->close();
     delete m_pHeartbeatProducer;
     m_pHeartbeatProducer = NULL;
@@ -161,6 +183,9 @@ void Server::Run()
     
     std::cout << "Starting the heartbeat" << std::endl;
     m_pTimer->schedule(m_pHeartbeat, 0, 1000);
+    
+    std::cout << "Starting the addressbook" << std::endl;
+    m_ptAddressbook->schedule(m_pAddressbook, 0, 2000);
 }
 
 // B2DWorld::ICallbacks implementation
@@ -202,6 +227,35 @@ void Server::OnBeat(int iBeat)
         strText = m_szBuf;
         
         m_pHeartbeatProducer->Send(strText);
+        strText.clear();
+    }
+    catch ( CMSException& e )
+    {
+        e.printStackTrace();
+    }
+}
+
+// Heartbeat::ICallbacks implementation
+void Server::OnPerson(tutorial::Person* person)
+{
+    assert(person);
+    
+    static char m_szBuf[0xFF];
+    static std::string strText = "";
+    
+    try
+    {
+        memset(m_szBuf, 0, sizeof(m_szBuf));
+        sprintf(m_szBuf, "%i", person->id());
+        //printf("%s\n", m_szBuf);
+        //strText = m_szBuf;
+        person->SerializeToString(&strText);
+        const char* pucText = strText.c_str();
+        unsigned long ulLength = strText.length();
+        m_pAddressbookProducer->Send((const unsigned char*)pucText, (int)ulLength);
+        //m_pAddressbookProducer->Send(pucText, ulLength);
+        
+        //person->SerializeToArray(pData, iSize);
         strText.clear();
     }
     catch ( CMSException& e )

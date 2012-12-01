@@ -14,6 +14,8 @@
 //#include "decaf/util/Timer.h"
 #include "B2DWorld.h"
 #include "Heartbeat.h"
+#include "Addressbook.h"
+#include "addressbook.pb.h"
 #include "../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include <string>
 
@@ -31,8 +33,8 @@ namespace decaf
 }
 class SimpleProducer;
 class SimpleAsyncConsumer;
-class Heartbeat;
-class B2DWorld;
+//class Heartbeat;
+//class B2DWorld;
 
 using namespace decaf::lang;
 using namespace decaf::util;
@@ -40,7 +42,8 @@ using namespace decaf::util;
 
 class Server :
     public B2DWorld::ICallbacks,
-    public Heartbeat::ICallbacks
+    public Heartbeat::ICallbacks,
+    public Addressbook::ICallbacks
 {
 // Class
 private:
@@ -57,11 +60,14 @@ private:
 protected:
     SimpleProducer*         m_pSimulationProducer;
     SimpleProducer*         m_pHeartbeatProducer;
+    SimpleProducer*         m_pAddressbookProducer;
     Thread*                 m_pB2DWorldThread;
     SimpleAsyncConsumer*    m_pCommandConsumer;
     B2DWorld*               m_pB2DWorld;
     Timer*                  m_pTimer;
+    Timer*                  m_ptAddressbook;
     Heartbeat*              m_pHeartbeat;
+    Addressbook*            m_pAddressbook;
     
     
     // Helper(s)
@@ -83,7 +89,10 @@ public:
     void OnB2DWorldUpdate(b2Vec2& b2vNewPosition, float32& fNewAngle);
     
     // Heartbeat::ICallbacks implementation
-    void OnBeat(int iBeat);    
+    void OnBeat(int iBeat);
+    
+    // Addressbook::ICallbacks implementation
+    void OnPerson(tutorial::Person* person);
 };
 
 #endif /* defined(__CMSTest__Server__) */

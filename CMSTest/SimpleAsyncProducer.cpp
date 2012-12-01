@@ -24,6 +24,7 @@
 #include "cms/MessageListener.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <assert.h>
 #include <iostream>
 #include <memory>
 
@@ -235,6 +236,28 @@ void SimpleProducer::Send(std::string& strToSend)
         m_pMessageProducer->send( pTextMessage );
         
         delete pTextMessage;
+    }
+    catch ( CMSException& e )
+    {
+        e.printStackTrace();
+    }
+}
+
+void SimpleProducer::Send(const unsigned char* pucArray, int iSize)
+{
+    assert(pucArray);
+    assert(iSize > 0);
+    
+    static int ix = 0;
+    BytesMessage* pBytesMessage = NULL;
+    
+    try
+    {
+        pBytesMessage = m_pSession->createBytesMessage(pucArray, iSize);
+        ++ix;
+        m_pMessageProducer->send(pBytesMessage);
+        
+        delete pBytesMessage;
     }
     catch ( CMSException& e )
     {

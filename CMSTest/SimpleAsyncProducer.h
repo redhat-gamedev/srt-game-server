@@ -75,6 +75,7 @@ public:
     // Function(s)
     void close();
     void Send(std::string& strToSend);
+    void Send(const unsigned char* pucArray, int iSize);
 };
 
 #endif /* defined(__CMSTest__SimpleAsyncProducer__) */

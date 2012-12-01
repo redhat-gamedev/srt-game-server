@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		CC488D27164EB5FD005078C3 /* libBox2D.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC488D20164EB5DE005078C3 /* libBox2D.a */; };
+		CC4FECE11662A3AA004810CC /* libProtocolBuffers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC4FECE01662A39A004810CC /* libProtocolBuffers.a */; };
+		CC67E1E0166A4F6500BCB047 /* addressbook.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CC67E1DC166A4F6500BCB047 /* addressbook.pb.cc */; };
+		CC67E1E4166A524400BCB047 /* Addressbook.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC67E1E2166A524300BCB047 /* Addressbook.cpp */; };
 		CC68EA96163DA07400D225C2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC68EA95163DA07400D225C2 /* main.cpp */; };
 		CC68EA98163DA07400D225C2 /* CMSTest.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = CC68EA97163DA07400D225C2 /* CMSTest.1 */; };
 		CC68EAB4163DB36800D225C2 /* SimpleAsyncConsumer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC68EAB2163DB36800D225C2 /* SimpleAsyncConsumer.cpp */; };
@@ -23,13 +26,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		CC3A5A851654679F00F30BA0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CC3A5A7A1654679E00F30BA0 /* b2dJson.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CC3A5A2C165465C900F30BA0;
-			remoteInfo = b2dJson;
-		};
 		CC488D1F164EB5DE005078C3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CCFB9DDC1640ABB900F6DBA2 /* Box2D.xcodeproj */;
@@ -57,6 +53,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 80BB8918141C3E3600F1753A;
 			remoteInfo = Testbed;
+		};
+		CC4FECDF1662A39A004810CC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CC4FECD81662A399004810CC /* ProtocolBuffers.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CC22AEFC16629B6C00E22E62;
+			remoteInfo = ProtocolBuffers;
 		};
 		CCE9086D16515D33005F2E72 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -95,7 +98,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		CC3A5A7A1654679E00F30BA0 /* b2dJson.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = b2dJson.xcodeproj; path = ../ThirdParty/b2dJson/b2dJson.xcodeproj; sourceTree = "<group>"; };
+		CC4FECD81662A399004810CC /* ProtocolBuffers.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ProtocolBuffers.xcodeproj; path = ../ThirdParty/protobuf/ProtocolBuffers/ProtocolBuffers.xcodeproj; sourceTree = "<group>"; };
+		CC4FECE31662A4A4004810CC /* box2d.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = box2d.pb.cc; sourceTree = "<group>"; };
+		CC4FECE41662A4A4004810CC /* box2d.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = box2d.pb.h; sourceTree = "<group>"; };
+		CC4FECE51662A4A4004810CC /* box2d.proto */ = {isa = PBXFileReference; explicitFileType = sourcecode.java; fileEncoding = 4; path = box2d.proto; sourceTree = "<group>"; };
+		CC67E1DC166A4F6500BCB047 /* addressbook.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = addressbook.pb.cc; sourceTree = "<group>"; };
+		CC67E1DD166A4F6500BCB047 /* addressbook.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = addressbook.pb.h; sourceTree = "<group>"; };
+		CC67E1E2166A524300BCB047 /* Addressbook.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Addressbook.cpp; sourceTree = "<group>"; };
+		CC67E1E3166A524400BCB047 /* Addressbook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Addressbook.h; sourceTree = "<group>"; };
 		CC68EA91163DA07400D225C2 /* CMSTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CMSTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC68EA95163DA07400D225C2 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		CC68EA97163DA07400D225C2 /* CMSTest.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = CMSTest.1; sourceTree = "<group>"; };
@@ -128,20 +138,13 @@
 				CCE9086F16515D64005F2E72 /* libactivemq-cpp.a in Frameworks */,
 				CC488D27164EB5FD005078C3 /* libBox2D.a in Frameworks */,
 				CCE9089216517138005F2E72 /* libPhoenix-osx.a in Frameworks */,
+				CC4FECE11662A3AA004810CC /* libProtocolBuffers.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		CC3A5A7B1654679E00F30BA0 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				CC3A5A861654679F00F30BA0 /* libb2dJson.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		CC488D19164EB5DE005078C3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -153,10 +156,29 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		CC4FECD91662A399004810CC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CC4FECE01662A39A004810CC /* libProtocolBuffers.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CC67E1DA166A4F0500BCB047 /* AddressbookTest */ = {
+			isa = PBXGroup;
+			children = (
+				CC67E1E2166A524300BCB047 /* Addressbook.cpp */,
+				CC67E1E3166A524400BCB047 /* Addressbook.h */,
+				CC67E1DC166A4F6500BCB047 /* addressbook.pb.cc */,
+				CC67E1DD166A4F6500BCB047 /* addressbook.pb.h */,
+			);
+			name = AddressbookTest;
+			sourceTree = "<group>";
+		};
 		CC68EA86163DA07400D225C2 = {
 			isa = PBXGroup;
 			children = (
-				CC3A5A7A1654679E00F30BA0 /* b2dJson.xcodeproj */,
+				CC4FECD81662A399004810CC /* ProtocolBuffers.xcodeproj */,
 				CCE9086616515D32005F2E72 /* activemq-cpp.xcodeproj */,
 				CCFB9DDC1640ABB900F6DBA2 /* Box2D.xcodeproj */,
 				CCE9087A16517079005F2E72 /* Phoenix.xcodeproj */,
@@ -177,6 +199,10 @@
 		CC68EA94163DA07400D225C2 /* CMSTest */ = {
 			isa = PBXGroup;
 			children = (
+				CC67E1DA166A4F0500BCB047 /* AddressbookTest */,
+				CC4FECE31662A4A4004810CC /* box2d.pb.cc */,
+				CC4FECE41662A4A4004810CC /* box2d.pb.h */,
+				CC4FECE51662A4A4004810CC /* box2d.proto */,
 				CCE9089616517F95005F2E72 /* PublisherT.cpp */,
 				CCE9089716517F95005F2E72 /* PublisherT.h */,
 				CC68EA95163DA07400D225C2 /* main.cpp */,
@@ -266,16 +292,16 @@
 					ProjectRef = CCE9086616515D32005F2E72 /* activemq-cpp.xcodeproj */;
 				},
 				{
-					ProductGroup = CC3A5A7B1654679E00F30BA0 /* Products */;
-					ProjectRef = CC3A5A7A1654679E00F30BA0 /* b2dJson.xcodeproj */;
-				},
-				{
 					ProductGroup = CC488D19164EB5DE005078C3 /* Products */;
 					ProjectRef = CCFB9DDC1640ABB900F6DBA2 /* Box2D.xcodeproj */;
 				},
 				{
 					ProductGroup = CCE9087B16517079005F2E72 /* Products */;
 					ProjectRef = CCE9087A16517079005F2E72 /* Phoenix.xcodeproj */;
+				},
+				{
+					ProductGroup = CC4FECD91662A399004810CC /* Products */;
+					ProjectRef = CC4FECD81662A399004810CC /* ProtocolBuffers.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -286,13 +312,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		CC3A5A861654679F00F30BA0 /* libb2dJson.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = "compiled.mach-o.dylib";
-			path = libb2dJson.a;
-			remoteRef = CC3A5A851654679F00F30BA0 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		CC488D20164EB5DE005078C3 /* libBox2D.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -319,6 +338,13 @@
 			fileType = "compiled.mach-o.executable";
 			path = Testbed;
 			remoteRef = CC488D25164EB5DE005078C3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CC4FECE01662A39A004810CC /* libProtocolBuffers.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = libProtocolBuffers.a;
+			remoteRef = CC4FECDF1662A39A004810CC /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		CCE9086E16515D33005F2E72 /* libactivemq-cpp.a */ = {
@@ -356,6 +382,8 @@
 				CCE90879165165F8005F2E72 /* Server.cpp in Sources */,
 				CCE9089816517F96005F2E72 /* PublisherT.cpp in Sources */,
 				CCE9089B165192E8005F2E72 /* Heartbeat.cpp in Sources */,
+				CC67E1E0166A4F6500BCB047 /* addressbook.pb.cc in Sources */,
+				CC67E1E4166A524400BCB047 /* Addressbook.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -419,8 +447,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				HEADER_SEARCH_PATHS = "/opt/local/include/apr-1/";
-				LIBRARY_SEARCH_PATHS = /opt/local/lib;
+				HEADER_SEARCH_PATHS = (
+					"/opt/local/include/apr-1/",
+					"\"$(SRCROOT)/../ThirdParty/protobuf/src/\"",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/opt/local/lib,
+					"\"$(SRCROOT)/../ThirdParty/protobuf/src/.libs\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx10.7;
 				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../ThirdParty/activemq-cpp/activemq-cpp/src/main\" \"$(SRCROOT)/../ThirdParty/box2d/Box2D/\"";
@@ -431,8 +465,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				HEADER_SEARCH_PATHS = "/opt/local/include/apr-1/";
-				LIBRARY_SEARCH_PATHS = /opt/local/lib;
+				HEADER_SEARCH_PATHS = (
+					"/opt/local/include/apr-1/",
+					"\"$(SRCROOT)/../ThirdParty/protobuf/src/\"",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/opt/local/lib,
+					"\"$(SRCROOT)/../ThirdParty/protobuf/src/.libs\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx10.7;
 				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../ThirdParty/activemq-cpp/activemq-cpp/src/main\" \"$(SRCROOT)/../ThirdParty/box2d/Box2D/\"";
