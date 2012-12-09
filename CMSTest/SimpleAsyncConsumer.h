@@ -41,6 +41,7 @@ namespace cms
     class MessageConsumer;
     class Message;
     class CMSException;
+    //class MessageListener;
 }
 
 
@@ -87,7 +88,9 @@ public:
 
     // Function(s)
     void close();
-    void runConsumer();    
+    void runConsumer();
+    
+    void SetMessageListener(cms::MessageListener* pMessageListener);
 };
 
 

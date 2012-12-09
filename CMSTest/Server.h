@@ -14,6 +14,7 @@
 //#include "decaf/util/Timer.h"
 #include "B2DWorld.h"
 #include "Heartbeat.h"
+#include "Input.h"
 #include "Addressbook.h"
 #include "addressbook.pb.h"
 #include "../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
@@ -68,6 +69,7 @@ protected:
     Timer*                  m_ptAddressbook;
     Heartbeat*              m_pHeartbeat;
     Addressbook*            m_pAddressbook;
+    Input*                  m_pInput;
     
     
     // Helper(s)

@@ -62,7 +62,8 @@ Server::Server() :
     m_pTimer(NULL),
     m_ptAddressbook(NULL),
     m_pHeartbeat(NULL),
-    m_pAddressbook(NULL)
+    m_pAddressbook(NULL),
+    m_pInput(NULL)
 {
     Setup();
 }
@@ -103,7 +104,7 @@ void Server::Setup()
     m_pSimulationProducer = new SimpleProducer(strBrokerURI, strWorldSimulationURI, useTopics);
     m_pHeartbeatProducer = new SimpleProducer(strBrokerURI, strHeartbeatURI, useTopics);
     m_pAddressbookProducer = new SimpleProducer(strBrokerURI, strAddressURI, useTopics);
-    m_pCommandConsumer = new SimpleAsyncConsumer(strBrokerURI, strInputURI, useTopics, clientAck);
+    //m_pCommandConsumer = new SimpleAsyncConsumer(strBrokerURI, strInputURI, useTopics, clientAck);
     
     m_pHeartbeat = new Heartbeat();
     m_pTimer = new decaf::util::Timer();
@@ -114,11 +115,16 @@ void Server::Setup()
     B2DWorld::Publisher.Attach(this);
     Heartbeat::Publisher.Attach(this);
     //Addressbook::Publisher.Attach(this);
+    
+    m_pInput = new Input();
 }
 
 void Server::Teardown()
 {
     std::cout << "Teardown()..." << std::endl;
+    
+    delete m_pInput;
+    m_pInput = NULL;
     
     //Addressbook::Publisher.Detach(this);
     Heartbeat::Publisher.Detach(this);
@@ -138,9 +144,9 @@ void Server::Teardown()
     delete m_pTimer;
     m_pTimer = NULL;    
     
-    m_pCommandConsumer->close();
-    delete m_pCommandConsumer;
-    m_pCommandConsumer = NULL;
+    //m_pCommandConsumer->close();
+    //delete m_pCommandConsumer;
+    //m_pCommandConsumer = NULL;
 
     m_pAddressbookProducer->close();
     delete m_pAddressbookProducer;
@@ -167,8 +173,8 @@ void Server::Teardown()
 void Server::Run()
 {
     // Receive incoming user commands
-    std::cout << "Starting the m_pCommandConsumer" << std::endl;
-    m_pCommandConsumer->runConsumer();
+    //std::cout << "Starting the m_pCommandConsumer" << std::endl;
+    //m_pCommandConsumer->runConsumer();
     
     // Run simulation step
     std::cout << "Starting the world simulation" << std::endl;

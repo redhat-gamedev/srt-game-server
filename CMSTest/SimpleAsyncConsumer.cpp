@@ -25,6 +25,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <assert.h>
 #include <iostream>
 
 using namespace activemq;
@@ -104,7 +105,7 @@ void SimpleAsyncConsumer::runConsumer()
         
         // Create a MessageConsumer from the Session to the Topic or Queue
         consumer = session->createConsumer( destination );
-        consumer->setMessageListener( this );
+        //consumer->setMessageListener( this );
         
     } catch (CMSException& e) {
         e.printStackTrace();
@@ -192,4 +193,12 @@ void SimpleAsyncConsumer::cleanup()
         if( connection != NULL ) delete connection;
     }catch (CMSException& e) {}
     connection = NULL;
+}
+
+void SimpleAsyncConsumer::SetMessageListener(cms::MessageListener* pMessageListener)
+{
+    assert(pMessageListener);
+    assert(consumer);
+    
+    consumer->setMessageListener(pMessageListener);
 }

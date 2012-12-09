@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		CC488D27164EB5FD005078C3 /* libBox2D.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC488D20164EB5DE005078C3 /* libBox2D.a */; };
 		CC4FECE11662A3AA004810CC /* libProtocolBuffers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC4FECE01662A39A004810CC /* libProtocolBuffers.a */; };
+		CC52E0B31675058400D47C43 /* DualStick.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CC52E0B01675058400D47C43 /* DualStick.pb.cc */; };
+		CC52E0B71675245600D47C43 /* Input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC52E0B51675245600D47C43 /* Input.cpp */; };
 		CC67E1E0166A4F6500BCB047 /* addressbook.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CC67E1DC166A4F6500BCB047 /* addressbook.pb.cc */; };
 		CC67E1E4166A524400BCB047 /* Addressbook.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC67E1E2166A524300BCB047 /* Addressbook.cpp */; };
 		CC68EA96163DA07400D225C2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC68EA95163DA07400D225C2 /* main.cpp */; };
@@ -103,6 +105,11 @@
 		CC4FECE31662A4A4004810CC /* box2d.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = box2d.pb.cc; sourceTree = "<group>"; };
 		CC4FECE41662A4A4004810CC /* box2d.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = box2d.pb.h; sourceTree = "<group>"; };
 		CC4FECE51662A4A4004810CC /* box2d.proto */ = {isa = PBXFileReference; explicitFileType = sourcecode.java; fileEncoding = 4; path = box2d.proto; sourceTree = "<group>"; };
+		CC52E0B01675058400D47C43 /* DualStick.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DualStick.pb.cc; sourceTree = "<group>"; };
+		CC52E0B11675058400D47C43 /* DualStick.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DualStick.pb.h; sourceTree = "<group>"; };
+		CC52E0B21675058400D47C43 /* DualStick.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; path = DualStick.proto; sourceTree = "<group>"; };
+		CC52E0B51675245600D47C43 /* Input.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Input.cpp; sourceTree = "<group>"; };
+		CC52E0B61675245600D47C43 /* Input.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Input.h; sourceTree = "<group>"; };
 		CC67E1DC166A4F6500BCB047 /* addressbook.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = addressbook.pb.cc; sourceTree = "<group>"; };
 		CC67E1DD166A4F6500BCB047 /* addressbook.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = addressbook.pb.h; sourceTree = "<group>"; };
 		CC67E1E2166A524300BCB047 /* Addressbook.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Addressbook.cpp; sourceTree = "<group>"; };
@@ -200,6 +207,9 @@
 		CC68EA94163DA07400D225C2 /* CMSTest */ = {
 			isa = PBXGroup;
 			children = (
+				CC52E0B01675058400D47C43 /* DualStick.pb.cc */,
+				CC52E0B11675058400D47C43 /* DualStick.pb.h */,
+				CC52E0B21675058400D47C43 /* DualStick.proto */,
 				CC67E1DA166A4F0500BCB047 /* AddressbookTest */,
 				CC4FECE31662A4A4004810CC /* box2d.pb.cc */,
 				CC4FECE41662A4A4004810CC /* box2d.pb.h */,
@@ -218,6 +228,8 @@
 				CCE90878165165F8005F2E72 /* Server.h */,
 				CCE90899165192E8005F2E72 /* Heartbeat.cpp */,
 				CCE9089A165192E8005F2E72 /* Heartbeat.h */,
+				CC52E0B51675245600D47C43 /* Input.cpp */,
+				CC52E0B61675245600D47C43 /* Input.h */,
 			);
 			path = CMSTest;
 			sourceTree = "<group>";
@@ -386,6 +398,8 @@
 				CC67E1E0166A4F6500BCB047 /* addressbook.pb.cc in Sources */,
 				CC67E1E4166A524400BCB047 /* Addressbook.cpp in Sources */,
 				CCA2F45C166AA72C00D62F5C /* box2d.pb.cc in Sources */,
+				CC52E0B31675058400D47C43 /* DualStick.pb.cc in Sources */,
+				CC52E0B71675245600D47C43 /* Input.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
