@@ -61,7 +61,6 @@ SimpleProducer::SimpleProducer(
     {
         e.printStackTrace();
     }
-
 }
 
 SimpleProducer::~SimpleProducer()

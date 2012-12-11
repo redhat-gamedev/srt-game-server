@@ -9,6 +9,9 @@
 #ifndef __CMSTest__Input__
 #define __CMSTest__Input__
 
+#include "DualStick.pb.h"
+#include "box2d.pb.h"
+#include "PublisherT.cpp"
 #include <cms/MessageListener.h>
 
 namespace cms
@@ -21,7 +24,26 @@ class SimpleAsyncConsumer;
 class Input :
     public cms::MessageListener
 {
-private:
+public:
+    class ICallbacks
+    {
+    public:
+        virtual void OnDualStick(const box2d::PbVec2& pbv2Move, const box2d::PbVec2& pbv2Shoot) {};
+    };
+    
+protected:
+    class _Publisher :
+        public ICallbacks,
+        public PublisherT<ICallbacks*>
+    {
+    protected:
+        std::list<ICallbacks*>          m_listSubscribersSwap;
+    public:
+        virtual void OnDualStick(const box2d::PbVec2& pbv2Move, const box2d::PbVec2& pbv2Shoot);
+    };
+    
+public:
+    static _Publisher               Publisher;
     
 protected:
     SimpleAsyncConsumer*        m_pSimpleAsyncConsumer;

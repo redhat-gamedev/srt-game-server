@@ -9,6 +9,8 @@
 #ifndef __CMSTest__B2DWorld__
 #define __CMSTest__B2DWorld__
 
+#include "box2d.pb.h"
+#include "Input.h"
 #include "../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include "decaf/lang/Runnable.h"
 #include "decaf/util/StlQueue.h"
@@ -22,7 +24,8 @@
 // using Box2D. Here we create a large ground box and a small dynamic
 // box.
 class B2DWorld :
-    public decaf::lang::Runnable
+    public decaf::lang::Runnable,
+    public Input::ICallbacks
 {
 // Class
 public:
@@ -73,6 +76,9 @@ protected:
     
     char            m_szBuf[0xff];
     
+    decaf::util::StlQueue<b2Vec2>       m_b2v2MoveQueue;
+    decaf::util::StlQueue<b2Vec2>       m_b2v2MoveSwapQueue;
+    
 public:
     // Constructor(s)
     B2DWorld();
@@ -86,6 +92,9 @@ public:
     
     // decaf::lang::Runnable implementation
     void run();
+    
+    // Input::ICallbacks implementation
+    virtual void OnDualStick(const box2d::PbVec2& pbv2Move, const box2d::PbVec2& pbv2Shoot);
 };
 
 

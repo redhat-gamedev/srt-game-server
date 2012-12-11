@@ -23,6 +23,39 @@ using namespace DualStick;
 using namespace box2d;
 using namespace cms;
 
+Input::_Publisher                 Input::Publisher;
+
+// Constructor(s)
+/*
+ B2DWorld.h::_Publisher::_Publisher()
+ {
+ 
+ }
+ */
+
+// Destructor
+/*
+ B2DWorld.h::_Publisher::~_Publisher()
+ {
+ 
+ }
+ */
+
+// Method(s)
+void Input::_Publisher::OnDualStick(const box2d::PbVec2& pbv2Move, const box2d::PbVec2& pbv2Shoot)
+{
+    ICallbacks* pObjToCallback = NULL;
+    
+    //m_listSubscribersSwap = m_listSubscribers;
+    Clone(m_listSubscribersSwap);
+    while(!m_listSubscribersSwap.empty())
+    {
+        pObjToCallback = m_listSubscribersSwap.front();
+        m_listSubscribersSwap.pop_front();
+        assert(pObjToCallback);
+        pObjToCallback->OnDualStick(pbv2Move, pbv2Shoot);
+    }
+}
 
 // Constructor(s)
 Input::Input() :
@@ -74,13 +107,15 @@ void Input::onMessage(const Message* pMessage)
             pMessage->acknowledge();
         }
         
-        printf("Bytes Message #%d Received\n", count);
+        //printf("Bytes Message #%d Received\n", count);
         //printf("Bytes Message #%d Received\n", count);
         const PbVec2& pbv2Move = aDualStick.pbv2move();
         const PbVec2& pbv2Shoot = aDualStick.pbv2shoot();
         
-        printf("h[%4.4f] v[%4.4f]\n", pbv2Move.x(), pbv2Move.y());
-        printf("fh[%4.4f] fv[%4.4f]\n", pbv2Shoot.x(), pbv2Shoot.y());
+        //printf("h[%4.4f] v[%4.4f]\n", pbv2Move.x(), pbv2Move.y());
+        //printf("fh[%4.4f] fv[%4.4f]\n", pbv2Shoot.x(), pbv2Shoot.y());
+        
+        Publisher.OnDualStick(pbv2Move, pbv2Shoot);
     }
     catch (CMSException& e)
     {
