@@ -10,11 +10,14 @@
 #include "DualStick.pb.h"
 #include "box2d.pb.h"
 #include "SimpleAsyncConsumer.h"
+#include "SimpleAsyncProducer.h"
 #include <cms/CMSException.h>
 //#include <cms/Message.h>
 #include <cms/TextMessage.h>
 #include <cms/BytesMessage.h>
 #include <cms/Destination.h>
+#include <cms/TemporaryQueue.h>
+#include <decaf/util/UUID.h>
 #include <stdio.h>
 #include <assert.h>
 #include <string>
@@ -43,7 +46,7 @@ Security::_Publisher                 Security::Publisher;
  */
 
 // Method(s)
-void Security::_Publisher::OnPlayerJoin(std::string strUUID)
+void Security::_Publisher::OnSecurityJoin(std::string& strUUID)
 {
     ICallbacks* pObjToCallback = NULL;
     
@@ -54,7 +57,7 @@ void Security::_Publisher::OnPlayerJoin(std::string strUUID)
         pObjToCallback = m_listSubscribersSwap.front();
         m_listSubscribersSwap.pop_front();
         assert(pObjToCallback);
-        pObjToCallback->OnPlayerJoin(strUUID);
+        pObjToCallback->OnSecurityJoin(strUUID);
     }
 }
 
@@ -73,11 +76,15 @@ Security::Security() :
     m_pSimpleAsyncConsumer = new SimpleAsyncConsumer(strBrokerURI, strSecurityURI, useTopics, clientAck);
     m_pSimpleAsyncConsumer->runConsumer();
     m_pSimpleAsyncConsumer->SetMessageListener(this);
+    
+    Player::Publisher.Attach(this);
 }
 
 // Destructor
 Security::~Security()
 {
+    Player::Publisher.Detach(this);
+    
     m_pSimpleAsyncConsumer->close();
     delete m_pSimpleAsyncConsumer;
     m_pSimpleAsyncConsumer = NULL;
@@ -90,7 +97,7 @@ void Security::onMessage(const Message* pMessage)
     
     static int      count = 0;
     bool            clientAck = false;
-    PbDualStick     aDualStick;
+    std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp";
     
     try
     {
@@ -107,17 +114,68 @@ void Security::onMessage(const Message* pMessage)
         {
             pMessage->acknowledge();
         }
-        
+
         const cms::Destination* pDestination = pBytesMessage->getCMSReplyTo();
         assert(pDestination);
 
-        std::string strUUID = "UUID";
-        m_mapUUIDToReplyDestinations.insert(std::pair<std::string, const cms::Destination*>(strUUID, pDestination));
+        decaf::util::UUID aNewUUID = decaf::util::UUID::randomUUID();
+        std::string strUUID = aNewUUID.toString();
+
+        m_pSimpleAsyncProducer = new SimpleProducer(strBrokerURI, pDestination);
+        m_pSimpleAsyncProducer->Send(strUUID, this);
+        //delete m_pSimpleAsyncProducer;
+        //m_pSimpleAsyncProducer = NULL;
         
-        Publisher.OnPlayerJoin(strUUID);
+        //m_mapUUIDToReplyDestinations.insert(std::pair<std::string, const cms::Destination*>(strUUID, pDestination));
+        //m_mapUUIDToReplyDestinations.insert(std::pair<std::string, std::string>(strUUID, strTemporaryQueueName));
+        
+        Publisher.OnSecurityJoin(strUUID);
     }
     catch (CMSException& e)
     {
         e.printStackTrace();
     }
+}
+
+// Player::ICallbacks implementation
+void Security::OnPlayerCreated(std::string& strUUID)
+{
+    assert(strUUID.length() > 0);
+    
+    std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp";
+    
+//    const cms::Destination* pDestination = m_mapUUIDToReplyDestinations[strUUID];
+//    assert(pDestination);
+//    
+//    const TemporaryQueue* pTemporaryQueue = NULL;
+//    if (pDestination->getDestinationType() == Destination::TEMPORARY_QUEUE)
+//    {
+//        pTemporaryQueue = static_cast<const TemporaryQueue*>(pDestination);
+//    }
+
+//    std::string strTemporaryQueueName = m_mapUUIDToReplyDestinations[strUUID];
+//   
+//    std::string strTemporaryQueueURI = strTemporaryQueueName.substr(3, strTemporaryQueueName.length());
+//    
+//    cms::TemporaryQueue* pTemporaryQueue = m_pSimpleAsyncProducer->m_pSession->CreateQueue(strTemporaryQueueURI);
+    
+    //m_pSimpleAsyncProducer = new SimpleProducer(strBrokerURI, pDestination);
+//    m_pSimpleAsyncProducer = new SimpleProducer(strBrokerURI, strTemporaryQueueName);
+//    m_pSimpleAsyncProducer->Send(strUUID);
+//    delete m_pSimpleAsyncProducer;
+//    m_pSimpleAsyncProducer = NULL;
+}
+
+
+// cms::AsyncCallback implementation
+void Security::onSuccess()
+{
+    delete m_pSimpleAsyncProducer;
+    m_pSimpleAsyncProducer = NULL;
+}
+
+void Security::onException(const cms::CMSException& aCMSException)
+{
+    delete m_pSimpleAsyncProducer;
+    m_pSimpleAsyncProducer = NULL;
 }

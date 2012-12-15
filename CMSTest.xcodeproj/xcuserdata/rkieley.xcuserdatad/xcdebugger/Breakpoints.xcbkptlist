@@ -20,13 +20,52 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "CMSTest/B2DWorld.cpp"
-         timestampString = "376879824.869177"
+         filePath = "CMSTest/Input.cpp"
+         timestampString = "377274581.536133"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "161"
-         endingLineNumber = "161"
-         landmarkName = "B2DWorld::run()"
+         startingLineNumber = "109"
+         endingLineNumber = "109"
+         landmarkName = "Input::onMessage(const Message* pMessage)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CMSTest/SimpleAsyncProducer.cpp"
+         timestampString = "377302211.948014"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "138"
+         endingLineNumber = "138"
+         landmarkName = "SimpleProducer::Setup()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CMSTest/Security.cpp"
+         timestampString = "377297541.966759"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "118"
+         endingLineNumber = "118"
+         landmarkName = "Security::onMessage(const Message* pMessage)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CMSTest/Security.cpp"
+         timestampString = "377301748.416342"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "179"
+         endingLineNumber = "179"
+         landmarkName = "Security::onException(const cms::CMSException&amp; aCMSException)"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

@@ -36,6 +36,7 @@ namespace cms
     class Session;
     class Destination;
     class MessageProducer;
+    class AsyncCallback;
 }
 
 
@@ -46,11 +47,12 @@ private:
     
     // ActiveMQ-CPP
     cms::Connection*        m_pConnection;
-    cms::Session*           m_pSession;
+
     cms::Destination*       m_pDestination;
     cms::MessageProducer*   m_pMessageProducer;
     bool                    m_bUseTopic;
     bool                    m_bClientAck;
+    bool                    m_bOwnDestination;
     std::string             m_strBrokerURI;
     std::string             m_strDestinationURI;
     
@@ -59,10 +61,15 @@ private:
     void Teardown();
     
 public:
-
+    cms::Session*           m_pSession; //temp
     // Constructor(s)
     SimpleProducer(const std::string& strBrokerURI,
                    const std::string& strDestinationURI,
+                   bool bUseTopic = false,
+                   bool bClientAck = false);
+
+    SimpleProducer(const std::string& strBrokerURI,
+                   const cms::Destination* pDestination = NULL,
                    bool bUseTopic = false,
                    bool bClientAck = false);
     
@@ -74,7 +81,8 @@ public:
     
     // Function(s)
     void close();
-    void Send(std::string& strToSend);
+    //6767void Send(std::string& strToSend);
+    void Send(std::string& strToSend, cms::AsyncCallback* pAsyncCallback = NULL);
     void Send(const unsigned char* pucArray, int iSize);
 };
 

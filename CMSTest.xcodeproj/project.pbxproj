@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CC3C8F8C167CC3F80084CBE8 /* Security.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC3C8F8A167CC3F80084CBE8 /* Security.cpp */; };
+		CC3C8F8F167CEF080084CBE8 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC3C8F8D167CEF070084CBE8 /* Player.cpp */; };
 		CC488D27164EB5FD005078C3 /* libBox2D.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC488D20164EB5DE005078C3 /* libBox2D.a */; };
 		CC4FECE11662A3AA004810CC /* libProtocolBuffers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC4FECE01662A39A004810CC /* libProtocolBuffers.a */; };
 		CC52E0B31675058400D47C43 /* DualStick.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CC52E0B01675058400D47C43 /* DualStick.pb.cc */; };
@@ -101,6 +103,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CC3C8F8A167CC3F80084CBE8 /* Security.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Security.cpp; sourceTree = "<group>"; };
+		CC3C8F8B167CC3F80084CBE8 /* Security.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Security.h; sourceTree = "<group>"; };
+		CC3C8F8D167CEF070084CBE8 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
+		CC3C8F8E167CEF070084CBE8 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		CC4FECD81662A399004810CC /* ProtocolBuffers.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ProtocolBuffers.xcodeproj; path = ../ThirdParty/protobuf/ProtocolBuffers/ProtocolBuffers.xcodeproj; sourceTree = "<group>"; };
 		CC4FECE31662A4A4004810CC /* box2d.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = box2d.pb.cc; sourceTree = "<group>"; };
 		CC4FECE41662A4A4004810CC /* box2d.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = box2d.pb.h; sourceTree = "<group>"; };
@@ -207,6 +213,8 @@
 		CC68EA94163DA07400D225C2 /* CMSTest */ = {
 			isa = PBXGroup;
 			children = (
+				CC3C8F8A167CC3F80084CBE8 /* Security.cpp */,
+				CC3C8F8B167CC3F80084CBE8 /* Security.h */,
 				CC52E0B01675058400D47C43 /* DualStick.pb.cc */,
 				CC52E0B11675058400D47C43 /* DualStick.pb.h */,
 				CC52E0B21675058400D47C43 /* DualStick.proto */,
@@ -230,6 +238,8 @@
 				CCE9089A165192E8005F2E72 /* Heartbeat.h */,
 				CC52E0B51675245600D47C43 /* Input.cpp */,
 				CC52E0B61675245600D47C43 /* Input.h */,
+				CC3C8F8D167CEF070084CBE8 /* Player.cpp */,
+				CC3C8F8E167CEF070084CBE8 /* Player.h */,
 			);
 			path = CMSTest;
 			sourceTree = "<group>";
@@ -400,6 +410,8 @@
 				CCA2F45C166AA72C00D62F5C /* box2d.pb.cc in Sources */,
 				CC52E0B31675058400D47C43 /* DualStick.pb.cc in Sources */,
 				CC52E0B71675245600D47C43 /* Input.cpp in Sources */,
+				CC3C8F8C167CC3F80084CBE8 /* Security.cpp in Sources */,
+				CC3C8F8F167CEF080084CBE8 /* Player.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

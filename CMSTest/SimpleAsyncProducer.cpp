@@ -22,6 +22,8 @@
 #include "cms/MapMessage.h"
 #include "cms/ExceptionListener.h"
 #include "cms/MessageListener.h"
+#include "cms/Destination.h"
+#include "cms/AsyncCallback.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
@@ -38,6 +40,7 @@ using namespace cms;
 using namespace std;
 
 
+// Constructor(s)
 SimpleProducer::SimpleProducer(
                                const std::string& strBrokerURI,
                                const std::string& strDestinationURI,
@@ -52,6 +55,7 @@ SimpleProducer::SimpleProducer(
     this->m_strBrokerURI = strBrokerURI;
     this->m_strDestinationURI = strDestinationURI;
     this->m_bClientAck = bClientAck;
+    m_bOwnDestination = true;
     
     try
     {
@@ -61,6 +65,32 @@ SimpleProducer::SimpleProducer(
     {
         e.printStackTrace();
     }
+}
+
+SimpleProducer::SimpleProducer(const std::string& strBrokerURI,
+               const cms::Destination* pDestination,
+               bool bUseTopic,
+               bool bClientAck)
+{
+    m_pConnection = NULL;
+    m_pSession = NULL;
+    m_pDestination = (Destination*)pDestination;
+    m_pMessageProducer = NULL;
+    this->m_bUseTopic = bUseTopic;
+    this->m_strBrokerURI = strBrokerURI;
+    //this->m_strDestinationURI = strDestinationURI;
+    this->m_bClientAck = bClientAck;
+    m_bOwnDestination = false;
+    
+    try
+    {
+        Setup();
+    }
+    catch ( CMSException& e )
+    {
+        e.printStackTrace();
+    }
+
 }
 
 SimpleProducer::~SimpleProducer()
@@ -97,15 +127,17 @@ void SimpleProducer::Setup()
     }
     
     // Create the m_pDestination (Topic or Queue)
-    if( m_bUseTopic )
+    if (NULL == m_pDestination)
     {
-        m_pDestination = m_pSession->createTopic( m_strDestinationURI );
+        if (m_bUseTopic)
+        {
+            m_pDestination = m_pSession->createTopic( m_strDestinationURI );
+        }
+        else
+        {
+            m_pDestination = m_pSession->createQueue( m_strDestinationURI );
+        }
     }
-    else
-    {
-        m_pDestination = m_pSession->createQueue( m_strDestinationURI );
-    }
-    
     // Create a MessageProducer from the Session to the Topic or Queue
     m_pMessageProducer = m_pSession->createProducer( m_pDestination );
     m_pMessageProducer->setDeliveryMode( DeliveryMode::NON_PERSISTENT );
@@ -122,7 +154,8 @@ void SimpleProducer::Teardown()
     try
     {
         if( m_pDestination != NULL )
-            delete m_pDestination;
+            if (m_bOwnDestination)
+                delete m_pDestination;
     }
     catch ( CMSException& e )
     {
@@ -222,7 +255,7 @@ void SimpleProducer::run()
 //    }
 }
 
-void SimpleProducer::Send(std::string& strToSend)
+void SimpleProducer::Send(std::string& strToSend, cms::AsyncCallback* pAsyncCallback)
 {
     static int ix = 0;
     TextMessage* pTextMessage = NULL;
@@ -232,7 +265,14 @@ void SimpleProducer::Send(std::string& strToSend)
         pTextMessage = m_pSession->createTextMessage( strToSend );
         ++ix;
         pTextMessage->setIntProperty( "Integer", ix );
-        m_pMessageProducer->send( pTextMessage );
+        if (pAsyncCallback)
+        {
+            m_pMessageProducer->send(pTextMessage, pAsyncCallback);
+        }
+        else
+        {
+            m_pMessageProducer->send(pTextMessage);
+        }
         
         delete pTextMessage;
     }

@@ -15,6 +15,7 @@
 #include "B2DWorld.h"
 #include "Heartbeat.h"
 #include "Input.h"
+#include "Security.h"
 #include "Addressbook.h"
 #include "addressbook.pb.h"
 #include "../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
@@ -34,9 +35,10 @@ namespace decaf
 }
 class SimpleProducer;
 class SimpleAsyncConsumer;
-class Security;
+//class Security;
 //class Heartbeat;
 //class B2DWorld;
+class Player;
 
 using namespace decaf::lang;
 using namespace decaf::util;
@@ -45,6 +47,7 @@ using namespace decaf::util;
 class Server :
     public B2DWorld::ICallbacks,
     public Heartbeat::ICallbacks,
+    public Security::ICallbacks,
     public Addressbook::ICallbacks
 {
 // Class
@@ -72,6 +75,7 @@ protected:
     Addressbook*            m_pAddressbook;
     Input*                  m_pInput;
     Security*               m_pSecurity;
+    Player*                 m_pPlayer;
     
     
     // Helper(s)
@@ -98,6 +102,9 @@ public:
     
     // Addressbook::ICallbacks implementation
     void OnPerson(tutorial::Person* person);
+
+    // Security::ICallbacks implementation
+    void OnSecurityJoin(std::string& strUUID);
 };
 
 #endif /* defined(__CMSTest__Server__) */

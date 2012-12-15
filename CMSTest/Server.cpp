@@ -14,6 +14,7 @@
 #include "Addressbook.h"
 #include "box2d.pb.h"
 #include "Security.h"
+#include "Player.h"
 #include "decaf/util/Timer.h"
 #include "decaf/lang/Thread.h"
 #include "decaf/lang/Runnable.h"
@@ -65,7 +66,8 @@ Server::Server() :
     m_pHeartbeat(NULL),
     m_pAddressbook(NULL),
     m_pInput(NULL),
-    m_pSecurity(NULL)
+    m_pSecurity(NULL),
+    m_pPlayer(NULL)
 {
     Setup();
 }
@@ -80,8 +82,7 @@ Server::~Server()
 void Server::Setup()
 {
     bool            useTopics = false;
-    bool            clientAck = false;
-    std::string     strName = "MySimpleProducerThread";
+    //bool            clientAck = false;
     std::string     strWorldSimulationURI = "WORLD.SIMULATION";
     std::string     strHeartbeatURI = "HEARTBEAT";
     std::string     strAddressURI = "ADDRESS";
@@ -101,8 +102,7 @@ void Server::Setup()
     
     m_pB2DWorld = new B2DWorld();
     m_pB2DWorld->CreateBodiesAndShapes();
-    m_pB2DWorldThread = new decaf::lang::Thread(m_pB2DWorld, strName);
-    
+
     m_pSimulationProducer = new SimpleProducer(strBrokerURI, strWorldSimulationURI, useTopics);
     m_pHeartbeatProducer = new SimpleProducer(strBrokerURI, strHeartbeatURI, useTopics);
     m_pAddressbookProducer = new SimpleProducer(strBrokerURI, strAddressURI, useTopics);
@@ -114,28 +114,30 @@ void Server::Setup()
     m_pAddressbook = new Addressbook();
     m_ptAddressbook = new decaf::util::Timer();
     
+    m_pInput = new Input();
+    m_pSecurity = new Security();
+
     B2DWorld::Publisher.Attach(this);
     Heartbeat::Publisher.Attach(this);
     //Addressbook::Publisher.Attach(this);
-    
-    m_pInput = new Input();
-    m_pSecurity = new Security();
+    Security::Publisher.Attach(this);
 }
 
 void Server::Teardown()
 {
     std::cout << "Teardown()..." << std::endl;
     
+    Security::Publisher.Detach(this);
+    //Addressbook::Publisher.Detach(this);
+    Heartbeat::Publisher.Detach(this);
+    B2DWorld::Publisher.Detach(this);
+
     delete m_pSecurity;
     m_pSecurity = NULL;
     
     delete m_pInput;
     m_pInput = NULL;
     
-    //Addressbook::Publisher.Detach(this);
-    Heartbeat::Publisher.Detach(this);
-    B2DWorld::Publisher.Detach(this);
-
     m_ptAddressbook->cancel();
     //delete m_pAddressbook;
     m_pAddressbook = NULL;
@@ -183,8 +185,8 @@ void Server::Run()
     //m_pCommandConsumer->runConsumer();
     
     // Run simulation step
-    std::cout << "Starting the world simulation" << std::endl;
-    m_pB2DWorldThread->start();
+    //std::cout << "Starting the world simulation" << std::endl;
+    //m_pB2DWorldThread->start();
     
     // Check game rules
     
@@ -322,5 +324,20 @@ void Server::OnPerson(tutorial::Person* person)
     catch ( CMSException& e )
     {
         e.printStackTrace();
+    }
+}
+
+// Security::ICallbacks implementation
+void Server::OnSecurityJoin(std::string& strUUID)
+{
+    std::string     strName = "B2DWorldThread";
+
+    m_pPlayer = new Player(strUUID, m_pB2DWorld);
+    
+    if (NULL == m_pB2DWorldThread)
+    {
+        m_pB2DWorldThread = new decaf::lang::Thread(m_pB2DWorld, strName);
+        std::cout << "Starting the world simulation" << std::endl;
+        m_pB2DWorldThread->start();
     }
 }

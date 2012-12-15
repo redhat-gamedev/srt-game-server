@@ -84,6 +84,26 @@ B2DWorld::~B2DWorld()
     delete world;
 }
 
+void B2DWorld::CreatePod()
+{
+	// Define the dynamic body. We set its position
+	bodyDef.type = b2_dynamicBody;
+	bodyDef.position.Set(0.0f, 0.0f);
+
+	// Set the box density to be non-zero, so it will be dynamic.
+	fixtureDef.density = 1.0f;
+	fixtureDef.friction = 0.3f;
+    fixtureDef.restitution = 0.3f;
+    // Define another box shape for our dynamic body.
+	dynamicBox.SetAsBox(4.0f, 4.0f);
+	// Define the dynamic body fixture.
+	fixtureDef.shape = &dynamicBox;
+
+    // call the body factory.
+    body = world->CreateBody(&bodyDef);
+	body->CreateFixture(&fixtureDef);
+}
+
 // Method(s)
 void B2DWorld::CreateBodiesAndShapes()
 {
@@ -100,23 +120,6 @@ void B2DWorld::CreateBodiesAndShapes()
     
 	// Add the ground fixture to the ground body.
 	groundBody->CreateFixture(&groundBox, 0.0f);
-
-	// Define the dynamic body. We set its position and call the body factory.
-	bodyDef.type = b2_dynamicBody;
-	bodyDef.position.Set(0.0f, 0.0f);
-    body = world->CreateBody(&bodyDef);
-    
-	// Define another box shape for our dynamic body.
-	dynamicBox.SetAsBox(4.0f, 4.0f);
-    
-	// Define the dynamic body fixture.
-	fixtureDef.shape = &dynamicBox;
-    
-	// Set the box density to be non-zero, so it will be dynamic.
-	fixtureDef.density = 1.0f;
-	fixtureDef.friction = 0.3f;
-    fixtureDef.restitution = 0.3f;
-	body->CreateFixture(&fixtureDef);
 }
 
 void B2DWorld::Update(std::string& strText)
@@ -131,28 +134,9 @@ void B2DWorld::Update(std::string& strText)
 // decaf::lang::Runnable implementation
 void B2DWorld::run()
 {
-    //static bool bOneTime = true;
-    //static unsigned int ui = 0;
-    //static b2Vec2 ab2Vec2Move;
-
     while (true)
     {
-        //if (bOneTime)
-        //{
-            //bOneTime = false;
-            //body->ApplyForceToCenter(b2Vec2(20.0f, 0.0f), true);
-        //}
-        
-//        if (ui < 100)
-//        {
-//            body->ApplyForceToCenter(b2Vec2(20.0f, 0.0f), true);
-//            ++ui;
-//        }
-        
         m_b2v2MoveQueue.lock();
-        //m_b2v2MoveSwapQueue = m_b2v2MoveQueue;
-        //m_b2v2MoveQueue.clear();
-        //m_b2v2MoveQueue.unlock();
         while (!(m_b2v2MoveQueue.empty()))
         {
             b2Vec2 ab2Vec2Move = m_b2v2MoveQueue.pop();
@@ -165,10 +149,6 @@ void B2DWorld::run()
         // Instruct the world to perform a single step of simulation.
         // It is generally best to keep the time step and iterations fixed.
         world->Step(timeStep, velocityIterations, positionIterations);
-        
-        // Now print the position and angle of the body.
-        //position = body->GetPosition();
-        //angle = body->GetAngle();
 
         //Publisher.OnB2DWorldUpdate(position, angle);
         Publisher.OnB2DWorldBodyUpdate(body);
@@ -194,4 +174,3 @@ void B2DWorld::OnDualStick(const box2d::PbVec2& pbv2Move, const box2d::PbVec2& p
     //body->ApplyForceToCenter(b2v2Move, true);
     //Publisher.OnB2DWorldBodyUpdate(body);
 }
-
