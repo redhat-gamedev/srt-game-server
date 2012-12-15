@@ -34,6 +34,7 @@ namespace decaf
 }
 class SimpleProducer;
 class SimpleAsyncConsumer;
+class Security;
 //class Heartbeat;
 //class B2DWorld;
 
@@ -70,6 +71,7 @@ protected:
     Heartbeat*              m_pHeartbeat;
     Addressbook*            m_pAddressbook;
     Input*                  m_pInput;
+    Security*               m_pSecurity;
     
     
     // Helper(s)

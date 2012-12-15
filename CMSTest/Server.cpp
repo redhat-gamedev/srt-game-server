@@ -13,6 +13,7 @@
 #include "Heartbeat.h"
 #include "Addressbook.h"
 #include "box2d.pb.h"
+#include "Security.h"
 #include "decaf/util/Timer.h"
 #include "decaf/lang/Thread.h"
 #include "decaf/lang/Runnable.h"
@@ -63,7 +64,8 @@ Server::Server() :
     m_ptAddressbook(NULL),
     m_pHeartbeat(NULL),
     m_pAddressbook(NULL),
-    m_pInput(NULL)
+    m_pInput(NULL),
+    m_pSecurity(NULL)
 {
     Setup();
 }
@@ -117,11 +119,15 @@ void Server::Setup()
     //Addressbook::Publisher.Attach(this);
     
     m_pInput = new Input();
+    m_pSecurity = new Security();
 }
 
 void Server::Teardown()
 {
     std::cout << "Teardown()..." << std::endl;
+    
+    delete m_pSecurity;
+    m_pSecurity = NULL;
     
     delete m_pInput;
     m_pInput = NULL;
