@@ -52,7 +52,8 @@ protected:
     };
     
     //std::map<std::string, const cms::Destination*>        m_mapUUIDToReplyDestinations;
-    std::map<std::string, std::string>        m_mapUUIDToReplyDestinations;
+    //std::map<std::string, std::string>        m_mapUUIDToReplyDestinations;
+    std::map<std::string, std::string>        m_mapUUIDToSimpleAsyncProducers;
     
 public:
     static _Publisher               Publisher;

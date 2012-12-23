@@ -121,13 +121,17 @@ void Security::onMessage(const Message* pMessage)
         decaf::util::UUID aNewUUID = decaf::util::UUID::randomUUID();
         std::string strUUID = aNewUUID.toString();
 
-        m_pSimpleAsyncProducer = new SimpleProducer(strBrokerURI, pDestination);
-        m_pSimpleAsyncProducer->Send(strUUID, this);
-        //delete m_pSimpleAsyncProducer;
-        //m_pSimpleAsyncProducer = NULL;
+        // TODO: Make not super inefficient
+        SimpleProducer* pSimpleAsyncProducer = new SimpleProducer(strBrokerURI, pDestination);
+        //pSimpleAsyncProducer->Send(strUUID, this);
+        pSimpleAsyncProducer->Send(strUUID);
+        delete pSimpleAsyncProducer;
         
         //m_mapUUIDToReplyDestinations.insert(std::pair<std::string, const cms::Destination*>(strUUID, pDestination));
         //m_mapUUIDToReplyDestinations.insert(std::pair<std::string, std::string>(strUUID, strTemporaryQueueName));
+        
+        // TODO: Remove hack
+        //m_mapUUIDToSimpleAsyncProducers.insert(std::pair<std::string, SimpleProducer*>(strUUID, m_pSimpleAsyncProducer));
         
         Publisher.OnSecurityJoin(strUUID);
     }
@@ -142,40 +146,24 @@ void Security::OnPlayerCreated(std::string& strUUID)
 {
     assert(strUUID.length() > 0);
     
-    std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp";
+    //std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp";
+    //SimpleProducer* pSimpleProducer = m_mapUUIDToSimpleAsyncProducers[strUUID];
+    //assert(pSimpleProducer);
     
-//    const cms::Destination* pDestination = m_mapUUIDToReplyDestinations[strUUID];
-//    assert(pDestination);
-//    
-//    const TemporaryQueue* pTemporaryQueue = NULL;
-//    if (pDestination->getDestinationType() == Destination::TEMPORARY_QUEUE)
-//    {
-//        pTemporaryQueue = static_cast<const TemporaryQueue*>(pDestination);
-//    }
-
-//    std::string strTemporaryQueueName = m_mapUUIDToReplyDestinations[strUUID];
-//   
-//    std::string strTemporaryQueueURI = strTemporaryQueueName.substr(3, strTemporaryQueueName.length());
-//    
-//    cms::TemporaryQueue* pTemporaryQueue = m_pSimpleAsyncProducer->m_pSession->CreateQueue(strTemporaryQueueURI);
-    
-    //m_pSimpleAsyncProducer = new SimpleProducer(strBrokerURI, pDestination);
-//    m_pSimpleAsyncProducer = new SimpleProducer(strBrokerURI, strTemporaryQueueName);
-//    m_pSimpleAsyncProducer->Send(strUUID);
-//    delete m_pSimpleAsyncProducer;
-//    m_pSimpleAsyncProducer = NULL;
+    //delete pSimpleProducer;
+    //pSimpleProducer = NULL;
 }
 
 
 // cms::AsyncCallback implementation
 void Security::onSuccess()
 {
-    delete m_pSimpleAsyncProducer;
-    m_pSimpleAsyncProducer = NULL;
+    //delete m_pSimpleAsyncProducer;
+    //m_pSimpleAsyncProducer = NULL;
 }
 
 void Security::onException(const cms::CMSException& aCMSException)
 {
-    delete m_pSimpleAsyncProducer;
-    m_pSimpleAsyncProducer = NULL;
+    //delete m_pSimpleAsyncProducer;
+    //m_pSimpleAsyncProducer = NULL;
 }

@@ -59,13 +59,52 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "CMSTest/Security.cpp"
-         timestampString = "377301748.416342"
+         filePath = "CMSTest/Player.cpp"
+         timestampString = "377962246.463337"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "179"
-         endingLineNumber = "179"
-         landmarkName = "Security::onException(const cms::CMSException&amp; aCMSException)"
+         startingLineNumber = "55"
+         endingLineNumber = "55"
+         landmarkName = "Player::Player(std::string&amp; strUUID, B2DWorld* pB2DWorld)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CMSTest/Security.cpp"
+         timestampString = "377962275.38225"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "147"
+         endingLineNumber = "147"
+         landmarkName = "Security::OnPlayerCreated(std::string&amp; strUUID)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CMSTest/Security.cpp"
+         timestampString = "377962280.168112"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "136"
+         endingLineNumber = "136"
+         landmarkName = "Security::onMessage(const Message* pMessage)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CMSTest/Server.cpp"
+         timestampString = "377962333.934439"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "335"
+         endingLineNumber = "335"
+         landmarkName = "Server::OnSecurityJoin(std::string&amp; strUUID)"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

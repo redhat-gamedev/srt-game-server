@@ -151,6 +151,7 @@ void B2DWorld::run()
         world->Step(timeStep, velocityIterations, positionIterations);
 
         //Publisher.OnB2DWorldUpdate(position, angle);
+        //world->GetBodyList()
         Publisher.OnB2DWorldBodyUpdate(body);
         
         decaf::lang::Thread::currentThread()->sleep(15);
