@@ -10,7 +10,7 @@
 #define __CMSTest__B2DWorld__
 
 #include "box2d.pb.h"
-#include "Input.h"
+
 #include "../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include "decaf/lang/Runnable.h"
 #include "decaf/util/StlQueue.h"
@@ -19,13 +19,14 @@
 #include <string>
 #include <list>
 
+class Player;
+
 
 // This is a simple example of building and running a simulation
 // using Box2D. Here we create a large ground box and a small dynamic
 // box.
 class B2DWorld :
-    public decaf::lang::Runnable,
-    public Input::ICallbacks
+    public decaf::lang::Runnable
 {
 // Class
 public:
@@ -57,7 +58,7 @@ private:
 private:
     
 protected:
-    b2World*        world;
+    //b2World*        world;
     b2Vec2*         gravity;
     
     b2BodyDef       groundBodyDef;
@@ -78,10 +79,12 @@ protected:
     
     char            m_szBuf[0xff];
     
-    decaf::util::StlQueue<b2Vec2>       m_b2v2MoveQueue;
-    decaf::util::StlQueue<b2Vec2>       m_b2v2MoveSwapQueue;
+    std::list<Player*>              m_listPlayers;
+    std::list<Player*>              m_listPlayersSwap;
     
 public:
+    b2World*        world;
+    
     // Constructor(s)
     B2DWorld();
     
@@ -90,14 +93,11 @@ public:
     
     // Method(s)
     void CreateBodiesAndShapes();
-    void Update(std::string& strText);
-    void CreatePod();
+    //void Update(std::string& strText);
+    void AddPlayer(Player* pPlayer);
 
     // decaf::lang::Runnable implementation
     void run();
-    
-    // Input::ICallbacks implementation
-    virtual void OnDualStick(const box2d::PbVec2& pbv2Move, const box2d::PbVec2& pbv2Shoot);
 };
 
 

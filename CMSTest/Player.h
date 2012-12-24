@@ -9,13 +9,21 @@
 #ifndef __CMSTest__Player__
 #define __CMSTest__Player__
 
+#include "Input.h"
+#include "decaf/util/StlQueue.h"
+#include "../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include "PublisherT.cpp"
 #include <string>
 
+struct b2BodyDef;
+struct b2FixtureDef;
 class B2DWorld;
+class b2Body;
+class b2PolygonShape;
 
 
-class Player
+class Player :
+    public Input::ICallbacks
 {
 public:
     class ICallbacks
@@ -39,6 +47,15 @@ private:
 protected:
     std::string     m_strUUID;
     
+    b2Body*         m_pb2bPod;
+    B2DWorld*       m_pB2DWorld;
+    
+    decaf::util::StlQueue<b2Vec2>       m_b2v2MoveQueue;
+    decaf::util::StlQueue<b2Vec2>       m_b2v2MoveSwapQueue;
+
+    // Helper(s)
+    void CreatePod();
+    
 public:
     static _Publisher               Publisher;
     
@@ -47,6 +64,12 @@ public:
     
     // Destructor(s)
     ~Player();
+    
+    // Method(s)
+    void Update();
+    
+    // Input::ICallbacks implementation
+    virtual void OnDualStick(const box2d::PbVec2& pbv2Move, const box2d::PbVec2& pbv2Shoot);
 };
 
 

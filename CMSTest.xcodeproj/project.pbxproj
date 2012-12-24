@@ -20,6 +20,7 @@
 		CC68EAB4163DB36800D225C2 /* SimpleAsyncConsumer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC68EAB2163DB36800D225C2 /* SimpleAsyncConsumer.cpp */; };
 		CC68EAB7163DB42E00D225C2 /* SimpleAsyncProducer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC68EAB5163DB42E00D225C2 /* SimpleAsyncProducer.cpp */; };
 		CCA2F45C166AA72C00D62F5C /* box2d.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CC4FECE31662A4A4004810CC /* box2d.pb.cc */; };
+		CCA4C32C1687B45D006BAC1D /* xdispatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA4C32B1687B45D006BAC1D /* xdispatch.framework */; };
 		CCE9086F16515D64005F2E72 /* libactivemq-cpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE9086E16515D33005F2E72 /* libactivemq-cpp.a */; };
 		CCE9087216516221005F2E72 /* libapr-1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE9087016516221005F2E72 /* libapr-1.dylib */; };
 		CCE9087316516221005F2E72 /* libaprutil-1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE9087116516221005F2E72 /* libaprutil-1.dylib */; };
@@ -127,6 +128,7 @@
 		CC68EAB3163DB36800D225C2 /* SimpleAsyncConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleAsyncConsumer.h; sourceTree = "<group>"; };
 		CC68EAB5163DB42E00D225C2 /* SimpleAsyncProducer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleAsyncProducer.cpp; sourceTree = "<group>"; };
 		CC68EAB6163DB42E00D225C2 /* SimpleAsyncProducer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleAsyncProducer.h; sourceTree = "<group>"; };
+		CCA4C32B1687B45D006BAC1D /* xdispatch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = xdispatch.framework; path = ../ThirdParty/xdispatch/build/bin/Debug/xdispatch.framework; sourceTree = "<group>"; };
 		CCE9086616515D32005F2E72 /* activemq-cpp.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "activemq-cpp.xcodeproj"; path = "../ThirdParty/activemq-cpp/activemq-cpp/activemq-cpp/activemq-cpp.xcodeproj"; sourceTree = "<group>"; };
 		CCE9087016516221005F2E72 /* libapr-1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libapr-1.dylib"; path = "usr/lib/libapr-1.dylib"; sourceTree = SDKROOT; };
 		CCE9087116516221005F2E72 /* libaprutil-1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libaprutil-1.dylib"; path = "usr/lib/libaprutil-1.dylib"; sourceTree = SDKROOT; };
@@ -153,6 +155,7 @@
 				CC488D27164EB5FD005078C3 /* libBox2D.a in Frameworks */,
 				CCE9089216517138005F2E72 /* libPhoenix-osx.a in Frameworks */,
 				CC4FECE11662A3AA004810CC /* libProtocolBuffers.a in Frameworks */,
+				CCA4C32C1687B45D006BAC1D /* xdispatch.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,6 +250,7 @@
 		CC68EAB1163DB32600D225C2 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				CCA4C32B1687B45D006BAC1D /* xdispatch.framework */,
 				CCE9087016516221005F2E72 /* libapr-1.dylib */,
 				CCE9087116516221005F2E72 /* libaprutil-1.dylib */,
 			);
@@ -435,6 +439,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
+					"__GXX_EXPERIMENTAL_CXX0X_=1",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
@@ -461,6 +466,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "__GXX_EXPERIMENTAL_CXX0X_=1";
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -475,6 +481,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../ThirdParty/xdispatch/build/bin/Debug\"",
+				);
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
 					"/opt/local/include/apr-1/",
 					"\"$(SRCROOT)/../ThirdParty/protobuf/src/\"",
@@ -493,6 +504,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../ThirdParty/xdispatch/build/bin/Debug\"",
+				);
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
 					"/opt/local/include/apr-1/",
 					"\"$(SRCROOT)/../ThirdParty/protobuf/src/\"",

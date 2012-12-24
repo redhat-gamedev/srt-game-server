@@ -60,11 +60,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CMSTest/Player.cpp"
-         timestampString = "377962246.463337"
+         timestampString = "377968859.795964"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "55"
-         endingLineNumber = "55"
+         startingLineNumber = "57"
+         endingLineNumber = "57"
          landmarkName = "Player::Player(std::string&amp; strUUID, B2DWorld* pB2DWorld)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -99,12 +99,51 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CMSTest/Server.cpp"
-         timestampString = "377962333.934439"
+         timestampString = "377968859.795964"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "335"
          endingLineNumber = "335"
          landmarkName = "Server::OnSecurityJoin(std::string&amp; strUUID)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CMSTest/Player.cpp"
+         timestampString = "377968859.795964"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "88"
+         endingLineNumber = "88"
+         landmarkName = "Player::CreatePod()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CMSTest/Server.cpp"
+         timestampString = "377968327.893218"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "216"
+         endingLineNumber = "216"
+         landmarkName = "Server::OnB2DWorldUpdate(b2Vec2&amp; b2vNewPosition, float32&amp; fNewAngle)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CMSTest/B2DWorld.cpp"
+         timestampString = "377968937.467193"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "151"
+         endingLineNumber = "151"
+         landmarkName = "B2DWorld::run()"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
