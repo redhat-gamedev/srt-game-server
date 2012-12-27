@@ -34,9 +34,10 @@ void protobuf_AssignDesc_DualStick_2eproto() {
       "DualStick.proto");
   GOOGLE_CHECK(file != NULL);
   PbDualStick_descriptor_ = file->message_type(0);
-  static const int PbDualStick_offsets_[2] = {
+  static const int PbDualStick_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PbDualStick, pbv2move_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PbDualStick, pbv2shoot_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PbDualStick, uuid_),
   };
   PbDualStick_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -81,9 +82,9 @@ void protobuf_AddDesc_DualStick_2eproto() {
   ::box2d::protobuf_AddDesc_box2d_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\017DualStick.proto\022\tDualStick\032\013box2d.prot"
-    "o\"P\n\013PbDualStick\022\037\n\010pbv2Move\030\001 \002(\0132\r.box"
+    "o\"^\n\013PbDualStick\022\037\n\010pbv2Move\030\001 \002(\0132\r.box"
     "2d.PbVec2\022 \n\tpbv2Shoot\030\002 \002(\0132\r.box2d.PbV"
-    "ec2", 123);
+    "ec2\022\014\n\004UUID\030\003 \002(\t", 137);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "DualStick.proto", &protobuf_RegisterTypes);
   PbDualStick::default_instance_ = new PbDualStick();
@@ -103,6 +104,7 @@ struct StaticDescriptorInitializer_DualStick_2eproto {
 #ifndef _MSC_VER
 const int PbDualStick::kPbv2MoveFieldNumber;
 const int PbDualStick::kPbv2ShootFieldNumber;
+const int PbDualStick::kUUIDFieldNumber;
 #endif  // !_MSC_VER
 
 PbDualStick::PbDualStick()
@@ -125,6 +127,7 @@ void PbDualStick::SharedCtor() {
   _cached_size_ = 0;
   pbv2move_ = NULL;
   pbv2shoot_ = NULL;
+  uuid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -133,6 +136,9 @@ PbDualStick::~PbDualStick() {
 }
 
 void PbDualStick::SharedDtor() {
+  if (uuid_ != &::google::protobuf::internal::kEmptyString) {
+    delete uuid_;
+  }
   if (this != default_instance_) {
     delete pbv2move_;
     delete pbv2shoot_;
@@ -168,6 +174,11 @@ void PbDualStick::Clear() {
     if (has_pbv2shoot()) {
       if (pbv2shoot_ != NULL) pbv2shoot_->::box2d::PbVec2::Clear();
     }
+    if (has_uuid()) {
+      if (uuid_ != &::google::protobuf::internal::kEmptyString) {
+        uuid_->clear();
+      }
+    }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -199,6 +210,23 @@ bool PbDualStick::MergePartialFromCodedStream(
          parse_pbv2Shoot:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_pbv2shoot()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(26)) goto parse_UUID;
+        break;
+      }
+
+      // required string UUID = 3;
+      case 3: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_UUID:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_uuid()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->uuid().data(), this->uuid().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
         }
@@ -236,6 +264,15 @@ void PbDualStick::SerializeWithCachedSizes(
       2, this->pbv2shoot(), output);
   }
 
+  // required string UUID = 3;
+  if (has_uuid()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->uuid().data(), this->uuid().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      3, this->uuid(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -256,6 +293,16 @@ void PbDualStick::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         2, this->pbv2shoot(), target);
+  }
+
+  // required string UUID = 3;
+  if (has_uuid()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->uuid().data(), this->uuid().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        3, this->uuid(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -281,6 +328,13 @@ int PbDualStick::ByteSize() const {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->pbv2shoot());
+    }
+
+    // required string UUID = 3;
+    if (has_uuid()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->uuid());
     }
 
   }
@@ -316,6 +370,9 @@ void PbDualStick::MergeFrom(const PbDualStick& from) {
     if (from.has_pbv2shoot()) {
       mutable_pbv2shoot()->::box2d::PbVec2::MergeFrom(from.pbv2shoot());
     }
+    if (from.has_uuid()) {
+      set_uuid(from.uuid());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -333,7 +390,7 @@ void PbDualStick::CopyFrom(const PbDualStick& from) {
 }
 
 bool PbDualStick::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
 
   if (has_pbv2move()) {
     if (!this->pbv2move().IsInitialized()) return false;
@@ -348,6 +405,7 @@ void PbDualStick::Swap(PbDualStick* other) {
   if (other != this) {
     std::swap(pbv2move_, other->pbv2move_);
     std::swap(pbv2shoot_, other->pbv2shoot_);
+    std::swap(uuid_, other->uuid_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

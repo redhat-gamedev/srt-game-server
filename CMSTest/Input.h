@@ -13,6 +13,8 @@
 #include "box2d.pb.h"
 #include "PublisherT.cpp"
 #include <cms/MessageListener.h>
+#include <string>
+#include <list>
 
 namespace cms
 {
@@ -28,7 +30,7 @@ public:
     class ICallbacks
     {
     public:
-        virtual void OnDualStick(const box2d::PbVec2& pbv2Move, const box2d::PbVec2& pbv2Shoot) {};
+        virtual void OnDualStick(const std::string& strUUID, const box2d::PbVec2& pbv2Move, const box2d::PbVec2& pbv2Shoot) {};
     };
     
 protected:
@@ -39,7 +41,7 @@ protected:
     protected:
         std::list<ICallbacks*>          m_listSubscribersSwap;
     public:
-        virtual void OnDualStick(const box2d::PbVec2& pbv2Move, const box2d::PbVec2& pbv2Shoot);
+        virtual void OnDualStick(const std::string& strUUID, const box2d::PbVec2& pbv2Move, const box2d::PbVec2& pbv2Shoot);
     };
     
 public:

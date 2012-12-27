@@ -110,20 +110,35 @@ class PbDualStick : public ::google::protobuf::Message {
   inline ::box2d::PbVec2* release_pbv2shoot();
   inline void set_allocated_pbv2shoot(::box2d::PbVec2* pbv2shoot);
 
+  // required string UUID = 3;
+  inline bool has_uuid() const;
+  inline void clear_uuid();
+  static const int kUUIDFieldNumber = 3;
+  inline const ::std::string& uuid() const;
+  inline void set_uuid(const ::std::string& value);
+  inline void set_uuid(const char* value);
+  inline void set_uuid(const char* value, size_t size);
+  inline ::std::string* mutable_uuid();
+  inline ::std::string* release_uuid();
+  inline void set_allocated_uuid(::std::string* uuid);
+
   // @@protoc_insertion_point(class_scope:DualStick.PbDualStick)
  private:
   inline void set_has_pbv2move();
   inline void clear_has_pbv2move();
   inline void set_has_pbv2shoot();
   inline void clear_has_pbv2shoot();
+  inline void set_has_uuid();
+  inline void clear_has_uuid();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::box2d::PbVec2* pbv2move_;
   ::box2d::PbVec2* pbv2shoot_;
+  ::std::string* uuid_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
   friend void  protobuf_AddDesc_DualStick_2eproto();
   friend void protobuf_AssignDesc_DualStick_2eproto();
@@ -212,6 +227,76 @@ inline void PbDualStick::set_allocated_pbv2shoot(::box2d::PbVec2* pbv2shoot) {
     set_has_pbv2shoot();
   } else {
     clear_has_pbv2shoot();
+  }
+}
+
+// required string UUID = 3;
+inline bool PbDualStick::has_uuid() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void PbDualStick::set_has_uuid() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void PbDualStick::clear_has_uuid() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void PbDualStick::clear_uuid() {
+  if (uuid_ != &::google::protobuf::internal::kEmptyString) {
+    uuid_->clear();
+  }
+  clear_has_uuid();
+}
+inline const ::std::string& PbDualStick::uuid() const {
+  return *uuid_;
+}
+inline void PbDualStick::set_uuid(const ::std::string& value) {
+  set_has_uuid();
+  if (uuid_ == &::google::protobuf::internal::kEmptyString) {
+    uuid_ = new ::std::string;
+  }
+  uuid_->assign(value);
+}
+inline void PbDualStick::set_uuid(const char* value) {
+  set_has_uuid();
+  if (uuid_ == &::google::protobuf::internal::kEmptyString) {
+    uuid_ = new ::std::string;
+  }
+  uuid_->assign(value);
+}
+inline void PbDualStick::set_uuid(const char* value, size_t size) {
+  set_has_uuid();
+  if (uuid_ == &::google::protobuf::internal::kEmptyString) {
+    uuid_ = new ::std::string;
+  }
+  uuid_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* PbDualStick::mutable_uuid() {
+  set_has_uuid();
+  if (uuid_ == &::google::protobuf::internal::kEmptyString) {
+    uuid_ = new ::std::string;
+  }
+  return uuid_;
+}
+inline ::std::string* PbDualStick::release_uuid() {
+  clear_has_uuid();
+  if (uuid_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = uuid_;
+    uuid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void PbDualStick::set_allocated_uuid(::std::string* uuid) {
+  if (uuid_ != &::google::protobuf::internal::kEmptyString) {
+    delete uuid_;
+  }
+  if (uuid) {
+    set_has_uuid();
+    uuid_ = uuid;
+  } else {
+    clear_has_uuid();
+    uuid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
 }
 

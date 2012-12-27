@@ -46,7 +46,7 @@ void Player::_Publisher::OnPlayerCreated(std::string& strUUID)
 }
 
 // Constructor(s)
-Player::Player(std::string& strUUID, B2DWorld* pB2DWorld) :
+Player::Player(const std::string& strUUID, B2DWorld* pB2DWorld) :
     m_strUUID(strUUID),
     m_pB2DWorld(pB2DWorld)
 {
@@ -104,8 +104,12 @@ void Player::Update()
 }
 
 // Input::ICallbacks implementation
-void Player::OnDualStick(const box2d::PbVec2& pbv2Move, const box2d::PbVec2& pbv2Shoot)
+void Player::OnDualStick(const std::string& strUUID, const box2d::PbVec2& pbv2Move, const box2d::PbVec2& pbv2Shoot)
 {
+    if (strUUID != m_strUUID)
+    {
+        return;
+    }
     b2Vec2 b2v2Move;
     b2Vec2 b2v2Shoot;
     

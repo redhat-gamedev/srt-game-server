@@ -332,8 +332,10 @@ void Server::OnSecurityJoin(std::string& strUUID)
 {
     std::string     strName = "B2DWorldThread";
 
-    m_pPlayer = new Player(strUUID, m_pB2DWorld);
-    m_pB2DWorld->AddPlayer(m_pPlayer);
+//    m_pPlayer = new Player(strUUID, m_pB2DWorld);
+//    m_pB2DWorld->AddPlayer(m_pPlayer);
+    
+    m_pB2DWorld->AddPlayer(strUUID);
     
     if (NULL == m_pB2DWorldThread)
     {

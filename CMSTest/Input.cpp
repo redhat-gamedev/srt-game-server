@@ -42,7 +42,7 @@ Input::_Publisher                 Input::Publisher;
  */
 
 // Method(s)
-void Input::_Publisher::OnDualStick(const box2d::PbVec2& pbv2Move, const box2d::PbVec2& pbv2Shoot)
+void Input::_Publisher::OnDualStick(const std::string& strUUID, const box2d::PbVec2& pbv2Move, const box2d::PbVec2& pbv2Shoot)
 {
     ICallbacks* pObjToCallback = NULL;
     
@@ -53,7 +53,7 @@ void Input::_Publisher::OnDualStick(const box2d::PbVec2& pbv2Move, const box2d::
         pObjToCallback = m_listSubscribersSwap.front();
         m_listSubscribersSwap.pop_front();
         assert(pObjToCallback);
-        pObjToCallback->OnDualStick(pbv2Move, pbv2Shoot);
+        pObjToCallback->OnDualStick(strUUID, pbv2Move, pbv2Shoot);
     }
 }
 
@@ -91,6 +91,7 @@ void Input::onMessage(const Message* pMessage)
     PbDualStick aDualStick;
     std::string     strNMSXGroupIDPropertyName = "NMSXGroupID";
     std::string     strNMSXGroupID = "";
+    std::string     strUUID = "";
     
     try
     {
@@ -122,7 +123,9 @@ void Input::onMessage(const Message* pMessage)
         //printf("h[%4.4f] v[%4.4f]\n", pbv2Move.x(), pbv2Move.y());
         //printf("fh[%4.4f] fv[%4.4f]\n", pbv2Shoot.x(), pbv2Shoot.y());
         
-        Publisher.OnDualStick(pbv2Move, pbv2Shoot);
+        const std::string& strUUID = aDualStick.uuid();
+        
+        Publisher.OnDualStick(strUUID, pbv2Move, pbv2Shoot);
     }
     catch (CMSException& e)
     {

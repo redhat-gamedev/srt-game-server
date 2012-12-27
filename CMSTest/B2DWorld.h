@@ -94,7 +94,8 @@ public:
     // Method(s)
     void CreateBodiesAndShapes();
     //void Update(std::string& strText);
-    void AddPlayer(Player* pPlayer);
+    //void AddPlayer(Player* pPlayer);
+    void AddPlayer(const std::string& strUUID);
 
     // decaf::lang::Runnable implementation
     void run();

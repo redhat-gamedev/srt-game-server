@@ -130,12 +130,23 @@ void B2DWorld::CreateBodiesAndShapes()
 //}
 
 
-void B2DWorld::AddPlayer(Player* pPlayer)
+//void B2DWorld::AddPlayer(Player* pPlayer)
+//{
+//    assert(pPlayer);
+//    
+//    xdispatch::global_queue().sync([=]
+//    {
+//        m_listPlayers.push_front(pPlayer);
+//    });
+//}
+
+void B2DWorld::AddPlayer(const std::string& strUUID)
 {
-    assert(pPlayer);
+    assert(strUUID.length() > 0);
     
     xdispatch::global_queue().sync([=]
     {
+        Player* pPlayer = new Player(strUUID, this);
         m_listPlayers.push_front(pPlayer);
     });
 }

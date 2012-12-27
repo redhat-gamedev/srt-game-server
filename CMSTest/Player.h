@@ -60,7 +60,7 @@ public:
     static _Publisher               Publisher;
     
     // Constructor(s)
-    Player(std::string& strUUID, B2DWorld* pB2DWorld);
+    Player(const std::string& strUUID, B2DWorld* pB2DWorld);
     
     // Destructor(s)
     ~Player();
@@ -69,7 +69,7 @@ public:
     void Update();
     
     // Input::ICallbacks implementation
-    virtual void OnDualStick(const box2d::PbVec2& pbv2Move, const box2d::PbVec2& pbv2Shoot);
+    virtual void OnDualStick(const std::string& strUUID, const box2d::PbVec2& pbv2Move, const box2d::PbVec2& pbv2Shoot);
 };
 
 
