@@ -9,8 +9,6 @@
 #ifndef __CMSTest__B2DWorld__
 #define __CMSTest__B2DWorld__
 
-#include "box2d.pb.h"
-
 #include "../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include "decaf/lang/Runnable.h"
 #include "decaf/util/StlQueue.h"
@@ -33,7 +31,8 @@ public:
     class ICallbacks
     {
     public:
-        virtual void OnB2DWorldUpdate(b2Vec2& b2vNewPosition, float32& fNewAngle) {};
+        //virtual void OnB2DWorldUpdate(b2Vec2& b2vNewPosition, float32& fNewAngle) {};
+        virtual void OnB2DWorldUpdate(b2World* pWorld) {};
         virtual void OnB2DWorldBodyUpdate(b2Body* pBody) {};
     };
     
@@ -45,7 +44,8 @@ protected:
     protected:
         std::list<ICallbacks*>          m_listSubscribersSwap;
     public:
-        virtual void OnB2DWorldUpdate(b2Vec2& b2vNewPosition, float32& fNewAngle);
+        //virtual void OnB2DWorldUpdate(b2Vec2& b2vNewPosition, float32& fNewAngle);
+        virtual void OnB2DWorldUpdate(b2World* pWorld);
         virtual void OnB2DWorldBodyUpdate(b2Body* pBody);
     };
 
@@ -60,19 +60,7 @@ private:
 protected:
     //b2World*        world;
     b2Vec2*         gravity;
-    
-    b2BodyDef       groundBodyDef;
-    b2Body*         groundBody;
-    b2PolygonShape  groundBox;
-    
-    b2BodyDef       bodyDef;
-    b2Body*         body;
-    b2PolygonShape  dynamicBox;
-    b2FixtureDef    fixtureDef;
-    
-    b2Vec2          position;
-    float32         angle;
-    
+        
     float32         timeStep;// = 1.0f / 60.0f;
 	int32           velocityIterations;
     int32           positionIterations;
@@ -92,9 +80,6 @@ public:
     ~B2DWorld();
     
     // Method(s)
-    void CreateBodiesAndShapes();
-    //void Update(std::string& strText);
-    //void AddPlayer(Player* pPlayer);
     void AddPlayer(const std::string& strUUID);
 
     // decaf::lang::Runnable implementation

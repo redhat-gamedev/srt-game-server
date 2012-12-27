@@ -18,6 +18,7 @@
 #include "Security.h"
 #include "Addressbook.h"
 #include "addressbook.pb.h"
+#include "box2d.pb.h"
 #include "../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include <string>
 
@@ -81,6 +82,8 @@ protected:
     // Helper(s)
     void Setup();
     void Teardown();
+    void b2Vec2ToPbVec2(b2Vec2* pb2Vec2);
+    void b2WorldToPbWorld(b2World* pb2World, ::box2d::PbWorld*& pPbWorldDefault, std::string& strPBBuffer);
     
 public:
     // Constructor(s)
@@ -94,7 +97,8 @@ public:
     
     
     // B2DWorld::ICallbacks implementation
-    void OnB2DWorldUpdate(b2Vec2& b2vNewPosition, float32& fNewAngle);
+    //void OnB2DWorldUpdate(b2Vec2& b2vNewPosition, float32& fNewAngle);
+    void OnB2DWorldUpdate(b2World* pWorld);
     void OnB2DWorldBodyUpdate(b2Body* pBody);
     
     // Heartbeat::ICallbacks implementation
