@@ -181,7 +181,7 @@ void protobuf_AssignDesc_box2d_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(PbJoint));
   PbBody_descriptor_ = file->message_type(5);
-  static const int PbBody_offsets_[19] = {
+  static const int PbBody_offsets_[20] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PbBody, tag_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PbBody, type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PbBody, position_),
@@ -200,6 +200,7 @@ void protobuf_AssignDesc_box2d_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PbBody, awake_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PbBody, active_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PbBody, fixed_rotation_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PbBody, uuid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PbBody, fixtures_),
   };
   PbBody_reflection_ =
@@ -327,7 +328,7 @@ void protobuf_AddDesc_box2d_2eproto() {
     "(\002\022\034\n\024spring_damping_ratio\030G \001(\002\022\022\n\nmax_"
     "torque\030Z \001(\002\022\022\n\nmax_length\030d \001(\002\022\016\n\006bodi"
     "es\030n \003(\005\022\016\n\006joints\030o \003(\005\022\025\n\rtarget_volum"
-    "e\030p \001(\002\"\267\003\n\006PbBody\022\013\n\003tag\030\001 \001(\003\022\037\n\004type\030"
+    "e\030p \001(\002\"\305\003\n\006PbBody\022\013\n\003tag\030\001 \001(\003\022\037\n\004type\030"
     "\002 \002(\0162\021.box2d.PbBodyType\022\037\n\010position\030\n \001"
     "(\0132\r.box2d.PbVec2\022\r\n\005angle\030\013 \001(\002\022&\n\017line"
     "ar_velocity\030\014 \001(\0132\r.box2d.PbVec2\022\030\n\020angu"
@@ -337,21 +338,22 @@ void protobuf_AddDesc_box2d_2eproto() {
     "ular_damping\0303 \001(\002\022\025\n\rgravity_scale\0304 \001("
     "\002\022\016\n\006bullet\0305 \001(\010\022\023\n\013allow_sleep\0306 \001(\010\022\r"
     "\n\005awake\0307 \001(\010\022\016\n\006active\0308 \001(\010\022\026\n\016fixed_r"
-    "otation\0309 \001(\010\022\"\n\010fixtures\030d \003(\0132\020.box2d."
-    "PbFixture\"\356\001\n\007PbWorld\022\013\n\003tag\030\001 \001(\003\022\036\n\007gr"
-    "avity\030\002 \001(\0132\r.box2d.PbVec2\022\023\n\013allow_slee"
-    "p\030\003 \001(\010\022\031\n\021auto_clear_forces\030\004 \001(\010\022\025\n\rwa"
-    "rm_starting\030\005 \001(\010\022\032\n\022continuous_physics\030"
-    "\006 \001(\010\022\024\n\014sub_stepping\030\007 \001(\010\022\035\n\006bodies\030\024 "
-    "\003(\0132\r.box2d.PbBody\022\036\n\006joints\030\025 \003(\0132\016.box"
-    "2d.PbJoint*4\n\nPbBodyType\022\n\n\006STATIC\020\000\022\013\n\007"
-    "DYNAMIC\020\001\022\r\n\tKINEMATIC\020\002*:\n\013PbShapeType\022"
-    "\n\n\006CIRCLE\020\001\022\013\n\007POLYGON\020\002\022\010\n\004EDGE\020\003\022\010\n\004LO"
-    "OP\020\004*\245\001\n\013PbJointType\022\014\n\010DISTANCE\020\001\022\014\n\010RE"
-    "VOLUTE\020\002\022\r\n\tPRISMATIC\020\003\022\n\n\006PULLEY\020\004\022\t\n\005M"
-    "OUSE\020\005\022\010\n\004GEAR\020\006\022\t\n\005WHEEL\020\007\022\010\n\004WELD\020\010\022\014\n"
-    "\010FRICTION\020\t\022\010\n\004ROPE\020\n\022\023\n\017CONSTANT_VOLUME"
-    "\020\013\022\010\n\004LINE\020\014B\030\n\017org.box2d.protoB\005Box2D", 2358);
+    "otation\0309 \001(\010\022\014\n\004UUID\030< \001(\t\022\"\n\010fixtures\030"
+    "d \003(\0132\020.box2d.PbFixture\"\356\001\n\007PbWorld\022\013\n\003t"
+    "ag\030\001 \001(\003\022\036\n\007gravity\030\002 \001(\0132\r.box2d.PbVec2"
+    "\022\023\n\013allow_sleep\030\003 \001(\010\022\031\n\021auto_clear_forc"
+    "es\030\004 \001(\010\022\025\n\rwarm_starting\030\005 \001(\010\022\032\n\022conti"
+    "nuous_physics\030\006 \001(\010\022\024\n\014sub_stepping\030\007 \001("
+    "\010\022\035\n\006bodies\030\024 \003(\0132\r.box2d.PbBody\022\036\n\006join"
+    "ts\030\025 \003(\0132\016.box2d.PbJoint*4\n\nPbBodyType\022\n"
+    "\n\006STATIC\020\000\022\013\n\007DYNAMIC\020\001\022\r\n\tKINEMATIC\020\002*:"
+    "\n\013PbShapeType\022\n\n\006CIRCLE\020\001\022\013\n\007POLYGON\020\002\022\010"
+    "\n\004EDGE\020\003\022\010\n\004LOOP\020\004*\245\001\n\013PbJointType\022\014\n\010DI"
+    "STANCE\020\001\022\014\n\010REVOLUTE\020\002\022\r\n\tPRISMATIC\020\003\022\n\n"
+    "\006PULLEY\020\004\022\t\n\005MOUSE\020\005\022\010\n\004GEAR\020\006\022\t\n\005WHEEL\020"
+    "\007\022\010\n\004WELD\020\010\022\014\n\010FRICTION\020\t\022\010\n\004ROPE\020\n\022\023\n\017C"
+    "ONSTANT_VOLUME\020\013\022\010\n\004LINE\020\014B\030\n\017org.box2d."
+    "protoB\005Box2D", 2372);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "box2d.proto", &protobuf_RegisterTypes);
   PbVec2::default_instance_ = new PbVec2();
@@ -3613,6 +3615,7 @@ const int PbBody::kAllowSleepFieldNumber;
 const int PbBody::kAwakeFieldNumber;
 const int PbBody::kActiveFieldNumber;
 const int PbBody::kFixedRotationFieldNumber;
+const int PbBody::kUUIDFieldNumber;
 const int PbBody::kFixturesFieldNumber;
 #endif  // !_MSC_VER
 
@@ -3653,6 +3656,7 @@ void PbBody::SharedCtor() {
   awake_ = false;
   active_ = false;
   fixed_rotation_ = false;
+  uuid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -3661,6 +3665,9 @@ PbBody::~PbBody() {
 }
 
 void PbBody::SharedDtor() {
+  if (uuid_ != &::google::protobuf::internal::kEmptyString) {
+    delete uuid_;
+  }
   if (this != default_instance_) {
     delete position_;
     delete linear_velocity_;
@@ -3719,6 +3726,11 @@ void PbBody::Clear() {
   if (_has_bits_[16 / 32] & (0xffu << (16 % 32))) {
     active_ = false;
     fixed_rotation_ = false;
+    if (has_uuid()) {
+      if (uuid_ != &::google::protobuf::internal::kEmptyString) {
+        uuid_->clear();
+      }
+    }
   }
   fixtures_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -4013,6 +4025,23 @@ bool PbBody::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
+        if (input->ExpectTag(482)) goto parse_UUID;
+        break;
+      }
+
+      // optional string UUID = 60;
+      case 60: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_UUID:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_uuid()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->uuid().data(), this->uuid().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
         if (input->ExpectTag(802)) goto parse_fixtures;
         break;
       }
@@ -4144,6 +4173,15 @@ void PbBody::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteBool(57, this->fixed_rotation(), output);
   }
 
+  // optional string UUID = 60;
+  if (has_uuid()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->uuid().data(), this->uuid().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      60, this->uuid(), output);
+  }
+
   // repeated .box2d.PbFixture fixtures = 100;
   for (int i = 0; i < this->fixtures_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
@@ -4253,6 +4291,16 @@ void PbBody::SerializeWithCachedSizes(
   // optional bool fixed_rotation = 57;
   if (has_fixed_rotation()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(57, this->fixed_rotation(), target);
+  }
+
+  // optional string UUID = 60;
+  if (has_uuid()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->uuid().data(), this->uuid().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        60, this->uuid(), target);
   }
 
   // repeated .box2d.PbFixture fixtures = 100;
@@ -4376,6 +4424,13 @@ int PbBody::ByteSize() const {
       total_size += 2 + 1;
     }
 
+    // optional string UUID = 60;
+    if (has_uuid()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->uuid());
+    }
+
   }
   // repeated .box2d.PbFixture fixtures = 100;
   total_size += 2 * this->fixtures_size();
@@ -4470,6 +4525,9 @@ void PbBody::MergeFrom(const PbBody& from) {
     if (from.has_fixed_rotation()) {
       set_fixed_rotation(from.fixed_rotation());
     }
+    if (from.has_uuid()) {
+      set_uuid(from.uuid());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -4524,6 +4582,7 @@ void PbBody::Swap(PbBody* other) {
     std::swap(awake_, other->awake_);
     std::swap(active_, other->active_);
     std::swap(fixed_rotation_, other->fixed_rotation_);
+    std::swap(uuid_, other->uuid_);
     fixtures_.Swap(&other->fixtures_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);

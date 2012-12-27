@@ -195,6 +195,7 @@ void Server::b2WorldToPbWorld(b2World* pb2World, PbWorld*& pPbWorldDefault, std:
     PbVec2* pPbVec2Force = NULL;
     //PbBodyType aPbBodyType = PbBodyType_MIN;
     const b2Vec2 b2v2Gravity = pb2World->GetGravity();
+    std::string* pstrUUID = NULL;
     
     ppbv2Gravity->set_x(b2v2Gravity.x);
     ppbv2Gravity->set_y(b2v2Gravity.y);
@@ -230,6 +231,11 @@ void Server::b2WorldToPbWorld(b2World* pb2World, PbWorld*& pPbWorldDefault, std:
         pPbVec2Force->set_x(0.0f);
         pPbVec2Force->set_y(0.0f);
         pPbBody->set_allocated_force(pPbVec2Force);
+        
+        pstrUUID = (std::string*)pBody->GetUserData();
+        assert(NULL != pstrUUID);
+//        pPbBody->mutable_unknown_fields()->AddLengthDelimited(0, *pstrUUID);        
+        pPbBody->set_uuid(*pstrUUID);
         
         pFixtureList = pBody->GetFixtureList();
         for (b2Fixture* pFixture = pFixtureList; pFixture; pFixture = pFixture->GetNext())

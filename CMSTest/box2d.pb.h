@@ -1252,6 +1252,18 @@ class PbBody : public ::google::protobuf::Message {
   inline bool fixed_rotation() const;
   inline void set_fixed_rotation(bool value);
 
+  // optional string UUID = 60;
+  inline bool has_uuid() const;
+  inline void clear_uuid();
+  static const int kUUIDFieldNumber = 60;
+  inline const ::std::string& uuid() const;
+  inline void set_uuid(const ::std::string& value);
+  inline void set_uuid(const char* value);
+  inline void set_uuid(const char* value, size_t size);
+  inline ::std::string* mutable_uuid();
+  inline ::std::string* release_uuid();
+  inline void set_allocated_uuid(::std::string* uuid);
+
   // repeated .box2d.PbFixture fixtures = 100;
   inline int fixtures_size() const;
   inline void clear_fixtures();
@@ -1302,6 +1314,8 @@ class PbBody : public ::google::protobuf::Message {
   inline void clear_has_active();
   inline void set_has_fixed_rotation();
   inline void clear_has_fixed_rotation();
+  inline void set_has_uuid();
+  inline void clear_has_uuid();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -1322,11 +1336,12 @@ class PbBody : public ::google::protobuf::Message {
   bool allow_sleep_;
   bool awake_;
   bool active_;
+  ::std::string* uuid_;
   ::google::protobuf::RepeatedPtrField< ::box2d::PbFixture > fixtures_;
   bool fixed_rotation_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(19 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(20 + 31) / 32];
 
   friend void  protobuf_AddDesc_box2d_2eproto();
   friend void protobuf_AssignDesc_box2d_2eproto();
@@ -3381,6 +3396,76 @@ inline bool PbBody::fixed_rotation() const {
 inline void PbBody::set_fixed_rotation(bool value) {
   set_has_fixed_rotation();
   fixed_rotation_ = value;
+}
+
+// optional string UUID = 60;
+inline bool PbBody::has_uuid() const {
+  return (_has_bits_[0] & 0x00040000u) != 0;
+}
+inline void PbBody::set_has_uuid() {
+  _has_bits_[0] |= 0x00040000u;
+}
+inline void PbBody::clear_has_uuid() {
+  _has_bits_[0] &= ~0x00040000u;
+}
+inline void PbBody::clear_uuid() {
+  if (uuid_ != &::google::protobuf::internal::kEmptyString) {
+    uuid_->clear();
+  }
+  clear_has_uuid();
+}
+inline const ::std::string& PbBody::uuid() const {
+  return *uuid_;
+}
+inline void PbBody::set_uuid(const ::std::string& value) {
+  set_has_uuid();
+  if (uuid_ == &::google::protobuf::internal::kEmptyString) {
+    uuid_ = new ::std::string;
+  }
+  uuid_->assign(value);
+}
+inline void PbBody::set_uuid(const char* value) {
+  set_has_uuid();
+  if (uuid_ == &::google::protobuf::internal::kEmptyString) {
+    uuid_ = new ::std::string;
+  }
+  uuid_->assign(value);
+}
+inline void PbBody::set_uuid(const char* value, size_t size) {
+  set_has_uuid();
+  if (uuid_ == &::google::protobuf::internal::kEmptyString) {
+    uuid_ = new ::std::string;
+  }
+  uuid_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* PbBody::mutable_uuid() {
+  set_has_uuid();
+  if (uuid_ == &::google::protobuf::internal::kEmptyString) {
+    uuid_ = new ::std::string;
+  }
+  return uuid_;
+}
+inline ::std::string* PbBody::release_uuid() {
+  clear_has_uuid();
+  if (uuid_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = uuid_;
+    uuid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void PbBody::set_allocated_uuid(::std::string* uuid) {
+  if (uuid_ != &::google::protobuf::internal::kEmptyString) {
+    delete uuid_;
+  }
+  if (uuid) {
+    set_has_uuid();
+    uuid_ = uuid;
+  } else {
+    clear_has_uuid();
+    uuid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // repeated .box2d.PbFixture fixtures = 100;

@@ -87,6 +87,8 @@ void Player::CreatePod()
     // call the body factory.
     m_pb2bPod = m_pB2DWorld->world->CreateBody(&bodyDef);
 	m_pb2bPod->CreateFixture(&fixtureDef);
+    
+    m_pb2bPod->SetUserData(&m_strUUID);
 }
 
 // Method(s)

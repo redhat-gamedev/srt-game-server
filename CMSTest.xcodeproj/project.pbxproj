@@ -162,6 +162,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CC19F7A1168CCC9E007B694E /* Proto */ = {
+			isa = PBXGroup;
+			children = (
+				CC4FECE31662A4A4004810CC /* box2d.pb.cc */,
+				CC4FECE41662A4A4004810CC /* box2d.pb.h */,
+				CC4FECE51662A4A4004810CC /* box2d.proto */,
+				CC52E0B01675058400D47C43 /* DualStick.pb.cc */,
+				CC52E0B11675058400D47C43 /* DualStick.pb.h */,
+				CC52E0B21675058400D47C43 /* DualStick.proto */,
+			);
+			name = Proto;
+			sourceTree = "<group>";
+		};
 		CC488D19164EB5DE005078C3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -216,15 +229,10 @@
 		CC68EA94163DA07400D225C2 /* CMSTest */ = {
 			isa = PBXGroup;
 			children = (
+				CC19F7A1168CCC9E007B694E /* Proto */,
 				CC3C8F8A167CC3F80084CBE8 /* Security.cpp */,
 				CC3C8F8B167CC3F80084CBE8 /* Security.h */,
-				CC52E0B01675058400D47C43 /* DualStick.pb.cc */,
-				CC52E0B11675058400D47C43 /* DualStick.pb.h */,
-				CC52E0B21675058400D47C43 /* DualStick.proto */,
 				CC67E1DA166A4F0500BCB047 /* AddressbookTest */,
-				CC4FECE31662A4A4004810CC /* box2d.pb.cc */,
-				CC4FECE41662A4A4004810CC /* box2d.pb.h */,
-				CC4FECE51662A4A4004810CC /* box2d.proto */,
 				CCE9089616517F95005F2E72 /* PublisherT.cpp */,
 				CCE9089716517F95005F2E72 /* PublisherT.h */,
 				CC68EA95163DA07400D225C2 /* main.cpp */,
