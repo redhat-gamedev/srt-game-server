@@ -67,6 +67,7 @@ public:
     
     // Method(s)
     void Update();
+    bool ThisUUIDIsAMatch(const std::string& strUUID);
     
     // Input::ICallbacks implementation
     virtual void OnDualStick(const std::string& strUUID, const box2d::PbVec2& pbv2Move, const box2d::PbVec2& pbv2Shoot);

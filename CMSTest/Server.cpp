@@ -459,3 +459,10 @@ void Server::OnSecurityJoin(std::string& strUUID)
         m_pB2DWorldThread->start();
     }
 }
+
+void Server::OnSecurityLeave(std::string& strUUID)
+{
+    assert(m_pB2DWorld);
+    
+    m_pB2DWorld->RemovePlayer(strUUID);
+}

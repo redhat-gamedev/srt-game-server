@@ -63,6 +63,9 @@ Player::Player(const std::string& strUUID, B2DWorld* pB2DWorld) :
 Player::~Player()
 {
     Input::Publisher.Detach(this);
+    
+    m_pB2DWorld->world->DestroyBody(m_pb2bPod);
+    m_pb2bPod = NULL;
 }
 
 void Player::CreatePod()
@@ -103,6 +106,15 @@ void Player::Update()
         m_pb2bPod->ApplyForceToCenter(ab2Vec2Move, true);
     }
     m_b2v2MoveQueue.unlock();
+}
+
+bool Player::ThisUUIDIsAMatch(const std::string& strUUID)
+{
+    if (strUUID == m_strUUID)
+    {
+        return true;
+    }
+    return false;
 }
 
 // Input::ICallbacks implementation

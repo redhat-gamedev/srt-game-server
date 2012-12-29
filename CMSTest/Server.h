@@ -109,6 +109,7 @@ public:
 
     // Security::ICallbacks implementation
     void OnSecurityJoin(std::string& strUUID);
+    void OnSecurityLeave(std::string& strUUID);
 };
 
 #endif /* defined(__CMSTest__Server__) */

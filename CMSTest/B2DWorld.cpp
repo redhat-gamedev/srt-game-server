@@ -96,6 +96,29 @@ void B2DWorld::AddPlayer(const std::string& strUUID)
     });
 }
 
+void B2DWorld::RemovePlayer(const std::string& strUUID)
+{
+    assert(strUUID.length() > 0);
+    
+    xdispatch::global_queue().sync([=]
+    {
+        std::list<Player*>::iterator    iterPlayerList;
+        Player* pPlayer = NULL;
+        
+        iterPlayerList = m_listPlayers.begin();
+        for (;iterPlayerList != m_listPlayers.end(); iterPlayerList++)
+        {
+            pPlayer = *iterPlayerList;
+            if (pPlayer->ThisUUIDIsAMatch(strUUID))
+            {
+                m_listPlayers.erase(iterPlayerList);
+                delete pPlayer;
+                break;
+            }
+        }
+    });
+}
+
 // decaf::lang::Runnable implementation
 void B2DWorld::run()
 {

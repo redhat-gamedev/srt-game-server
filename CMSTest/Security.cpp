@@ -9,6 +9,7 @@
 #include "Security.h"
 #include "DualStick.pb.h"
 #include "box2d.pb.h"
+#include "Command.pb.h"
 #include "SimpleAsyncConsumer.h"
 #include "SimpleAsyncProducer.h"
 #include <cms/CMSException.h>
@@ -26,6 +27,7 @@
 using namespace DualStick;
 using namespace box2d;
 using namespace cms;
+using namespace command;
 
 Security::_Publisher                 Security::Publisher;
 
@@ -58,6 +60,21 @@ void Security::_Publisher::OnSecurityJoin(std::string& strUUID)
         m_listSubscribersSwap.pop_front();
         assert(pObjToCallback);
         pObjToCallback->OnSecurityJoin(strUUID);
+    }
+}
+
+void Security::_Publisher::OnSecurityLeave(std::string& strUUID)
+{
+    ICallbacks* pObjToCallback = NULL;
+    
+    //m_listSubscribersSwap = m_listSubscribers;
+    Clone(m_listSubscribersSwap);
+    while(!m_listSubscribersSwap.empty())
+    {
+        pObjToCallback = m_listSubscribersSwap.front();
+        m_listSubscribersSwap.pop_front();
+        assert(pObjToCallback);
+        pObjToCallback->OnSecurityLeave(strUUID);
     }
 }
 
@@ -95,9 +112,11 @@ void Security::onMessage(const Message* pMessage)
 {
     assert(pMessage);
     
-    static int      count = 0;
-    bool            clientAck = false;
-    std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp";
+    static int              count = 0;
+    bool                    clientAck = false;
+    Command                 aCommand;
+    std::string             strUUID = "";
+    std::string             strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp";
     
     try
     {
@@ -114,26 +133,34 @@ void Security::onMessage(const Message* pMessage)
         {
             pMessage->acknowledge();
         }
-
-        const cms::Destination* pDestination = pBytesMessage->getCMSReplyTo();
-        assert(pDestination);
-
-        decaf::util::UUID aNewUUID = decaf::util::UUID::randomUUID();
-        std::string strUUID = aNewUUID.toString();
-
-        // TODO: Make not super inefficient
-        SimpleProducer* pSimpleAsyncProducer = new SimpleProducer(strBrokerURI, pDestination);
-        //pSimpleAsyncProducer->Send(strUUID, this);
-        pSimpleAsyncProducer->Send(strUUID);
-        delete pSimpleAsyncProducer;
         
-        //m_mapUUIDToReplyDestinations.insert(std::pair<std::string, const cms::Destination*>(strUUID, pDestination));
-        //m_mapUUIDToReplyDestinations.insert(std::pair<std::string, std::string>(strUUID, strTemporaryQueueName));
-        
-        // TODO: Remove hack
-        //m_mapUUIDToSimpleAsyncProducers.insert(std::pair<std::string, SimpleProducer*>(strUUID, m_pSimpleAsyncProducer));
-        
-        Publisher.OnSecurityJoin(strUUID);
+        aCommand.ParseFromArray(pucBodyBytes, iBodyBytes);
+
+        assert(Command_CommandType_SECURITY == aCommand.type());
+        const SecurityCommand& aSecurityCommand = aCommand.securitycommand();
+        if (SecurityCommand_SecurityCommandType_JOIN == aSecurityCommand.type())
+        {
+            // Join stuff
+            const cms::Destination* pDestination = pBytesMessage->getCMSReplyTo();
+            assert(pDestination);
+            decaf::util::UUID aNewUUID = decaf::util::UUID::randomUUID();
+            strUUID = aNewUUID.toString();
+            // TODO: Make not super inefficient
+            SimpleProducer* pSimpleAsyncProducer = new SimpleProducer(strBrokerURI, pDestination);
+            pSimpleAsyncProducer->Send(strUUID);
+            delete pSimpleAsyncProducer;
+            
+            Publisher.OnSecurityJoin(strUUID);
+        }
+
+        if (SecurityCommand_SecurityCommandType_LEAVE == aSecurityCommand.type())
+        {
+            assert(aSecurityCommand.has_uuid());
+            strUUID = aSecurityCommand.uuid();
+            
+            Publisher.OnSecurityLeave(strUUID);
+        }
+
     }
     catch (CMSException& e)
     {

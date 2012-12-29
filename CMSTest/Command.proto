@@ -1,0 +1,23 @@
+package command;
+
+message SecurityCommand
+{
+	enum SecurityCommandType
+	{
+		JOIN = 0;
+		LEAVE = 1;
+	}
+	required SecurityCommandType type = 1;
+
+	optional string UUID = 2;
+}
+
+message Command
+{
+	enum CommandType
+	{
+		SECURITY = 0;
+	}
+	required CommandType type = 1 [default = SECURITY];
+	optional SecurityCommand securityCommand = 3;
+}

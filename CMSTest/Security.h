@@ -38,6 +38,7 @@ public:
     {
     public:
         virtual void OnSecurityJoin(std::string& strUUID) {};
+        virtual void OnSecurityLeave(std::string& strUUID) {};
     };
     
 protected:
@@ -49,6 +50,7 @@ protected:
         std::list<ICallbacks*>          m_listSubscribersSwap;
     public:
         virtual void OnSecurityJoin(std::string& strUUID);
+        virtual void OnSecurityLeave(std::string& strUUID);
     };
     
     //std::map<std::string, const cms::Destination*>        m_mapUUIDToReplyDestinations;

@@ -13,6 +13,8 @@
 		CC4FECE11662A3AA004810CC /* libProtocolBuffers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC4FECE01662A39A004810CC /* libProtocolBuffers.a */; };
 		CC52E0B31675058400D47C43 /* DualStick.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CC52E0B01675058400D47C43 /* DualStick.pb.cc */; };
 		CC52E0B71675245600D47C43 /* Input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC52E0B51675245600D47C43 /* Input.cpp */; };
+		CC57A5C7168F6E5A00B43FAA /* Command.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CC57A5C4168F6E5A00B43FAA /* Command.pb.cc */; };
+		CC57A5C8168F6E5A00B43FAA /* Command.proto in Sources */ = {isa = PBXBuildFile; fileRef = CC57A5C6168F6E5A00B43FAA /* Command.proto */; };
 		CC67E1E0166A4F6500BCB047 /* addressbook.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CC67E1DC166A4F6500BCB047 /* addressbook.pb.cc */; };
 		CC67E1E4166A524400BCB047 /* Addressbook.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC67E1E2166A524300BCB047 /* Addressbook.cpp */; };
 		CC68EA96163DA07400D225C2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC68EA95163DA07400D225C2 /* main.cpp */; };
@@ -117,6 +119,9 @@
 		CC52E0B21675058400D47C43 /* DualStick.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; path = DualStick.proto; sourceTree = "<group>"; };
 		CC52E0B51675245600D47C43 /* Input.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Input.cpp; sourceTree = "<group>"; };
 		CC52E0B61675245600D47C43 /* Input.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Input.h; sourceTree = "<group>"; };
+		CC57A5C4168F6E5A00B43FAA /* Command.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Command.pb.cc; sourceTree = "<group>"; };
+		CC57A5C5168F6E5A00B43FAA /* Command.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Command.pb.h; sourceTree = "<group>"; };
+		CC57A5C6168F6E5A00B43FAA /* Command.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; path = Command.proto; sourceTree = "<group>"; };
 		CC67E1DC166A4F6500BCB047 /* addressbook.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = addressbook.pb.cc; sourceTree = "<group>"; };
 		CC67E1DD166A4F6500BCB047 /* addressbook.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = addressbook.pb.h; sourceTree = "<group>"; };
 		CC67E1E2166A524300BCB047 /* Addressbook.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Addressbook.cpp; sourceTree = "<group>"; };
@@ -165,6 +170,9 @@
 		CC19F7A1168CCC9E007B694E /* Proto */ = {
 			isa = PBXGroup;
 			children = (
+				CC57A5C4168F6E5A00B43FAA /* Command.pb.cc */,
+				CC57A5C5168F6E5A00B43FAA /* Command.pb.h */,
+				CC57A5C6168F6E5A00B43FAA /* Command.proto */,
 				CC4FECE31662A4A4004810CC /* box2d.pb.cc */,
 				CC4FECE41662A4A4004810CC /* box2d.pb.h */,
 				CC4FECE51662A4A4004810CC /* box2d.proto */,
@@ -424,6 +432,8 @@
 				CC52E0B71675245600D47C43 /* Input.cpp in Sources */,
 				CC3C8F8C167CC3F80084CBE8 /* Security.cpp in Sources */,
 				CC3C8F8F167CEF080084CBE8 /* Player.cpp in Sources */,
+				CC57A5C7168F6E5A00B43FAA /* Command.pb.cc in Sources */,
+				CC57A5C8168F6E5A00B43FAA /* Command.proto in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

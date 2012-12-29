@@ -81,6 +81,7 @@ public:
     
     // Method(s)
     void AddPlayer(const std::string& strUUID);
+    void RemovePlayer(const std::string& strUUID);
 
     // decaf::lang::Runnable implementation
     void run();
