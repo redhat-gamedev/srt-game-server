@@ -48,7 +48,7 @@ Security::_Publisher                 Security::Publisher;
  */
 
 // Method(s)
-void Security::_Publisher::OnSecurityJoin(std::string& strUUID)
+void Security::_Publisher::OnSecurityRequestJoin(std::string& strUUID)
 {
     ICallbacks* pObjToCallback = NULL;
     
@@ -59,11 +59,11 @@ void Security::_Publisher::OnSecurityJoin(std::string& strUUID)
         pObjToCallback = m_listSubscribersSwap.front();
         m_listSubscribersSwap.pop_front();
         assert(pObjToCallback);
-        pObjToCallback->OnSecurityJoin(strUUID);
+        pObjToCallback->OnSecurityRequestJoin(strUUID);
     }
 }
 
-void Security::_Publisher::OnSecurityLeave(std::string& strUUID)
+void Security::_Publisher::OnSecurityRequestLeave(std::string& strUUID)
 {
     ICallbacks* pObjToCallback = NULL;
     
@@ -74,7 +74,37 @@ void Security::_Publisher::OnSecurityLeave(std::string& strUUID)
         pObjToCallback = m_listSubscribersSwap.front();
         m_listSubscribersSwap.pop_front();
         assert(pObjToCallback);
-        pObjToCallback->OnSecurityLeave(strUUID);
+        pObjToCallback->OnSecurityRequestLeave(strUUID);
+    }
+}
+
+void Security::_Publisher::OnSecurityHasJoined(std::string& strUUID)
+{
+    ICallbacks* pObjToCallback = NULL;
+    
+    //m_listSubscribersSwap = m_listSubscribers;
+    Clone(m_listSubscribersSwap);
+    while(!m_listSubscribersSwap.empty())
+    {
+        pObjToCallback = m_listSubscribersSwap.front();
+        m_listSubscribersSwap.pop_front();
+        assert(pObjToCallback);
+        pObjToCallback->OnSecurityHasJoined(strUUID);
+    }
+}
+
+void Security::_Publisher::OnSecurityHasLeft(std::string& strUUID)
+{
+    ICallbacks* pObjToCallback = NULL;
+    
+    //m_listSubscribersSwap = m_listSubscribers;
+    Clone(m_listSubscribersSwap);
+    while(!m_listSubscribersSwap.empty())
+    {
+        pObjToCallback = m_listSubscribersSwap.front();
+        m_listSubscribersSwap.pop_front();
+        assert(pObjToCallback);
+        pObjToCallback->OnSecurityHasLeft(strUUID);
     }
 }
 
@@ -85,14 +115,17 @@ Security::Security() :
 {
     bool            useTopics = false;
     bool            clientAck = false;
-    std::string     strSecurityURI = "AAS.IN";
+    std::string     strSecurityInURI = "AAS.IN";
+    std::string     strSecurityOutURI = "AAS.OUT";
     std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp";
 
     std::cout << "Security::Security()..." << std::endl;
     
-    m_pSimpleAsyncConsumer = new SimpleAsyncConsumer(strBrokerURI, strSecurityURI, useTopics, clientAck);
+    m_pSimpleAsyncConsumer = new SimpleAsyncConsumer(strBrokerURI, strSecurityInURI, false, true);
     m_pSimpleAsyncConsumer->runConsumer();
     m_pSimpleAsyncConsumer->SetMessageListener(this);
+    
+    m_pSimpleAsyncProducer = new SimpleProducer(strBrokerURI, strSecurityOutURI, true, true);
     
     Player::Publisher.Attach(this);
 }
@@ -101,6 +134,10 @@ Security::Security() :
 Security::~Security()
 {
     Player::Publisher.Detach(this);
+    
+    m_pSimpleAsyncProducer->close();
+    delete m_pSimpleAsyncProducer;
+    m_pSimpleAsyncProducer = NULL;
     
     m_pSimpleAsyncConsumer->close();
     delete m_pSimpleAsyncConsumer;
@@ -129,10 +166,10 @@ void Security::onMessage(const Message* pMessage)
         assert(pucBodyBytes);
         assert(iBodyBytes > 0);
         
-        if(clientAck)
-        {
-            pMessage->acknowledge();
-        }
+        //if(clientAck)
+        //{
+        //    pMessage->acknowledge();
+        //}
         
         aCommand.ParseFromArray(pucBodyBytes, iBodyBytes);
 
@@ -146,11 +183,11 @@ void Security::onMessage(const Message* pMessage)
             decaf::util::UUID aNewUUID = decaf::util::UUID::randomUUID();
             strUUID = aNewUUID.toString();
             // TODO: Make not super inefficient
-            SimpleProducer* pSimpleAsyncProducer = new SimpleProducer(strBrokerURI, pDestination);
+            SimpleProducer* pSimpleAsyncProducer = new SimpleProducer(strBrokerURI, pDestination, false, true);
             pSimpleAsyncProducer->Send(strUUID);
             delete pSimpleAsyncProducer;
             
-            Publisher.OnSecurityJoin(strUUID);
+            Publisher.OnSecurityRequestJoin(strUUID);
         }
 
         if (SecurityCommand_SecurityCommandType_LEAVE == aSecurityCommand.type())
@@ -158,9 +195,8 @@ void Security::onMessage(const Message* pMessage)
             assert(aSecurityCommand.has_uuid());
             strUUID = aSecurityCommand.uuid();
             
-            Publisher.OnSecurityLeave(strUUID);
+            Publisher.OnSecurityRequestLeave(strUUID);
         }
-
     }
     catch (CMSException& e)
     {
@@ -173,14 +209,45 @@ void Security::OnPlayerCreated(std::string& strUUID)
 {
     assert(strUUID.length() > 0);
     
-    //std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp";
-    //SimpleProducer* pSimpleProducer = m_mapUUIDToSimpleAsyncProducers[strUUID];
-    //assert(pSimpleProducer);
+    static std::string strPBBuffer = "";
     
-    //delete pSimpleProducer;
-    //pSimpleProducer = NULL;
+    Command* pCommand = new Command();
+    SecurityCommand* pSecurityCommand = pCommand->mutable_securitycommand();
+    assert(NULL != pSecurityCommand);
+    
+    pCommand->set_type(Command_CommandType_SECURITY);
+    pSecurityCommand->set_uuid(strUUID);
+    pSecurityCommand->set_type(SecurityCommand_SecurityCommandType_JOIN);
+    
+    pCommand->SerializeToString(&strPBBuffer);
+    const char* pucText = strPBBuffer.c_str();
+    unsigned long ulLength = strPBBuffer.length();
+    m_pSimpleAsyncProducer->Send((const unsigned char*)pucText, (int)ulLength);
+    
+    Publisher.OnSecurityHasJoined(strUUID);
 }
 
+void Security::OnPlayerDestroyed(std::string& strUUID)
+{
+    assert(strUUID.length() > 0);
+    
+    static std::string strPBBuffer = "";
+    
+    Command* pCommand = new Command();
+    SecurityCommand* pSecurityCommand = pCommand->mutable_securitycommand();
+    assert(NULL != pSecurityCommand);
+    
+    pCommand->set_type(Command_CommandType_SECURITY);
+    pSecurityCommand->set_uuid(strUUID);
+    pSecurityCommand->set_type(SecurityCommand_SecurityCommandType_LEAVE);
+    
+    pCommand->SerializeToString(&strPBBuffer);
+    const char* pucText = strPBBuffer.c_str();
+    unsigned long ulLength = strPBBuffer.length();
+    m_pSimpleAsyncProducer->Send((const unsigned char*)pucText, (int)ulLength);
+    
+    Publisher.OnSecurityHasLeft(strUUID);
+}
 
 // cms::AsyncCallback implementation
 void Security::onSuccess()

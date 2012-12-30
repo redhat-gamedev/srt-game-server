@@ -45,6 +45,22 @@ void Player::_Publisher::OnPlayerCreated(std::string& strUUID)
     }
 }
 
+void Player::_Publisher::OnPlayerDestroyed(std::string& strUUID)
+{
+    ICallbacks* pObjToCallback = NULL;
+    
+    //m_listSubscribersSwap = m_listSubscribers;
+    Clone(m_listSubscribersSwap);
+    while(!m_listSubscribersSwap.empty())
+    {
+        pObjToCallback = m_listSubscribersSwap.front();
+        m_listSubscribersSwap.pop_front();
+        assert(pObjToCallback);
+        pObjToCallback->OnPlayerDestroyed(strUUID);
+    }
+}
+
+
 // Constructor(s)
 Player::Player(const std::string& strUUID, B2DWorld* pB2DWorld) :
     m_strUUID(strUUID),
@@ -63,6 +79,8 @@ Player::Player(const std::string& strUUID, B2DWorld* pB2DWorld) :
 Player::~Player()
 {
     Input::Publisher.Detach(this);
+
+    Publisher.OnPlayerDestroyed(m_strUUID);
     
     m_pB2DWorld->world->DestroyBody(m_pb2bPod);
     m_pb2bPod = NULL;

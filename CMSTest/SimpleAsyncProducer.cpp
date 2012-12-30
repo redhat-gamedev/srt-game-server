@@ -78,7 +78,6 @@ SimpleProducer::SimpleProducer(const std::string& strBrokerURI,
     m_pMessageProducer = NULL;
     this->m_bUseTopic = bUseTopic;
     this->m_strBrokerURI = strBrokerURI;
-    //this->m_strDestinationURI = strDestinationURI;
     this->m_bClientAck = bClientAck;
     m_bOwnDestination = false;
     
@@ -90,7 +89,6 @@ SimpleProducer::SimpleProducer(const std::string& strBrokerURI,
     {
         e.printStackTrace();
     }
-
 }
 
 SimpleProducer::~SimpleProducer()

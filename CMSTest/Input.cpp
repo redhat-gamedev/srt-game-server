@@ -110,10 +110,10 @@ void Input::onMessage(const Message* pMessage)
             strNMSXGroupID = pBytesMessage->getStringProperty(strNMSXGroupIDPropertyName);
         }
         
-        if(clientAck)
-        {
-            pMessage->acknowledge();
-        }
+        //if(clientAck)
+        //{
+        //    pMessage->acknowledge();
+        //}
         
         //printf("Bytes Message #%d Received\n", count);
         //printf("Bytes Message #%d Received\n", count);

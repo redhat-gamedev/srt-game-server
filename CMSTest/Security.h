@@ -37,8 +37,10 @@ public:
     class ICallbacks
     {
     public:
-        virtual void OnSecurityJoin(std::string& strUUID) {};
-        virtual void OnSecurityLeave(std::string& strUUID) {};
+        virtual void OnSecurityRequestJoin(std::string& strUUID) {};
+        virtual void OnSecurityRequestLeave(std::string& strUUID) {};
+        virtual void OnSecurityHasJoined(std::string& strUUID) {};
+        virtual void OnSecurityHasLeft(std::string& strUUID) {};
     };
     
 protected:
@@ -49,12 +51,12 @@ protected:
     protected:
         std::list<ICallbacks*>          m_listSubscribersSwap;
     public:
-        virtual void OnSecurityJoin(std::string& strUUID);
-        virtual void OnSecurityLeave(std::string& strUUID);
+        virtual void OnSecurityRequestJoin(std::string& strUUID);
+        virtual void OnSecurityRequestLeave(std::string& strUUID);
+        virtual void OnSecurityHasJoined(std::string& strUUID);
+        virtual void OnSecurityHasLeft(std::string& strUUID);
     };
     
-    //std::map<std::string, const cms::Destination*>        m_mapUUIDToReplyDestinations;
-    //std::map<std::string, std::string>        m_mapUUIDToReplyDestinations;
     std::map<std::string, std::string>        m_mapUUIDToSimpleAsyncProducers;
     
 public:
@@ -77,6 +79,7 @@ public:
     
     // Player::ICallbacks implementation
     void OnPlayerCreated(std::string& strUUID);
+    void OnPlayerDestroyed(std::string& strUUID);
     
     // cms::AsyncCallback implementation
     void onSuccess();

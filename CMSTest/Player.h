@@ -30,6 +30,7 @@ public:
     {
     public:
         virtual void OnPlayerCreated(std::string& strUUID) {};
+        virtual void OnPlayerDestroyed(std::string& strUUID) {};
     };
     
 protected:
@@ -41,6 +42,7 @@ protected:
         std::list<ICallbacks*>          m_listSubscribersSwap;
     public:
         virtual void OnPlayerCreated(std::string& strUUID);
+        virtual void OnPlayerDestroyed(std::string& strUUID);
     };
 private:
     

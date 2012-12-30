@@ -103,9 +103,9 @@ void Server::Setup()
     m_pB2DWorld = new B2DWorld();
     //m_pB2DWorld->CreateBodiesAndShapes();
 
-    m_pSimulationProducer = new SimpleProducer(strBrokerURI, strWorldSimulationURI, useTopics);
-    m_pHeartbeatProducer = new SimpleProducer(strBrokerURI, strHeartbeatURI, useTopics);
-    m_pAddressbookProducer = new SimpleProducer(strBrokerURI, strAddressURI, useTopics);
+    m_pSimulationProducer = new SimpleProducer(strBrokerURI, strWorldSimulationURI, true);
+    m_pHeartbeatProducer = new SimpleProducer(strBrokerURI, strHeartbeatURI, true);
+    m_pAddressbookProducer = new SimpleProducer(strBrokerURI, strAddressURI, true);
     //m_pCommandConsumer = new SimpleAsyncConsumer(strBrokerURI, strInputURI, useTopics, clientAck);
     
     m_pHeartbeat = new Heartbeat();
@@ -234,7 +234,6 @@ void Server::b2WorldToPbWorld(b2World* pb2World, PbWorld*& pPbWorldDefault, std:
         
         pstrUUID = (std::string*)pBody->GetUserData();
         assert(NULL != pstrUUID);
-//        pPbBody->mutable_unknown_fields()->AddLengthDelimited(0, *pstrUUID);        
         pPbBody->set_uuid(*pstrUUID);
         
         pFixtureList = pBody->GetFixtureList();
@@ -279,39 +278,12 @@ void Server::Run()
     //m_ptAddressbook->schedule(m_pAddressbook, 0, 2000);
 }
 
-// B2DWorld::ICallbacks implementation
-//void Server::OnB2DWorldUpdate(b2Vec2& b2vNewPosition, float32& fNewAngle)
-//{
-//    assert(m_pSimulationProducer);
-//    
-//    static char m_szBuf[0xFF];
-//    static std::string strText = "";
-//    
-//    try
-//    {
-//        memset(m_szBuf, 0, sizeof(m_szBuf));
-//        //sprintf(m_szBuf, "%4.2f %4.2f %4.2f", position.x, position.y, angle);
-//        sprintf(m_szBuf, "%4.2f", b2vNewPosition.y);
-//        //printf("%s\n", m_szBuf);
-//        strText = m_szBuf;
-//
-//        m_pSimulationProducer->Send(strText);
-//        strText.clear();
-//    }
-//    catch ( CMSException& e )
-//    {
-//        e.printStackTrace();
-//    }
-//}
-
 void Server::OnB2DWorldUpdate(b2World* pWorld)
 {
     assert(pWorld);
     assert(m_pSimulationProducer);
     
     static std::string strPBBuffer = "";
-    //const PbWorld& aPbWorldDefault = PbWorld::default_instance();
-    //PbWorld& aPbWorldDefault = PbWorld::default_instance();
     PbWorld* pPbWorldDefault = new PbWorld();
     
     try
@@ -443,13 +415,10 @@ void Server::OnPerson(tutorial::Person* person)
 }
 
 // Security::ICallbacks implementation
-void Server::OnSecurityJoin(std::string& strUUID)
+void Server::OnSecurityRequestJoin(std::string& strUUID)
 {
     std::string     strName = "B2DWorldThread";
 
-//    m_pPlayer = new Player(strUUID, m_pB2DWorld);
-//    m_pB2DWorld->AddPlayer(m_pPlayer);
-    
     m_pB2DWorld->AddPlayer(strUUID);
     
     if (NULL == m_pB2DWorldThread)
@@ -460,7 +429,7 @@ void Server::OnSecurityJoin(std::string& strUUID)
     }
 }
 
-void Server::OnSecurityLeave(std::string& strUUID)
+void Server::OnSecurityRequestLeave(std::string& strUUID)
 {
     assert(m_pB2DWorld);
     

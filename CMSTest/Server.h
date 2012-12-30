@@ -95,9 +95,7 @@ public:
     // Method(s)
     void Run();
     
-    
     // B2DWorld::ICallbacks implementation
-    //void OnB2DWorldUpdate(b2Vec2& b2vNewPosition, float32& fNewAngle);
     void OnB2DWorldUpdate(b2World* pWorld);
     void OnB2DWorldBodyUpdate(b2Body* pBody);
     
@@ -108,8 +106,8 @@ public:
     void OnPerson(tutorial::Person* person);
 
     // Security::ICallbacks implementation
-    void OnSecurityJoin(std::string& strUUID);
-    void OnSecurityLeave(std::string& strUUID);
+    void OnSecurityRequestJoin(std::string& strUUID);
+    void OnSecurityRequestLeave(std::string& strUUID);
 };
 
 #endif /* defined(__CMSTest__Server__) */
