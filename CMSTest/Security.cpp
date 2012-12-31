@@ -113,11 +113,11 @@ Security::Security() :
     m_pSimpleAsyncConsumer(NULL),
     m_pSimpleAsyncProducer(NULL)
 {
-    bool            useTopics = false;
-    bool            clientAck = false;
+//    bool            useTopics = false;
+//    bool            clientAck = false;
     std::string     strSecurityInURI = "AAS.IN";
     std::string     strSecurityOutURI = "AAS.OUT";
-    std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp";
+    std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp&keepAlive=true";
 
     std::cout << "Security::Security()..." << std::endl;
     
@@ -150,7 +150,7 @@ void Security::onMessage(const Message* pMessage)
     assert(pMessage);
     
     static int              count = 0;
-    bool                    clientAck = false;
+//    bool                    clientAck = false;
     Command                 aCommand;
     std::string             strUUID = "";
     std::string             strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp";

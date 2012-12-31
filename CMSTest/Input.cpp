@@ -64,7 +64,7 @@ Input::Input() :
     bool            useTopics = false;
     bool            clientAck = false;
     std::string     strInputURI = "CLIENT.INPUT";
-    std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp";
+    std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp&keepAlive=true";
 
     std::cout << "Input::Input()..." << std::endl;
     
@@ -109,20 +109,13 @@ void Input::onMessage(const Message* pMessage)
         {
             strNMSXGroupID = pBytesMessage->getStringProperty(strNMSXGroupIDPropertyName);
         }
-        
         //if(clientAck)
         //{
         //    pMessage->acknowledge();
         //}
         
-        //printf("Bytes Message #%d Received\n", count);
-        //printf("Bytes Message #%d Received\n", count);
         const PbVec2& pbv2Move = aDualStick.pbv2move();
         const PbVec2& pbv2Shoot = aDualStick.pbv2shoot();
-        
-        //printf("h[%4.4f] v[%4.4f]\n", pbv2Move.x(), pbv2Move.y());
-        //printf("fh[%4.4f] fv[%4.4f]\n", pbv2Shoot.x(), pbv2Shoot.y());
-        
         const std::string& strUUID = aDualStick.uuid();
         
         Publisher.OnDualStick(strUUID, pbv2Move, pbv2Shoot);
