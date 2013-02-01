@@ -178,6 +178,7 @@ void Security::onMessage(const Message* pMessage)
         if (SecurityCommand_SecurityCommandType_JOIN == aSecurityCommand.type())
         {
             // Join stuff
+            // don't forget to ->clone() the reply to destination if lifetime is impt
             const cms::Destination* pDestination = pBytesMessage->getCMSReplyTo();
             assert(pDestination);
             decaf::util::UUID aNewUUID = decaf::util::UUID::randomUUID();
