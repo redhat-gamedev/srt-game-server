@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CC0F90D817179815006B9474 /* libactivemq-cpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0F90D7171797FF006B9474 /* libactivemq-cpp.a */; };
+		CC0F90DC17179AF3006B9474 /* libssl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0F90DB17179AF3006B9474 /* libssl.dylib */; };
+		CC0F90DE17179B7A006B9474 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0F90DD17179B7A006B9474 /* libcrypto.dylib */; };
 		CC3C8F8C167CC3F80084CBE8 /* Security.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC3C8F8A167CC3F80084CBE8 /* Security.cpp */; };
 		CC3C8F8F167CEF080084CBE8 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC3C8F8D167CEF070084CBE8 /* Player.cpp */; };
 		CC488D27164EB5FD005078C3 /* libBox2D.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC488D20164EB5DE005078C3 /* libBox2D.a */; };
@@ -23,7 +26,6 @@
 		CC68EAB7163DB42E00D225C2 /* SimpleAsyncProducer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC68EAB5163DB42E00D225C2 /* SimpleAsyncProducer.cpp */; };
 		CCA2F45C166AA72C00D62F5C /* box2d.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CC4FECE31662A4A4004810CC /* box2d.pb.cc */; };
 		CCA4C32C1687B45D006BAC1D /* xdispatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA4C32B1687B45D006BAC1D /* xdispatch.framework */; };
-		CCE9086F16515D64005F2E72 /* libactivemq-cpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE9086E16515D33005F2E72 /* libactivemq-cpp.a */; };
 		CCE9087216516221005F2E72 /* libapr-1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE9087016516221005F2E72 /* libapr-1.dylib */; };
 		CCE9087316516221005F2E72 /* libaprutil-1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE9087116516221005F2E72 /* libaprutil-1.dylib */; };
 		CCE90879165165F8005F2E72 /* Server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE90877165165F8005F2E72 /* Server.cpp */; };
@@ -34,6 +36,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		CC0F90D6171797FF006B9474 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CC0F90CF171797FE006B9474 /* activemq-cpp.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CC489773164F15FF005078C3;
+			remoteInfo = "activemq-cpp";
+		};
 		CC488D1F164EB5DE005078C3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CCFB9DDC1640ABB900F6DBA2 /* Box2D.xcodeproj */;
@@ -69,13 +78,6 @@
 			remoteGlobalIDString = CC22AEFC16629B6C00E22E62;
 			remoteInfo = ProtocolBuffers;
 		};
-		CCE9086D16515D33005F2E72 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CCE9086616515D32005F2E72 /* activemq-cpp.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CC489773164F15FF005078C3;
-			remoteInfo = "activemq-cpp";
-		};
 		CCE908851651707A005F2E72 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CCE9087A16517079005F2E72 /* Phoenix.xcodeproj */;
@@ -106,6 +108,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CC0F90CF171797FE006B9474 /* activemq-cpp.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "activemq-cpp.xcodeproj"; path = "../ThirdParty/activemq-cpp/activemq-cpp/activemq-cpp.xcodeproj"; sourceTree = "<group>"; };
+		CC0F90DB17179AF3006B9474 /* libssl.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libssl.dylib; path = usr/lib/libssl.dylib; sourceTree = SDKROOT; };
+		CC0F90DD17179B7A006B9474 /* libcrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.dylib; path = usr/lib/libcrypto.dylib; sourceTree = SDKROOT; };
 		CC3C8F8A167CC3F80084CBE8 /* Security.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Security.cpp; sourceTree = "<group>"; };
 		CC3C8F8B167CC3F80084CBE8 /* Security.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Security.h; sourceTree = "<group>"; };
 		CC3C8F8D167CEF070084CBE8 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
@@ -134,7 +139,6 @@
 		CC68EAB5163DB42E00D225C2 /* SimpleAsyncProducer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleAsyncProducer.cpp; sourceTree = "<group>"; };
 		CC68EAB6163DB42E00D225C2 /* SimpleAsyncProducer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleAsyncProducer.h; sourceTree = "<group>"; };
 		CCA4C32B1687B45D006BAC1D /* xdispatch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = xdispatch.framework; path = ../ThirdParty/xdispatch/build/bin/Debug/xdispatch.framework; sourceTree = "<group>"; };
-		CCE9086616515D32005F2E72 /* activemq-cpp.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "activemq-cpp.xcodeproj"; path = "../ThirdParty/activemq-cpp/activemq-cpp/activemq-cpp/activemq-cpp.xcodeproj"; sourceTree = "<group>"; };
 		CCE9087016516221005F2E72 /* libapr-1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libapr-1.dylib"; path = "usr/lib/libapr-1.dylib"; sourceTree = SDKROOT; };
 		CCE9087116516221005F2E72 /* libaprutil-1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libaprutil-1.dylib"; path = "usr/lib/libaprutil-1.dylib"; sourceTree = SDKROOT; };
 		CCE90877165165F8005F2E72 /* Server.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Server.cpp; sourceTree = "<group>"; };
@@ -154,12 +158,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC0F90D817179815006B9474 /* libactivemq-cpp.a in Frameworks */,
 				CCE9087216516221005F2E72 /* libapr-1.dylib in Frameworks */,
 				CCE9087316516221005F2E72 /* libaprutil-1.dylib in Frameworks */,
-				CCE9086F16515D64005F2E72 /* libactivemq-cpp.a in Frameworks */,
 				CC488D27164EB5FD005078C3 /* libBox2D.a in Frameworks */,
+				CC0F90DE17179B7A006B9474 /* libcrypto.dylib in Frameworks */,
 				CCE9089216517138005F2E72 /* libPhoenix-osx.a in Frameworks */,
 				CC4FECE11662A3AA004810CC /* libProtocolBuffers.a in Frameworks */,
+				CC0F90DC17179AF3006B9474 /* libssl.dylib in Frameworks */,
 				CCA4C32C1687B45D006BAC1D /* xdispatch.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -167,6 +173,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CC0F90D0171797FE006B9474 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CC0F90D7171797FF006B9474 /* libactivemq-cpp.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		CC19F7A1168CCC9E007B694E /* Proto */ = {
 			isa = PBXGroup;
 			children = (
@@ -216,8 +230,8 @@
 		CC68EA86163DA07400D225C2 = {
 			isa = PBXGroup;
 			children = (
+				CC0F90CF171797FE006B9474 /* activemq-cpp.xcodeproj */,
 				CC4FECD81662A399004810CC /* ProtocolBuffers.xcodeproj */,
-				CCE9086616515D32005F2E72 /* activemq-cpp.xcodeproj */,
 				CCFB9DDC1640ABB900F6DBA2 /* Box2D.xcodeproj */,
 				CCE9087A16517079005F2E72 /* Phoenix.xcodeproj */,
 				CC68EAB1163DB32600D225C2 /* Libraries */,
@@ -266,19 +280,13 @@
 		CC68EAB1163DB32600D225C2 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				CC0F90DD17179B7A006B9474 /* libcrypto.dylib */,
+				CC0F90DB17179AF3006B9474 /* libssl.dylib */,
 				CCA4C32B1687B45D006BAC1D /* xdispatch.framework */,
 				CCE9087016516221005F2E72 /* libapr-1.dylib */,
 				CCE9087116516221005F2E72 /* libaprutil-1.dylib */,
 			);
 			name = Libraries;
-			sourceTree = "<group>";
-		};
-		CCE9086716515D32005F2E72 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				CCE9086E16515D33005F2E72 /* libactivemq-cpp.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		CCE9087B16517079005F2E72 /* Products */ = {
@@ -331,8 +339,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = CCE9086716515D32005F2E72 /* Products */;
-					ProjectRef = CCE9086616515D32005F2E72 /* activemq-cpp.xcodeproj */;
+					ProductGroup = CC0F90D0171797FE006B9474 /* Products */;
+					ProjectRef = CC0F90CF171797FE006B9474 /* activemq-cpp.xcodeproj */;
 				},
 				{
 					ProductGroup = CC488D19164EB5DE005078C3 /* Products */;
@@ -355,6 +363,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		CC0F90D7171797FF006B9474 /* libactivemq-cpp.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = "libactivemq-cpp.a";
+			remoteRef = CC0F90D6171797FF006B9474 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		CC488D20164EB5DE005078C3 /* libBox2D.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -388,13 +403,6 @@
 			fileType = "compiled.mach-o.dylib";
 			path = libProtocolBuffers.a;
 			remoteRef = CC4FECDF1662A39A004810CC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CCE9086E16515D33005F2E72 /* libactivemq-cpp.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = "compiled.mach-o.dylib";
-			path = "libactivemq-cpp.a";
-			remoteRef = CCE9086D16515D33005F2E72 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		CCE908861651707A005F2E72 /* libPhoenix.a */ = {
