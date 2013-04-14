@@ -87,7 +87,7 @@ void Input::onMessage(const Message* pMessage)
     assert(pMessage);
     
     static int count = 0;
-    bool            clientAck = false;
+    //bool            clientAck = false;
     PbDualStick aDualStick;
     std::string     strNMSXGroupIDPropertyName = "NMSXGroupID";
     std::string     strNMSXGroupID = "";

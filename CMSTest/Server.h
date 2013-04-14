@@ -70,8 +70,8 @@ protected:
     Thread*                 m_pB2DWorldThread;
     SimpleAsyncConsumer*    m_pCommandConsumer;
     B2DWorld*               m_pB2DWorld;
-    Timer*                  m_pTimer;
-    Timer*                  m_ptAddressbook;
+    decaf::util::Timer*     m_pTimer;
+    decaf::util::Timer*     m_ptAddressbook;
     Heartbeat*              m_pHeartbeat;
     Addressbook*            m_pAddressbook;
     Input*                  m_pInput;

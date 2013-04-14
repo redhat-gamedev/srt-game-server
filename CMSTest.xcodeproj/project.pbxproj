@@ -17,7 +17,6 @@
 		CC52E0B31675058400D47C43 /* DualStick.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CC52E0B01675058400D47C43 /* DualStick.pb.cc */; };
 		CC52E0B71675245600D47C43 /* Input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC52E0B51675245600D47C43 /* Input.cpp */; };
 		CC57A5C7168F6E5A00B43FAA /* Command.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CC57A5C4168F6E5A00B43FAA /* Command.pb.cc */; };
-		CC57A5C8168F6E5A00B43FAA /* Command.proto in Sources */ = {isa = PBXBuildFile; fileRef = CC57A5C6168F6E5A00B43FAA /* Command.proto */; };
 		CC67E1E0166A4F6500BCB047 /* addressbook.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CC67E1DC166A4F6500BCB047 /* addressbook.pb.cc */; };
 		CC67E1E4166A524400BCB047 /* Addressbook.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC67E1E2166A524300BCB047 /* Addressbook.cpp */; };
 		CC68EA96163DA07400D225C2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC68EA95163DA07400D225C2 /* main.cpp */; };
@@ -441,7 +440,6 @@
 				CC3C8F8C167CC3F80084CBE8 /* Security.cpp in Sources */,
 				CC3C8F8F167CEF080084CBE8 /* Player.cpp in Sources */,
 				CC57A5C7168F6E5A00B43FAA /* Command.pb.cc in Sources */,
-				CC57A5C8168F6E5A00B43FAA /* Command.proto in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

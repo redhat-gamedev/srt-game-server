@@ -214,6 +214,7 @@ void Server::b2WorldToPbWorld(b2World* pb2World, PbWorld*& pPbWorldDefault, std:
         assert(iPostCount > iPreCount);
         
         pPbBody->set_active(pBody->IsActive());
+        pPbBody->set_bullet(pBody->IsBullet());
         //aPbBodyType = DYNAMIC;
         pPbBody->set_type(DYNAMIC);
         ppbv2Position = new PbVec2();

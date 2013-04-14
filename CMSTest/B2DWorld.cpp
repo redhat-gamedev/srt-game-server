@@ -142,12 +142,6 @@ void B2DWorld::run()
         // It is generally best to keep the time step and iterations fixed.
         world->Step(timeStep, velocityIterations, positionIterations);
 
-//        b2Body* pBodyList = world->GetBodyList();
-//        for (b2Body* pBody = pBodyList; pBody; pBody = pBody->GetNext())
-//		{
-//            Publisher.OnB2DWorldBodyUpdate(pBody);
-//		}
-
         Publisher.OnB2DWorldUpdate(world);
         
         decaf::lang::Thread::currentThread()->sleep(15);

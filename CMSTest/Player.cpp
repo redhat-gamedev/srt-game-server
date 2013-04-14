@@ -7,8 +7,8 @@
 //
 
 #include "Player.h"
-//#include "../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include "B2DWorld.h"
+//#include "../../Libraries/Phoenix/source/Timer.h"
 #include <assert.h>
 
 Player::_Publisher                 Player::Publisher;
@@ -64,10 +64,12 @@ void Player::_Publisher::OnPlayerDestroyed(std::string& strUUID)
 // Constructor(s)
 Player::Player(const std::string& strUUID, B2DWorld* pB2DWorld) :
     m_strUUID(strUUID),
-    m_pB2DWorld(pB2DWorld)
+    m_pB2DWorld(pB2DWorld)//,
+    //m_pBulletTimer(NULL)
 {
     assert(m_pB2DWorld);
     
+    //m_pBulletTimer = new Timer(20000, Timer::STARTEXPIRED);
     CreatePod();
     
     Publisher.OnPlayerCreated(m_strUUID);
@@ -82,8 +84,20 @@ Player::~Player()
 
     Publisher.OnPlayerDestroyed(m_strUUID);
     
+    m_b2bBulletQueue.lock();
+    b2Body* pb2bBullet = NULL;
+    while (!(m_b2bBulletQueue.empty()))
+    {
+        pb2bBullet = m_b2bBulletQueue.pop();
+        m_pB2DWorld->world->DestroyBody(pb2bBullet);
+    }
+    m_b2bBulletQueue.unlock();
+    
     m_pB2DWorld->world->DestroyBody(m_pb2bPod);
     m_pb2bPod = NULL;
+    
+    //delete m_pBulletTimer;
+    //m_pBulletTimer = NULL;
 }
 
 void Player::CreatePod()
@@ -97,29 +111,65 @@ void Player::CreatePod()
 	bodyDef.type = b2_dynamicBody;
 	bodyDef.position.Set(0.0f, 0.0f);
 
-	// Set the box density to be non-zero, so it will be dynamic.
-	fixtureDef.density = 1.0f;
+    // Set the size of our shape
+	aB2CircleShape.m_radius = 1.0f;
+
+    // Set the fixture and use the shape
+    fixtureDef.density = 1.0f;
 	fixtureDef.friction = 0.3f;
     fixtureDef.restitution = 0.3f;
-    
-//    // Define another box shape for our dynamic body.
-//	dynamicBox.SetAsBox(4.0f, 4.0f);
-//	// Define the dynamic body fixture.
-//	fixtureDef.shape = &dynamicBox;
-
-    aB2CircleShape.m_radius = 1.0f;
+    fixtureDef.filter.groupIndex = -2;    
     fixtureDef.shape = &aB2CircleShape;
 
     // call the body factory.
     m_pb2bPod = m_pB2DWorld->world->CreateBody(&bodyDef);
 	m_pb2bPod->CreateFixture(&fixtureDef);
-    
     m_pb2bPod->SetUserData(&m_strUUID);
+}
+
+void Player::CreateBullet(b2Vec2& b2v2Bullet)
+{
+    b2BodyDef       bodyDef;
+    b2CircleShape   aB2CircleShape;
+    b2FixtureDef    fixtureDef;
+    b2Body*         pb2bBullet = NULL;
+    
+	// Define the dynamic body. We set its position
+	bodyDef.type = b2_dynamicBody;
+    bodyDef.bullet = true;
+    bodyDef.allowSleep = false;
+	bodyDef.position.Set(0.0f, 0.0f);
+    
+    // Set the size of our shape
+	aB2CircleShape.m_radius = 0.25f;
+    
+    // Set the fixture and use the shape
+    fixtureDef.density = 0.1f;
+	fixtureDef.friction = 0.1f;
+    fixtureDef.restitution = 0.1f;
+    fixtureDef.filter.groupIndex = -2;
+    fixtureDef.shape = &aB2CircleShape;
+    
+    // call the body factory.
+    pb2bBullet = m_pB2DWorld->world->CreateBody(&bodyDef);
+	pb2bBullet->CreateFixture(&fixtureDef);
+    pb2bBullet->SetUserData(&m_strUUID);
+    
+    m_b2bBulletQueue.lock();
+    m_b2bBulletQueue.push(pb2bBullet);
+    m_b2bBulletQueue.unlock();
+    
+    b2Vec2 b2v2Force = b2v2Bullet;
+    b2v2Force.x *= 10.0f;
+    b2v2Force.y *= 10.0f;
+    pb2bBullet->ApplyForceToCenter(b2v2Force, false);
 }
 
 // Method(s)
 void Player::Update()
 {
+    static bool bFirstTime = true;
+    
     m_b2v2MoveQueue.lock();
     while (!(m_b2v2MoveQueue.empty()))
     {
@@ -129,6 +179,21 @@ void Player::Update()
         m_pb2bPod->ApplyForceToCenter(ab2Vec2Move, true);
     }
     m_b2v2MoveQueue.unlock();
+    
+    m_b2v2ShootQueue.lock();
+    while (!(m_b2v2ShootQueue.empty()))
+    {
+        b2Vec2 ab2Vec2Shoot = m_b2v2ShootQueue.pop();
+        //if (m_pBulletTimer->Status() == Timer::EXPIRED)
+        if (bFirstTime)
+        {
+            bFirstTime = false;
+            std::cout << "Creating Bullet" << std::endl;
+            CreateBullet(ab2Vec2Shoot);
+            //m_pBulletTimer->Restart();
+        }
+    }
+    m_b2v2ShootQueue.unlock();
 }
 
 bool Player::ThisUUIDIsAMatch(const std::string& strUUID)
@@ -158,4 +223,12 @@ void Player::OnDualStick(const std::string& strUUID, const box2d::PbVec2& pbv2Mo
     m_b2v2MoveQueue.lock();
     m_b2v2MoveQueue.push(b2v2Move);
     m_b2v2MoveQueue.unlock();
+
+    if (((b2v2Shoot.x < 0.0f) || (b2v2Shoot.x > 0.0f)) ||
+        ((b2v2Shoot.y < 0.0f) || (b2v2Shoot.y > 0.0f)))
+    {
+        m_b2v2ShootQueue.lock();
+        m_b2v2ShootQueue.push(b2v2Shoot);
+        m_b2v2ShootQueue.unlock();
+    }
 }
