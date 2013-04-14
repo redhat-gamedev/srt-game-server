@@ -90,6 +90,7 @@ void Player::CreatePod()
 {
     b2BodyDef       bodyDef;
     b2PolygonShape  dynamicBox;
+    b2CircleShape   aB2CircleShape;
     b2FixtureDef    fixtureDef;
     
 	// Define the dynamic body. We set its position
@@ -100,10 +101,14 @@ void Player::CreatePod()
 	fixtureDef.density = 1.0f;
 	fixtureDef.friction = 0.3f;
     fixtureDef.restitution = 0.3f;
-    // Define another box shape for our dynamic body.
-	dynamicBox.SetAsBox(4.0f, 4.0f);
-	// Define the dynamic body fixture.
-	fixtureDef.shape = &dynamicBox;
+    
+//    // Define another box shape for our dynamic body.
+//	dynamicBox.SetAsBox(4.0f, 4.0f);
+//	// Define the dynamic body fixture.
+//	fixtureDef.shape = &dynamicBox;
+
+    aB2CircleShape.m_radius = 1.0f;
+    fixtureDef.shape = &aB2CircleShape;
 
     // call the body factory.
     m_pb2bPod = m_pB2DWorld->world->CreateBody(&bodyDef);
@@ -119,8 +124,8 @@ void Player::Update()
     while (!(m_b2v2MoveQueue.empty()))
     {
         b2Vec2 ab2Vec2Move = m_b2v2MoveQueue.pop();
-        ab2Vec2Move.x *= 1000.0f;
-        ab2Vec2Move.y *= 1000.0f;
+        ab2Vec2Move.x *= 50.0f;
+        ab2Vec2Move.y *= 50.0f;
         m_pb2bPod->ApplyForceToCenter(ab2Vec2Move, true);
     }
     m_b2v2MoveQueue.unlock();

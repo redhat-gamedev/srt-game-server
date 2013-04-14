@@ -81,7 +81,7 @@ Server::~Server()
 // Helper(s)
 void Server::Setup()
 {
-    bool            useTopics = false;
+    //bool            useTopics = false;
     //bool            clientAck = false;
     std::string     strWorldSimulationURI = "WORLD.SIMULATION";
     std::string     strHeartbeatURI = "HEARTBEAT";
