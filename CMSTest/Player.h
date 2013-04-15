@@ -20,7 +20,7 @@ struct b2FixtureDef;
 class B2DWorld;
 class b2Body;
 class b2PolygonShape;
-//class Timer;
+class Timer;
 
 
 class Player :
@@ -48,13 +48,13 @@ protected:
 private:
     
 protected:
+    ::Timer*          m_pBulletTimer;
+    
     std::string     m_strUUID;
     
     b2Body*         m_pb2bPod;
     B2DWorld*       m_pB2DWorld;
 
-    //Timer*          m_pBulletTimer;
-    
     decaf::util::StlQueue<b2Vec2>       m_b2v2MoveQueue;
     decaf::util::StlQueue<b2Vec2>       m_b2v2MoveSwapQueue;
 
@@ -63,7 +63,7 @@ protected:
 
     decaf::util::StlQueue<b2Body*>      m_b2bBulletQueue;
     //decaf::util::StlQueue<b2Body*>      m_b2bBulletSwapQueue;
-    
+
     // Helper(s)
     void CreatePod();
     void CreateBullet(b2Vec2& b2v2Bullet);

@@ -8,7 +8,7 @@
 
 #include "Player.h"
 #include "B2DWorld.h"
-//#include "../../Libraries/Phoenix/source/Timer.h"
+#include "../../Libraries/Phoenix/source/Timer.h"
 #include <assert.h>
 
 Player::_Publisher                 Player::Publisher;
@@ -64,12 +64,12 @@ void Player::_Publisher::OnPlayerDestroyed(std::string& strUUID)
 // Constructor(s)
 Player::Player(const std::string& strUUID, B2DWorld* pB2DWorld) :
     m_strUUID(strUUID),
-    m_pB2DWorld(pB2DWorld)//,
-    //m_pBulletTimer(NULL)
+    m_pB2DWorld(pB2DWorld),
+    m_pBulletTimer(NULL)
 {
     assert(m_pB2DWorld);
     
-    //m_pBulletTimer = new Timer(20000, Timer::STARTEXPIRED);
+    m_pBulletTimer = new ::Timer(20000, ::Timer::STARTEXPIRED);
     CreatePod();
     
     Publisher.OnPlayerCreated(m_strUUID);
@@ -96,8 +96,8 @@ Player::~Player()
     m_pB2DWorld->world->DestroyBody(m_pb2bPod);
     m_pb2bPod = NULL;
     
-    //delete m_pBulletTimer;
-    //m_pBulletTimer = NULL;
+    delete m_pBulletTimer;
+    m_pBulletTimer = NULL;
 }
 
 void Player::CreatePod()
@@ -184,13 +184,13 @@ void Player::Update()
     while (!(m_b2v2ShootQueue.empty()))
     {
         b2Vec2 ab2Vec2Shoot = m_b2v2ShootQueue.pop();
-        //if (m_pBulletTimer->Status() == Timer::EXPIRED)
-        if (bFirstTime)
+        if (m_pBulletTimer->Status() == ::Timer::EXPIRED)
+        //if (bFirstTime)
         {
             bFirstTime = false;
             std::cout << "Creating Bullet" << std::endl;
             CreateBullet(ab2Vec2Shoot);
-            //m_pBulletTimer->Restart();
+            m_pBulletTimer->Restart();
         }
     }
     m_b2v2ShootQueue.unlock();
