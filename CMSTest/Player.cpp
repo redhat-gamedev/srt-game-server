@@ -146,12 +146,14 @@ void Player::CreateBullet(b2Vec2& b2v2Bullet)
     b2CircleShape   aB2CircleShape;
     b2FixtureDef    fixtureDef;
     b2Body*         pb2bBullet = NULL;
+    const b2Vec2&         b2v2PlayerPosition = m_pb2bPod->GetPosition();
     
 	// Define the dynamic body. We set its position
 	bodyDef.type = b2_dynamicBody;
     bodyDef.bullet = true;
     bodyDef.allowSleep = false;
-	bodyDef.position.Set(0.0f, 0.0f);
+    
+	bodyDef.position.Set(b2v2PlayerPosition.x, b2v2PlayerPosition.y);
     
     // Set the size of our shape
 	aB2CircleShape.m_radius = 0.25f;
