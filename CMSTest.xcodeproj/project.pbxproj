@@ -16,15 +16,18 @@
 		CC4DC150171CC64A00F581A8 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC4DC14E171CC64A00F581A8 /* Timer.cpp */; };
 		CC4DC154171CDB3D00F581A8 /* UserData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC4DC152171CDB3D00F581A8 /* UserData.cpp */; };
 		CC4FECE11662A3AA004810CC /* libProtocolBuffers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC4FECE01662A39A004810CC /* libProtocolBuffers.a */; };
-		CC52E0B31675058400D47C43 /* DualStick.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CC52E0B01675058400D47C43 /* DualStick.pb.cc */; };
 		CC52E0B71675245600D47C43 /* Input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC52E0B51675245600D47C43 /* Input.cpp */; };
-		CC57A5C7168F6E5A00B43FAA /* Command.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CC57A5C4168F6E5A00B43FAA /* Command.pb.cc */; };
 		CC68EA96163DA07400D225C2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC68EA95163DA07400D225C2 /* main.cpp */; };
 		CC68EA98163DA07400D225C2 /* CMSTest.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = CC68EA97163DA07400D225C2 /* CMSTest.1 */; };
 		CC68EAB4163DB36800D225C2 /* SimpleAsyncConsumer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC68EAB2163DB36800D225C2 /* SimpleAsyncConsumer.cpp */; };
 		CC68EAB7163DB42E00D225C2 /* SimpleAsyncProducer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC68EAB5163DB42E00D225C2 /* SimpleAsyncProducer.cpp */; };
-		CCA2F45C166AA72C00D62F5C /* box2d.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CC4FECE31662A4A4004810CC /* box2d.pb.cc */; };
 		CCA4C32C1687B45D006BAC1D /* xdispatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA4C32B1687B45D006BAC1D /* xdispatch.framework */; };
+		CCE449C217230E21002A1937 /* box2d.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CCE449B917230E21002A1937 /* box2d.pb.cc */; };
+		CCE449C317230E21002A1937 /* box2d.proto in Sources */ = {isa = PBXBuildFile; fileRef = CCE449BB17230E21002A1937 /* box2d.proto */; };
+		CCE449C417230E21002A1937 /* Command.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CCE449BC17230E21002A1937 /* Command.pb.cc */; };
+		CCE449C517230E21002A1937 /* Command.proto in Sources */ = {isa = PBXBuildFile; fileRef = CCE449BE17230E21002A1937 /* Command.proto */; };
+		CCE449C617230E21002A1937 /* DualStick.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CCE449BF17230E21002A1937 /* DualStick.pb.cc */; };
+		CCE449C717230E21002A1937 /* DualStick.proto in Sources */ = {isa = PBXBuildFile; fileRef = CCE449C117230E21002A1937 /* DualStick.proto */; };
 		CCE9087216516221005F2E72 /* libapr-1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE9087016516221005F2E72 /* libapr-1.dylib */; };
 		CCE9087316516221005F2E72 /* libaprutil-1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE9087116516221005F2E72 /* libaprutil-1.dylib */; };
 		CCE90879165165F8005F2E72 /* Server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE90877165165F8005F2E72 /* Server.cpp */; };
@@ -105,17 +108,8 @@
 		CC4DC152171CDB3D00F581A8 /* UserData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UserData.cpp; sourceTree = "<group>"; };
 		CC4DC153171CDB3D00F581A8 /* UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserData.h; sourceTree = "<group>"; };
 		CC4FECD81662A399004810CC /* ProtocolBuffers.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ProtocolBuffers.xcodeproj; path = ../ThirdParty/protobuf/ProtocolBuffers/ProtocolBuffers.xcodeproj; sourceTree = "<group>"; };
-		CC4FECE31662A4A4004810CC /* box2d.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = box2d.pb.cc; sourceTree = "<group>"; };
-		CC4FECE41662A4A4004810CC /* box2d.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = box2d.pb.h; sourceTree = "<group>"; };
-		CC4FECE51662A4A4004810CC /* box2d.proto */ = {isa = PBXFileReference; explicitFileType = sourcecode.java; fileEncoding = 4; path = box2d.proto; sourceTree = "<group>"; };
-		CC52E0B01675058400D47C43 /* DualStick.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DualStick.pb.cc; sourceTree = "<group>"; };
-		CC52E0B11675058400D47C43 /* DualStick.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DualStick.pb.h; sourceTree = "<group>"; };
-		CC52E0B21675058400D47C43 /* DualStick.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; path = DualStick.proto; sourceTree = "<group>"; };
 		CC52E0B51675245600D47C43 /* Input.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Input.cpp; sourceTree = "<group>"; };
 		CC52E0B61675245600D47C43 /* Input.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Input.h; sourceTree = "<group>"; };
-		CC57A5C4168F6E5A00B43FAA /* Command.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Command.pb.cc; sourceTree = "<group>"; };
-		CC57A5C5168F6E5A00B43FAA /* Command.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Command.pb.h; sourceTree = "<group>"; };
-		CC57A5C6168F6E5A00B43FAA /* Command.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; path = Command.proto; sourceTree = "<group>"; };
 		CC68EA91163DA07400D225C2 /* CMSTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CMSTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC68EA95163DA07400D225C2 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		CC68EA97163DA07400D225C2 /* CMSTest.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = CMSTest.1; sourceTree = "<group>"; };
@@ -124,6 +118,15 @@
 		CC68EAB5163DB42E00D225C2 /* SimpleAsyncProducer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleAsyncProducer.cpp; sourceTree = "<group>"; };
 		CC68EAB6163DB42E00D225C2 /* SimpleAsyncProducer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleAsyncProducer.h; sourceTree = "<group>"; };
 		CCA4C32B1687B45D006BAC1D /* xdispatch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = xdispatch.framework; path = ../ThirdParty/xdispatch/build/bin/Debug/xdispatch.framework; sourceTree = "<group>"; };
+		CCE449B917230E21002A1937 /* box2d.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = box2d.pb.cc; path = Proto/box2d.pb.cc; sourceTree = "<group>"; };
+		CCE449BA17230E21002A1937 /* box2d.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = box2d.pb.h; path = Proto/box2d.pb.h; sourceTree = "<group>"; };
+		CCE449BB17230E21002A1937 /* box2d.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; name = box2d.proto; path = Proto/box2d.proto; sourceTree = "<group>"; };
+		CCE449BC17230E21002A1937 /* Command.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Command.pb.cc; path = Proto/Command.pb.cc; sourceTree = "<group>"; };
+		CCE449BD17230E21002A1937 /* Command.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Command.pb.h; path = Proto/Command.pb.h; sourceTree = "<group>"; };
+		CCE449BE17230E21002A1937 /* Command.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; name = Command.proto; path = Proto/Command.proto; sourceTree = "<group>"; };
+		CCE449BF17230E21002A1937 /* DualStick.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DualStick.pb.cc; path = Proto/DualStick.pb.cc; sourceTree = "<group>"; };
+		CCE449C017230E21002A1937 /* DualStick.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DualStick.pb.h; path = Proto/DualStick.pb.h; sourceTree = "<group>"; };
+		CCE449C117230E21002A1937 /* DualStick.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; name = DualStick.proto; path = Proto/DualStick.proto; sourceTree = "<group>"; };
 		CCE9087016516221005F2E72 /* libapr-1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libapr-1.dylib"; path = "usr/lib/libapr-1.dylib"; sourceTree = SDKROOT; };
 		CCE9087116516221005F2E72 /* libaprutil-1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libaprutil-1.dylib"; path = "usr/lib/libaprutil-1.dylib"; sourceTree = SDKROOT; };
 		CCE90877165165F8005F2E72 /* Server.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Server.cpp; sourceTree = "<group>"; };
@@ -167,15 +170,15 @@
 		CC19F7A1168CCC9E007B694E /* Proto */ = {
 			isa = PBXGroup;
 			children = (
-				CC57A5C4168F6E5A00B43FAA /* Command.pb.cc */,
-				CC57A5C5168F6E5A00B43FAA /* Command.pb.h */,
-				CC57A5C6168F6E5A00B43FAA /* Command.proto */,
-				CC4FECE31662A4A4004810CC /* box2d.pb.cc */,
-				CC4FECE41662A4A4004810CC /* box2d.pb.h */,
-				CC4FECE51662A4A4004810CC /* box2d.proto */,
-				CC52E0B01675058400D47C43 /* DualStick.pb.cc */,
-				CC52E0B11675058400D47C43 /* DualStick.pb.h */,
-				CC52E0B21675058400D47C43 /* DualStick.proto */,
+				CCE449B917230E21002A1937 /* box2d.pb.cc */,
+				CCE449BA17230E21002A1937 /* box2d.pb.h */,
+				CCE449BB17230E21002A1937 /* box2d.proto */,
+				CCE449BC17230E21002A1937 /* Command.pb.cc */,
+				CCE449BD17230E21002A1937 /* Command.pb.h */,
+				CCE449BE17230E21002A1937 /* Command.proto */,
+				CCE449BF17230E21002A1937 /* DualStick.pb.cc */,
+				CCE449C017230E21002A1937 /* DualStick.pb.h */,
+				CCE449C117230E21002A1937 /* DualStick.proto */,
 			);
 			name = Proto;
 			sourceTree = "<group>";
@@ -381,14 +384,17 @@
 				CCE90879165165F8005F2E72 /* Server.cpp in Sources */,
 				CCE9089816517F96005F2E72 /* PublisherT.cpp in Sources */,
 				CCE9089B165192E8005F2E72 /* Heartbeat.cpp in Sources */,
-				CCA2F45C166AA72C00D62F5C /* box2d.pb.cc in Sources */,
-				CC52E0B31675058400D47C43 /* DualStick.pb.cc in Sources */,
 				CC52E0B71675245600D47C43 /* Input.cpp in Sources */,
 				CC3C8F8C167CC3F80084CBE8 /* Security.cpp in Sources */,
 				CC3C8F8F167CEF080084CBE8 /* Player.cpp in Sources */,
-				CC57A5C7168F6E5A00B43FAA /* Command.pb.cc in Sources */,
 				CC4DC150171CC64A00F581A8 /* Timer.cpp in Sources */,
 				CC4DC154171CDB3D00F581A8 /* UserData.cpp in Sources */,
+				CCE449C217230E21002A1937 /* box2d.pb.cc in Sources */,
+				CCE449C317230E21002A1937 /* box2d.proto in Sources */,
+				CCE449C417230E21002A1937 /* Command.pb.cc in Sources */,
+				CCE449C517230E21002A1937 /* Command.proto in Sources */,
+				CCE449C617230E21002A1937 /* DualStick.pb.cc in Sources */,
+				CCE449C717230E21002A1937 /* DualStick.proto in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
