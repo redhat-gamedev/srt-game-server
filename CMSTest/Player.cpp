@@ -8,10 +8,13 @@
 
 #include "Player.h"
 #include "B2DWorld.h"
-#include "../../Libraries/Phoenix/source/Timer.h"
+#include "Timer.h"
+#include "UserData.h"
 #include <assert.h>
 
-Player::_Publisher                 Player::Publisher;
+Player::_Publisher          Player::Publisher;
+uint32_t                    Player::s_ui32Count = 1;
+uint32_t                    Player::s_ui32Type = 1;
 
 // Constructor(s)
 /*
@@ -69,7 +72,10 @@ Player::Player(const std::string& strUUID, B2DWorld* pB2DWorld) :
 {
     assert(m_pB2DWorld);
     
-    m_pBulletTimer = new ::Timer(20000, ::Timer::STARTEXPIRED);
+    m_ui64Tag = MAKE<uint64_t>(s_ui32Type, s_ui32Count);
+    ++s_ui32Count;
+    
+    m_pBulletTimer = new Rock2D::Timer(1000);
     CreatePod();
     
     Publisher.OnPlayerCreated(m_strUUID);
@@ -120,15 +126,22 @@ void Player::CreatePod()
     fixtureDef.restitution = 0.3f;
     fixtureDef.filter.groupIndex = -2;    
     fixtureDef.shape = &aB2CircleShape;
-
+    
+    UserData* pUserData = new UserData(m_ui64Tag, m_strUUID);
+    
     // call the body factory.
     m_pb2bPod = m_pB2DWorld->world->CreateBody(&bodyDef);
 	m_pb2bPod->CreateFixture(&fixtureDef);
-    m_pb2bPod->SetUserData(&m_strUUID);
+    //m_pb2bPod->SetUserData(&m_strUUID);
+    m_pb2bPod->SetUserData(pUserData);
 }
 
 void Player::CreateBullet(b2Vec2& b2v2Bullet)
 {
+    static uint32_t     ui32Count = 1;
+    static uint32_t     ui32Type = 2;
+    uint64_t            ui64Tag = 0;
+    
     b2BodyDef       bodyDef;
     b2CircleShape   aB2CircleShape;
     b2FixtureDef    fixtureDef;
@@ -153,7 +166,13 @@ void Player::CreateBullet(b2Vec2& b2v2Bullet)
     // call the body factory.
     pb2bBullet = m_pB2DWorld->world->CreateBody(&bodyDef);
 	pb2bBullet->CreateFixture(&fixtureDef);
-    pb2bBullet->SetUserData(&m_strUUID);
+    
+    ui64Tag = MAKE<uint64_t>(ui32Type, ui32Count);
+    ++ui32Count;
+    UserData* pUserData = new UserData(ui64Tag, m_strUUID);
+    
+    //pb2bBullet->SetUserData(&m_strUUID);
+    pb2bBullet->SetUserData(pUserData);
     
     m_b2bBulletQueue.lock();
     m_b2bBulletQueue.push(pb2bBullet);
@@ -168,7 +187,7 @@ void Player::CreateBullet(b2Vec2& b2v2Bullet)
 // Method(s)
 void Player::Update()
 {
-    static bool bFirstTime = true;
+    Rock2D::Timer::Update();
     
     m_b2v2MoveQueue.lock();
     while (!(m_b2v2MoveQueue.empty()))
@@ -184,10 +203,8 @@ void Player::Update()
     while (!(m_b2v2ShootQueue.empty()))
     {
         b2Vec2 ab2Vec2Shoot = m_b2v2ShootQueue.pop();
-        if (m_pBulletTimer->Status() == ::Timer::EXPIRED)
-        //if (bFirstTime)
+        if (m_pBulletTimer->Status() == Rock2D::Timer::EXPIRED)
         {
-            bFirstTime = false;
             std::cout << "Creating Bullet" << std::endl;
             CreateBullet(ab2Vec2Shoot);
             m_pBulletTimer->Restart();

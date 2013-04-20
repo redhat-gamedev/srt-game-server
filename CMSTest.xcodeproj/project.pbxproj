@@ -13,6 +13,8 @@
 		CC3C8F8C167CC3F80084CBE8 /* Security.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC3C8F8A167CC3F80084CBE8 /* Security.cpp */; };
 		CC3C8F8F167CEF080084CBE8 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC3C8F8D167CEF070084CBE8 /* Player.cpp */; };
 		CC488D27164EB5FD005078C3 /* libBox2D.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC488D20164EB5DE005078C3 /* libBox2D.a */; };
+		CC4DC150171CC64A00F581A8 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC4DC14E171CC64A00F581A8 /* Timer.cpp */; };
+		CC4DC154171CDB3D00F581A8 /* UserData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC4DC152171CDB3D00F581A8 /* UserData.cpp */; };
 		CC4FECE11662A3AA004810CC /* libProtocolBuffers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC4FECE01662A39A004810CC /* libProtocolBuffers.a */; };
 		CC52E0B31675058400D47C43 /* DualStick.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CC52E0B01675058400D47C43 /* DualStick.pb.cc */; };
 		CC52E0B71675245600D47C43 /* Input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC52E0B51675245600D47C43 /* Input.cpp */; };
@@ -28,7 +30,6 @@
 		CCE9087216516221005F2E72 /* libapr-1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE9087016516221005F2E72 /* libapr-1.dylib */; };
 		CCE9087316516221005F2E72 /* libaprutil-1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE9087116516221005F2E72 /* libaprutil-1.dylib */; };
 		CCE90879165165F8005F2E72 /* Server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE90877165165F8005F2E72 /* Server.cpp */; };
-		CCE9089216517138005F2E72 /* libPhoenix-osx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE908881651707A005F2E72 /* libPhoenix-osx.a */; };
 		CCE9089816517F96005F2E72 /* PublisherT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE9089616517F95005F2E72 /* PublisherT.cpp */; };
 		CCE9089B165192E8005F2E72 /* Heartbeat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE90899165192E8005F2E72 /* Heartbeat.cpp */; };
 		CCFB9E101640AF8900F6DBA2 /* B2DWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCFB9E0E1640AF8900F6DBA2 /* B2DWorld.cpp */; };
@@ -77,20 +78,6 @@
 			remoteGlobalIDString = CC22AEFC16629B6C00E22E62;
 			remoteInfo = ProtocolBuffers;
 		};
-		CCE908851651707A005F2E72 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CCE9087A16517079005F2E72 /* Phoenix.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D2AAC046055464E500DB518D;
-			remoteInfo = Phoenix;
-		};
-		CCE908871651707A005F2E72 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CCE9087A16517079005F2E72 /* Phoenix.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CCD5D5C61586C9E3007AC8C2;
-			remoteInfo = "Phoenix-osx";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -114,6 +101,11 @@
 		CC3C8F8B167CC3F80084CBE8 /* Security.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Security.h; sourceTree = "<group>"; };
 		CC3C8F8D167CEF070084CBE8 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
 		CC3C8F8E167CEF070084CBE8 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		CC4DC14E171CC64A00F581A8 /* Timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Timer.cpp; sourceTree = "<group>"; };
+		CC4DC14F171CC64A00F581A8 /* Timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timer.h; sourceTree = "<group>"; };
+		CC4DC151171CC66400F581A8 /* Types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Types.h; sourceTree = "<group>"; };
+		CC4DC152171CDB3D00F581A8 /* UserData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UserData.cpp; sourceTree = "<group>"; };
+		CC4DC153171CDB3D00F581A8 /* UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserData.h; sourceTree = "<group>"; };
 		CC4FECD81662A399004810CC /* ProtocolBuffers.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ProtocolBuffers.xcodeproj; path = ../ThirdParty/protobuf/ProtocolBuffers/ProtocolBuffers.xcodeproj; sourceTree = "<group>"; };
 		CC4FECE31662A4A4004810CC /* box2d.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = box2d.pb.cc; sourceTree = "<group>"; };
 		CC4FECE41662A4A4004810CC /* box2d.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = box2d.pb.h; sourceTree = "<group>"; };
@@ -142,7 +134,6 @@
 		CCE9087116516221005F2E72 /* libaprutil-1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libaprutil-1.dylib"; path = "usr/lib/libaprutil-1.dylib"; sourceTree = SDKROOT; };
 		CCE90877165165F8005F2E72 /* Server.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Server.cpp; sourceTree = "<group>"; };
 		CCE90878165165F8005F2E72 /* Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
-		CCE9087A16517079005F2E72 /* Phoenix.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Phoenix.xcodeproj; path = ../Libraries/Phoenix/Phoenix.xcodeproj; sourceTree = "<group>"; };
 		CCE9089616517F95005F2E72 /* PublisherT.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PublisherT.cpp; sourceTree = "<group>"; };
 		CCE9089716517F95005F2E72 /* PublisherT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublisherT.h; sourceTree = "<group>"; };
 		CCE90899165192E8005F2E72 /* Heartbeat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Heartbeat.cpp; sourceTree = "<group>"; };
@@ -162,7 +153,6 @@
 				CCE9087316516221005F2E72 /* libaprutil-1.dylib in Frameworks */,
 				CC488D27164EB5FD005078C3 /* libBox2D.a in Frameworks */,
 				CC0F90DE17179B7A006B9474 /* libcrypto.dylib in Frameworks */,
-				CCE9089216517138005F2E72 /* libPhoenix-osx.a in Frameworks */,
 				CC4FECE11662A3AA004810CC /* libProtocolBuffers.a in Frameworks */,
 				CC0F90DC17179AF3006B9474 /* libssl.dylib in Frameworks */,
 				CCA4C32C1687B45D006BAC1D /* xdispatch.framework in Frameworks */,
@@ -232,7 +222,6 @@
 				CC0F90CF171797FE006B9474 /* activemq-cpp.xcodeproj */,
 				CC4FECD81662A399004810CC /* ProtocolBuffers.xcodeproj */,
 				CCFB9DDC1640ABB900F6DBA2 /* Box2D.xcodeproj */,
-				CCE9087A16517079005F2E72 /* Phoenix.xcodeproj */,
 				CC68EAB1163DB32600D225C2 /* Libraries */,
 				CC68EA94163DA07400D225C2 /* CMSTest */,
 				CC68EA92163DA07400D225C2 /* Products */,
@@ -250,6 +239,9 @@
 		CC68EA94163DA07400D225C2 /* CMSTest */ = {
 			isa = PBXGroup;
 			children = (
+				CC4DC151171CC66400F581A8 /* Types.h */,
+				CC4DC14E171CC64A00F581A8 /* Timer.cpp */,
+				CC4DC14F171CC64A00F581A8 /* Timer.h */,
 				CC19F7A1168CCC9E007B694E /* Proto */,
 				CC3C8F8A167CC3F80084CBE8 /* Security.cpp */,
 				CC3C8F8B167CC3F80084CBE8 /* Security.h */,
@@ -272,6 +264,8 @@
 				CC52E0B61675245600D47C43 /* Input.h */,
 				CC3C8F8D167CEF070084CBE8 /* Player.cpp */,
 				CC3C8F8E167CEF070084CBE8 /* Player.h */,
+				CC4DC152171CDB3D00F581A8 /* UserData.cpp */,
+				CC4DC153171CDB3D00F581A8 /* UserData.h */,
 			);
 			path = CMSTest;
 			sourceTree = "<group>";
@@ -286,15 +280,6 @@
 				CCE9087116516221005F2E72 /* libaprutil-1.dylib */,
 			);
 			name = Libraries;
-			sourceTree = "<group>";
-		};
-		CCE9087B16517079005F2E72 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				CCE908861651707A005F2E72 /* libPhoenix.a */,
-				CCE908881651707A005F2E72 /* libPhoenix-osx.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -344,10 +329,6 @@
 				{
 					ProductGroup = CC488D19164EB5DE005078C3 /* Products */;
 					ProjectRef = CCFB9DDC1640ABB900F6DBA2 /* Box2D.xcodeproj */;
-				},
-				{
-					ProductGroup = CCE9087B16517079005F2E72 /* Products */;
-					ProjectRef = CCE9087A16517079005F2E72 /* Phoenix.xcodeproj */;
 				},
 				{
 					ProductGroup = CC4FECD91662A399004810CC /* Products */;
@@ -404,20 +385,6 @@
 			remoteRef = CC4FECDF1662A39A004810CC /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		CCE908861651707A005F2E72 /* libPhoenix.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libPhoenix.a;
-			remoteRef = CCE908851651707A005F2E72 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CCE908881651707A005F2E72 /* libPhoenix-osx.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libPhoenix-osx.a";
-			remoteRef = CCE908871651707A005F2E72 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -440,6 +407,8 @@
 				CC3C8F8C167CC3F80084CBE8 /* Security.cpp in Sources */,
 				CC3C8F8F167CEF080084CBE8 /* Player.cpp in Sources */,
 				CC57A5C7168F6E5A00B43FAA /* Command.pb.cc in Sources */,
+				CC4DC150171CC64A00F581A8 /* Timer.cpp in Sources */,
+				CC4DC154171CDB3D00F581A8 /* UserData.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

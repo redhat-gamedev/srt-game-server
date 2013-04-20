@@ -15,6 +15,7 @@
 #include "box2d.pb.h"
 #include "Security.h"
 #include "Player.h"
+#include "UserData.h"
 #include "decaf/util/Timer.h"
 #include "decaf/lang/Thread.h"
 #include "decaf/lang/Runnable.h"
@@ -39,14 +40,14 @@
 #include <iostream>
 #include <assert.h>
 
-StlQueue<std::string>      Server::s_ProducerQueue;
-StlQueue<std::string>      Server::s_ConsumerQueue;
+decaf::util::StlQueue<std::string>      Server::s_ProducerQueue;
+decaf::util::StlQueue<std::string>      Server::s_ConsumerQueue;
 
 using namespace activemq;
 using namespace activemq::core;
 using namespace activemq::transport;
 using namespace decaf::lang;
-using namespace decaf::util;
+//using namespace decaf::util;
 using namespace decaf::util::concurrent;
 using namespace cms;
 using namespace std;
@@ -97,6 +98,35 @@ void Server::Setup()
     ///")";
     
     std::cout << "Setup()..." << std::endl;
+    
+//    size_t iIntSize = sizeof(int);
+//    size_t iInt32Size = sizeof(int32_t);
+//    size_t iInt64Size = sizeof(int64_t);
+    
+//    int64_t i64Tag = 0;
+//    int32_t i32Type = 1;
+//    int32_t i32ID = 16;
+//    i64Tag = i32Type << 32;
+//    i64Tag |= i32ID;
+    
+//    uint32_t ui32Tag = 0;
+//    int32_t i32Tag = 0;
+//    uint32_t i32TagLo = 0;
+//    uint16_t i16TagHi = 0x55AA;
+//    uint16_t i16TagLo = 0xAA55;
+//    
+//    ui32Tag = static_cast<uint32_t>(i16TagHi << (CHAR_BIT * sizeof(uint16_t)));
+//    i32TagLo |= i16TagLo;
+//    //i32Tag |= static_cast<int16_t>(i16TagLo);
+//    ui32Tag |= i32TagLo;
+//    i32Tag = ui32Tag;
+    
+//    uint16_t wLo = 0xAA55U;
+//    uint16_t wHi = 0x55AAU;
+//    assert (MAKE<uint32_t> (wLo, wHi) == 0x55AAAA55);
+//    uint32_t uLo = 0x11223344U;
+//    uint32_t uHi = 0x44332211U;
+//    assert (MAKE<uint64_t> (uLo, uHi) == 0x4433221111223344);
     
     activemq::library::ActiveMQCPP::initializeLibrary();
     
@@ -196,6 +226,7 @@ void Server::b2WorldToPbWorld(b2World* pb2World, PbWorld*& pPbWorldDefault, std:
     //PbBodyType aPbBodyType = PbBodyType_MIN;
     const b2Vec2 b2v2Gravity = pb2World->GetGravity();
     std::string* pstrUUID = NULL;
+    UserData* pUserData = NULL;
     
     ppbv2Gravity->set_x(b2v2Gravity.x);
     ppbv2Gravity->set_y(b2v2Gravity.y);
@@ -233,10 +264,16 @@ void Server::b2WorldToPbWorld(b2World* pb2World, PbWorld*& pPbWorldDefault, std:
         pPbVec2Force->set_y(0.0f);
         pPbBody->set_allocated_force(pPbVec2Force);
         
-        pstrUUID = (std::string*)pBody->GetUserData();
-        assert(NULL != pstrUUID);
-        pPbBody->set_uuid(*pstrUUID);
-        
+//        pstrUUID = (std::string*)pBody->GetUserData();
+//        assert(NULL != pstrUUID);
+//        pPbBody->set_uuid(*pstrUUID);
+//        pPbBody->set_tag(1);
+
+        pUserData = static_cast<UserData*>(pBody->GetUserData());
+        assert(NULL != pUserData);
+        pPbBody->set_uuid(pUserData->m_strUUID);
+        pPbBody->set_tag(pUserData->m_ui64Tag);
+
         pFixtureList = pBody->GetFixtureList();
         for (b2Fixture* pFixture = pFixtureList; pFixture; pFixture = pFixture->GetNext())
         {

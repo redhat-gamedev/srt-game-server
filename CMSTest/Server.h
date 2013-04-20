@@ -42,7 +42,7 @@ class SimpleAsyncConsumer;
 class Player;
 
 using namespace decaf::lang;
-using namespace decaf::util;
+//using namespace decaf::util;
 
 
 class Server :
@@ -57,8 +57,8 @@ private:
 protected:
 
 public:
-    static StlQueue<std::string>      s_ProducerQueue;
-    static StlQueue<std::string>      s_ConsumerQueue;
+    static decaf::util::StlQueue<std::string>      s_ProducerQueue;
+    static decaf::util::StlQueue<std::string>      s_ConsumerQueue;
     
 // Instance
 private:

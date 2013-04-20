@@ -20,7 +20,10 @@ struct b2FixtureDef;
 class B2DWorld;
 class b2Body;
 class b2PolygonShape;
-class Timer;
+namespace Rock2D
+{
+    class Timer;
+}
 
 
 class Player :
@@ -46,15 +49,18 @@ protected:
         virtual void OnPlayerDestroyed(std::string& strUUID);
     };
 private:
+    static uint32_t         s_ui32Count;
+    static uint32_t         s_ui32Type;
     
 protected:
-    ::Timer*          m_pBulletTimer;
-    
+    uint64_t        m_ui64Tag;
     std::string     m_strUUID;
     
     b2Body*         m_pb2bPod;
     B2DWorld*       m_pB2DWorld;
 
+    Rock2D::Timer*          m_pBulletTimer;
+    
     decaf::util::StlQueue<b2Vec2>       m_b2v2MoveQueue;
     decaf::util::StlQueue<b2Vec2>       m_b2v2MoveSwapQueue;
 
