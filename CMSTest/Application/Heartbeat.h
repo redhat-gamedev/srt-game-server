@@ -10,7 +10,7 @@
 #define __CMSTest__Heartbeat__
 
 #include "decaf/util/TimerTask.h"
-#include "PublisherT.cpp"
+#include "../Shared/PublisherT.cpp"
 #include <list>
 
 

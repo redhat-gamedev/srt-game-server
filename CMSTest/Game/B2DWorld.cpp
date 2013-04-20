@@ -9,7 +9,7 @@
 #include "B2DWorld.h"
 #include "Player.h"
 #include "decaf/lang/Thread.h"
-#include "../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
+#include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
 
 using namespace box2d;
 

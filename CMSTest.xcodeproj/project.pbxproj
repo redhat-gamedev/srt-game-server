@@ -10,17 +10,9 @@
 		CC0F90D817179815006B9474 /* libactivemq-cpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0F90D7171797FF006B9474 /* libactivemq-cpp.a */; };
 		CC0F90DC17179AF3006B9474 /* libssl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0F90DB17179AF3006B9474 /* libssl.dylib */; };
 		CC0F90DE17179B7A006B9474 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0F90DD17179B7A006B9474 /* libcrypto.dylib */; };
-		CC3C8F8C167CC3F80084CBE8 /* Security.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC3C8F8A167CC3F80084CBE8 /* Security.cpp */; };
-		CC3C8F8F167CEF080084CBE8 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC3C8F8D167CEF070084CBE8 /* Player.cpp */; };
 		CC488D27164EB5FD005078C3 /* libBox2D.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC488D20164EB5DE005078C3 /* libBox2D.a */; };
-		CC4DC150171CC64A00F581A8 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC4DC14E171CC64A00F581A8 /* Timer.cpp */; };
-		CC4DC154171CDB3D00F581A8 /* UserData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC4DC152171CDB3D00F581A8 /* UserData.cpp */; };
 		CC4FECE11662A3AA004810CC /* libProtocolBuffers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC4FECE01662A39A004810CC /* libProtocolBuffers.a */; };
-		CC52E0B71675245600D47C43 /* Input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC52E0B51675245600D47C43 /* Input.cpp */; };
-		CC68EA96163DA07400D225C2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC68EA95163DA07400D225C2 /* main.cpp */; };
 		CC68EA98163DA07400D225C2 /* CMSTest.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = CC68EA97163DA07400D225C2 /* CMSTest.1 */; };
-		CC68EAB4163DB36800D225C2 /* SimpleAsyncConsumer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC68EAB2163DB36800D225C2 /* SimpleAsyncConsumer.cpp */; };
-		CC68EAB7163DB42E00D225C2 /* SimpleAsyncProducer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC68EAB5163DB42E00D225C2 /* SimpleAsyncProducer.cpp */; };
 		CCA4C32C1687B45D006BAC1D /* xdispatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA4C32B1687B45D006BAC1D /* xdispatch.framework */; };
 		CCE449C217230E21002A1937 /* box2d.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CCE449B917230E21002A1937 /* box2d.pb.cc */; };
 		CCE449C317230E21002A1937 /* box2d.proto in Sources */ = {isa = PBXBuildFile; fileRef = CCE449BB17230E21002A1937 /* box2d.proto */; };
@@ -28,12 +20,20 @@
 		CCE449C517230E21002A1937 /* Command.proto in Sources */ = {isa = PBXBuildFile; fileRef = CCE449BE17230E21002A1937 /* Command.proto */; };
 		CCE449C617230E21002A1937 /* DualStick.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CCE449BF17230E21002A1937 /* DualStick.pb.cc */; };
 		CCE449C717230E21002A1937 /* DualStick.proto in Sources */ = {isa = PBXBuildFile; fileRef = CCE449C117230E21002A1937 /* DualStick.proto */; };
+		CCE449D317230EF9002A1937 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449C917230EF9002A1937 /* main.cpp */; };
+		CCE449D417230EF9002A1937 /* Security.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449CA17230EF9002A1937 /* Security.cpp */; };
+		CCE449D517230EF9002A1937 /* Server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449CC17230EF9002A1937 /* Server.cpp */; };
+		CCE449DE17230F8E002A1937 /* PublisherT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449DA17230F8E002A1937 /* PublisherT.cpp */; };
+		CCE449DF17230F8E002A1937 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449DC17230F8E002A1937 /* Timer.cpp */; };
+		CCE449E31723109C002A1937 /* Heartbeat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449E11723109C002A1937 /* Heartbeat.cpp */; };
+		CCE449E81723111C002A1937 /* SimpleAsyncConsumer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449E41723111C002A1937 /* SimpleAsyncConsumer.cpp */; };
+		CCE449E91723111C002A1937 /* SimpleAsyncProducer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449E61723111C002A1937 /* SimpleAsyncProducer.cpp */; };
+		CCE449F5172313FD002A1937 /* B2DWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449EC172313FD002A1937 /* B2DWorld.cpp */; };
+		CCE449F6172313FD002A1937 /* Input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449EE172313FD002A1937 /* Input.cpp */; };
+		CCE449F7172313FD002A1937 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449F0172313FD002A1937 /* Player.cpp */; };
+		CCE449F8172313FD002A1937 /* UserData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449F2172313FD002A1937 /* UserData.cpp */; };
 		CCE9087216516221005F2E72 /* libapr-1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE9087016516221005F2E72 /* libapr-1.dylib */; };
 		CCE9087316516221005F2E72 /* libaprutil-1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE9087116516221005F2E72 /* libaprutil-1.dylib */; };
-		CCE90879165165F8005F2E72 /* Server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE90877165165F8005F2E72 /* Server.cpp */; };
-		CCE9089816517F96005F2E72 /* PublisherT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE9089616517F95005F2E72 /* PublisherT.cpp */; };
-		CCE9089B165192E8005F2E72 /* Heartbeat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE90899165192E8005F2E72 /* Heartbeat.cpp */; };
-		CCFB9E101640AF8900F6DBA2 /* B2DWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCFB9E0E1640AF8900F6DBA2 /* B2DWorld.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,25 +98,9 @@
 		CC0F90CF171797FE006B9474 /* activemq-cpp.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "activemq-cpp.xcodeproj"; path = "../ThirdParty/activemq-cpp/activemq-cpp/activemq-cpp.xcodeproj"; sourceTree = "<group>"; };
 		CC0F90DB17179AF3006B9474 /* libssl.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libssl.dylib; path = usr/lib/libssl.dylib; sourceTree = SDKROOT; };
 		CC0F90DD17179B7A006B9474 /* libcrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.dylib; path = usr/lib/libcrypto.dylib; sourceTree = SDKROOT; };
-		CC3C8F8A167CC3F80084CBE8 /* Security.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Security.cpp; sourceTree = "<group>"; };
-		CC3C8F8B167CC3F80084CBE8 /* Security.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Security.h; sourceTree = "<group>"; };
-		CC3C8F8D167CEF070084CBE8 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
-		CC3C8F8E167CEF070084CBE8 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
-		CC4DC14E171CC64A00F581A8 /* Timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Timer.cpp; sourceTree = "<group>"; };
-		CC4DC14F171CC64A00F581A8 /* Timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timer.h; sourceTree = "<group>"; };
-		CC4DC151171CC66400F581A8 /* Types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Types.h; sourceTree = "<group>"; };
-		CC4DC152171CDB3D00F581A8 /* UserData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UserData.cpp; sourceTree = "<group>"; };
-		CC4DC153171CDB3D00F581A8 /* UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserData.h; sourceTree = "<group>"; };
 		CC4FECD81662A399004810CC /* ProtocolBuffers.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ProtocolBuffers.xcodeproj; path = ../ThirdParty/protobuf/ProtocolBuffers/ProtocolBuffers.xcodeproj; sourceTree = "<group>"; };
-		CC52E0B51675245600D47C43 /* Input.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Input.cpp; sourceTree = "<group>"; };
-		CC52E0B61675245600D47C43 /* Input.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Input.h; sourceTree = "<group>"; };
 		CC68EA91163DA07400D225C2 /* CMSTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CMSTest; sourceTree = BUILT_PRODUCTS_DIR; };
-		CC68EA95163DA07400D225C2 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		CC68EA97163DA07400D225C2 /* CMSTest.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = CMSTest.1; sourceTree = "<group>"; };
-		CC68EAB2163DB36800D225C2 /* SimpleAsyncConsumer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleAsyncConsumer.cpp; sourceTree = "<group>"; };
-		CC68EAB3163DB36800D225C2 /* SimpleAsyncConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleAsyncConsumer.h; sourceTree = "<group>"; };
-		CC68EAB5163DB42E00D225C2 /* SimpleAsyncProducer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleAsyncProducer.cpp; sourceTree = "<group>"; };
-		CC68EAB6163DB42E00D225C2 /* SimpleAsyncProducer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleAsyncProducer.h; sourceTree = "<group>"; };
 		CCA4C32B1687B45D006BAC1D /* xdispatch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = xdispatch.framework; path = ../ThirdParty/xdispatch/build/bin/Debug/xdispatch.framework; sourceTree = "<group>"; };
 		CCE449B917230E21002A1937 /* box2d.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = box2d.pb.cc; path = Proto/box2d.pb.cc; sourceTree = "<group>"; };
 		CCE449BA17230E21002A1937 /* box2d.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = box2d.pb.h; path = Proto/box2d.pb.h; sourceTree = "<group>"; };
@@ -127,17 +111,33 @@
 		CCE449BF17230E21002A1937 /* DualStick.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DualStick.pb.cc; path = Proto/DualStick.pb.cc; sourceTree = "<group>"; };
 		CCE449C017230E21002A1937 /* DualStick.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DualStick.pb.h; path = Proto/DualStick.pb.h; sourceTree = "<group>"; };
 		CCE449C117230E21002A1937 /* DualStick.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; name = DualStick.proto; path = Proto/DualStick.proto; sourceTree = "<group>"; };
+		CCE449C917230EF9002A1937 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = Application/main.cpp; sourceTree = "<group>"; };
+		CCE449CA17230EF9002A1937 /* Security.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Security.cpp; path = Application/Security.cpp; sourceTree = "<group>"; };
+		CCE449CB17230EF9002A1937 /* Security.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Security.h; path = Application/Security.h; sourceTree = "<group>"; };
+		CCE449CC17230EF9002A1937 /* Server.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Server.cpp; path = Application/Server.cpp; sourceTree = "<group>"; };
+		CCE449CD17230EF9002A1937 /* Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Server.h; path = Application/Server.h; sourceTree = "<group>"; };
+		CCE449DA17230F8E002A1937 /* PublisherT.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PublisherT.cpp; path = Shared/PublisherT.cpp; sourceTree = "<group>"; };
+		CCE449DB17230F8E002A1937 /* PublisherT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PublisherT.h; path = Shared/PublisherT.h; sourceTree = "<group>"; };
+		CCE449DC17230F8E002A1937 /* Timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Timer.cpp; path = Shared/Timer.cpp; sourceTree = "<group>"; };
+		CCE449DD17230F8E002A1937 /* Timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Timer.h; path = Shared/Timer.h; sourceTree = "<group>"; };
+		CCE449E017230FD2002A1937 /* Types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Types.h; path = Shared/Types.h; sourceTree = "<group>"; };
+		CCE449E11723109C002A1937 /* Heartbeat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Heartbeat.cpp; path = Application/Heartbeat.cpp; sourceTree = "<group>"; };
+		CCE449E21723109C002A1937 /* Heartbeat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Heartbeat.h; path = Application/Heartbeat.h; sourceTree = "<group>"; };
+		CCE449E41723111C002A1937 /* SimpleAsyncConsumer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SimpleAsyncConsumer.cpp; path = Shared/SimpleAsyncConsumer.cpp; sourceTree = "<group>"; };
+		CCE449E51723111C002A1937 /* SimpleAsyncConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimpleAsyncConsumer.h; path = Shared/SimpleAsyncConsumer.h; sourceTree = "<group>"; };
+		CCE449E61723111C002A1937 /* SimpleAsyncProducer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SimpleAsyncProducer.cpp; path = Shared/SimpleAsyncProducer.cpp; sourceTree = "<group>"; };
+		CCE449E71723111C002A1937 /* SimpleAsyncProducer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimpleAsyncProducer.h; path = Shared/SimpleAsyncProducer.h; sourceTree = "<group>"; };
+		CCE449EC172313FD002A1937 /* B2DWorld.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = B2DWorld.cpp; path = Game/B2DWorld.cpp; sourceTree = "<group>"; };
+		CCE449ED172313FD002A1937 /* B2DWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = B2DWorld.h; path = Game/B2DWorld.h; sourceTree = "<group>"; };
+		CCE449EE172313FD002A1937 /* Input.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Input.cpp; path = Game/Input.cpp; sourceTree = "<group>"; };
+		CCE449EF172313FD002A1937 /* Input.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Input.h; path = Game/Input.h; sourceTree = "<group>"; };
+		CCE449F0172313FD002A1937 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Player.cpp; path = Game/Player.cpp; sourceTree = "<group>"; };
+		CCE449F1172313FD002A1937 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Player.h; path = Game/Player.h; sourceTree = "<group>"; };
+		CCE449F2172313FD002A1937 /* UserData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UserData.cpp; path = Game/UserData.cpp; sourceTree = "<group>"; };
+		CCE449F3172313FD002A1937 /* UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserData.h; path = Game/UserData.h; sourceTree = "<group>"; };
 		CCE9087016516221005F2E72 /* libapr-1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libapr-1.dylib"; path = "usr/lib/libapr-1.dylib"; sourceTree = SDKROOT; };
 		CCE9087116516221005F2E72 /* libaprutil-1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libaprutil-1.dylib"; path = "usr/lib/libaprutil-1.dylib"; sourceTree = SDKROOT; };
-		CCE90877165165F8005F2E72 /* Server.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Server.cpp; sourceTree = "<group>"; };
-		CCE90878165165F8005F2E72 /* Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
-		CCE9089616517F95005F2E72 /* PublisherT.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PublisherT.cpp; sourceTree = "<group>"; };
-		CCE9089716517F95005F2E72 /* PublisherT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublisherT.h; sourceTree = "<group>"; };
-		CCE90899165192E8005F2E72 /* Heartbeat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Heartbeat.cpp; sourceTree = "<group>"; };
-		CCE9089A165192E8005F2E72 /* Heartbeat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Heartbeat.h; sourceTree = "<group>"; };
 		CCFB9DDC1640ABB900F6DBA2 /* Box2D.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Box2D.xcodeproj; path = ../ThirdParty/box2d/Box2D/Build/xcode4/Box2D.xcodeproj; sourceTree = "<group>"; };
-		CCFB9E0E1640AF8900F6DBA2 /* B2DWorld.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = B2DWorld.cpp; sourceTree = "<group>"; };
-		CCFB9E0F1640AF8900F6DBA2 /* B2DWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B2DWorld.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,32 +225,11 @@
 		CC68EA94163DA07400D225C2 /* CMSTest */ = {
 			isa = PBXGroup;
 			children = (
-				CC4DC151171CC66400F581A8 /* Types.h */,
-				CC4DC14E171CC64A00F581A8 /* Timer.cpp */,
-				CC4DC14F171CC64A00F581A8 /* Timer.h */,
+				CCE449D917230F6B002A1937 /* Game */,
+				CCE449D817230F64002A1937 /* Shared */,
+				CCE449C817230EE1002A1937 /* Application */,
 				CC19F7A1168CCC9E007B694E /* Proto */,
-				CC3C8F8A167CC3F80084CBE8 /* Security.cpp */,
-				CC3C8F8B167CC3F80084CBE8 /* Security.h */,
-				CCE9089616517F95005F2E72 /* PublisherT.cpp */,
-				CCE9089716517F95005F2E72 /* PublisherT.h */,
-				CC68EA95163DA07400D225C2 /* main.cpp */,
 				CC68EA97163DA07400D225C2 /* CMSTest.1 */,
-				CC68EAB2163DB36800D225C2 /* SimpleAsyncConsumer.cpp */,
-				CC68EAB3163DB36800D225C2 /* SimpleAsyncConsumer.h */,
-				CC68EAB5163DB42E00D225C2 /* SimpleAsyncProducer.cpp */,
-				CC68EAB6163DB42E00D225C2 /* SimpleAsyncProducer.h */,
-				CCFB9E0E1640AF8900F6DBA2 /* B2DWorld.cpp */,
-				CCFB9E0F1640AF8900F6DBA2 /* B2DWorld.h */,
-				CCE90877165165F8005F2E72 /* Server.cpp */,
-				CCE90878165165F8005F2E72 /* Server.h */,
-				CCE90899165192E8005F2E72 /* Heartbeat.cpp */,
-				CCE9089A165192E8005F2E72 /* Heartbeat.h */,
-				CC52E0B51675245600D47C43 /* Input.cpp */,
-				CC52E0B61675245600D47C43 /* Input.h */,
-				CC3C8F8D167CEF070084CBE8 /* Player.cpp */,
-				CC3C8F8E167CEF070084CBE8 /* Player.h */,
-				CC4DC152171CDB3D00F581A8 /* UserData.cpp */,
-				CC4DC153171CDB3D00F581A8 /* UserData.h */,
 			);
 			path = CMSTest;
 			sourceTree = "<group>";
@@ -265,6 +244,51 @@
 				CCE9087116516221005F2E72 /* libaprutil-1.dylib */,
 			);
 			name = Libraries;
+			sourceTree = "<group>";
+		};
+		CCE449C817230EE1002A1937 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				CCE449E11723109C002A1937 /* Heartbeat.cpp */,
+				CCE449E21723109C002A1937 /* Heartbeat.h */,
+				CCE449C917230EF9002A1937 /* main.cpp */,
+				CCE449CA17230EF9002A1937 /* Security.cpp */,
+				CCE449CB17230EF9002A1937 /* Security.h */,
+				CCE449CC17230EF9002A1937 /* Server.cpp */,
+				CCE449CD17230EF9002A1937 /* Server.h */,
+			);
+			name = Application;
+			sourceTree = "<group>";
+		};
+		CCE449D817230F64002A1937 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				CCE449E41723111C002A1937 /* SimpleAsyncConsumer.cpp */,
+				CCE449E51723111C002A1937 /* SimpleAsyncConsumer.h */,
+				CCE449E61723111C002A1937 /* SimpleAsyncProducer.cpp */,
+				CCE449E71723111C002A1937 /* SimpleAsyncProducer.h */,
+				CCE449E017230FD2002A1937 /* Types.h */,
+				CCE449DA17230F8E002A1937 /* PublisherT.cpp */,
+				CCE449DB17230F8E002A1937 /* PublisherT.h */,
+				CCE449DC17230F8E002A1937 /* Timer.cpp */,
+				CCE449DD17230F8E002A1937 /* Timer.h */,
+			);
+			name = Shared;
+			sourceTree = "<group>";
+		};
+		CCE449D917230F6B002A1937 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				CCE449EC172313FD002A1937 /* B2DWorld.cpp */,
+				CCE449ED172313FD002A1937 /* B2DWorld.h */,
+				CCE449EE172313FD002A1937 /* Input.cpp */,
+				CCE449EF172313FD002A1937 /* Input.h */,
+				CCE449F0172313FD002A1937 /* Player.cpp */,
+				CCE449F1172313FD002A1937 /* Player.h */,
+				CCE449F2172313FD002A1937 /* UserData.cpp */,
+				CCE449F3172313FD002A1937 /* UserData.h */,
+			);
+			name = Game;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -377,24 +401,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC68EA96163DA07400D225C2 /* main.cpp in Sources */,
-				CC68EAB4163DB36800D225C2 /* SimpleAsyncConsumer.cpp in Sources */,
-				CC68EAB7163DB42E00D225C2 /* SimpleAsyncProducer.cpp in Sources */,
-				CCFB9E101640AF8900F6DBA2 /* B2DWorld.cpp in Sources */,
-				CCE90879165165F8005F2E72 /* Server.cpp in Sources */,
-				CCE9089816517F96005F2E72 /* PublisherT.cpp in Sources */,
-				CCE9089B165192E8005F2E72 /* Heartbeat.cpp in Sources */,
-				CC52E0B71675245600D47C43 /* Input.cpp in Sources */,
-				CC3C8F8C167CC3F80084CBE8 /* Security.cpp in Sources */,
-				CC3C8F8F167CEF080084CBE8 /* Player.cpp in Sources */,
-				CC4DC150171CC64A00F581A8 /* Timer.cpp in Sources */,
-				CC4DC154171CDB3D00F581A8 /* UserData.cpp in Sources */,
 				CCE449C217230E21002A1937 /* box2d.pb.cc in Sources */,
 				CCE449C317230E21002A1937 /* box2d.proto in Sources */,
 				CCE449C417230E21002A1937 /* Command.pb.cc in Sources */,
 				CCE449C517230E21002A1937 /* Command.proto in Sources */,
 				CCE449C617230E21002A1937 /* DualStick.pb.cc in Sources */,
 				CCE449C717230E21002A1937 /* DualStick.proto in Sources */,
+				CCE449D317230EF9002A1937 /* main.cpp in Sources */,
+				CCE449D417230EF9002A1937 /* Security.cpp in Sources */,
+				CCE449D517230EF9002A1937 /* Server.cpp in Sources */,
+				CCE449DE17230F8E002A1937 /* PublisherT.cpp in Sources */,
+				CCE449DF17230F8E002A1937 /* Timer.cpp in Sources */,
+				CCE449E31723109C002A1937 /* Heartbeat.cpp in Sources */,
+				CCE449E81723111C002A1937 /* SimpleAsyncConsumer.cpp in Sources */,
+				CCE449E91723111C002A1937 /* SimpleAsyncProducer.cpp in Sources */,
+				CCE449F5172313FD002A1937 /* B2DWorld.cpp in Sources */,
+				CCE449F6172313FD002A1937 /* Input.cpp in Sources */,
+				CCE449F7172313FD002A1937 /* Player.cpp in Sources */,
+				CCE449F8172313FD002A1937 /* UserData.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

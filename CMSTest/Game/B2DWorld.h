@@ -9,11 +9,11 @@
 #ifndef __CMSTest__B2DWorld__
 #define __CMSTest__B2DWorld__
 
-#include "../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
+#include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include "decaf/lang/Runnable.h"
 #include "decaf/util/StlQueue.h"
 //#include "../../Libraries/Phoenix/source/PublisherT.cpp"
-#include "PublisherT.cpp"
+#include "../Shared/PublisherT.cpp"
 #include <string>
 #include <list>
 

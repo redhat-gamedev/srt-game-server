@@ -11,8 +11,8 @@
 
 #include "Input.h"
 #include "decaf/util/StlQueue.h"
-#include "../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
-#include "PublisherT.cpp"
+#include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
+#include "../Shared/PublisherT.cpp"
 #include <string>
 
 struct b2BodyDef;

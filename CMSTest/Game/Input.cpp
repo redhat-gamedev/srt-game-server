@@ -7,9 +7,9 @@
 //
 
 #include "Input.h"
-#include "DualStick.pb.h"
-#include "box2d.pb.h"
-#include "SimpleAsyncConsumer.h"
+#include "../Proto/DualStick.pb.h"
+#include "../Proto/box2d.pb.h"
+#include "../Shared/SimpleAsyncConsumer.h"
 #include <cms/CMSException.h>
 //#include <cms/Message.h>
 #include <cms/TextMessage.h>

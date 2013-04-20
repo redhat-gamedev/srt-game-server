@@ -7,11 +7,11 @@
 //
 
 #include "Security.h"
-#include "DualStick.pb.h"
-#include "box2d.pb.h"
+#include "../Proto/DualStick.pb.h"
+#include "../Proto/box2d.pb.h"
 #include "Command.pb.h"
-#include "SimpleAsyncConsumer.h"
-#include "SimpleAsyncProducer.h"
+#include "../Shared/SimpleAsyncConsumer.h"
+#include "../Shared/SimpleAsyncProducer.h"
 #include <cms/CMSException.h>
 //#include <cms/Message.h>
 #include <cms/TextMessage.h>

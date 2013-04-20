@@ -7,13 +7,13 @@
 //
 
 #include "Server.h"
-#include "SimpleAsyncConsumer.h"
-#include "SimpleAsyncProducer.h"
+#include "../Shared/SimpleAsyncConsumer.h"
+#include "../Shared/SimpleAsyncProducer.h"
 #include "B2DWorld.h"
 #include "Heartbeat.h"
-#include "box2d.pb.h"
+#include "../Proto/box2d.pb.h"
 #include "Security.h"
-#include "Player.h"
+#include "../Game/Player.h"
 #include "UserData.h"
 #include "decaf/util/Timer.h"
 #include "decaf/lang/Thread.h"

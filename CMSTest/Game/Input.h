@@ -9,9 +9,9 @@
 #ifndef __CMSTest__Input__
 #define __CMSTest__Input__
 
-#include "DualStick.pb.h"
-#include "box2d.pb.h"
-#include "PublisherT.cpp"
+#include "../Proto/DualStick.pb.h"
+#include "../Proto/box2d.pb.h"
+#include "../Shared/PublisherT.cpp"
 #include <cms/MessageListener.h>
 #include <string>
 #include <list>

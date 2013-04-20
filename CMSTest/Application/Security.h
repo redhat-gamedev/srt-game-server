@@ -9,10 +9,10 @@
 #ifndef __CMSTest__Security__
 #define __CMSTest__Security__
 
-#include "DualStick.pb.h"
-#include "box2d.pb.h"
-#include "Player.h"
-#include "PublisherT.cpp"
+#include "../Proto/DualStick.pb.h"
+#include "../Proto/box2d.pb.h"
+#include "../Game/Player.h"
+#include "../Shared/PublisherT.cpp"
 #include <cms/MessageListener.h>
 #include <cms/AsyncCallback.h>
 #include <string>

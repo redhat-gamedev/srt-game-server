@@ -12,12 +12,12 @@
 #include "decaf/util/StlQueue.h"
 //#include "decaf/lang/Thread.h"
 //#include "decaf/util/Timer.h"
-#include "B2DWorld.h"
+#include "../Game/B2DWorld.h"
 #include "Heartbeat.h"
-#include "Input.h"
+#include "../Game/Input.h"
 #include "Security.h"
-#include "box2d.pb.h"
-#include "../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
+#include "../Proto/box2d.pb.h"
+#include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include <string>
 
 
