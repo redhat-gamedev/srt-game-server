@@ -32,6 +32,9 @@
 		CCE449F6172313FD002A1937 /* Input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449EE172313FD002A1937 /* Input.cpp */; };
 		CCE449F7172313FD002A1937 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449F0172313FD002A1937 /* Player.cpp */; };
 		CCE449F8172313FD002A1937 /* UserData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449F2172313FD002A1937 /* UserData.cpp */; };
+		CCE449FC172317CA002A1937 /* AEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449FA172317C9002A1937 /* AEntity.cpp */; };
+		CCE449FF17231ADD002A1937 /* Bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449FD17231ADD002A1937 /* Bullet.cpp */; };
+		CCE44A0317232660002A1937 /* World.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE44A011723265F002A1937 /* World.cpp */; };
 		CCE9087216516221005F2E72 /* libapr-1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE9087016516221005F2E72 /* libapr-1.dylib */; };
 		CCE9087316516221005F2E72 /* libaprutil-1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE9087116516221005F2E72 /* libaprutil-1.dylib */; };
 /* End PBXBuildFile section */
@@ -135,6 +138,13 @@
 		CCE449F1172313FD002A1937 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Player.h; path = Game/Player.h; sourceTree = "<group>"; };
 		CCE449F2172313FD002A1937 /* UserData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UserData.cpp; path = Game/UserData.cpp; sourceTree = "<group>"; };
 		CCE449F3172313FD002A1937 /* UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserData.h; path = Game/UserData.h; sourceTree = "<group>"; };
+		CCE449FA172317C9002A1937 /* AEntity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AEntity.cpp; path = Game/AEntity.cpp; sourceTree = "<group>"; };
+		CCE449FB172317CA002A1937 /* AEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AEntity.h; path = Game/AEntity.h; sourceTree = "<group>"; };
+		CCE449FD17231ADD002A1937 /* Bullet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Bullet.cpp; path = Game/Bullet.cpp; sourceTree = "<group>"; };
+		CCE449FE17231ADD002A1937 /* Bullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Bullet.h; path = Game/Bullet.h; sourceTree = "<group>"; };
+		CCE44A0017231FAD002A1937 /* MakeT.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MakeT.h; path = Shared/MakeT.h; sourceTree = "<group>"; };
+		CCE44A011723265F002A1937 /* World.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = World.cpp; path = Game/World.cpp; sourceTree = "<group>"; };
+		CCE44A021723265F002A1937 /* World.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = World.h; path = Game/World.h; sourceTree = "<group>"; };
 		CCE9087016516221005F2E72 /* libapr-1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libapr-1.dylib"; path = "usr/lib/libapr-1.dylib"; sourceTree = SDKROOT; };
 		CCE9087116516221005F2E72 /* libaprutil-1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libaprutil-1.dylib"; path = "usr/lib/libaprutil-1.dylib"; sourceTree = SDKROOT; };
 		CCFB9DDC1640ABB900F6DBA2 /* Box2D.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Box2D.xcodeproj; path = ../ThirdParty/box2d/Box2D/Build/xcode4/Box2D.xcodeproj; sourceTree = "<group>"; };
@@ -272,6 +282,7 @@
 				CCE449DB17230F8E002A1937 /* PublisherT.h */,
 				CCE449DC17230F8E002A1937 /* Timer.cpp */,
 				CCE449DD17230F8E002A1937 /* Timer.h */,
+				CCE44A0017231FAD002A1937 /* MakeT.h */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -287,6 +298,12 @@
 				CCE449F1172313FD002A1937 /* Player.h */,
 				CCE449F2172313FD002A1937 /* UserData.cpp */,
 				CCE449F3172313FD002A1937 /* UserData.h */,
+				CCE449FA172317C9002A1937 /* AEntity.cpp */,
+				CCE449FB172317CA002A1937 /* AEntity.h */,
+				CCE449FD17231ADD002A1937 /* Bullet.cpp */,
+				CCE449FE17231ADD002A1937 /* Bullet.h */,
+				CCE44A011723265F002A1937 /* World.cpp */,
+				CCE44A021723265F002A1937 /* World.h */,
 			);
 			name = Game;
 			sourceTree = "<group>";
@@ -419,6 +436,9 @@
 				CCE449F6172313FD002A1937 /* Input.cpp in Sources */,
 				CCE449F7172313FD002A1937 /* Player.cpp in Sources */,
 				CCE449F8172313FD002A1937 /* UserData.cpp in Sources */,
+				CCE449FC172317CA002A1937 /* AEntity.cpp in Sources */,
+				CCE449FF17231ADD002A1937 /* Bullet.cpp in Sources */,
+				CCE44A0317232660002A1937 /* World.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

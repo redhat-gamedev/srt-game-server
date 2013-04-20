@@ -13,16 +13,16 @@
 #include <limits.h>
 
 
-// Comment from:
-// http://msdn.microsoft.com/en-ca/library/windows/desktop/ms632660(v=vs.85).aspx
-//
-template<typename DOUBLE, typename SINGLE>
-DOUBLE
-MAKE (const SINGLE lo, const SINGLE hi)
-{
-    static_assert (sizeof (DOUBLE) == (2 * sizeof (SINGLE)), "Unmatched");
-    return ((static_cast<DOUBLE> (hi) << (CHAR_BIT * sizeof (SINGLE))) | lo);
-}
+//// Comment from:
+//// http://msdn.microsoft.com/en-ca/library/windows/desktop/ms632660(v=vs.85).aspx
+////
+//template<typename DOUBLE, typename SINGLE>
+//DOUBLE
+//MAKE (const SINGLE lo, const SINGLE hi)
+//{
+//    static_assert (sizeof (DOUBLE) == (2 * sizeof (SINGLE)), "Unmatched");
+//    return ((static_cast<DOUBLE> (hi) << (CHAR_BIT * sizeof (SINGLE))) | lo);
+//}
 
 class UserData
 {

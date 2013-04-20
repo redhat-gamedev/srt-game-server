@@ -7,14 +7,17 @@
 //
 
 #include "Player.h"
+#include "Bullet.h"
 #include "B2DWorld.h"
+#include "World.h"
 #include "Timer.h"
 #include "UserData.h"
+#include "../Shared/MakeT.h"
 #include <assert.h>
 
 Player::_Publisher          Player::Publisher;
 uint32_t                    Player::s_ui32Count = 1;
-uint32_t                    Player::s_ui32Type = 1;
+//uint32_t                    Player::s_ui32Type = AEntity::POD;
 
 // Constructor(s)
 /*
@@ -65,14 +68,13 @@ void Player::_Publisher::OnPlayerDestroyed(std::string& strUUID)
 
 
 // Constructor(s)
-Player::Player(const std::string& strUUID, B2DWorld* pB2DWorld) :
-    m_strUUID(strUUID),
-    m_pB2DWorld(pB2DWorld),
-    m_pBulletTimer(NULL)
+Player::Player(const std::string& strUUID) :
+    //m_pB2DWorld(pB2DWorld),
+    m_pBulletTimer(NULL),
+    AEntity(strUUID, (uint64_t)MakeT<uint64_t>((uint32_t)AEntity::POD, s_ui32Count))
 {
-    assert(m_pB2DWorld);
+    assert(World::m_pB2DWorld);
     
-    m_ui64Tag = MAKE<uint64_t>(s_ui32Type, s_ui32Count);
     ++s_ui32Count;
     
     m_pBulletTimer = new Rock2D::Timer(1000);
@@ -90,16 +92,16 @@ Player::~Player()
 
     Publisher.OnPlayerDestroyed(m_strUUID);
     
-    m_b2bBulletQueue.lock();
-    b2Body* pb2bBullet = NULL;
-    while (!(m_b2bBulletQueue.empty()))
-    {
-        pb2bBullet = m_b2bBulletQueue.pop();
-        m_pB2DWorld->world->DestroyBody(pb2bBullet);
-    }
-    m_b2bBulletQueue.unlock();
+//    m_b2bBulletQueue.lock();
+//    b2Body* pb2bBullet = NULL;
+//    while (!(m_b2bBulletQueue.empty()))
+//    {
+//        pb2bBullet = m_b2bBulletQueue.pop();
+//        m_pB2DWorld->world->DestroyBody(pb2bBullet);
+//    }
+//    m_b2bBulletQueue.unlock();
     
-    m_pB2DWorld->world->DestroyBody(m_pb2bPod);
+    World::m_pB2DWorld->world->DestroyBody(m_pb2bPod);
     m_pb2bPod = NULL;
     
     delete m_pBulletTimer;
@@ -130,61 +132,61 @@ void Player::CreatePod()
     UserData* pUserData = new UserData(m_ui64Tag, m_strUUID);
     
     // call the body factory.
-    m_pb2bPod = m_pB2DWorld->world->CreateBody(&bodyDef);
+    m_pb2bPod = World::m_pB2DWorld->world->CreateBody(&bodyDef);
 	m_pb2bPod->CreateFixture(&fixtureDef);
     //m_pb2bPod->SetUserData(&m_strUUID);
     m_pb2bPod->SetUserData(pUserData);
 }
 
-void Player::CreateBullet(b2Vec2& b2v2Bullet)
-{
-    static uint32_t     ui32Count = 1;
-    static uint32_t     ui32Type = 2;
-    uint64_t            ui64Tag = 0;
-    
-    b2BodyDef       bodyDef;
-    b2CircleShape   aB2CircleShape;
-    b2FixtureDef    fixtureDef;
-    b2Body*         pb2bBullet = NULL;
-    const b2Vec2&         b2v2PlayerPosition = m_pb2bPod->GetPosition();
-    
-	// Define the dynamic body. We set its position
-	bodyDef.type = b2_dynamicBody;
-    bodyDef.bullet = true;
-    bodyDef.allowSleep = false;
-    
-	bodyDef.position.Set(b2v2PlayerPosition.x, b2v2PlayerPosition.y);
-    
-    // Set the size of our shape
-	aB2CircleShape.m_radius = 0.25f;
-    
-    // Set the fixture and use the shape
-    fixtureDef.density = 0.1f;
-	fixtureDef.friction = 0.1f;
-    fixtureDef.restitution = 0.1f;
-    fixtureDef.filter.groupIndex = -2;
-    fixtureDef.shape = &aB2CircleShape;
-    
-    // call the body factory.
-    pb2bBullet = m_pB2DWorld->world->CreateBody(&bodyDef);
-	pb2bBullet->CreateFixture(&fixtureDef);
-    
-    ui64Tag = MAKE<uint64_t>(ui32Type, ui32Count);
-    ++ui32Count;
-    UserData* pUserData = new UserData(ui64Tag, m_strUUID);
-    
-    //pb2bBullet->SetUserData(&m_strUUID);
-    pb2bBullet->SetUserData(pUserData);
-    
-    m_b2bBulletQueue.lock();
-    m_b2bBulletQueue.push(pb2bBullet);
-    m_b2bBulletQueue.unlock();
-    
-    b2Vec2 b2v2Force = b2v2Bullet;
-    b2v2Force.x *= 10.0f;
-    b2v2Force.y *= 10.0f;
-    pb2bBullet->ApplyForceToCenter(b2v2Force, false);
-}
+//void Player::CreateBullet(b2Vec2& b2v2Bullet)
+//{
+//    static uint32_t     ui32Count = 1;
+//    static uint32_t     ui32Type = 2;
+//    uint64_t            ui64Tag = 0;
+//    
+//    b2BodyDef       bodyDef;
+//    b2CircleShape   aB2CircleShape;
+//    b2FixtureDef    fixtureDef;
+//    b2Body*         pb2bBullet = NULL;
+//    const b2Vec2&         b2v2PlayerPosition = m_pb2bPod->GetPosition();
+//    
+//	// Define the dynamic body. We set its position
+//	bodyDef.type = b2_dynamicBody;
+//    bodyDef.bullet = true;
+//    bodyDef.allowSleep = false;
+//    
+//	bodyDef.position.Set(b2v2PlayerPosition.x, b2v2PlayerPosition.y);
+//    
+//    // Set the size of our shape
+//	aB2CircleShape.m_radius = 0.25f;
+//    
+//    // Set the fixture and use the shape
+//    fixtureDef.density = 0.1f;
+//	fixtureDef.friction = 0.1f;
+//    fixtureDef.restitution = 0.1f;
+//    fixtureDef.filter.groupIndex = -2;
+//    fixtureDef.shape = &aB2CircleShape;
+//    
+//    // call the body factory.
+//    pb2bBullet = m_pB2DWorld->world->CreateBody(&bodyDef);
+//	pb2bBullet->CreateFixture(&fixtureDef);
+//    
+//    ui64Tag = MakeT<uint64_t>(ui32Type, ui32Count);
+//    ++ui32Count;
+//    UserData* pUserData = new UserData(ui64Tag, m_strUUID);
+//    
+//    //pb2bBullet->SetUserData(&m_strUUID);
+//    pb2bBullet->SetUserData(pUserData);
+//    
+//    m_b2bBulletQueue.lock();
+//    m_b2bBulletQueue.push(pb2bBullet);
+//    m_b2bBulletQueue.unlock();
+//    
+//    b2Vec2 b2v2Force = b2v2Bullet;
+//    b2v2Force.x *= 10.0f;
+//    b2v2Force.y *= 10.0f;
+//    pb2bBullet->ApplyForceToCenter(b2v2Force, false);
+//}
 
 // Method(s)
 void Player::Update()
@@ -201,14 +203,16 @@ void Player::Update()
     }
     m_b2v2MoveQueue.unlock();
     
+    Bullet* pBullet = NULL;
     m_b2v2ShootQueue.lock();
     while (!(m_b2v2ShootQueue.empty()))
     {
-        b2Vec2 ab2Vec2Shoot = m_b2v2ShootQueue.pop();
+        b2Vec2 ab2v2Shoot = m_b2v2ShootQueue.pop();
         if (m_pBulletTimer->Status() == Rock2D::Timer::EXPIRED)
         {
             std::cout << "Creating Bullet" << std::endl;
-            CreateBullet(ab2Vec2Shoot);
+            //CreateBullet(ab2Vec2Shoot);
+            pBullet = new Bullet(m_strUUID, m_pb2bPod->GetPosition(), ab2v2Shoot);
             m_pBulletTimer->Restart();
         }
     }

@@ -91,7 +91,7 @@ void B2DWorld::AddPlayer(const std::string& strUUID)
     
     xdispatch::global_queue().sync([=]
     {
-        Player* pPlayer = new Player(strUUID, this);
+        Player* pPlayer = new Player(strUUID);
         m_listPlayers.push_front(pPlayer);
     });
 }
