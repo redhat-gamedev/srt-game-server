@@ -42,32 +42,6 @@
          landmarkName = "SimpleProducer::Setup()"
          landmarkType = "5">
       </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "CMSTest/Server.cpp"
-         timestampString = "387767620.003204"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "230"
-         endingLineNumber = "230"
-         landmarkName = "Server::b2WorldToPbWorld(b2World* pb2World, PbWorld*&amp; pPbWorldDefault, std::string&amp; strPBBuffer)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "CMSTest/Server.cpp"
-         timestampString = "388154867.342666"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "275"
-         endingLineNumber = "275"
-         landmarkName = "Server::b2WorldToPbWorld(b2World* pb2World, PbWorld*&amp; pPbWorldDefault, std::string&amp; strPBBuffer)"
-         landmarkType = "5">
-      </FileBreakpoint>
    </FileBreakpoints>
    <SymbolicBreakpoints>
       <SymbolicBreakpoint

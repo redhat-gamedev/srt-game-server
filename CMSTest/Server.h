@@ -16,8 +16,6 @@
 #include "Heartbeat.h"
 #include "Input.h"
 #include "Security.h"
-#include "Addressbook.h"
-#include "addressbook.pb.h"
 #include "box2d.pb.h"
 #include "../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include <string>
@@ -42,14 +40,13 @@ class SimpleAsyncConsumer;
 class Player;
 
 using namespace decaf::lang;
-//using namespace decaf::util;
+
 
 
 class Server :
     public B2DWorld::ICallbacks,
     public Heartbeat::ICallbacks,
-    public Security::ICallbacks,
-    public Addressbook::ICallbacks
+    public Security::ICallbacks
 {
 // Class
 private:
@@ -66,14 +63,11 @@ private:
 protected:
     SimpleProducer*         m_pSimulationProducer;
     SimpleProducer*         m_pHeartbeatProducer;
-    SimpleProducer*         m_pAddressbookProducer;
     Thread*                 m_pB2DWorldThread;
     SimpleAsyncConsumer*    m_pCommandConsumer;
     B2DWorld*               m_pB2DWorld;
     decaf::util::Timer*     m_pTimer;
-    decaf::util::Timer*     m_ptAddressbook;
     Heartbeat*              m_pHeartbeat;
-    Addressbook*            m_pAddressbook;
     Input*                  m_pInput;
     Security*               m_pSecurity;
     Player*                 m_pPlayer;
@@ -102,9 +96,6 @@ public:
     // Heartbeat::ICallbacks implementation
     void OnBeat(int iBeat);
     
-    // Addressbook::ICallbacks implementation
-    void OnPerson(tutorial::Person* person);
-
     // Security::ICallbacks implementation
     void OnSecurityRequestJoin(std::string& strUUID);
     void OnSecurityRequestLeave(std::string& strUUID);

@@ -11,7 +11,6 @@
 #include "SimpleAsyncProducer.h"
 #include "B2DWorld.h"
 #include "Heartbeat.h"
-#include "Addressbook.h"
 #include "box2d.pb.h"
 #include "Security.h"
 #include "Player.h"
@@ -58,14 +57,11 @@ using namespace box2d;
 Server::Server() :
     m_pSimulationProducer(NULL),
     m_pHeartbeatProducer(NULL),
-    m_pAddressbookProducer(NULL),
     m_pB2DWorldThread(NULL),
     m_pCommandConsumer(NULL),
     m_pB2DWorld(NULL),
     m_pTimer(NULL),
-    m_ptAddressbook(NULL),
     m_pHeartbeat(NULL),
-    m_pAddressbook(NULL),
     m_pInput(NULL),
     m_pSecurity(NULL),
     m_pPlayer(NULL)
@@ -86,7 +82,6 @@ void Server::Setup()
     //bool            clientAck = false;
     std::string     strWorldSimulationURI = "WORLD.SIMULATION";
     std::string     strHeartbeatURI = "HEARTBEAT";
-    std::string     strAddressURI = "ADDRESS";
     std::string     strInputURI = "CLIENT.INPUT";
     std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp";
     ///"failover:(tcp://127.0.0.1:61616"
@@ -99,57 +94,22 @@ void Server::Setup()
     
     std::cout << "Setup()..." << std::endl;
     
-//    size_t iIntSize = sizeof(int);
-//    size_t iInt32Size = sizeof(int32_t);
-//    size_t iInt64Size = sizeof(int64_t);
-    
-//    int64_t i64Tag = 0;
-//    int32_t i32Type = 1;
-//    int32_t i32ID = 16;
-//    i64Tag = i32Type << 32;
-//    i64Tag |= i32ID;
-    
-//    uint32_t ui32Tag = 0;
-//    int32_t i32Tag = 0;
-//    uint32_t i32TagLo = 0;
-//    uint16_t i16TagHi = 0x55AA;
-//    uint16_t i16TagLo = 0xAA55;
-//    
-//    ui32Tag = static_cast<uint32_t>(i16TagHi << (CHAR_BIT * sizeof(uint16_t)));
-//    i32TagLo |= i16TagLo;
-//    //i32Tag |= static_cast<int16_t>(i16TagLo);
-//    ui32Tag |= i32TagLo;
-//    i32Tag = ui32Tag;
-    
-//    uint16_t wLo = 0xAA55U;
-//    uint16_t wHi = 0x55AAU;
-//    assert (MAKE<uint32_t> (wLo, wHi) == 0x55AAAA55);
-//    uint32_t uLo = 0x11223344U;
-//    uint32_t uHi = 0x44332211U;
-//    assert (MAKE<uint64_t> (uLo, uHi) == 0x4433221111223344);
-    
     activemq::library::ActiveMQCPP::initializeLibrary();
     
     m_pB2DWorld = new B2DWorld();
-    //m_pB2DWorld->CreateBodiesAndShapes();
 
     m_pSimulationProducer = new SimpleProducer(strBrokerURI, strWorldSimulationURI, true);
     m_pHeartbeatProducer = new SimpleProducer(strBrokerURI, strHeartbeatURI, true);
-    m_pAddressbookProducer = new SimpleProducer(strBrokerURI, strAddressURI, true);
     //m_pCommandConsumer = new SimpleAsyncConsumer(strBrokerURI, strInputURI, useTopics, clientAck);
     
     m_pHeartbeat = new Heartbeat();
     m_pTimer = new decaf::util::Timer();
 
-    m_pAddressbook = new Addressbook();
-    m_ptAddressbook = new decaf::util::Timer();
-    
     m_pInput = new Input();
     m_pSecurity = new Security();
 
     B2DWorld::Publisher.Attach(this);
     Heartbeat::Publisher.Attach(this);
-    //Addressbook::Publisher.Attach(this);
     Security::Publisher.Attach(this);
 }
 
@@ -158,7 +118,6 @@ void Server::Teardown()
     std::cout << "Teardown()..." << std::endl;
     
     Security::Publisher.Detach(this);
-    //Addressbook::Publisher.Detach(this);
     Heartbeat::Publisher.Detach(this);
     B2DWorld::Publisher.Detach(this);
 
@@ -167,13 +126,6 @@ void Server::Teardown()
     
     delete m_pInput;
     m_pInput = NULL;
-    
-    m_ptAddressbook->cancel();
-    //delete m_pAddressbook;
-    m_pAddressbook = NULL;
-    
-    delete m_ptAddressbook;
-    m_ptAddressbook = NULL;
     
     m_pTimer->cancel();
     //delete m_pHeartbeat;
@@ -186,10 +138,6 @@ void Server::Teardown()
     //delete m_pCommandConsumer;
     //m_pCommandConsumer = NULL;
 
-    m_pAddressbookProducer->close();
-    delete m_pAddressbookProducer;
-    m_pAddressbookProducer = NULL;
-    
     m_pHeartbeatProducer->close();
     delete m_pHeartbeatProducer;
     m_pHeartbeatProducer = NULL;
@@ -225,7 +173,7 @@ void Server::b2WorldToPbWorld(b2World* pb2World, PbWorld*& pPbWorldDefault, std:
     PbVec2* pPbVec2Force = NULL;
     //PbBodyType aPbBodyType = PbBodyType_MIN;
     const b2Vec2 b2v2Gravity = pb2World->GetGravity();
-    std::string* pstrUUID = NULL;
+    //std::string* pstrUUID = NULL;
     UserData* pUserData = NULL;
     
     ppbv2Gravity->set_x(b2v2Gravity.x);
@@ -264,11 +212,6 @@ void Server::b2WorldToPbWorld(b2World* pb2World, PbWorld*& pPbWorldDefault, std:
         pPbVec2Force->set_y(0.0f);
         pPbBody->set_allocated_force(pPbVec2Force);
         
-//        pstrUUID = (std::string*)pBody->GetUserData();
-//        assert(NULL != pstrUUID);
-//        pPbBody->set_uuid(*pstrUUID);
-//        pPbBody->set_tag(1);
-
         pUserData = static_cast<UserData*>(pBody->GetUserData());
         assert(NULL != pUserData);
         pPbBody->set_uuid(pUserData->m_strUUID);
@@ -311,9 +254,6 @@ void Server::Run()
     
     std::cout << "Starting the heartbeat" << std::endl;
     m_pTimer->schedule(m_pHeartbeat, 0, 1000);
-    
-    //std::cout << "Starting the addressbook" << std::endl;
-    //m_ptAddressbook->schedule(m_pAddressbook, 0, 2000);
 }
 
 void Server::OnB2DWorldUpdate(b2World* pWorld)
@@ -415,35 +355,6 @@ void Server::OnBeat(int iBeat)
         strText = m_szBuf;
         
         m_pHeartbeatProducer->Send(strText);
-        strText.clear();
-    }
-    catch ( CMSException& e )
-    {
-        e.printStackTrace();
-    }
-}
-
-// Heartbeat::ICallbacks implementation
-void Server::OnPerson(tutorial::Person* person)
-{
-    assert(person);
-    
-    static char m_szBuf[0xFF];
-    static std::string strText = "";
-    
-    try
-    {
-        memset(m_szBuf, 0, sizeof(m_szBuf));
-        sprintf(m_szBuf, "%i", person->id());
-        //printf("%s\n", m_szBuf);
-        //strText = m_szBuf;
-        person->SerializeToString(&strText);
-        const char* pucText = strText.c_str();
-        unsigned long ulLength = strText.length();
-        m_pAddressbookProducer->Send((const unsigned char*)pucText, (int)ulLength);
-        //m_pAddressbookProducer->Send(pucText, ulLength);
-        
-        //person->SerializeToArray(pData, iSize);
         strText.clear();
     }
     catch ( CMSException& e )

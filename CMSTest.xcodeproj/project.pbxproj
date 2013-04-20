@@ -19,8 +19,6 @@
 		CC52E0B31675058400D47C43 /* DualStick.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CC52E0B01675058400D47C43 /* DualStick.pb.cc */; };
 		CC52E0B71675245600D47C43 /* Input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC52E0B51675245600D47C43 /* Input.cpp */; };
 		CC57A5C7168F6E5A00B43FAA /* Command.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CC57A5C4168F6E5A00B43FAA /* Command.pb.cc */; };
-		CC67E1E0166A4F6500BCB047 /* addressbook.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CC67E1DC166A4F6500BCB047 /* addressbook.pb.cc */; };
-		CC67E1E4166A524400BCB047 /* Addressbook.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC67E1E2166A524300BCB047 /* Addressbook.cpp */; };
 		CC68EA96163DA07400D225C2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC68EA95163DA07400D225C2 /* main.cpp */; };
 		CC68EA98163DA07400D225C2 /* CMSTest.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = CC68EA97163DA07400D225C2 /* CMSTest.1 */; };
 		CC68EAB4163DB36800D225C2 /* SimpleAsyncConsumer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC68EAB2163DB36800D225C2 /* SimpleAsyncConsumer.cpp */; };
@@ -118,10 +116,6 @@
 		CC57A5C4168F6E5A00B43FAA /* Command.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Command.pb.cc; sourceTree = "<group>"; };
 		CC57A5C5168F6E5A00B43FAA /* Command.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Command.pb.h; sourceTree = "<group>"; };
 		CC57A5C6168F6E5A00B43FAA /* Command.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; path = Command.proto; sourceTree = "<group>"; };
-		CC67E1DC166A4F6500BCB047 /* addressbook.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = addressbook.pb.cc; sourceTree = "<group>"; };
-		CC67E1DD166A4F6500BCB047 /* addressbook.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = addressbook.pb.h; sourceTree = "<group>"; };
-		CC67E1E2166A524300BCB047 /* Addressbook.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Addressbook.cpp; sourceTree = "<group>"; };
-		CC67E1E3166A524400BCB047 /* Addressbook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Addressbook.h; sourceTree = "<group>"; };
 		CC68EA91163DA07400D225C2 /* CMSTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CMSTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC68EA95163DA07400D225C2 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		CC68EA97163DA07400D225C2 /* CMSTest.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = CMSTest.1; sourceTree = "<group>"; };
@@ -205,17 +199,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		CC67E1DA166A4F0500BCB047 /* AddressbookTest */ = {
-			isa = PBXGroup;
-			children = (
-				CC67E1E2166A524300BCB047 /* Addressbook.cpp */,
-				CC67E1E3166A524400BCB047 /* Addressbook.h */,
-				CC67E1DC166A4F6500BCB047 /* addressbook.pb.cc */,
-				CC67E1DD166A4F6500BCB047 /* addressbook.pb.h */,
-			);
-			name = AddressbookTest;
-			sourceTree = "<group>";
-		};
 		CC68EA86163DA07400D225C2 = {
 			isa = PBXGroup;
 			children = (
@@ -245,7 +228,6 @@
 				CC19F7A1168CCC9E007B694E /* Proto */,
 				CC3C8F8A167CC3F80084CBE8 /* Security.cpp */,
 				CC3C8F8B167CC3F80084CBE8 /* Security.h */,
-				CC67E1DA166A4F0500BCB047 /* AddressbookTest */,
 				CCE9089616517F95005F2E72 /* PublisherT.cpp */,
 				CCE9089716517F95005F2E72 /* PublisherT.h */,
 				CC68EA95163DA07400D225C2 /* main.cpp */,
@@ -399,8 +381,6 @@
 				CCE90879165165F8005F2E72 /* Server.cpp in Sources */,
 				CCE9089816517F96005F2E72 /* PublisherT.cpp in Sources */,
 				CCE9089B165192E8005F2E72 /* Heartbeat.cpp in Sources */,
-				CC67E1E0166A4F6500BCB047 /* addressbook.pb.cc in Sources */,
-				CC67E1E4166A524400BCB047 /* Addressbook.cpp in Sources */,
 				CCA2F45C166AA72C00D62F5C /* box2d.pb.cc in Sources */,
 				CC52E0B31675058400D47C43 /* DualStick.pb.cc in Sources */,
 				CC52E0B71675245600D47C43 /* Input.cpp in Sources */,
