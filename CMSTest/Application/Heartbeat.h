@@ -9,15 +9,15 @@
 #ifndef __CMSTest__Heartbeat__
 #define __CMSTest__Heartbeat__
 
-#include "decaf/util/TimerTask.h"
 #include "../Shared/PublisherT.cpp"
+#include <decaf/util/TimerTask.h>
 #include <list>
 
 
 class Heartbeat :
     public decaf::util::TimerTask
 {
-    // Class
+// Class
 public:
     class ICallbacks
     {

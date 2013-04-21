@@ -13,7 +13,6 @@
 #include "../Shared/SimpleAsyncConsumer.h"
 #include "../Shared/SimpleAsyncProducer.h"
 #include <cms/CMSException.h>
-//#include <cms/Message.h>
 #include <cms/TextMessage.h>
 #include <cms/BytesMessage.h>
 #include <cms/Destination.h>
@@ -30,6 +29,7 @@ using namespace cms;
 using namespace command;
 
 Security::_Publisher                 Security::Publisher;
+
 
 // Constructor(s)
 /*

@@ -9,22 +9,21 @@
 #ifndef __CMSTest__B2DWorld__
 #define __CMSTest__B2DWorld__
 
-#include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
-#include "decaf/lang/Runnable.h"
-#include "decaf/util/StlQueue.h"
+//#include <decaf/lang/Runnable.h>
+//#include <decaf/util/StlQueue.h>
 //#include "../../Libraries/Phoenix/source/PublisherT.cpp"
 #include "../Shared/PublisherT.cpp"
+#include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include <string>
 #include <list>
 
-class Player;
+//class Player;
 
 
 // This is a simple example of building and running a simulation
 // using Box2D. Here we create a large ground box and a small dynamic
 // box.
-class B2DWorld :
-    public decaf::lang::Runnable
+class B2DWorld
 {
 // Class
 public:
@@ -65,11 +64,11 @@ protected:
 	int32           velocityIterations;
     int32           positionIterations;
     
-    char            m_szBuf[0xff];
+//    char            m_szBuf[0xff];
     
-    std::list<Player*>              m_listPlayers;
-    std::list<Player*>              m_listPlayersSwap;
-    
+//    std::list<Player*>              m_listPlayers;
+//    std::list<Player*>              m_listPlayersSwap;
+//    
 public:
     b2World*        world;
     
@@ -79,9 +78,9 @@ public:
     // Destructor
     ~B2DWorld();
     
-    // Method(s)
-    void AddPlayer(const std::string& strUUID);
-    void RemovePlayer(const std::string& strUUID);
+//    // Method(s)
+//    void AddPlayer(const std::string& strUUID);
+//    void RemovePlayer(const std::string& strUUID);
 
     // decaf::lang::Runnable implementation
     void run();

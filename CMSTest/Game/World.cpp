@@ -8,16 +8,17 @@
 
 #include "World.h"
 #include "B2DWorld.h"
+#include "Player.h"
 #include "UserData.h"
 #include "../Shared/SimpleAsyncProducer.h"
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
+#include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
 #include <cms/CMSException.h>
 #include <decaf/lang/Thread.h>
 
 B2DWorld*               World::m_pB2DWorld = NULL;
 
 using namespace decaf::lang;
-//using namespace decaf::util;
 using namespace decaf::util::concurrent;
 using namespace box2d;
 using namespace cms;
@@ -55,7 +56,6 @@ void World::Teardown()
 // Constructor(s)
 World::World() :
     m_pSimulationProducer(NULL),
-//    m_pB2DWorld(NULL),
     m_pB2DWorldThread(NULL)
 {
     Setup();
@@ -142,6 +142,41 @@ void World::b2WorldToPbWorld(b2World* pb2World, PbWorld*& pPbWorldDefault, std::
             pPbFixture->set_friction(pFixture->GetFriction());
         }
     }    
+}
+
+// Method(s)
+void World::AddPlayer(const std::string& strUUID)
+{
+    assert(strUUID.length() > 0);
+    
+    xdispatch::global_queue().sync([=]
+    {
+       Player* pPlayer = new Player(strUUID);
+       m_listPlayers.push_front(pPlayer);
+    });
+}
+
+void World::RemovePlayer(const std::string& strUUID)
+{
+    assert(strUUID.length() > 0);
+    
+    xdispatch::global_queue().sync([=]
+    {
+       std::list<Player*>::iterator    iterPlayerList;
+       Player* pPlayer = NULL;
+       
+       iterPlayerList = m_listPlayers.begin();
+       for (;iterPlayerList != m_listPlayers.end(); iterPlayerList++)
+       {
+           pPlayer = *iterPlayerList;
+           if (pPlayer->ThisUUIDIsAMatch(strUUID))
+           {
+               m_listPlayers.erase(iterPlayerList);
+               delete pPlayer;
+               break;
+           }
+       }
+    });
 }
 
 void World::OnB2DWorldUpdate(b2World* pWorld)
@@ -232,13 +267,15 @@ void World::OnB2DWorldBodyUpdate(b2Body* pBody)
 // Security::ICallbacks implementation
 void World::OnSecurityRequestJoin(std::string& strUUID)
 {
-    std::string     strName = "B2DWorldThread";
+    std::string     strName = "WorldThread";
     
-    m_pB2DWorld->AddPlayer(strUUID);
+    //m_pB2DWorld->AddPlayer(strUUID);
+    AddPlayer(strUUID);
     
     if (NULL == m_pB2DWorldThread)
     {
-        m_pB2DWorldThread = new decaf::lang::Thread(m_pB2DWorld, strName);
+        //m_pB2DWorldThread = new decaf::lang::Thread(m_pB2DWorld, strName);
+        m_pB2DWorldThread = new decaf::lang::Thread(this, strName);
         std::cout << "Starting the world simulation" << std::endl;
         m_pB2DWorldThread->start();
     }
@@ -248,5 +285,33 @@ void World::OnSecurityRequestLeave(std::string& strUUID)
 {
     assert(m_pB2DWorld);
     
-    m_pB2DWorld->RemovePlayer(strUUID);
+    //m_pB2DWorld->RemovePlayer(strUUID);
+    RemovePlayer(strUUID);
 }
+
+// decaf::lang::Runnable implementation
+void World::run()
+{
+    Player* pPlayer = NULL;
+    
+    while (true)
+    {
+        xdispatch::global_queue().sync([=]
+        {
+           m_listPlayersSwap = m_listPlayers;
+        });
+        
+        while (!(m_listPlayersSwap.empty()))
+        {
+            pPlayer = m_listPlayersSwap.front();
+            m_listPlayersSwap.pop_front();
+            assert(pPlayer);
+            pPlayer->Update();
+        }
+        
+        m_pB2DWorld->run();
+        
+        decaf::lang::Thread::currentThread()->sleep(15);
+    }
+}
+

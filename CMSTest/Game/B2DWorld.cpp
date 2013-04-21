@@ -7,11 +7,11 @@
 //
 
 #include "B2DWorld.h"
-#include "Player.h"
-#include "decaf/lang/Thread.h"
-#include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
+//#include "Player.h"
+#include <decaf/lang/Thread.h>
+//#include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
 
-using namespace box2d;
+//using namespace box2d;
 
 B2DWorld::_Publisher                 B2DWorld::Publisher;
 
@@ -81,70 +81,72 @@ B2DWorld::B2DWorld()
 B2DWorld::~B2DWorld()
 {
     delete gravity;
+    gravity = NULL;
+    
     delete world;
+    world = NULL;
 }
 
-// Method(s)
-void B2DWorld::AddPlayer(const std::string& strUUID)
-{
-    assert(strUUID.length() > 0);
-    
-    xdispatch::global_queue().sync([=]
-    {
-        Player* pPlayer = new Player(strUUID);
-        m_listPlayers.push_front(pPlayer);
-    });
-}
-
-void B2DWorld::RemovePlayer(const std::string& strUUID)
-{
-    assert(strUUID.length() > 0);
-    
-    xdispatch::global_queue().sync([=]
-    {
-        std::list<Player*>::iterator    iterPlayerList;
-        Player* pPlayer = NULL;
-        
-        iterPlayerList = m_listPlayers.begin();
-        for (;iterPlayerList != m_listPlayers.end(); iterPlayerList++)
-        {
-            pPlayer = *iterPlayerList;
-            if (pPlayer->ThisUUIDIsAMatch(strUUID))
-            {
-                m_listPlayers.erase(iterPlayerList);
-                delete pPlayer;
-                break;
-            }
-        }
-    });
-}
+//// Method(s)
+//void B2DWorld::AddPlayer(const std::string& strUUID)
+//{
+//    assert(strUUID.length() > 0);
+//    
+//    xdispatch::global_queue().sync([=]
+//    {
+//        Player* pPlayer = new Player(strUUID);
+//        m_listPlayers.push_front(pPlayer);
+//    });
+//}
+//
+//void B2DWorld::RemovePlayer(const std::string& strUUID)
+//{
+//    assert(strUUID.length() > 0);
+//    
+//    xdispatch::global_queue().sync([=]
+//    {
+//        std::list<Player*>::iterator    iterPlayerList;
+//        Player* pPlayer = NULL;
+//        
+//        iterPlayerList = m_listPlayers.begin();
+//        for (;iterPlayerList != m_listPlayers.end(); iterPlayerList++)
+//        {
+//            pPlayer = *iterPlayerList;
+//            if (pPlayer->ThisUUIDIsAMatch(strUUID))
+//            {
+//                m_listPlayers.erase(iterPlayerList);
+//                delete pPlayer;
+//                break;
+//            }
+//        }
+//    });
+//}
 
 // decaf::lang::Runnable implementation
 void B2DWorld::run()
 {
-    Player* pPlayer = NULL;
+//    Player* pPlayer = NULL;
+//    
+//    while (true)
+//    {
+//        xdispatch::global_queue().sync([=]
+//        {
+//            m_listPlayersSwap = m_listPlayers;
+//        });
+//        while (!(m_listPlayersSwap.empty()))
+//        {
+//            pPlayer = m_listPlayersSwap.front();
+//            m_listPlayersSwap.pop_front();
+//            assert(pPlayer);
+//            pPlayer->Update();
+//        }
     
-    while (true)
-    {
-        xdispatch::global_queue().sync([=]
-        {
-            m_listPlayersSwap = m_listPlayers;
-        });
-        while (!(m_listPlayersSwap.empty()))
-        {
-            pPlayer = m_listPlayersSwap.front();
-            m_listPlayersSwap.pop_front();
-            assert(pPlayer);
-            pPlayer->Update();
-        }
-        
         // Instruct the world to perform a single step of simulation.
         // It is generally best to keep the time step and iterations fixed.
         world->Step(timeStep, velocityIterations, positionIterations);
-
         Publisher.OnB2DWorldUpdate(world);
-        
-        decaf::lang::Thread::currentThread()->sleep(15);
-    }
+//        
+//        decaf::lang::Thread::currentThread()->sleep(15);
+//    }
 }
 

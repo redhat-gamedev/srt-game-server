@@ -12,6 +12,7 @@
 #include "B2DWorld.h"
 #include "../Application/Security.h"
 #include "../Proto/box2d.pb.h"
+#include <decaf/lang/Runnable.h>
 #include <string>
 
 namespace decaf
@@ -27,9 +28,11 @@ namespace decaf
 }
 class SimpleProducer;
 class B2DWorld;
+class Player;
 
 
 class World :
+    public decaf::lang::Runnable,
     public B2DWorld::ICallbacks,
     public Security::ICallbacks
 {
@@ -38,6 +41,9 @@ private:
 protected:
     SimpleProducer*                 m_pSimulationProducer;
     decaf::lang::Thread*            m_pB2DWorldThread;
+    
+    std::list<Player*>              m_listPlayers;
+    std::list<Player*>              m_listPlayersSwap;
     
     // Helper(s)
     void Setup();
@@ -54,13 +60,20 @@ public:
     // Destructor(s)
     ~World();
 
+    // Method(s)
+    void AddPlayer(const std::string& strUUID);
+    void RemovePlayer(const std::string& strUUID);
+    
     // B2DWorld::ICallbacks implementation
     void OnB2DWorldUpdate(b2World* pWorld);
     void OnB2DWorldBodyUpdate(b2Body* pBody);
     
     // Security::ICallbacks implementation
     void OnSecurityRequestJoin(std::string& strUUID);
-    void OnSecurityRequestLeave(std::string& strUUID);    
+    void OnSecurityRequestLeave(std::string& strUUID);
+    
+    // decaf::lang::Runnable implementation
+    void run();
 };
 
 #endif /* defined(__CMSTest__World__) */
