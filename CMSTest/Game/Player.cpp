@@ -9,15 +9,17 @@
 #include "Player.h"
 #include "Bullet.h"
 #include "B2DWorld.h"
+
 #include "World.h"
 #include "Timer.h"
 #include "UserData.h"
+#include "B2DWorld_BuildT.h"
 #include "../Shared/MakeT.h"
 #include <assert.h>
 
 Player::_Publisher          Player::Publisher;
 uint32_t                    Player::s_ui32Count = 1;
-//uint32_t                    Player::s_ui32Type = AEntity::POD;
+
 
 // Constructor(s)
 /*
@@ -92,15 +94,6 @@ Player::~Player()
 
     Publisher.OnPlayerDestroyed(m_strUUID);
     
-//    m_b2bBulletQueue.lock();
-//    b2Body* pb2bBullet = NULL;
-//    while (!(m_b2bBulletQueue.empty()))
-//    {
-//        pb2bBullet = m_b2bBulletQueue.pop();
-//        m_pB2DWorld->world->DestroyBody(pb2bBullet);
-//    }
-//    m_b2bBulletQueue.unlock();
-    
     World::m_pB2DWorld->world->DestroyBody(m_pb2bPod);
     m_pb2bPod = NULL;
     
@@ -110,83 +103,42 @@ Player::~Player()
 
 void Player::CreatePod()
 {
-    b2BodyDef       bodyDef;
-    b2PolygonShape  dynamicBox;
-    b2CircleShape   aB2CircleShape;
-    b2FixtureDef    fixtureDef;
-    
-	// Define the dynamic body. We set its position
-	bodyDef.type = b2_dynamicBody;
-	bodyDef.position.Set(0.0f, 0.0f);
-
-    // Set the size of our shape
-	aB2CircleShape.m_radius = 1.0f;
-
-    // Set the fixture and use the shape
-    fixtureDef.density = 1.0f;
-	fixtureDef.friction = 0.3f;
-    fixtureDef.restitution = 0.3f;
-    fixtureDef.filter.groupIndex = -2;    
-    fixtureDef.shape = &aB2CircleShape;
-    
-    UserData* pUserData = new UserData(m_ui64Tag, m_strUUID);
-    
-    // call the body factory.
-    m_pb2bPod = World::m_pB2DWorld->world->CreateBody(&bodyDef);
-	m_pb2bPod->CreateFixture(&fixtureDef);
-    //m_pb2bPod->SetUserData(&m_strUUID);
-    m_pb2bPod->SetUserData(pUserData);
-}
-
-//void Player::CreateBullet(b2Vec2& b2v2Bullet)
-//{
-//    static uint32_t     ui32Count = 1;
-//    static uint32_t     ui32Type = 2;
-//    uint64_t            ui64Tag = 0;
-//    
 //    b2BodyDef       bodyDef;
+//    b2PolygonShape  dynamicBox;
 //    b2CircleShape   aB2CircleShape;
 //    b2FixtureDef    fixtureDef;
-//    b2Body*         pb2bBullet = NULL;
-//    const b2Vec2&         b2v2PlayerPosition = m_pb2bPod->GetPosition();
 //    
 //	// Define the dynamic body. We set its position
 //	bodyDef.type = b2_dynamicBody;
-//    bodyDef.bullet = true;
-//    bodyDef.allowSleep = false;
-//    
-//	bodyDef.position.Set(b2v2PlayerPosition.x, b2v2PlayerPosition.y);
-//    
+//	bodyDef.position.Set(0.0f, 0.0f);
+//
 //    // Set the size of our shape
-//	aB2CircleShape.m_radius = 0.25f;
-//    
+//	aB2CircleShape.m_radius = 1.0f;
+//
 //    // Set the fixture and use the shape
-//    fixtureDef.density = 0.1f;
-//	fixtureDef.friction = 0.1f;
-//    fixtureDef.restitution = 0.1f;
-//    fixtureDef.filter.groupIndex = -2;
+//    fixtureDef.density = 1.0f;
+//	fixtureDef.friction = 0.3f;
+//    fixtureDef.restitution = 0.3f;
+//    fixtureDef.filter.groupIndex = -2;    
 //    fixtureDef.shape = &aB2CircleShape;
 //    
+//    UserData* pUserData = new UserData(m_ui64Tag, m_strUUID);
+//    
 //    // call the body factory.
-//    pb2bBullet = m_pB2DWorld->world->CreateBody(&bodyDef);
-//	pb2bBullet->CreateFixture(&fixtureDef);
-//    
-//    ui64Tag = MakeT<uint64_t>(ui32Type, ui32Count);
-//    ++ui32Count;
-//    UserData* pUserData = new UserData(ui64Tag, m_strUUID);
-//    
-//    //pb2bBullet->SetUserData(&m_strUUID);
-//    pb2bBullet->SetUserData(pUserData);
-//    
-//    m_b2bBulletQueue.lock();
-//    m_b2bBulletQueue.push(pb2bBullet);
-//    m_b2bBulletQueue.unlock();
-//    
-//    b2Vec2 b2v2Force = b2v2Bullet;
-//    b2v2Force.x *= 10.0f;
-//    b2v2Force.y *= 10.0f;
-//    pb2bBullet->ApplyForceToCenter(b2v2Force, false);
-//}
+//    m_pb2bPod = World::m_pB2DWorld->world->CreateBody(&bodyDef);
+//	m_pb2bPod->CreateFixture(&fixtureDef);
+//    m_pb2bPod->SetUserData(pUserData);
+
+    UserData* pUserData = new UserData(m_ui64Tag, m_strUUID);
+    B2DWorld::_BuildT<Player>::B2DPod(this, &Player::ReceivePod, pUserData);
+}
+
+void Player::ReceivePod(b2Body* pb2bPod)
+{
+    assert(pb2bPod);
+    
+    m_pb2bPod = pb2bPod;
+}
 
 // Method(s)
 void Player::Update()
@@ -211,7 +163,6 @@ void Player::Update()
         if (m_pBulletTimer->Status() == Rock2D::Timer::EXPIRED)
         {
             std::cout << "Creating Bullet" << std::endl;
-            //CreateBullet(ab2Vec2Shoot);
             pBullet = new Bullet(m_strUUID, m_pb2bPod->GetPosition(), ab2v2Shoot);
             m_pBulletTimer->Restart();
         }

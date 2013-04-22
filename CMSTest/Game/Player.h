@@ -52,14 +52,9 @@ protected:
     };
 private:
     static uint32_t         s_ui32Count;
-//    static uint32_t         s_ui32Type;
     
 protected:
-//    uint64_t        m_ui64Tag;
-//    std::string     m_strUUID;
-    
     b2Body*         m_pb2bPod;
-    //B2DWorld*       m_pB2DWorld;
 
     Rock2D::Timer*          m_pBulletTimer;
     
@@ -69,12 +64,9 @@ protected:
     decaf::util::StlQueue<b2Vec2>       m_b2v2ShootQueue;
     decaf::util::StlQueue<b2Vec2>       m_b2v2ShootSwapQueue;
 
-//    decaf::util::StlQueue<b2Body*>      m_b2bBulletQueue;
-    //decaf::util::StlQueue<b2Body*>      m_b2bBulletSwapQueue;
-
     // Helper(s)
     void CreatePod();
-//    void CreateBullet(b2Vec2& b2v2Bullet);
+    void ReceivePod(b2Body* pb2bPod);
     
 public:
     static _Publisher               Publisher;

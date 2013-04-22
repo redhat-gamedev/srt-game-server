@@ -40,7 +40,7 @@ private:
     
 protected:
     SimpleProducer*                 m_pSimulationProducer;
-    decaf::lang::Thread*            m_pB2DWorldThread;
+    decaf::lang::Thread*            m_pWorldThread;
     
     std::list<Player*>              m_listPlayers;
     std::list<Player*>              m_listPlayersSwap;

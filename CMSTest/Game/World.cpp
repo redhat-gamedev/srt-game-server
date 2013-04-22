@@ -46,8 +46,8 @@ void World::Teardown()
     delete m_pSimulationProducer;
     m_pSimulationProducer = NULL;
  
-    delete m_pB2DWorldThread;
-    m_pB2DWorldThread = NULL;
+    delete m_pWorldThread;
+    m_pWorldThread = NULL;
     
     delete m_pB2DWorld;
     m_pB2DWorld = NULL;
@@ -56,7 +56,7 @@ void World::Teardown()
 // Constructor(s)
 World::World() :
     m_pSimulationProducer(NULL),
-    m_pB2DWorldThread(NULL)
+    m_pWorldThread(NULL)
 {
     Setup();
 }
@@ -269,15 +269,13 @@ void World::OnSecurityRequestJoin(std::string& strUUID)
 {
     std::string     strName = "WorldThread";
     
-    //m_pB2DWorld->AddPlayer(strUUID);
     AddPlayer(strUUID);
     
-    if (NULL == m_pB2DWorldThread)
+    if (NULL == m_pWorldThread)
     {
-        //m_pB2DWorldThread = new decaf::lang::Thread(m_pB2DWorld, strName);
-        m_pB2DWorldThread = new decaf::lang::Thread(this, strName);
+        m_pWorldThread = new decaf::lang::Thread(this, strName);
         std::cout << "Starting the world simulation" << std::endl;
-        m_pB2DWorldThread->start();
+        m_pWorldThread->start();
     }
 }
 
@@ -285,7 +283,6 @@ void World::OnSecurityRequestLeave(std::string& strUUID)
 {
     assert(m_pB2DWorld);
     
-    //m_pB2DWorld->RemovePlayer(strUUID);
     RemovePlayer(strUUID);
 }
 
