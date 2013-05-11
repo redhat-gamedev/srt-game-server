@@ -107,166 +107,20 @@ void World::b2Vec2ToPbVec2(b2Vec2* pb2Vec2)
     assert(NULL != pb2Vec2);
 }
 
-void World::b2WorldToPbWorld(b2World* pb2World, PbWorld*& pPbWorldDefault, std::string& strPBBuffer)
-{
-    assert(NULL != pb2World);
-    
-    b2Fixture* pFixtureList = NULL;
-    PbBody* pPbBody = NULL;
-    PbFixture* pPbFixture = NULL;
-    PbVec2* ppbv2Gravity = new PbVec2();
-    PbVec2* ppbv2Position = new PbVec2();
-    PbVec2* pPbVec2LinearVelocity = NULL;
-    PbVec2* pPbVec2Force = NULL;
-    //PbBodyType aPbBodyType = PbBodyType_MIN;
-    const b2Vec2 b2v2Gravity = pb2World->GetGravity();
-    //std::string* pstrUUID = NULL;
-    UserData* pUserData = NULL;
-    
-    ppbv2Gravity->set_x(b2v2Gravity.x);
-    ppbv2Gravity->set_y(b2v2Gravity.y);
-    pPbWorldDefault->set_allocated_gravity(ppbv2Gravity);
-    
-    int iPreCount = 0;
-    int iPostCount = 0;
-    strPBBuffer.clear();
-    b2Body* pBodyList = pb2World->GetBodyList();
-    for (b2Body* pBody = pBodyList; pBody; pBody = pBody->GetNext())
-    {
-        iPreCount = pPbWorldDefault->bodies_size();
-        pPbBody = pPbWorldDefault->add_bodies();
-        assert(NULL != pPbBody);
-        iPostCount = pPbWorldDefault->bodies_size();
-        assert(iPostCount > iPreCount);
-        
-        pPbBody->set_active(pBody->IsActive());
-        pPbBody->set_bullet(pBody->IsBullet());
-        //aPbBodyType = DYNAMIC;
-        pPbBody->set_type(DYNAMIC);
-        ppbv2Position = new PbVec2();
-        ppbv2Position->set_x(pBody->GetPosition().x);
-        ppbv2Position->set_y(pBody->GetPosition().y);
-        pPbBody->set_angle(pBody->GetAngle());
-        pPbBody->set_allocated_position(ppbv2Position);
-        
-        pPbVec2LinearVelocity = new PbVec2();
-        pPbVec2LinearVelocity->set_x(pBody->GetLinearVelocity().x);
-        pPbVec2LinearVelocity->set_y(pBody->GetLinearVelocity().y);
-        pPbBody->set_allocated_linear_velocity(pPbVec2LinearVelocity);
-        
-        pPbVec2Force = new PbVec2();
-        pPbVec2Force->set_x(0.0f);
-        pPbVec2Force->set_y(0.0f);
-        pPbBody->set_allocated_force(pPbVec2Force);
-        
-        pUserData = static_cast<UserData*>(pBody->GetUserData());
-        assert(NULL != pUserData);
-        pPbBody->set_uuid(pUserData->m_strUUID);
-        pPbBody->set_tag(pUserData->m_ui64Tag);
-        
-        pFixtureList = pBody->GetFixtureList();
-        for (b2Fixture* pFixture = pFixtureList; pFixture; pFixture = pFixture->GetNext())
-        {
-            iPreCount = pPbBody->fixtures_size();
-            pPbFixture = pPbBody->add_fixtures();
-            assert(NULL != pPbFixture);
-            iPostCount = pPbBody->fixtures_size();
-            assert(iPostCount > iPreCount);
-            
-            pPbFixture->set_density(pFixture->GetDensity());
-            pPbFixture->set_friction(pFixture->GetFriction());
-        }
-    }    
-}
-
 void World::b2WorldToPbWorld(b2World* pb2World, PbWorld*& pPbWorldDefault)
 {
     assert(NULL != pb2World);
+    assert(NULL != pPbWorldDefault);
     
-    b2Fixture* pFixtureList = NULL;
-    PbBody* pPbBody = NULL;
-    PbFixture* pPbFixture = NULL;
-    PbVec2* ppbv2Gravity = new PbVec2();
-    PbVec2* ppbv2Position = new PbVec2();
-    PbVec2* pPbVec2LinearVelocity = NULL;
-    PbVec2* pPbVec2Force = NULL;
-    //PbBodyType aPbBodyType = PbBodyType_MIN;
-    const b2Vec2 b2v2Gravity = pb2World->GetGravity();
-    //std::string* pstrUUID = NULL;
-    UserData* pUserData = NULL;
-    
-    ppbv2Gravity->set_x(b2v2Gravity.x);
-    ppbv2Gravity->set_y(b2v2Gravity.y);
-    pPbWorldDefault->set_allocated_gravity(ppbv2Gravity);
-    
-    int iPreCount = 0;
-    int iPostCount = 0;
-    b2Body* pBodyList = pb2World->GetBodyList();
-    for (b2Body* pBody = pBodyList; pBody; pBody = pBody->GetNext())
-    {
-        iPreCount = pPbWorldDefault->bodies_size();
-        pPbBody = pPbWorldDefault->add_bodies();
-        assert(NULL != pPbBody);
-        iPostCount = pPbWorldDefault->bodies_size();
-        assert(iPostCount > iPreCount);
-        
-        pPbBody->set_active(pBody->IsActive());
-        pPbBody->set_bullet(pBody->IsBullet());
-        //aPbBodyType = DYNAMIC;
-        pPbBody->set_type(DYNAMIC);
-        ppbv2Position = new PbVec2();
-        ppbv2Position->set_x(pBody->GetPosition().x);
-        ppbv2Position->set_y(pBody->GetPosition().y);
-        pPbBody->set_angle(pBody->GetAngle());
-        pPbBody->set_allocated_position(ppbv2Position);
-        
-        pPbVec2LinearVelocity = new PbVec2();
-        pPbVec2LinearVelocity->set_x(pBody->GetLinearVelocity().x);
-        pPbVec2LinearVelocity->set_y(pBody->GetLinearVelocity().y);
-        pPbBody->set_allocated_linear_velocity(pPbVec2LinearVelocity);
-        
-        pPbVec2Force = new PbVec2();
-        pPbVec2Force->set_x(0.0f);
-        pPbVec2Force->set_y(0.0f);
-        pPbBody->set_allocated_force(pPbVec2Force);
-        
-        pUserData = static_cast<UserData*>(pBody->GetUserData());
-        assert(NULL != pUserData);
-        pPbBody->set_uuid(pUserData->m_strUUID);
-        pPbBody->set_tag(pUserData->m_ui64Tag);
-        
-        pFixtureList = pBody->GetFixtureList();
-        for (b2Fixture* pFixture = pFixtureList; pFixture; pFixture = pFixture->GetNext())
-        {
-            iPreCount = pPbBody->fixtures_size();
-            pPbFixture = pPbBody->add_fixtures();
-            assert(NULL != pPbFixture);
-            iPostCount = pPbBody->fixtures_size();
-            assert(iPostCount > iPreCount);
-            
-            pPbFixture->set_density(pFixture->GetDensity());
-            pPbFixture->set_friction(pFixture->GetFriction());
-        }
-    }
-}
-
-void World::b2WorldToPbWorld(b2World* pb2World)
-{
-    assert(NULL != pb2World);
-    
-        PbWorld*    pPbWorldDefault = NULL;//new PbWorld();
-    
-    b2Fixture* pFixtureList = NULL;
-    PbBody* pPbBody = NULL;
-    PbFixture* pPbFixture = NULL;
-    PbVec2* ppbv2Gravity = new PbVec2();
-    PbVec2* ppbv2Position = new PbVec2();
-    PbVec2* pPbVec2LinearVelocity = NULL;
-    PbVec2* pPbVec2Force = NULL;
-    //PbBodyType aPbBodyType = PbBodyType_MIN;
-    const b2Vec2 b2v2Gravity = pb2World->GetGravity();
-    //std::string* pstrUUID = NULL;
-    UserData* pUserData = NULL;
+    b2Fixture*  pFixtureList = NULL;
+    PbBody*     pPbBody = NULL;
+    PbFixture*  pPbFixture = NULL;
+    PbVec2*     ppbv2Gravity = new PbVec2();
+    PbVec2*     ppbv2Position = new PbVec2();
+    PbVec2*     pPbVec2LinearVelocity = NULL;
+    PbVec2*     pPbVec2Force = NULL;
+    const       b2Vec2 b2v2Gravity = pb2World->GetGravity();
+    UserData*   pUserData = NULL;
     
     ppbv2Gravity->set_x(b2v2Gravity.x);
     ppbv2Gravity->set_y(b2v2Gravity.y);
@@ -285,7 +139,6 @@ void World::b2WorldToPbWorld(b2World* pb2World)
         
         pPbBody->set_active(pBody->IsActive());
         pPbBody->set_bullet(pBody->IsBullet());
-        //aPbBodyType = DYNAMIC;
         pPbBody->set_type(DYNAMIC);
         ppbv2Position = new PbVec2();
         ppbv2Position->set_x(pBody->GetPosition().x);
@@ -358,153 +211,49 @@ void World::RemovePlayer(const std::string& strUUID)
     });
 }
 
-void World::OnB2DWorldUpdate(b2World* pWorld)
-{
-    assert(pWorld);
-    assert(m_pSimulationProducer);
-    
-    static std::string strPBBuffer = "";
-    PbWorld* pPbWorldDefault = new PbWorld();
-    
-    try
-    {
-        b2WorldToPbWorld(pWorld, pPbWorldDefault, strPBBuffer);
-        pPbWorldDefault->SerializeToString(&strPBBuffer);
-        const char* pucText = strPBBuffer.c_str();
-        unsigned long ulLength = strPBBuffer.length();
-        m_pSimulationProducer->Send((const unsigned char*)pucText, (int)ulLength);
-    }
-    catch ( CMSException& e )
-    {
-        e.printStackTrace();
-        if (NULL != pPbWorldDefault)
-        {
-            pPbWorldDefault->clear_bodies();
-            pPbWorldDefault->clear_joints();
-            delete pPbWorldDefault;
-            pPbWorldDefault = NULL;
-        }
-    }
-    
-    if (NULL != pPbWorldDefault)
-    {
-        pPbWorldDefault->clear_bodies();
-        pPbWorldDefault->clear_joints();
-        delete pPbWorldDefault;
-        pPbWorldDefault = NULL;
-    }
-}
-
-void World::SendUpdate(PbWorld* pPbWorldDefault)
-{
-    assert(pPbWorldDefault);
-    
-    static std::string strPBBuffer = "";
-    
-    try
-    {
-        strPBBuffer.clear();
-        pPbWorldDefault->SerializeToString(&strPBBuffer);
-        const char* pucText = strPBBuffer.c_str();
-        unsigned long ulLength = strPBBuffer.length();
-        m_pSimulationProducer->Send((const unsigned char*)pucText, (int)ulLength);
-    }
-    catch ( CMSException& e )
-    {
-        e.printStackTrace();
-//        if (NULL != pPbWorldDefault)
-//        {
-//            pPbWorldDefault->clear_bodies();
-//            pPbWorldDefault->clear_joints();
-//            delete pPbWorldDefault;
-//            pPbWorldDefault = NULL;
-//        }
-    }
-    
-//    if (NULL != pPbWorldDefault)
+//void World::SendUpdate(PbWorld* pPbWorldDefault)
+//{
+//    assert(pPbWorldDefault);
+//    
+//    static std::string strPBBuffer = "";
+//    
+//    try
 //    {
-//        pPbWorldDefault->clear_bodies();
-//        pPbWorldDefault->clear_joints();
-//        delete pPbWorldDefault;
-//        pPbWorldDefault = NULL;
+//        strPBBuffer.clear();
+//        pPbWorldDefault->SerializeToString(&strPBBuffer);
+//        const char* pucText = strPBBuffer.c_str();
+//        unsigned long ulLength = strPBBuffer.length();
+//        m_pSimulationProducer->Send((const unsigned char*)pucText, (int)ulLength);
 //    }
-}
+//    catch ( CMSException& e )
+//    {
+//        e.printStackTrace();
+//        //        if (NULL != pPbWorldDefault)
+//        //        {
+//        //            pPbWorldDefault->clear_bodies();
+//        //            pPbWorldDefault->clear_joints();
+//        //            delete pPbWorldDefault;
+//        //            pPbWorldDefault = NULL;
+//        //        }
+//    }
+//    
+//    //    if (NULL != pPbWorldDefault)
+//    //    {
+//    //        pPbWorldDefault->clear_bodies();
+//    //        pPbWorldDefault->clear_joints();
+//    //        delete pPbWorldDefault;
+//    //        pPbWorldDefault = NULL;
+//    //    }
+//}
 
 void World::SendUpdate(std::string* pstrWorldUpdate)
 {
     assert(pstrWorldUpdate);
     
-    //static std::string strPBBuffer = "";
-    
     try
     {
-        //strPBBuffer.clear();
-        //pPbWorldDefault->SerializeToString(&strPBBuffer);
         const char* pucText = pstrWorldUpdate->c_str();
         unsigned long ulLength = pstrWorldUpdate->length();
-        m_pSimulationProducer->Send((const unsigned char*)pucText, (int)ulLength);
-    }
-    catch ( CMSException& e )
-    {
-        e.printStackTrace();
-        //        if (NULL != pPbWorldDefault)
-        //        {
-        //            pPbWorldDefault->clear_bodies();
-        //            pPbWorldDefault->clear_joints();
-        //            delete pPbWorldDefault;
-        //            pPbWorldDefault = NULL;
-        //        }
-    }
-    
-    //    if (NULL != pPbWorldDefault)
-    //    {
-    //        pPbWorldDefault->clear_bodies();
-    //        pPbWorldDefault->clear_joints();
-    //        delete pPbWorldDefault;
-    //        pPbWorldDefault = NULL;
-    //    }
-}
-
-void World::OnB2DWorldBodyUpdate(b2Body* pBody)
-{
-    assert(m_pSimulationProducer);
-    assert(pBody);
-    
-    static std::string strText = "";
-    
-    try
-    {
-        ::box2d::PbBody aPbBody;
-        aPbBody.set_active(true);
-        ::box2d::PbBodyType aPbBodyType = ::box2d::PbBodyType_MIN;
-        //aPbBody.set_type(::box2d::PbBodyType::DYNAMIC);
-        aPbBody.set_type(aPbBodyType);
-        aPbBody.set_angle(pBody->GetAngle());
-        
-        ::box2d::PbVec2* pPbVec2 = new ::box2d::PbVec2();
-        pPbVec2->set_x(pBody->GetPosition().x);
-        pPbVec2->set_y(pBody->GetPosition().y);
-        aPbBody.set_allocated_position(pPbVec2);
-        
-        ::box2d::PbVec2* pPbVec2LV = new ::box2d::PbVec2();
-        pPbVec2LV->set_x(0.0f);
-        pPbVec2LV->set_y(0.0f);
-        aPbBody.set_allocated_linear_velocity(pPbVec2LV);
-        
-        ::box2d::PbVec2* pPbVec2F = new ::box2d::PbVec2();
-        pPbVec2F->set_x(0.0f);
-        pPbVec2F->set_y(0.0f);
-        aPbBody.set_allocated_force(pPbVec2F);
-        
-        //::box2d::PbFixture aPbFixture;
-        ::box2d::PbFixture* pPbFixture = aPbBody.add_fixtures();
-        pPbFixture->set_restitution(0.5f);
-        pPbFixture->set_density(0.6f);
-        //int iFixtures = aPbBody.fixtures_size();
-        
-        aPbBody.SerializeToString(&strText);
-        const char* pucText = strText.c_str();
-        unsigned long ulLength = strText.length();
         m_pSimulationProducer->Send((const unsigned char*)pucText, (int)ulLength);
     }
     catch ( CMSException& e )
@@ -521,13 +270,6 @@ void World::OnSecurityRequestJoin(std::string& strUUID)
     
     AddPlayer(strUUID);
     
-//    if (NULL == m_pWorldThread)
-//    {
-//        m_pWorldThread = new decaf::lang::Thread(this, strName);
-//        std::cout << "Starting the world simulation" << std::endl;
-//        m_pWorldThread->start();
-//    }
-    
     if (NULL == m_pSimulationDispatchTimer)
     {
         std::cout << "Starting the world simulation" << std::endl;
@@ -541,7 +283,7 @@ void World::OnSecurityRequestJoin(std::string& strUUID)
         m_pWorldProducerThread->start();
         
         std::cout << "Starting the producer dispatch timer" << std::endl;
-        m_pProducerDispatchTimer = new xdispatch::timer(15 * NSEC_PER_MSEC, *m_pProducerSerialDispatchQueue);
+        m_pProducerDispatchTimer = new xdispatch::timer(5 * NSEC_PER_MSEC, *m_pProducerSerialDispatchQueue);
         m_pProducerDispatchTimer->start();
         
         std::cout << "Starting the simulation dispatch timer" << std::endl;
@@ -581,18 +323,12 @@ void World::Simulate()
             pPlayer->Update();
         }
         
-        //xdispatch::queue("simulation").sync([=]
         m_pSimulationSerialDispatchQueue->sync([=]
         {
             B2DWorld::world->Step(timeStep, velocityIterations, positionIterations);
             PbWorld* pPbWorldDefault = new PbWorld(); // TODO: remove memory thrash
             b2WorldToPbWorld(B2DWorld::world, pPbWorldDefault);
             std::string* pstrPBBuffer = new std::string();
-            
-            //const PbVec2& bv2Test = pPbWorldDefault->bodies(0).position();
-            //printf("x is %4.4f, y is %4.4f", bv2Test.x(), bv2Test.y());
-            //float x = bv2Test.x();
-            //float y = bv2Test.y();
             pPbWorldDefault->SerializeToString(pstrPBBuffer);
             pPbWorldDefault->Clear();
             m_aSimulationUpdateQueue.lock();
@@ -611,7 +347,6 @@ void World::SendUpdates()
     
     while (true)
     {
-        //xdispatch::queue("producer").sync([=]
         m_pProducerSerialDispatchQueue->sync([=]
         {
             m_aSimulationUpdateQueue.lock();
@@ -628,38 +363,6 @@ void World::SendUpdates()
         decaf::lang::Thread::currentThread()->sleep(5);
     }
 }
-
-// decaf::lang::Runnable implementation
-//void B2DWorld::run()
-//{
-//    // Instruct the world to perform a single step of simulation.
-//    // It is generally best to keep the time step and iterations fixed.
-//    //xdispatch::global_queue().sync([=]
-//    xdispatch::queue("world").sync([=]
-//                                   {
-//                                       world->Step(timeStep, velocityIterations, positionIterations);
-//                                   });
-//    
-//    Publisher.OnB2DWorldUpdate(world);
-//}
-//
-
-// xdispatch::timer
-//void World::Start()
-//{
-//    assert(m_pSimulationSerialDispatchQueue);
-//    assert(m_pSimulationDispatchTimer);
-//    
-//    m_pSimulationDispatchTimer->start();
-//}
-//
-//void World::Stop()
-//{
-//    assert(m_pSimulationSerialDispatchQueue);
-//    assert(m_pSimulationDispatchTimer);
-//    
-//    m_pSimulationDispatchTimer->stop();
-//}
 
 // Constructor(s)
 World::Simulation::Simulation(World* pWorld) :

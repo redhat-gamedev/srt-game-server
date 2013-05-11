@@ -35,7 +35,7 @@ public:
     ~Bullet();
     
     // Callback(s)
-    void ReceiveBullet(b2Body* pb2bBullet);
+    void OnBuildB2DBulletCompleted(b2Body* pb2bBullet);
 };
 
 #endif /* defined(__CMSTest__Bullet__) */

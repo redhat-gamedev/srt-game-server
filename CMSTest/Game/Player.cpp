@@ -108,7 +108,6 @@ Player::~Player()
 
 void Player::CreatePod()
 {
-    //UserData* pUserData = new UserData(m_ui64Tag, m_strUUID);
     B2DWorld::_BuildT<Player>::B2DPod(this, &Player::ReceivePod);
 }
 
@@ -149,15 +148,6 @@ void Player::Update()
     }
     m_b2v2ShootQueue.unlock();
 }
-
-//bool Player::ThisUUIDIsAMatch(const std::string& strUUID)
-//{
-//    if (strUUID == m_strUUID)
-//    {
-//        return true;
-//    }
-//    return false;
-//}
 
 // Input::ICallbacks implementation
 void Player::OnDualStick(const std::string& strUUID, const box2d::PbVec2& pbv2Move, const box2d::PbVec2& pbv2Shoot)

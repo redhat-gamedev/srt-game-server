@@ -32,12 +32,9 @@ namespace decaf
 class SimpleProducer;
 class B2DWorld;
 class Player;
-//class PbWorld;
 
 
 class World :
-    //public decaf::lang::Runnable,
-    public B2DWorld::ICallbacks,
     public Security::ICallbacks
 {
 private:
@@ -101,9 +98,7 @@ protected:
     void Setup();
     void Teardown();
     void b2Vec2ToPbVec2(b2Vec2* pb2Vec2);
-    void b2WorldToPbWorld(b2World* pb2World, ::box2d::PbWorld*& pPbWorldDefault, std::string& strPBBuffer);
     void b2WorldToPbWorld(b2World* pb2World, ::box2d::PbWorld*& pPbWorldDefault);
-    void b2WorldToPbWorld(b2World* pb2World);
     void SendUpdate(::box2d::PbWorld* pPbWorldDefault);
     void SendUpdate(std::string* pstrWorldUpdate);
     
@@ -119,14 +114,6 @@ public:
     // Method(s)
     void AddPlayer(const std::string& strUUID);
     void RemovePlayer(const std::string& strUUID);
-    
-    // xdispatch::timer
-//    void Start();
-//    void Stop();
-    
-    // B2DWorld::ICallbacks implementation
-    void OnB2DWorldUpdate(b2World* pWorld);
-    void OnB2DWorldBodyUpdate(b2Body* pBody);
     
     // Security::ICallbacks implementation
     void OnSecurityRequestJoin(std::string& strUUID);

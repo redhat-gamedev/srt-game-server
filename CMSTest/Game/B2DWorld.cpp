@@ -9,7 +9,7 @@
 #include "B2DWorld.h"
 #include "UserData.h"
 
-B2DWorld::_Publisher                B2DWorld::Publisher;
+//B2DWorld::_Publisher                B2DWorld::Publisher;
 b2World*                            B2DWorld::world = NULL;
 
 
@@ -30,33 +30,33 @@ b2World*                            B2DWorld::world = NULL;
  */
 
 // Method(s)
-void B2DWorld::_Publisher::OnB2DWorldUpdate(b2World* pWorld)
-{
-    ICallbacks* pObjToCallback = NULL;
-    
-    Clone(m_listSubscribersSwap);
-    while(!m_listSubscribersSwap.empty())
-    {
-        pObjToCallback = m_listSubscribersSwap.front();
-        m_listSubscribersSwap.pop_front();
-        assert(pObjToCallback);
-        pObjToCallback->OnB2DWorldUpdate(pWorld);
-    }
-}
-
-void B2DWorld::_Publisher::OnB2DWorldBodyUpdate(b2Body* pBody)
-{
-    ICallbacks* pObjToCallback = NULL;
-    
-    Clone(m_listSubscribersSwap);
-    while(!m_listSubscribersSwap.empty())
-    {
-        pObjToCallback = m_listSubscribersSwap.front();
-        m_listSubscribersSwap.pop_front();
-        assert(pObjToCallback);
-        pObjToCallback->OnB2DWorldBodyUpdate(pBody);
-    }
-}
+//void B2DWorld::_Publisher::OnB2DWorldUpdate(b2World* pWorld)
+//{
+//    ICallbacks* pObjToCallback = NULL;
+//    
+//    Clone(m_listSubscribersSwap);
+//    while(!m_listSubscribersSwap.empty())
+//    {
+//        pObjToCallback = m_listSubscribersSwap.front();
+//        m_listSubscribersSwap.pop_front();
+//        assert(pObjToCallback);
+//        pObjToCallback->OnB2DWorldUpdate(pWorld);
+//    }
+//}
+//
+//void B2DWorld::_Publisher::OnB2DWorldBodyUpdate(b2Body* pBody)
+//{
+//    ICallbacks* pObjToCallback = NULL;
+//    
+//    Clone(m_listSubscribersSwap);
+//    while(!m_listSubscribersSwap.empty())
+//    {
+//        pObjToCallback = m_listSubscribersSwap.front();
+//        m_listSubscribersSwap.pop_front();
+//        assert(pObjToCallback);
+//        pObjToCallback->OnB2DWorldBodyUpdate(pBody);
+//    }
+//}
 
 // Constructor(s)
 B2DWorld::B2DWorld()

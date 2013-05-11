@@ -18,7 +18,6 @@
 
 struct b2BodyDef;
 struct b2FixtureDef;
-//class B2DWorld;
 class b2Body;
 class b2PolygonShape;
 namespace Rock2D
@@ -78,7 +77,6 @@ public:
     
     // Method(s)
     void Update();
-//    bool ThisUUIDIsAMatch(const std::string& strUUID);
     
     // Callback(s)
     void ReceivePod(b2Body* pb2bPod);

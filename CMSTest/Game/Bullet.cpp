@@ -44,10 +44,10 @@ Bullet::~Bullet()
 void Bullet::CreateBullet(const b2Vec2& b2v2Position, b2Vec2& b2v2Direction)
 {
     //UserData* pUserData = new UserData(m_ui64Tag, m_strUUID);
-    B2DWorld::_BuildT<Bullet>::B2DBullet(this, &Bullet::ReceiveBullet, b2v2Position, b2v2Direction);
+    B2DWorld::_BuildT<Bullet>::B2DBullet(this, &Bullet::OnBuildB2DBulletCompleted, b2v2Position, b2v2Direction);
 }
 
-void Bullet::ReceiveBullet(b2Body* pb2bBullet)
+void Bullet::OnBuildB2DBulletCompleted(b2Body* pb2bBullet)
 {
     assert(pb2bBullet);
     

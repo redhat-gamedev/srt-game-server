@@ -24,31 +24,31 @@ class B2DWorld
 {
 // Class
 public:
-    class ICallbacks
-    {
-    public:
-        virtual void OnB2DWorldUpdate(b2World* pWorld) {};
-        virtual void OnB2DWorldBodyUpdate(b2Body* pBody) {};
-    };
+//    class ICallbacks
+//    {
+//    public:
+//        virtual void OnB2DWorldUpdate(b2World* pWorld) {};
+//        virtual void OnB2DWorldBodyUpdate(b2Body* pBody) {};
+//    };
 
     // See B2DWorld_BuildT.h
     template <class T>
     class _BuildT;
     
 protected:
-    class _Publisher :
-        public ICallbacks,
-        public PublisherT<ICallbacks*>
-    {
-    protected:
-        std::list<ICallbacks*>          m_listSubscribersSwap;
-    public:
-        virtual void OnB2DWorldUpdate(b2World* pWorld);
-        virtual void OnB2DWorldBodyUpdate(b2Body* pBody);
-    };
+//    class _Publisher :
+//        public ICallbacks,
+//        public PublisherT<ICallbacks*>
+//    {
+//    protected:
+//        std::list<ICallbacks*>          m_listSubscribersSwap;
+//    public:
+//        virtual void OnB2DWorldUpdate(b2World* pWorld);
+//        virtual void OnB2DWorldBodyUpdate(b2Body* pBody);
+//    };
 
 public:
-    static _Publisher               Publisher;
+//    static _Publisher               Publisher;
 
 private:
     
