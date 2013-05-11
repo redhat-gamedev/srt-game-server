@@ -9,12 +9,12 @@
 #include "Player.h"
 #include "Bullet.h"
 #include "B2DWorld.h"
-
+#include "B2DWorld_BuildT.h"
 #include "World.h"
 #include "Timer.h"
 #include "UserData.h"
-#include "B2DWorld_BuildT.h"
 #include "../Shared/MakeT.h"
+#include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
 #include <assert.h>
 
 Player::_Publisher          Player::Publisher;
@@ -38,44 +38,49 @@ uint32_t                    Player::s_ui32Count = 1;
  */
 
 // Method(s)
-void Player::_Publisher::OnPlayerCreated(std::string& strUUID)
+void Player::_Publisher::OnPlayerCreated(const std::string& strUUID)
 {
-    ICallbacks* pObjToCallback = NULL;
-    
-    //m_listSubscribersSwap = m_listSubscribers;
-    Clone(m_listSubscribersSwap);
-    while(!m_listSubscribersSwap.empty())
+    xdispatch::global_queue().async([=]
     {
-        pObjToCallback = m_listSubscribersSwap.front();
-        m_listSubscribersSwap.pop_front();
-        assert(pObjToCallback);
-        pObjToCallback->OnPlayerCreated(strUUID);
-    }
+        ICallbacks* pObjToCallback = NULL;
+        
+        //m_listSubscribersSwap = m_listSubscribers;
+        Clone(m_listSubscribersSwap);
+        while(!m_listSubscribersSwap.empty())
+        {
+            pObjToCallback = m_listSubscribersSwap.front();
+            m_listSubscribersSwap.pop_front();
+            assert(pObjToCallback);
+            pObjToCallback->OnPlayerCreated(strUUID);
+        }
+    });
 }
 
-void Player::_Publisher::OnPlayerDestroyed(std::string& strUUID)
+void Player::_Publisher::OnPlayerDestroyed(const std::string& strUUID)
 {
-    ICallbacks* pObjToCallback = NULL;
-    
-    //m_listSubscribersSwap = m_listSubscribers;
-    Clone(m_listSubscribersSwap);
-    while(!m_listSubscribersSwap.empty())
+    xdispatch::global_queue().async([=]
     {
-        pObjToCallback = m_listSubscribersSwap.front();
-        m_listSubscribersSwap.pop_front();
-        assert(pObjToCallback);
-        pObjToCallback->OnPlayerDestroyed(strUUID);
-    }
+        ICallbacks* pObjToCallback = NULL;
+        
+        //m_listSubscribersSwap = m_listSubscribers;
+        Clone(m_listSubscribersSwap);
+        while(!m_listSubscribersSwap.empty())
+        {
+            pObjToCallback = m_listSubscribersSwap.front();
+            m_listSubscribersSwap.pop_front();
+            assert(pObjToCallback);
+            pObjToCallback->OnPlayerDestroyed(strUUID);
+        }
+    });
 }
 
 
 // Constructor(s)
 Player::Player(const std::string& strUUID) :
-    //m_pB2DWorld(pB2DWorld),
     m_pBulletTimer(NULL),
     AEntity(strUUID, (uint64_t)MakeT<uint64_t>((uint32_t)AEntity::POD, s_ui32Count))
 {
-    assert(World::m_pB2DWorld);
+    //assert(World::world);
     
     ++s_ui32Count;
     
@@ -94,7 +99,7 @@ Player::~Player()
 
     Publisher.OnPlayerDestroyed(m_strUUID);
     
-    World::m_pB2DWorld->world->DestroyBody(m_pb2bPod);
+    B2DWorld::world->DestroyBody(m_pb2bPod);
     m_pb2bPod = NULL;
     
     delete m_pBulletTimer;
@@ -103,40 +108,15 @@ Player::~Player()
 
 void Player::CreatePod()
 {
-//    b2BodyDef       bodyDef;
-//    b2PolygonShape  dynamicBox;
-//    b2CircleShape   aB2CircleShape;
-//    b2FixtureDef    fixtureDef;
-//    
-//	// Define the dynamic body. We set its position
-//	bodyDef.type = b2_dynamicBody;
-//	bodyDef.position.Set(0.0f, 0.0f);
-//
-//    // Set the size of our shape
-//	aB2CircleShape.m_radius = 1.0f;
-//
-//    // Set the fixture and use the shape
-//    fixtureDef.density = 1.0f;
-//	fixtureDef.friction = 0.3f;
-//    fixtureDef.restitution = 0.3f;
-//    fixtureDef.filter.groupIndex = -2;    
-//    fixtureDef.shape = &aB2CircleShape;
-//    
-//    UserData* pUserData = new UserData(m_ui64Tag, m_strUUID);
-//    
-//    // call the body factory.
-//    m_pb2bPod = World::m_pB2DWorld->world->CreateBody(&bodyDef);
-//	m_pb2bPod->CreateFixture(&fixtureDef);
-//    m_pb2bPod->SetUserData(pUserData);
-
-    UserData* pUserData = new UserData(m_ui64Tag, m_strUUID);
-    B2DWorld::_BuildT<Player>::B2DPod(this, &Player::ReceivePod, pUserData);
+    //UserData* pUserData = new UserData(m_ui64Tag, m_strUUID);
+    B2DWorld::_BuildT<Player>::B2DPod(this, &Player::ReceivePod);
 }
 
 void Player::ReceivePod(b2Body* pb2bPod)
 {
     assert(pb2bPod);
     
+    pb2bPod->SetUserData(new UserData(m_ui64Tag, m_strUUID));
     m_pb2bPod = pb2bPod;
 }
 
@@ -162,7 +142,7 @@ void Player::Update()
         b2Vec2 ab2v2Shoot = m_b2v2ShootQueue.pop();
         if (m_pBulletTimer->Status() == Rock2D::Timer::EXPIRED)
         {
-            std::cout << "Creating Bullet" << std::endl;
+            //std::cout << "Creating Bullet" << std::endl;
             pBullet = new Bullet(m_strUUID, m_pb2bPod->GetPosition(), ab2v2Shoot);
             m_pBulletTimer->Restart();
         }

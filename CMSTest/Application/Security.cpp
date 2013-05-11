@@ -78,7 +78,7 @@ void Security::_Publisher::OnSecurityRequestLeave(std::string& strUUID)
     }
 }
 
-void Security::_Publisher::OnSecurityHasJoined(std::string& strUUID)
+void Security::_Publisher::OnSecurityHasJoined(const std::string& strUUID)
 {
     ICallbacks* pObjToCallback = NULL;
     
@@ -93,7 +93,7 @@ void Security::_Publisher::OnSecurityHasJoined(std::string& strUUID)
     }
 }
 
-void Security::_Publisher::OnSecurityHasLeft(std::string& strUUID)
+void Security::_Publisher::OnSecurityHasLeft(const std::string& strUUID)
 {
     ICallbacks* pObjToCallback = NULL;
     
@@ -206,7 +206,7 @@ void Security::onMessage(const Message* pMessage)
 }
 
 // Player::ICallbacks implementation
-void Security::OnPlayerCreated(std::string& strUUID)
+void Security::OnPlayerCreated(const std::string& strUUID)
 {
     assert(strUUID.length() > 0);
     
@@ -228,7 +228,7 @@ void Security::OnPlayerCreated(std::string& strUUID)
     Publisher.OnSecurityHasJoined(strUUID);
 }
 
-void Security::OnPlayerDestroyed(std::string& strUUID)
+void Security::OnPlayerDestroyed(const std::string& strUUID)
 {
     assert(strUUID.length() > 0);
     

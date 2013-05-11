@@ -33,7 +33,9 @@ public:
     
     // Destructor(s)
     ~Bullet();
+    
+    // Callback(s)
+    void ReceiveBullet(b2Body* pb2bBullet);
 };
-
 
 #endif /* defined(__CMSTest__Bullet__) */

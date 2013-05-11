@@ -35,8 +35,8 @@ public:
     class ICallbacks
     {
     public:
-        virtual void OnPlayerCreated(std::string& strUUID) {};
-        virtual void OnPlayerDestroyed(std::string& strUUID) {};
+        virtual void OnPlayerCreated(const std::string& strUUID) {};
+        virtual void OnPlayerDestroyed(const std::string& strUUID) {};
     };
     
 protected:
@@ -47,8 +47,8 @@ protected:
     protected:
         std::list<ICallbacks*>          m_listSubscribersSwap;
     public:
-        virtual void OnPlayerCreated(std::string& strUUID);
-        virtual void OnPlayerDestroyed(std::string& strUUID);
+        virtual void OnPlayerCreated(const std::string& strUUID);
+        virtual void OnPlayerDestroyed(const std::string& strUUID);
     };
 private:
     static uint32_t         s_ui32Count;
@@ -66,8 +66,7 @@ protected:
 
     // Helper(s)
     void CreatePod();
-    void ReceivePod(b2Body* pb2bPod);
-    
+
 public:
     static _Publisher               Publisher;
     
@@ -80,6 +79,9 @@ public:
     // Method(s)
     void Update();
     bool ThisUUIDIsAMatch(const std::string& strUUID);
+    
+    // Callback(s)
+    void ReceivePod(b2Body* pb2bPod);
     
     // Input::ICallbacks implementation
     virtual void OnDualStick(const std::string& strUUID, const box2d::PbVec2& pbv2Move, const box2d::PbVec2& pbv2Shoot);
