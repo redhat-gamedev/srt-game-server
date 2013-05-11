@@ -31,10 +31,13 @@ protected:
     // Constructor(s)
     AEntity(const std::string& strUUID, uint64_t ui64Tag);
     //AEntity(EType eType, const std::string& strUUID);
-    
+
 public:
     // Destructor(s)
     virtual ~AEntity();
+
+    // Method(s)
+    bool ThisUUIDIsAMatch(const std::string& strUUID);
 
 };
 

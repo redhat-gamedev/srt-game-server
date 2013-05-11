@@ -78,7 +78,7 @@ public:
     
     // Method(s)
     void Update();
-    bool ThisUUIDIsAMatch(const std::string& strUUID);
+//    bool ThisUUIDIsAMatch(const std::string& strUUID);
     
     // Callback(s)
     void ReceivePod(b2Body* pb2bPod);

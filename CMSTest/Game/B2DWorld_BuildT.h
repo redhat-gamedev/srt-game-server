@@ -9,30 +9,25 @@
 #ifndef CMSTest_B2DWorld_BuildT_h
 #define CMSTest_B2DWorld_BuildT_h
 
-//#include "UserData.h"
 #include "B2DWorld.h"
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
-#include "../../../ThirdParty/xdispatch/include/xdispatch/synchronized.h"
-
-class UserData;
+//#include "../../../ThirdParty/xdispatch/include/xdispatch/synchronized.h"
 
 
 template <class T>
 class B2DWorld::_BuildT
 {
 public:
-    
     static void B2DPod(T* pT, void (T::*pB2DReceivePod)(b2Body* pb2bPod))
     {
         xdispatch::global_queue().sync([=]
         {
-            //xdispatch::synclock aSyncLock;
             b2BodyDef           bodyDef;
             b2PolygonShape      dynamicBox;
             b2CircleShape       aB2CircleShape;
             b2FixtureDef        fixtureDef;
-//            b2Body*             pb2bPod = NULL;
+            b2Body*             pb2bPod = NULL;
             
             // Define the dynamic body. We set its position
             bodyDef.type = b2_dynamicBody;
@@ -48,26 +43,11 @@ public:
             fixtureDef.filter.groupIndex = -2;
             fixtureDef.shape = &aB2CircleShape;
             
-            //aSyncLock.lock();
-            //s_pSyncLock->lock();
-            //synchronize ("B2DWorld_lock")
-            //synchronize (aSyncLock)
-            //synchronized{
-            //XDISPATCH_SYNCHRONIZED
-            //xdispatch::global_queue().sync([=]
-            {
-                b2Body*             pb2bPod = NULL;
-                pb2bPod = B2DWorld::world->CreateBody(&bodyDef);
-                pb2bPod->CreateFixture(&fixtureDef);
-                (pT->* pB2DReceivePod)(pb2bPod);
-                
-//                (B2DWorld::world->CreateBody(&bodyDef))->CreateFixture(&fixtureDef);
-            }
-            //});
-            //aSyncLock.unlock();
-            //s_pSyncLock->unlock();
-            
-//            (pT->* pB2DReceivePod)(pb2bPod);
+            // call the body factory.
+            pb2bPod = B2DWorld::world->CreateBody(&bodyDef);
+            pb2bPod->CreateFixture(&fixtureDef);
+
+            (pT->* pB2DReceivePod)(pb2bPod);
         });
     }
     
@@ -75,11 +55,10 @@ public:
     {
         xdispatch::global_queue().sync([=]
         {
-            //xdispatch::synclock aSyncLock;
             b2BodyDef           bodyDef;
             b2CircleShape       aB2CircleShape;
             b2FixtureDef        fixtureDef;
-//            b2Body*             pb2bBullet = NULL;
+            b2Body*             pb2bBullet = NULL;
             
             // Define the dynamic body. We set its position
             bodyDef.type = b2_dynamicBody;
@@ -102,34 +81,12 @@ public:
             b2v2Force.y *= 10.0f;
 
             // call the body factory.
-            //aSyncLock.lock();
-            //synchronize ("B2DWorld_lock")
-            //synchronize (aSyncLock)
-            //XDISPATCH_SYNCHRONIZED
-            //s_pSyncLock->lock();
-            
-            //xdispatch::global_queue().sync([=]
-            {
-                b2Body*             pb2bBullet = NULL;
-                pb2bBullet = B2DWorld::world->CreateBody(&bodyDef);
-                pb2bBullet->CreateFixture(&fixtureDef);
-                pb2bBullet->ApplyForceToCenter(b2v2Force, false);
-                (pT->* pB2DReceiveBullet)(pb2bBullet);
+            pb2bBullet = B2DWorld::world->CreateBody(&bodyDef);
+            pb2bBullet->CreateFixture(&fixtureDef);
+            pb2bBullet->ApplyForceToCenter(b2v2Force, false);
 
-                //(B2DWorld::world->CreateBody(&bodyDef))->CreateFixture(&fixtureDef);
-            }
-            //});
-        
-            //aSyncLock.unlock();
-            //s_pSyncLock->unlock();
-            //pb2bBullet->SetUserData(pUserData);
-
-//            pb2bBullet->ApplyForceToCenter(b2v2Force, false);
-//            (pT->* pB2DReceiveBullet)(pb2bBullet);
+            (pT->* pB2DReceiveBullet)(pb2bBullet);
         });
-        
-        
     }
 };
-//xdispatch::synclock B2DWorld::_BuildT<T>::aSyncLock;
 #endif

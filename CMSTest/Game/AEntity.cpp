@@ -26,3 +26,12 @@ AEntity::~AEntity()
     m_ui64Tag = 0;
     --s_ui64Count;
 }
+
+bool AEntity::ThisUUIDIsAMatch(const std::string& strUUID)
+{
+    if (strUUID == m_strUUID)
+    {
+        return true;
+    }
+    return false;
+}

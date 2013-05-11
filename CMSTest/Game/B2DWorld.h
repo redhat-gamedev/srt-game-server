@@ -12,6 +12,7 @@
 #include "../Shared/PublisherT.cpp"
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
+#include "../../../ThirdParty/xdispatch/include/xdispatch/timer.h"
 #include <string>
 #include <list>
 
@@ -48,9 +49,6 @@ protected:
 
 public:
     static _Publisher               Publisher;
-    //static xdispatch::synclock      aSyncLock;
-    //static xdispatch::synclock*     s_pSyncLock;
-    
 
 private:
     
@@ -65,6 +63,10 @@ protected:
 	int32           velocityIterations;
     int32           positionIterations;
     
+//    xdispatch::queue*       m_pWorldSerialDispatchQueue;
+//    xdispatch::timer*       m_pDispatchTimer;
+    
+    
 public:
     static b2World*        world;
     
@@ -78,6 +80,10 @@ public:
 
     // decaf::lang::Runnable implementation
     void run();
+    
+//    // xdispatch::timer
+//    void Start();
+//    void Stop();
 };
 
 #endif /* defined(__CMSTest__B2DWorld__) */

@@ -150,14 +150,14 @@ void Player::Update()
     m_b2v2ShootQueue.unlock();
 }
 
-bool Player::ThisUUIDIsAMatch(const std::string& strUUID)
-{
-    if (strUUID == m_strUUID)
-    {
-        return true;
-    }
-    return false;
-}
+//bool Player::ThisUUIDIsAMatch(const std::string& strUUID)
+//{
+//    if (strUUID == m_strUUID)
+//    {
+//        return true;
+//    }
+//    return false;
+//}
 
 // Input::ICallbacks implementation
 void Player::OnDualStick(const std::string& strUUID, const box2d::PbVec2& pbv2Move, const box2d::PbVec2& pbv2Shoot)

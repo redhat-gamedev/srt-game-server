@@ -11,8 +11,7 @@
 
 B2DWorld::_Publisher                B2DWorld::Publisher;
 b2World*                            B2DWorld::world = NULL;
-//xdispatch::synclock                 B2DWorld::aSyncLock;
-//xdispatch::synclock*                B2DWorld::s_pSyncLock = NULL;
+
 
 // Constructor(s)
 /*
@@ -73,12 +72,19 @@ B2DWorld::B2DWorld()
 	velocityIterations = 6;
 	positionIterations = 2;
     
-    //s_pSyncLock = new xdispatch::synclock();
+//    m_pWorldSerialDispatchQueue = new xdispatch::queue("world");
+//    m_pDispatchTimer = new xdispatch::timer(15 * NSEC_PER_MSEC, *m_pWorldSerialDispatchQueue);
 }
 
 // Destructor
 B2DWorld::~B2DWorld()
 {
+//    delete m_pDispatchTimer;
+//    m_pDispatchTimer = NULL;
+//    
+//    delete m_pWorldSerialDispatchQueue;
+//    m_pWorldSerialDispatchQueue = NULL;
+    
     delete gravity;
     gravity = NULL;
     
@@ -93,17 +99,28 @@ void B2DWorld::run()
 {    
     // Instruct the world to perform a single step of simulation.
     // It is generally best to keep the time step and iterations fixed.
-    //aSyncLock.lock();
-    //synchronize ("B2DWorld_lock")
-    //XDISPATCH_SYNCHRONIZED
-    //s_pSyncLock->lock();
-    xdispatch::global_queue().sync([=]
-    {
-        world->Step(timeStep, velocityIterations, positionIterations);
-    });
-    //aSyncLock.unlock();
-    //s_pSyncLock->unlock();
-    
-    Publisher.OnB2DWorldUpdate(world);
+    //xdispatch::global_queue().sync([=]
+//    xdispatch::queue("world").sync([=]
+//    {
+//        world->Step(timeStep, velocityIterations, positionIterations);
+//    });
+//
+//    Publisher.OnB2DWorldUpdate(world);
 }
 
+// xdispatch::timer
+//void B2DWorld::Start()
+//{
+//    assert(m_pWorldSerialDispatchQueue);
+//    assert(m_pDispatchTimer);
+//    
+//    m_pDispatchTimer->start();
+//}
+//
+//void B2DWorld::Stop()
+//{
+//    assert(m_pWorldSerialDispatchQueue);
+//    assert(m_pDispatchTimer);
+//    
+//    m_pDispatchTimer->stop();
+//}
