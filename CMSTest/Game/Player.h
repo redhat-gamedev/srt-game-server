@@ -16,10 +16,6 @@
 #include <decaf/util/StlQueue.h>
 #include <string>
 
-struct b2BodyDef;
-struct b2FixtureDef;
-class b2Body;
-class b2PolygonShape;
 namespace Rock2D
 {
     class Timer;
@@ -60,9 +56,6 @@ protected:
     Rock2D::Timer*                      m_pBulletTimer;
     decaf::util::StlQueue<Bullet*>      m_BulletQueue;
     
-//    decaf::util::StlQueue<b2Vec2>       m_b2v2MoveQueue;
-//    decaf::util::StlQueue<b2Vec2>       m_b2v2MoveSwapQueue;
-
     decaf::util::StlQueue<b2Vec2>       m_b2v2ShootQueue;
     decaf::util::StlQueue<b2Vec2>       m_b2v2ShootSwapQueue;
 
@@ -80,9 +73,6 @@ public:
     
     // Method(s)
     void Update();
-    
-    // Callback(s)
-    //void OnB2DBodyCreated(b2Body* pb2Body);
     
     // Input::ICallbacks implementation
     virtual void OnDualStick(const std::string& strUUID, const box2d::PbVec2& pbv2Move, const box2d::PbVec2& pbv2Shoot);

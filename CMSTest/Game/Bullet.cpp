@@ -33,37 +33,6 @@ Bullet::~Bullet()
 {
     --s_ui32Count;
 
-//    m_b2bBulletQueue.lock();
-//    b2Body* pb2bBullet = NULL;
-//    while (!(m_b2bBulletQueue.empty()))
-//    {
-//        pb2bBullet = m_b2bBulletQueue.pop();
-//        B2DWorld::world->DestroyBody(pb2bBullet);
-//    }
-//    m_b2bBulletQueue.unlock();
-    
     delete m_pB2DBullet;
     m_pB2DBullet = NULL;
 }
-
-//void Bullet::CreateBullet(const b2Vec2& b2v2Position, b2Vec2& b2v2Direction)
-//{
-//    B2DWorld::_BuildT<Bullet>::B2DBody(this, &Bullet::OnB2DBodyCreated, B2DBullet::Definition.BodyDef, B2DBullet::Definition.FixtureDef);
-//}
-//
-//void Bullet::OnB2DBodyCreated(b2Body* pb2bBullet)
-//{
-//    assert(pb2bBullet);
-//    
-//    pb2bBullet->SetUserData(new UserData(m_ui64Tag, m_strUUID));
-//
-//    pb2bBullet->SetTransform(m_b2v2InitialPosition, 0.0f);
-//    b2Vec2 b2v2Force = m_b2v2InitialDirection;
-//    b2v2Force.x *= 10.0f;
-//    b2v2Force.y *= 10.0f;
-//    pb2bBullet->ApplyForceToCenter(b2v2Force, false);
-//    
-//    m_b2bBulletQueue.lock();
-//    m_b2bBulletQueue.push(pb2bBullet);
-//    m_b2bBulletQueue.unlock();
-//}
