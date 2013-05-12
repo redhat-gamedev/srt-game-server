@@ -15,16 +15,22 @@
 #include <string>
 
 class B2DBullet;
+namespace Rock2D
+{
+    class Timer;
+}
 
 
 class Bullet :
     public AEntity
 {
+    friend class Player;
 private:
     static uint32_t         s_ui32Count;
     
 protected:
     B2DBullet*              m_pB2DBullet;
+    Rock2D::Timer*          m_pLifeTimer;
 
 public:
     // Constructor(s)
@@ -32,6 +38,9 @@ public:
     
     // Destructor(s)
     ~Bullet();
+    
+    // Method(s)
+    //void Update();
 };
 
 #endif /* defined(__CMSTest__Bullet__) */

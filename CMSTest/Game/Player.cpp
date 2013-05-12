@@ -127,22 +127,6 @@ void Player::Update()
     m_pB2DPod->Update();
     
     Bullet* pBullet = NULL;
-//    m_b2v2ShootQueue.lock();    
-//    while (!(m_b2v2ShootQueue.empty()))
-//    {
-//        b2Vec2 ab2v2Shoot = m_b2v2ShootQueue.pop();
-//        if (m_pBulletTimer->Status() == Rock2D::Timer::EXPIRED)
-//        {
-//            //std::cout << "Creating Bullet" << std::endl;
-//            pBullet = new Bullet(m_strUUID, m_pB2DPod->GetPosition(), ab2v2Shoot);
-//            m_BulletQueue.lock();
-//            m_BulletQueue.push(pBullet);
-//            m_BulletQueue.unlock();
-//            m_pBulletTimer->Restart();
-//        }
-//    }
-//    m_b2v2ShootQueue.unlock();
-    
     m_b2v2ShootQueue.lock();
     std::vector<b2Vec2> aShootVector = m_b2v2ShootQueue.toArray();
     m_b2v2ShootQueue.clear();
@@ -160,6 +144,49 @@ void Player::Update()
         }
     }
     aShootVector.clear();
+
+//    m_BulletQueue.lock();
+//    std::vector<Bullet*>    aBulletVector = m_BulletQueue.toArray();
+//    m_BulletQueue.unlock();
+//    std::list<Bullet*>      aBulletToRemoveList;
+//    for(int j = 0; j < aBulletVector.size(); ++j)
+//    {
+//        pBullet = aBulletVector[j];
+//        if (pBullet->m_pLifeTimer->Status() == Rock2D::Timer::EXPIRED)
+//        {
+//            aBulletToRemoveList.push_front(pBullet);
+//        }
+//    }
+    m_BulletQueue.lock();
+    std::list<Bullet*>      aBulletToRemoveList;
+    std::list<Bullet*>      aBulletToAddList;
+    while (!m_BulletQueue.empty())
+    {
+        pBullet = m_BulletQueue.pop();
+        if (pBullet->m_pLifeTimer->Status() == Rock2D::Timer::EXPIRED)
+        {
+            aBulletToRemoveList.push_front(pBullet);
+        }
+        else
+        {
+            aBulletToAddList.push_front(pBullet);
+        }
+    }
+    while (!aBulletToAddList.empty())
+    {
+        pBullet = aBulletToAddList.front();
+        aBulletToAddList.pop_front();
+        m_BulletQueue.push(pBullet);
+    }
+    m_BulletQueue.unlock();
+    
+    while (!aBulletToRemoveList.empty())
+    {
+        pBullet = aBulletToRemoveList.front();
+        aBulletToRemoveList.pop_front();
+        delete pBullet;
+        pBullet = NULL;
+    }
 }
 
 // Input::ICallbacks implementation
