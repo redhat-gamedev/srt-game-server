@@ -127,36 +127,6 @@ void Player::Update()
     m_pB2DPod->Update();
     
     Bullet* pBullet = NULL;
-    m_b2v2ShootQueue.lock();
-    std::vector<b2Vec2> aShootVector = m_b2v2ShootQueue.toArray();
-    m_b2v2ShootQueue.clear();
-    m_b2v2ShootQueue.unlock();
-
-    for (int i = 0; i < aShootVector.size(); ++i)
-    {
-        if (m_pBulletTimer->Status() == Rock2D::Timer::EXPIRED)
-        {
-            pBullet = new Bullet(m_strUUID, m_pB2DPod->GetPosition(), aShootVector[i]);
-            m_BulletQueue.lock();
-            m_BulletQueue.push(pBullet);
-            m_BulletQueue.unlock();
-            m_pBulletTimer->Restart();
-        }
-    }
-    aShootVector.clear();
-
-//    m_BulletQueue.lock();
-//    std::vector<Bullet*>    aBulletVector = m_BulletQueue.toArray();
-//    m_BulletQueue.unlock();
-//    std::list<Bullet*>      aBulletToRemoveList;
-//    for(int j = 0; j < aBulletVector.size(); ++j)
-//    {
-//        pBullet = aBulletVector[j];
-//        if (pBullet->m_pLifeTimer->Status() == Rock2D::Timer::EXPIRED)
-//        {
-//            aBulletToRemoveList.push_front(pBullet);
-//        }
-//    }
     m_BulletQueue.lock();
     std::list<Bullet*>      aBulletToRemoveList;
     std::list<Bullet*>      aBulletToAddList;
@@ -193,6 +163,7 @@ void Player::Update()
 void Player::OnDualStick(const std::string& strUUID, const box2d::PbVec2& pbv2Move, const box2d::PbVec2& pbv2Shoot)
 {
     assert(m_pB2DPod);
+    assert(m_pBulletTimer);
     
     if (strUUID != m_strUUID)
     {
@@ -200,6 +171,7 @@ void Player::OnDualStick(const std::string& strUUID, const box2d::PbVec2& pbv2Mo
     }
 
     b2Vec2 b2v2Shoot;
+    Bullet* pBullet = NULL;
     
     b2v2Shoot.x = pbv2Shoot.x();
     b2v2Shoot.y = pbv2Shoot.y();
@@ -209,8 +181,13 @@ void Player::OnDualStick(const std::string& strUUID, const box2d::PbVec2& pbv2Mo
     if (((b2v2Shoot.x < 0.0f) || (b2v2Shoot.x > 0.0f)) ||
         ((b2v2Shoot.y < 0.0f) || (b2v2Shoot.y > 0.0f)))
     {
-        m_b2v2ShootQueue.lock();
-        m_b2v2ShootQueue.push(b2v2Shoot);
-        m_b2v2ShootQueue.unlock();
+        if (m_pBulletTimer->Status() == Rock2D::Timer::EXPIRED)
+        {
+            pBullet = new Bullet(m_strUUID, m_pB2DPod->GetPosition(), b2v2Shoot);
+            m_BulletQueue.lock();
+            m_BulletQueue.push(pBullet);
+            m_BulletQueue.unlock();
+            m_pBulletTimer->Restart();
+        }
     }
 }
