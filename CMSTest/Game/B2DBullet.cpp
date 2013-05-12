@@ -7,23 +7,20 @@
 //
 
 #include "B2DBullet.h"
-#include "B2DWorld.h"
 #include "B2DWorld_BuildT.h"
 #include "UserData.h"
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
-#include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
 #include <assert.h>
 
-B2DBulletDefinition          B2DBulletDefinition::Definition;
+B2DBullet::_Definition          B2DBullet::Definition;
 
 
-B2DBulletDefinition::B2DBulletDefinition()
+B2DBullet::_Definition::_Definition()
 {
     // Define the dynamic body. We set its position
     m_ab2BodyDef.type = b2_dynamicBody;
     m_ab2BodyDef.bullet = true;
     m_ab2BodyDef.allowSleep = false;
-    //m_ab2BodyDef.position.Set(b2v2Position.x, b2v2Position.y);
     
     // Set the size of our shape
     m_ab2CircleShape.m_radius = 0.25f;
@@ -34,36 +31,8 @@ B2DBulletDefinition::B2DBulletDefinition()
     m_ab2FixtureDef.restitution = 0.1f;
     m_ab2FixtureDef.filter.groupIndex = -2;
     m_ab2FixtureDef.shape = &m_ab2CircleShape;
-    
-    //b2Vec2 b2v2Force = b2v2Direction;
-    //b2v2Force.x *= 10.0f;
-    //b2v2Force.y *= 10.0f;
 }
 
-// Constructor(s)
-AB2DEntity::AB2DEntity() :
-    m_pb2Body(NULL)
-{
-
-}
-
-// Destructor
-AB2DEntity::~AB2DEntity()
-{
-    xdispatch::queue("simulation").sync([=]
-    {
-        B2DWorld::world->DestroyBody(m_pb2Body);
-    });
-}
-
-// Method(s)
-void AB2DEntity::SetUserData(UserData *pUserData)
-{
-    assert(m_pb2Body);
-    assert(pUserData);
-    
-    m_pb2Body->SetUserData(pUserData);
-}
 // Constructor(s)
 B2DBullet::B2DBullet(const b2Vec2& b2v2Position, b2Vec2& b2v2Direction, UserData* pUserData) :
     m_b2v2InitialPosition(b2v2Position),
@@ -85,7 +54,7 @@ B2DBullet::~B2DBullet()
 // Helper(s)
 void B2DBullet::CreateBullet()
 {
-    B2DWorld::_BuildT<B2DBullet>::B2DBody(this, &B2DBullet::OnB2DBodyCreated, B2DBulletDefinition::Definition.BodyDef, B2DBulletDefinition::Definition.FixtureDef);
+    B2DWorld::_BuildT<B2DBullet>::B2DBody(this, &B2DBullet::OnB2DBodyCreated, Definition.BodyDef, Definition.FixtureDef);
 }
 
 // Callback(s)

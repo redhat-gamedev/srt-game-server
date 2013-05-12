@@ -9,40 +9,11 @@
 #ifndef __CMSTest__B2DBullet__
 #define __CMSTest__B2DBullet__
 
-#include "AB2DBodyDefinition.h"
+#include "AB2DEntity.h"
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 
 class UserData;
 
-
-class B2DBulletDefinition :
-    public AB2DBodyDefinition
-{
-protected:
-    b2CircleShape       m_ab2CircleShape;
-    
-    // Constructor(s)
-    B2DBulletDefinition();
-    
-public:
-    static B2DBulletDefinition        Definition;
-};
-
-class AB2DEntity
-{
-protected:
-    b2Body*         m_pb2Body;
-    
-    // Constructor(s)
-    AB2DEntity();
-    
-    // Destructor
-    virtual ~AB2DEntity();
-    
-public:
-    // Method(s)
-    void SetUserData(UserData* pUserData);
-};
 
 class B2DBullet :
     public AB2DEntity
@@ -50,6 +21,17 @@ class B2DBullet :
 private:
     
 protected:
+    class _Definition :
+        public AB2DEntity::ADefinition
+    {
+    protected:
+        b2CircleShape       m_ab2CircleShape;
+        
+    public:
+        // Constructor(s)
+        _Definition();
+    };
+
     b2Vec2              m_b2v2InitialPosition;
     b2Vec2              m_b2v2InitialDirection;
     UserData*           m_pUserData;
@@ -58,6 +40,8 @@ protected:
     void CreateBullet();
     
 public:
+    static _Definition        Definition;
+    
     // Constructor(s)
     B2DBullet(const b2Vec2& b2v2Position, b2Vec2& b2v2Direction, UserData* pUserData);
     

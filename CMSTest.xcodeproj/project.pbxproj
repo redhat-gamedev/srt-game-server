@@ -37,9 +37,9 @@
 		CCE44A0317232660002A1937 /* World.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE44A011723265F002A1937 /* World.cpp */; };
 		CCE9087216516221005F2E72 /* libapr-1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE9087016516221005F2E72 /* libapr-1.dylib */; };
 		CCE9087316516221005F2E72 /* libaprutil-1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE9087116516221005F2E72 /* libaprutil-1.dylib */; };
-		CCEB9EF0173FD59A00B3CE16 /* AB2DBodyDefinition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCEB9EEE173FD59900B3CE16 /* AB2DBodyDefinition.cpp */; };
 		CCEB9EF3173FDEE700B3CE16 /* B2DPod.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCEB9EF1173FDEE700B3CE16 /* B2DPod.cpp */; };
 		CCEB9EF9173FE24F00B3CE16 /* B2DBullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCEB9EF7173FE24F00B3CE16 /* B2DBullet.cpp */; };
+		CCEB9EFC173FFB8F00B3CE16 /* AB2DEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCEB9EFA173FFB8E00B3CE16 /* AB2DEntity.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -150,12 +150,12 @@
 		CCE44A021723265F002A1937 /* World.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = World.h; path = Game/World.h; sourceTree = "<group>"; };
 		CCE9087016516221005F2E72 /* libapr-1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libapr-1.dylib"; path = "usr/lib/libapr-1.dylib"; sourceTree = SDKROOT; };
 		CCE9087116516221005F2E72 /* libaprutil-1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libaprutil-1.dylib"; path = "usr/lib/libaprutil-1.dylib"; sourceTree = SDKROOT; };
-		CCEB9EEE173FD59900B3CE16 /* AB2DBodyDefinition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AB2DBodyDefinition.cpp; path = Game/AB2DBodyDefinition.cpp; sourceTree = "<group>"; };
-		CCEB9EEF173FD59A00B3CE16 /* AB2DBodyDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AB2DBodyDefinition.h; path = Game/AB2DBodyDefinition.h; sourceTree = "<group>"; };
 		CCEB9EF1173FDEE700B3CE16 /* B2DPod.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = B2DPod.cpp; sourceTree = "<group>"; };
 		CCEB9EF2173FDEE700B3CE16 /* B2DPod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B2DPod.h; sourceTree = "<group>"; };
 		CCEB9EF7173FE24F00B3CE16 /* B2DBullet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = B2DBullet.cpp; path = Game/B2DBullet.cpp; sourceTree = "<group>"; };
 		CCEB9EF8173FE24F00B3CE16 /* B2DBullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = B2DBullet.h; path = Game/B2DBullet.h; sourceTree = "<group>"; };
+		CCEB9EFA173FFB8E00B3CE16 /* AB2DEntity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AB2DEntity.cpp; path = Game/AB2DEntity.cpp; sourceTree = "<group>"; };
+		CCEB9EFB173FFB8E00B3CE16 /* AB2DEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AB2DEntity.h; path = Game/AB2DEntity.h; sourceTree = "<group>"; };
 		CCF21E6A1724B485006D1290 /* B2DWorld_BuildT.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = B2DWorld_BuildT.h; path = Game/B2DWorld_BuildT.h; sourceTree = "<group>"; };
 		CCFB9DDC1640ABB900F6DBA2 /* Box2D.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Box2D.xcodeproj; path = ../ThirdParty/box2d/Box2D/Build/xcode4/Box2D.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -315,12 +315,12 @@
 				CCE44A011723265F002A1937 /* World.cpp */,
 				CCE44A021723265F002A1937 /* World.h */,
 				CCF21E6A1724B485006D1290 /* B2DWorld_BuildT.h */,
-				CCEB9EEE173FD59900B3CE16 /* AB2DBodyDefinition.cpp */,
-				CCEB9EEF173FD59A00B3CE16 /* AB2DBodyDefinition.h */,
 				CCEB9EF1173FDEE700B3CE16 /* B2DPod.cpp */,
 				CCEB9EF2173FDEE700B3CE16 /* B2DPod.h */,
 				CCEB9EF7173FE24F00B3CE16 /* B2DBullet.cpp */,
 				CCEB9EF8173FE24F00B3CE16 /* B2DBullet.h */,
+				CCEB9EFA173FFB8E00B3CE16 /* AB2DEntity.cpp */,
+				CCEB9EFB173FFB8E00B3CE16 /* AB2DEntity.h */,
 			);
 			name = Game;
 			sourceTree = "<group>";
@@ -456,9 +456,9 @@
 				CCE449FC172317CA002A1937 /* AEntity.cpp in Sources */,
 				CCE449FF17231ADD002A1937 /* Bullet.cpp in Sources */,
 				CCE44A0317232660002A1937 /* World.cpp in Sources */,
-				CCEB9EF0173FD59A00B3CE16 /* AB2DBodyDefinition.cpp in Sources */,
 				CCEB9EF3173FDEE700B3CE16 /* B2DPod.cpp in Sources */,
 				CCEB9EF9173FE24F00B3CE16 /* B2DBullet.cpp in Sources */,
+				CCEB9EFC173FFB8F00B3CE16 /* AB2DEntity.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,11 +7,15 @@
 //
 
 #include "B2DPod.h"
+#include "B2DWorld_BuildT.h"
+#include "UserData.h"
+#include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
+#include <assert.h>
 
-B2DPod          B2DPod::Definition;
+B2DPod::_Definition          B2DPod::Definition;
 
 
-B2DPod::B2DPod()
+B2DPod::_Definition::_Definition()
 {
     // Define the dynamic body. We set its position
     m_ab2BodyDef.type = b2_dynamicBody;
@@ -26,4 +30,64 @@ B2DPod::B2DPod()
     m_ab2FixtureDef.restitution = 0.3f;
     m_ab2FixtureDef.filter.groupIndex = -2;
     m_ab2FixtureDef.shape = &m_ab2CircleShape;
+}
+
+
+// Constructor(s)
+B2DPod::B2DPod(UserData* pUserData) :
+    m_pUserData(pUserData)
+{
+    assert(m_pUserData);
+    
+    CreatePod();
+}
+
+// Destructor(s)
+B2DPod::B2DPod()
+{
+    delete m_pUserData;
+    m_pUserData = NULL;
+}
+
+// Helper(s)
+void B2DPod::CreatePod()
+{
+    B2DWorld::_BuildT<B2DPod>::B2DBody(this, &B2DPod::OnB2DBodyCreated, Definition.BodyDef, Definition.FixtureDef);
+}
+
+// Callback(s)
+void B2DPod::OnB2DBodyCreated(b2Body* pb2bPod)
+{
+    assert(pb2bPod);
+    assert(NULL == m_pb2Body);
+    
+    m_pb2Body = pb2bPod;
+    
+    m_pb2Body->SetUserData(m_pUserData);
+}
+
+// Method(s)
+void B2DPod::Move(float fX, float fY)
+{
+    b2Vec2 b2v2Move;
+
+    b2v2Move.x = fX;
+    b2v2Move.y = fY;
+    
+    m_b2v2MoveQueue.lock();
+    m_b2v2MoveQueue.push(b2v2Move);
+    m_b2v2MoveQueue.unlock();
+}
+
+void B2DPod::Update()
+{
+    m_b2v2MoveQueue.lock();
+    while (!(m_b2v2MoveQueue.empty()))
+    {
+        b2Vec2 ab2Vec2Move = m_b2v2MoveQueue.pop();
+        ab2Vec2Move.x *= 50.0f;
+        ab2Vec2Move.y *= 50.0f;
+        m_pb2Body->ApplyForceToCenter(ab2Vec2Move, true);
+    }
+    m_b2v2MoveQueue.unlock();    
 }

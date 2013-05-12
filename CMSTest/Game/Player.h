@@ -25,6 +25,7 @@ namespace Rock2D
     class Timer;
 }
 class Bullet;
+class B2DPod;
 
 
 class Player :
@@ -54,19 +55,19 @@ private:
     static uint32_t         s_ui32Count;
     
 protected:
-    //b2Body*         m_pb2bPod;
-
+    B2DPod*                 m_pB2DPod;
+    
     Rock2D::Timer*                      m_pBulletTimer;
     decaf::util::StlQueue<Bullet*>      m_BulletQueue;
     
-    decaf::util::StlQueue<b2Vec2>       m_b2v2MoveQueue;
-    decaf::util::StlQueue<b2Vec2>       m_b2v2MoveSwapQueue;
+//    decaf::util::StlQueue<b2Vec2>       m_b2v2MoveQueue;
+//    decaf::util::StlQueue<b2Vec2>       m_b2v2MoveSwapQueue;
 
     decaf::util::StlQueue<b2Vec2>       m_b2v2ShootQueue;
     decaf::util::StlQueue<b2Vec2>       m_b2v2ShootSwapQueue;
 
     // Helper(s)
-    void CreatePod();
+    //void CreatePod();
 
 public:
     static _Publisher               Publisher;
@@ -81,7 +82,7 @@ public:
     void Update();
     
     // Callback(s)
-    void OnB2DBodyCreated(b2Body* pb2Body);
+    //void OnB2DBodyCreated(b2Body* pb2Body);
     
     // Input::ICallbacks implementation
     virtual void OnDualStick(const std::string& strUUID, const box2d::PbVec2& pbv2Move, const box2d::PbVec2& pbv2Shoot);
