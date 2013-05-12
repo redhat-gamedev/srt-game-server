@@ -98,6 +98,16 @@ Player::~Player()
 {
     Input::Publisher.Detach(this);
 
+    m_BulletQueue.lock();
+    Bullet* pBullet = NULL;
+    while (!(m_BulletQueue.empty()))
+    {
+        pBullet = m_BulletQueue.pop();
+        delete pBullet;
+        pBullet = NULL;
+    }
+    m_BulletQueue.unlock();
+
     Publisher.OnPlayerDestroyed(m_strUUID);
     
     B2DWorld::world->DestroyBody(m_pb2Body);
@@ -145,6 +155,9 @@ void Player::Update()
         {
             //std::cout << "Creating Bullet" << std::endl;
             pBullet = new Bullet(m_strUUID, m_pb2Body->GetPosition(), ab2v2Shoot);
+            m_BulletQueue.lock();
+            m_BulletQueue.push(pBullet);
+            m_BulletQueue.unlock();
             m_pBulletTimer->Restart();
         }
     }

@@ -24,6 +24,7 @@ namespace Rock2D
 {
     class Timer;
 }
+class Bullet;
 
 
 class Player :
@@ -55,7 +56,8 @@ private:
 protected:
     //b2Body*         m_pb2bPod;
 
-    Rock2D::Timer*          m_pBulletTimer;
+    Rock2D::Timer*                      m_pBulletTimer;
+    decaf::util::StlQueue<Bullet*>      m_BulletQueue;
     
     decaf::util::StlQueue<b2Vec2>       m_b2v2MoveQueue;
     decaf::util::StlQueue<b2Vec2>       m_b2v2MoveSwapQueue;

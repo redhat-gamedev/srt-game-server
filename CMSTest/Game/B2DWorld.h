@@ -55,13 +55,6 @@ public:
     ~B2DWorld();
     
     // Method(s)
-
-    // decaf::lang::Runnable implementation
-    void run();
-    
-//    // xdispatch::timer
-//    void Start();
-//    void Stop();
 };
 
 #endif /* defined(__CMSTest__B2DWorld__) */

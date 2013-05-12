@@ -93,34 +93,3 @@ B2DWorld::~B2DWorld()
 }
 
 // Method(s)
-
-// decaf::lang::Runnable implementation
-void B2DWorld::run()
-{    
-    // Instruct the world to perform a single step of simulation.
-    // It is generally best to keep the time step and iterations fixed.
-    //xdispatch::global_queue().sync([=]
-//    xdispatch::queue("world").sync([=]
-//    {
-//        world->Step(timeStep, velocityIterations, positionIterations);
-//    });
-//
-//    Publisher.OnB2DWorldUpdate(world);
-}
-
-// xdispatch::timer
-//void B2DWorld::Start()
-//{
-//    assert(m_pWorldSerialDispatchQueue);
-//    assert(m_pDispatchTimer);
-//    
-//    m_pDispatchTimer->start();
-//}
-//
-//void B2DWorld::Stop()
-//{
-//    assert(m_pWorldSerialDispatchQueue);
-//    assert(m_pDispatchTimer);
-//    
-//    m_pDispatchTimer->stop();
-//}

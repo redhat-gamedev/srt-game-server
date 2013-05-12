@@ -22,8 +22,9 @@ protected:
     AB2DBodyDefinition() {};
 
 public:
-    const b2BodyDef&        BodyDef     = m_ab2BodyDef;
-    const b2FixtureDef&     FixtureDef  = m_ab2FixtureDef;
+    // Properties
+    b2BodyDef&        BodyDef     = m_ab2BodyDef;
+    b2FixtureDef&     FixtureDef  = m_ab2FixtureDef;
 };
 
 #endif /* defined(__CMSTest__AB2DBodyDefinition__) */

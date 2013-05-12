@@ -14,6 +14,8 @@
 #include <decaf/util/StlQueue.h>
 #include <string>
 
+class B2DBullet;
+
 
 class Bullet :
     public AEntity
@@ -21,11 +23,8 @@ class Bullet :
 private:
     static uint32_t         s_ui32Count;
     
-protected:    
-    decaf::util::StlQueue<b2Body*>      m_b2bBulletQueue;
-
-    // Helper(s)
-    void CreateBullet(const b2Vec2& b2v2Position, b2Vec2& b2v2Direction);
+protected:
+    B2DBullet*              m_pB2DBullet;
 
 public:
     // Constructor(s)
@@ -33,9 +32,6 @@ public:
     
     // Destructor(s)
     ~Bullet();
-    
-    // Callback(s)
-    void OnBuildB2DBulletCompleted(b2Body* pb2bBullet);
 };
 
 #endif /* defined(__CMSTest__Bullet__) */
