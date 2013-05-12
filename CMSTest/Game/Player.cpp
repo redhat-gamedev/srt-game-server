@@ -13,6 +13,7 @@
 #include "World.h"
 #include "Timer.h"
 #include "UserData.h"
+#include "AB2DBodyDefinition.h"
 #include "../Shared/MakeT.h"
 #include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
 #include <assert.h>
@@ -99,8 +100,8 @@ Player::~Player()
 
     Publisher.OnPlayerDestroyed(m_strUUID);
     
-    B2DWorld::world->DestroyBody(m_pb2bPod);
-    m_pb2bPod = NULL;
+    B2DWorld::world->DestroyBody(m_pb2Body);
+    m_pb2Body = NULL;
     
     delete m_pBulletTimer;
     m_pBulletTimer = NULL;
@@ -108,15 +109,16 @@ Player::~Player()
 
 void Player::CreatePod()
 {
-    B2DWorld::_BuildT<Player>::B2DPod(this, &Player::ReceivePod);
+    //B2DWorld::_BuildT<Player>::B2DPod(this, &Player::OnB2DBodyCreated);
+    B2DWorld::_BuildT<Player>::B2DBody(this, &Player::OnB2DBodyCreated, B2DPod::Definition.m_ab2BodyDef, B2DPod::Definition.m_ab2FixtureDef);
 }
 
-void Player::ReceivePod(b2Body* pb2bPod)
+void Player::OnB2DBodyCreated(b2Body* pb2Body)
 {
-    assert(pb2bPod);
+    assert(pb2Body);
     
-    pb2bPod->SetUserData(new UserData(m_ui64Tag, m_strUUID));
-    m_pb2bPod = pb2bPod;
+    pb2Body->SetUserData(new UserData(m_ui64Tag, m_strUUID));
+    m_pb2Body = pb2Body;
 }
 
 // Method(s)
@@ -130,7 +132,7 @@ void Player::Update()
         b2Vec2 ab2Vec2Move = m_b2v2MoveQueue.pop();
         ab2Vec2Move.x *= 50.0f;
         ab2Vec2Move.y *= 50.0f;
-        m_pb2bPod->ApplyForceToCenter(ab2Vec2Move, true);
+        m_pb2Body->ApplyForceToCenter(ab2Vec2Move, true);
     }
     m_b2v2MoveQueue.unlock();
     
@@ -142,7 +144,7 @@ void Player::Update()
         if (m_pBulletTimer->Status() == Rock2D::Timer::EXPIRED)
         {
             //std::cout << "Creating Bullet" << std::endl;
-            pBullet = new Bullet(m_strUUID, m_pb2bPod->GetPosition(), ab2v2Shoot);
+            pBullet = new Bullet(m_strUUID, m_pb2Body->GetPosition(), ab2v2Shoot);
             m_pBulletTimer->Restart();
         }
     }

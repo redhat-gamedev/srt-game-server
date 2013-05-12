@@ -11,6 +11,8 @@
 
 #include <string>
 
+class b2Body;
+
 
 class AEntity
 {
@@ -27,6 +29,7 @@ protected:
     
     std::string             m_strUUID;
     uint64_t                m_ui64Tag;
+    b2Body*                 m_pb2Body;
     
     // Constructor(s)
     AEntity(const std::string& strUUID, uint64_t ui64Tag);

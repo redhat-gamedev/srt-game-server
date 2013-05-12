@@ -19,6 +19,18 @@ template <class T>
 class B2DWorld::_BuildT
 {
 public:
+    static void B2DBody(T* pT, void (T::*pOnB2DBodyCreated)(b2Body* pb2Body), const b2BodyDef& ab2BodyDef, const b2FixtureDef& ab2FixtureDef)
+    {
+        xdispatch::queue("simulation").sync([=]
+        {
+            // call the body factory.
+            b2Body* pb2Body = B2DWorld::world->CreateBody(&ab2BodyDef);
+            pb2Body->CreateFixture(&ab2FixtureDef);
+            
+            (pT->* pOnB2DBodyCreated)(pb2Body);
+        });
+    }
+    
     static void B2DPod(T* pT, void (T::*pB2DReceivePod)(b2Body* pb2bPod))
     {
         b2BodyDef           bodyDef;

@@ -14,7 +14,8 @@ uint64_t                    AEntity::s_ui64Count = 1;
 // Constructor(s)
 AEntity::AEntity(const std::string& strUUID, uint64_t ui64Tag) :
     m_strUUID(strUUID),
-    m_ui64Tag(ui64Tag)
+    m_ui64Tag(ui64Tag),
+    m_pb2Body(NULL)
 {
     ++s_ui64Count;
 }
@@ -27,6 +28,7 @@ AEntity::~AEntity()
     --s_ui64Count;
 }
 
+// Method(s)
 bool AEntity::ThisUUIDIsAMatch(const std::string& strUUID)
 {
     if (strUUID == m_strUUID)

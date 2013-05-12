@@ -80,8 +80,7 @@ protected:
     xdispatch::queue*               m_pProducerSerialDispatchQueue;
     xdispatch::timer*               m_pProducerDispatchTimer;
     
-    //decaf::util::StlQueue<::box2d::PbWorld*>    m_aSimulationUpdateQueue;
-    decaf::util::StlQueue<std::string*>    m_aSimulationUpdateQueue;
+    decaf::util::StlQueue<::box2d::PbWorld*>    m_aSimulationUpdateQueue;
 
     World::Simulation*              m_pWorldSimulation;
     decaf::lang::Thread*            m_pWorldSimulationThread;
@@ -115,13 +114,13 @@ public:
     void AddPlayer(const std::string& strUUID);
     void RemovePlayer(const std::string& strUUID);
     
-    // Security::ICallbacks implementation
-    void OnSecurityRequestJoin(std::string& strUUID);
-    void OnSecurityRequestLeave(std::string& strUUID);
-    
     // decaf::lang::Runnable implementation
     void Simulate();
     void SendUpdates();
+    
+    // Security::ICallbacks implementation
+    void OnSecurityRequestJoin(std::string& strUUID);
+    void OnSecurityRequestLeave(std::string& strUUID);
 };
 
 #endif /* defined(__CMSTest__World__) */

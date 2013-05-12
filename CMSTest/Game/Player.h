@@ -53,7 +53,7 @@ private:
     static uint32_t         s_ui32Count;
     
 protected:
-    b2Body*         m_pb2bPod;
+    //b2Body*         m_pb2bPod;
 
     Rock2D::Timer*          m_pBulletTimer;
     
@@ -79,7 +79,7 @@ public:
     void Update();
     
     // Callback(s)
-    void ReceivePod(b2Body* pb2bPod);
+    void OnB2DBodyCreated(b2Body* pb2Body);
     
     // Input::ICallbacks implementation
     virtual void OnDualStick(const std::string& strUUID, const box2d::PbVec2& pbv2Move, const box2d::PbVec2& pbv2Shoot);
