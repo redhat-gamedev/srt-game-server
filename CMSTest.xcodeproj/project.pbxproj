@@ -38,6 +38,7 @@
 		CCE9087216516221005F2E72 /* libapr-1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE9087016516221005F2E72 /* libapr-1.dylib */; };
 		CCE9087316516221005F2E72 /* libaprutil-1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE9087116516221005F2E72 /* libaprutil-1.dylib */; };
 		CCEB9EF0173FD59A00B3CE16 /* AB2DBodyDefinition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCEB9EEE173FD59900B3CE16 /* AB2DBodyDefinition.cpp */; };
+		CCEB9EF3173FDEE700B3CE16 /* B2DPod.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCEB9EF1173FDEE700B3CE16 /* B2DPod.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -150,6 +151,8 @@
 		CCE9087116516221005F2E72 /* libaprutil-1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libaprutil-1.dylib"; path = "usr/lib/libaprutil-1.dylib"; sourceTree = SDKROOT; };
 		CCEB9EEE173FD59900B3CE16 /* AB2DBodyDefinition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AB2DBodyDefinition.cpp; path = Game/AB2DBodyDefinition.cpp; sourceTree = "<group>"; };
 		CCEB9EEF173FD59A00B3CE16 /* AB2DBodyDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AB2DBodyDefinition.h; path = Game/AB2DBodyDefinition.h; sourceTree = "<group>"; };
+		CCEB9EF1173FDEE700B3CE16 /* B2DPod.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = B2DPod.cpp; sourceTree = "<group>"; };
+		CCEB9EF2173FDEE700B3CE16 /* B2DPod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B2DPod.h; sourceTree = "<group>"; };
 		CCF21E6A1724B485006D1290 /* B2DWorld_BuildT.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = B2DWorld_BuildT.h; path = Game/B2DWorld_BuildT.h; sourceTree = "<group>"; };
 		CCFB9DDC1640ABB900F6DBA2 /* Box2D.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Box2D.xcodeproj; path = ../ThirdParty/box2d/Box2D/Build/xcode4/Box2D.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -311,6 +314,8 @@
 				CCF21E6A1724B485006D1290 /* B2DWorld_BuildT.h */,
 				CCEB9EEE173FD59900B3CE16 /* AB2DBodyDefinition.cpp */,
 				CCEB9EEF173FD59A00B3CE16 /* AB2DBodyDefinition.h */,
+				CCEB9EF1173FDEE700B3CE16 /* B2DPod.cpp */,
+				CCEB9EF2173FDEE700B3CE16 /* B2DPod.h */,
 			);
 			name = Game;
 			sourceTree = "<group>";
@@ -447,6 +452,7 @@
 				CCE449FF17231ADD002A1937 /* Bullet.cpp in Sources */,
 				CCE44A0317232660002A1937 /* World.cpp in Sources */,
 				CCEB9EF0173FD59A00B3CE16 /* AB2DBodyDefinition.cpp in Sources */,
+				CCEB9EF3173FDEE700B3CE16 /* B2DPod.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

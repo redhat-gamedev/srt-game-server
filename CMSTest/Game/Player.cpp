@@ -13,7 +13,7 @@
 #include "World.h"
 #include "Timer.h"
 #include "UserData.h"
-#include "AB2DBodyDefinition.h"
+#include "B2DPod.h"
 #include "../Shared/MakeT.h"
 #include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
 #include <assert.h>
@@ -110,7 +110,7 @@ Player::~Player()
 void Player::CreatePod()
 {
     //B2DWorld::_BuildT<Player>::B2DPod(this, &Player::OnB2DBodyCreated);
-    B2DWorld::_BuildT<Player>::B2DBody(this, &Player::OnB2DBodyCreated, B2DPod::Definition.m_ab2BodyDef, B2DPod::Definition.m_ab2FixtureDef);
+    B2DWorld::_BuildT<Player>::B2DBody(this, &Player::OnB2DBodyCreated, B2DPod::Definition.BodyDef, B2DPod::Definition.FixtureDef);
 }
 
 void Player::OnB2DBodyCreated(b2Body* pb2Body)

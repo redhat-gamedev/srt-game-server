@@ -14,26 +14,16 @@
 
 class AB2DBodyDefinition
 {
-public:
+protected:
     b2BodyDef       m_ab2BodyDef;
     b2FixtureDef    m_ab2FixtureDef;
-    
-public:
+
     // Constructor(s)
     AB2DBodyDefinition() {};
-};
 
-class B2DPod :
-    public AB2DBodyDefinition
-{
 public:
-    b2CircleShape       m_ab2CircleShape;
-
-    // Constructor(s)
-    B2DPod();
-    
-public:
-    static B2DPod     Definition;
+    const b2BodyDef&        BodyDef     = m_ab2BodyDef;
+    const b2FixtureDef&     FixtureDef  = m_ab2FixtureDef;
 };
 
 #endif /* defined(__CMSTest__AB2DBodyDefinition__) */
