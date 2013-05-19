@@ -13,6 +13,7 @@
 		CC2436B517490AEA00A8519D /* SecurityCommand.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CC2436B217490AEA00A8519D /* SecurityCommand.pb.cc */; };
 		CC2436D117491B5800A8519D /* EntityGameEvent.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CC2436CB17491B5400A8519D /* EntityGameEvent.pb.cc */; };
 		CC2436D317491B5800A8519D /* GameEvent.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CC2436CE17491B5500A8519D /* GameEvent.pb.cc */; };
+		CC2436D717492CFA00A8519D /* B2DPod.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC2436D517492CFA00A8519D /* B2DPod.cpp */; };
 		CC488D27164EB5FD005078C3 /* libBox2D.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC488D20164EB5DE005078C3 /* libBox2D.a */; };
 		CC4FECE11662A3AA004810CC /* libProtocolBuffers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC4FECE01662A39A004810CC /* libProtocolBuffers.a */; };
 		CC68EA98163DA07400D225C2 /* CMSTest.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = CC68EA97163DA07400D225C2 /* CMSTest.1 */; };
@@ -37,7 +38,6 @@
 		CCE44A0317232660002A1937 /* World.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE44A011723265F002A1937 /* World.cpp */; };
 		CCE9087216516221005F2E72 /* libapr-1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE9087016516221005F2E72 /* libapr-1.dylib */; };
 		CCE9087316516221005F2E72 /* libaprutil-1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE9087116516221005F2E72 /* libaprutil-1.dylib */; };
-		CCEB9EF3173FDEE700B3CE16 /* B2DPod.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCEB9EF1173FDEE700B3CE16 /* B2DPod.cpp */; };
 		CCEB9EF9173FE24F00B3CE16 /* B2DBullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCEB9EF7173FE24F00B3CE16 /* B2DBullet.cpp */; };
 		CCEB9EFC173FFB8F00B3CE16 /* AB2DEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCEB9EFA173FFB8E00B3CE16 /* AB2DEntity.cpp */; };
 /* End PBXBuildFile section */
@@ -113,6 +113,8 @@
 		CC2436CE17491B5500A8519D /* GameEvent.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GameEvent.pb.cc; path = Proto/GameEvent.pb.cc; sourceTree = "<group>"; };
 		CC2436CF17491B5600A8519D /* GameEvent.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameEvent.pb.h; path = Proto/GameEvent.pb.h; sourceTree = "<group>"; };
 		CC2436D017491B5700A8519D /* GameEvent.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; name = GameEvent.proto; path = Proto/GameEvent.proto; sourceTree = "<group>"; };
+		CC2436D517492CFA00A8519D /* B2DPod.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = B2DPod.cpp; path = Game/B2DPod.cpp; sourceTree = "<group>"; };
+		CC2436D617492CFA00A8519D /* B2DPod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = B2DPod.h; path = Game/B2DPod.h; sourceTree = "<group>"; };
 		CC4FECD81662A399004810CC /* ProtocolBuffers.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ProtocolBuffers.xcodeproj; path = ../ThirdParty/protobuf/ProtocolBuffers/ProtocolBuffers.xcodeproj; sourceTree = "<group>"; };
 		CC68EA91163DA07400D225C2 /* CMSTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CMSTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC68EA97163DA07400D225C2 /* CMSTest.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = CMSTest.1; sourceTree = "<group>"; };
@@ -159,8 +161,6 @@
 		CCE44A021723265F002A1937 /* World.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = World.h; path = Game/World.h; sourceTree = "<group>"; };
 		CCE9087016516221005F2E72 /* libapr-1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libapr-1.dylib"; path = "usr/lib/libapr-1.dylib"; sourceTree = SDKROOT; };
 		CCE9087116516221005F2E72 /* libaprutil-1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libaprutil-1.dylib"; path = "usr/lib/libaprutil-1.dylib"; sourceTree = SDKROOT; };
-		CCEB9EF1173FDEE700B3CE16 /* B2DPod.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = B2DPod.cpp; sourceTree = "<group>"; };
-		CCEB9EF2173FDEE700B3CE16 /* B2DPod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B2DPod.h; sourceTree = "<group>"; };
 		CCEB9EF7173FE24F00B3CE16 /* B2DBullet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = B2DBullet.cpp; path = Game/B2DBullet.cpp; sourceTree = "<group>"; };
 		CCEB9EF8173FE24F00B3CE16 /* B2DBullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = B2DBullet.h; path = Game/B2DBullet.h; sourceTree = "<group>"; };
 		CCEB9EFA173FFB8E00B3CE16 /* AB2DEntity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AB2DEntity.cpp; path = Game/AB2DEntity.cpp; sourceTree = "<group>"; };
@@ -318,6 +318,8 @@
 		CCE449D917230F6B002A1937 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				CC2436D517492CFA00A8519D /* B2DPod.cpp */,
+				CC2436D617492CFA00A8519D /* B2DPod.h */,
 				CCE449EC172313FD002A1937 /* B2DWorld.cpp */,
 				CCE449ED172313FD002A1937 /* B2DWorld.h */,
 				CCE449EE172313FD002A1937 /* Input.cpp */,
@@ -333,8 +335,6 @@
 				CCE44A011723265F002A1937 /* World.cpp */,
 				CCE44A021723265F002A1937 /* World.h */,
 				CCF21E6A1724B485006D1290 /* B2DWorld_BuildT.h */,
-				CCEB9EF1173FDEE700B3CE16 /* B2DPod.cpp */,
-				CCEB9EF2173FDEE700B3CE16 /* B2DPod.h */,
 				CCEB9EF7173FE24F00B3CE16 /* B2DBullet.cpp */,
 				CCEB9EF8173FE24F00B3CE16 /* B2DBullet.h */,
 				CCEB9EFA173FFB8E00B3CE16 /* AB2DEntity.cpp */,
@@ -471,12 +471,12 @@
 				CCE449FC172317CA002A1937 /* AEntity.cpp in Sources */,
 				CCE449FF17231ADD002A1937 /* Bullet.cpp in Sources */,
 				CCE44A0317232660002A1937 /* World.cpp in Sources */,
-				CCEB9EF3173FDEE700B3CE16 /* B2DPod.cpp in Sources */,
 				CCEB9EF9173FE24F00B3CE16 /* B2DBullet.cpp in Sources */,
 				CCEB9EFC173FFB8F00B3CE16 /* AB2DEntity.cpp in Sources */,
 				CC2436B517490AEA00A8519D /* SecurityCommand.pb.cc in Sources */,
 				CC2436D117491B5800A8519D /* EntityGameEvent.pb.cc in Sources */,
 				CC2436D317491B5800A8519D /* GameEvent.pb.cc in Sources */,
+				CC2436D717492CFA00A8519D /* B2DPod.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
