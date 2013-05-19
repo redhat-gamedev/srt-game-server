@@ -9,11 +9,10 @@
 #include "Messenger_Producer.h"
 #include "SimpleAsyncProducer.h"
 #include <cms/CMSException.h>
-//#include <decaf/lang/Thread.h>
+#include <google/protobuf/message.h>
 #include <assert.h>
 
 using namespace decaf::lang;
-//using namespace decaf::util::concurrent;
 using namespace cms;
 
 
@@ -21,16 +20,15 @@ using namespace cms;
 Messenger::_Producer::_Producer() :
     m_pSimulationProducer(NULL),
     m_pProducerSerialDispatchQueue(NULL),
-    m_pProducerDispatchTimer(NULL)//,
-    //m_pProducerThread(NULL)
+    m_pProducerDispatchTimer(NULL)
 {
-//    Setup();
+
 }
 
 // Destructor(s)
 Messenger::_Producer::~_Producer()
 {
-//    Teardown();
+
 }
 
 // Helper(s)
@@ -38,28 +36,28 @@ void Messenger::_Producer::Setup()
 {
     std::string     strWorldSimulationURI = "WORLD.SIMULATION";
     std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp";
-    std::string     strWorldProducerName = "WorldProducerThread";
+    std::string     strWorldProducerThreadName = "WorldProducerThread";
+    //std::string     strWorldProducerQueueName = "WorldProducerQueue";
+    const char*     pszWorldProducerQueueName = "WorldProducerQueue";
+    //const char*     pszWorldProducerQueueName = &szWorldProducerQueueName;
     
     std::cout << "Starting the activemq simple producer" << std::endl;
     m_pSimulationProducer = new SimpleProducer(strBrokerURI, strWorldSimulationURI, true);
-    m_pProducerSerialDispatchQueue = new xdispatch::queue("WorldProducerQueue");
+    //m_pProducerSerialDispatchQueue = new xdispatch::queue("WorldProducerQueue");
+    m_pProducerSerialDispatchQueue = new xdispatch::queue(pszWorldProducerQueueName);
     
-    std::cout << "Starting the producer dispatch timer" << std::endl;
-    m_pProducerDispatchTimer = new xdispatch::timer(5 * NSEC_PER_MSEC, *m_pProducerSerialDispatchQueue);
-    m_pProducerDispatchTimer->start();
-    
-//    std::cout << "Starting the world producer" << std::endl;
-//    m_pProducerThread = new decaf::lang::Thread(this, strWorldProducerName);
-//    m_pProducerThread->start();
+    //std::cout << "Starting the producer dispatch timer" << std::endl;
+    //m_pProducerDispatchTimer = new xdispatch::timer(5 * NSEC_PER_MSEC, *m_pProducerSerialDispatchQueue);
+    //m_pProducerDispatchTimer->start();
 }
 
 void Messenger::_Producer::Teardown()
 {
-//    delete m_pProducerThread;
-//    m_pProducerThread = NULL;
-
-    delete m_pProducerDispatchTimer;
-    m_pProducerDispatchTimer = NULL;
+    //delete m_pProducerDispatchTimer;
+    //m_pProducerDispatchTimer = NULL;
+    
+    delete m_pProducerSerialDispatchQueue;
+    m_pProducerSerialDispatchQueue = NULL;
     
     m_pSimulationProducer->close();
     delete m_pSimulationProducer;
@@ -67,25 +65,33 @@ void Messenger::_Producer::Teardown()
 }
 
 // Method(s)
-void Messenger::_Producer::Enqueue(::box2d::PbWorld* pPbWorldDefault)
+void Messenger::_Producer::Enqueue(::box2d::PbWorld* pPbWorld)
 {
-    assert(pPbWorldDefault);
+    assert(pPbWorld);
     
-    m_aSimulationUpdateQueue.lock();
-    m_aSimulationUpdateQueue.push(pPbWorldDefault);
-    m_aSimulationUpdateQueue.unlock();
+    m_aMessageQueue.lock();
+    m_aMessageQueue.push(pPbWorld);
+    m_aMessageQueue.unlock();
 }
 
-void Messenger::_Producer::SendUpdate(::box2d::PbWorld* pPbWorldDefault)
+//void Messenger::_Producer::SendUpdate(::box2d::PbWorld* pPbWorld)
+void Messenger::_Producer::SendUpdate(::google::protobuf::Message* pMessage)
 {
-    assert(pPbWorldDefault);
+//    assert(pPbWorld);
+    assert(pMessage);
     
     static std::string strPBBuffer = "";
     
     try
     {
+//        m_aMessageQueue.lock();
+//        ::google::protobuf::Message* pMessage = m_aMessageQueue.pop();
+//        pMessage->SerializeToString(&strPBBuffer);
+//        m_aMessageQueue.unlock();
+        
         strPBBuffer.clear();
-        pPbWorldDefault->SerializeToString(&strPBBuffer);
+        //pPbWorld->SerializeToString(&strPBBuffer);
+        pMessage->SerializeToString(&strPBBuffer);
         const char* pucText = strPBBuffer.c_str();
         unsigned long ulLength = strPBBuffer.length();
         if (ulLength > 0)
@@ -105,13 +111,17 @@ void Messenger::_Producer::SendUpdates()
     {
         m_pProducerSerialDispatchQueue->sync([=]
         {
-            m_aSimulationUpdateQueue.lock();
-            box2d::PbWorld*  pPbWorldDefault = m_aSimulationUpdateQueue.pop();
-            m_aSimulationUpdateQueue.unlock();
-            if (pPbWorldDefault)
+            m_aMessageQueue.lock();
+            //box2d::PbWorld*  pPbWorldDefault = m_aMessageQueue.pop();
+            ::google::protobuf::Message* pMessage = m_aMessageQueue.pop();
+            m_aMessageQueue.unlock();
+            //if (pPbWorldDefault)
+            if (pMessage)
             {
-                SendUpdate(pPbWorldDefault);
-                pPbWorldDefault->Clear();
+                //SendUpdate(pPbWorldDefault);
+                SendUpdate(pMessage);
+                //pPbWorldDefault->Clear();
+                pMessage->Clear();
  //                delete pPbWorldDefault; // TODO: remove memory thrash
  //                pPbWorldDefault = NULL;
             }
@@ -119,9 +129,3 @@ void Messenger::_Producer::SendUpdates()
         decaf::lang::Thread::currentThread()->sleep(5);
     }
 }
-
-// decaf::lang::Runnable implementation
-//void Messenger::_Producer::run()
-//{
-//    SendUpdates();
-//}

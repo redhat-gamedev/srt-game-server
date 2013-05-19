@@ -9,6 +9,8 @@
 #ifndef __CMSTest__Messenger__
 #define __CMSTest__Messenger__
 
+#include <string>
+
 
 class Messenger
 {
@@ -18,6 +20,8 @@ protected:
     class _Producer;
     class _Consumer;
 
+    static const std::string        BrokerURI;
+    
     // Constructor(s)
     Messenger();
     
@@ -35,3 +39,6 @@ public:
 };
 
 #endif /* defined(__CMSTest__Messenger__) */
+
+//ProtocolBuffers/src/google/protobuf/message.h
+//#include <google/protobuf/message.h>

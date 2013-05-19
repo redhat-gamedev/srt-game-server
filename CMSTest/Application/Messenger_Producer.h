@@ -13,15 +13,20 @@
 #include "../Proto/box2d.pb.h"
 #include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
 #include "../../../ThirdParty/xdispatch/include/xdispatch/timer.h"
-//#include <decaf/lang/Runnable.h>
 #include <decaf/util/StlQueue.h>
 #include <string>
 
 class SimpleProducer;
+namespace google
+{
+    namespace protobuf
+    {
+        class Message;
+    }
+}
 
 
-class Messenger::_Producer// :
-//    public decaf::lang::Runnable
+class Messenger::_Producer
 {
     friend class Messenger;
     
@@ -33,9 +38,8 @@ protected:
     xdispatch::queue*                           m_pProducerSerialDispatchQueue;
     xdispatch::timer*                           m_pProducerDispatchTimer;
     
-    decaf::util::StlQueue<::box2d::PbWorld*>    m_aSimulationUpdateQueue;
-    
-    //decaf::lang::Thread*                        m_pProducerThread;
+    //decaf::util::StlQueue<::box2d::PbWorld*>    m_aSimulationUpdateQueue;
+    decaf::util::StlQueue<::google::protobuf::Message*>    m_aMessageQueue;
     
     // Helper(s)
     void Setup();
@@ -49,12 +53,10 @@ public:
     ~_Producer();
     
     // Method(s)
-    void Enqueue(::box2d::PbWorld* pPbWorldDefault);
-    void SendUpdate(::box2d::PbWorld* pPbWorldDefault);
+    void Enqueue(::box2d::PbWorld* pPbWorld);
+    //void SendUpdate(::box2d::PbWorld* pPbWorld);
+    void SendUpdate(::google::protobuf::Message* pMessage);
     void SendUpdates();
-    
-    // decaf::lang::Runnable implementation
-    //void run();
 };
 
 #endif /* defined(__CMSTest__Messenger_Producer__) */

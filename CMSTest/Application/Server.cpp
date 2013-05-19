@@ -145,11 +145,6 @@ void Server::Teardown()
     delete m_pWorld;
     m_pWorld = NULL;
     
-//    delete m_pMessenger;
-//    m_pMessenger = NULL;
-    
-//    activemq::library::ActiveMQCPP::shutdownLibrary();
-    
     Messenger::Teardown();
 }
 

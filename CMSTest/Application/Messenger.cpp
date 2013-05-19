@@ -9,9 +9,10 @@
 #include "Messenger.h"
 #include "Messenger_Producer.h"
 #include <decaf/lang/Thread.h>
-#include <string.h>
+#include <string>
 
 Messenger::_Producer            Messenger::Producer;
+const std::string               Messenger::BrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp";
 
 
 // Constructor(s)
