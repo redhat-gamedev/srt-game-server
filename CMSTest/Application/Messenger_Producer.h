@@ -13,16 +13,18 @@
 #include "../Proto/box2d.pb.h"
 #include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
 #include "../../../ThirdParty/xdispatch/include/xdispatch/timer.h"
-#include <decaf/lang/Runnable.h>
+//#include <decaf/lang/Runnable.h>
 #include <decaf/util/StlQueue.h>
 #include <string>
 
 class SimpleProducer;
 
 
-class Messenger::_Producer :
-    public decaf::lang::Runnable
+class Messenger::_Producer// :
+//    public decaf::lang::Runnable
 {
+    friend class Messenger;
+    
 private:
     
 protected:
@@ -33,9 +35,7 @@ protected:
     
     decaf::util::StlQueue<::box2d::PbWorld*>    m_aSimulationUpdateQueue;
     
-    decaf::lang::Thread*                        m_pWorldProducerThread;
-    
-    bool                                        m_bSetup;
+    //decaf::lang::Thread*                        m_pProducerThread;
     
     // Helper(s)
     void Setup();
@@ -54,7 +54,7 @@ public:
     void SendUpdates();
     
     // decaf::lang::Runnable implementation
-    void run();
+    //void run();
 };
 
 #endif /* defined(__CMSTest__Messenger_Producer__) */

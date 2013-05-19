@@ -9,18 +9,6 @@
 #ifndef __CMSTest__Messenger__
 #define __CMSTest__Messenger__
 
-namespace decaf
-{
-    namespace lang
-    {
-        class Thread;
-    }
-    namespace util
-    {
-        class Timer;
-    }
-}
-
 
 class Messenger
 {
@@ -30,11 +18,6 @@ protected:
     class _Producer;
     class _Consumer;
 
-    //_Producer*                      m_pWorldProducer;
-//    static decaf::lang::Thread*            m_pWorldProducerThread;
-    
-    // Helper(s)
-
     // Constructor(s)
     Messenger();
     
@@ -42,13 +25,13 @@ protected:
     ~Messenger();
     
 public:
-    //static const _Producer*    Producer;
     static _Producer    Producer;
-    static const _Consumer*    Consumer;
+    //static _Consumer    Consumer;
     
     // Class function(s)
     static void Setup();
-    static void Teardown();    
+    static void Teardown();
+    static void Send();
 };
 
 #endif /* defined(__CMSTest__Messenger__) */

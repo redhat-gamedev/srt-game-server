@@ -58,7 +58,8 @@ Server::Server() :
     m_pTimer(NULL),
     m_pHeartbeat(NULL),
     m_pInput(NULL),
-    m_pSecurity(NULL)
+    m_pSecurity(NULL),
+    m_pMainThread(NULL)
 {
     Setup();
 }
@@ -75,6 +76,8 @@ void Server::Setup()
     std::string     strHeartbeatURI = "HEARTBEAT";
     std::string     strInputURI = "CLIENT.INPUT";
     std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp";
+    std::string     strMainThreadName = "MainThread";
+    
     ///"failover:(tcp://127.0.0.1:61616"
     //        "?wireFormat=openwire"
     //        "&connection.useAsyncSend=true"
@@ -83,7 +86,7 @@ void Server::Setup()
     //        "&wireFormat.tightEncodingEnabled=true"
     ///")";
     
-    std::cout << "Setup()..." << std::endl;
+    std::cout << "Server::Setup()..." << std::endl;
     
 //    activemq::library::ActiveMQCPP::initializeLibrary();
     
@@ -102,11 +105,18 @@ void Server::Setup()
 
     Heartbeat::Publisher.Attach(this);
     //Security::Publisher.Attach(this);
+    
+    std::cout << "Starting the world producer" << std::endl;
+    m_pMainThread = new decaf::lang::Thread(this, strMainThreadName);
+    m_pMainThread->start();
 }
 
 void Server::Teardown()
 {
     std::cout << "Teardown()..." << std::endl;
+    
+    delete m_pMainThread;
+    m_pMainThread = NULL;
     
     //Security::Publisher.Detach(this);
     Heartbeat::Publisher.Detach(this);
@@ -144,7 +154,7 @@ void Server::Teardown()
 }
 
 // Method(s)
-void Server::Run()
+void Server::run()
 {
     // Receive incoming user commands
     //std::cout << "Starting the m_pCommandConsumer" << std::endl;
@@ -161,9 +171,10 @@ void Server::Run()
     //  if any client needs a world update
     // take world snapshot
     // Update clients if required
+    Messenger::Send();
     
-    std::cout << "Starting the heartbeat" << std::endl;
-    m_pTimer->schedule(m_pHeartbeat, 0, 1000);
+    //std::cout << "Starting the heartbeat" << std::endl;
+    //m_pTimer->schedule(m_pHeartbeat, 0, 1000);
 }
 
 // Heartbeat::ICallbacks implementation

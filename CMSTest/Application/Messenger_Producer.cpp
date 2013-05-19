@@ -8,13 +8,12 @@
 
 #include "Messenger_Producer.h"
 #include "SimpleAsyncProducer.h"
-//#include "activemq/library/ActiveMQCPP.h"
 #include <cms/CMSException.h>
-#include <decaf/lang/Thread.h>
+//#include <decaf/lang/Thread.h>
 #include <assert.h>
 
 using namespace decaf::lang;
-using namespace decaf::util::concurrent;
+//using namespace decaf::util::concurrent;
 using namespace cms;
 
 
@@ -22,9 +21,8 @@ using namespace cms;
 Messenger::_Producer::_Producer() :
     m_pSimulationProducer(NULL),
     m_pProducerSerialDispatchQueue(NULL),
-    m_pProducerDispatchTimer(NULL),
-    m_pWorldProducerThread(NULL),
-    m_bSetup(false)
+    m_pProducerDispatchTimer(NULL)//,
+    //m_pProducerThread(NULL)
 {
 //    Setup();
 }
@@ -32,7 +30,7 @@ Messenger::_Producer::_Producer() :
 // Destructor(s)
 Messenger::_Producer::~_Producer()
 {
-    Teardown();
+//    Teardown();
 }
 
 // Helper(s)
@@ -40,31 +38,25 @@ void Messenger::_Producer::Setup()
 {
     std::string     strWorldSimulationURI = "WORLD.SIMULATION";
     std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp";
-
-//    std::cout << "Initializing the ActiveMQCPP library" << std::endl;
-//    activemq::library::ActiveMQCPP::initializeLibrary();
+    std::string     strWorldProducerName = "WorldProducerThread";
     
     std::cout << "Starting the activemq simple producer" << std::endl;
     m_pSimulationProducer = new SimpleProducer(strBrokerURI, strWorldSimulationURI, true);
-    m_pProducerSerialDispatchQueue = new xdispatch::queue("producer");
+    m_pProducerSerialDispatchQueue = new xdispatch::queue("WorldProducerQueue");
     
     std::cout << "Starting the producer dispatch timer" << std::endl;
     m_pProducerDispatchTimer = new xdispatch::timer(5 * NSEC_PER_MSEC, *m_pProducerSerialDispatchQueue);
     m_pProducerDispatchTimer->start();
     
-    std::string     strWorldProducerName = "WorldProducerThread";
-    
-    std::cout << "Starting the world producer" << std::endl;
-    //    m_pWorldProducer = new _Producer();
-    //    m_pWorldProducerThread = new decaf::lang::Thread(m_pWorldProducer, strWorldProducerName);
-    m_pWorldProducerThread = new decaf::lang::Thread(this, strWorldProducerName);
-    m_pWorldProducerThread->start();
+//    std::cout << "Starting the world producer" << std::endl;
+//    m_pProducerThread = new decaf::lang::Thread(this, strWorldProducerName);
+//    m_pProducerThread->start();
 }
 
 void Messenger::_Producer::Teardown()
 {
-    delete m_pWorldProducerThread;
-    m_pWorldProducerThread = NULL;
+//    delete m_pProducerThread;
+//    m_pProducerThread = NULL;
 
     delete m_pProducerDispatchTimer;
     m_pProducerDispatchTimer = NULL;
@@ -72,8 +64,6 @@ void Messenger::_Producer::Teardown()
     m_pSimulationProducer->close();
     delete m_pSimulationProducer;
     m_pSimulationProducer = NULL;
-    
-//    activemq::library::ActiveMQCPP::shutdownLibrary();
 }
 
 // Method(s)
@@ -82,11 +72,6 @@ void Messenger::_Producer::Enqueue(::box2d::PbWorld* pPbWorldDefault)
     assert(pPbWorldDefault);
     
     m_aSimulationUpdateQueue.lock();
-    if (!m_bSetup)
-    {
-        m_bSetup = true;
-        Setup();
-    }
     m_aSimulationUpdateQueue.push(pPbWorldDefault);
     m_aSimulationUpdateQueue.unlock();
 }
@@ -136,7 +121,7 @@ void Messenger::_Producer::SendUpdates()
 }
 
 // decaf::lang::Runnable implementation
-void Messenger::_Producer::run()
-{
-    SendUpdates();
-}
+//void Messenger::_Producer::run()
+//{
+//    SendUpdates();
+//}

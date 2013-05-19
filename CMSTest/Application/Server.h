@@ -16,6 +16,7 @@
 #include "../Game/Input.h"
 #include "../Proto/box2d.pb.h"
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
+#include <decaf/lang/Runnable.h>
 #include <string>
 
 namespace decaf
@@ -42,7 +43,8 @@ using namespace decaf::lang;
 
 class Server :
     public Heartbeat::ICallbacks,
-    public Security::ICallbacks
+    public Security::ICallbacks,
+    public decaf::lang::Runnable
 {
 // Class
 private:
@@ -64,6 +66,8 @@ protected:
     World*                  m_pWorld;
     //Messenger*              m_pMessenger;
     
+    decaf::lang::Thread*                        m_pMainThread;
+    
     // Helper(s)
     void Setup();
     void Teardown();
@@ -76,7 +80,8 @@ public:
     ~Server();
     
     // Method(s)
-    void Run();
+    // decaf::lang::Runnable implementation
+    void run();
     
     // Heartbeat::ICallbacks implementation
     void OnBeat(int iBeat);    
