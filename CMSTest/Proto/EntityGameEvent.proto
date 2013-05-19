@@ -1,0 +1,15 @@
+package gameevent;
+
+
+message EntityGameEvent
+{
+	enum EntityGameEventType
+	{
+		CREATE = 0;
+		DESTROY = 1;
+	}
+	required EntityGameEventType type = 1;
+
+	optional string UUID = 2;
+	required uint64 entityTag = 3;
+}

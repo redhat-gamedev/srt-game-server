@@ -1,0 +1,14 @@
+package gameevent;
+
+import "EntityGameEvent.proto";
+
+
+message GameEvent
+{
+	enum GameEventType
+	{
+		ENTITY = 0;
+	}
+	required GameEventType type = 1 [default = ENTITY];
+	optional EntityGameEvent entityGameEvent = 3;
+}
