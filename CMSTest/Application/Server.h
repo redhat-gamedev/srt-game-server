@@ -35,6 +35,7 @@ class SimpleAsyncConsumer;
 //class Heartbeat;
 class World;
 class Player;
+//class Messenger;
 
 using namespace decaf::lang;
 
@@ -61,6 +62,7 @@ protected:
     Input*                  m_pInput;
     Security*               m_pSecurity;
     World*                  m_pWorld;
+    //Messenger*              m_pMessenger;
     
     // Helper(s)
     void Setup();

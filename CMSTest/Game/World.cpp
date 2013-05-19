@@ -48,27 +48,6 @@ void World::Simulation::run()
     m_pWorld->Simulate();
 }
 
-// Constructor(s)
-World::Producer::Producer(World* pWorld) :
-    m_pWorld(pWorld)
-{
-    assert(m_pWorld);
-}
-
-// Destructor
-World::Producer::~Producer()
-{
-    assert(m_pWorld);
-}
-
-// decaf::lang::Runnable implementation
-void World::Producer::run()
-{
-    assert(m_pWorld);
-    
-    m_pWorld->SendUpdates();
-}
-
 
 // Helper(s)
 void World::Setup()
@@ -78,28 +57,13 @@ void World::Setup()
     std::string     strWorldSimulationName = "WorldSimulationThread";
     std::string     strWorldProducerName = "WorldProducerThread";
 
-    m_pMessenger = new Messenger();
-    
-
     m_pB2DWorld = new B2DWorld();
-//    m_pSimulationProducer = new SimpleProducer(strBrokerURI, strWorldSimulationURI, true);
-
     m_pSimulationSerialDispatchQueue = new xdispatch::queue("simulation");
-//    m_pProducerSerialDispatchQueue = new xdispatch::queue("producer");
     
     std::cout << "Starting the world simulation" << std::endl;
     m_pWorldSimulation = new World::Simulation(this);
     m_pWorldSimulationThread = new decaf::lang::Thread(m_pWorldSimulation, strWorldSimulationName);
     m_pWorldSimulationThread->start();
-    
-//    std::cout << "Starting the world producer" << std::endl;
-//    m_pWorldProducer = new World::Producer(this);
-//    m_pWorldProducerThread = new decaf::lang::Thread(m_pWorldProducer, strWorldProducerName);
-//    m_pWorldProducerThread->start();
-//    
-//    std::cout << "Starting the producer dispatch timer" << std::endl;
-//    m_pProducerDispatchTimer = new xdispatch::timer(5 * NSEC_PER_MSEC, *m_pProducerSerialDispatchQueue);
-//    m_pProducerDispatchTimer->start();
     
     std::cout << "Starting the simulation dispatch timer" << std::endl;
     m_pSimulationDispatchTimer = new xdispatch::timer(15 * NSEC_PER_MSEC, *m_pSimulationSerialDispatchQueue);
@@ -112,50 +76,36 @@ void World::Teardown()
 {
     Security::Publisher.Detach(this);
 
-//    delete m_pWorldProducerThread;
-//    m_pWorldProducerThread = NULL;
-//    
-//    delete m_pWorldProducer;
-//    m_pWorldProducer = NULL;
-    
     delete m_pWorldSimulationThread;
     m_pWorldSimulationThread = NULL;
     
     delete m_pWorldSimulation;
     m_pWorldSimulation = NULL;
     
-//    delete m_pProducerDispatchTimer;
-//    m_pProducerDispatchTimer = NULL;
-    
     delete m_pSimulationDispatchTimer;
     m_pSimulationDispatchTimer = NULL;
     
     delete m_pSimulationSerialDispatchQueue;
     m_pSimulationSerialDispatchQueue = NULL;
-    
-//    m_pSimulationProducer->close();
-//    delete m_pSimulationProducer;
-//    m_pSimulationProducer = NULL;
  
     delete m_pB2DWorld;
     m_pB2DWorld = NULL;
     
-    delete m_pMessenger;
-    m_pMessenger = NULL;
+//    delete m_pMessenger;
+//    m_pMessenger = NULL;
 }
 
 // Constructor(s)
 World::World() :
-//    m_pSimulationProducer(NULL),
+//World::World(Messenger* pMessenger) :
     m_pSimulationSerialDispatchQueue(NULL),
     m_pSimulationDispatchTimer(NULL),
-//    m_pProducerSerialDispatchQueue(NULL),
-//    m_pProducerDispatchTimer(NULL),
     m_pWorldSimulation(NULL),
     m_pWorldSimulationThread(NULL)//,
-//    m_pWorldProducer(NULL),
-//    m_pWorldProducerThread(NULL)
+    //m_pMessenger(pMessenger)
 {
+//    assert(m_pMessenger);
+    
     Setup();
 }
 
@@ -274,45 +224,6 @@ void World::RemovePlayer(const std::string& strUUID)
     });
 }
 
-void World::SendUpdate(PbWorld* pPbWorldDefault)
-{
-//    assert(pPbWorldDefault);
-//    
-//    static std::string strPBBuffer = "";
-//    
-//    try
-//    {
-//        strPBBuffer.clear();
-//        pPbWorldDefault->SerializeToString(&strPBBuffer);
-//        const char* pucText = strPBBuffer.c_str();
-//        unsigned long ulLength = strPBBuffer.length();
-//        if (ulLength > 0)
-//        {
-//            m_pSimulationProducer->Send((const unsigned char*)pucText, (int)ulLength);
-//        }
-//    }
-//    catch ( CMSException& e )
-//    {
-//        e.printStackTrace();
-//    }    
-}
-
-void World::SendUpdate(std::string* pstrWorldUpdate)
-{
-//    assert(pstrWorldUpdate);
-//    
-//    try
-//    {
-//        const char* pucText = pstrWorldUpdate->c_str();
-//        unsigned long ulLength = pstrWorldUpdate->length();
-//        m_pSimulationProducer->Send((const unsigned char*)pucText, (int)ulLength);
-//    }
-//    catch ( CMSException& e )
-//    {
-//        e.printStackTrace();
-//    }
-}
-
 // decaf::lang::Runnable implementation
 void World::Simulate()
 {
@@ -342,34 +253,11 @@ void World::Simulate()
             B2DWorld::world->Step(timeStep, velocityIterations, positionIterations);
             PbWorld* pPbWorldDefault = new PbWorld(); // TODO: remove memory thrash
             b2WorldToPbWorld(B2DWorld::world, pPbWorldDefault);
-//            m_aSimulationUpdateQueue.lock();
-//            m_aSimulationUpdateQueue.push(pPbWorldDefault);
-//            m_aSimulationUpdateQueue.unlock();
-            m_pMessenger->m_pWorldProducer->Enqueue(pPbWorldDefault);
+//            m_pMessenger->m_pWorldProducer->Enqueue(pPbWorldDefault);
+            Messenger::Producer.Enqueue(pPbWorldDefault);
         });
         decaf::lang::Thread::currentThread()->sleep(15);
     }
-}
-
-void World::SendUpdates()
-{
-//    while (true)
-//    {
-//        m_pProducerSerialDispatchQueue->sync([=]
-//        {
-//            m_aSimulationUpdateQueue.lock();
-//            PbWorld*  pPbWorldDefault = m_aSimulationUpdateQueue.pop();
-//            m_aSimulationUpdateQueue.unlock();
-//            if (pPbWorldDefault)
-//            {
-//                SendUpdate(pPbWorldDefault);
-//                pPbWorldDefault->Clear();
-//                delete pPbWorldDefault; // TODO: remove memory thrash
-//                pPbWorldDefault = NULL;
-//            }
-//        });
-//        decaf::lang::Thread::currentThread()->sleep(5);
-//    }
 }
 
 // Security::ICallbacks implementation

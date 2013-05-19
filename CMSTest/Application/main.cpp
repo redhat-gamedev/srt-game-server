@@ -16,12 +16,17 @@
  */
 
 #include "Server.h"
+#include "activemq/library/ActiveMQCPP.h"
 #include <iostream>
 
 
 int main(int argc, char* argv[])
 {
     std::cout << "Starting..." << std::endl;
+    
+    std::cout << "Initializing the ActiveMQCPP library" << std::endl;
+    activemq::library::ActiveMQCPP::initializeLibrary();
+    
     Server* pServer = new Server();
 
     pServer->Run();
@@ -29,7 +34,9 @@ int main(int argc, char* argv[])
     // Wait to exit.
     std::cout << "Press 'q' to quit" << std::endl;
     while( std::cin.get() != 'q') {}
-    
+
     delete pServer;
     pServer = NULL;
+    
+    activemq::library::ActiveMQCPP::shutdownLibrary();
 }

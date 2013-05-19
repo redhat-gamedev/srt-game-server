@@ -33,6 +33,10 @@ protected:
     
     decaf::util::StlQueue<::box2d::PbWorld*>    m_aSimulationUpdateQueue;
     
+    decaf::lang::Thread*                        m_pWorldProducerThread;
+    
+    bool                                        m_bSetup;
+    
     // Helper(s)
     void Setup();
     void Teardown();

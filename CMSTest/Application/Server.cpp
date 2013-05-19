@@ -15,6 +15,7 @@
 #include "Security.h"
 #include "../Game/Player.h"
 #include "UserData.h"
+#include "Messenger.h"
 #include "decaf/util/Timer.h"
 #include "decaf/lang/Thread.h"
 #include "decaf/lang/Runnable.h"
@@ -84,8 +85,11 @@ void Server::Setup()
     
     std::cout << "Setup()..." << std::endl;
     
-    activemq::library::ActiveMQCPP::initializeLibrary();
+//    activemq::library::ActiveMQCPP::initializeLibrary();
     
+    //m_pMessenger = new Messenger();
+    
+    Messenger::Setup();
     m_pWorld = new World();
 
     m_pHeartbeatProducer = new SimpleProducer(strBrokerURI, strHeartbeatURI, true);
@@ -131,7 +135,12 @@ void Server::Teardown()
     delete m_pWorld;
     m_pWorld = NULL;
     
-    activemq::library::ActiveMQCPP::shutdownLibrary();
+//    delete m_pMessenger;
+//    m_pMessenger = NULL;
+    
+//    activemq::library::ActiveMQCPP::shutdownLibrary();
+    
+    Messenger::Teardown();
 }
 
 // Method(s)
