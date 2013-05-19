@@ -22,7 +22,7 @@ namespace decaf
 {
     namespace lang
     {
-        class Thread;        
+        class Thread;
     }
     namespace util
     {

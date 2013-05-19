@@ -10,6 +10,7 @@
 #include "../Proto/DualStick.pb.h"
 #include "../Proto/box2d.pb.h"
 #include "Command.pb.h"
+#include "SecurityCommand.pb.h"
 #include "../Shared/SimpleAsyncConsumer.h"
 #include "../Shared/SimpleAsyncProducer.h"
 #include <cms/CMSException.h>

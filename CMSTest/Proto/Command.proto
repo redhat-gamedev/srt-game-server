@@ -1,16 +1,7 @@
 package command;
 
-message SecurityCommand
-{
-	enum SecurityCommandType
-	{
-		JOIN = 0;
-		LEAVE = 1;
-	}
-	required SecurityCommandType type = 1;
+import "SecurityCommand.proto";
 
-	optional string UUID = 2;
-}
 
 message Command
 {

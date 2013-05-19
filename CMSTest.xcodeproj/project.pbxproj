@@ -10,6 +10,7 @@
 		CC0F90D817179815006B9474 /* libactivemq-cpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0F90D7171797FF006B9474 /* libactivemq-cpp.a */; };
 		CC0F90DC17179AF3006B9474 /* libssl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0F90DB17179AF3006B9474 /* libssl.dylib */; };
 		CC0F90DE17179B7A006B9474 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0F90DD17179B7A006B9474 /* libcrypto.dylib */; };
+		CC2436B517490AEA00A8519D /* SecurityCommand.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CC2436B217490AEA00A8519D /* SecurityCommand.pb.cc */; };
 		CC488D27164EB5FD005078C3 /* libBox2D.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC488D20164EB5DE005078C3 /* libBox2D.a */; };
 		CC4FECE11662A3AA004810CC /* libProtocolBuffers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC4FECE01662A39A004810CC /* libProtocolBuffers.a */; };
 		CC68EA98163DA07400D225C2 /* CMSTest.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = CC68EA97163DA07400D225C2 /* CMSTest.1 */; };
@@ -104,6 +105,9 @@
 		CC0F90CF171797FE006B9474 /* activemq-cpp.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "activemq-cpp.xcodeproj"; path = "../ThirdParty/activemq-cpp/activemq-cpp/activemq-cpp.xcodeproj"; sourceTree = "<group>"; };
 		CC0F90DB17179AF3006B9474 /* libssl.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libssl.dylib; path = usr/lib/libssl.dylib; sourceTree = SDKROOT; };
 		CC0F90DD17179B7A006B9474 /* libcrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.dylib; path = usr/lib/libcrypto.dylib; sourceTree = SDKROOT; };
+		CC2436B217490AEA00A8519D /* SecurityCommand.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SecurityCommand.pb.cc; path = Proto/SecurityCommand.pb.cc; sourceTree = "<group>"; };
+		CC2436B317490AEA00A8519D /* SecurityCommand.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SecurityCommand.pb.h; path = Proto/SecurityCommand.pb.h; sourceTree = "<group>"; };
+		CC2436B417490AEA00A8519D /* SecurityCommand.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; name = SecurityCommand.proto; path = Proto/SecurityCommand.proto; sourceTree = "<group>"; };
 		CC4FECD81662A399004810CC /* ProtocolBuffers.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ProtocolBuffers.xcodeproj; path = ../ThirdParty/protobuf/ProtocolBuffers/ProtocolBuffers.xcodeproj; sourceTree = "<group>"; };
 		CC68EA91163DA07400D225C2 /* CMSTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CMSTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC68EA97163DA07400D225C2 /* CMSTest.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = CMSTest.1; sourceTree = "<group>"; };
@@ -190,6 +194,9 @@
 		CC19F7A1168CCC9E007B694E /* Proto */ = {
 			isa = PBXGroup;
 			children = (
+				CC2436B217490AEA00A8519D /* SecurityCommand.pb.cc */,
+				CC2436B317490AEA00A8519D /* SecurityCommand.pb.h */,
+				CC2436B417490AEA00A8519D /* SecurityCommand.proto */,
 				CCE449B917230E21002A1937 /* box2d.pb.cc */,
 				CCE449BA17230E21002A1937 /* box2d.pb.h */,
 				CCE449BB17230E21002A1937 /* box2d.proto */,
@@ -459,6 +466,7 @@
 				CCEB9EF3173FDEE700B3CE16 /* B2DPod.cpp in Sources */,
 				CCEB9EF9173FE24F00B3CE16 /* B2DBullet.cpp in Sources */,
 				CCEB9EFC173FFB8F00B3CE16 /* AB2DEntity.cpp in Sources */,
+				CC2436B517490AEA00A8519D /* SecurityCommand.pb.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -20,10 +20,6 @@ namespace command {
 
 namespace {
 
-const ::google::protobuf::Descriptor* SecurityCommand_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  SecurityCommand_reflection_ = NULL;
-const ::google::protobuf::EnumDescriptor* SecurityCommand_SecurityCommandType_descriptor_ = NULL;
 const ::google::protobuf::Descriptor* Command_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   Command_reflection_ = NULL;
@@ -38,24 +34,7 @@ void protobuf_AssignDesc_Command_2eproto() {
     ::google::protobuf::DescriptorPool::generated_pool()->FindFileByName(
       "Command.proto");
   GOOGLE_CHECK(file != NULL);
-  SecurityCommand_descriptor_ = file->message_type(0);
-  static const int SecurityCommand_offsets_[2] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SecurityCommand, type_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SecurityCommand, uuid_),
-  };
-  SecurityCommand_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
-      SecurityCommand_descriptor_,
-      SecurityCommand::default_instance_,
-      SecurityCommand_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SecurityCommand, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SecurityCommand, _unknown_fields_),
-      -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(SecurityCommand));
-  SecurityCommand_SecurityCommandType_descriptor_ = SecurityCommand_descriptor_->enum_type(0);
-  Command_descriptor_ = file->message_type(1);
+  Command_descriptor_ = file->message_type(0);
   static const int Command_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Command, type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Command, securitycommand_),
@@ -85,16 +64,12 @@ inline void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    SecurityCommand_descriptor_, &SecurityCommand::default_instance());
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     Command_descriptor_, &Command::default_instance());
 }
 
 }  // namespace
 
 void protobuf_ShutdownFile_Command_2eproto() {
-  delete SecurityCommand::default_instance_;
-  delete SecurityCommand_reflection_;
   delete Command::default_instance_;
   delete Command_reflection_;
 }
@@ -105,20 +80,16 @@ void protobuf_AddDesc_Command_2eproto() {
   already_here = true;
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
+  ::command::protobuf_AddDesc_SecurityCommand_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\rCommand.proto\022\007command\"\207\001\n\017SecurityCom"
-    "mand\022:\n\004type\030\001 \002(\0162,.command.SecurityCom"
-    "mand.SecurityCommandType\022\014\n\004UUID\030\002 \001(\t\"*"
-    "\n\023SecurityCommandType\022\010\n\004JOIN\020\000\022\t\n\005LEAVE"
-    "\020\001\"\217\001\n\007Command\0224\n\004type\030\001 \002(\0162\034.command.C"
-    "ommand.CommandType:\010SECURITY\0221\n\017security"
-    "Command\030\003 \001(\0132\030.command.SecurityCommand\""
-    "\033\n\013CommandType\022\014\n\010SECURITY\020\000", 308);
+    "\n\rCommand.proto\022\007command\032\025SecurityComman"
+    "d.proto\"\217\001\n\007Command\0224\n\004type\030\001 \002(\0162\034.comm"
+    "and.Command.CommandType:\010SECURITY\0221\n\017sec"
+    "urityCommand\030\003 \001(\0132\030.command.SecurityCom"
+    "mand\"\033\n\013CommandType\022\014\n\010SECURITY\020\000", 193);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "Command.proto", &protobuf_RegisterTypes);
-  SecurityCommand::default_instance_ = new SecurityCommand();
   Command::default_instance_ = new Command();
-  SecurityCommand::default_instance_->InitAsDefaultInstance();
   Command::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_Command_2eproto);
 }
@@ -129,299 +100,6 @@ struct StaticDescriptorInitializer_Command_2eproto {
     protobuf_AddDesc_Command_2eproto();
   }
 } static_descriptor_initializer_Command_2eproto_;
-
-// ===================================================================
-
-const ::google::protobuf::EnumDescriptor* SecurityCommand_SecurityCommandType_descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return SecurityCommand_SecurityCommandType_descriptor_;
-}
-bool SecurityCommand_SecurityCommandType_IsValid(int value) {
-  switch(value) {
-    case 0:
-    case 1:
-      return true;
-    default:
-      return false;
-  }
-}
-
-#ifndef _MSC_VER
-const SecurityCommand_SecurityCommandType SecurityCommand::JOIN;
-const SecurityCommand_SecurityCommandType SecurityCommand::LEAVE;
-const SecurityCommand_SecurityCommandType SecurityCommand::SecurityCommandType_MIN;
-const SecurityCommand_SecurityCommandType SecurityCommand::SecurityCommandType_MAX;
-const int SecurityCommand::SecurityCommandType_ARRAYSIZE;
-#endif  // _MSC_VER
-#ifndef _MSC_VER
-const int SecurityCommand::kTypeFieldNumber;
-const int SecurityCommand::kUUIDFieldNumber;
-#endif  // !_MSC_VER
-
-SecurityCommand::SecurityCommand()
-  : ::google::protobuf::Message() {
-  SharedCtor();
-}
-
-void SecurityCommand::InitAsDefaultInstance() {
-}
-
-SecurityCommand::SecurityCommand(const SecurityCommand& from)
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  MergeFrom(from);
-}
-
-void SecurityCommand::SharedCtor() {
-  _cached_size_ = 0;
-  type_ = 0;
-  uuid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-}
-
-SecurityCommand::~SecurityCommand() {
-  SharedDtor();
-}
-
-void SecurityCommand::SharedDtor() {
-  if (uuid_ != &::google::protobuf::internal::kEmptyString) {
-    delete uuid_;
-  }
-  if (this != default_instance_) {
-  }
-}
-
-void SecurityCommand::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* SecurityCommand::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return SecurityCommand_descriptor_;
-}
-
-const SecurityCommand& SecurityCommand::default_instance() {
-  if (default_instance_ == NULL) protobuf_AddDesc_Command_2eproto();
-  return *default_instance_;
-}
-
-SecurityCommand* SecurityCommand::default_instance_ = NULL;
-
-SecurityCommand* SecurityCommand::New() const {
-  return new SecurityCommand;
-}
-
-void SecurityCommand::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    type_ = 0;
-    if (has_uuid()) {
-      if (uuid_ != &::google::protobuf::internal::kEmptyString) {
-        uuid_->clear();
-      }
-    }
-  }
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
-}
-
-bool SecurityCommand::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
-  ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .command.SecurityCommand.SecurityCommandType type = 1;
-      case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-          int value;
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
-                 input, &value)));
-          if (::command::SecurityCommand_SecurityCommandType_IsValid(value)) {
-            set_type(static_cast< ::command::SecurityCommand_SecurityCommandType >(value));
-          } else {
-            mutable_unknown_fields()->AddVarint(1, value);
-          }
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(18)) goto parse_UUID;
-        break;
-      }
-
-      // optional string UUID = 2;
-      case 2: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_UUID:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_uuid()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->uuid().data(), this->uuid().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectAtEnd()) return true;
-        break;
-      }
-
-      default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-  return true;
-#undef DO_
-}
-
-void SecurityCommand::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // required .command.SecurityCommand.SecurityCommandType type = 1;
-  if (has_type()) {
-    ::google::protobuf::internal::WireFormatLite::WriteEnum(
-      1, this->type(), output);
-  }
-
-  // optional string UUID = 2;
-  if (has_uuid()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->uuid().data(), this->uuid().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
-      2, this->uuid(), output);
-  }
-
-  if (!unknown_fields().empty()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
-}
-
-::google::protobuf::uint8* SecurityCommand::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
-  // required .command.SecurityCommand.SecurityCommandType type = 1;
-  if (has_type()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
-      1, this->type(), target);
-  }
-
-  // optional string UUID = 2;
-  if (has_uuid()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->uuid().data(), this->uuid().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        2, this->uuid(), target);
-  }
-
-  if (!unknown_fields().empty()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
-  return target;
-}
-
-int SecurityCommand::ByteSize() const {
-  int total_size = 0;
-
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .command.SecurityCommand.SecurityCommandType type = 1;
-    if (has_type()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());
-    }
-
-    // optional string UUID = 2;
-    if (has_uuid()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->uuid());
-    }
-
-  }
-  if (!unknown_fields().empty()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void SecurityCommand::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const SecurityCommand* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const SecurityCommand*>(
-      &from);
-  if (source == NULL) {
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-    MergeFrom(*source);
-  }
-}
-
-void SecurityCommand::MergeFrom(const SecurityCommand& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_type()) {
-      set_type(from.type());
-    }
-    if (from.has_uuid()) {
-      set_uuid(from.uuid());
-    }
-  }
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
-}
-
-void SecurityCommand::CopyFrom(const ::google::protobuf::Message& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void SecurityCommand::CopyFrom(const SecurityCommand& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool SecurityCommand::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
-
-  return true;
-}
-
-void SecurityCommand::Swap(SecurityCommand* other) {
-  if (other != this) {
-    std::swap(type_, other->type_);
-    std::swap(uuid_, other->uuid_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
-}
-
-::google::protobuf::Metadata SecurityCommand::GetMetadata() const {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::Metadata metadata;
-  metadata.descriptor = SecurityCommand_descriptor_;
-  metadata.reflection = SecurityCommand_reflection_;
-  return metadata;
-}
-
 
 // ===================================================================
 
