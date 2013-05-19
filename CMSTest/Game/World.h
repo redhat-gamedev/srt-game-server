@@ -32,6 +32,7 @@ namespace decaf
 class SimpleProducer;
 class B2DWorld;
 class Player;
+class Messenger;
 
 
 class World :
@@ -72,26 +73,28 @@ private:
         void run();
     };
 protected:
-    SimpleProducer*                 m_pSimulationProducer;
+//    SimpleProducer*                 m_pSimulationProducer;
     
     xdispatch::queue*               m_pSimulationSerialDispatchQueue;
     xdispatch::timer*               m_pSimulationDispatchTimer;
 
-    xdispatch::queue*               m_pProducerSerialDispatchQueue;
-    xdispatch::timer*               m_pProducerDispatchTimer;
-    
-    decaf::util::StlQueue<::box2d::PbWorld*>    m_aSimulationUpdateQueue;
+//    xdispatch::queue*               m_pProducerSerialDispatchQueue;
+//    xdispatch::timer*               m_pProducerDispatchTimer;
+//    
+//    decaf::util::StlQueue<::box2d::PbWorld*>    m_aSimulationUpdateQueue;
 
     World::Simulation*              m_pWorldSimulation;
     decaf::lang::Thread*            m_pWorldSimulationThread;
 
-    World::Producer*                m_pWorldProducer;
-    decaf::lang::Thread*            m_pWorldProducerThread;
+//    World::Producer*                m_pWorldProducer;
+//    decaf::lang::Thread*            m_pWorldProducerThread;
 
     std::list<Player*>              m_listPlayers;
     std::list<Player*>              m_listPlayersSwap;
     
     std::string                     m_strPBBuffer;
+    
+    Messenger*                      m_pMessenger;
     
     // Helper(s)
     void Setup();
