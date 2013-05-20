@@ -9,39 +9,8 @@
 #include "Heartbeat.h"
 #include <stdio.h>
 
-Heartbeat::_Publisher                 Heartbeat::Publisher;
+Heartbeat::_EventPublisher              Heartbeat::EventPublisher;
 
-
-// Constructor(s)
-/*
- B2DWorld.h::_Publisher::_Publisher()
- {
- 
- }
- */
-
-// Destructor
-/*
- B2DWorld.h::_Publisher::~_Publisher()
- {
- 
- }
- */
-
-// Method(s)
-void Heartbeat::_Publisher::OnBeat(int iBeat)
-{
-    ICallbacks* pObjToCallback = NULL;
-    
-    Clone(m_listSubscribersSwap);
-    while(!m_listSubscribersSwap.empty())
-    {
-        pObjToCallback = m_listSubscribersSwap.front();
-        m_listSubscribersSwap.pop_front();
-        assert(pObjToCallback);
-        pObjToCallback->OnBeat(iBeat);
-    }
-}
 
 // Constructor(s)
 Heartbeat::Heartbeat()
@@ -56,11 +25,17 @@ Heartbeat::~Heartbeat()
     ++i;
 }
 
-// Method(s)
+// Event Firing Method(s)
+void Heartbeat::FireBeatEvent(const int& iBeat)
+{
+    EventPublisher.BeatEvent(this, iBeat);
+}
+
+// decaf::Runnable implementation
 void Heartbeat::run()
 {
     static int iBeat = 0;
     //printf("%i", i);
-    Publisher.OnBeat(iBeat);
+    FireBeatEvent(iBeat);
     ++iBeat;
 }

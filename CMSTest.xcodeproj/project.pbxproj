@@ -27,7 +27,6 @@
 		CCE449D317230EF9002A1937 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449C917230EF9002A1937 /* main.cpp */; };
 		CCE449D417230EF9002A1937 /* Security.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449CA17230EF9002A1937 /* Security.cpp */; };
 		CCE449D517230EF9002A1937 /* Server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449CC17230EF9002A1937 /* Server.cpp */; };
-		CCE449DE17230F8E002A1937 /* PublisherT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449DA17230F8E002A1937 /* PublisherT.cpp */; };
 		CCE449DF17230F8E002A1937 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449DC17230F8E002A1937 /* Timer.cpp */; };
 		CCE449E31723109C002A1937 /* Heartbeat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449E11723109C002A1937 /* Heartbeat.cpp */; };
 		CCE449E81723111C002A1937 /* SimpleAsyncConsumer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449E41723111C002A1937 /* SimpleAsyncConsumer.cpp */; };
@@ -235,8 +234,6 @@
 		CCE449CB17230EF9002A1937 /* Security.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Security.h; path = Application/Security.h; sourceTree = "<group>"; };
 		CCE449CC17230EF9002A1937 /* Server.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Server.cpp; path = Application/Server.cpp; sourceTree = "<group>"; };
 		CCE449CD17230EF9002A1937 /* Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Server.h; path = Application/Server.h; sourceTree = "<group>"; };
-		CCE449DA17230F8E002A1937 /* PublisherT.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PublisherT.cpp; path = Shared/PublisherT.cpp; sourceTree = "<group>"; };
-		CCE449DB17230F8E002A1937 /* PublisherT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PublisherT.h; path = Shared/PublisherT.h; sourceTree = "<group>"; };
 		CCE449DC17230F8E002A1937 /* Timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Timer.cpp; path = Shared/Timer.cpp; sourceTree = "<group>"; };
 		CCE449DD17230F8E002A1937 /* Timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Timer.h; path = Shared/Timer.h; sourceTree = "<group>"; };
 		CCE449E017230FD2002A1937 /* Types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Types.h; path = Shared/Types.h; sourceTree = "<group>"; };
@@ -436,8 +433,6 @@
 				CCE449E61723111C002A1937 /* SimpleAsyncProducer.cpp */,
 				CCE449E71723111C002A1937 /* SimpleAsyncProducer.h */,
 				CCE449E017230FD2002A1937 /* Types.h */,
-				CCE449DA17230F8E002A1937 /* PublisherT.cpp */,
-				CCE449DB17230F8E002A1937 /* PublisherT.h */,
 				CCE449DC17230F8E002A1937 /* Timer.cpp */,
 				CCE449DD17230F8E002A1937 /* Timer.h */,
 				CCE44A0017231FAD002A1937 /* MakeT.h */,
@@ -684,7 +679,6 @@
 				CCE449D317230EF9002A1937 /* main.cpp in Sources */,
 				CCE449D417230EF9002A1937 /* Security.cpp in Sources */,
 				CCE449D517230EF9002A1937 /* Server.cpp in Sources */,
-				CCE449DE17230F8E002A1937 /* PublisherT.cpp in Sources */,
 				CCE449DF17230F8E002A1937 /* Timer.cpp in Sources */,
 				CCE449E31723109C002A1937 /* Heartbeat.cpp in Sources */,
 				CCE449E81723111C002A1937 /* SimpleAsyncConsumer.cpp in Sources */,

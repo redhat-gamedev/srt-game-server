@@ -10,8 +10,6 @@
 #define __CMSTest__Server__
 
 #include "decaf/util/StlQueue.h"
-#include "Heartbeat.h"
-#include "Security.h"
 #include "../Game/B2DWorld.h"
 #include "../Game/Input.h"
 #include "../Proto/box2d.pb.h"
@@ -32,8 +30,8 @@ namespace decaf
 }
 class SimpleProducer;
 class SimpleAsyncConsumer;
-//class Security;
-//class Heartbeat;
+class Security;
+class Heartbeat;
 class World;
 class Player;
 //class Messenger;
@@ -42,8 +40,6 @@ using namespace decaf::lang;
 
 
 class Server :
-    public Heartbeat::ICallbacks,
-    public Security::ICallbacks,
     public decaf::lang::Runnable
 {
 // Class
@@ -83,8 +79,8 @@ public:
     // decaf::lang::Runnable implementation
     void run();
     
-    // Heartbeat::ICallbacks implementation
-    void OnBeat(int iBeat);    
+    // Heartbeat Event response
+    void OnHeartBeatBeat(const void* pSender, const int& iBeat);
 };
 
 #endif /* defined(__CMSTest__Server__) */

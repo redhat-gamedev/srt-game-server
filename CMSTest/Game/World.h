@@ -10,7 +10,6 @@
 #define __CMSTest__World__
 
 #include "B2DWorld.h"
-#include "../Application/Security.h"
 #include "../Proto/box2d.pb.h"
 #include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
 #include "../../../ThirdParty/xdispatch/include/xdispatch/timer.h"
@@ -33,8 +32,7 @@ class B2DWorld;
 class Player;
 
 
-class World :
-    public Security::ICallbacks
+class World
 {
 private:
     class Simulation :
@@ -87,8 +85,8 @@ public:
     void Simulate();
     
     // Security::ICallbacks implementation
-    void OnSecurityRequestJoin(std::string& strUUID);
-    void OnSecurityRequestLeave(std::string& strUUID);
+    void OnSecurityRequestJoin(const void* pSender, const std::string& strUUID);
+    void OnSecurityRequestLeave(const void* pSender, const std::string& strUUID);
 };
 
 #endif /* defined(__CMSTest__World__) */

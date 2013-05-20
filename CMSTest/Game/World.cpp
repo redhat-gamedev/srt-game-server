@@ -10,12 +10,14 @@
 #include "B2DWorld.h"
 #include "Player.h"
 #include "UserData.h"
-#include "Messenger.h"
-#include "Messenger_Producer.h"
+#include "../Application/Messenger.h"
+#include "../Application/Messenger_Producer.h"
+#include "../Application/Security.h"
 #include "../Shared/SimpleAsyncProducer.h"
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Common/b2Settings.h"
 #include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
+#include "Poco/Delegate.h"
 #include <cms/CMSException.h>
 #include <decaf/lang/Thread.h>
 
@@ -66,12 +68,16 @@ void World::Setup()
     //m_pSimulationDispatchTimer = new xdispatch::timer(15 * NSEC_PER_MSEC, *m_pSimulationSerialDispatchQueue);
     //m_pSimulationDispatchTimer->start();
     
-    Security::Publisher.Attach(this);
+    //Security::Publisher.Attach(this);
+    Security::EventPublisher.RequestJoinEvent += Poco::Delegate<World, const std::string&>(this, &World::OnSecurityRequestJoin);
+    Security::EventPublisher.RequestLeaveEvent += Poco::Delegate<World, const std::string&>(this, &World::OnSecurityRequestLeave);
 }
 
 void World::Teardown()
 {
-    Security::Publisher.Detach(this);
+    //Security::Publisher.Detach(this);
+    Security::EventPublisher.RequestLeaveEvent -= Poco::Delegate<World, const std::string&>(this, &World::OnSecurityRequestLeave);
+    Security::EventPublisher.RequestJoinEvent -= Poco::Delegate<World, const std::string&>(this, &World::OnSecurityRequestJoin);
 
     delete m_pWorldSimulationThread;
     m_pWorldSimulationThread = NULL;
@@ -250,14 +256,14 @@ void World::Simulate()
 }
 
 // Security::ICallbacks implementation
-void World::OnSecurityRequestJoin(std::string& strUUID)
+void World::OnSecurityRequestJoin(const void* pSender, const std::string& strUUID)
 {
     assert(!strUUID.empty());
     
     AddPlayer(strUUID);
 }
 
-void World::OnSecurityRequestLeave(std::string& strUUID)
+void World::OnSecurityRequestLeave(const void* pSender, const std::string& strUUID)
 {
     assert(!strUUID.empty());
     

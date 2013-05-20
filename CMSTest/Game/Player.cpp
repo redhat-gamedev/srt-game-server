@@ -14,66 +14,15 @@
 #include "Timer.h"
 #include "UserData.h"
 #include "B2DPod.h"
+#include "Input.h"
+#include "../Proto/box2d.pb.h"
+#include "Poco/Delegate.h"
 #include "../Shared/MakeT.h"
 #include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
 #include <assert.h>
 
-Player::_Publisher          Player::Publisher;
+Player::_EventPublisher     Player::EventPublisher;
 uint32_t                    Player::s_ui32Count = 1;
-
-
-// Constructor(s)
-/*
- Player::_Publisher::_Publisher()
- {
- 
- }
- */
-
-// Destructor
-/*
- Player::_Publisher::~_Publisher()
- {
- 
- }
- */
-
-// Method(s)
-void Player::_Publisher::OnPlayerCreated(const std::string& strUUID)
-{
-    xdispatch::global_queue().async([=]
-    {
-        ICallbacks* pObjToCallback = NULL;
-        
-        //m_listSubscribersSwap = m_listSubscribers;
-        Clone(m_listSubscribersSwap);
-        while(!m_listSubscribersSwap.empty())
-        {
-            pObjToCallback = m_listSubscribersSwap.front();
-            m_listSubscribersSwap.pop_front();
-            assert(pObjToCallback);
-            pObjToCallback->OnPlayerCreated(strUUID);
-        }
-    });
-}
-
-void Player::_Publisher::OnPlayerDestroyed(const std::string& strUUID)
-{
-    xdispatch::global_queue().async([=]
-    {
-        ICallbacks* pObjToCallback = NULL;
-        
-        //m_listSubscribersSwap = m_listSubscribers;
-        Clone(m_listSubscribersSwap);
-        while(!m_listSubscribersSwap.empty())
-        {
-            pObjToCallback = m_listSubscribersSwap.front();
-            m_listSubscribersSwap.pop_front();
-            assert(pObjToCallback);
-            pObjToCallback->OnPlayerDestroyed(strUUID);
-        }
-    });
-}
 
 
 // Constructor(s)
@@ -87,9 +36,9 @@ Player::Player(const std::string& strUUID) :
     m_pBulletTimer = new Rock2D::Timer(1000);
     m_pB2DPod = new B2DPod(new UserData(m_ui64Tag, m_strUUID));
     
-    Publisher.OnPlayerCreated(m_strUUID);
+    FireCreatedEvent(m_strUUID);
     
-    Input::Publisher.Attach(this);
+    Input::EventPublisher.DualStickEvent += Poco::Delegate<Player, DualStick::PbDualStick>(this, &Player::OnInputDualStick);
 }
 
 // Destructor(s)
@@ -97,7 +46,7 @@ Player::~Player()
 {
     --s_ui32Count;
     
-    Input::Publisher.Detach(this);
+    Input::EventPublisher.DualStickEvent -= Poco::Delegate<Player, DualStick::PbDualStick>(this, &Player::OnInputDualStick);
 
     m_BulletQueue.lock();
     Bullet* pBullet = NULL;
@@ -112,7 +61,7 @@ Player::~Player()
     delete m_pB2DPod;
     m_pB2DPod = NULL;
     
-    Publisher.OnPlayerDestroyed(m_strUUID);
+    FireDestroyedEvent(m_strUUID);
     
     delete m_pBulletTimer;
     m_pBulletTimer = NULL;
@@ -159,23 +108,38 @@ void Player::Update()
     }
 }
 
-// Input::ICallbacks implementation
-void Player::OnDualStick(const std::string& strUUID, const box2d::PbVec2& pbv2Move, const box2d::PbVec2& pbv2Shoot)
+// Event Firing Method(s)
+void Player::FireCreatedEvent(const std::string& strUUID)
+{
+    EventPublisher.CreatedEvent(this, strUUID);
+}
+
+void Player::FireDestroyedEvent(const std::string& strUUID)
+{
+    EventPublisher.DestroyedEvent(this, strUUID);
+}
+
+// Input Event response
+void Player::OnInputDualStick(const void* pSender, DualStick::PbDualStick& aPbDualStick)
 {
     assert(m_pB2DPod);
     assert(m_pBulletTimer);
-    
+
+    const box2d::PbVec2& pbv2Move = aPbDualStick.pbv2move();
+    const box2d::PbVec2& pbv2Shoot = aPbDualStick.pbv2shoot();
+    const std::string& strUUID = aPbDualStick.uuid();
+
     if (strUUID != m_strUUID)
     {
         return;
     }
-
+    
     b2Vec2 b2v2Shoot;
     Bullet* pBullet = NULL;
     
     b2v2Shoot.x = pbv2Shoot.x();
     b2v2Shoot.y = pbv2Shoot.y();
-
+    
     m_pB2DPod->Move(pbv2Move.x(), pbv2Move.y());
     
     if (((b2v2Shoot.x < 0.0f) || (b2v2Shoot.x > 0.0f)) ||

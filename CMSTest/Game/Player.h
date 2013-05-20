@@ -9,12 +9,13 @@
 #ifndef __CMSTest__Player__
 #define __CMSTest__Player__
 
-#include "Input.h"
 #include "AEntity.h"
-#include "../Shared/PublisherT.cpp"
+#include "../Proto/DualStick.pb.h"
+#include "Poco/BasicEvent.h"
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include <decaf/util/StlQueue.h>
 #include <string>
+#include <list>
 
 namespace Rock2D
 {
@@ -25,28 +26,17 @@ class B2DPod;
 
 
 class Player :
-    public AEntity,
-    public Input::ICallbacks
+    public AEntity
 {
-public:
-    class ICallbacks
+protected:
+    class _EventPublisher
     {
     public:
-        virtual void OnPlayerCreated(const std::string& strUUID) {};
-        virtual void OnPlayerDestroyed(const std::string& strUUID) {};
+        // Event(s)
+        Poco::BasicEvent<const std::string&>    CreatedEvent;
+        Poco::BasicEvent<const std::string&>    DestroyedEvent;
     };
     
-protected:
-    class _Publisher :
-        public ICallbacks,
-        public PublisherT<ICallbacks*>
-    {
-    protected:
-        std::list<ICallbacks*>          m_listSubscribersSwap;
-    public:
-        virtual void OnPlayerCreated(const std::string& strUUID);
-        virtual void OnPlayerDestroyed(const std::string& strUUID);
-    };
 private:
     static uint32_t         s_ui32Count;
     
@@ -63,7 +53,7 @@ protected:
     //void CreatePod();
 
 public:
-    static _Publisher               Publisher;
+    static _EventPublisher          EventPublisher;
     
     // Constructor(s)
     Player(const std::string& strUUID);
@@ -74,8 +64,13 @@ public:
     // Method(s)
     void Update();
     
-    // Input::ICallbacks implementation
-    virtual void OnDualStick(const std::string& strUUID, const box2d::PbVec2& pbv2Move, const box2d::PbVec2& pbv2Shoot);
+    // Event Firing Method(s)
+    void FireCreatedEvent(const std::string& strUUID);
+    void FireDestroyedEvent(const std::string& strUUID);
+    
+    // Input Event response
+    void OnInputDualStick(const void* pSender, DualStick::PbDualStick& aPbDualStick);
+    //void OnDualStick(const std::string& strUUID, const box2d::PbVec2& pbv2Move, const box2d::PbVec2& pbv2Shoot);
 };
 
 

@@ -23,39 +23,8 @@ using namespace DualStick;
 using namespace box2d;
 using namespace cms;
 
-Input::_Publisher                 Input::Publisher;
+Input::_EventPublisher            Input::EventPublisher;
 
-// Constructor(s)
-/*
- B2DWorld.h::_Publisher::_Publisher()
- {
- 
- }
- */
-
-// Destructor
-/*
- B2DWorld.h::_Publisher::~_Publisher()
- {
- 
- }
- */
-
-// Method(s)
-void Input::_Publisher::OnDualStick(const std::string& strUUID, const box2d::PbVec2& pbv2Move, const box2d::PbVec2& pbv2Shoot)
-{
-    ICallbacks* pObjToCallback = NULL;
-    
-    //m_listSubscribersSwap = m_listSubscribers;
-    Clone(m_listSubscribersSwap);
-    while(!m_listSubscribersSwap.empty())
-    {
-        pObjToCallback = m_listSubscribersSwap.front();
-        m_listSubscribersSwap.pop_front();
-        assert(pObjToCallback);
-        pObjToCallback->OnDualStick(strUUID, pbv2Move, pbv2Shoot);
-    }
-}
 
 // Constructor(s)
 Input::Input() :
@@ -114,14 +83,16 @@ void Input::onMessage(const Message* pMessage)
         //    pMessage->acknowledge();
         //}
         
-        const PbVec2& pbv2Move = aDualStick.pbv2move();
-        const PbVec2& pbv2Shoot = aDualStick.pbv2shoot();
-        const std::string& strUUID = aDualStick.uuid();
-        
-        Publisher.OnDualStick(strUUID, pbv2Move, pbv2Shoot);
+        FireDualStickEvent(aDualStick);
     }
     catch (CMSException& e)
     {
         e.printStackTrace();
     }
+}
+
+// Event Firing Method(s)
+void Input::FireDualStickEvent(DualStick::PbDualStick aPbDualStick)
+{
+    EventPublisher.DualStickEvent(this, aPbDualStick);
 }

@@ -9,7 +9,7 @@
 #ifndef __CMSTest__Heartbeat__
 #define __CMSTest__Heartbeat__
 
-#include "../Shared/PublisherT.cpp"
+#include "Poco/BasicEvent.h"
 #include <decaf/util/TimerTask.h>
 #include <list>
 
@@ -17,42 +17,25 @@
 class Heartbeat :
     public decaf::util::TimerTask
 {
-// Class
-public:
-    class ICallbacks
-    {
-    public:
-        virtual void OnBeat(int iBeat) {};
-    };
-    
 protected:
-    class _Publisher :
-        public ICallbacks,
-        public PublisherT<ICallbacks*>
+    class _EventPublisher
     {
-    protected:
-        std::list<ICallbacks*>          m_listSubscribersSwap;
     public:
-        virtual void OnBeat(int iBeat);
+        // Event(s)
+        Poco::BasicEvent<const int&>     BeatEvent;
     };
     
 public:
-    static _Publisher               Publisher;
-    
-private:
-protected:
-public:
-    
-    // Instance
-private:
-protected:
-    
-public:
+    static _EventPublisher              EventPublisher;
+
     // Constructor(s)
     Heartbeat();
     
     // Destructor(s)
     ~Heartbeat();
+    
+    // Event Firing Method(s)
+    void FireBeatEvent(const int& iBeat);
     
     // decaf::Runnable implementation
     void run();

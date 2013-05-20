@@ -9,10 +9,12 @@
 #include "Security.h"
 #include "../Proto/DualStick.pb.h"
 #include "../Proto/box2d.pb.h"
-#include "Command.pb.h"
-#include "SecurityCommand.pb.h"
+#include "../Proto/Command.pb.h"
+#include "../Proto/SecurityCommand.pb.h"
+#include "../Game/Player.h"
 #include "../Shared/SimpleAsyncConsumer.h"
 #include "../Shared/SimpleAsyncProducer.h"
+#include "Poco/Delegate.h"
 #include <cms/CMSException.h>
 #include <cms/TextMessage.h>
 #include <cms/BytesMessage.h>
@@ -24,90 +26,11 @@
 #include <string>
 #include <iostream>
 
-using namespace DualStick;
-using namespace box2d;
+Security::_EventPublisher           Security::EventPublisher;
+
 using namespace cms;
 using namespace command;
 
-Security::_Publisher                 Security::Publisher;
-
-
-// Constructor(s)
-/*
- B2DWorld.h::_Publisher::_Publisher()
- {
- 
- }
- */
-
-// Destructor
-/*
- B2DWorld.h::_Publisher::~_Publisher()
- {
- 
- }
- */
-
-// Method(s)
-void Security::_Publisher::OnSecurityRequestJoin(std::string& strUUID)
-{
-    ICallbacks* pObjToCallback = NULL;
-    
-    //m_listSubscribersSwap = m_listSubscribers;
-    Clone(m_listSubscribersSwap);
-    while(!m_listSubscribersSwap.empty())
-    {
-        pObjToCallback = m_listSubscribersSwap.front();
-        m_listSubscribersSwap.pop_front();
-        assert(pObjToCallback);
-        pObjToCallback->OnSecurityRequestJoin(strUUID);
-    }
-}
-
-void Security::_Publisher::OnSecurityRequestLeave(std::string& strUUID)
-{
-    ICallbacks* pObjToCallback = NULL;
-    
-    //m_listSubscribersSwap = m_listSubscribers;
-    Clone(m_listSubscribersSwap);
-    while(!m_listSubscribersSwap.empty())
-    {
-        pObjToCallback = m_listSubscribersSwap.front();
-        m_listSubscribersSwap.pop_front();
-        assert(pObjToCallback);
-        pObjToCallback->OnSecurityRequestLeave(strUUID);
-    }
-}
-
-void Security::_Publisher::OnSecurityHasJoined(const std::string& strUUID)
-{
-    ICallbacks* pObjToCallback = NULL;
-    
-    //m_listSubscribersSwap = m_listSubscribers;
-    Clone(m_listSubscribersSwap);
-    while(!m_listSubscribersSwap.empty())
-    {
-        pObjToCallback = m_listSubscribersSwap.front();
-        m_listSubscribersSwap.pop_front();
-        assert(pObjToCallback);
-        pObjToCallback->OnSecurityHasJoined(strUUID);
-    }
-}
-
-void Security::_Publisher::OnSecurityHasLeft(const std::string& strUUID)
-{
-    ICallbacks* pObjToCallback = NULL;
-    
-    //m_listSubscribersSwap = m_listSubscribers;
-    Clone(m_listSubscribersSwap);
-    while(!m_listSubscribersSwap.empty())
-    {
-        pObjToCallback = m_listSubscribersSwap.front();
-        m_listSubscribersSwap.pop_front();
-        assert(pObjToCallback);
-        pObjToCallback->OnSecurityHasLeft(strUUID);
-    }
-}
 
 // Constructor(s)
 Security::Security() :
@@ -128,13 +51,15 @@ Security::Security() :
     
     m_pSimpleAsyncProducer = new SimpleProducer(strBrokerURI, strSecurityOutURI, true, true);
     
-    Player::Publisher.Attach(this);
+    Player::EventPublisher.CreatedEvent += Poco::Delegate<Security, const std::string&>(this, &Security::OnPlayerCreated);
+    Player::EventPublisher.DestroyedEvent += Poco::Delegate<Security, const std::string&>(this, &Security::OnPlayerDestroyed);
 }
 
 // Destructor
 Security::~Security()
 {
-    Player::Publisher.Detach(this);
+    Player::EventPublisher.DestroyedEvent -= Poco::Delegate<Security, const std::string&>(this, &Security::OnPlayerDestroyed);
+    Player::EventPublisher.CreatedEvent -= Poco::Delegate<Security, const std::string&>(this, &Security::OnPlayerCreated);
     
     m_pSimpleAsyncProducer->close();
     delete m_pSimpleAsyncProducer;
@@ -143,6 +68,27 @@ Security::~Security()
     m_pSimpleAsyncConsumer->close();
     delete m_pSimpleAsyncConsumer;
     m_pSimpleAsyncConsumer = NULL;
+}
+
+// Event Firing Method(s)
+void Security::FireRequestJoinEvent(const std::string& strUUID)
+{
+    EventPublisher.RequestJoinEvent(this, strUUID);
+}
+
+void Security::FireRequestLeaveEvent(const std::string& strUUID)
+{
+    EventPublisher.RequestLeaveEvent(this, strUUID);
+}
+
+void Security::FireHasJoinedEvent(const std::string& strUUID)
+{
+    EventPublisher.HasJoinedEvent(this, strUUID);
+}
+
+void Security::FireHasLeftEvent(const std::string& strUUID)
+{
+    EventPublisher.HasLeftEvent(this, strUUID);
 }
 
 // MessageListener implementation
@@ -189,7 +135,7 @@ void Security::onMessage(const Message* pMessage)
             pSimpleAsyncProducer->Send(strUUID);
             delete pSimpleAsyncProducer;
             
-            Publisher.OnSecurityRequestJoin(strUUID);
+            FireRequestJoinEvent(strUUID);
         }
 
         if (SecurityCommand_SecurityCommandType_LEAVE == aSecurityCommand.type())
@@ -197,7 +143,7 @@ void Security::onMessage(const Message* pMessage)
             assert(aSecurityCommand.has_uuid());
             strUUID = aSecurityCommand.uuid();
             
-            Publisher.OnSecurityRequestLeave(strUUID);
+            FireRequestLeaveEvent(strUUID);
         }
     }
     catch (CMSException& e)
@@ -206,8 +152,8 @@ void Security::onMessage(const Message* pMessage)
     }
 }
 
-// Player::ICallbacks implementation
-void Security::OnPlayerCreated(const std::string& strUUID)
+// Player Event response
+void Security::OnPlayerCreated(const void* pSender, const std::string& strUUID)
 {
     assert(strUUID.length() > 0);
     
@@ -226,10 +172,10 @@ void Security::OnPlayerCreated(const std::string& strUUID)
     unsigned long ulLength = strPBBuffer.length();
     m_pSimpleAsyncProducer->Send((const unsigned char*)pucText, (int)ulLength);
     
-    Publisher.OnSecurityHasJoined(strUUID);
+    FireHasJoinedEvent(strUUID);
 }
 
-void Security::OnPlayerDestroyed(const std::string& strUUID)
+void Security::OnPlayerDestroyed(const void* pSender, const std::string& strUUID)
 {
     assert(strUUID.length() > 0);
     
@@ -248,7 +194,7 @@ void Security::OnPlayerDestroyed(const std::string& strUUID)
     unsigned long ulLength = strPBBuffer.length();
     m_pSimpleAsyncProducer->Send((const unsigned char*)pucText, (int)ulLength);
     
-    Publisher.OnSecurityHasLeft(strUUID);
+    FireHasLeftEvent(strUUID);
 }
 
 // cms::AsyncCallback implementation

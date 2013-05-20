@@ -16,6 +16,7 @@
 #include "../Game/Player.h"
 #include "UserData.h"
 #include "Messenger.h"
+#include "Poco/Delegate.h"
 #include "decaf/util/Timer.h"
 #include "decaf/lang/Thread.h"
 #include "decaf/lang/Runnable.h"
@@ -73,10 +74,10 @@ Server::~Server()
 // Helper(s)
 void Server::Setup()
 {
-    std::string     strHeartbeatURI = "HEARTBEAT";
-    std::string     strInputURI = "CLIENT.INPUT";
-    std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp";
-    std::string     strMainThreadName = "MainThread";
+//    std::string     strHeartbeatURI = "HEARTBEAT";
+//    std::string     strInputURI = "CLIENT.INPUT";
+//    std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp";
+//    std::string     strMainThreadName = "MainThread";
     
     ///"failover:(tcp://127.0.0.1:61616"
     //        "?wireFormat=openwire"
@@ -89,18 +90,16 @@ void Server::Setup()
     std::cout << "Server::Setup()..." << std::endl;
     
     Messenger::Setup();
-    m_pWorld = new World();
-
-    m_pHeartbeatProducer = new SimpleProducer(strBrokerURI, strHeartbeatURI, true);
-    m_pHeartbeat = new Heartbeat();
     
-    m_pTimer = new decaf::util::Timer();
-
+    m_pWorld = new World();
     m_pInput = new Input();
     m_pSecurity = new Security();
+    //m_pTimer = new decaf::util::Timer();
 
-    Heartbeat::Publisher.Attach(this);
-    //Security::Publisher.Attach(this);
+    //m_pHeartbeatProducer = new SimpleProducer(strBrokerURI, strHeartbeatURI, true);
+    //m_pHeartbeat = new Heartbeat();
+
+    //Heartbeat::EventPublisher.BeatEvent += Poco::Delegate<Server, const int&>(this, &Server::OnHeartBeatBeat);
     
 //    std::cout << "Starting the world producer" << std::endl;
 //    m_pMainThread = new decaf::lang::Thread(this, strMainThreadName);
@@ -114,29 +113,28 @@ void Server::Teardown()
 //    delete m_pMainThread;
 //    m_pMainThread = NULL;
     
-    //Security::Publisher.Detach(this);
-    Heartbeat::Publisher.Detach(this);
+    //Heartbeat::EventPublisher.BeatEvent -= Poco::Delegate<Server, const int&>(this, &Server::OnHeartBeatBeat);
 
+    //m_pTimer->cancel();
+    //delete m_pHeartbeat;
+    //m_pHeartbeat = NULL;
+
+    //m_pHeartbeatProducer->close();
+    //delete m_pHeartbeatProducer;
+    //m_pHeartbeatProducer = NULL;
+    
+    //delete m_pTimer;
+    //m_pTimer = NULL;
+    
     delete m_pSecurity;
     m_pSecurity = NULL;
     
     delete m_pInput;
     m_pInput = NULL;
-    
-    m_pTimer->cancel();
-    //delete m_pHeartbeat;
-    m_pHeartbeat = NULL;
 
-    delete m_pTimer;
-    m_pTimer = NULL;    
-    
     //m_pCommandConsumer->close();
     //delete m_pCommandConsumer;
     //m_pCommandConsumer = NULL;
-
-    m_pHeartbeatProducer->close();
-    delete m_pHeartbeatProducer;
-    m_pHeartbeatProducer = NULL;
 
     delete m_pWorld;
     m_pWorld = NULL;
@@ -168,8 +166,8 @@ void Server::run()
     //m_pTimer->schedule(m_pHeartbeat, 0, 1000);
 }
 
-// Heartbeat::ICallbacks implementation
-void Server::OnBeat(int iBeat)
+// Heartbeat Event response
+void Server::OnHeartBeatBeat(const void* pSender, const int& iBeat)
 {
     static char m_szBuf[0xFF];
     static std::string strText = "";

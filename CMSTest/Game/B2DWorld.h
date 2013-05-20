@@ -9,7 +9,6 @@
 #ifndef __CMSTest__B2DWorld__
 #define __CMSTest__B2DWorld__
 
-#include "../Shared/PublisherT.cpp"
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
 #include "../../../ThirdParty/xdispatch/include/xdispatch/timer.h"
@@ -32,8 +31,6 @@ public:
 protected:
 
 public:
-
-private:
     
 // Instance
 private:

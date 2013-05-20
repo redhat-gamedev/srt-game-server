@@ -11,8 +11,7 @@
 
 #include "../Proto/DualStick.pb.h"
 #include "../Proto/box2d.pb.h"
-#include "../Game/Player.h"
-#include "../Shared/PublisherT.cpp"
+#include "Poco/BasicEvent.h"
 #include <cms/MessageListener.h>
 #include <cms/AsyncCallback.h>
 #include <string>
@@ -30,43 +29,26 @@ class SimpleProducer;
 
 class Security :
     public cms::MessageListener,
-    public cms::AsyncCallback,
-    public Player::ICallbacks
+    public cms::AsyncCallback
 {
-public:
-    class ICallbacks
+protected:
+    class _EventPublisher
     {
     public:
-        virtual void OnSecurityRequestJoin(std::string& strUUID) {};
-        virtual void OnSecurityRequestLeave(std::string& strUUID) {};
-        virtual void OnSecurityHasJoined(const std::string& strUUID) {};
-        virtual void OnSecurityHasLeft(const std::string& strUUID) {};
+        // Event(s)
+        Poco::BasicEvent<const std::string&>        RequestJoinEvent;
+        Poco::BasicEvent<const std::string&>        RequestLeaveEvent;
+        Poco::BasicEvent<const std::string&>        HasJoinedEvent;
+        Poco::BasicEvent<const std::string&>        HasLeftEvent;
     };
     
-protected:
-    class _Publisher :
-        public ICallbacks,
-        public PublisherT<ICallbacks*>
-    {
-    protected:
-        std::list<ICallbacks*>          m_listSubscribersSwap;
-    public:
-        virtual void OnSecurityRequestJoin(std::string& strUUID);
-        virtual void OnSecurityRequestLeave(std::string& strUUID);
-        virtual void OnSecurityHasJoined(const std::string& strUUID);
-        virtual void OnSecurityHasLeft(const std::string& strUUID);
-    };
-    
-    std::map<std::string, std::string>        m_mapUUIDToSimpleAsyncProducers;
+    std::map<std::string, std::string>              m_mapUUIDToSimpleAsyncProducers;
+    SimpleAsyncConsumer*                            m_pSimpleAsyncConsumer;
+    SimpleProducer*                                 m_pSimpleAsyncProducer;
     
 public:
-    static _Publisher               Publisher;
-    
-protected:
-    SimpleAsyncConsumer*        m_pSimpleAsyncConsumer;
-    SimpleProducer*             m_pSimpleAsyncProducer;
-    
-public:
+    static _EventPublisher                          EventPublisher;
+
     // Constructor(s)
     Security();
     
@@ -74,12 +56,19 @@ public:
     ~Security();
     
     // Method(s)
+    
+    // Event Firing Method(s)
+    void FireRequestJoinEvent(const std::string& strUUID);
+    void FireRequestLeaveEvent(const std::string& strUUID);
+    void FireHasJoinedEvent(const std::string& strUUID);
+    void FireHasLeftEvent(const std::string& strUUID);
+    
     // MessageListener implementation
     virtual void onMessage(const cms::Message* pMessage);
     
-    // Player::ICallbacks implementation
-    void OnPlayerCreated(const std::string& strUUID);
-    void OnPlayerDestroyed(const std::string& strUUID);
+    // Player Event response
+    void OnPlayerCreated(const void* pSender, const std::string& strUUID);
+    void OnPlayerDestroyed(const void* pSender, const std::string& strUUID);
     
     // cms::AsyncCallback implementation
     void onSuccess();
