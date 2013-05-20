@@ -1,13 +1,13 @@
 //
-//  UserData.h
+//  EntityData.h
 //  CMSTest
 //
 //  Created by Roddie Kieley on 13-04-15.
 //  Copyright (c) 2013 Roddie Kieley. All rights reserved.
 //
 
-#ifndef __CMSTest__UserData__
-#define __CMSTest__UserData__
+#ifndef __CMSTest__EntityData__
+#define __CMSTest__EntityData__
 
 #include <string>
 #include <limits.h>
@@ -24,7 +24,7 @@
 //    return ((static_cast<DOUBLE> (hi) << (CHAR_BIT * sizeof (SINGLE))) | lo);
 //}
 
-class UserData
+class EntityData
 {
 private:
 
@@ -35,13 +35,16 @@ public:
     uint64_t        m_ui64Tag;
     std::string     m_strUUID;
     
+    const uint64_t&     Tag = m_ui64Tag;
+    const std::string&  UUID = m_strUUID;
+    
     // Constructor(s)
-    UserData(uint64_t ui64Tag, std::string strUUID);
+    EntityData(uint64_t ui64Tag, std::string strUUID);
     
     // Destructor(s)
-    ~UserData();
+    ~EntityData();
 };
 
 
 
-#endif /* defined(__CMSTest__UserData__) */
+#endif /* defined(__CMSTest__EntityData__) */

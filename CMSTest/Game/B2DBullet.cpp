@@ -8,7 +8,7 @@
 
 #include "B2DBullet.h"
 #include "B2DWorld_BuildT.h"
-#include "UserData.h"
+#include "EntityData.h"
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include <assert.h>
 
@@ -34,12 +34,12 @@ B2DBullet::_Definition::_Definition()
 }
 
 // Constructor(s)
-B2DBullet::B2DBullet(const b2Vec2& b2v2Position, b2Vec2& b2v2Direction, UserData* pUserData) :
+B2DBullet::B2DBullet(const b2Vec2& b2v2Position, b2Vec2& b2v2Direction, EntityData* pEntityData) :
     m_b2v2InitialPosition(b2v2Position),
     m_b2v2InitialDirection(b2v2Direction),
-    m_pUserData(pUserData)
+    m_pEntityData(pEntityData)
 {
-    assert(m_pUserData);
+    assert(m_pEntityData);
     
     CreateBullet();
 }
@@ -47,8 +47,8 @@ B2DBullet::B2DBullet(const b2Vec2& b2v2Position, b2Vec2& b2v2Direction, UserData
 // Destructor(s)
 B2DBullet::~B2DBullet()
 {
-    delete m_pUserData;
-    m_pUserData = NULL;
+    delete m_pEntityData;
+    m_pEntityData = NULL;
 }
 
 // Helper(s)
@@ -71,5 +71,5 @@ void B2DBullet::OnB2DBodyCreated(b2Body* pb2bBullet)
     b2v2Force.y *= 10.0f;
     m_pb2Body->ApplyForceToCenter(b2v2Force, false);
     
-    m_pb2Body->SetUserData(m_pUserData);
+    m_pb2Body->SetUserData(m_pEntityData);
 }

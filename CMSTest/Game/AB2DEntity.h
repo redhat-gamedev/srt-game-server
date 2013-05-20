@@ -11,7 +11,7 @@
 
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 
-class UserData;
+class EntityData;
 
 
 class AB2DEntity
@@ -42,7 +42,7 @@ protected:
     
 public:
     // Method(s)
-    void SetUserData(UserData* pUserData);
+    void SetEntityData(EntityData* pEntityData);
 };
 
 

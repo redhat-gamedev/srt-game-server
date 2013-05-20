@@ -1,16 +1,16 @@
 //
-//  UserData.cpp
+//  EntityData.cpp
 //  CMSTest
 //
 //  Created by Roddie Kieley on 13-04-15.
 //  Copyright (c) 2013 Roddie Kieley. All rights reserved.
 //
 
-#include "UserData.h"
+#include "EntityData.h"
 
 
 // Constructor(s)
-UserData::UserData(uint64_t ui64Tag, std::string strUUID) :
+EntityData::EntityData(uint64_t ui64Tag, std::string strUUID) :
     m_ui64Tag(ui64Tag),
     m_strUUID(strUUID)
 {
@@ -18,7 +18,7 @@ UserData::UserData(uint64_t ui64Tag, std::string strUUID) :
 }
 
 // Destructor(s)
-UserData::~UserData()
+EntityData::~EntityData()
 {
     m_ui64Tag = 0;
     m_strUUID.clear();

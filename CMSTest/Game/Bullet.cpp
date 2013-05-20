@@ -7,7 +7,7 @@
 //
 
 #include "Bullet.h"
-#include "UserData.h"
+#include "EntityData.h"
 #include "World.h"
 #include "B2DWorld.h"
 #include "B2DWorld_BuildT.h"
@@ -28,7 +28,7 @@ Bullet::Bullet(const std::string& strUUID, const b2Vec2& b2v2Position, b2Vec2& b
 {
     ++s_ui32Count;
     
-    m_pB2DBullet = new B2DBullet(b2v2Position, b2v2Direction, new UserData(m_ui64Tag, m_strUUID));
+    m_pB2DBullet = new B2DBullet(b2v2Position, b2v2Direction, new EntityData(m_ui64Tag, m_strUUID));
     m_pLifeTimer = new Rock2D::Timer(3000);
 }
 

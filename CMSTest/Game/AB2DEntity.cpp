@@ -27,10 +27,10 @@ AB2DEntity::~AB2DEntity()
 }
 
 // Method(s)
-void AB2DEntity::SetUserData(UserData *pUserData)
+void AB2DEntity::SetEntityData(EntityData *pEntityData)
 {
     assert(m_pb2Body);
-    assert(pUserData);
+    assert(pEntityData);
     
-    m_pb2Body->SetUserData(pUserData);
+    m_pb2Body->SetUserData(pEntityData);
 }

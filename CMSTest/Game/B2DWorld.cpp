@@ -7,7 +7,7 @@
 //
 
 #include "B2DWorld.h"
-#include "UserData.h"
+#include "EntityData.h"
 
 b2World*                            B2DWorld::world = NULL;
 

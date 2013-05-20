@@ -29,13 +29,13 @@ class Player :
     public AEntity
 {
 protected:
-    class _EventPublisher
-    {
-    public:
-        // Event(s)
-        Poco::BasicEvent<const std::string&>    CreatedEvent;
-        Poco::BasicEvent<const std::string&>    DestroyedEvent;
-    };
+//    class _EventPublisher
+//    {
+//    public:
+//        // Event(s)
+//        Poco::BasicEvent<const std::string&>    CreatedEvent;
+//        Poco::BasicEvent<const std::string&>    DestroyedEvent;
+//    };
     
 private:
     static uint32_t         s_ui32Count;
@@ -64,9 +64,9 @@ public:
     // Method(s)
     void Update();
     
-    // Event Firing Method(s)
-    void FireCreatedEvent(const std::string& strUUID);
-    void FireDestroyedEvent(const std::string& strUUID);
+//    // Event Firing Method(s)
+//    void FireCreatedEvent(const std::string& strUUID);
+//    void FireDestroyedEvent(const std::string& strUUID);
     
     // Input Event response
     void OnInputDualStick(const void* pSender, DualStick::PbDualStick& aPbDualStick);

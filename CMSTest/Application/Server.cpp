@@ -14,7 +14,7 @@
 #include "../Proto/box2d.pb.h"
 #include "Security.h"
 #include "../Game/Player.h"
-#include "UserData.h"
+#include "EntityData.h"
 #include "Messenger.h"
 #include "Poco/Delegate.h"
 #include "decaf/util/Timer.h"

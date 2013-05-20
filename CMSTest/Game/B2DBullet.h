@@ -12,7 +12,7 @@
 #include "AB2DEntity.h"
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 
-class UserData;
+class EntityData;
 
 
 class B2DBullet :
@@ -34,7 +34,7 @@ protected:
 
     b2Vec2              m_b2v2InitialPosition;
     b2Vec2              m_b2v2InitialDirection;
-    UserData*           m_pUserData;
+    EntityData*           m_pEntityData;
 
     // Helper(s)
     void CreateBullet();
@@ -43,7 +43,7 @@ public:
     static _Definition        Definition;
     
     // Constructor(s)
-    B2DBullet(const b2Vec2& b2v2Position, b2Vec2& b2v2Direction, UserData* pUserData);
+    B2DBullet(const b2Vec2& b2v2Position, b2Vec2& b2v2Direction, EntityData* pEntityData);
     
     // Destructor(s)
     ~B2DBullet();

@@ -9,7 +9,7 @@
 #include "World.h"
 #include "B2DWorld.h"
 #include "Player.h"
-#include "UserData.h"
+#include "EntityData.h"
 #include "../Application/Messenger.h"
 #include "../Application/Messenger_Producer.h"
 #include "../Application/Security.h"
@@ -129,7 +129,7 @@ void World::b2WorldToPbWorld(b2World* pb2World, PbWorld*& pPbWorldDefault)
     PbVec2*     pPbVec2LinearVelocity = NULL;
     PbVec2*     pPbVec2Force = NULL;
     const       b2Vec2 b2v2Gravity = pb2World->GetGravity();
-    UserData*   pUserData = NULL;
+    EntityData*   pEntityData = NULL;
     
     ppbv2Gravity->set_x(b2v2Gravity.x);
     ppbv2Gravity->set_y(b2v2Gravity.y);
@@ -165,10 +165,10 @@ void World::b2WorldToPbWorld(b2World* pb2World, PbWorld*& pPbWorldDefault)
         pPbVec2Force->set_y(0.0f);
         pPbBody->set_allocated_force(pPbVec2Force);
         
-        pUserData = static_cast<UserData*>(pBody->GetUserData());
-        assert(NULL != pUserData);
-        pPbBody->set_uuid(pUserData->m_strUUID);
-        pPbBody->set_tag(pUserData->m_ui64Tag);
+        pEntityData = static_cast<EntityData*>(pBody->GetUserData());
+        assert(NULL != pEntityData);
+        pPbBody->set_uuid(pEntityData->m_strUUID);
+        pPbBody->set_tag(pEntityData->m_ui64Tag);
         
         pFixtureList = pBody->GetFixtureList();
         for (b2Fixture* pFixture = pFixtureList; pFixture; pFixture = pFixture->GetNext())

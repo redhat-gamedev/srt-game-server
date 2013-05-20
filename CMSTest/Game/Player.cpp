@@ -12,7 +12,7 @@
 #include "B2DWorld_BuildT.h"
 #include "World.h"
 #include "Timer.h"
-#include "UserData.h"
+#include "EntityData.h"
 #include "B2DPod.h"
 #include "Input.h"
 #include "../Proto/box2d.pb.h"
@@ -34,16 +34,20 @@ Player::Player(const std::string& strUUID) :
     ++s_ui32Count;
     
     m_pBulletTimer = new Rock2D::Timer(1000);
-    m_pB2DPod = new B2DPod(new UserData(m_ui64Tag, m_strUUID));
-    
-    FireCreatedEvent(m_strUUID);
+    m_pB2DPod = new B2DPod(new EntityData(m_ui64Tag, m_strUUID));
     
     Input::EventPublisher.DualStickEvent += Poco::Delegate<Player, DualStick::PbDualStick>(this, &Player::OnInputDualStick);
+    
+    //    FireCreatedEvent(m_strUUID);
+    EventPublisher.CreatedEvent(this, EntityData(m_ui64Tag, m_strUUID));
 }
 
 // Destructor(s)
 Player::~Player()
 {
+    //    FireDestroyedEvent(m_strUUID);
+    EventPublisher.DestroyedEvent(this, EntityData(m_ui64Tag, m_strUUID));
+
     --s_ui32Count;
     
     Input::EventPublisher.DualStickEvent -= Poco::Delegate<Player, DualStick::PbDualStick>(this, &Player::OnInputDualStick);
@@ -60,8 +64,6 @@ Player::~Player()
 
     delete m_pB2DPod;
     m_pB2DPod = NULL;
-    
-    FireDestroyedEvent(m_strUUID);
     
     delete m_pBulletTimer;
     m_pBulletTimer = NULL;
@@ -108,16 +110,16 @@ void Player::Update()
     }
 }
 
-// Event Firing Method(s)
-void Player::FireCreatedEvent(const std::string& strUUID)
-{
-    EventPublisher.CreatedEvent(this, strUUID);
-}
-
-void Player::FireDestroyedEvent(const std::string& strUUID)
-{
-    EventPublisher.DestroyedEvent(this, strUUID);
-}
+//// Event Firing Method(s)
+//void Player::FireCreatedEvent(const std::string& strUUID)
+//{
+//    EventPublisher.CreatedEvent(this, strUUID);
+//}
+//
+//void Player::FireDestroyedEvent(const std::string& strUUID)
+//{
+//    EventPublisher.DestroyedEvent(this, strUUID);
+//}
 
 // Input Event response
 void Player::OnInputDualStick(const void* pSender, DualStick::PbDualStick& aPbDualStick)

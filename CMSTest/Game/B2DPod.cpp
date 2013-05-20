@@ -8,7 +8,7 @@
 
 #include "B2DPod.h"
 #include "B2DWorld_BuildT.h"
-#include "UserData.h"
+#include "EntityData.h"
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include <assert.h>
 
@@ -34,10 +34,10 @@ B2DPod::_Definition::_Definition()
 
 
 // Constructor(s)
-B2DPod::B2DPod(UserData* pUserData) :
-    m_pUserData(pUserData)
+B2DPod::B2DPod(EntityData* pEntityData) :
+    m_pEntityData(pEntityData)
 {
-    assert(m_pUserData);
+    assert(m_pEntityData);
     
     CreatePod();
 }
@@ -45,8 +45,8 @@ B2DPod::B2DPod(UserData* pUserData) :
 // Destructor(s)
 B2DPod::B2DPod()
 {
-    delete m_pUserData;
-    m_pUserData = NULL;
+    delete m_pEntityData;
+    m_pEntityData = NULL;
 }
 
 // Helper(s)
@@ -63,7 +63,7 @@ void B2DPod::OnB2DBodyCreated(b2Body* pb2bPod)
     
     m_pb2Body = pb2bPod;
     
-    m_pb2Body->SetUserData(m_pUserData);
+    m_pb2Body->SetUserData(m_pEntityData);
 }
 
 // Method(s)
