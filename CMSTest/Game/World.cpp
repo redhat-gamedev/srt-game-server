@@ -52,10 +52,7 @@ void World::Simulation::run()
 // Helper(s)
 void World::Setup()
 {
-    std::string     strWorldSimulationURI = "WORLD.SIMULATION";
-    std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp";
     std::string     strWorldSimulationName = "WorldSimulationThread";
-    std::string     strWorldProducerName = "WorldProducerThread";
 
     m_pB2DWorld = new B2DWorld();
     m_pSimulationSerialDispatchQueue = new xdispatch::queue("simulation");
@@ -65,9 +62,9 @@ void World::Setup()
     m_pWorldSimulationThread = new decaf::lang::Thread(m_pWorldSimulation, strWorldSimulationName);
     m_pWorldSimulationThread->start();
     
-    std::cout << "Starting the simulation dispatch timer" << std::endl;
-    m_pSimulationDispatchTimer = new xdispatch::timer(15 * NSEC_PER_MSEC, *m_pSimulationSerialDispatchQueue);
-    m_pSimulationDispatchTimer->start();
+    //std::cout << "Starting the simulation dispatch timer" << std::endl;
+    //m_pSimulationDispatchTimer = new xdispatch::timer(15 * NSEC_PER_MSEC, *m_pSimulationSerialDispatchQueue);
+    //m_pSimulationDispatchTimer->start();
     
     Security::Publisher.Attach(this);
 }
@@ -82,30 +79,23 @@ void World::Teardown()
     delete m_pWorldSimulation;
     m_pWorldSimulation = NULL;
     
-    delete m_pSimulationDispatchTimer;
-    m_pSimulationDispatchTimer = NULL;
+    //delete m_pSimulationDispatchTimer;
+    //m_pSimulationDispatchTimer = NULL;
     
     delete m_pSimulationSerialDispatchQueue;
     m_pSimulationSerialDispatchQueue = NULL;
  
     delete m_pB2DWorld;
     m_pB2DWorld = NULL;
-    
-//    delete m_pMessenger;
-//    m_pMessenger = NULL;
 }
 
 // Constructor(s)
 World::World() :
-//World::World(Messenger* pMessenger) :
     m_pSimulationSerialDispatchQueue(NULL),
-    m_pSimulationDispatchTimer(NULL),
+    //m_pSimulationDispatchTimer(NULL),
     m_pWorldSimulation(NULL),
-    m_pWorldSimulationThread(NULL)//,
-    //m_pMessenger(pMessenger)
+    m_pWorldSimulationThread(NULL)
 {
-//    assert(m_pMessenger);
-    
     Setup();
 }
 
@@ -251,10 +241,9 @@ void World::Simulate()
         m_pSimulationSerialDispatchQueue->sync([=]
         {
             B2DWorld::world->Step(timeStep, velocityIterations, positionIterations);
-            PbWorld* pPbWorldDefault = new PbWorld(); // TODO: remove memory thrash
-            b2WorldToPbWorld(B2DWorld::world, pPbWorldDefault);
-//            m_pMessenger->m_pWorldProducer->Enqueue(pPbWorldDefault);
-            Messenger::Producer.Enqueue(pPbWorldDefault);
+            PbWorld* pPbWorld = new PbWorld(); // TODO: remove memory thrash
+            b2WorldToPbWorld(B2DWorld::world, pPbWorld);
+            Messenger::Producer.Enqueue(pPbWorld);
         });
         decaf::lang::Thread::currentThread()->sleep(15);
     }

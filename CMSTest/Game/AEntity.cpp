@@ -7,8 +7,14 @@
 //
 
 #include "AEntity.h"
+#include "../Application/Messenger.h"
+#include "../Application/Messenger_Producer.h"
+#include "../Proto/GameEvent.pb.h"
+#include "../Proto/EntityGameEvent.pb.h"
 
 uint64_t                    AEntity::s_ui64Count = 1;
+
+using namespace gameevent;
 
 
 // Constructor(s)
@@ -18,6 +24,19 @@ AEntity::AEntity(const std::string& strUUID, uint64_t ui64Tag) :
     m_pb2Body(NULL)
 {
     ++s_ui64Count;
+    
+    std::string strPBBuffer = "";
+    
+    GameEvent* pGameEvent = new GameEvent();
+    EntityGameEvent* pEntityGameEvent = pGameEvent->mutable_entitygameevent();
+    assert(NULL != pEntityGameEvent);
+    
+    pGameEvent->set_type(GameEvent_GameEventType_ENTITY);
+    pEntityGameEvent->set_type(EntityGameEvent_EntityGameEventType_CREATE);
+    pEntityGameEvent->set_uuid(m_strUUID);
+    pEntityGameEvent->set_entitytag(ui64Tag);
+    
+    Messenger::Producer.Enqueue(pGameEvent);
 }
 
 // Destructor(s)

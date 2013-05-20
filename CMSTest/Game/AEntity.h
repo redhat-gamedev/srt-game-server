@@ -36,6 +36,8 @@ protected:
     //AEntity(EType eType, const std::string& strUUID);
 
 public:
+    const uint64_t&          Tag = m_ui64Tag;
+    
     // Destructor(s)
     virtual ~AEntity();
 

@@ -10,11 +10,11 @@
 #define __CMSTest__Messenger_Producer__
 
 #include "Messenger.h"
-#include "../Proto/box2d.pb.h"
 #include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
-#include "../../../ThirdParty/xdispatch/include/xdispatch/timer.h"
+//#include "../../../ThirdParty/xdispatch/include/xdispatch/timer.h"
 #include <decaf/util/StlQueue.h>
-#include <string>
+#include <decaf/lang/Runnable.h>
+
 
 class SimpleProducer;
 namespace google
@@ -26,23 +26,22 @@ namespace google
 }
 
 
-class Messenger::_Producer
+class Messenger::_Producer :
+    decaf::lang::Runnable
 {
     friend class Messenger;
     
 private:
     
 protected:
-    SimpleProducer*                             m_pSimulationProducer;
-    
-    xdispatch::queue*                           m_pProducerSerialDispatchQueue;
-    xdispatch::timer*                           m_pProducerDispatchTimer;
-    
-    //decaf::util::StlQueue<::box2d::PbWorld*>    m_aSimulationUpdateQueue;
-    decaf::util::StlQueue<::google::protobuf::Message*>    m_aMessageQueue;
-    
+    SimpleProducer*                                         m_pSimpleProducer;
+    xdispatch::queue*                                       m_pProducerSerialDispatchQueue;
+//    xdispatch::timer*                                       m_pProducerDispatchTimer;
+    decaf::util::StlQueue<::google::protobuf::Message*>     m_aMessageQueue;
+    decaf::lang::Thread*                                    m_pThread;
+ 
     // Helper(s)
-    void Setup();
+    void Setup(std::string& strBrokerURI, std::string& strDestinationURI);
     void Teardown();
     
 public:
@@ -53,10 +52,12 @@ public:
     ~_Producer();
     
     // Method(s)
-    void Enqueue(::box2d::PbWorld* pPbWorld);
-    //void SendUpdate(::box2d::PbWorld* pPbWorld);
+    void Enqueue(::google::protobuf::Message* pMessage);
     void SendUpdate(::google::protobuf::Message* pMessage);
     void SendUpdates();
+    
+    // decaf::lang::Runnable implementation
+    void run();
 };
 
 #endif /* defined(__CMSTest__Messenger_Producer__) */

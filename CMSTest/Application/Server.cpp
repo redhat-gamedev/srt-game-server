@@ -88,10 +88,6 @@ void Server::Setup()
     
     std::cout << "Server::Setup()..." << std::endl;
     
-//    activemq::library::ActiveMQCPP::initializeLibrary();
-    
-    //m_pMessenger = new Messenger();
-    
     Messenger::Setup();
     m_pWorld = new World();
 
@@ -106,17 +102,17 @@ void Server::Setup()
     Heartbeat::Publisher.Attach(this);
     //Security::Publisher.Attach(this);
     
-    std::cout << "Starting the world producer" << std::endl;
-    m_pMainThread = new decaf::lang::Thread(this, strMainThreadName);
-    m_pMainThread->start();
+//    std::cout << "Starting the world producer" << std::endl;
+//    m_pMainThread = new decaf::lang::Thread(this, strMainThreadName);
+//    m_pMainThread->start();
 }
 
 void Server::Teardown()
 {
     std::cout << "Teardown()..." << std::endl;
     
-    delete m_pMainThread;
-    m_pMainThread = NULL;
+//    delete m_pMainThread;
+//    m_pMainThread = NULL;
     
     //Security::Publisher.Detach(this);
     Heartbeat::Publisher.Detach(this);
@@ -166,7 +162,7 @@ void Server::run()
     //  if any client needs a world update
     // take world snapshot
     // Update clients if required
-    Messenger::Send();
+    //Messenger::Send();
     
     //std::cout << "Starting the heartbeat" << std::endl;
     //m_pTimer->schedule(m_pHeartbeat, 0, 1000);

@@ -29,10 +29,8 @@ namespace decaf
         class Timer;
     }
 }
-class SimpleProducer;
 class B2DWorld;
 class Player;
-class Messenger;
 
 
 class World :
@@ -58,17 +56,13 @@ private:
 
 protected:
     xdispatch::queue*               m_pSimulationSerialDispatchQueue;
-    xdispatch::timer*               m_pSimulationDispatchTimer;
+//    xdispatch::timer*               m_pSimulationDispatchTimer;
 
     World::Simulation*              m_pWorldSimulation;
     decaf::lang::Thread*            m_pWorldSimulationThread;
 
     std::list<Player*>              m_listPlayers;
     std::list<Player*>              m_listPlayersSwap;
-    
-    std::string                     m_strPBBuffer;
-    
-    Messenger*                      m_pMessenger;
     
     // Helper(s)
     void Setup();
@@ -81,7 +75,6 @@ public:
     
     // Constructor(s)
     World();
-//    World(Messenger* pMessenger);
     
     // Destructor(s)
     ~World();

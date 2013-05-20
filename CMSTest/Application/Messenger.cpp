@@ -30,7 +30,9 @@ Messenger::~Messenger()
 // Class function(s)
 void Messenger::Setup()
 {
-    Producer.Setup();
+    std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp";
+    std::string     strDestinationURI = "WORLD.SIMULATION";
+    Producer.Setup(strBrokerURI, strDestinationURI);
 }
 
 void Messenger::Teardown()

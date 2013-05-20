@@ -39,6 +39,3 @@ public:
 };
 
 #endif /* defined(__CMSTest__Messenger__) */
-
-//ProtocolBuffers/src/google/protobuf/message.h
-//#include <google/protobuf/message.h>
