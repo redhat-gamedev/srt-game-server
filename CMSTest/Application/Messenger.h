@@ -11,6 +11,8 @@
 
 #include <string>
 
+class EntityData;
+
 
 class Messenger
 {
@@ -36,6 +38,10 @@ public:
     static void Setup();
     static void Teardown();
     static void Send();
+    
+    // Player Event response
+    static void OnPlayerCreated(const void* pSender, const EntityData& anEntityData);
+    static void OnPlayerDestroyed(const void* pSender, const EntityData& anEntityData);
 };
 
 #endif /* defined(__CMSTest__Messenger__) */

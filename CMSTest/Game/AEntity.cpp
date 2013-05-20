@@ -29,18 +29,6 @@ AEntity::AEntity(const std::string& strUUID, uint64_t ui64Tag) :
     //FireCreatedEvent(m_strUUID);
     //FireCreatedEvent(EntityData(ui64Tag, strUUID));
     
-//    std::string strPBBuffer = "";
-//    
-//    GameEvent* pGameEvent = new GameEvent();
-//    EntityGameEvent* pEntityGameEvent = pGameEvent->mutable_entitygameevent();
-//    assert(NULL != pEntityGameEvent);
-//    
-//    pGameEvent->set_type(GameEvent_GameEventType_ENTITY);
-//    pEntityGameEvent->set_type(EntityGameEvent_EntityGameEventType_CREATE);
-//    pEntityGameEvent->set_uuid(m_strUUID);
-//    pEntityGameEvent->set_entitytag(ui64Tag);
-//    
-//    Messenger::Producer.Enqueue(pGameEvent);
 }
 
 // Destructor(s)

@@ -38,14 +38,14 @@ Player::Player(const std::string& strUUID) :
     
     Input::EventPublisher.DualStickEvent += Poco::Delegate<Player, DualStick::PbDualStick>(this, &Player::OnInputDualStick);
     
-    //    FireCreatedEvent(m_strUUID);
+    //FireCreatedEvent(m_strUUID);
     EventPublisher.CreatedEvent(this, EntityData(m_ui64Tag, m_strUUID));
 }
 
 // Destructor(s)
 Player::~Player()
 {
-    //    FireDestroyedEvent(m_strUUID);
+    //FireDestroyedEvent(m_strUUID);
     EventPublisher.DestroyedEvent(this, EntityData(m_ui64Tag, m_strUUID));
 
     --s_ui32Count;
@@ -111,14 +111,14 @@ void Player::Update()
 }
 
 //// Event Firing Method(s)
-//void Player::FireCreatedEvent(const std::string& strUUID)
+//void Player::FireCreatedEvent(const EntityData& anEntityData)
 //{
-//    EventPublisher.CreatedEvent(this, strUUID);
+//    EventPublisher.CreatedEvent(this, anEntityData);
 //}
 //
-//void Player::FireDestroyedEvent(const std::string& strUUID)
+//void Player::FireDestroyedEvent(const EntityData& anEntityData)
 //{
-//    EventPublisher.DestroyedEvent(this, strUUID);
+//    EventPublisher.DestroyedEvent(this, anEntityData);
 //}
 
 // Input Event response

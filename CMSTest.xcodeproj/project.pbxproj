@@ -18,6 +18,7 @@
 		CC2436E017492E2E00A8519D /* Messenger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC2436DE17492E2E00A8519D /* Messenger.cpp */; };
 		CC2436E317492E8A00A8519D /* Messenger_Consumer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC2436E117492E8A00A8519D /* Messenger_Consumer.cpp */; };
 		CC488D27164EB5FD005078C3 /* libBox2D.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC488D20164EB5DE005078C3 /* libBox2D.a */; };
+		CC4CCEED174A98E800D13E37 /* EntityData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC4CCEEC174A98E700D13E37 /* EntityData.cpp */; };
 		CC4FECE11662A3AA004810CC /* libProtocolBuffers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC4FECE01662A39A004810CC /* libProtocolBuffers.a */; };
 		CC68EA98163DA07400D225C2 /* CMSTest.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = CC68EA97163DA07400D225C2 /* CMSTest.1 */; };
 		CCA4C32C1687B45D006BAC1D /* xdispatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA4C32B1687B45D006BAC1D /* xdispatch.framework */; };
@@ -34,7 +35,6 @@
 		CCE449F5172313FD002A1937 /* B2DWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449EC172313FD002A1937 /* B2DWorld.cpp */; };
 		CCE449F6172313FD002A1937 /* Input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449EE172313FD002A1937 /* Input.cpp */; };
 		CCE449F7172313FD002A1937 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449F0172313FD002A1937 /* Player.cpp */; };
-		CCE449F8172313FD002A1937 /* EntityData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449F2172313FD002A1937 /* EntityData.cpp */; };
 		CCE449FC172317CA002A1937 /* AEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449FA172317C9002A1937 /* AEntity.cpp */; };
 		CCE449FF17231ADD002A1937 /* Bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449FD17231ADD002A1937 /* Bullet.cpp */; };
 		CCE44A0317232660002A1937 /* World.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE44A011723265F002A1937 /* World.cpp */; };
@@ -215,6 +215,7 @@
 		CC2436DF17492E2E00A8519D /* Messenger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Messenger.h; path = Application/Messenger.h; sourceTree = "<group>"; };
 		CC2436E117492E8A00A8519D /* Messenger_Consumer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Messenger_Consumer.cpp; path = Application/Messenger_Consumer.cpp; sourceTree = "<group>"; };
 		CC2436E217492E8A00A8519D /* Messenger_Consumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Messenger_Consumer.h; path = Application/Messenger_Consumer.h; sourceTree = "<group>"; };
+		CC4CCEEC174A98E700D13E37 /* EntityData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EntityData.cpp; path = Game/EntityData.cpp; sourceTree = "<group>"; };
 		CC4FECD81662A399004810CC /* ProtocolBuffers.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ProtocolBuffers.xcodeproj; path = ../ThirdParty/protobuf/ProtocolBuffers/ProtocolBuffers.xcodeproj; sourceTree = "<group>"; };
 		CC68EA91163DA07400D225C2 /* CMSTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CMSTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC68EA97163DA07400D225C2 /* CMSTest.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = CMSTest.1; sourceTree = "<group>"; };
@@ -249,7 +250,6 @@
 		CCE449EF172313FD002A1937 /* Input.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Input.h; path = Game/Input.h; sourceTree = "<group>"; };
 		CCE449F0172313FD002A1937 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Player.cpp; path = Game/Player.cpp; sourceTree = "<group>"; };
 		CCE449F1172313FD002A1937 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Player.h; path = Game/Player.h; sourceTree = "<group>"; };
-		CCE449F2172313FD002A1937 /* EntityData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EntityData.cpp; path = Game/EntityData.cpp; sourceTree = "<group>"; };
 		CCE449F3172313FD002A1937 /* EntityData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EntityData.h; path = Game/EntityData.h; sourceTree = "<group>"; };
 		CCE449FA172317C9002A1937 /* AEntity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AEntity.cpp; path = Game/AEntity.cpp; sourceTree = "<group>"; };
 		CCE449FB172317CA002A1937 /* AEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AEntity.h; path = Game/AEntity.h; sourceTree = "<group>"; };
@@ -443,27 +443,27 @@
 		CCE449D917230F6B002A1937 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				CCEB9EFA173FFB8E00B3CE16 /* AB2DEntity.cpp */,
+				CCEB9EFB173FFB8E00B3CE16 /* AB2DEntity.h */,
+				CCE449FA172317C9002A1937 /* AEntity.cpp */,
+				CCE449FB172317CA002A1937 /* AEntity.h */,
+				CCEB9EF7173FE24F00B3CE16 /* B2DBullet.cpp */,
+				CCEB9EF8173FE24F00B3CE16 /* B2DBullet.h */,
 				CC2436D517492CFA00A8519D /* B2DPod.cpp */,
 				CC2436D617492CFA00A8519D /* B2DPod.h */,
 				CCE449EC172313FD002A1937 /* B2DWorld.cpp */,
 				CCE449ED172313FD002A1937 /* B2DWorld.h */,
+				CCF21E6A1724B485006D1290 /* B2DWorld_BuildT.h */,
+				CCE449FD17231ADD002A1937 /* Bullet.cpp */,
+				CCE449FE17231ADD002A1937 /* Bullet.h */,
+				CC4CCEEC174A98E700D13E37 /* EntityData.cpp */,
+				CCE449F3172313FD002A1937 /* EntityData.h */,
 				CCE449EE172313FD002A1937 /* Input.cpp */,
 				CCE449EF172313FD002A1937 /* Input.h */,
 				CCE449F0172313FD002A1937 /* Player.cpp */,
 				CCE449F1172313FD002A1937 /* Player.h */,
-				CCE449F2172313FD002A1937 /* EntityData.cpp */,
-				CCE449F3172313FD002A1937 /* EntityData.h */,
-				CCE449FA172317C9002A1937 /* AEntity.cpp */,
-				CCE449FB172317CA002A1937 /* AEntity.h */,
-				CCE449FD17231ADD002A1937 /* Bullet.cpp */,
-				CCE449FE17231ADD002A1937 /* Bullet.h */,
 				CCE44A011723265F002A1937 /* World.cpp */,
 				CCE44A021723265F002A1937 /* World.h */,
-				CCF21E6A1724B485006D1290 /* B2DWorld_BuildT.h */,
-				CCEB9EF7173FE24F00B3CE16 /* B2DBullet.cpp */,
-				CCEB9EF8173FE24F00B3CE16 /* B2DBullet.h */,
-				CCEB9EFA173FFB8E00B3CE16 /* AB2DEntity.cpp */,
-				CCEB9EFB173FFB8E00B3CE16 /* AB2DEntity.h */,
 			);
 			name = Game;
 			sourceTree = "<group>";
@@ -686,7 +686,6 @@
 				CCE449F5172313FD002A1937 /* B2DWorld.cpp in Sources */,
 				CCE449F6172313FD002A1937 /* Input.cpp in Sources */,
 				CCE449F7172313FD002A1937 /* Player.cpp in Sources */,
-				CCE449F8172313FD002A1937 /* EntityData.cpp in Sources */,
 				CCE449FC172317CA002A1937 /* AEntity.cpp in Sources */,
 				CCE449FF17231ADD002A1937 /* Bullet.cpp in Sources */,
 				CCE44A0317232660002A1937 /* World.cpp in Sources */,
@@ -699,6 +698,7 @@
 				CC2436DD17492E0800A8519D /* Messenger_Producer.cpp in Sources */,
 				CC2436E017492E2E00A8519D /* Messenger.cpp in Sources */,
 				CC2436E317492E8A00A8519D /* Messenger_Consumer.cpp in Sources */,
+				CC4CCEED174A98E800D13E37 /* EntityData.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
