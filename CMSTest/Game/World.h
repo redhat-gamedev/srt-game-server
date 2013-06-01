@@ -10,6 +10,7 @@
 #define __CMSTest__World__
 
 #include "B2DWorld.h"
+#include "EntityData.h"
 #include "../Proto/box2d.pb.h"
 #include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
 #include "../../../ThirdParty/xdispatch/include/xdispatch/timer.h"
@@ -84,9 +85,12 @@ public:
     // decaf::lang::Runnable implementation
     void Simulate();
     
-    // Security::ICallbacks implementation
+    // Security Event response
     void OnSecurityRequestJoin(const void* pSender, const std::string& strUUID);
     void OnSecurityRequestLeave(const void* pSender, const std::string& strUUID);
+    
+    // Messenger Event response
+    void HandleMessengerConsumerEventPublisherCreateEntityRequest(const void* pSender, const EntityData& anEntityData);
 };
 
 #endif /* defined(__CMSTest__World__) */

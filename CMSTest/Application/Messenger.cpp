@@ -8,6 +8,7 @@
 
 #include "Messenger.h"
 #include "Messenger_Producer.h"
+#include "Messenger_Consumer.h"
 #include "../Game/EntityData.h"
 #include "../Game/Player.h"
 #include "../Proto/GameEvent.pb.h"
@@ -19,6 +20,7 @@
 #include <assert.h>
 
 Messenger::_Producer            Messenger::Producer;
+Messenger::_Consumer            Messenger::Consumer;
 const std::string               Messenger::BrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp";
 
 
@@ -38,9 +40,11 @@ Messenger::~Messenger()
 void Messenger::Setup()
 {
     std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp";
-    std::string     strDestinationURI = "WORLD.SIMULATION";
+    std::string     strWorldSimulationDestinationURI = "WORLD.SIMULATION";
+    std::string     strClientEventDestinationURI = "CLIENT.EVENT";
     
-    Producer.Setup(strBrokerURI, strDestinationURI);
+    Producer.Setup(strBrokerURI, strWorldSimulationDestinationURI);
+    Consumer.Setup(strBrokerURI, strClientEventDestinationURI);
     
     Player::EventPublisher.CreatedEvent += Poco::FunctionDelegate<const EntityData&>(&Messenger::OnPlayerCreated);
     Player::EventPublisher.DestroyedEvent += Poco::FunctionDelegate<const EntityData&>(&Messenger::OnPlayerDestroyed);
@@ -51,6 +55,7 @@ void Messenger::Teardown()
     Player::EventPublisher.DestroyedEvent -= Poco::FunctionDelegate<const EntityData&>(&Messenger::OnPlayerDestroyed);
     Player::EventPublisher.CreatedEvent -= Poco::FunctionDelegate<const EntityData&>(&Messenger::OnPlayerCreated);
 
+    Consumer.Teardown();
     Producer.Teardown();
 }
 

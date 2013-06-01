@@ -54,6 +54,8 @@ public:
     
     // Method(s)
     void Update();
+    void CreatePod();
+    void DestroyPod();
     
     // Event Firing Method(s)
 //    void FireCreatedEvent(const EntityData& anEntityData);

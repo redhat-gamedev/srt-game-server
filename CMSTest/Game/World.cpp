@@ -9,9 +9,10 @@
 #include "World.h"
 #include "B2DWorld.h"
 #include "Player.h"
-#include "EntityData.h"
+//#include "EntityData.h"
 #include "../Application/Messenger.h"
 #include "../Application/Messenger_Producer.h"
+#include "../Application/Messenger_Consumer.h"
 #include "../Application/Security.h"
 #include "../Shared/SimpleAsyncProducer.h"
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
@@ -68,14 +69,16 @@ void World::Setup()
     //m_pSimulationDispatchTimer = new xdispatch::timer(15 * NSEC_PER_MSEC, *m_pSimulationSerialDispatchQueue);
     //m_pSimulationDispatchTimer->start();
     
-    //Security::Publisher.Attach(this);
     Security::EventPublisher.RequestJoinEvent += Poco::Delegate<World, const std::string&>(this, &World::OnSecurityRequestJoin);
     Security::EventPublisher.RequestLeaveEvent += Poco::Delegate<World, const std::string&>(this, &World::OnSecurityRequestLeave);
+    
+    Messenger::Consumer.EventPublisher.ReceivedCreateEntityRequest += Poco::Delegate<World, const EntityData&>(this, &World::HandleMessengerConsumerEventPublisherCreateEntityRequest);
 }
 
 void World::Teardown()
 {
-    //Security::Publisher.Detach(this);
+    Messenger::Consumer.EventPublisher.ReceivedCreateEntityRequest -= Poco::Delegate<World, const EntityData&>(this, &World::HandleMessengerConsumerEventPublisherCreateEntityRequest);
+    
     Security::EventPublisher.RequestLeaveEvent -= Poco::Delegate<World, const std::string&>(this, &World::OnSecurityRequestLeave);
     Security::EventPublisher.RequestJoinEvent -= Poco::Delegate<World, const std::string&>(this, &World::OnSecurityRequestJoin);
 
@@ -260,7 +263,7 @@ void World::OnSecurityRequestJoin(const void* pSender, const std::string& strUUI
 {
     assert(!strUUID.empty());
     
-    AddPlayer(strUUID);
+    //AddPlayer(strUUID);
 }
 
 void World::OnSecurityRequestLeave(const void* pSender, const std::string& strUUID)
@@ -270,3 +273,8 @@ void World::OnSecurityRequestLeave(const void* pSender, const std::string& strUU
     RemovePlayer(strUUID);
 }
 
+// Messenger Event response
+void World::HandleMessengerConsumerEventPublisherCreateEntityRequest(const void* pSender, const EntityData& anEntityData)
+{
+    AddPlayer(anEntityData.UUID);
+}

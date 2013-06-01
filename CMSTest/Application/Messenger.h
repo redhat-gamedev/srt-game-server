@@ -32,7 +32,7 @@ protected:
     
 public:
     static _Producer    Producer;
-    //static _Consumer    Consumer;
+    static _Consumer    Consumer;
     
     // Class function(s)
     static void Setup();

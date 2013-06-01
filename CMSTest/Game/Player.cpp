@@ -33,12 +33,15 @@ Player::Player(const std::string& strUUID) :
 {
     ++s_ui32Count;
     
-    m_pBulletTimer = new Rock2D::Timer(1000);
-    m_pB2DPod = new B2DPod(new EntityData(m_ui64Tag, m_strUUID));
-    
-    Input::EventPublisher.DualStickEvent += Poco::Delegate<Player, DualStick::PbDualStick>(this, &Player::OnInputDualStick);
+//    m_pBulletTimer = new Rock2D::Timer(1000);
+//    m_pB2DPod = new B2DPod(new EntityData(m_ui64Tag, m_strUUID));
+//    
+//    Input::EventPublisher.DualStickEvent += Poco::Delegate<Player, DualStick::PbDualStick>(this, &Player::OnInputDualStick);
     
     //FireCreatedEvent(m_strUUID);
+    
+    CreatePod();
+    
     EventPublisher.CreatedEvent(this, EntityData(m_ui64Tag, m_strUUID));
 }
 
@@ -50,23 +53,24 @@ Player::~Player()
 
     --s_ui32Count;
     
-    Input::EventPublisher.DualStickEvent -= Poco::Delegate<Player, DualStick::PbDualStick>(this, &Player::OnInputDualStick);
-
-    m_BulletQueue.lock();
-    Bullet* pBullet = NULL;
-    while (!(m_BulletQueue.empty()))
-    {
-        pBullet = m_BulletQueue.pop();
-        delete pBullet;
-        pBullet = NULL;
-    }
-    m_BulletQueue.unlock();
-
-    delete m_pB2DPod;
-    m_pB2DPod = NULL;
-    
-    delete m_pBulletTimer;
-    m_pBulletTimer = NULL;
+//    Input::EventPublisher.DualStickEvent -= Poco::Delegate<Player, DualStick::PbDualStick>(this, &Player::OnInputDualStick);
+//
+//    m_BulletQueue.lock();
+//    Bullet* pBullet = NULL;
+//    while (!(m_BulletQueue.empty()))
+//    {
+//        pBullet = m_BulletQueue.pop();
+//        delete pBullet;
+//        pBullet = NULL;
+//    }
+//    m_BulletQueue.unlock();
+//
+//    delete m_pB2DPod;
+//    m_pB2DPod = NULL;
+//    
+//    delete m_pBulletTimer;
+//    m_pBulletTimer = NULL;
+    DestroyPod();
 }
 
 // Method(s)
@@ -108,6 +112,35 @@ void Player::Update()
         delete pBullet;
         pBullet = NULL;
     }
+}
+
+void Player::CreatePod()
+{
+    m_pBulletTimer = new Rock2D::Timer(1000);
+    m_pB2DPod = new B2DPod(new EntityData(m_ui64Tag, m_strUUID));
+
+    Input::EventPublisher.DualStickEvent += Poco::Delegate<Player, DualStick::PbDualStick>(this, &Player::OnInputDualStick);
+}
+
+void Player::DestroyPod()
+{
+    Input::EventPublisher.DualStickEvent -= Poco::Delegate<Player, DualStick::PbDualStick>(this, &Player::OnInputDualStick);
+    
+    m_BulletQueue.lock();
+    Bullet* pBullet = NULL;
+    while (!(m_BulletQueue.empty()))
+    {
+        pBullet = m_BulletQueue.pop();
+        delete pBullet;
+        pBullet = NULL;
+    }
+    m_BulletQueue.unlock();
+    
+    delete m_pB2DPod;
+    m_pB2DPod = NULL;
+    
+    delete m_pBulletTimer;
+    m_pBulletTimer = NULL;    
 }
 
 //// Event Firing Method(s)

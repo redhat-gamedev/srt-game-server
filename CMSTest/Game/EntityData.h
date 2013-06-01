@@ -39,6 +39,7 @@ public:
     const std::string&  UUID = m_strUUID;
     
     // Constructor(s)
+    EntityData() : m_ui64Tag(0), m_strUUID("") {};
     EntityData(uint64_t ui64Tag, std::string strUUID);
     
     // Destructor(s)
