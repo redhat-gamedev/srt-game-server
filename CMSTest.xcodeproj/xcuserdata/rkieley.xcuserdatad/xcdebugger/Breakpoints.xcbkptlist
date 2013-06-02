@@ -69,7 +69,7 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CMSTest/Game/World.cpp"
@@ -79,6 +79,32 @@
          startingLineNumber = "279"
          endingLineNumber = "279"
          landmarkName = "World::HandleMessengerConsumerEventPublisherCreateEntityRequest(const void* pSender, const EntityData&amp; anEntityData)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CMSTest/Application/Messenger.cpp"
+         timestampString = "391802471.631564"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "83"
+         endingLineNumber = "83"
+         landmarkName = "Messenger::OnPlayerCreated(const void* pSender, const EntityData&amp; anEntityData)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CMSTest/Application/Messenger.cpp"
+         timestampString = "391802471.631564"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "102"
+         endingLineNumber = "102"
+         landmarkName = "Messenger::OnPlayerDestroyed(const void* pSender, const EntityData&amp; anEntityData)"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

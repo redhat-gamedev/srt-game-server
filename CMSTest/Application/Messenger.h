@@ -31,7 +31,11 @@ protected:
     ~Messenger();
     
 public:
+    // World Simulation
     static _Producer    Producer;
+    
+    // Game Event
+    static _Producer    GameEventProducer;
     static _Consumer    Consumer;
     
     // Class function(s)

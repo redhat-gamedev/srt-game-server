@@ -20,6 +20,7 @@
 #include <assert.h>
 
 Messenger::_Producer            Messenger::Producer;
+Messenger::_Producer            Messenger::GameEventProducer;
 Messenger::_Consumer            Messenger::Consumer;
 const std::string               Messenger::BrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp";
 
@@ -41,10 +42,15 @@ void Messenger::Setup()
 {
     std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp";
     std::string     strWorldSimulationDestinationURI = "WORLD.SIMULATION";
-    std::string     strClientEventDestinationURI = "CLIENT.EVENT";
+    std::string     strGameEventInDestinationURI = "GAME.EVENT.IN";
+    std::string     strGameEventOutDestinationURI = "GAME.EVENT.OUT";
     
+    // World Simulation
     Producer.Setup(strBrokerURI, strWorldSimulationDestinationURI);
-    Consumer.Setup(strBrokerURI, strClientEventDestinationURI);
+    
+    // Game Event
+    GameEventProducer.Setup(strBrokerURI, strGameEventOutDestinationURI);
+    Consumer.Setup(strBrokerURI, strGameEventInDestinationURI);
     
     Player::EventPublisher.CreatedEvent += Poco::FunctionDelegate<const EntityData&>(&Messenger::OnPlayerCreated);
     Player::EventPublisher.DestroyedEvent += Poco::FunctionDelegate<const EntityData&>(&Messenger::OnPlayerDestroyed);
@@ -55,12 +61,14 @@ void Messenger::Teardown()
     Player::EventPublisher.DestroyedEvent -= Poco::FunctionDelegate<const EntityData&>(&Messenger::OnPlayerDestroyed);
     Player::EventPublisher.CreatedEvent -= Poco::FunctionDelegate<const EntityData&>(&Messenger::OnPlayerCreated);
 
+    GameEventProducer.Teardown();
     Consumer.Teardown();
     Producer.Teardown();
 }
 
 void Messenger::Send()
 {
+    GameEventProducer.SendUpdates();
     Producer.SendUpdates();
 }
 
@@ -81,7 +89,8 @@ void Messenger::OnPlayerCreated(const void* pSender, const EntityData& anEntityD
     pEntityGameEvent->set_uuid(anEntityData.UUID);
     pEntityGameEvent->set_entitytag(anEntityData.Tag);
 
-    Producer.Enqueue(pGameEvent);
+    //Producer.Enqueue(pGameEvent);
+    GameEventProducer.Enqueue(pGameEvent);
 }
 
 void Messenger::OnPlayerDestroyed(const void* pSender, const EntityData& anEntityData)
@@ -99,5 +108,6 @@ void Messenger::OnPlayerDestroyed(const void* pSender, const EntityData& anEntit
     pEntityGameEvent->set_uuid(anEntityData.UUID);
     pEntityGameEvent->set_entitytag(anEntityData.Tag);
     
-    Producer.Enqueue(pGameEvent);
+    //Producer.Enqueue(pGameEvent);
+    GameEventProducer.Enqueue(pGameEvent);
 }
