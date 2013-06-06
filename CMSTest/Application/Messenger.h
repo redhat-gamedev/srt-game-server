@@ -9,6 +9,7 @@
 #ifndef __CMSTest__Messenger__
 #define __CMSTest__Messenger__
 
+#include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
 #include <string>
 
 class EntityData;
@@ -23,6 +24,7 @@ protected:
     class _Consumer;
 
     static const std::string        BrokerURI;
+    static xdispatch::queue*        s_pMessengerSerialDispatchQueue;
     
     // Constructor(s)
     Messenger();
@@ -41,7 +43,7 @@ public:
     // Class function(s)
     static void Setup();
     static void Teardown();
-    static void Send();
+    //static void Send();
     
     // Entity Event response
     static void OnEntityCreated(const void* pSender, const EntityData& anEntityData);

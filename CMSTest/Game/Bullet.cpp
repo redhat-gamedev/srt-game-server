@@ -30,18 +30,19 @@ Bullet::Bullet(const std::string& strUUID, const b2Vec2& b2v2Position, b2Vec2& b
     m_pLifeTimer(NULL),
     AEntity(strUUID, (uint64_t)MakeT<uint64_t>((uint32_t)AEntity::BULLET, s_ui32Count))
 {
-    ++s_ui32Count;
-    
     m_pB2DBullet = new B2DBullet(b2v2Position, b2v2Direction, new EntityData(m_ui64Tag, m_strUUID));
     m_pLifeTimer = new Rock2D::Timer(3000);
     
-    std::cout << "Bullet::Bullet() " << s_ui32Count << std::endl;
+    //std::cout << "Bullet::Bullet() " << m_ui64Tag << std::endl;
     EventPublisher.CreatedEvent(this, EntityData(m_ui64Tag, m_strUUID));
+    
+    ++s_ui32Count;
 }
 
 // Destructor(s)
 Bullet::~Bullet()
 {
+    std::cout << "Bullet::~Bullet() " << m_ui64Tag << std::endl;
     EventPublisher.DestroyedEvent(this, EntityData(m_ui64Tag, m_strUUID));
     
     //--s_ui32Count;

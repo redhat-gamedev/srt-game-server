@@ -18,13 +18,14 @@
 #include "Poco/FunctionDelegate.h"
 #include <decaf/lang/Thread.h>
 #include <string>
+#include <iostream>
 #include <assert.h>
 
 Messenger::_Producer            Messenger::Producer;
 Messenger::_Producer            Messenger::GameEventProducer;
 Messenger::_Consumer            Messenger::Consumer;
 const std::string               Messenger::BrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp";
-
+xdispatch::queue*               Messenger::s_pMessengerSerialDispatchQueue = NULL;
 
 // Constructor(s)
 Messenger::Messenger()
@@ -45,6 +46,8 @@ void Messenger::Setup()
     std::string     strWorldSimulationDestinationURI = "WORLD.SIMULATION";
     std::string     strGameEventInDestinationURI = "GAME.EVENT.IN";
     std::string     strGameEventOutDestinationURI = "GAME.EVENT.OUT";
+    
+    s_pMessengerSerialDispatchQueue = new xdispatch::queue("simulation");
     
     // World Simulation
     Producer.Setup(strBrokerURI, strWorldSimulationDestinationURI);
@@ -71,13 +74,16 @@ void Messenger::Teardown()
     GameEventProducer.Teardown();
     Consumer.Teardown();
     Producer.Teardown();
+    
+    delete s_pMessengerSerialDispatchQueue;
+    s_pMessengerSerialDispatchQueue = NULL;
 }
 
-void Messenger::Send()
-{
-    GameEventProducer.SendUpdates();
-    Producer.SendUpdates();
-}
+//void Messenger::Send()
+//{
+//    GameEventProducer.SendUpdates();
+//    Producer.SendUpdates();
+//}
 
 
 // Player Event response
@@ -85,36 +91,49 @@ void Messenger::OnEntityCreated(const void* pSender, const EntityData& anEntityD
 {
     using namespace gameevent;
     
-    std::string strPBBuffer = "";
+    s_pMessengerSerialDispatchQueue->sync([=]
+    {
+        std::string strPBBuffer = "";
 
-    GameEvent* pGameEvent = new GameEvent();
-    EntityGameEvent* pEntityGameEvent = pGameEvent->mutable_entitygameevent();
-    assert(NULL != pEntityGameEvent);
+        GameEvent aGameEvent;
+        //aGameEvent.New()
+        //GameEvent* pGameEvent = new GameEvent();
+        GameEvent* pGameEvent = aGameEvent.New();
+        EntityGameEvent* pEntityGameEvent = pGameEvent->mutable_entitygameevent();
+        assert(NULL != pEntityGameEvent);
 
-    pGameEvent->set_type(GameEvent_GameEventType_ENTITY);
-    pEntityGameEvent->set_type(EntityGameEvent_EntityGameEventType_CREATE);
-    pEntityGameEvent->set_uuid(anEntityData.UUID);
-    pEntityGameEvent->set_entitytag(anEntityData.Tag);
+        pGameEvent->set_type(GameEvent_GameEventType_ENTITY);
+        pEntityGameEvent->set_type(EntityGameEvent_EntityGameEventType_CREATE);
+        pEntityGameEvent->set_uuid(anEntityData.UUID);
+        pEntityGameEvent->set_entitytag(anEntityData.Tag);
 
-    //Producer.Enqueue(pGameEvent);
-    GameEventProducer.Enqueue(pGameEvent);
+        //Producer.Enqueue(pGameEvent);
+        GameEventProducer.Enqueue(pGameEvent);
+    });
 }
 
 void Messenger::OnEntityDestroyed(const void* pSender, const EntityData& anEntityData)
 {
     using namespace gameevent;
-    
-    std::string strPBBuffer = "";
-    
-    GameEvent* pGameEvent = new GameEvent();
-    EntityGameEvent* pEntityGameEvent = pGameEvent->mutable_entitygameevent();
-    assert(NULL != pEntityGameEvent);
-    
-    pGameEvent->set_type(GameEvent_GameEventType_ENTITY);
-    pEntityGameEvent->set_type(EntityGameEvent_EntityGameEventType_DESTROY);
-    pEntityGameEvent->set_uuid(anEntityData.UUID);
-    pEntityGameEvent->set_entitytag(anEntityData.Tag);
-    
-    //Producer.Enqueue(pGameEvent);
-    GameEventProducer.Enqueue(pGameEvent);
+
+    s_pMessengerSerialDispatchQueue->sync([=]
+    {
+        std::string strPBBuffer = "";
+        
+        GameEvent aGameEvent;
+        //aGameEvent.New()
+        //GameEvent* pGameEvent = new GameEvent();
+        GameEvent* pGameEvent = aGameEvent.New();
+        EntityGameEvent* pEntityGameEvent = pGameEvent->mutable_entitygameevent();
+        assert(NULL != pEntityGameEvent);
+        
+        pGameEvent->set_type(GameEvent_GameEventType_ENTITY);
+        pEntityGameEvent->set_type(EntityGameEvent_EntityGameEventType_DESTROY);
+        pEntityGameEvent->set_uuid(anEntityData.UUID);
+        pEntityGameEvent->set_entitytag(anEntityData.Tag);
+        
+        //Producer.Enqueue(pGameEvent);
+        std::cout << "OnEntityDestroyed message " << pGameEvent->DebugString() << std::endl;
+        GameEventProducer.Enqueue(pGameEvent);
+    });
 }

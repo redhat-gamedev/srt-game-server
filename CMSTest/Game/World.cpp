@@ -226,7 +226,7 @@ void World::RemovePlayer(const std::string& strUUID)
 // decaf::lang::Runnable implementation
 void World::Simulate()
 {
-    Player*     pPlayer = NULL;
+    //Player*     pPlayer = NULL;
     float32 timeStep = 1.0f / 66.0f;
     
 	int32 velocityIterations = 6;
@@ -236,16 +236,16 @@ void World::Simulate()
     {
         xdispatch::global_queue().sync([=]
         {
-           m_listPlayersSwap = m_listPlayers;
+            m_listPlayersSwap = m_listPlayers;
+            Player*     pPlayer = NULL;
+            while (!(m_listPlayersSwap.empty()))
+            {
+                pPlayer = m_listPlayersSwap.front();
+                m_listPlayersSwap.pop_front();
+                assert(pPlayer);
+                pPlayer->Update();
+            }
         });
-        
-        while (!(m_listPlayersSwap.empty()))
-        {
-            pPlayer = m_listPlayersSwap.front();
-            m_listPlayersSwap.pop_front();
-            assert(pPlayer);
-            pPlayer->Update();
-        }
         
         m_pSimulationSerialDispatchQueue->sync([=]
         {

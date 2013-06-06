@@ -159,7 +159,7 @@ void Security::OnPlayerCreated(const void* pSender, const EntityData& anEntityDa
 {
 //    assert(strUUID.length() > 0);
     
-    static std::string strPBBuffer = "";
+    std::string strPBBuffer = "";
     
     Command* pCommand = new Command();
     SecurityCommand* pSecurityCommand = pCommand->mutable_securitycommand();
@@ -183,7 +183,7 @@ void Security::OnPlayerDestroyed(const void* pSender, const EntityData& anEntity
 {
 //    assert(strUUID.length() > 0);
     
-    static std::string strPBBuffer = "";
+    std::string strPBBuffer = "";
     
     Command* pCommand = new Command();
     SecurityCommand* pSecurityCommand = pCommand->mutable_securitycommand();

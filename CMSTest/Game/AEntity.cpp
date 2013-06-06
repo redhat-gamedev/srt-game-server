@@ -34,6 +34,7 @@ AEntity::AEntity(const std::string& strUUID, uint64_t ui64Tag) :
 // Destructor(s)
 AEntity::~AEntity()
 {
+    std::cout << "AEntity::~AEntity() " << m_ui64Tag << std::endl;
     //FireDestroyedEvent(m_strUUID);
     //FireDestroyedEvent(EntityData(m_ui64Tag, m_strUUID));
 
