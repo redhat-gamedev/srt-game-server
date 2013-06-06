@@ -15,6 +15,9 @@
 #include "Timer.h"
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include "../Shared/MakeT.h"
+//#include <stdio.h>
+#include <iostream>
+#include <string>
 #include <assert.h>
 
 Bullet::_EventPublisher     Bullet::EventPublisher;
@@ -32,6 +35,7 @@ Bullet::Bullet(const std::string& strUUID, const b2Vec2& b2v2Position, b2Vec2& b
     m_pB2DBullet = new B2DBullet(b2v2Position, b2v2Direction, new EntityData(m_ui64Tag, m_strUUID));
     m_pLifeTimer = new Rock2D::Timer(3000);
     
+    std::cout << "Bullet::Bullet() " << s_ui32Count << std::endl;
     EventPublisher.CreatedEvent(this, EntityData(m_ui64Tag, m_strUUID));
 }
 
@@ -40,7 +44,7 @@ Bullet::~Bullet()
 {
     EventPublisher.DestroyedEvent(this, EntityData(m_ui64Tag, m_strUUID));
     
-    --s_ui32Count;
+    //--s_ui32Count;
 
     delete m_pLifeTimer;
     m_pLifeTimer = NULL;

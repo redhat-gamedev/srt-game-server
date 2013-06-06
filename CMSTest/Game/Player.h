@@ -39,6 +39,9 @@ protected:
     
     decaf::util::StlQueue<b2Vec2>       m_b2v2ShootQueue;
     decaf::util::StlQueue<b2Vec2>       m_b2v2ShootSwapQueue;
+    
+    decaf::util::StlQueue<DualStick::PbDualStick>   m_PbDualStickQueue;
+    
 
     // Helper(s)
     //void CreatePod();

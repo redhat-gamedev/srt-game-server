@@ -85,7 +85,7 @@ void Messenger::OnEntityCreated(const void* pSender, const EntityData& anEntityD
 {
     using namespace gameevent;
     
-    static std::string strPBBuffer = "";
+    std::string strPBBuffer = "";
 
     GameEvent* pGameEvent = new GameEvent();
     EntityGameEvent* pEntityGameEvent = pGameEvent->mutable_entitygameevent();
@@ -104,7 +104,7 @@ void Messenger::OnEntityDestroyed(const void* pSender, const EntityData& anEntit
 {
     using namespace gameevent;
     
-    static std::string strPBBuffer = "";
+    std::string strPBBuffer = "";
     
     GameEvent* pGameEvent = new GameEvent();
     EntityGameEvent* pEntityGameEvent = pGameEvent->mutable_entitygameevent();

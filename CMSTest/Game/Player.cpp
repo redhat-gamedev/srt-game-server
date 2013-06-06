@@ -45,7 +45,7 @@ Player::~Player()
     //FireDestroyedEvent(m_strUUID);
     EventPublisher.DestroyedEvent(this, EntityData(m_ui64Tag, m_strUUID));
 
-    --s_ui32Count;
+    //--s_ui32Count;
     
     DestroyPod();
 }
@@ -54,14 +54,59 @@ Player::~Player()
 void Player::Update()
 {
     assert(m_pB2DPod);
+    assert(m_pBulletTimer);
+
+    Bullet* pBullet = NULL;
     
+    m_PbDualStickQueue.lock();
+//    decaf::util::StlQueue<DualStick::PbDualStick>   aPbDualStickQueueSwap = m_PbDualStickQueue;
+    std::vector<DualStick::PbDualStick> vecPbDualStick = m_PbDualStickQueue.toArray();
+    m_PbDualStickQueue.clear();
+    m_PbDualStickQueue.unlock();
+    
+    //while (!aPbDualStickQueueSwap.empty())
+    for (int i = 0; i < vecPbDualStick.size(); ++i)
+    {
+        //DualStick::PbDualStick aPbDualStick = aPbDualStickQueueSwap.pop();
+        DualStick::PbDualStick aPbDualStick = vecPbDualStick[i];
+        const box2d::PbVec2& pbv2Move = aPbDualStick.pbv2move();
+        const box2d::PbVec2& pbv2Shoot = aPbDualStick.pbv2shoot();
+        const std::string& strUUID = aPbDualStick.uuid();
+
+        if (strUUID != m_strUUID)
+        {
+            return;
+        }
+    
+        b2Vec2 b2v2Shoot;
+        b2v2Shoot.x = pbv2Shoot.x();
+        b2v2Shoot.y = pbv2Shoot.y();
+
+        m_pB2DPod->Move(pbv2Move.x(), pbv2Move.y());
+
+        if (((b2v2Shoot.x < 0.0f) || (b2v2Shoot.x > 0.0f)) ||
+            ((b2v2Shoot.y < 0.0f) || (b2v2Shoot.y > 0.0f)))
+        {
+            if (m_pBulletTimer->Status() == Rock2D::Timer::EXPIRED)
+            {
+                m_pBulletTimer->Restart();
+                pBullet = new Bullet(m_strUUID, m_pB2DPod->GetPosition(), b2v2Shoot);
+                m_BulletQueue.lock();
+                m_BulletQueue.push(pBullet);
+                m_BulletQueue.unlock();
+            }
+        }
+    }
+
+    pBullet = NULL;
     Rock2D::Timer::Update();
     m_pB2DPod->Update();
     
-    Bullet* pBullet = NULL;
-    m_BulletQueue.lock();
+
     std::list<Bullet*>      aBulletToRemoveList;
     std::list<Bullet*>      aBulletToAddList;
+    m_BulletQueue.lock();
+    //for (m_BulletQueue::iterator iterQueue = m_BulletQueue.begin(); iterQueue != m_BulletQueue.end(); iterQueue++)
     while (!m_BulletQueue.empty())
     {
         pBullet = m_BulletQueue.pop();
@@ -80,8 +125,6 @@ void Player::Update()
         aBulletToAddList.pop_front();
         m_BulletQueue.push(pBullet);
     }
-    m_BulletQueue.unlock();
-    
     while (!aBulletToRemoveList.empty())
     {
         pBullet = aBulletToRemoveList.front();
@@ -89,6 +132,7 @@ void Player::Update()
         delete pBullet;
         pBullet = NULL;
     }
+    m_BulletQueue.unlock();
 }
 
 void Player::CreatePod()
@@ -134,36 +178,40 @@ void Player::DestroyPod()
 // Input Event response
 void Player::OnInputDualStick(const void* pSender, DualStick::PbDualStick& aPbDualStick)
 {
-    assert(m_pB2DPod);
-    assert(m_pBulletTimer);
-
-    const box2d::PbVec2& pbv2Move = aPbDualStick.pbv2move();
-    const box2d::PbVec2& pbv2Shoot = aPbDualStick.pbv2shoot();
-    const std::string& strUUID = aPbDualStick.uuid();
-
-    if (strUUID != m_strUUID)
-    {
-        return;
-    }
+//    assert(m_pB2DPod);
+//    assert(m_pBulletTimer);
+//
+//    const box2d::PbVec2& pbv2Move = aPbDualStick.pbv2move();
+//    const box2d::PbVec2& pbv2Shoot = aPbDualStick.pbv2shoot();
+//    const std::string& strUUID = aPbDualStick.uuid();
+//
+//    if (strUUID != m_strUUID)
+//    {
+//        return;
+//    }
+//    
+//    b2Vec2 b2v2Shoot;
+//    Bullet* pBullet = NULL;
+//    
+//    b2v2Shoot.x = pbv2Shoot.x();
+//    b2v2Shoot.y = pbv2Shoot.y();
+//    
+//    m_pB2DPod->Move(pbv2Move.x(), pbv2Move.y());
+//    
+//    if (((b2v2Shoot.x < 0.0f) || (b2v2Shoot.x > 0.0f)) ||
+//        ((b2v2Shoot.y < 0.0f) || (b2v2Shoot.y > 0.0f)))
+//    {
+//        if (m_pBulletTimer->Status() == Rock2D::Timer::EXPIRED)
+//        {
+//            m_pBulletTimer->Restart();
+//            pBullet = new Bullet(m_strUUID, m_pB2DPod->GetPosition(), b2v2Shoot);
+//            m_BulletQueue.lock();
+//            m_BulletQueue.push(pBullet);
+//            m_BulletQueue.unlock();
+//        }
+//    }
     
-    b2Vec2 b2v2Shoot;
-    Bullet* pBullet = NULL;
-    
-    b2v2Shoot.x = pbv2Shoot.x();
-    b2v2Shoot.y = pbv2Shoot.y();
-    
-    m_pB2DPod->Move(pbv2Move.x(), pbv2Move.y());
-    
-    if (((b2v2Shoot.x < 0.0f) || (b2v2Shoot.x > 0.0f)) ||
-        ((b2v2Shoot.y < 0.0f) || (b2v2Shoot.y > 0.0f)))
-    {
-        if (m_pBulletTimer->Status() == Rock2D::Timer::EXPIRED)
-        {
-            pBullet = new Bullet(m_strUUID, m_pB2DPod->GetPosition(), b2v2Shoot);
-            m_BulletQueue.lock();
-            m_BulletQueue.push(pBullet);
-            m_BulletQueue.unlock();
-            m_pBulletTimer->Restart();
-        }
-    }
+    m_PbDualStickQueue.lock();
+    m_PbDualStickQueue.push(aPbDualStick);
+    m_PbDualStickQueue.unlock();
 }

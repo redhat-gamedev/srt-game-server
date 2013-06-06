@@ -91,7 +91,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "90"
          endingLineNumber = "90"
-         landmarkName = "Messenger::OnPlayerCreated(const void* pSender, const EntityData&amp; anEntityData)"
+         landmarkName = "Messenger::OnEntityCreated(const void* pSender, const EntityData&amp; anEntityData)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -104,7 +104,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "109"
          endingLineNumber = "109"
-         landmarkName = "Messenger::OnPlayerDestroyed(const void* pSender, const EntityData&amp; anEntityData)"
+         landmarkName = "Messenger::OnEntityDestroyed(const void* pSender, const EntityData&amp; anEntityData)"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
