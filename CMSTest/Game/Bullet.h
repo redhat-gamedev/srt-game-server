@@ -33,6 +33,8 @@ protected:
     Rock2D::Timer*          m_pLifeTimer;
 
 public:
+    static _EventPublisher          EventPublisher;
+    
     // Constructor(s)
     Bullet(const std::string& strUUID, const b2Vec2& b2v2Position, b2Vec2& b2v2Direction);
     

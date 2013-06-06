@@ -43,9 +43,9 @@ public:
     static void Teardown();
     static void Send();
     
-    // Player Event response
-    static void OnPlayerCreated(const void* pSender, const EntityData& anEntityData);
-    static void OnPlayerDestroyed(const void* pSender, const EntityData& anEntityData);
+    // Entity Event response
+    static void OnEntityCreated(const void* pSender, const EntityData& anEntityData);
+    static void OnEntityDestroyed(const void* pSender, const EntityData& anEntityData);
 };
 
 #endif /* defined(__CMSTest__Messenger__) */

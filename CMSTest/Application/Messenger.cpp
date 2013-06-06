@@ -11,6 +11,7 @@
 #include "Messenger_Consumer.h"
 #include "../Game/EntityData.h"
 #include "../Game/Player.h"
+#include "../Game/Bullet.h"
 #include "../Proto/GameEvent.pb.h"
 #include "../Proto/EntityGameEvent.pb.h"
 #include "Poco/Delegate.h"
@@ -52,14 +53,20 @@ void Messenger::Setup()
     GameEventProducer.Setup(strBrokerURI, strGameEventOutDestinationURI);
     Consumer.Setup(strBrokerURI, strGameEventInDestinationURI);
     
-    Player::EventPublisher.CreatedEvent += Poco::FunctionDelegate<const EntityData&>(&Messenger::OnPlayerCreated);
-    Player::EventPublisher.DestroyedEvent += Poco::FunctionDelegate<const EntityData&>(&Messenger::OnPlayerDestroyed);
+    Player::EventPublisher.CreatedEvent += Poco::FunctionDelegate<const EntityData&>(&Messenger::OnEntityCreated);
+    Player::EventPublisher.DestroyedEvent += Poco::FunctionDelegate<const EntityData&>(&Messenger::OnEntityDestroyed);
+
+    Bullet::EventPublisher.CreatedEvent += Poco::FunctionDelegate<const EntityData&>(&Messenger::OnEntityCreated);
+    Bullet::EventPublisher.DestroyedEvent += Poco::FunctionDelegate<const EntityData&>(&Messenger::OnEntityDestroyed);
 }
 
 void Messenger::Teardown()
 {
-    Player::EventPublisher.DestroyedEvent -= Poco::FunctionDelegate<const EntityData&>(&Messenger::OnPlayerDestroyed);
-    Player::EventPublisher.CreatedEvent -= Poco::FunctionDelegate<const EntityData&>(&Messenger::OnPlayerCreated);
+    Bullet::EventPublisher.DestroyedEvent -= Poco::FunctionDelegate<const EntityData&>(&Messenger::OnEntityDestroyed);
+    Bullet::EventPublisher.CreatedEvent -= Poco::FunctionDelegate<const EntityData&>(&Messenger::OnEntityCreated);
+    
+    Player::EventPublisher.DestroyedEvent -= Poco::FunctionDelegate<const EntityData&>(&Messenger::OnEntityDestroyed);
+    Player::EventPublisher.CreatedEvent -= Poco::FunctionDelegate<const EntityData&>(&Messenger::OnEntityCreated);
 
     GameEventProducer.Teardown();
     Consumer.Teardown();
@@ -74,7 +81,7 @@ void Messenger::Send()
 
 
 // Player Event response
-void Messenger::OnPlayerCreated(const void* pSender, const EntityData& anEntityData)
+void Messenger::OnEntityCreated(const void* pSender, const EntityData& anEntityData)
 {
     using namespace gameevent;
     
@@ -93,7 +100,7 @@ void Messenger::OnPlayerCreated(const void* pSender, const EntityData& anEntityD
     GameEventProducer.Enqueue(pGameEvent);
 }
 
-void Messenger::OnPlayerDestroyed(const void* pSender, const EntityData& anEntityData)
+void Messenger::OnEntityDestroyed(const void* pSender, const EntityData& anEntityData)
 {
     using namespace gameevent;
     

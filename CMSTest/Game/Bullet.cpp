@@ -17,6 +17,7 @@
 #include "../Shared/MakeT.h"
 #include <assert.h>
 
+Bullet::_EventPublisher     Bullet::EventPublisher;
 uint32_t                    Bullet::s_ui32Count = 1;
 
 
@@ -30,11 +31,15 @@ Bullet::Bullet(const std::string& strUUID, const b2Vec2& b2v2Position, b2Vec2& b
     
     m_pB2DBullet = new B2DBullet(b2v2Position, b2v2Direction, new EntityData(m_ui64Tag, m_strUUID));
     m_pLifeTimer = new Rock2D::Timer(3000);
+    
+    EventPublisher.CreatedEvent(this, EntityData(m_ui64Tag, m_strUUID));
 }
 
 // Destructor(s)
 Bullet::~Bullet()
 {
+    EventPublisher.DestroyedEvent(this, EntityData(m_ui64Tag, m_strUUID));
+    
     --s_ui32Count;
 
     delete m_pLifeTimer;
