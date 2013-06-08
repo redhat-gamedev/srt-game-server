@@ -80,14 +80,22 @@ void Messenger::_Producer::Enqueue(::google::protobuf::Message* pMessage)
 
 void Messenger::_Producer::SendUpdate(::google::protobuf::Message* pMessage)
 {
-    assert(pMessage);
+    //assert(pMessage);
+    //assert(pMessage->IsInitialized());
     
-    static std::string strPBBuffer = "";
+    if (NULL == pMessage)
+    {
+        //printf("Messenger::_Producer::SendUpdate bailing on NULL pMessage");
+        return;
+    }
+    
+    std::string strPBBuffer = "";
     
     try
     {
         strPBBuffer.clear();
         pMessage->SerializeToString(&strPBBuffer);
+        pMessage->Clear();
         const char* pucText = strPBBuffer.c_str();
         unsigned long ulLength = strPBBuffer.length();
         if (ulLength > 0)
@@ -117,6 +125,13 @@ void Messenger::_Producer::SendUpdates()
  //                delete pPbWorldDefault; // TODO: remove memory thrash
  //                pPbWorldDefault = NULL;
             }
+            
+//            m_aMessageQueue.lock();
+//            if (m_aMessageQueue.size() > 0)
+//            {
+//                SendUpdate(m_aMessageQueue.pop());
+//            }
+//            m_aMessageQueue.unlock();
         });
         decaf::lang::Thread::currentThread()->sleep(5);
     }

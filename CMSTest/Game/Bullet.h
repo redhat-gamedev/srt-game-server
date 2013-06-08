@@ -25,13 +25,19 @@ class Bullet :
     public AEntity
 {
     friend class Player;
+    friend class B2DBullet;
+    
 private:
     static uint32_t         s_ui32Count;
     
 protected:
     B2DBullet*              m_pB2DBullet;
     Rock2D::Timer*          m_pLifeTimer;
+    bool                    m_bDead;
 
+    void B2DBulletCreated();
+    void B2DBulletDestroyed();
+    
 public:
     static _EventPublisher          EventPublisher;
     

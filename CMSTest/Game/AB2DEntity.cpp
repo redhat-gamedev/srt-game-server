@@ -20,10 +20,6 @@ AB2DEntity::AB2DEntity() :
 // Destructor
 AB2DEntity::~AB2DEntity()
 {
-    xdispatch::queue("simulation").sync([=]
-    {
-        B2DWorld::world->DestroyBody(m_pb2Body);
-    });
 }
 
 // Method(s)

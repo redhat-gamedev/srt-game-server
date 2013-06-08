@@ -13,6 +13,7 @@
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 
 class EntityData;
+class Bullet;
 
 
 class B2DBullet :
@@ -24,6 +25,8 @@ protected:
     class _Definition :
         public AB2DEntity::ADefinition
     {
+        friend class B2DBullet;
+        
     protected:
         b2CircleShape       m_ab2CircleShape;
         
@@ -35,21 +38,26 @@ protected:
     b2Vec2              m_b2v2InitialPosition;
     b2Vec2              m_b2v2InitialDirection;
     EntityData*           m_pEntityData;
+    Bullet*             m_pBullet;
 
     // Helper(s)
-    void CreateBullet();
+
     
 public:
     static _Definition        Definition;
     
     // Constructor(s)
-    B2DBullet(const b2Vec2& b2v2Position, b2Vec2& b2v2Direction, EntityData* pEntityData);
+    B2DBullet(const b2Vec2& b2v2Position, b2Vec2& b2v2Direction, EntityData* pEntityData, Bullet* pBullet);
     
     // Destructor(s)
     ~B2DBullet();
     
     // Callback(s)
     void OnB2DBodyCreated(b2Body* pb2bBullet);
+    void OnB2DBodyDestroyed();
+
+    void CreateBullet();
+    void DestroyBullet();
 };
 
 
