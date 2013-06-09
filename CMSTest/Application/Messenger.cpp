@@ -47,7 +47,7 @@ void Messenger::Setup()
     std::string     strGameEventInDestinationURI = "GAME.EVENT.IN";
     std::string     strGameEventOutDestinationURI = "GAME.EVENT.OUT";
     
-    s_pMessengerSerialDispatchQueue = new xdispatch::queue("simulation");
+    s_pMessengerSerialDispatchQueue = new xdispatch::queue("messenger");
     
     // World Simulation
     Producer.Setup(strBrokerURI, strWorldSimulationDestinationURI);

@@ -7,20 +7,17 @@
 //
 
 #include "B2DPod.h"
-#include "B2DWorld_BuildT.h"
 #include "EntityData.h"
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include <assert.h>
 
-B2DPod::_Definition          B2DPod::Definition;
+B2DPod::_B2DDefinition          B2DPod::Definition;
 
 
-B2DPod::_Definition::_Definition()
+B2DPod::_B2DDefinition::_B2DDefinition() :
+    AB2DEntity::_AB2DDefinition()
 {
-    // Define the dynamic body. We set its position
-    m_ab2BodyDef.type = b2_dynamicBody;
-    m_ab2BodyDef.position.Set(0.0f, 0.0f);
-    
+    // Override the defaults where appropriate
     // Set the size of our shape
     m_ab2CircleShape.m_radius = 1.0f;
     
@@ -35,42 +32,43 @@ B2DPod::_Definition::_Definition()
 
 // Constructor(s)
 B2DPod::B2DPod(EntityData* pEntityData) :
-    m_pEntityData(pEntityData)
+    m_pEntityData(pEntityData),
+    AB2DEntity(Definition)
 {
     assert(m_pEntityData);
     
-    CreatePod();
+    m_pb2Body->SetUserData((void *)pEntityData);
 }
 
 // Destructor(s)
-B2DPod::B2DPod()
+B2DPod::~B2DPod()
 {
     delete m_pEntityData;
     m_pEntityData = NULL;
 }
 
 // Helper(s)
-void B2DPod::CreatePod()
-{
-    B2DWorld::_BuildT<B2DPod>::B2DBody(this, &B2DPod::OnB2DBodyCreated, Definition.BodyDef, Definition.FixtureDef);
-}
+//void B2DPod::CreatePod()
+//{
+//    B2DWorld::_BuildT<B2DPod>::B2DBody(this, &B2DPod::OnB2DBodyCreated, Definition.BodyDef, Definition.FixtureDef);
+//}
 
 // Callback(s)
-void B2DPod::OnB2DBodyCreated(b2Body* pb2bPod)
-{
-    assert(pb2bPod);
-    assert(NULL == m_pb2Body);
-    
-    m_pb2Body = pb2bPod;
-    
-    m_pb2Body->SetUserData(m_pEntityData);
-}
+//void B2DPod::OnB2DBodyCreated(b2Body* pb2bPod)
+//{
+//    assert(pb2bPod);
+//    assert(NULL == m_pb2Body);
+//    
+//    m_pb2Body = pb2bPod;
+//    
+//    m_pb2Body->SetUserData(m_pEntityData);
+//}
 
-// Method(s)
+
 void B2DPod::Move(float fX, float fY)
 {
     b2Vec2 b2v2Move;
-
+    
     b2v2Move.x = fX;
     b2v2Move.y = fY;
     

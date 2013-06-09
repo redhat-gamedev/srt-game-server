@@ -13,22 +13,20 @@
 #include "Poco/BasicEvent.h"
 #include <string>
 
-class b2Body;
+//class b2Body;
+class AB2DEntity;
 
 
 class AEntity
 {
 private:
     static uint64_t         s_ui64Count;
-    //static _EventPublisher          EventPublisher;
     
 protected:
     class _EventPublisher
     {
     public:
         // Event(s)
-//        Poco::BasicEvent<const std::string&>    CreatedEvent;
-//        Poco::BasicEvent<const std::string&>    DestroyedEvent;
         Poco::BasicEvent<const EntityData&>    CreatedEvent;
         Poco::BasicEvent<const EntityData&>    DestroyedEvent;
     };
@@ -42,19 +40,32 @@ protected:
     
     std::string             m_strUUID;
     uint64_t                m_ui64Tag;
-    b2Body*                 m_pb2Body;
+    AB2DEntity*             m_pB2DEntity;
+//    b2Body*                 m_pb2Body;
+    
+//    class _Factory
+//    {
+//    public:
+//        AEntity* Create(const EntityData& anEntityData, b2Vec2& b2v2Position, b2Vec2& b2v2Direction);
+//        //void Create(const EntityData& anEntityData, Player* pPlayer);
+//        
+//        void Destroy(AEntity* pBullet);
+//        //void Destroy(Player* pPlayer);
+//    };
     
     // Constructor(s)
-    AEntity(const std::string& strUUID, uint64_t ui64Tag);
+    AEntity(const std::string& strUUID, uint64_t ui64Tag, AB2DEntity* pAB2DEntity  /* sink */);
+
+    // Destructor(s)
+    virtual ~AEntity();
     
 public:
+    //static  _Factory                    Factory;
     //static _EventPublisher          EventPublisher;
     //static const _EventPublisher&
 
 //    const uint64_t&          Tag = m_ui64Tag;
     
-    // Destructor(s)
-    virtual ~AEntity();
 
     // Method(s)
     bool ThisUUIDIsAMatch(const std::string& strUUID);

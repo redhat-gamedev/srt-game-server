@@ -193,19 +193,19 @@ void World::AddPlayer(const std::string& strUUID)
 {
     assert(strUUID.length() > 0);
     
-    xdispatch::global_queue().sync([=]
-    {
+//    xdispatch::global_queue().sync([=]
+//    {
        Player* pPlayer = new Player(strUUID);
        m_listPlayers.push_front(pPlayer);
-    });
+//    });
 }
 
 void World::RemovePlayer(const std::string& strUUID)
 {
     assert(strUUID.length() > 0);
     
-    xdispatch::global_queue().sync([=]
-    {
+//    xdispatch::global_queue().sync([=]
+//    {
        std::list<Player*>::iterator    iterPlayerList;
        Player* pPlayer = NULL;
        
@@ -220,7 +220,7 @@ void World::RemovePlayer(const std::string& strUUID)
                break;
            }
        }
-    });
+//    });
 }
 
 // decaf::lang::Runnable implementation
@@ -234,7 +234,7 @@ void World::Simulate()
     
     while (true)
     {
-        xdispatch::global_queue().sync([=]
+        m_pSimulationSerialDispatchQueue->sync([=]
         {
             m_listPlayersSwap = m_listPlayers;
             Player*     pPlayer = NULL;
@@ -245,10 +245,7 @@ void World::Simulate()
                 assert(pPlayer);
                 pPlayer->Update();
             }
-        });
-        
-        m_pSimulationSerialDispatchQueue->sync([=]
-        {
+            
             B2DWorld::world->Step(timeStep, velocityIterations, positionIterations);
             PbWorld* pPbWorld = new PbWorld(); // TODO: remove memory thrash
             b2WorldToPbWorld(B2DWorld::world, pPbWorld);
@@ -269,12 +266,20 @@ void World::OnSecurityRequestJoin(const void* pSender, const std::string& strUUI
 void World::OnSecurityRequestLeave(const void* pSender, const std::string& strUUID)
 {
     assert(!strUUID.empty());
-    
-    RemovePlayer(strUUID);
+
+    m_pSimulationSerialDispatchQueue->sync([=]
+    {
+        RemovePlayer(strUUID);
+    });
 }
 
 // Messenger Event response
 void World::HandleMessengerConsumerEventPublisherCreateEntityRequest(const void* pSender, const EntityData& anEntityData)
 {
-    AddPlayer(anEntityData.UUID);
+    //AddPlayer(anEntityData.UUID);
+    m_pSimulationSerialDispatchQueue->sync([=]
+    {
+        //m_listEntities.push_front(PlayerFactory.Create(anEntityData));
+        AddPlayer(anEntityData.UUID);
+    });
 }

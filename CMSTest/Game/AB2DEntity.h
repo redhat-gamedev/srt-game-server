@@ -11,20 +11,23 @@
 
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 
-class EntityData;
+//class EntityData;
+class AEntity;
 
 
 class AB2DEntity
 {
+    friend class AEntity;
+    
 protected:
-    class ADefinition
+    class _AB2DDefinition
     {
     protected:
         b2BodyDef       m_ab2BodyDef;
         b2FixtureDef    m_ab2FixtureDef;
         
         // Constructor(s)
-        ADefinition() {};
+        _AB2DDefinition();
         
     public:
         // Properties
@@ -35,14 +38,20 @@ protected:
     b2Body*         m_pb2Body;
     
     // Constructor(s)
-    AB2DEntity();
+    AB2DEntity(const _AB2DDefinition& aAB2DDefinition);
     
     // Destructor
     virtual ~AB2DEntity();
     
 public:
+    // Accessor(s)
+    const b2Vec2& GetPosition() { return m_pb2Body->GetPosition(); }
+    
     // Method(s)
-    void SetEntityData(EntityData* pEntityData);
+    //void SetEntityData(EntityData* pEntityData);
+
+    virtual void Move(float fX, float fY) {}
+    virtual void Update() {}
 };
 
 

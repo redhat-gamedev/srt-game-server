@@ -10,6 +10,7 @@
 #define __CMSTest__World__
 
 #include "B2DWorld.h"
+#include "AEntity.h"
 #include "EntityData.h"
 #include "../Proto/box2d.pb.h"
 #include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
@@ -32,7 +33,6 @@ namespace decaf
 class B2DWorld;
 class Player;
 
-
 class World
 {
 private:
@@ -53,6 +53,9 @@ private:
         void run();
     };
 
+    // See World_FactoryT.h
+    class _Factory;    
+
 protected:
     xdispatch::queue*               m_pSimulationSerialDispatchQueue;
 //    xdispatch::timer*               m_pSimulationDispatchTimer;
@@ -62,6 +65,9 @@ protected:
 
     std::list<Player*>              m_listPlayers;
     std::list<Player*>              m_listPlayersSwap;
+    
+    std::list<AEntity*>             m_listEntities;
+    std::list<AEntity*>             m_listEntitiesSwap;
     
     // Helper(s)
     void Setup();

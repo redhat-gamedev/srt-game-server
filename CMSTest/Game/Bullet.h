@@ -14,7 +14,6 @@
 #include <decaf/util/StlQueue.h>
 #include <string>
 
-class B2DBullet;
 namespace Rock2D
 {
     class Timer;
@@ -25,18 +24,14 @@ class Bullet :
     public AEntity
 {
     friend class Player;
-    friend class B2DBullet;
+//    friend class B2DBullet;
     
 private:
     static uint32_t         s_ui32Count;
     
 protected:
-    B2DBullet*              m_pB2DBullet;
+    bool                    m_bAlive;
     Rock2D::Timer*          m_pLifeTimer;
-    bool                    m_bDead;
-
-    void B2DBulletCreated();
-    void B2DBulletDestroyed();
     
 public:
     static _EventPublisher          EventPublisher;
@@ -48,7 +43,10 @@ public:
     ~Bullet();
     
     // Method(s)
-    //void Update();
+    const bool Alive() { return m_bAlive; }
+    
+    // Override(s)
+    void Update();
 };
 
 #endif /* defined(__CMSTest__Bullet__) */

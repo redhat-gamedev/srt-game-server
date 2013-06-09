@@ -7,10 +7,12 @@
 //
 
 #include "AEntity.h"
+#include "AB2DEntity.h"
 #include "../Application/Messenger.h"
 #include "../Application/Messenger_Producer.h"
 #include "../Proto/GameEvent.pb.h"
 #include "../Proto/EntityGameEvent.pb.h"
+#include <assert.h>
 
 //AEntity::_EventPublisher    AEntity::EventPublisher;
 uint64_t                    AEntity::s_ui64Count = 1;
@@ -18,12 +20,36 @@ uint64_t                    AEntity::s_ui64Count = 1;
 using namespace gameevent;
 
 
+//AEntity* AEntity::_Factory::Create(const EntityData& anEntityData)
+//{
+//    AEntity* pEntity = NULL;
+//    
+//    switch()
+//    {
+//    case POD:
+//        pEntity = new Player();
+//        break;
+//    case BULLET:
+//        pEntity = new Bullet();
+//        break;
+//    default:
+//        assert(false);
+//    }
+//    
+//    return pEntity;
+//}
+
 // Constructor(s)
-AEntity::AEntity(const std::string& strUUID, uint64_t ui64Tag) :
+AEntity::AEntity(const std::string& strUUID, uint64_t ui64Tag, AB2DEntity* pAB2DEntity /* sink */) :
     m_strUUID(strUUID),
     m_ui64Tag(ui64Tag),
-    m_pb2Body(NULL)
+    m_pB2DEntity(pAB2DEntity)//,
+//    m_pb2Body(NULL)
 {
+    assert(strUUID.size() > 0);
+    assert(ui64Tag > 0);
+    assert(pAB2DEntity);
+    
     ++s_ui64Count;
 
     //FireCreatedEvent(m_strUUID);
@@ -38,6 +64,9 @@ AEntity::~AEntity()
     //FireDestroyedEvent(m_strUUID);
     //FireDestroyedEvent(EntityData(m_ui64Tag, m_strUUID));
 
+    delete m_pB2DEntity;
+    m_pB2DEntity = NULL;
+    
     m_strUUID.clear();
     m_ui64Tag = 0;
     --s_ui64Count;

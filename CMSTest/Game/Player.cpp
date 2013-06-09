@@ -27,37 +27,47 @@ uint32_t                    Player::s_ui32Count = 1;
 
 // Constructor(s)
 Player::Player(const std::string& strUUID) :
-    m_pBulletTimer(NULL),
-    m_pB2DPod(NULL),
-    AEntity(strUUID, (uint64_t)MakeT<uint64_t>((uint32_t)AEntity::POD, s_ui32Count))
+    m_pBulletTimer(new Rock2D::Timer(1000)),
+    AEntity(strUUID,
+            (uint64_t)MakeT<uint64_t>((uint32_t)AEntity::POD, s_ui32Count),
+            new B2DPod(new EntityData((uint64_t)MakeT<uint64_t>((uint32_t)AEntity::POD, s_ui32Count),
+                                      strUUID)))
 {
     ++s_ui32Count;
     
-    //FireCreatedEvent(m_strUUID);
-    CreatePod();
-    
+    Input::EventPublisher.DualStickEvent += Poco::Delegate<Player, DualStick::PbDualStick>(this, &Player::OnInputDualStick);
     EventPublisher.CreatedEvent(this, EntityData(m_ui64Tag, m_strUUID));
 }
 
 // Destructor(s)
 Player::~Player()
 {
-    //FireDestroyedEvent(m_strUUID);
-    EventPublisher.DestroyedEvent(this, EntityData(m_ui64Tag, m_strUUID));
-
     //--s_ui32Count;
+
+    Input::EventPublisher.DualStickEvent -= Poco::Delegate<Player, DualStick::PbDualStick>(this, &Player::OnInputDualStick);
     
-    DestroyPod();
+    m_BulletQueue.lock();
+    Bullet* pBullet = NULL;
+    while (!(m_BulletQueue.empty()))
+    {
+        pBullet = m_BulletQueue.pop();
+        delete pBullet;
+        pBullet = NULL;
+    }
+    m_BulletQueue.unlock();
+    
+    delete m_pBulletTimer;
+    m_pBulletTimer = NULL;
+    
+    EventPublisher.DestroyedEvent(this, EntityData(m_ui64Tag, m_strUUID));
 }
 
 // Method(s)
 void Player::Update()
 {
-    assert(m_pB2DPod);
+    assert(m_pB2DEntity);
     assert(m_pBulletTimer);
 
-    
-    
     m_PbDualStickQueue.lock();
 //    decaf::util::StlQueue<DualStick::PbDualStick>   aPbDualStickQueueSwap = m_PbDualStickQueue;
     std::vector<DualStick::PbDualStick> vecPbDualStick = m_PbDualStickQueue.toArray();
@@ -82,7 +92,7 @@ void Player::Update()
         b2v2Shoot.x = pbv2Shoot.x();
         b2v2Shoot.y = pbv2Shoot.y();
 
-        m_pB2DPod->Move(pbv2Move.x(), pbv2Move.y());
+        m_pB2DEntity->Move(pbv2Move.x(), pbv2Move.y());
 
         if (((b2v2Shoot.x < 0.0f) || (b2v2Shoot.x > 0.0f)) ||
             ((b2v2Shoot.y < 0.0f) || (b2v2Shoot.y > 0.0f)))
@@ -91,7 +101,7 @@ void Player::Update()
             {
                 m_pBulletTimer->Restart();
                 Bullet* pBullet = NULL;
-                pBullet = new Bullet(m_strUUID, m_pB2DPod->GetPosition(), b2v2Shoot);
+                pBullet = new Bullet(m_strUUID, m_pB2DEntity->GetPosition(), b2v2Shoot);
                 m_BulletQueue.lock();
                 m_BulletQueue.push(pBullet);
                 m_BulletQueue.unlock();
@@ -100,18 +110,17 @@ void Player::Update()
     }
 
     Rock2D::Timer::Update();
-    m_pB2DPod->Update();
+    m_pB2DEntity->Update();
     
 
     std::list<Bullet*>      aBulletToRemoveList;
     std::list<Bullet*>      aBulletToAddList;
     m_BulletQueue.lock();
-    //for (m_BulletQueue::iterator iterQueue = m_BulletQueue.begin(); iterQueue != m_BulletQueue.end(); iterQueue++)
     while (!m_BulletQueue.empty())
     {
         Bullet* pBullet = NULL;
         pBullet = m_BulletQueue.pop();
-        if (pBullet->m_pLifeTimer->Status() == Rock2D::Timer::EXPIRED)
+        if (!pBullet->Alive())
         {
             aBulletToRemoveList.push_front(pBullet);
         }
@@ -125,6 +134,7 @@ void Player::Update()
         Bullet* pBullet = NULL;
         pBullet = aBulletToAddList.front();
         aBulletToAddList.pop_front();
+        pBullet->Update();
         m_BulletQueue.push(pBullet);
     }
     while (!aBulletToRemoveList.empty())
@@ -132,41 +142,48 @@ void Player::Update()
         Bullet* pBullet = NULL;
         pBullet = aBulletToRemoveList.front();
         aBulletToRemoveList.pop_front();
-        //Bullet::EventPublisher.DestroyedEvent(pBullet, EntityData(pBullet->m_ui64Tag, pBullet->m_strUUID));
         delete pBullet;
         pBullet = NULL;
     }
     m_BulletQueue.unlock();
 }
 
-void Player::CreatePod()
+// Input Event response
+void Player::OnInputDualStick(const void* pSender, DualStick::PbDualStick& aPbDualStick)
 {
-    m_pBulletTimer = new Rock2D::Timer(1000);
-    m_pB2DPod = new B2DPod(new EntityData(m_ui64Tag, m_strUUID));
-
-    Input::EventPublisher.DualStickEvent += Poco::Delegate<Player, DualStick::PbDualStick>(this, &Player::OnInputDualStick);
+    m_PbDualStickQueue.lock();
+    m_PbDualStickQueue.push(aPbDualStick);
+    m_PbDualStickQueue.unlock();
 }
 
-void Player::DestroyPod()
-{
-    Input::EventPublisher.DualStickEvent -= Poco::Delegate<Player, DualStick::PbDualStick>(this, &Player::OnInputDualStick);
-    
-    m_BulletQueue.lock();
-    Bullet* pBullet = NULL;
-    while (!(m_BulletQueue.empty()))
-    {
-        pBullet = m_BulletQueue.pop();
-        delete pBullet;
-        pBullet = NULL;
-    }
-    m_BulletQueue.unlock();
-    
-    delete m_pB2DPod;
-    m_pB2DPod = NULL;
-    
-    delete m_pBulletTimer;
-    m_pBulletTimer = NULL;    
-}
+//void Player::CreatePod()
+//{
+//    m_pBulletTimer = new Rock2D::Timer(1000);
+//    m_pB2DPod = new B2DPod(new EntityData(m_ui64Tag, m_strUUID));
+//
+//    Input::EventPublisher.DualStickEvent += Poco::Delegate<Player, DualStick::PbDualStick>(this, &Player::OnInputDualStick);
+//}
+//
+//void Player::DestroyPod()
+//{
+//    Input::EventPublisher.DualStickEvent -= Poco::Delegate<Player, DualStick::PbDualStick>(this, &Player::OnInputDualStick);
+//    
+//    m_BulletQueue.lock();
+//    Bullet* pBullet = NULL;
+//    while (!(m_BulletQueue.empty()))
+//    {
+//        pBullet = m_BulletQueue.pop();
+//        delete pBullet;
+//        pBullet = NULL;
+//    }
+//    m_BulletQueue.unlock();
+//    
+//    delete m_pB2DPod;
+//    m_pB2DPod = NULL;
+//    
+//    delete m_pBulletTimer;
+//    m_pBulletTimer = NULL;    
+//}
 
 //// Event Firing Method(s)
 //void Player::FireCreatedEvent(const EntityData& anEntityData)
@@ -179,43 +196,3 @@ void Player::DestroyPod()
 //    EventPublisher.DestroyedEvent(this, anEntityData);
 //}
 
-// Input Event response
-void Player::OnInputDualStick(const void* pSender, DualStick::PbDualStick& aPbDualStick)
-{
-//    assert(m_pB2DPod);
-//    assert(m_pBulletTimer);
-//
-//    const box2d::PbVec2& pbv2Move = aPbDualStick.pbv2move();
-//    const box2d::PbVec2& pbv2Shoot = aPbDualStick.pbv2shoot();
-//    const std::string& strUUID = aPbDualStick.uuid();
-//
-//    if (strUUID != m_strUUID)
-//    {
-//        return;
-//    }
-//    
-//    b2Vec2 b2v2Shoot;
-//    Bullet* pBullet = NULL;
-//    
-//    b2v2Shoot.x = pbv2Shoot.x();
-//    b2v2Shoot.y = pbv2Shoot.y();
-//    
-//    m_pB2DPod->Move(pbv2Move.x(), pbv2Move.y());
-//    
-//    if (((b2v2Shoot.x < 0.0f) || (b2v2Shoot.x > 0.0f)) ||
-//        ((b2v2Shoot.y < 0.0f) || (b2v2Shoot.y > 0.0f)))
-//    {
-//        if (m_pBulletTimer->Status() == Rock2D::Timer::EXPIRED)
-//        {
-//            m_pBulletTimer->Restart();
-//            pBullet = new Bullet(m_strUUID, m_pB2DPod->GetPosition(), b2v2Shoot);
-//            m_BulletQueue.lock();
-//            m_BulletQueue.push(pBullet);
-//            m_BulletQueue.unlock();
-//        }
-//    }
-    
-    m_PbDualStickQueue.lock();
-    m_PbDualStickQueue.push(aPbDualStick);
-    m_PbDualStickQueue.unlock();
-}

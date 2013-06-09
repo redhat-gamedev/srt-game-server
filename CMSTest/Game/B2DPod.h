@@ -20,15 +20,15 @@ class B2DPod :
     public AB2DEntity
 {
 protected:
-    class _Definition :
-        public AB2DEntity::ADefinition
+    class _B2DDefinition :
+        public AB2DEntity::_AB2DDefinition
     {
     protected:
         b2CircleShape       m_ab2CircleShape;
         
     public:
         // Constructor(s)
-        _Definition();
+        _B2DDefinition();
     };
     
     EntityData*           m_pEntityData;
@@ -37,22 +37,21 @@ protected:
     //decaf::util::StlQueue<b2Vec2>       m_b2v2MoveSwapQueue;
     
     // Helper(s)
-    void CreatePod();
+    //void CreatePod();
     
 public:
-    static _Definition        Definition;
+    static _B2DDefinition        Definition;
     
     // Constructor(s)
     B2DPod(EntityData* pEntityData);
     
     // Destructor(s)
-    B2DPod();
+    ~B2DPod();
     
     // Callback(s)
-    void OnB2DBodyCreated(b2Body* pb2bPod);
+//    void OnB2DBodyCreated(b2Body* pb2bPod);
     
     // Method(s)
-    const b2Vec2& GetPosition() { return m_pb2Body->GetPosition(); }
     void Move(float fX, float fY);
     void Update();
 };

@@ -22,7 +22,7 @@ namespace Rock2D
     class Timer;
 }
 class Bullet;
-class B2DPod;
+//class B2DPod;
 
 
 class Player :
@@ -32,7 +32,7 @@ private:
     static uint32_t         s_ui32Count;
     
 protected:
-    B2DPod*                 m_pB2DPod;
+//    B2DPod*                 m_pB2DPod;
     
     Rock2D::Timer*                      m_pBulletTimer;
     decaf::util::StlQueue<Bullet*>      m_BulletQueue;
@@ -57,8 +57,8 @@ public:
     
     // Method(s)
     void Update();
-    void CreatePod();
-    void DestroyPod();
+//    void CreatePod();
+//    void DestroyPod();
     
     // Event Firing Method(s)
 //    void FireCreatedEvent(const EntityData& anEntityData);
