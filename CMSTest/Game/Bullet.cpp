@@ -27,7 +27,7 @@ uint32_t                    Bullet::s_ui32Count = 1;
 // Constructor(s)
 Bullet::Bullet(const std::string& strUUID, const b2Vec2& b2v2Position, b2Vec2& b2v2Direction) :
     m_bAlive(true),
-    m_pLifeTimer(new Rock2D::Timer(3000)),
+    m_pLifeTimer(new Rock2D::Timer(4000)),
     AEntity(strUUID,
             (uint64_t)MakeT<uint64_t>((uint32_t)AEntity::BULLET, s_ui32Count),
             new B2DBullet(b2v2Position,
@@ -37,7 +37,7 @@ Bullet::Bullet(const std::string& strUUID, const b2Vec2& b2v2Position, b2Vec2& b
 {
     //m_pLifeTimer = new Rock2D::Timer(3000);
     
-    std::cout << "Bullet::Bullet() " << m_ui64Tag << std::endl;
+    //std::cout << "Bullet::Bullet() " << m_ui64Tag << std::endl;
 
     ++s_ui32Count;
     
@@ -47,7 +47,7 @@ Bullet::Bullet(const std::string& strUUID, const b2Vec2& b2v2Position, b2Vec2& b
 // Destructor(s)
 Bullet::~Bullet()
 {
-    std::cout << "Bullet::~Bullet() " << m_ui64Tag << std::endl;
+    //std::cout << "Bullet::~Bullet() " << m_ui64Tag << std::endl;
     
     //--s_ui32Count;
     delete m_pLifeTimer;

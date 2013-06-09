@@ -27,7 +27,7 @@ uint32_t                    Player::s_ui32Count = 1;
 
 // Constructor(s)
 Player::Player(const std::string& strUUID) :
-    m_pBulletTimer(new Rock2D::Timer(1000)),
+    m_pBulletTimer(new Rock2D::Timer(250)),
     AEntity(strUUID,
             (uint64_t)MakeT<uint64_t>((uint32_t)AEntity::POD, s_ui32Count),
             new B2DPod(new EntityData((uint64_t)MakeT<uint64_t>((uint32_t)AEntity::POD, s_ui32Count),

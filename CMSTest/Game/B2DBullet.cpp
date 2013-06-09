@@ -43,8 +43,8 @@ B2DBullet::B2DBullet(const b2Vec2& b2v2Position, b2Vec2& b2v2Direction, EntityDa
     m_pb2Body->SetTransform(m_b2v2InitialPosition, 0.0f);
     
     b2Vec2 b2v2Force = m_b2v2InitialDirection;
-    b2v2Force.x *= 10.0f;
-    b2v2Force.y *= 10.0f;
+    b2v2Force.x *= 20.0f;
+    b2v2Force.y *= 20.0f;
     m_pb2Body->ApplyForceToCenter(b2v2Force, false);
 }
 
