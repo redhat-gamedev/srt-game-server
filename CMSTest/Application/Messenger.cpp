@@ -16,7 +16,7 @@
 #include "../Proto/EntityGameEvent.pb.h"
 #include "Poco/Delegate.h"
 #include "Poco/FunctionDelegate.h"
-#include <decaf/lang/Thread.h>
+//#include <decaf/lang/Thread.h>
 #include <string>
 #include <iostream>
 #include <assert.h>
@@ -28,7 +28,8 @@ const std::string               Messenger::BrokerURI = "tcp://127.0.0.1:61613?wi
 xdispatch::queue*               Messenger::s_pMessengerSerialDispatchQueue = NULL;
 
 // Constructor(s)
-Messenger::Messenger()
+Messenger::Messenger()// :
+    //s_pThread(NULL)
 {
 
 }
@@ -46,6 +47,7 @@ void Messenger::Setup()
     std::string     strWorldSimulationDestinationURI = "WORLD.SIMULATION";
     std::string     strGameEventInDestinationURI = "GAME.EVENT.IN";
     std::string     strGameEventOutDestinationURI = "GAME.EVENT.OUT";
+    std::string     strThreadName = "MessengerThread";
     
     s_pMessengerSerialDispatchQueue = new xdispatch::queue("messenger");
     
@@ -61,10 +63,17 @@ void Messenger::Setup()
 
     Bullet::EventPublisher.CreatedEvent += Poco::FunctionDelegate<const EntityData&>(&Messenger::OnEntityCreated);
     Bullet::EventPublisher.DestroyedEvent += Poco::FunctionDelegate<const EntityData&>(&Messenger::OnEntityDestroyed);
+    
+//    std::cout << "Starting " << strThreadName << std::endl;
+//    s_pThread = new decaf::lang::Thread(this, strThreadName);
+//    s_pThread->start();
 }
 
 void Messenger::Teardown()
 {
+//    delete s_pThread;
+//    s_pThread = NULL;
+
     Bullet::EventPublisher.DestroyedEvent -= Poco::FunctionDelegate<const EntityData&>(&Messenger::OnEntityDestroyed);
     Bullet::EventPublisher.CreatedEvent -= Poco::FunctionDelegate<const EntityData&>(&Messenger::OnEntityCreated);
     
@@ -85,6 +94,17 @@ void Messenger::Teardown()
 //    Producer.SendUpdates();
 //}
 
+//void Messenger::run()
+//{
+//    Producer.SendUpdates();
+//    GameEventProducer.SendUpdates();
+//}
+
+void Messenger::SendUpdates()
+{
+    Producer.SendUpdates();
+    GameEventProducer.SendUpdates();
+}
 
 // Player Event response
 void Messenger::OnEntityCreated(const void* pSender, const EntityData& anEntityData)

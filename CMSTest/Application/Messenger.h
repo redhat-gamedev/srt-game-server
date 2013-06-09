@@ -10,12 +10,21 @@
 #define __CMSTest__Messenger__
 
 #include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
+//#include <decaf/lang/Runnable.h>
 #include <string>
 
 class EntityData;
+namespace decaf
+{
+    namespace lang
+    {
+        class Thread;
+    }
+}
 
 
-class Messenger
+class Messenger// :
+//    decaf::lang::Runnable
 {
 private:
     
@@ -25,6 +34,8 @@ protected:
 
     static const std::string        BrokerURI;
     static xdispatch::queue*        s_pMessengerSerialDispatchQueue;
+    
+    //static decaf::lang::Thread*     s_pThread;
     
     // Constructor(s)
     Messenger();
@@ -48,6 +59,11 @@ public:
     // Entity Event response
     static void OnEntityCreated(const void* pSender, const EntityData& anEntityData);
     static void OnEntityDestroyed(const void* pSender, const EntityData& anEntityData);
+    
+    // decaf::lang::Runnable implementation
+    //void run();
+    
+    static void SendUpdates();
 };
 
 #endif /* defined(__CMSTest__Messenger__) */

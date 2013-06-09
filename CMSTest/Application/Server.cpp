@@ -16,6 +16,8 @@
 #include "../Game/Player.h"
 #include "EntityData.h"
 #include "Messenger.h"
+#include "Messenger_Consumer.h"
+#include "Messenger_Producer.h"
 #include "Poco/Delegate.h"
 #include "decaf/util/Timer.h"
 #include "decaf/lang/Thread.h"
@@ -74,44 +76,32 @@ Server::~Server()
 // Helper(s)
 void Server::Setup()
 {
-//    std::string     strHeartbeatURI = "HEARTBEAT";
-//    std::string     strInputURI = "CLIENT.INPUT";
-//    std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp";
-//    std::string     strMainThreadName = "MainThread";
-    
-    ///"failover:(tcp://127.0.0.1:61616"
-    //        "?wireFormat=openwire"
-    //        "&connection.useAsyncSend=true"
-    //        "&transport.commandTracingEnabled=true"
-    //        "&transport.tcpTracingEnabled=true"
-    //        "&wireFormat.tightEncodingEnabled=true"
-    ///")";
-    
     std::cout << "Server::Setup()..." << std::endl;
-    
+
+    std::string     strMainThreadName = "ServerThread";
+
     Messenger::Setup();
     
     m_pWorld = new World();
     m_pInput = new Input();
     m_pSecurity = new Security();
-    //m_pTimer = new decaf::util::Timer();
 
+    //m_pTimer = new decaf::util::Timer();
     //m_pHeartbeatProducer = new SimpleProducer(strBrokerURI, strHeartbeatURI, true);
     //m_pHeartbeat = new Heartbeat();
-
     //Heartbeat::EventPublisher.BeatEvent += Poco::Delegate<Server, const int&>(this, &Server::OnHeartBeatBeat);
     
-//    std::cout << "Starting the world producer" << std::endl;
-//    m_pMainThread = new decaf::lang::Thread(this, strMainThreadName);
-//    m_pMainThread->start();
+    std::cout << "Starting the world producer" << std::endl;
+    m_pMainThread = new decaf::lang::Thread(this, strMainThreadName);
+    m_pMainThread->start();
 }
 
 void Server::Teardown()
 {
     std::cout << "Teardown()..." << std::endl;
-    
-//    delete m_pMainThread;
-//    m_pMainThread = NULL;
+
+    delete m_pMainThread;
+    m_pMainThread = NULL;
     
     //Heartbeat::EventPublisher.BeatEvent -= Poco::Delegate<Server, const int&>(this, &Server::OnHeartBeatBeat);
 
@@ -145,25 +135,34 @@ void Server::Teardown()
 // Method(s)
 void Server::run()
 {
-    // Receive incoming user commands
-    //std::cout << "Starting the m_pCommandConsumer" << std::endl;
-    //m_pCommandConsumer->runConsumer();
-    
-    // Run simulation step
-    //std::cout << "Starting the world simulation" << std::endl;
-    //m_pB2DWorldThread->start();
-    
-    // Check game rules
-    
-    // Update all object states
-    
-    //  if any client needs a world update
-    // take world snapshot
-    // Update clients if required
-    //Messenger::Send();
-    
-    //std::cout << "Starting the heartbeat" << std::endl;
-    //m_pTimer->schedule(m_pHeartbeat, 0, 1000);
+    while (true)
+    {
+        // Receive incoming user commands
+        //std::cout << "Starting the m_pCommandConsumer" << std::endl;
+        //m_pCommandConsumer->runConsumer();
+        Messenger::Consumer.ProcessReceivedMessages();
+        
+        // Run simulation step
+        //std::cout << "Starting the world simulation" << std::endl;
+        //m_pB2DWorldThread->start();
+        m_pWorld->Simulate();
+        
+        // Check game rules
+        
+        // Update all object states
+        
+        //  if any client needs a world update
+        // take world snapshot
+        // Update clients if required
+        //Messenger::Send();
+        Messenger::Producer.ProcessEnqueuedMessages();
+        Messenger::GameEventProducer.ProcessEnqueuedMessages();
+        
+        //std::cout << "Starting the heartbeat" << std::endl;
+        //m_pTimer->schedule(m_pHeartbeat, 0, 1000);
+        
+        decaf::lang::Thread::currentThread()->sleep(15);
+    }
 }
 
 // Heartbeat Event response

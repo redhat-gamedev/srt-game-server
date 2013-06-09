@@ -61,7 +61,7 @@ protected:
 //    xdispatch::timer*               m_pSimulationDispatchTimer;
 
     World::Simulation*              m_pWorldSimulation;
-    decaf::lang::Thread*            m_pWorldSimulationThread;
+//    decaf::lang::Thread*            m_pWorldSimulationThread;
 
     std::list<Player*>              m_listPlayers;
     std::list<Player*>              m_listPlayersSwap;

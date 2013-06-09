@@ -56,16 +56,42 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "../ThirdParty/activemq-cpp/activemq-cpp/src/main/decaf/internal/util/concurrent/Threading.cpp"
+         timestampString = "392485317.222995"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "305"
+         endingLineNumber = "305"
+         landmarkName = "interruptionThread(void *arg)"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "../ThirdParty/activemq-cpp/activemq-cpp/src/main/decaf/internal/util/concurrent/Threading.cpp"
+         timestampString = "392485318.644285"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "313"
+         endingLineNumber = "313"
+         landmarkName = "interruptionThread(void *arg)"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "CMSTest/Application/Messenger_Consumer.cpp"
-         timestampString = "391656707.753594"
+         filePath = "CMSTest/Application/Server.cpp"
+         timestampString = "392488162.063184"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "84"
-         endingLineNumber = "84"
-         landmarkName = "Messenger::_Consumer::onMessage(const cms::Message* pMessage)"
+         startingLineNumber = "143"
+         endingLineNumber = "143"
+         landmarkName = "Server::run()"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

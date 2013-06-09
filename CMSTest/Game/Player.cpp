@@ -120,6 +120,7 @@ void Player::Update()
     {
         Bullet* pBullet = NULL;
         pBullet = m_BulletQueue.pop();
+        pBullet->Update();
         if (!pBullet->Alive())
         {
             aBulletToRemoveList.push_front(pBullet);
@@ -134,7 +135,6 @@ void Player::Update()
         Bullet* pBullet = NULL;
         pBullet = aBulletToAddList.front();
         aBulletToAddList.pop_front();
-        pBullet->Update();
         m_BulletQueue.push(pBullet);
     }
     while (!aBulletToRemoveList.empty())

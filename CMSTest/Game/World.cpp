@@ -62,8 +62,8 @@ void World::Setup()
     
     std::cout << "Starting the world simulation" << std::endl;
     m_pWorldSimulation = new World::Simulation(this);
-    m_pWorldSimulationThread = new decaf::lang::Thread(m_pWorldSimulation, strWorldSimulationName);
-    m_pWorldSimulationThread->start();
+//    m_pWorldSimulationThread = new decaf::lang::Thread(m_pWorldSimulation, strWorldSimulationName);
+//    m_pWorldSimulationThread->start();
     
     //std::cout << "Starting the simulation dispatch timer" << std::endl;
     //m_pSimulationDispatchTimer = new xdispatch::timer(15 * NSEC_PER_MSEC, *m_pSimulationSerialDispatchQueue);
@@ -82,8 +82,8 @@ void World::Teardown()
     Security::EventPublisher.RequestLeaveEvent -= Poco::Delegate<World, const std::string&>(this, &World::OnSecurityRequestLeave);
     Security::EventPublisher.RequestJoinEvent -= Poco::Delegate<World, const std::string&>(this, &World::OnSecurityRequestJoin);
 
-    delete m_pWorldSimulationThread;
-    m_pWorldSimulationThread = NULL;
+//    delete m_pWorldSimulationThread;
+//    m_pWorldSimulationThread = NULL;
     
     delete m_pWorldSimulation;
     m_pWorldSimulation = NULL;
@@ -102,8 +102,8 @@ void World::Teardown()
 World::World() :
     m_pSimulationSerialDispatchQueue(NULL),
     //m_pSimulationDispatchTimer(NULL),
-    m_pWorldSimulation(NULL),
-    m_pWorldSimulationThread(NULL)
+    m_pWorldSimulation(NULL)//,
+//    m_pWorldSimulationThread(NULL)
 {
     Setup();
 }
@@ -232,10 +232,15 @@ void World::Simulate()
 	int32 velocityIterations = 6;
 	int32 positionIterations = 2;
     
-    while (true)
-    {
+//    while (true)
+//    {
         m_pSimulationSerialDispatchQueue->sync([=]
         {
+            B2DWorld::world->Step(timeStep, velocityIterations, positionIterations);
+            PbWorld* pPbWorld = new PbWorld(); // TODO: remove memory thrash
+            b2WorldToPbWorld(B2DWorld::world, pPbWorld);
+            Messenger::Producer.Enqueue(pPbWorld);
+            
             m_listPlayersSwap = m_listPlayers;
             Player*     pPlayer = NULL;
             while (!(m_listPlayersSwap.empty()))
@@ -245,14 +250,9 @@ void World::Simulate()
                 assert(pPlayer);
                 pPlayer->Update();
             }
-            
-            B2DWorld::world->Step(timeStep, velocityIterations, positionIterations);
-            PbWorld* pPbWorld = new PbWorld(); // TODO: remove memory thrash
-            b2WorldToPbWorld(B2DWorld::world, pPbWorld);
-            Messenger::Producer.Enqueue(pPbWorld);
         });
-        decaf::lang::Thread::currentThread()->sleep(15);
-    }
+//        decaf::lang::Thread::currentThread()->sleep(15);
+//    }
 }
 
 // Security::ICallbacks implementation

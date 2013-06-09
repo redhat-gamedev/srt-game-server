@@ -20,8 +20,8 @@ using namespace cms;
 // Constructor(s)
 Messenger::_Producer::_Producer() :
     m_pSimpleProducer(NULL),
-    m_pProducerSerialDispatchQueue(NULL),
-    m_pThread(NULL)
+    m_pProducerSerialDispatchQueue(NULL)//,
+//    m_pThread(NULL)
 //    m_pProducerDispatchTimer(NULL)
 {
 
@@ -36,7 +36,7 @@ Messenger::_Producer::~_Producer()
 // Helper(s)
 void Messenger::_Producer::Setup(std::string& strBrokerURI, std::string& strDestinationURI)
 {
-    std::string     strThreadName = strDestinationURI + "-Thread";
+//    std::string     strThreadName = strDestinationURI + "-Thread";
     std::string     strDispatchQueueName = strDestinationURI + "-DispatchQueue";
     
     std::cout << "Starting the activemq simple producer" << std::endl;
@@ -47,15 +47,15 @@ void Messenger::_Producer::Setup(std::string& strBrokerURI, std::string& strDest
     //m_pProducerDispatchTimer = new xdispatch::timer(5 * NSEC_PER_MSEC, *m_pProducerSerialDispatchQueue);
     //m_pProducerDispatchTimer->start();
     
-    std::cout << "Starting " << strThreadName << std::endl;
-    m_pThread = new decaf::lang::Thread(this, strThreadName);
-    m_pThread->start();
+//    std::cout << "Starting " << strThreadName << std::endl;
+//    m_pThread = new decaf::lang::Thread(this, strThreadName);
+//    m_pThread->start();
 }
 
 void Messenger::_Producer::Teardown()
 {
-    delete m_pThread;
-    m_pThread = NULL;
+//    delete m_pThread;
+//    m_pThread = NULL;
 
     //delete m_pProducerDispatchTimer;
     //m_pProducerDispatchTimer = NULL;
@@ -111,8 +111,8 @@ void Messenger::_Producer::SendUpdate(::google::protobuf::Message* pMessage)
 
 void Messenger::_Producer::SendUpdates()
 {
-    while (true)
-    {
+//    while (true)
+//    {
         m_pProducerSerialDispatchQueue->sync([=]
         {
             m_aMessageQueue.lock();
@@ -124,20 +124,40 @@ void Messenger::_Producer::SendUpdates()
                 pMessage->Clear();
  //                delete pPbWorldDefault; // TODO: remove memory thrash
  //                pPbWorldDefault = NULL;
-            }
-            
-//            m_aMessageQueue.lock();
-//            if (m_aMessageQueue.size() > 0)
-//            {
-//                SendUpdate(m_aMessageQueue.pop());
-//            }
-//            m_aMessageQueue.unlock();
+            }            
         });
-        decaf::lang::Thread::currentThread()->sleep(5);
-    }
+        //decaf::lang::Thread::currentThread()->sleep(5);
+//    }
 }
 
-void Messenger::_Producer::run()
+//void Messenger::_Producer::run()
+//{
+//    SendUpdates();
+//}
+
+void Messenger::_Producer::ProcessEnqueuedMessages()
 {
-    SendUpdates();
+    ::google::protobuf::Message* pMessage = NULL;
+    
+    try
+    {
+        m_aMessageQueue.lock();
+        std::vector<::google::protobuf::Message*> vecMessage = m_aMessageQueue.toArray();
+        m_aMessageQueue.clear();
+        m_aMessageQueue.unlock();
+
+        for(int i = 0; i < vecMessage.size(); ++i)
+        {
+            pMessage = vecMessage[i];
+            if (pMessage)
+            {
+                SendUpdate(pMessage);
+                pMessage->Clear();
+            }
+        }
+    }
+    catch (CMSException& e)
+    {
+        e.printStackTrace();
+    }
 }

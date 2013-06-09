@@ -13,7 +13,7 @@
 #include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
 //#include "../../../ThirdParty/xdispatch/include/xdispatch/timer.h"
 #include <decaf/util/StlQueue.h>
-#include <decaf/lang/Runnable.h>
+//#include <decaf/lang/Runnable.h>
 
 
 class SimpleProducer;
@@ -26,8 +26,8 @@ namespace google
 }
 
 
-class Messenger::_Producer :
-    decaf::lang::Runnable
+class Messenger::_Producer// :
+//    decaf::lang::Runnable
 {
     friend class Messenger;
     
@@ -38,7 +38,7 @@ protected:
     xdispatch::queue*                                       m_pProducerSerialDispatchQueue;
 //    xdispatch::timer*                                       m_pProducerDispatchTimer;
     decaf::util::StlQueue<::google::protobuf::Message*>     m_aMessageQueue;
-    decaf::lang::Thread*                                    m_pThread;
+//    decaf::lang::Thread*                                    m_pThread;
  
     // Helper(s)
     void Setup(std::string& strBrokerURI, std::string& strDestinationURI);
@@ -57,7 +57,9 @@ public:
     void SendUpdates();
     
     // decaf::lang::Runnable implementation
-    void run();
+//    void run();
+    
+    void ProcessEnqueuedMessages();
 };
 
 #endif /* defined(__CMSTest__Messenger_Producer__) */

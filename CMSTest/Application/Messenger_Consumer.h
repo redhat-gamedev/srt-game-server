@@ -11,6 +11,7 @@
 
 #include "Messenger.h"
 #include "Poco/BasicEvent.h"
+#include <decaf/util/StlQueue.h>
 #include <cms/MessageListener.h>
 #include <string>
 #include <stdint.h>
@@ -18,6 +19,14 @@
 namespace cms
 {
     class Message;
+    class BytesMessage;
+}
+namespace google
+{
+    namespace protobuf
+    {
+        class Message;
+    }
 }
 class EntityData;
 class SimpleAsyncConsumer;
@@ -40,7 +49,11 @@ protected:
 private:
     
 protected:
-    SimpleAsyncConsumer*        m_pSimpleAsyncConsumer;
+    SimpleAsyncConsumer*                                    m_pSimpleAsyncConsumer;
+    //decaf::util::StlQueue<cms::Message*>         m_aMessageQueue;
+    //decaf::util::StlQueue<cms::BytesMessage*>         m_aMessageQueue;
+    //decaf::util::StlQueue<unsigned char*>         m_aMessageQueue;
+    decaf::util::StlQueue<std::pair<int, unsigned char*> >         m_aMessageQueue;
     
     // Helper(s)
     void Setup(std::string& strBrokerURI, std::string& strDestinationURI);
@@ -57,6 +70,8 @@ public:
     
     // MessageListener implementation
     virtual void onMessage(const cms::Message* pMessage);
+    
+    void ProcessReceivedMessages();
 };
 
 #endif /* defined(__CMSTest__Messenger_Consumer__) */

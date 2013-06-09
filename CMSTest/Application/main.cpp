@@ -28,7 +28,7 @@ int main(int argc, char* argv[])
     
     Server* pServer = new Server();
 
-    //pServer->Run();
+    //pServer->run();
     
     // Wait to exit.
     std::cout << "Press 'q' to quit" << std::endl;
