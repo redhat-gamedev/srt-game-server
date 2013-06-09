@@ -138,30 +138,24 @@ void Server::run()
     while (true)
     {
         // Receive incoming user commands
-        //std::cout << "Starting the m_pCommandConsumer" << std::endl;
-        //m_pCommandConsumer->runConsumer();
         Messenger::Consumer.ProcessReceivedMessages();
         
         // Run simulation step
-        //std::cout << "Starting the world simulation" << std::endl;
-        //m_pB2DWorldThread->start();
         m_pWorld->Simulate();
         
         // Check game rules
         
         // Update all object states
         
-        //  if any client needs a world update
-        // take world snapshot
+        // if any client needs a world update take world snapshot
         // Update clients if required
-        //Messenger::Send();
         Messenger::Producer.ProcessEnqueuedMessages();
-        Messenger::GameEventProducer.ProcessEnqueuedMessages();
         
         //std::cout << "Starting the heartbeat" << std::endl;
         //m_pTimer->schedule(m_pHeartbeat, 0, 1000);
         
         decaf::lang::Thread::currentThread()->sleep(15);
+        Messenger::GameEventProducer.ProcessEnqueuedMessages();
     }
 }
 

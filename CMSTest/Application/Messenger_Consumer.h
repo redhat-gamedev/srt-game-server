@@ -49,11 +49,8 @@ protected:
 private:
     
 protected:
-    SimpleAsyncConsumer*                                    m_pSimpleAsyncConsumer;
-    //decaf::util::StlQueue<cms::Message*>         m_aMessageQueue;
-    //decaf::util::StlQueue<cms::BytesMessage*>         m_aMessageQueue;
-    //decaf::util::StlQueue<unsigned char*>         m_aMessageQueue;
-    decaf::util::StlQueue<std::pair<int, unsigned char*> >         m_aMessageQueue;
+    SimpleAsyncConsumer*                                            m_pSimpleAsyncConsumer;
+    decaf::util::StlQueue<std::pair<int, unsigned char*> >          m_aMessageQueue;
     
     // Helper(s)
     void Setup(std::string& strBrokerURI, std::string& strDestinationURI);

@@ -40,7 +40,6 @@ protected:
     b2Vec2              m_b2v2InitialPosition;
     b2Vec2              m_b2v2InitialDirection;
     EntityData*         m_pEntityData;
-    //Bullet*             m_pBullet;
 
     // Helper(s)
 
@@ -55,12 +54,6 @@ public:
     ~B2DBullet();
     
     // Callback(s)
-    //void OnB2DBodyCreated(b2Body* pb2bBullet);
-    //void OnB2DBodyCreated();
-    //void OnB2DBodyDestroyed();
-
-//    void CreateBullet();
-//    void DestroyBullet();
 };
 
 
