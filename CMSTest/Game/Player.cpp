@@ -36,7 +36,8 @@ Player::Player(const std::string& strUUID) :
     ++s_ui32Count;
     
     Input::EventPublisher.DualStickEvent += Poco::Delegate<Player, DualStick::PbDualStick>(this, &Player::OnInputDualStick);
-    EventPublisher.CreatedEvent(this, EntityData(m_ui64Tag, m_strUUID));
+    //EventPublisher.CreatedEvent(this, EntityData(m_ui64Tag, m_strUUID));
+    EventPublisher.CreatedEvent(this, AEntity::POD);
 }
 
 // Destructor(s)
@@ -59,7 +60,8 @@ Player::~Player()
     delete m_pBulletTimer;
     m_pBulletTimer = NULL;
     
-    EventPublisher.DestroyedEvent(this, EntityData(m_ui64Tag, m_strUUID));
+    //EventPublisher.DestroyedEvent(this, EntityData(m_ui64Tag, m_strUUID));
+    EventPublisher.DestroyedEvent(this, AEntity::POD);
 }
 
 // Method(s)

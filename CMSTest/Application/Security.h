@@ -9,6 +9,7 @@
 #ifndef __CMSTest__Security__
 #define __CMSTest__Security__
 
+#include "../Game/AEntity.h"
 #include "../Proto/DualStick.pb.h"
 #include "../Proto/box2d.pb.h"
 #include "Poco/BasicEvent.h"
@@ -25,7 +26,6 @@ namespace cms
 }
 class SimpleAsyncConsumer;
 class SimpleProducer;
-class EntityData;
 
 
 class Security :
@@ -68,10 +68,10 @@ public:
     virtual void onMessage(const cms::Message* pMessage);
     
     // Player Event response
-//    void OnPlayerCreated(const void* pSender, const std::string& strUUID);
-//    void OnPlayerDestroyed(const void* pSender, const std::string& strUUID);
-    void OnPlayerCreated(const void* pSender, const EntityData& anEntityData);
-    void OnPlayerDestroyed(const void* pSender, const EntityData& anEntityData);
+//    void OnPlayerCreated(const void* pSender, const EntityData& anEntityData);
+//    void OnPlayerDestroyed(const void* pSender, const EntityData& anEntityData);
+    void OnPlayerCreated(const void* pSender, const AEntity::EType& anEntityType);
+    void OnPlayerDestroyed(const void* pSender, const AEntity::EType& anEntityType);
     
     // cms::AsyncCallback implementation
     void onSuccess();

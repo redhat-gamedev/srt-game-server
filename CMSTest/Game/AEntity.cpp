@@ -10,59 +10,53 @@
 #include "AB2DEntity.h"
 #include "../Application/Messenger.h"
 #include "../Application/Messenger_Producer.h"
-#include "../Proto/GameEvent.pb.h"
+//#include "../Proto/GameEvent.pb.h"
 #include "../Proto/EntityGameEvent.pb.h"
 #include <assert.h>
 
-//AEntity::_EventPublisher    AEntity::EventPublisher;
+AEntity::_Serializer        AEntity::Serializer;
 uint64_t                    AEntity::s_ui64Count = 1;
 
 using namespace gameevent;
 
 
-//AEntity* AEntity::_Factory::Create(const EntityData& anEntityData)
-//{
-//    AEntity* pEntity = NULL;
-//    
-//    switch()
-//    {
-//    case POD:
-//        pEntity = new Player();
-//        break;
-//    case BULLET:
-//        pEntity = new Bullet();
-//        break;
-//    default:
-//        assert(false);
-//    }
-//    
-//    return pEntity;
-//}
+void AEntity::_Serializer::Serialize(const AEntity* pEntity, gameevent::EntityGameEvent* pEntityGameEvent)
+{
+    pEntityGameEvent->set_uuid(pEntity->m_strUUID);
+    pEntityGameEvent->set_entitytag(pEntity->m_ui64Tag);
+}
+
+void AEntity::_Serializer::Deserialisze(const gameevent::EntityGameEvent* pEntityGameEvent, AEntity*& pEntity)
+{
+    
+    
+}
 
 // Constructor(s)
 AEntity::AEntity(const std::string& strUUID, uint64_t ui64Tag, AB2DEntity* pAB2DEntity /* sink */) :
     m_strUUID(strUUID),
     m_ui64Tag(ui64Tag),
-    m_pB2DEntity(pAB2DEntity)//,
-//    m_pb2Body(NULL)
+    m_pB2DEntity(pAB2DEntity)
 {
     assert(strUUID.size() > 0);
     assert(ui64Tag > 0);
     assert(pAB2DEntity);
     
     ++s_ui64Count;
-
-    //FireCreatedEvent(m_strUUID);
-    //FireCreatedEvent(EntityData(ui64Tag, strUUID));
-    
 }
+
+// Copy constructor
+//AEntity::AEntity(const AEntity& anEntity) :
+//    m_strUUID(anEntity.m_strUUID),
+//    m_ui64Tag(anEntity.m_ui64Tag),
+//    m_pB2DEntity(anEntity.m_pB2DEntity)
+//{
+//}
 
 // Destructor(s)
 AEntity::~AEntity()
 {
     //std::cout << "AEntity::~AEntity() " << m_ui64Tag << std::endl;
-    //FireDestroyedEvent(m_strUUID);
-    //FireDestroyedEvent(EntityData(m_ui64Tag, m_strUUID));
 
     delete m_pB2DEntity;
     m_pB2DEntity = NULL;
@@ -96,3 +90,4 @@ bool AEntity::ThisUUIDIsAMatch(const std::string& strUUID)
 //    //EventPublisher.DestroyedEvent(this, strUUID);
 //    EventPublisher.DestroyedEvent(this, anEntityData);
 //}
+

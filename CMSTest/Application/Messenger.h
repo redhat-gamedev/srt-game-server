@@ -9,11 +9,11 @@
 #ifndef __CMSTest__Messenger__
 #define __CMSTest__Messenger__
 
+#include "../Game/AEntity.h"
 #include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
 //#include <decaf/lang/Runnable.h>
 #include <string>
 
-class EntityData;
 namespace decaf
 {
     namespace lang
@@ -21,7 +21,7 @@ namespace decaf
         class Thread;
     }
 }
-
+//class AEntity;
 
 class Messenger// :
 //    decaf::lang::Runnable
@@ -57,8 +57,8 @@ public:
     //static void Send();
     
     // Entity Event response
-    static void OnEntityCreated(const void* pSender, const EntityData& anEntityData);
-    static void OnEntityDestroyed(const void* pSender, const EntityData& anEntityData);
+    static void OnEntityCreated(const void* pSender, const AEntity::EType& anEntityType);
+    static void OnEntityDestroyed(const void* pSender, const AEntity::EType& anEntityType);
     
     // decaf::lang::Runnable implementation
     //void run();

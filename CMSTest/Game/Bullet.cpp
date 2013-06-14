@@ -41,7 +41,8 @@ Bullet::Bullet(const std::string& strUUID, const b2Vec2& b2v2Position, b2Vec2& b
 
     ++s_ui32Count;
     
-    EventPublisher.CreatedEvent(this, EntityData(m_ui64Tag, m_strUUID));
+//    EventPublisher.CreatedEvent(this, EntityData(m_ui64Tag, m_strUUID));
+    EventPublisher.CreatedEvent(this, AEntity::BULLET);
 }
 
 // Destructor(s)
@@ -53,7 +54,8 @@ Bullet::~Bullet()
     delete m_pLifeTimer;
     m_pLifeTimer = NULL;
     
-    EventPublisher.DestroyedEvent(this, EntityData(m_ui64Tag, m_strUUID));
+    //EventPublisher.DestroyedEvent(this, EntityData(m_ui64Tag, m_strUUID));
+    EventPublisher.DestroyedEvent(this, AEntity::BULLET);
 }
 
 // Method(s)

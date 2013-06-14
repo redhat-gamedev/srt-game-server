@@ -7,7 +7,7 @@
 //
 
 #include "Security.h"
-#include "../Game/EntityData.h"
+//#include "../Game/AEntity.h"
 #include "../Proto/DualStick.pb.h"
 #include "../Proto/box2d.pb.h"
 #include "../Proto/Command.pb.h"
@@ -52,15 +52,19 @@ Security::Security() :
     
     m_pSimpleAsyncProducer = new SimpleProducer(strBrokerURI, strSecurityOutURI, true, true);
     
-    Player::EventPublisher.CreatedEvent += Poco::Delegate<Security, const EntityData&>(this, &Security::OnPlayerCreated);
-    Player::EventPublisher.DestroyedEvent += Poco::Delegate<Security, const EntityData&>(this, &Security::OnPlayerDestroyed);
+//    Player::EventPublisher.CreatedEvent += Poco::Delegate<Security, const EntityData&>(this, &Security::OnPlayerCreated);
+//    Player::EventPublisher.DestroyedEvent += Poco::Delegate<Security, const EntityData&>(this, &Security::OnPlayerDestroyed);
+    Player::EventPublisher.CreatedEvent += Poco::Delegate<Security, const AEntity::EType&>(this, &Security::OnPlayerCreated);
+    Player::EventPublisher.DestroyedEvent += Poco::Delegate<Security, const AEntity::EType&>(this, &Security::OnPlayerDestroyed);
 }
 
 // Destructor
 Security::~Security()
 {
-    Player::EventPublisher.DestroyedEvent -= Poco::Delegate<Security, const EntityData&>(this, &Security::OnPlayerDestroyed);
-    Player::EventPublisher.CreatedEvent -= Poco::Delegate<Security, const EntityData&>(this, &Security::OnPlayerCreated);
+//    Player::EventPublisher.DestroyedEvent -= Poco::Delegate<Security, const EntityData&>(this, &Security::OnPlayerDestroyed);
+//    Player::EventPublisher.CreatedEvent -= Poco::Delegate<Security, const EntityData&>(this, &Security::OnPlayerCreated);
+    Player::EventPublisher.DestroyedEvent -= Poco::Delegate<Security, const AEntity::EType&>(this, &Security::OnPlayerDestroyed);
+    Player::EventPublisher.CreatedEvent -= Poco::Delegate<Security, const AEntity::EType&>(this, &Security::OnPlayerCreated);
     
     m_pSimpleAsyncProducer->close();
     delete m_pSimpleAsyncProducer;
@@ -154,12 +158,14 @@ void Security::onMessage(const Message* pMessage)
 }
 
 // Player Event response
-//void Security::OnPlayerCreated(const void* pSender, const std::string& strUUID)
-void Security::OnPlayerCreated(const void* pSender, const EntityData& anEntityData)
+//void Security::OnPlayerCreated(const void* pSender, const EntityData& anEntityData)
+void Security::OnPlayerCreated(const void* pSender, const AEntity::EType& anEntityType)
 {
 //    assert(strUUID.length() > 0);
     
     std::string strPBBuffer = "";
+    
+    const AEntity* pEntity = static_cast<const AEntity*>(pSender);
     
     Command* pCommand = new Command();
     SecurityCommand* pSecurityCommand = pCommand->mutable_securitycommand();
@@ -167,7 +173,7 @@ void Security::OnPlayerCreated(const void* pSender, const EntityData& anEntityDa
     
     pCommand->set_type(Command_CommandType_SECURITY);
     //pSecurityCommand->set_uuid(strUUID);
-    pSecurityCommand->set_uuid(anEntityData.UUID);
+    pSecurityCommand->set_uuid(pEntity->UUID);
     pSecurityCommand->set_type(SecurityCommand_SecurityCommandType_JOIN);
     
     pCommand->SerializeToString(&strPBBuffer);
@@ -175,15 +181,17 @@ void Security::OnPlayerCreated(const void* pSender, const EntityData& anEntityDa
     unsigned long ulLength = strPBBuffer.length();
     m_pSimpleAsyncProducer->Send((const unsigned char*)pucText, (int)ulLength);
     
-    FireHasJoinedEvent(anEntityData.UUID);
+    FireHasJoinedEvent(pEntity->UUID);
 }
 
-//void Security::OnPlayerDestroyed(const void* pSender, const std::string& strUUID)
-void Security::OnPlayerDestroyed(const void* pSender, const EntityData& anEntityData)
+//void Security::OnPlayerDestroyed(const void* pSender, const EntityData& anEntityData)
+void Security::OnPlayerDestroyed(const void* pSender, const AEntity::EType& anEntityType)
 {
 //    assert(strUUID.length() > 0);
     
     std::string strPBBuffer = "";
+    
+    const AEntity* pEntity = static_cast<const AEntity*>(pSender);
     
     Command* pCommand = new Command();
     SecurityCommand* pSecurityCommand = pCommand->mutable_securitycommand();
@@ -191,7 +199,7 @@ void Security::OnPlayerDestroyed(const void* pSender, const EntityData& anEntity
     
     pCommand->set_type(Command_CommandType_SECURITY);
     //pSecurityCommand->set_uuid(strUUID);
-    pSecurityCommand->set_uuid(anEntityData.UUID);
+    pSecurityCommand->set_uuid(pEntity->UUID);
     pSecurityCommand->set_type(SecurityCommand_SecurityCommandType_LEAVE);
     
     pCommand->SerializeToString(&strPBBuffer);
@@ -199,7 +207,7 @@ void Security::OnPlayerDestroyed(const void* pSender, const EntityData& anEntity
     unsigned long ulLength = strPBBuffer.length();
     m_pSimpleAsyncProducer->Send((const unsigned char*)pucText, (int)ulLength);
     
-    FireHasLeftEvent(anEntityData.UUID);
+    FireHasLeftEvent(pEntity->UUID);
 }
 
 // cms::AsyncCallback implementation

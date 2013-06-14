@@ -47,12 +47,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CMSTest/Application/Security.cpp"
-         timestampString = "391643319.850303"
+         timestampString = "392914062.393297"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "178"
-         endingLineNumber = "178"
-         landmarkName = "Security::OnPlayerCreated(const void* pSender, const EntityData&amp; anEntityData)"
+         startingLineNumber = "184"
+         endingLineNumber = "184"
+         landmarkName = "Security::OnPlayerCreated(const void* pSender, const AEntity::EType&amp; anEntityType)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint

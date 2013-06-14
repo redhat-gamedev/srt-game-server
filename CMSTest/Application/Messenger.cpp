@@ -9,7 +9,7 @@
 #include "Messenger.h"
 #include "Messenger_Producer.h"
 #include "Messenger_Consumer.h"
-#include "../Game/EntityData.h"
+//#include "../Game/AEntity.h"
 #include "../Game/Player.h"
 #include "../Game/Bullet.h"
 #include "../Proto/GameEvent.pb.h"
@@ -58,11 +58,18 @@ void Messenger::Setup()
     GameEventProducer.Setup(strBrokerURI, strGameEventOutDestinationURI);
     Consumer.Setup(strBrokerURI, strGameEventInDestinationURI);
     
-    Player::EventPublisher.CreatedEvent += Poco::FunctionDelegate<const EntityData&>(&Messenger::OnEntityCreated);
-    Player::EventPublisher.DestroyedEvent += Poco::FunctionDelegate<const EntityData&>(&Messenger::OnEntityDestroyed);
+//    Player::EventPublisher.CreatedEvent += Poco::FunctionDelegate<const EntityData&>(&Messenger::OnEntityCreated);
+//    Player::EventPublisher.DestroyedEvent += Poco::FunctionDelegate<const EntityData&>(&Messenger::OnEntityDestroyed);
+//
+//    Bullet::EventPublisher.CreatedEvent += Poco::FunctionDelegate<const EntityData&>(&Messenger::OnEntityCreated);
+//    Bullet::EventPublisher.DestroyedEvent += Poco::FunctionDelegate<const EntityData&>(&Messenger::OnEntityDestroyed);
 
-    Bullet::EventPublisher.CreatedEvent += Poco::FunctionDelegate<const EntityData&>(&Messenger::OnEntityCreated);
-    Bullet::EventPublisher.DestroyedEvent += Poco::FunctionDelegate<const EntityData&>(&Messenger::OnEntityDestroyed);
+    Player::EventPublisher.CreatedEvent += Poco::FunctionDelegate<const AEntity::EType&>(&Messenger::OnEntityCreated);
+    Player::EventPublisher.DestroyedEvent += Poco::FunctionDelegate<const AEntity::EType&>(&Messenger::OnEntityDestroyed);
+    
+    Bullet::EventPublisher.CreatedEvent += Poco::FunctionDelegate<const AEntity::EType&>(&Messenger::OnEntityCreated);
+    Bullet::EventPublisher.DestroyedEvent += Poco::FunctionDelegate<const AEntity::EType&>(&Messenger::OnEntityDestroyed);
+
     
 //    std::cout << "Starting " << strThreadName << std::endl;
 //    s_pThread = new decaf::lang::Thread(this, strThreadName);
@@ -74,11 +81,17 @@ void Messenger::Teardown()
 //    delete s_pThread;
 //    s_pThread = NULL;
 
-    Bullet::EventPublisher.DestroyedEvent -= Poco::FunctionDelegate<const EntityData&>(&Messenger::OnEntityDestroyed);
-    Bullet::EventPublisher.CreatedEvent -= Poco::FunctionDelegate<const EntityData&>(&Messenger::OnEntityCreated);
+//    Bullet::EventPublisher.DestroyedEvent -= Poco::FunctionDelegate<const EntityData&>(&Messenger::OnEntityDestroyed);
+//    Bullet::EventPublisher.CreatedEvent -= Poco::FunctionDelegate<const EntityData&>(&Messenger::OnEntityCreated);
+//    
+//    Player::EventPublisher.DestroyedEvent -= Poco::FunctionDelegate<const EntityData&>(&Messenger::OnEntityDestroyed);
+//    Player::EventPublisher.CreatedEvent -= Poco::FunctionDelegate<const EntityData&>(&Messenger::OnEntityCreated);
+
+    Bullet::EventPublisher.DestroyedEvent -= Poco::FunctionDelegate<const AEntity::EType&>(&Messenger::OnEntityDestroyed);
+    Bullet::EventPublisher.CreatedEvent -= Poco::FunctionDelegate<const AEntity::EType&>(&Messenger::OnEntityCreated);
     
-    Player::EventPublisher.DestroyedEvent -= Poco::FunctionDelegate<const EntityData&>(&Messenger::OnEntityDestroyed);
-    Player::EventPublisher.CreatedEvent -= Poco::FunctionDelegate<const EntityData&>(&Messenger::OnEntityCreated);
+    Player::EventPublisher.DestroyedEvent -= Poco::FunctionDelegate<const AEntity::EType&>(&Messenger::OnEntityDestroyed);
+    Player::EventPublisher.CreatedEvent -= Poco::FunctionDelegate<const AEntity::EType&>(&Messenger::OnEntityCreated);
 
     GameEventProducer.Teardown();
     Consumer.Teardown();
@@ -107,53 +120,45 @@ void Messenger::SendUpdates()
 }
 
 // Player Event response
-void Messenger::OnEntityCreated(const void* pSender, const EntityData& anEntityData)
+void Messenger::OnEntityCreated(const void* pSender, const AEntity::EType& anEntityType)
 {
     using namespace gameevent;
     
     s_pMessengerSerialDispatchQueue->sync([=]
     {
-        std::string strPBBuffer = "";
-
+        const AEntity* pEntity = static_cast<const AEntity*>(pSender);
+        
         //GameEvent aGameEvent;
-        //aGameEvent.New()
-        GameEvent* pGameEvent = new GameEvent();
         //GameEvent* pGameEvent = aGameEvent.New();
-        //std::string strDebugString = aGameEvent.DebugString();
-        //std::cout << "OnEntityCreated message " << strDebugString << std::endl;
+        GameEvent* pGameEvent = new GameEvent();
+        pGameEvent->set_type(GameEvent_GameEventType_ENTITY);
+        
         EntityGameEvent* pEntityGameEvent = pGameEvent->mutable_entitygameevent();
         assert(NULL != pEntityGameEvent);
-
-        pGameEvent->set_type(GameEvent_GameEventType_ENTITY);
         pEntityGameEvent->set_type(EntityGameEvent_EntityGameEventType_CREATE);
-        pEntityGameEvent->set_uuid(anEntityData.UUID);
-        pEntityGameEvent->set_entitytag(anEntityData.Tag);
 
-        //Producer.Enqueue(pGameEvent);
-        //std::cout << "OnEntityCreated message " << aGameEvent.DebugString() << std::endl;
-        GameEventProducer.Enqueue(pGameEvent);
+        AEntity::Serializer.Serialize(pEntity, pEntityGameEvent);
     });
 }
 
-void Messenger::OnEntityDestroyed(const void* pSender, const EntityData& anEntityData)
+void Messenger::OnEntityDestroyed(const void* pSender, const AEntity::EType& anEntityType)
 {
     using namespace gameevent;
 
     s_pMessengerSerialDispatchQueue->sync([=]
     {
+        const AEntity* pEntity = static_cast<const AEntity*>(pSender);
+        
         //GameEvent aGameEvent;
-        //aGameEvent.New()
-        GameEvent* pGameEvent = new GameEvent();
         //GameEvent* pGameEvent = aGameEvent.New();
-        //std::string strDebugString = aGameEvent.DebugString();
-        //std::cout << "OnEntityDestroyed message " << strDebugString << std::endl;
+        GameEvent* pGameEvent = new GameEvent();
+        pGameEvent->set_type(GameEvent_GameEventType_ENTITY);
+        
         EntityGameEvent* pEntityGameEvent = pGameEvent->mutable_entitygameevent();
         assert(NULL != pEntityGameEvent);
-        
-        pGameEvent->set_type(GameEvent_GameEventType_ENTITY);
         pEntityGameEvent->set_type(EntityGameEvent_EntityGameEventType_DESTROY);
-        pEntityGameEvent->set_uuid(anEntityData.UUID);
-        pEntityGameEvent->set_entitytag(anEntityData.Tag);
+
+        AEntity::Serializer.Serialize(pEntity, pEntityGameEvent);
         
         //Producer.Enqueue(pGameEvent);
         //std::cout << "OnEntityDestroyed message " << aGameEvent.DebugString() << std::endl;
