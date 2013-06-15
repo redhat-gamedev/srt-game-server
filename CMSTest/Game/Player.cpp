@@ -98,9 +98,12 @@ void Player::Update()
         {
             if (m_pBulletTimer->Status() == Rock2D::Timer::EXPIRED)
             {
+                //b2v2Shoot.Normalize();
+                //b2v2Shoot *= m_pB2DEntity->GetLinearVelocity().Length();
+
                 m_pBulletTimer->Restart();
                 Bullet* pBullet = NULL;
-                pBullet = new Bullet(m_strUUID, m_pB2DEntity->GetPosition(), b2v2Shoot);
+                pBullet = new Bullet(m_strUUID, m_pB2DEntity->GetPosition(), m_pB2DEntity->GetLinearVelocity(), b2v2Shoot);
                 m_BulletQueue.lock();
                 m_BulletQueue.push(pBullet);
                 m_BulletQueue.unlock();

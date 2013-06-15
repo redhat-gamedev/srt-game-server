@@ -37,7 +37,7 @@ public:
     static _EventPublisher          EventPublisher;
     
     // Constructor(s)
-    Bullet(const std::string& strUUID, const b2Vec2& b2v2Position, b2Vec2& b2v2Direction);
+    Bullet(const std::string& strUUID, const b2Vec2& b2v2GunPosition, const b2Vec2& b2v2GunVelocity, b2Vec2& b2v2FiringDirection);
     
     // Destructor(s)
     ~Bullet();

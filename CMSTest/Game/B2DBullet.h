@@ -35,7 +35,7 @@ protected:
     };
 
     b2Vec2              m_b2v2InitialPosition;
-    b2Vec2              m_b2v2InitialDirection;
+    b2Vec2              m_b2v2InitialVelocity;
 
     // Helper(s)
 
@@ -44,7 +44,7 @@ public:
     static _B2DDefinition        Definition;
     
     // Constructor(s)
-    B2DBullet(const b2Vec2& b2v2Position, b2Vec2& b2v2Direction, AEntity* pBullet);
+    B2DBullet(const b2Vec2& b2v2GunPosition, const b2Vec2& b2v2GunVelocity, b2Vec2& b2v2FiringDirection, AEntity* pBullet);
     
     // Destructor(s)
     ~B2DBullet();

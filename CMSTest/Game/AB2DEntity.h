@@ -45,6 +45,7 @@ protected:
 public:
     // Accessor(s)
     const b2Vec2& GetPosition() { return m_pb2Body->GetPosition(); }
+    const b2Vec2& GetLinearVelocity() { return m_pb2Body->GetLinearVelocity(); }
     
     // Method(s)
     virtual void Move(float fX, float fY) {}

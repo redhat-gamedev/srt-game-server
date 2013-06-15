@@ -30,16 +30,18 @@ B2DBullet::_B2DDefinition::_B2DDefinition() :
 
 
 // Constructor(s)
-B2DBullet::B2DBullet(const b2Vec2& b2v2Position, b2Vec2& b2v2Direction, AEntity* pBullet) :
-    m_b2v2InitialPosition(b2v2Position),
-    m_b2v2InitialDirection(b2v2Direction),
+B2DBullet::B2DBullet(const b2Vec2& b2v2GunPosition, const b2Vec2& b2v2GunVelocity, b2Vec2& b2v2FiringDirection, AEntity* pBullet) :
+    m_b2v2InitialPosition(b2v2GunPosition),
+    m_b2v2InitialVelocity(b2v2GunVelocity),
     AB2DEntity(Definition, pBullet)
 {
     m_pb2Body->SetTransform(m_b2v2InitialPosition, 0.0f);
     
-    b2Vec2 b2v2Force = m_b2v2InitialDirection;
-    b2v2Force.x *= 20.0f;
-    b2v2Force.y *= 20.0f;
+    //float fSpeed = b2v2FiringDirection.Normalize();
+    b2v2FiringDirection.Normalize();
+    b2Vec2 b2v2Force = b2v2FiringDirection;
+    b2v2Force *= 40.0f;
+    b2v2Force += b2v2GunVelocity;
     m_pb2Body->ApplyForceToCenter(b2v2Force, false);
 }
 
