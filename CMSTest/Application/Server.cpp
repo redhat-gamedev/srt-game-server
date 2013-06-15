@@ -14,7 +14,6 @@
 #include "../Proto/box2d.pb.h"
 #include "Security.h"
 #include "../Game/Player.h"
-#include "EntityData.h"
 #include "Messenger.h"
 #include "Messenger_Consumer.h"
 #include "Messenger_Producer.h"

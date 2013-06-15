@@ -10,8 +10,7 @@
 #define __CMSTest__World__
 
 #include "B2DWorld.h"
-#include "AEntity.h"
-#include "EntityData.h"
+//#include "AEntity.h"
 #include "../Proto/box2d.pb.h"
 #include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
 #include "../../../ThirdParty/xdispatch/include/xdispatch/timer.h"
@@ -32,6 +31,8 @@ namespace decaf
 }
 class B2DWorld;
 class Player;
+class AEntity;
+
 
 class World
 {
@@ -96,7 +97,7 @@ public:
     void OnSecurityRequestLeave(const void* pSender, const std::string& strUUID);
     
     // Messenger Event response
-    void HandleMessengerConsumerEventPublisherCreateEntityRequest(const void* pSender, const EntityData& anEntityData);
+    void HandleMessengerConsumerEventPublisherCreateEntityRequest(const void* pSender, const AEntity& anEntity);
 };
 
 #endif /* defined(__CMSTest__World__) */

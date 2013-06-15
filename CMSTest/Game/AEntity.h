@@ -9,19 +9,9 @@
 #ifndef __CMSTest__Entity__
 #define __CMSTest__Entity__
 
-#include "EntityData.h"
 #include "Poco/BasicEvent.h"
-//#include "../Proto/GameEvent.pb.h"
-//#include "../Proto/EntityGameEvent.pb.h"
 #include <string>
 
-//namespace google
-//{
-//    namespace protobuf
-//    {
-//        class Message;
-//    }
-//}
 namespace gameevent
 {
     class EntityGameEvent;
@@ -29,13 +19,6 @@ namespace gameevent
 class AB2DEntity;
 
 
-//class ISerializable
-//{
-//public:
-//    void
-//}
-//
-//
 class AEntity
 {
 public:
@@ -54,8 +37,6 @@ protected:
     {
     public:
         // Event(s)
-//        Poco::BasicEvent<const EntityData&>    CreatedEvent;
-//        Poco::BasicEvent<const EntityData&>    DestroyedEvent;
         Poco::BasicEvent<const AEntity::EType&>    CreatedEvent;
         Poco::BasicEvent<const AEntity::EType&>    DestroyedEvent;
     };
@@ -78,10 +59,9 @@ public:
     static _Serializer          Serializer;
 
     // Constructor(s)
-    AEntity() {};
-    // Copy constructor
-    //AEntity(const AEntity& anEntity);
-
+    AEntity();
+    AEntity(const std::string& strUUID, uint64_t ui64Tag);
+    
     // Destructor(s)
     virtual ~AEntity();
     
@@ -91,8 +71,6 @@ public:
     
     // Method(s)
     bool ThisUUIDIsAMatch(const std::string& strUUID);
-//    AEntity* Clone() const { return new AEntity(m_strUUID, m_ui64Tag, m_pB2DEntity); };
-
 };
 
 

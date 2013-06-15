@@ -15,9 +15,6 @@
 #include <string>
 #include <list>
 
-//class Player;
-class EntityData;
-
 
 class B2DWorld
 {

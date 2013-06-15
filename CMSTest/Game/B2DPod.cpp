@@ -7,8 +7,7 @@
 //
 
 #include "B2DPod.h"
-#include "EntityData.h"
-#include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
+//#include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include <assert.h>
 
 B2DPod::_B2DDefinition          B2DPod::Definition;
@@ -31,40 +30,21 @@ B2DPod::_B2DDefinition::_B2DDefinition() :
 
 
 // Constructor(s)
-B2DPod::B2DPod(EntityData* pEntityData) :
-    m_pEntityData(pEntityData),
-    AB2DEntity(Definition)
+B2DPod::B2DPod(AEntity* pPlayer) :
+    AB2DEntity(Definition, pPlayer)
 {
-    assert(m_pEntityData);
-    
-    m_pb2Body->SetUserData((void *)pEntityData);
 }
 
 // Destructor(s)
 B2DPod::~B2DPod()
 {
-    delete m_pEntityData;
-    m_pEntityData = NULL;
 }
 
 // Helper(s)
-//void B2DPod::CreatePod()
-//{
-//    B2DWorld::_BuildT<B2DPod>::B2DBody(this, &B2DPod::OnB2DBodyCreated, Definition.BodyDef, Definition.FixtureDef);
-//}
 
 // Callback(s)
-//void B2DPod::OnB2DBodyCreated(b2Body* pb2bPod)
-//{
-//    assert(pb2bPod);
-//    assert(NULL == m_pb2Body);
-//    
-//    m_pb2Body = pb2bPod;
-//    
-//    m_pb2Body->SetUserData(m_pEntityData);
-//}
 
-
+// Method(s)
 void B2DPod::Move(float fX, float fY)
 {
     b2Vec2 b2v2Move;

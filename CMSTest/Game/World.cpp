@@ -9,7 +9,7 @@
 #include "World.h"
 #include "B2DWorld.h"
 #include "Player.h"
-//#include "EntityData.h"
+#include "AEntity.h"
 #include "../Application/Messenger.h"
 #include "../Application/Messenger_Producer.h"
 #include "../Application/Messenger_Consumer.h"
@@ -72,12 +72,12 @@ void World::Setup()
     Security::EventPublisher.RequestJoinEvent += Poco::Delegate<World, const std::string&>(this, &World::OnSecurityRequestJoin);
     Security::EventPublisher.RequestLeaveEvent += Poco::Delegate<World, const std::string&>(this, &World::OnSecurityRequestLeave);
     
-    Messenger::Consumer.EventPublisher.ReceivedCreateEntityRequest += Poco::Delegate<World, const EntityData&>(this, &World::HandleMessengerConsumerEventPublisherCreateEntityRequest);
+    Messenger::Consumer.EventPublisher.ReceivedCreateEntityRequest += Poco::Delegate<World, const AEntity&>(this, &World::HandleMessengerConsumerEventPublisherCreateEntityRequest);
 }
 
 void World::Teardown()
 {
-    Messenger::Consumer.EventPublisher.ReceivedCreateEntityRequest -= Poco::Delegate<World, const EntityData&>(this, &World::HandleMessengerConsumerEventPublisherCreateEntityRequest);
+    Messenger::Consumer.EventPublisher.ReceivedCreateEntityRequest -= Poco::Delegate<World, const AEntity&>(this, &World::HandleMessengerConsumerEventPublisherCreateEntityRequest);
     
     Security::EventPublisher.RequestLeaveEvent -= Poco::Delegate<World, const std::string&>(this, &World::OnSecurityRequestLeave);
     Security::EventPublisher.RequestJoinEvent -= Poco::Delegate<World, const std::string&>(this, &World::OnSecurityRequestJoin);
@@ -132,7 +132,7 @@ void World::b2WorldToPbWorld(b2World* pb2World, PbWorld*& pPbWorldDefault)
     PbVec2*     pPbVec2LinearVelocity = NULL;
     PbVec2*     pPbVec2Force = NULL;
     const       b2Vec2 b2v2Gravity = pb2World->GetGravity();
-    EntityData*   pEntityData = NULL;
+    AEntity*    pEntity = NULL;
     
     ppbv2Gravity->set_x(b2v2Gravity.x);
     ppbv2Gravity->set_y(b2v2Gravity.y);
@@ -168,10 +168,10 @@ void World::b2WorldToPbWorld(b2World* pb2World, PbWorld*& pPbWorldDefault)
         pPbVec2Force->set_y(0.0f);
         pPbBody->set_allocated_force(pPbVec2Force);
         
-        pEntityData = static_cast<EntityData*>(pBody->GetUserData());
-        assert(NULL != pEntityData);
-        pPbBody->set_uuid(pEntityData->m_strUUID);
-        pPbBody->set_tag(pEntityData->m_ui64Tag);
+        pEntity = static_cast<AEntity*>(pBody->GetUserData());
+        assert(NULL != pEntity);
+        pPbBody->set_uuid(pEntity->UUID);
+        pPbBody->set_tag(pEntity->Tag);
         
         pFixtureList = pBody->GetFixtureList();
         for (b2Fixture* pFixture = pFixtureList; pFixture; pFixture = pFixture->GetNext())
@@ -274,12 +274,10 @@ void World::OnSecurityRequestLeave(const void* pSender, const std::string& strUU
 }
 
 // Messenger Event response
-void World::HandleMessengerConsumerEventPublisherCreateEntityRequest(const void* pSender, const EntityData& anEntityData)
+void World::HandleMessengerConsumerEventPublisherCreateEntityRequest(const void* pSender, const AEntity& anEntity)
 {
-    //AddPlayer(anEntityData.UUID);
     m_pSimulationSerialDispatchQueue->sync([=]
     {
-        //m_listEntities.push_front(PlayerFactory.Create(anEntityData));
-        AddPlayer(anEntityData.UUID);
+        AddPlayer(anEntity.UUID);
     });
 }

@@ -13,7 +13,7 @@
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include <decaf/util/StlQueue.h>
 
-class EntityData;
+class AEntity;
 
 
 class B2DPod :
@@ -31,25 +31,21 @@ protected:
         _B2DDefinition();
     };
     
-    EntityData*           m_pEntityData;
-    
     decaf::util::StlQueue<b2Vec2>       m_b2v2MoveQueue;
     //decaf::util::StlQueue<b2Vec2>       m_b2v2MoveSwapQueue;
     
     // Helper(s)
-    //void CreatePod();
-    
+
 public:
     static _B2DDefinition        Definition;
     
     // Constructor(s)
-    B2DPod(EntityData* pEntityData);
+    B2DPod(AEntity* pPlayer);
     
     // Destructor(s)
     ~B2DPod();
     
     // Callback(s)
-//    void OnB2DBodyCreated(b2Body* pb2bPod);
     
     // Method(s)
     void Move(float fX, float fY);

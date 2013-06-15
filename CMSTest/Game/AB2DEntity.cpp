@@ -9,6 +9,7 @@
 #include "AB2DEntity.h"
 #include "B2DWorld.h"
 #include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
+#include <assert.h>
 
 
 AB2DEntity::_AB2DDefinition::_AB2DDefinition()
@@ -28,27 +29,23 @@ AB2DEntity::_AB2DDefinition::_AB2DDefinition()
 
 
 // Constructor(s)
-AB2DEntity::AB2DEntity(const _AB2DDefinition& aAB2DDefinition) :
+AB2DEntity::AB2DEntity(const _AB2DDefinition& aAB2DDefinition, AEntity* pEntity) :
     m_pb2Body(NULL)
 {
+    assert(pEntity);
+    
     m_pb2Body = B2DWorld::world->CreateBody(&aAB2DDefinition.BodyDef);
     m_pb2Body->CreateFixture(&aAB2DDefinition.FixtureDef);
+    m_pb2Body->SetUserData((void *)pEntity);
 }
 
 // Destructor
 AB2DEntity::~AB2DEntity()
 {
+    //std::cout << "AB2DEntity::~AB2DEntity()..." << std::endl;
+    
     B2DWorld::world->DestroyBody(m_pb2Body);
     m_pb2Body = NULL;
 }
-
-// Method(s)
-//void AB2DEntity::SetEntityData(EntityData *pEntityData)
-//{
-//    assert(m_pb2Body);
-//    assert(pEntityData);
-//    
-//    m_pb2Body->SetUserData(pEntityData);
-//}
 
 // Method(s)

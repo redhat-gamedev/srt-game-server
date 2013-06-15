@@ -7,15 +7,12 @@
 //
 
 #include "Bullet.h"
-#include "EntityData.h"
-//#include "World.h"
 #include "B2DWorld.h"
 #include "B2DBullet.h"
 #include "Timer.h"
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
 #include "../Shared/MakeT.h"
-//#include <stdio.h>
 #include <iostream>
 #include <string>
 #include <assert.h>
@@ -30,18 +27,12 @@ Bullet::Bullet(const std::string& strUUID, const b2Vec2& b2v2Position, b2Vec2& b
     m_pLifeTimer(new Rock2D::Timer(4000)),
     AEntity(strUUID,
             (uint64_t)MakeT<uint64_t>((uint32_t)AEntity::BULLET, s_ui32Count),
-            new B2DBullet(b2v2Position,
-                          b2v2Direction,
-                          new EntityData((uint64_t)MakeT<uint64_t>((uint32_t)AEntity::BULLET, s_ui32Count),
-                                         strUUID)))
+            new B2DBullet(b2v2Position, b2v2Direction, this))
 {
-    //m_pLifeTimer = new Rock2D::Timer(3000);
-    
     //std::cout << "Bullet::Bullet() " << m_ui64Tag << std::endl;
 
     ++s_ui32Count;
     
-//    EventPublisher.CreatedEvent(this, EntityData(m_ui64Tag, m_strUUID));
     EventPublisher.CreatedEvent(this, AEntity::BULLET);
 }
 
@@ -54,7 +45,6 @@ Bullet::~Bullet()
     delete m_pLifeTimer;
     m_pLifeTimer = NULL;
     
-    //EventPublisher.DestroyedEvent(this, EntityData(m_ui64Tag, m_strUUID));
     EventPublisher.DestroyedEvent(this, AEntity::BULLET);
 }
 

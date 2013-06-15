@@ -11,7 +11,6 @@
 
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 
-//class EntityData;
 class AEntity;
 
 
@@ -38,7 +37,7 @@ protected:
     b2Body*         m_pb2Body;
     
     // Constructor(s)
-    AB2DEntity(const _AB2DDefinition& aAB2DDefinition);
+    AB2DEntity(const _AB2DDefinition& aAB2DDefinition, AEntity* pEntity);
     
     // Destructor
     virtual ~AB2DEntity();
@@ -48,8 +47,6 @@ public:
     const b2Vec2& GetPosition() { return m_pb2Body->GetPosition(); }
     
     // Method(s)
-    //void SetEntityData(EntityData* pEntityData);
-
     virtual void Move(float fX, float fY) {}
     virtual void Update() {}
 };

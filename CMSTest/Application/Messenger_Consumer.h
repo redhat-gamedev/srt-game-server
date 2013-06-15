@@ -28,9 +28,8 @@ namespace google
         class Message;
     }
 }
-class EntityData;
 class SimpleAsyncConsumer;
-
+class AEntity;
 
 
 class Messenger::_Consumer :
@@ -42,8 +41,8 @@ protected:
     {
     public:
         // Event(s)
-        Poco::BasicEvent<const EntityData&>        ReceivedCreateEntityRequest;
-        Poco::BasicEvent<const EntityData&>        ReceivedDestroyEntityRequest;
+        Poco::BasicEvent<const AEntity&>        ReceivedCreateEntityRequest;
+        Poco::BasicEvent<const AEntity&>        ReceivedDestroyEntityRequest;
     };
     
 private:

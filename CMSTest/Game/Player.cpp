@@ -12,7 +12,6 @@
 #include "B2DWorld_BuildT.h"
 #include "World.h"
 #include "Timer.h"
-#include "EntityData.h"
 #include "B2DPod.h"
 #include "Input.h"
 #include "../Proto/box2d.pb.h"
@@ -30,13 +29,12 @@ Player::Player(const std::string& strUUID) :
     m_pBulletTimer(new Rock2D::Timer(250)),
     AEntity(strUUID,
             (uint64_t)MakeT<uint64_t>((uint32_t)AEntity::POD, s_ui32Count),
-            new B2DPod(new EntityData((uint64_t)MakeT<uint64_t>((uint32_t)AEntity::POD, s_ui32Count),
-                                      strUUID)))
+            new B2DPod(this))
 {
     ++s_ui32Count;
     
     Input::EventPublisher.DualStickEvent += Poco::Delegate<Player, DualStick::PbDualStick>(this, &Player::OnInputDualStick);
-    //EventPublisher.CreatedEvent(this, EntityData(m_ui64Tag, m_strUUID));
+
     EventPublisher.CreatedEvent(this, AEntity::POD);
 }
 
@@ -60,7 +58,6 @@ Player::~Player()
     delete m_pBulletTimer;
     m_pBulletTimer = NULL;
     
-    //EventPublisher.DestroyedEvent(this, EntityData(m_ui64Tag, m_strUUID));
     EventPublisher.DestroyedEvent(this, AEntity::POD);
 }
 
@@ -157,35 +154,6 @@ void Player::OnInputDualStick(const void* pSender, DualStick::PbDualStick& aPbDu
     m_PbDualStickQueue.push(aPbDualStick);
     m_PbDualStickQueue.unlock();
 }
-
-//void Player::CreatePod()
-//{
-//    m_pBulletTimer = new Rock2D::Timer(1000);
-//    m_pB2DPod = new B2DPod(new EntityData(m_ui64Tag, m_strUUID));
-//
-//    Input::EventPublisher.DualStickEvent += Poco::Delegate<Player, DualStick::PbDualStick>(this, &Player::OnInputDualStick);
-//}
-//
-//void Player::DestroyPod()
-//{
-//    Input::EventPublisher.DualStickEvent -= Poco::Delegate<Player, DualStick::PbDualStick>(this, &Player::OnInputDualStick);
-//    
-//    m_BulletQueue.lock();
-//    Bullet* pBullet = NULL;
-//    while (!(m_BulletQueue.empty()))
-//    {
-//        pBullet = m_BulletQueue.pop();
-//        delete pBullet;
-//        pBullet = NULL;
-//    }
-//    m_BulletQueue.unlock();
-//    
-//    delete m_pB2DPod;
-//    m_pB2DPod = NULL;
-//    
-//    delete m_pBulletTimer;
-//    m_pBulletTimer = NULL;    
-//}
 
 //// Event Firing Method(s)
 //void Player::FireCreatedEvent(const EntityData& anEntityData)

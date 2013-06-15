@@ -68,8 +68,6 @@ public:
     virtual void onMessage(const cms::Message* pMessage);
     
     // Player Event response
-//    void OnPlayerCreated(const void* pSender, const EntityData& anEntityData);
-//    void OnPlayerDestroyed(const void* pSender, const EntityData& anEntityData);
     void OnPlayerCreated(const void* pSender, const AEntity::EType& anEntityType);
     void OnPlayerDestroyed(const void* pSender, const AEntity::EType& anEntityType);
     

@@ -7,10 +7,10 @@
 //
 
 #include "Messenger_Consumer.h"
+#include "../Game/AEntity.h"
 #include "../Shared/SimpleAsyncConsumer.h"
 #include "../Proto/GameEvent.pb.h"
 #include "../Proto/EntityGameEvent.pb.h"
-#include "EntityData.h"
 #include <cms/CMSException.h>
 #include <cms/BytesMessage.h>
 #include <assert.h>
@@ -98,12 +98,12 @@ void Messenger::_Consumer::ProcessReceivedMessages()
                         {
                             case EntityGameEvent_EntityGameEventType_CREATE:
                                 EventPublisher.ReceivedCreateEntityRequest(                                                                       this,
-                                    EntityData(anEntityGameEvent.entitytag(), anEntityGameEvent.uuid()));
+                                    AEntity(anEntityGameEvent.uuid(), anEntityGameEvent.entitytag()));
                                 break;
                             case EntityGameEvent_EntityGameEventType_DESTROY:
                                 EventPublisher.ReceivedDestroyEntityRequest(
                                     this,
-                                    EntityData(anEntityGameEvent.entitytag(), anEntityGameEvent.uuid()));
+                                    AEntity(anEntityGameEvent.uuid(), anEntityGameEvent.entitytag()));
                                 break;
                             default:
                                 assert(false);

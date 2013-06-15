@@ -33,6 +33,20 @@ void AEntity::_Serializer::Deserialisze(const gameevent::EntityGameEvent* pEntit
 }
 
 // Constructor(s)
+AEntity::AEntity()
+{
+    // Necessary due to xdispatch sync compile errors? /// rnk 061413
+}
+
+AEntity::AEntity(const std::string& strUUID, uint64_t ui64Tag) :
+    m_strUUID(strUUID),
+    m_ui64Tag(ui64Tag),
+    m_pB2DEntity(NULL)
+{
+    // Used for incoming event notification
+    // data store only...
+}
+
 AEntity::AEntity(const std::string& strUUID, uint64_t ui64Tag, AB2DEntity* pAB2DEntity /* sink */) :
     m_strUUID(strUUID),
     m_ui64Tag(ui64Tag),
@@ -45,21 +59,16 @@ AEntity::AEntity(const std::string& strUUID, uint64_t ui64Tag, AB2DEntity* pAB2D
     ++s_ui64Count;
 }
 
-// Copy constructor
-//AEntity::AEntity(const AEntity& anEntity) :
-//    m_strUUID(anEntity.m_strUUID),
-//    m_ui64Tag(anEntity.m_ui64Tag),
-//    m_pB2DEntity(anEntity.m_pB2DEntity)
-//{
-//}
-
 // Destructor(s)
 AEntity::~AEntity()
 {
     //std::cout << "AEntity::~AEntity() " << m_ui64Tag << std::endl;
 
-    delete m_pB2DEntity;
-    m_pB2DEntity = NULL;
+    if (m_pB2DEntity)
+    {
+        delete m_pB2DEntity;
+        m_pB2DEntity = NULL;
+    }
     
     m_strUUID.clear();
     m_ui64Tag = 0;

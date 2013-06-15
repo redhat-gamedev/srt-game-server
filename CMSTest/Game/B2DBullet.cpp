@@ -8,7 +8,6 @@
 
 #include "B2DBullet.h"
 #include "B2DWorld.h"
-#include "EntityData.h"
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include <assert.h>
 
@@ -31,15 +30,11 @@ B2DBullet::_B2DDefinition::_B2DDefinition() :
 
 
 // Constructor(s)
-B2DBullet::B2DBullet(const b2Vec2& b2v2Position, b2Vec2& b2v2Direction, EntityData* pEntityData) :
+B2DBullet::B2DBullet(const b2Vec2& b2v2Position, b2Vec2& b2v2Direction, AEntity* pBullet) :
     m_b2v2InitialPosition(b2v2Position),
     m_b2v2InitialDirection(b2v2Direction),
-    m_pEntityData(pEntityData),
-    AB2DEntity(Definition)
+    AB2DEntity(Definition, pBullet)
 {
-    assert(m_pEntityData);
-    
-    m_pb2Body->SetUserData((void *)pEntityData);
     m_pb2Body->SetTransform(m_b2v2InitialPosition, 0.0f);
     
     b2Vec2 b2v2Force = m_b2v2InitialDirection;
@@ -51,8 +46,7 @@ B2DBullet::B2DBullet(const b2Vec2& b2v2Position, b2Vec2& b2v2Direction, EntityDa
 // Destructor(s)
 B2DBullet::~B2DBullet()
 {
-    delete m_pEntityData;
-    m_pEntityData = NULL;
+    //std::cout << "B2DBullet::~B2DBullet()..." << std::endl;
 }
 
 // Helper(s)

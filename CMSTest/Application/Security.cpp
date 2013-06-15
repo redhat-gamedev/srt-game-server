@@ -158,7 +158,6 @@ void Security::onMessage(const Message* pMessage)
 }
 
 // Player Event response
-//void Security::OnPlayerCreated(const void* pSender, const EntityData& anEntityData)
 void Security::OnPlayerCreated(const void* pSender, const AEntity::EType& anEntityType)
 {
 //    assert(strUUID.length() > 0);
@@ -184,7 +183,6 @@ void Security::OnPlayerCreated(const void* pSender, const AEntity::EType& anEnti
     FireHasJoinedEvent(pEntity->UUID);
 }
 
-//void Security::OnPlayerDestroyed(const void* pSender, const EntityData& anEntityData)
 void Security::OnPlayerDestroyed(const void* pSender, const AEntity::EType& anEntityType)
 {
 //    assert(strUUID.length() > 0);
