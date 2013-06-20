@@ -24,7 +24,7 @@ B2DBullet::_B2DDefinition::_B2DDefinition() :
     m_ab2CircleShape.m_radius = 0.25f;
     
     // Set the fixture and use the shape
-    m_ab2FixtureDef.filter.groupIndex = -2;
+    m_ab2FixtureDef.filter.groupIndex = -1;
     m_ab2FixtureDef.shape = &m_ab2CircleShape;
 }
 

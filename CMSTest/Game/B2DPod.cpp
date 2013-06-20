@@ -24,7 +24,7 @@ B2DPod::_B2DDefinition::_B2DDefinition() :
     m_ab2FixtureDef.density = 1.0f;
     m_ab2FixtureDef.friction = 0.3f;
     m_ab2FixtureDef.restitution = 0.3f;
-    m_ab2FixtureDef.filter.groupIndex = -2;
+    m_ab2FixtureDef.filter.groupIndex = -1;
     m_ab2FixtureDef.shape = &m_ab2CircleShape;
 }
 
