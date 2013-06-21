@@ -25,6 +25,7 @@
 #include <google/protobuf/extension_set.h>
 #include <google/protobuf/generated_enum_reflection.h>
 #include <google/protobuf/unknown_field_set.h>
+#include "box2d.pb.h"
 // @@protoc_insertion_point(includes)
 
 namespace gameevent {
@@ -38,7 +39,9 @@ class EntityGameEvent;
 
 enum EntityGameEvent_EntityGameEventType {
   EntityGameEvent_EntityGameEventType_CREATE = 0,
-  EntityGameEvent_EntityGameEventType_DESTROY = 1
+  EntityGameEvent_EntityGameEventType_RETRIEVE = 1,
+  EntityGameEvent_EntityGameEventType_UPDATE = 2,
+  EntityGameEvent_EntityGameEventType_DESTROY = 3
 };
 bool EntityGameEvent_EntityGameEventType_IsValid(int value);
 const EntityGameEvent_EntityGameEventType EntityGameEvent_EntityGameEventType_EntityGameEventType_MIN = EntityGameEvent_EntityGameEventType_CREATE;
@@ -111,6 +114,8 @@ class EntityGameEvent : public ::google::protobuf::Message {
 
   typedef EntityGameEvent_EntityGameEventType EntityGameEventType;
   static const EntityGameEventType CREATE = EntityGameEvent_EntityGameEventType_CREATE;
+  static const EntityGameEventType RETRIEVE = EntityGameEvent_EntityGameEventType_RETRIEVE;
+  static const EntityGameEventType UPDATE = EntityGameEvent_EntityGameEventType_UPDATE;
   static const EntityGameEventType DESTROY = EntityGameEvent_EntityGameEventType_DESTROY;
   static inline bool EntityGameEventType_IsValid(int value) {
     return EntityGameEvent_EntityGameEventType_IsValid(value);
@@ -142,10 +147,17 @@ class EntityGameEvent : public ::google::protobuf::Message {
   inline ::gameevent::EntityGameEvent_EntityGameEventType type() const;
   inline void set_type(::gameevent::EntityGameEvent_EntityGameEventType value);
 
-  // optional string UUID = 2;
+  // required uint64 entityTag = 2;
+  inline bool has_entitytag() const;
+  inline void clear_entitytag();
+  static const int kEntityTagFieldNumber = 2;
+  inline ::google::protobuf::uint64 entitytag() const;
+  inline void set_entitytag(::google::protobuf::uint64 value);
+
+  // optional string UUID = 3;
   inline bool has_uuid() const;
   inline void clear_uuid();
-  static const int kUUIDFieldNumber = 2;
+  static const int kUUIDFieldNumber = 3;
   inline const ::std::string& uuid() const;
   inline void set_uuid(const ::std::string& value);
   inline void set_uuid(const char* value);
@@ -154,30 +166,35 @@ class EntityGameEvent : public ::google::protobuf::Message {
   inline ::std::string* release_uuid();
   inline void set_allocated_uuid(::std::string* uuid);
 
-  // required uint64 entityTag = 3;
-  inline bool has_entitytag() const;
-  inline void clear_entitytag();
-  static const int kEntityTagFieldNumber = 3;
-  inline ::google::protobuf::uint64 entitytag() const;
-  inline void set_entitytag(::google::protobuf::uint64 value);
+  // optional .box2d.PbBody body = 4;
+  inline bool has_body() const;
+  inline void clear_body();
+  static const int kBodyFieldNumber = 4;
+  inline const ::box2d::PbBody& body() const;
+  inline ::box2d::PbBody* mutable_body();
+  inline ::box2d::PbBody* release_body();
+  inline void set_allocated_body(::box2d::PbBody* body);
 
   // @@protoc_insertion_point(class_scope:gameevent.EntityGameEvent)
  private:
   inline void set_has_type();
   inline void clear_has_type();
-  inline void set_has_uuid();
-  inline void clear_has_uuid();
   inline void set_has_entitytag();
   inline void clear_has_entitytag();
+  inline void set_has_uuid();
+  inline void clear_has_uuid();
+  inline void set_has_body();
+  inline void clear_has_body();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::std::string* uuid_;
   ::google::protobuf::uint64 entitytag_;
+  ::std::string* uuid_;
+  ::box2d::PbBody* body_;
   int type_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
   friend void  protobuf_AddDesc_EntityGameEvent_2eproto();
   friend void protobuf_AssignDesc_EntityGameEvent_2eproto();
@@ -216,15 +233,37 @@ inline void EntityGameEvent::set_type(::gameevent::EntityGameEvent_EntityGameEve
   type_ = value;
 }
 
-// optional string UUID = 2;
-inline bool EntityGameEvent::has_uuid() const {
+// required uint64 entityTag = 2;
+inline bool EntityGameEvent::has_entitytag() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void EntityGameEvent::set_has_uuid() {
+inline void EntityGameEvent::set_has_entitytag() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void EntityGameEvent::clear_has_uuid() {
+inline void EntityGameEvent::clear_has_entitytag() {
   _has_bits_[0] &= ~0x00000002u;
+}
+inline void EntityGameEvent::clear_entitytag() {
+  entitytag_ = GOOGLE_ULONGLONG(0);
+  clear_has_entitytag();
+}
+inline ::google::protobuf::uint64 EntityGameEvent::entitytag() const {
+  return entitytag_;
+}
+inline void EntityGameEvent::set_entitytag(::google::protobuf::uint64 value) {
+  set_has_entitytag();
+  entitytag_ = value;
+}
+
+// optional string UUID = 3;
+inline bool EntityGameEvent::has_uuid() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void EntityGameEvent::set_has_uuid() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void EntityGameEvent::clear_has_uuid() {
+  _has_bits_[0] &= ~0x00000004u;
 }
 inline void EntityGameEvent::clear_uuid() {
   if (uuid_ != &::google::protobuf::internal::kEmptyString) {
@@ -286,26 +325,42 @@ inline void EntityGameEvent::set_allocated_uuid(::std::string* uuid) {
   }
 }
 
-// required uint64 entityTag = 3;
-inline bool EntityGameEvent::has_entitytag() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+// optional .box2d.PbBody body = 4;
+inline bool EntityGameEvent::has_body() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void EntityGameEvent::set_has_entitytag() {
-  _has_bits_[0] |= 0x00000004u;
+inline void EntityGameEvent::set_has_body() {
+  _has_bits_[0] |= 0x00000008u;
 }
-inline void EntityGameEvent::clear_has_entitytag() {
-  _has_bits_[0] &= ~0x00000004u;
+inline void EntityGameEvent::clear_has_body() {
+  _has_bits_[0] &= ~0x00000008u;
 }
-inline void EntityGameEvent::clear_entitytag() {
-  entitytag_ = GOOGLE_ULONGLONG(0);
-  clear_has_entitytag();
+inline void EntityGameEvent::clear_body() {
+  if (body_ != NULL) body_->::box2d::PbBody::Clear();
+  clear_has_body();
 }
-inline ::google::protobuf::uint64 EntityGameEvent::entitytag() const {
-  return entitytag_;
+inline const ::box2d::PbBody& EntityGameEvent::body() const {
+  return body_ != NULL ? *body_ : *default_instance_->body_;
 }
-inline void EntityGameEvent::set_entitytag(::google::protobuf::uint64 value) {
-  set_has_entitytag();
-  entitytag_ = value;
+inline ::box2d::PbBody* EntityGameEvent::mutable_body() {
+  set_has_body();
+  if (body_ == NULL) body_ = new ::box2d::PbBody;
+  return body_;
+}
+inline ::box2d::PbBody* EntityGameEvent::release_body() {
+  clear_has_body();
+  ::box2d::PbBody* temp = body_;
+  body_ = NULL;
+  return temp;
+}
+inline void EntityGameEvent::set_allocated_body(::box2d::PbBody* body) {
+  delete body_;
+  body_ = body;
+  if (body) {
+    set_has_body();
+  } else {
+    clear_has_body();
+  }
 }
 
 

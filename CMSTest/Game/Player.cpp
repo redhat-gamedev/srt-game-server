@@ -148,6 +148,8 @@ void Player::Update()
         pBullet = NULL;
     }
     m_BulletQueue.unlock();
+    
+    EventPublisher.UpdatedEvent(this, AEntity::POD);
 }
 
 // Input Event response

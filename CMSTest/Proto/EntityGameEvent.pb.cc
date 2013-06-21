@@ -35,10 +35,11 @@ void protobuf_AssignDesc_EntityGameEvent_2eproto() {
       "EntityGameEvent.proto");
   GOOGLE_CHECK(file != NULL);
   EntityGameEvent_descriptor_ = file->message_type(0);
-  static const int EntityGameEvent_offsets_[3] = {
+  static const int EntityGameEvent_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EntityGameEvent, type_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EntityGameEvent, uuid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EntityGameEvent, entitytag_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EntityGameEvent, uuid_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EntityGameEvent, body_),
   };
   EntityGameEvent_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -81,12 +82,15 @@ void protobuf_AddDesc_EntityGameEvent_2eproto() {
   already_here = true;
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
+  ::box2d::protobuf_AddDesc_box2d_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\025EntityGameEvent.proto\022\tgameevent\"\240\001\n\017E"
-    "ntityGameEvent\022<\n\004type\030\001 \002(\0162..gameevent"
-    ".EntityGameEvent.EntityGameEventType\022\014\n\004"
-    "UUID\030\002 \001(\t\022\021\n\tentityTag\030\003 \002(\004\".\n\023EntityG"
-    "ameEventType\022\n\n\006CREATE\020\000\022\013\n\007DESTROY\020\001", 197);
+    "\n\025EntityGameEvent.proto\022\tgameevent\032\013box2"
+    "d.proto\"\327\001\n\017EntityGameEvent\022<\n\004type\030\001 \002("
+    "\0162..gameevent.EntityGameEvent.EntityGame"
+    "EventType\022\021\n\tentityTag\030\002 \002(\004\022\014\n\004UUID\030\003 \001"
+    "(\t\022\033\n\004body\030\004 \001(\0132\r.box2d.PbBody\"H\n\023Entit"
+    "yGameEventType\022\n\n\006CREATE\020\000\022\014\n\010RETRIEVE\020\001"
+    "\022\n\n\006UPDATE\020\002\022\013\n\007DESTROY\020\003", 265);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "EntityGameEvent.proto", &protobuf_RegisterTypes);
   EntityGameEvent::default_instance_ = new EntityGameEvent();
@@ -111,6 +115,8 @@ bool EntityGameEvent_EntityGameEventType_IsValid(int value) {
   switch(value) {
     case 0:
     case 1:
+    case 2:
+    case 3:
       return true;
     default:
       return false;
@@ -119,6 +125,8 @@ bool EntityGameEvent_EntityGameEventType_IsValid(int value) {
 
 #ifndef _MSC_VER
 const EntityGameEvent_EntityGameEventType EntityGameEvent::CREATE;
+const EntityGameEvent_EntityGameEventType EntityGameEvent::RETRIEVE;
+const EntityGameEvent_EntityGameEventType EntityGameEvent::UPDATE;
 const EntityGameEvent_EntityGameEventType EntityGameEvent::DESTROY;
 const EntityGameEvent_EntityGameEventType EntityGameEvent::EntityGameEventType_MIN;
 const EntityGameEvent_EntityGameEventType EntityGameEvent::EntityGameEventType_MAX;
@@ -126,8 +134,9 @@ const int EntityGameEvent::EntityGameEventType_ARRAYSIZE;
 #endif  // _MSC_VER
 #ifndef _MSC_VER
 const int EntityGameEvent::kTypeFieldNumber;
-const int EntityGameEvent::kUUIDFieldNumber;
 const int EntityGameEvent::kEntityTagFieldNumber;
+const int EntityGameEvent::kUUIDFieldNumber;
+const int EntityGameEvent::kBodyFieldNumber;
 #endif  // !_MSC_VER
 
 EntityGameEvent::EntityGameEvent()
@@ -136,6 +145,7 @@ EntityGameEvent::EntityGameEvent()
 }
 
 void EntityGameEvent::InitAsDefaultInstance() {
+  body_ = const_cast< ::box2d::PbBody*>(&::box2d::PbBody::default_instance());
 }
 
 EntityGameEvent::EntityGameEvent(const EntityGameEvent& from)
@@ -147,8 +157,9 @@ EntityGameEvent::EntityGameEvent(const EntityGameEvent& from)
 void EntityGameEvent::SharedCtor() {
   _cached_size_ = 0;
   type_ = 0;
-  uuid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   entitytag_ = GOOGLE_ULONGLONG(0);
+  uuid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  body_ = NULL;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -161,6 +172,7 @@ void EntityGameEvent::SharedDtor() {
     delete uuid_;
   }
   if (this != default_instance_) {
+    delete body_;
   }
 }
 
@@ -188,12 +200,15 @@ EntityGameEvent* EntityGameEvent::New() const {
 void EntityGameEvent::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     type_ = 0;
+    entitytag_ = GOOGLE_ULONGLONG(0);
     if (has_uuid()) {
       if (uuid_ != &::google::protobuf::internal::kEmptyString) {
         uuid_->clear();
       }
     }
-    entitytag_ = GOOGLE_ULONGLONG(0);
+    if (has_body()) {
+      if (body_ != NULL) body_->::box2d::PbBody::Clear();
+    }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -221,12 +236,28 @@ bool EntityGameEvent::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(18)) goto parse_UUID;
+        if (input->ExpectTag(16)) goto parse_entityTag;
         break;
       }
 
-      // optional string UUID = 2;
+      // required uint64 entityTag = 2;
       case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_entityTag:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &entitytag_)));
+          set_has_entitytag();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(26)) goto parse_UUID;
+        break;
+      }
+
+      // optional string UUID = 3;
+      case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_UUID:
@@ -238,19 +269,17 @@ bool EntityGameEvent::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(24)) goto parse_entityTag;
+        if (input->ExpectTag(34)) goto parse_body;
         break;
       }
 
-      // required uint64 entityTag = 3;
-      case 3: {
+      // optional .box2d.PbBody body = 4;
+      case 4: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_entityTag:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
-                 input, &entitytag_)));
-          set_has_entitytag();
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_body:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_body()));
         } else {
           goto handle_uninterpreted;
         }
@@ -282,18 +311,24 @@ void EntityGameEvent::SerializeWithCachedSizes(
       1, this->type(), output);
   }
 
-  // optional string UUID = 2;
+  // required uint64 entityTag = 2;
+  if (has_entitytag()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(2, this->entitytag(), output);
+  }
+
+  // optional string UUID = 3;
   if (has_uuid()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->uuid().data(), this->uuid().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      2, this->uuid(), output);
+      3, this->uuid(), output);
   }
 
-  // required uint64 entityTag = 3;
-  if (has_entitytag()) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt64(3, this->entitytag(), output);
+  // optional .box2d.PbBody body = 4;
+  if (has_body()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      4, this->body(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -310,19 +345,26 @@ void EntityGameEvent::SerializeWithCachedSizes(
       1, this->type(), target);
   }
 
-  // optional string UUID = 2;
+  // required uint64 entityTag = 2;
+  if (has_entitytag()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(2, this->entitytag(), target);
+  }
+
+  // optional string UUID = 3;
   if (has_uuid()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->uuid().data(), this->uuid().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        2, this->uuid(), target);
+        3, this->uuid(), target);
   }
 
-  // required uint64 entityTag = 3;
-  if (has_entitytag()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(3, this->entitytag(), target);
+  // optional .box2d.PbBody body = 4;
+  if (has_body()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        4, this->body(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -342,18 +384,25 @@ int EntityGameEvent::ByteSize() const {
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());
     }
 
-    // optional string UUID = 2;
+    // required uint64 entityTag = 2;
+    if (has_entitytag()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::UInt64Size(
+          this->entitytag());
+    }
+
+    // optional string UUID = 3;
     if (has_uuid()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
           this->uuid());
     }
 
-    // required uint64 entityTag = 3;
-    if (has_entitytag()) {
+    // optional .box2d.PbBody body = 4;
+    if (has_body()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::UInt64Size(
-          this->entitytag());
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->body());
     }
 
   }
@@ -386,11 +435,14 @@ void EntityGameEvent::MergeFrom(const EntityGameEvent& from) {
     if (from.has_type()) {
       set_type(from.type());
     }
+    if (from.has_entitytag()) {
+      set_entitytag(from.entitytag());
+    }
     if (from.has_uuid()) {
       set_uuid(from.uuid());
     }
-    if (from.has_entitytag()) {
-      set_entitytag(from.entitytag());
+    if (from.has_body()) {
+      mutable_body()->::box2d::PbBody::MergeFrom(from.body());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -409,16 +461,20 @@ void EntityGameEvent::CopyFrom(const EntityGameEvent& from) {
 }
 
 bool EntityGameEvent::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000005) != 0x00000005) return false;
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
 
+  if (has_body()) {
+    if (!this->body().IsInitialized()) return false;
+  }
   return true;
 }
 
 void EntityGameEvent::Swap(EntityGameEvent* other) {
   if (other != this) {
     std::swap(type_, other->type_);
-    std::swap(uuid_, other->uuid_);
     std::swap(entitytag_, other->entitytag_);
+    std::swap(uuid_, other->uuid_);
+    std::swap(body_, other->body_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

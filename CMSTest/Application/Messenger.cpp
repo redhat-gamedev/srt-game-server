@@ -59,6 +59,7 @@ void Messenger::Setup()
     Consumer.Setup(strBrokerURI, strGameEventInDestinationURI);
     
     Player::EventPublisher.CreatedEvent += Poco::FunctionDelegate<const AEntity::EType&>(&Messenger::OnEntityCreated);
+    Player::EventPublisher.UpdatedEvent += Poco::FunctionDelegate<const AEntity::EType&>(&Messenger::OnEntityUpdated);
     Player::EventPublisher.DestroyedEvent += Poco::FunctionDelegate<const AEntity::EType&>(&Messenger::OnEntityDestroyed);
     
     Bullet::EventPublisher.CreatedEvent += Poco::FunctionDelegate<const AEntity::EType&>(&Messenger::OnEntityCreated);
@@ -78,6 +79,7 @@ void Messenger::Teardown()
     Bullet::EventPublisher.CreatedEvent -= Poco::FunctionDelegate<const AEntity::EType&>(&Messenger::OnEntityCreated);
     
     Player::EventPublisher.DestroyedEvent -= Poco::FunctionDelegate<const AEntity::EType&>(&Messenger::OnEntityDestroyed);
+    Player::EventPublisher.UpdatedEvent -= Poco::FunctionDelegate<const AEntity::EType&>(&Messenger::OnEntityUpdated);
     Player::EventPublisher.CreatedEvent -= Poco::FunctionDelegate<const AEntity::EType&>(&Messenger::OnEntityCreated);
 
     GameEventProducer.Teardown();
@@ -102,7 +104,7 @@ void Messenger::Teardown()
 
 void Messenger::SendUpdates()
 {
-    Producer.SendUpdates();
+    //Producer.SendUpdates();
     GameEventProducer.SendUpdates();
 }
 
@@ -125,6 +127,27 @@ void Messenger::OnEntityCreated(const void* pSender, const AEntity::EType& anEnt
         pEntityGameEvent->set_type(EntityGameEvent_EntityGameEventType_CREATE);
 
         AEntity::Serializer.Serialize(pEntity, pEntityGameEvent);
+        GameEventProducer.Enqueue(pGameEvent);
+    });
+}
+
+void Messenger::OnEntityUpdated(const void* pSender, const AEntity::EType& anEntityType)
+{
+    using namespace gameevent;
+    
+    s_pMessengerSerialDispatchQueue->sync([=]
+    {
+      const AEntity* pEntity = static_cast<const AEntity*>(pSender);
+      
+      GameEvent* pGameEvent = new GameEvent();
+      pGameEvent->set_type(GameEvent_GameEventType_ENTITY);
+      
+      EntityGameEvent* pEntityGameEvent = pGameEvent->mutable_entitygameevent();
+      assert(NULL != pEntityGameEvent);
+      pEntityGameEvent->set_type(EntityGameEvent_EntityGameEventType_UPDATE);
+      
+      AEntity::Serializer.Serialize(pEntity, pEntityGameEvent);
+      GameEventProducer.Enqueue(pGameEvent);
     });
 }
 

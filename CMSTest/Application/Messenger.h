@@ -58,6 +58,7 @@ public:
     
     // Entity Event response
     static void OnEntityCreated(const void* pSender, const AEntity::EType& anEntityType);
+    static void OnEntityUpdated(const void* pSender, const AEntity::EType& anEntityType);
     static void OnEntityDestroyed(const void* pSender, const AEntity::EType& anEntityType);
     
     // decaf::lang::Runnable implementation

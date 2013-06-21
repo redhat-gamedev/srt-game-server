@@ -10,6 +10,7 @@
 #define __CMSTest__Entity__
 
 #include "Poco/BasicEvent.h"
+#include <decaf/util/StlQueue.h>
 #include <string>
 
 namespace gameevent
@@ -33,11 +34,14 @@ private:
     static uint64_t         s_ui64Count;
     
 protected:
+    // Class(es)
     class _EventPublisher
     {
     public:
         // Event(s)
         Poco::BasicEvent<const AEntity::EType&>    CreatedEvent;
+        Poco::BasicEvent<const AEntity::EType&>    RetrievedEvent;
+        Poco::BasicEvent<const AEntity::EType&>    UpdatedEvent;
         Poco::BasicEvent<const AEntity::EType&>    DestroyedEvent;
     };
 
@@ -47,6 +51,9 @@ protected:
         void Serialize(const AEntity* anEntity, gameevent::EntityGameEvent* pEntityGameEvent);
         void Deserialisze(const gameevent::EntityGameEvent* pEntityGameEvent, AEntity*& anEntity);
     };
+    
+    // Class data
+    static decaf::util::StlQueue<AEntity*>          s_EntityQueue;
     
     std::string             m_strUUID;
     uint64_t                m_ui64Tag;

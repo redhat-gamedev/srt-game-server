@@ -11,6 +11,10 @@
 
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 
+namespace gameevent
+{
+    class EntityGameEvent;
+}
 class AEntity;
 
 
@@ -34,6 +38,13 @@ protected:
         b2FixtureDef&     FixtureDef  = m_ab2FixtureDef;
     };
     
+    class _Serializer
+    {
+    public:
+        void Serialize(const AB2DEntity* anEntity, gameevent::EntityGameEvent* pEntityGameEvent);
+        void Deserialisze(const gameevent::EntityGameEvent* pEntityGameEvent, AB2DEntity*& anEntity);
+    };
+    
     b2Body*         m_pb2Body;
     
     // Constructor(s)
@@ -43,6 +54,8 @@ protected:
     virtual ~AB2DEntity();
     
 public:
+    static _Serializer          Serializer;
+    
     // Accessor(s)
     const b2Vec2& GetPosition() { return m_pb2Body->GetPosition(); }
     const b2Vec2& GetLinearVelocity() { return m_pb2Body->GetLinearVelocity(); }

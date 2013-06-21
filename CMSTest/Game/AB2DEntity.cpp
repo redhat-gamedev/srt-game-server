@@ -8,9 +8,80 @@
 
 #include "AB2DEntity.h"
 #include "B2DWorld.h"
+#include "AEntity.h"
+#include "../Proto/EntityGameEvent.pb.h"
 #include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
 #include <assert.h>
 
+AB2DEntity::_Serializer                AB2DEntity::Serializer;
+
+using namespace gameevent;
+
+
+void AB2DEntity::_Serializer::Serialize(const AB2DEntity* pB2DEntity, gameevent::EntityGameEvent* pEntityGameEvent)
+{
+    using namespace box2d;
+    
+    assert(pEntityGameEvent);
+    
+    //int iPreCount = 0;
+    //int iPostCount = 0;
+    
+    b2Fixture*  pFixtureList = NULL;
+    PbBody*     pPbBody = NULL;
+    PbFixture*  pPbFixture = NULL;
+    //PbVec2*     ppbv2Gravity = new PbVec2();
+    PbVec2*     ppbv2Position = new PbVec2();
+    PbVec2*     pPbVec2LinearVelocity = NULL;
+    PbVec2*     pPbVec2Force = NULL;
+    //const       b2Vec2 b2v2Gravity = pb2World->GetGravity();
+    AEntity*    pEntity = NULL;
+    
+    pPbBody = pEntityGameEvent->mutable_body();
+
+    pPbBody->set_active(pB2DEntity->m_pb2Body->IsActive());
+    pPbBody->set_bullet(pB2DEntity->m_pb2Body->IsBullet());
+    pPbBody->set_type(DYNAMIC);
+    ppbv2Position = new PbVec2();
+    ppbv2Position->set_x(pB2DEntity->m_pb2Body->GetPosition().x);
+    ppbv2Position->set_y(pB2DEntity->m_pb2Body->GetPosition().y);
+    pPbBody->set_angle(pB2DEntity->m_pb2Body->GetAngle());
+    pPbBody->set_allocated_position(ppbv2Position);
+    
+    pPbVec2LinearVelocity = new PbVec2();
+    pPbVec2LinearVelocity->set_x(pB2DEntity->m_pb2Body->GetLinearVelocity().x);
+    pPbVec2LinearVelocity->set_y(pB2DEntity->m_pb2Body->GetLinearVelocity().y);
+    pPbBody->set_allocated_linear_velocity(pPbVec2LinearVelocity);
+    
+    pPbVec2Force = new PbVec2();
+    pPbVec2Force->set_x(0.0f);
+    pPbVec2Force->set_y(0.0f);
+    pPbBody->set_allocated_force(pPbVec2Force);
+    
+    pEntity = static_cast<AEntity*>(pB2DEntity->m_pb2Body->GetUserData());
+    assert(NULL != pEntity);
+    pPbBody->set_uuid(pEntity->UUID);
+    pPbBody->set_tag(pEntity->Tag);
+    
+    pFixtureList = pB2DEntity->m_pb2Body->GetFixtureList();
+    for (b2Fixture* pFixture = pFixtureList; pFixture; pFixture = pFixture->GetNext())
+    {
+        //iPreCount = pPbBody->fixtures_size();
+        pPbFixture = pPbBody->add_fixtures();
+        assert(NULL != pPbFixture);
+        //iPostCount = pPbBody->fixtures_size();
+        //assert(iPostCount > iPreCount);
+        
+        pPbFixture->set_density(pFixture->GetDensity());
+        pPbFixture->set_friction(pFixture->GetFriction());
+    }
+}
+
+void AB2DEntity::_Serializer::Deserialisze(const gameevent::EntityGameEvent* pEntityGameEvent, AB2DEntity*& pEntity)
+{
+    
+    
+}
 
 AB2DEntity::_AB2DDefinition::_AB2DDefinition()
 {

@@ -1,15 +1,21 @@
 package gameevent;
 
+import "box2d.proto";
+
 
 message EntityGameEvent
 {
 	enum EntityGameEventType
 	{
 		CREATE = 0;
-		DESTROY = 1;
+        RETRIEVE = 1;
+		UPDATE = 2;
+        DESTROY = 3;
 	}
-	required EntityGameEventType type = 1;
 
-	optional string UUID = 2;
-	required uint64 entityTag = 3;
+	required EntityGameEventType type = 1;
+    required uint64 entityTag = 2;
+
+	optional string UUID = 3;
+    optional box2d.PbBody body = 4;
 }

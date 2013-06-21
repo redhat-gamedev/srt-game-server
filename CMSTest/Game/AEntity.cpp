@@ -14,16 +14,24 @@
 #include "../Proto/EntityGameEvent.pb.h"
 #include <assert.h>
 
-AEntity::_Serializer        AEntity::Serializer;
-uint64_t                    AEntity::s_ui64Count = 1;
-
-using namespace gameevent;
+decaf::util::StlQueue<AEntity*>     AEntity::s_EntityQueue;
+AEntity::_Serializer                AEntity::Serializer;
+uint64_t                            AEntity::s_ui64Count = 1;
 
 
 void AEntity::_Serializer::Serialize(const AEntity* pEntity, gameevent::EntityGameEvent* pEntityGameEvent)
 {
+    using namespace box2d;
+    using namespace gameevent;
+    
+    assert(pEntityGameEvent);
+    
+    PbBody* pBody = NULL;
+
     pEntityGameEvent->set_uuid(pEntity->m_strUUID);
     pEntityGameEvent->set_entitytag(pEntity->m_ui64Tag);
+    pBody = pEntityGameEvent->mutable_body();
+    pEntity->m_pB2DEntity->Serializer.Serialize(pEntity->m_pB2DEntity, pEntityGameEvent);
 }
 
 void AEntity::_Serializer::Deserialisze(const gameevent::EntityGameEvent* pEntityGameEvent, AEntity*& pEntity)
@@ -31,6 +39,7 @@ void AEntity::_Serializer::Deserialisze(const gameevent::EntityGameEvent* pEntit
     
     
 }
+
 
 // Constructor(s)
 AEntity::AEntity()
@@ -57,6 +66,7 @@ AEntity::AEntity(const std::string& strUUID, uint64_t ui64Tag, AB2DEntity* pAB2D
     assert(pAB2DEntity);
     
     ++s_ui64Count;
+    
 }
 
 // Destructor(s)

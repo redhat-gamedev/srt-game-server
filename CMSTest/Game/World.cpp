@@ -9,11 +9,13 @@
 #include "World.h"
 #include "B2DWorld.h"
 #include "Player.h"
-#include "AEntity.h"
+//#include "AEntity.h"
 #include "../Application/Messenger.h"
 #include "../Application/Messenger_Producer.h"
 #include "../Application/Messenger_Consumer.h"
 #include "../Application/Security.h"
+//#include "../Proto/GameEvent.pb.h"
+//#include "../Proto/EntityGameEvent.pb.h"
 #include "../Shared/SimpleAsyncProducer.h"
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Common/b2Settings.h"
@@ -238,8 +240,8 @@ void World::Simulate()
         {
             B2DWorld::world->Step(timeStep, velocityIterations, positionIterations);
             PbWorld* pPbWorld = new PbWorld(); // TODO: remove memory thrash
-            b2WorldToPbWorld(B2DWorld::world, pPbWorld);
-            Messenger::Producer.Enqueue(pPbWorld);
+            //b2WorldToPbWorld(B2DWorld::world, pPbWorld);
+            //Messenger::Producer.Enqueue(pPbWorld);
             
             m_listPlayersSwap = m_listPlayers;
             Player*     pPlayer = NULL;
@@ -248,7 +250,7 @@ void World::Simulate()
                 pPlayer = m_listPlayersSwap.front();
                 m_listPlayersSwap.pop_front();
                 assert(pPlayer);
-                pPlayer->Update();
+                pPlayer->Update();                
             }
         });
 //        decaf::lang::Thread::currentThread()->sleep(15);
