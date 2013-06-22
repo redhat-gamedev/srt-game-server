@@ -63,6 +63,7 @@ void Messenger::Setup()
     Player::EventPublisher.DestroyedEvent += Poco::FunctionDelegate<const AEntity::EType&>(&Messenger::OnEntityDestroyed);
     
     Bullet::EventPublisher.CreatedEvent += Poco::FunctionDelegate<const AEntity::EType&>(&Messenger::OnEntityCreated);
+    Bullet::EventPublisher.UpdatedEvent += Poco::FunctionDelegate<const AEntity::EType&>(&Messenger::OnEntityUpdated);
     Bullet::EventPublisher.DestroyedEvent += Poco::FunctionDelegate<const AEntity::EType&>(&Messenger::OnEntityDestroyed);
     
 //    std::cout << "Starting " << strThreadName << std::endl;
@@ -76,6 +77,7 @@ void Messenger::Teardown()
 //    s_pThread = NULL;
 
     Bullet::EventPublisher.DestroyedEvent -= Poco::FunctionDelegate<const AEntity::EType&>(&Messenger::OnEntityDestroyed);
+    Bullet::EventPublisher.UpdatedEvent -= Poco::FunctionDelegate<const AEntity::EType&>(&Messenger::OnEntityUpdated);
     Bullet::EventPublisher.CreatedEvent -= Poco::FunctionDelegate<const AEntity::EType&>(&Messenger::OnEntityCreated);
     
     Player::EventPublisher.DestroyedEvent -= Poco::FunctionDelegate<const AEntity::EType&>(&Messenger::OnEntityDestroyed);

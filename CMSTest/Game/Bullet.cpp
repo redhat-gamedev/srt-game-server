@@ -14,6 +14,7 @@
 #include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
 #include "../Shared/MakeT.h"
 #include <iostream>
+#include <iomanip>
 #include <string>
 #include <assert.h>
 
@@ -29,7 +30,9 @@ Bullet::Bullet(const std::string& strUUID, const b2Vec2& b2v2GunPosition, const 
             (uint64_t)MakeT<uint64_t>((uint32_t)AEntity::BULLET, s_ui32Count),
             new B2DBullet(b2v2GunPosition, b2v2GunVelocity, b2v2FiringDirection, this))
 {
-    //std::cout << "Bullet::Bullet() " << m_ui64Tag << std::endl;
+    using namespace std;
+    
+    //cout << hex << "Bullet::Bullet() " << m_ui64Tag << endl;
 
     ++s_ui32Count;
     
@@ -39,7 +42,9 @@ Bullet::Bullet(const std::string& strUUID, const b2Vec2& b2v2GunPosition, const 
 // Destructor(s)
 Bullet::~Bullet()
 {
-    //std::cout << "Bullet::~Bullet() " << m_ui64Tag << std::endl;
+    using namespace std;
+    
+    //cout << hex << "Bullet::~Bullet() " << m_ui64Tag << endl;
     
     //--s_ui32Count;
     delete m_pLifeTimer;
@@ -59,4 +64,6 @@ void Bullet::Update()
     {
         m_bAlive = false;
     }
+    
+    EventPublisher.UpdatedEvent(this, AEntity::BULLET);
 }

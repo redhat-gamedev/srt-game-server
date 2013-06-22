@@ -54,9 +54,6 @@ private:
         void run();
     };
 
-    // See World_FactoryT.h
-    class _Factory;    
-
 protected:
     xdispatch::queue*               m_pSimulationSerialDispatchQueue;
 //    xdispatch::timer*               m_pSimulationDispatchTimer;

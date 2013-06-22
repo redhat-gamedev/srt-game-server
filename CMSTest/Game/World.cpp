@@ -23,6 +23,8 @@
 #include "Poco/Delegate.h"
 #include <cms/CMSException.h>
 #include <decaf/lang/Thread.h>
+#include <assert.h>
+#include <iostream>
 
 B2DWorld*               World::m_pB2DWorld = NULL;
 
@@ -239,7 +241,7 @@ void World::Simulate()
         m_pSimulationSerialDispatchQueue->sync([=]
         {
             B2DWorld::world->Step(timeStep, velocityIterations, positionIterations);
-            PbWorld* pPbWorld = new PbWorld(); // TODO: remove memory thrash
+            //PbWorld* pPbWorld = new PbWorld(); // TODO: remove memory thrash
             //b2WorldToPbWorld(B2DWorld::world, pPbWorld);
             //Messenger::Producer.Enqueue(pPbWorld);
             
@@ -280,6 +282,7 @@ void World::HandleMessengerConsumerEventPublisherCreateEntityRequest(const void*
 {
     m_pSimulationSerialDispatchQueue->sync([=]
     {
+        std::cout << "World::HandleMessengerConsumerEventPublisherCreateEntityRequest" << std::endl;
         AddPlayer(anEntity.UUID);
     });
 }

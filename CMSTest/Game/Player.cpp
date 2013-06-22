@@ -14,10 +14,12 @@
 #include "Timer.h"
 #include "B2DPod.h"
 #include "Input.h"
-#include "../Proto/box2d.pb.h"
 #include "Poco/Delegate.h"
+#include "../Proto/box2d.pb.h"
 #include "../Shared/MakeT.h"
 #include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
+#include <iostream>
+#include <iomanip>
 #include <assert.h>
 
 Player::_EventPublisher     Player::EventPublisher;
@@ -26,11 +28,15 @@ uint32_t                    Player::s_ui32Count = 1;
 
 // Constructor(s)
 Player::Player(const std::string& strUUID) :
-    m_pBulletTimer(new Rock2D::Timer(250)),
+    m_pBulletTimer(new Rock2D::Timer(500)),
     AEntity(strUUID,
             (uint64_t)MakeT<uint64_t>((uint32_t)AEntity::POD, s_ui32Count),
             new B2DPod(this))
 {
+    using namespace std;
+    
+    //cout << hex << "Player::Player() " << m_ui64Tag << endl;
+    
     ++s_ui32Count;
     
     Input::EventPublisher.DualStickEvent += Poco::Delegate<Player, DualStick::PbDualStick>(this, &Player::OnInputDualStick);
@@ -41,6 +47,10 @@ Player::Player(const std::string& strUUID) :
 // Destructor(s)
 Player::~Player()
 {
+    using namespace std;
+    
+    //cout << hex << "Player::~Player() " << m_ui64Tag << endl;
+    
     //--s_ui32Count;
 
     Input::EventPublisher.DualStickEvent -= Poco::Delegate<Player, DualStick::PbDualStick>(this, &Player::OnInputDualStick);

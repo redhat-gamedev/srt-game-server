@@ -21,7 +21,7 @@ namespace decaf
         class Thread;
     }
 }
-//class AEntity;
+
 
 class Messenger// :
 //    decaf::lang::Runnable
