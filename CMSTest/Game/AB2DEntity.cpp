@@ -13,7 +13,8 @@
 #include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
 #include <assert.h>
 
-AB2DEntity::_Serializer                AB2DEntity::Serializer;
+AB2DEntity::_Serializer                 AB2DEntity::Serializer;
+//AB2DEntity::_Factory                    AB2DEntity::Factory;
 
 using namespace gameevent;
 
@@ -83,6 +84,38 @@ void AB2DEntity::_Serializer::Deserialisze(const gameevent::EntityGameEvent* pEn
     
 }
 
+//b2Body* AB2DEntity::_Factory::CreateBody(const b2BodyDef& ab2BodyDef, const b2FixtureDef& ab2FixtureDef, void* pUserData)
+b2Body* AB2DEntity::_Factory::CreateBody(const _AB2DDefinition& aAB2DDefinition)
+{
+    b2Body* pb2Body = B2DWorld::world->CreateBody(&aAB2DDefinition.BodyDef);
+    pb2Body->CreateFixture(&aAB2DDefinition.FixtureDef);
+    pb2Body->SetUserData((void *)aAB2DDefinition.UserData);
+    
+    return pb2Body;
+}
+
+//void AB2DEntity::_Factory::Create(const b2BodyDef& ab2BodyDef, const b2FixtureDef& ab2FixtureDef, void* pUserData)
+//{
+//    xdispatch::queue("box2d").sync([=]
+//    {
+//        CreateBody(ab2BodyDef, ab2FixtureDef, pUserData);
+//        CreatedEvent(this, pb2Body);
+//    });
+//}
+//
+//void AB2DEntity::_Factory::Destroy(AB2DEntity* pB2DEntity)
+//{
+//    assert(pB2DEntity);
+//    
+//    xdispatch::queue("box2d").sync([=]
+//    {
+//        b2Body* pb2BodyCopy = pB2DEntity->m_pb2Body;
+//        DestroyedEvent(this, pB2DEntity);
+//        
+//        B2DWorld::world->DestroyBody(pb2BodyCopy);
+//    });
+//}
+
 AB2DEntity::_AB2DDefinition::_AB2DDefinition()
 {
     // Define the dynamic body. We set its position
@@ -100,6 +133,17 @@ AB2DEntity::_AB2DDefinition::_AB2DDefinition()
 
 
 // Constructor(s)
+AB2DEntity::AB2DEntity()
+{
+    assert(false);
+}
+
+AB2DEntity::AB2DEntity(b2Body* pb2Body) :
+    m_pb2Body(pb2Body)
+{
+    assert(m_pb2Body);
+}
+
 AB2DEntity::AB2DEntity(const _AB2DDefinition& aAB2DDefinition, AEntity* pEntity) :
     m_pb2Body(NULL)
 {
@@ -109,6 +153,13 @@ AB2DEntity::AB2DEntity(const _AB2DDefinition& aAB2DDefinition, AEntity* pEntity)
     m_pb2Body->CreateFixture(&aAB2DDefinition.FixtureDef);
     m_pb2Body->SetUserData((void *)pEntity);
 }
+
+//void AB2DEntity::SetParentEntity(AEntity* pParentEntity)
+//{
+//    assert(pParentEntity);
+//    
+//    m_pParentEntity = pParentEntity;
+//}
 
 // Destructor
 AB2DEntity::~AB2DEntity()

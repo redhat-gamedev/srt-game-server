@@ -8,15 +8,7 @@
 
 #include "World.h"
 #include "B2DWorld.h"
-#include "Player.h"
-//#include "AEntity.h"
-#include "../Application/Messenger.h"
-#include "../Application/Messenger_Producer.h"
-#include "../Application/Messenger_Consumer.h"
-#include "../Application/Security.h"
-//#include "../Proto/GameEvent.pb.h"
-//#include "../Proto/EntityGameEvent.pb.h"
-#include "../Shared/SimpleAsyncProducer.h"
+#include "AEntity.h"
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Common/b2Settings.h"
 #include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
@@ -62,51 +54,41 @@ void World::Setup()
     std::string     strWorldSimulationName = "WorldSimulationThread";
 
     m_pB2DWorld = new B2DWorld();
-    m_pSimulationSerialDispatchQueue = new xdispatch::queue("simulation");
+//    m_pSimulationSerialDispatchQueue = new xdispatch::queue("box2d");
     
-    std::cout << "Starting the world simulation" << std::endl;
-    m_pWorldSimulation = new World::Simulation(this);
+    //std::cout << "Starting the world box2d simulation" << std::endl;
+    //m_pWorldSimulation = new World::Simulation(this);
 //    m_pWorldSimulationThread = new decaf::lang::Thread(m_pWorldSimulation, strWorldSimulationName);
 //    m_pWorldSimulationThread->start();
     
     //std::cout << "Starting the simulation dispatch timer" << std::endl;
     //m_pSimulationDispatchTimer = new xdispatch::timer(15 * NSEC_PER_MSEC, *m_pSimulationSerialDispatchQueue);
     //m_pSimulationDispatchTimer->start();
-    
-//    Security::EventPublisher.RequestJoinEvent += Poco::Delegate<World, const std::string&>(this, &World::OnSecurityRequestJoin);
-//    Security::EventPublisher.RequestLeaveEvent += Poco::Delegate<World, const std::string&>(this, &World::OnSecurityRequestLeave);
-//    
-//    Messenger::Consumer.EventPublisher.ReceivedCreateEntityRequest += Poco::Delegate<World, const AEntity&>(this, &World::HandleMessengerConsumerEventPublisherCreateEntityRequest);
 }
 
 void World::Teardown()
 {
-//    Messenger::Consumer.EventPublisher.ReceivedCreateEntityRequest -= Poco::Delegate<World, const AEntity&>(this, &World::HandleMessengerConsumerEventPublisherCreateEntityRequest);
-//    
-//    Security::EventPublisher.RequestLeaveEvent -= Poco::Delegate<World, const std::string&>(this, &World::OnSecurityRequestLeave);
-//    Security::EventPublisher.RequestJoinEvent -= Poco::Delegate<World, const std::string&>(this, &World::OnSecurityRequestJoin);
-
 //    delete m_pWorldSimulationThread;
 //    m_pWorldSimulationThread = NULL;
     
-    delete m_pWorldSimulation;
-    m_pWorldSimulation = NULL;
+//    delete m_pWorldSimulation;
+//    m_pWorldSimulation = NULL;
     
     //delete m_pSimulationDispatchTimer;
     //m_pSimulationDispatchTimer = NULL;
     
-    delete m_pSimulationSerialDispatchQueue;
-    m_pSimulationSerialDispatchQueue = NULL;
+//    delete m_pSimulationSerialDispatchQueue;
+//    m_pSimulationSerialDispatchQueue = NULL;
  
     delete m_pB2DWorld;
     m_pB2DWorld = NULL;
 }
 
 // Constructor(s)
-World::World() :
-    m_pSimulationSerialDispatchQueue(NULL),
+World::World()// :
+//    m_pSimulationSerialDispatchQueue(NULL),
     //m_pSimulationDispatchTimer(NULL),
-    m_pWorldSimulation(NULL)//,
+//    m_pWorldSimulation(NULL)//,
 //    m_pWorldSimulationThread(NULL)
 {
     Setup();
@@ -192,97 +174,10 @@ void World::b2WorldToPbWorld(b2World* pb2World, PbWorld*& pPbWorldDefault)
     }
 }
 
-// Method(s)
-//void World::AddPlayer(const std::string& strUUID)
-//{
-//    assert(strUUID.length() > 0);
-//    
-////    xdispatch::global_queue().sync([=]
-////    {
-//       Player* pPlayer = new Player(strUUID);
-//       m_listPlayers.push_front(pPlayer);
-////    });
-//}
-//
-//void World::RemovePlayer(const std::string& strUUID)
-//{
-//    assert(strUUID.length() > 0);
-//    
-////    xdispatch::global_queue().sync([=]
-////    {
-//       std::list<Player*>::iterator    iterPlayerList;
-//       Player* pPlayer = NULL;
-//       
-//       iterPlayerList = m_listPlayers.begin();
-//       for (;iterPlayerList != m_listPlayers.end(); iterPlayerList++)
-//       {
-//           pPlayer = *iterPlayerList;
-//           if (pPlayer->ThisUUIDIsAMatch(strUUID))
-//           {
-//               m_listPlayers.erase(iterPlayerList);
-//               delete pPlayer;
-//               break;
-//           }
-//       }
-////    });
-//}
-
 // decaf::lang::Runnable implementation
 void World::Simulate()
 {
-    //Player*     pPlayer = NULL;
-    float32 timeStep = 1.0f / 66.0f;
+    assert(m_pB2DWorld);
     
-	int32 velocityIterations = 6;
-	int32 positionIterations = 2;
-    
-//    while (true)
-//    {
-        m_pSimulationSerialDispatchQueue->sync([=]
-        {
-            B2DWorld::world->Step(timeStep, velocityIterations, positionIterations);
-            //PbWorld* pPbWorld = new PbWorld(); // TODO: remove memory thrash
-            //b2WorldToPbWorld(B2DWorld::world, pPbWorld);
-            //Messenger::Producer.Enqueue(pPbWorld);
-            
-//            m_listPlayersSwap = m_listPlayers;
-//            Player*     pPlayer = NULL;
-//            while (!(m_listPlayersSwap.empty()))
-//            {
-//                pPlayer = m_listPlayersSwap.front();
-//                m_listPlayersSwap.pop_front();
-//                assert(pPlayer);
-//                pPlayer->Update();           
-//            }
-        });
-//        decaf::lang::Thread::currentThread()->sleep(15);
-//    }
+    m_pB2DWorld->Step();
 }
-
-//// Security::ICallbacks implementation
-//void World::OnSecurityRequestJoin(const void* pSender, const std::string& strUUID)
-//{
-//    assert(!strUUID.empty());
-//    
-//    //AddPlayer(strUUID);
-//}
-//
-//void World::OnSecurityRequestLeave(const void* pSender, const std::string& strUUID)
-//{
-//    assert(!strUUID.empty());
-//
-//    m_pSimulationSerialDispatchQueue->sync([=]
-//    {
-//        RemovePlayer(strUUID);
-//    });
-//}
-//
-//// Messenger Event response
-//void World::HandleMessengerConsumerEventPublisherCreateEntityRequest(const void* pSender, const AEntity& anEntity)
-//{
-//    m_pSimulationSerialDispatchQueue->sync([=]
-//    {
-//        std::cout << "World::HandleMessengerConsumerEventPublisherCreateEntityRequest" << std::endl;
-//        AddPlayer(anEntity.UUID);
-//    });
-//}

@@ -159,6 +159,16 @@ AEntity::AEntity()
     // Necessary due to xdispatch sync compile errors? /// rnk 061413
 }
 
+AEntity::AEntity(AB2DEntity* pB2DEntity, uint64_t ui64Tag) :
+    m_ui64Tag(ui64Tag),
+    m_pB2DEntity(pB2DEntity)
+{
+    assert(pB2DEntity);
+    assert(ui64Tag > 0);
+    
+    ++s_ui64Count;
+}
+
 AEntity::AEntity(const std::string& strUUID, uint64_t ui64Tag) :
     m_strUUID(strUUID),
     m_ui64Tag(ui64Tag),
@@ -178,7 +188,6 @@ AEntity::AEntity(const std::string& strUUID, uint64_t ui64Tag, AB2DEntity* pAB2D
     assert(pAB2DEntity);
     
     ++s_ui64Count;
-    
 }
 
 // Destructor(s)

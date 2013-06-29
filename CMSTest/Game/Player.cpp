@@ -113,10 +113,10 @@ void Player::Update()
 
                 m_pBulletTimer->Restart();
                 Bullet* pBullet = NULL;
-                pBullet = new Bullet(m_strUUID, m_pB2DEntity->GetPosition(), m_pB2DEntity->GetLinearVelocity(), b2v2Shoot);
-                m_BulletQueue.lock();
-                m_BulletQueue.push(pBullet);
-                m_BulletQueue.unlock();
+                //pBullet = new Bullet(m_strUUID, m_pB2DEntity->GetPosition(), m_pB2DEntity->GetLinearVelocity(), b2v2Shoot);
+                //m_BulletQueue.lock();
+                //m_BulletQueue.push(pBullet);
+                //m_BulletQueue.unlock();
             }
         }
     }

@@ -61,6 +61,17 @@ protected:
         void Deserialisze(const gameevent::EntityGameEvent* pEntityGameEvent, AEntity*& anEntity);
     };
     
+    class _Factory
+    {
+    protected:
+        virtual void Create(const std::string& strUUID, uint64_t ui64Tag) {};
+        virtual void Destroy(AEntity*& pEntity) {};
+        
+    public:
+        Poco::BasicEvent<AEntity*&>    CreatedEvent;
+        Poco::BasicEvent<AEntity*&>    DestroyedEvent;
+    };
+    
     // Class data
     static decaf::util::StlQueue<AEntity*>          s_EntityQueue;
     
@@ -69,6 +80,7 @@ protected:
     AB2DEntity*             m_pB2DEntity;
 
     // Constructor(s)
+    AEntity(AB2DEntity* pB2DEntity, uint64_t ui64Tag);
     AEntity(const std::string& strUUID, uint64_t ui64Tag, AB2DEntity* pAB2DEntity  /* sink */);
 
 public:

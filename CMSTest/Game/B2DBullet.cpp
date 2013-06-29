@@ -11,7 +11,8 @@
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include <assert.h>
 
-B2DBullet::_B2DDefinition          B2DBullet::Definition;
+//B2DBullet::_B2DDefinition          B2DBullet::Definition;
+B2DBullet::_Factory             B2DBullet::Factory;
 
 
 B2DBullet::_B2DDefinition::_B2DDefinition() :
@@ -28,12 +29,54 @@ B2DBullet::_B2DDefinition::_B2DDefinition() :
     m_ab2FixtureDef.shape = &m_ab2CircleShape;
 }
 
+B2DBullet::_B2DDefinition::_B2DDefinition(const b2Vec2& b2v2GunPosition, const b2Vec2& b2v2GunVelocity, b2Vec2& b2v2FiringDirection, void* pUserData) :
+    _B2DDefinition()
+{
+    m_ab2BodyDef.position = b2v2GunPosition;
+    m_ab2BodyDef.linearVelocity = b2v2GunVelocity;
+}
+
+
+void B2DBullet::_Factory::Create(const _B2DDefinition& aB2DDefinition)
+{
+    xdispatch::queue("box2d").sync([=]
+    {
+        b2Body*     pb2Body = NULL;
+        B2DBullet*  pB2DBullet = NULL;
+        
+        //CreateBody(aB2DDefinition.BodyDef, aB2DDefinition.FixtureDef, aB2DDefinition.UserData);
+        pb2Body = CreateBody(aB2DDefinition);
+        pB2DBullet = new B2DBullet(pb2Body);
+        
+        CreatedEvent(this, pB2DBullet);
+    });
+}
+
+void B2DBullet::_Factory::Destroy(B2DBullet* pB2DBullet)
+{
+    assert(pB2DBullet);
+    
+    xdispatch::queue("box2d").sync([=]
+    {
+        b2Body* pb2BodyCopy = pB2DBullet->m_pb2Body;
+        B2DBullet* pB2DBulletCopy = pB2DBullet;
+        
+        DestroyedEvent(this, pB2DBulletCopy);
+        B2DWorld::world->DestroyBody(pb2BodyCopy);
+    });
+}
 
 // Constructor(s)
+B2DBullet::B2DBullet(b2Body* pb2Body) :
+    AB2DEntity(pb2Body)
+{
+    assert(pb2Body);
+}
+
 B2DBullet::B2DBullet(const b2Vec2& b2v2GunPosition, const b2Vec2& b2v2GunVelocity, b2Vec2& b2v2FiringDirection, AEntity* pBullet) :
     m_b2v2InitialPosition(b2v2GunPosition),
-    m_b2v2InitialVelocity(b2v2GunVelocity),
-    AB2DEntity(Definition, pBullet)
+    m_b2v2InitialVelocity(b2v2GunVelocity)//,
+    //AB2DEntity(Definition, pBullet)
 {
     m_pb2Body->SetTransform(m_b2v2InitialPosition, 0.0f);
     

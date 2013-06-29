@@ -15,9 +15,15 @@
 #include <string>
 #include <list>
 
+namespace xdispatch
+{
+    class queue;
+}
 
 class B2DWorld
 {
+    friend class AB2DEntity;
+    
 // Class
 public:
 
@@ -38,10 +44,12 @@ protected:
     float32         timeStep;// = 1.0f / 60.0f;
 	int32           velocityIterations;
     int32           positionIterations;
+        
+    xdispatch::queue*               m_pBox2DSerialDispatchQueue;
     
 public:
     static b2World*        world;
-    
+
     // Constructor(s)
     B2DWorld();
     
@@ -49,6 +57,7 @@ public:
     ~B2DWorld();
     
     // Method(s)
+    void Step();
 };
 
 #endif /* defined(__CMSTest__B2DWorld__) */

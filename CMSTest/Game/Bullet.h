@@ -18,6 +18,7 @@ namespace Rock2D
 {
     class Timer;
 }
+class B2DBullet;
 
 
 class Bullet :
@@ -33,11 +34,37 @@ protected:
     bool                    m_bAlive;
     Rock2D::Timer*          m_pLifeTimer;
     
+    class _Factory :
+        public AEntity::_Factory
+    {
+        friend class Bullet;
+        
+    protected:
+        // Constructor(s)
+        _Factory();
+        
+        // Destructor(s)
+        ~_Factory();
+        
+        virtual void Create(const b2Vec2& b2v2GunPosition, const b2Vec2& b2v2GunVelocity, b2Vec2& b2v2FiringDirection);
+        virtual void Destroy(Bullet*& pBullet);
+        
+    public:
+        Poco::BasicEvent<Bullet*&>    CreatedEvent;
+        Poco::BasicEvent<Bullet*&>    DestroyedEvent;
+        
+        // Event response
+        void HandleB2DBulletCreatedEvent(const void* pSender, B2DBullet*& pB2DBullet);
+        void HandleB2DBulletDestroyedEvent(const void* pSender, B2DBullet*& pB2DBullet);
+    };
+    
 public:
     static _EventPublisher          EventPublisher;
-    
+    static _Factory                 Factory;
+
     // Constructor(s)
-    Bullet(const std::string& strUUID, const b2Vec2& b2v2GunPosition, const b2Vec2& b2v2GunVelocity, b2Vec2& b2v2FiringDirection);
+    Bullet(B2DBullet* pB2DBullet);
+    //Bullet(const std::string& strUUID, const b2Vec2& b2v2GunPosition, const b2Vec2& b2v2GunVelocity, b2Vec2& b2v2FiringDirection);
     
     // Destructor(s)
     ~Bullet();

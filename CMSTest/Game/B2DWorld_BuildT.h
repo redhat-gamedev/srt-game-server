@@ -21,7 +21,7 @@ class B2DWorld::_BuildT
 public:
     static void B2DBody(T* pT, void (T::*pOnB2DBodyCreated)(b2Body* pb2Body), const b2BodyDef& ab2BodyDef, const b2FixtureDef& ab2FixtureDef)
     {
-        xdispatch::queue("simulation").sync([=]
+        xdispatch::queue("box2d").sync([=]
         {
             // call the body factory.
             b2Body* pb2Body = B2DWorld::world->CreateBody(&ab2BodyDef);
@@ -35,7 +35,7 @@ public:
     {
         assert(pb2Body);
         
-        xdispatch::queue("simulation").sync([=]
+        xdispatch::queue("box2d").sync([=]
         {
             B2DWorld::world->DestroyBody(pb2Body);
             
