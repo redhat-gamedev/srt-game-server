@@ -61,12 +61,12 @@ protected:
     World::Simulation*              m_pWorldSimulation;
 //    decaf::lang::Thread*            m_pWorldSimulationThread;
 
-    std::list<Player*>              m_listPlayers;
-    std::list<Player*>              m_listPlayersSwap;
-    
-    std::list<AEntity*>             m_listEntities;
-    std::list<AEntity*>             m_listEntitiesSwap;
-    
+//    std::list<Player*>              m_listPlayers;
+//    std::list<Player*>              m_listPlayersSwap;
+//    
+//    //std::list<AEntity*>             m_listEntities;
+//    //std::list<AEntity*>             m_listEntitiesSwap;
+//    
     // Helper(s)
     void Setup();
     void Teardown();
@@ -83,18 +83,18 @@ public:
     ~World();
 
     // Method(s)
-    void AddPlayer(const std::string& strUUID);
-    void RemovePlayer(const std::string& strUUID);
+//    void AddPlayer(const std::string& strUUID);
+//    void RemovePlayer(const std::string& strUUID);
     
     // decaf::lang::Runnable implementation
     void Simulate();
     
-    // Security Event response
-    void OnSecurityRequestJoin(const void* pSender, const std::string& strUUID);
-    void OnSecurityRequestLeave(const void* pSender, const std::string& strUUID);
-    
-    // Messenger Event response
-    void HandleMessengerConsumerEventPublisherCreateEntityRequest(const void* pSender, const AEntity& anEntity);
+//    // Security Event response
+//    void OnSecurityRequestJoin(const void* pSender, const std::string& strUUID);
+//    void OnSecurityRequestLeave(const void* pSender, const std::string& strUUID);
+//    
+//    // Messenger Event response
+//    void HandleMessengerConsumerEventPublisherCreateEntityRequest(const void* pSender, const AEntity& anEntity);
 };
 
 #endif /* defined(__CMSTest__World__) */

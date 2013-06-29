@@ -25,7 +25,7 @@ uint32_t                    Bullet::s_ui32Count = 1;
 // Constructor(s)
 Bullet::Bullet(const std::string& strUUID, const b2Vec2& b2v2GunPosition, const b2Vec2& b2v2GunVelocity, b2Vec2& b2v2FiringDirection) :
     m_bAlive(true),
-    m_pLifeTimer(new Rock2D::Timer(4000)),
+    m_pLifeTimer(new Rock2D::Timer(3000)),
     AEntity(strUUID,
             (uint64_t)MakeT<uint64_t>((uint32_t)AEntity::BULLET, s_ui32Count),
             new B2DBullet(b2v2GunPosition, b2v2GunVelocity, b2v2FiringDirection, this))

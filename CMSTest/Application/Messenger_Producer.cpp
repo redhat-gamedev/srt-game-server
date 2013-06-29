@@ -8,9 +8,14 @@
 
 #include "Messenger_Producer.h"
 #include "SimpleAsyncProducer.h"
+#include "../Proto/GameEvent.pb.h"
+#include "../Proto/EntityGameEvent.pb.h"
 #include <cms/CMSException.h>
 #include <google/protobuf/message.h>
 #include <string>
+#include <iostream>
+#include <iomanip>
+#include <bitset>
 #include <assert.h>
 
 using namespace decaf::lang;
@@ -83,16 +88,30 @@ void Messenger::_Producer::SendUpdate(::google::protobuf::Message* pMessage)
     //assert(pMessage);
     //assert(pMessage->IsInitialized());
     
+    using namespace std;
+    using namespace gameevent;
+    
     if (NULL == pMessage)
     {
         //printf("Messenger::_Producer::SendUpdate bailing on NULL pMessage");
         return;
     }
     
-    std::string strPBBuffer = "";
+    string strPBBuffer = "";
     
     try
     {
+        GameEvent* pGameEvent = static_cast<GameEvent*>(pMessage);
+        //EntityGameEvent* pEntityGameEvent = pGameEvent->entitygameevent();
+        const EntityGameEvent& anEntityGameEvent = pGameEvent->entitygameevent();
+        //cout << hex << anEntityGameEvent.type() << endl;
+//        if (pEntityGameEvent)
+        //{
+            //uint64_t ui64Tag = anEntityGameEvent.entitytag();
+            //bitset<sizeof(uint64_t)*8>    aBitSet(ui64Tag);
+            //cout << hex << anEntityGameEvent.entitytag() << endl;
+            //cout << aBitSet << endl;
+        //}
         strPBBuffer.clear();
         pMessage->SerializeToString(&strPBBuffer);
         pMessage->Clear();
@@ -137,6 +156,8 @@ void Messenger::_Producer::SendUpdates()
 
 void Messenger::_Producer::ProcessEnqueuedMessages()
 {
+    //m_pProducerSerialDispatchQueue->sync([=]
+    //{
     ::google::protobuf::Message* pMessage = NULL;
     
     try
@@ -160,4 +181,5 @@ void Messenger::_Producer::ProcessEnqueuedMessages()
     {
         e.printStackTrace();
     }
+    //});
 }

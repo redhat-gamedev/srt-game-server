@@ -24,6 +24,11 @@ namespace google
         class Message;
     }
 }
+namespace gameevent
+{
+    class GameEvent;
+    class EntityGameEvent;
+}
 
 
 class Messenger::_Producer// :
@@ -39,7 +44,8 @@ protected:
 //    xdispatch::timer*                                       m_pProducerDispatchTimer;
     decaf::util::StlQueue<::google::protobuf::Message*>     m_aMessageQueue;
 //    decaf::lang::Thread*                                    m_pThread;
- 
+    //decaf::util::StlQueue<::google::protobuf::Message*>     m_aMessageQueue;
+    
     // Helper(s)
     void Setup(std::string& strBrokerURI, std::string& strDestinationURI);
     void Teardown();

@@ -19,9 +19,10 @@
 //#include <decaf/lang/Thread.h>
 #include <string>
 #include <iostream>
+//#include <bitset>
 #include <assert.h>
 
-Messenger::_Producer            Messenger::Producer;
+//Messenger::_Producer            Messenger::Producer;
 Messenger::_Producer            Messenger::GameEventProducer;
 Messenger::_Consumer            Messenger::Consumer;
 const std::string               Messenger::BrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp";
@@ -44,7 +45,7 @@ Messenger::~Messenger()
 void Messenger::Setup()
 {
     std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp";
-    std::string     strWorldSimulationDestinationURI = "WORLD.SIMULATION";
+    //std::string     strWorldSimulationDestinationURI = "WORLD.SIMULATION";
     std::string     strGameEventInDestinationURI = "GAME.EVENT.IN";
     std::string     strGameEventOutDestinationURI = "GAME.EVENT.OUT";
     std::string     strThreadName = "MessengerThread";
@@ -52,7 +53,7 @@ void Messenger::Setup()
     s_pMessengerSerialDispatchQueue = new xdispatch::queue("messenger");
     
     // World Simulation
-    Producer.Setup(strBrokerURI, strWorldSimulationDestinationURI);
+    //Producer.Setup(strBrokerURI, strWorldSimulationDestinationURI);
     
     // Game Event
     GameEventProducer.Setup(strBrokerURI, strGameEventOutDestinationURI);
@@ -86,7 +87,7 @@ void Messenger::Teardown()
 
     GameEventProducer.Teardown();
     Consumer.Teardown();
-    Producer.Teardown();
+    //Producer.Teardown();
     
     delete s_pMessengerSerialDispatchQueue;
     s_pMessengerSerialDispatchQueue = NULL;
@@ -119,9 +120,9 @@ void Messenger::OnEntityCreated(const void* pSender, const AEntity::EType& anEnt
     {
         const AEntity* pEntity = static_cast<const AEntity*>(pSender);
         
-        //GameEvent aGameEvent;
-        //GameEvent* pGameEvent = aGameEvent.New();
-        GameEvent* pGameEvent = new GameEvent();
+        GameEvent aGameEvent;
+        GameEvent* pGameEvent = aGameEvent.New();
+        //GameEvent* pGameEvent = new GameEvent();
         pGameEvent->set_type(GameEvent_GameEventType_ENTITY);
         
         EntityGameEvent* pEntityGameEvent = pGameEvent->mutable_entitygameevent();
@@ -135,21 +136,31 @@ void Messenger::OnEntityCreated(const void* pSender, const AEntity::EType& anEnt
 
 void Messenger::OnEntityUpdated(const void* pSender, const AEntity::EType& anEntityType)
 {
+    using namespace std;
     using namespace gameevent;
     
     s_pMessengerSerialDispatchQueue->sync([=]
     {
-      const AEntity* pEntity = static_cast<const AEntity*>(pSender);
-      
-      GameEvent* pGameEvent = new GameEvent();
-      pGameEvent->set_type(GameEvent_GameEventType_ENTITY);
-      
-      EntityGameEvent* pEntityGameEvent = pGameEvent->mutable_entitygameevent();
-      assert(NULL != pEntityGameEvent);
-      pEntityGameEvent->set_type(EntityGameEvent_EntityGameEventType_UPDATE);
-      
-      AEntity::Serializer.Serialize(pEntity, pEntityGameEvent);
-      GameEventProducer.Enqueue(pGameEvent);
+        const AEntity* pEntity = static_cast<const AEntity*>(pSender);
+
+        GameEvent aGameEvent;
+        GameEvent* pGameEvent = aGameEvent.New();
+        //GameEvent* pGameEvent = new GameEvent();
+        pGameEvent->set_type(GameEvent_GameEventType_ENTITY);
+
+        EntityGameEvent* pEntityGameEvent = pGameEvent->mutable_entitygameevent();
+        assert(NULL != pEntityGameEvent);
+        pEntityGameEvent->set_type(EntityGameEvent_EntityGameEventType_UPDATE);
+
+        AEntity::Serializer.Serialize(pEntity, pEntityGameEvent);
+//        if (pEntityGameEvent)
+//        {
+//            uint64_t ui64Tag = pEntityGameEvent->entitytag();
+//            bitset<sizeof(uint64_t)*8>    aBitSet(ui64Tag);
+//            //cout << hex << pEntityGameEvent->entitytag() << endl;
+//            cout << aBitSet << endl;
+//        }
+        GameEventProducer.Enqueue(pGameEvent);
     });
 }
 
@@ -161,9 +172,9 @@ void Messenger::OnEntityDestroyed(const void* pSender, const AEntity::EType& anE
     {
         const AEntity* pEntity = static_cast<const AEntity*>(pSender);
         
-        //GameEvent aGameEvent;
-        //GameEvent* pGameEvent = aGameEvent.New();
-        GameEvent* pGameEvent = new GameEvent();
+        GameEvent aGameEvent;
+        GameEvent* pGameEvent = aGameEvent.New();
+        //GameEvent* pGameEvent = new GameEvent();
         pGameEvent->set_type(GameEvent_GameEventType_ENTITY);
         
         EntityGameEvent* pEntityGameEvent = pGameEvent->mutable_entitygameevent();

@@ -7,16 +7,17 @@
 //
 
 #include "Server.h"
-#include "../Shared/SimpleAsyncConsumer.h"
-#include "../Shared/SimpleAsyncProducer.h"
 #include "World.h"
 #include "Heartbeat.h"
-#include "../Proto/box2d.pb.h"
 #include "Security.h"
-#include "../Game/Player.h"
 #include "Messenger.h"
 #include "Messenger_Consumer.h"
 #include "Messenger_Producer.h"
+#include "AEntity.h"
+#include "../Game/Player.h"
+#include "../Proto/box2d.pb.h"
+#include "../Shared/SimpleAsyncConsumer.h"
+#include "../Shared/SimpleAsyncProducer.h"
 #include "Poco/Delegate.h"
 #include "decaf/util/Timer.h"
 #include "decaf/lang/Thread.h"
@@ -80,6 +81,7 @@ void Server::Setup()
     std::string     strMainThreadName = "ServerThread";
 
     Messenger::Setup();
+    AEntity::ClassSetup();
     
     m_pWorld = new World();
     m_pInput = new Input();
@@ -128,6 +130,7 @@ void Server::Teardown()
     delete m_pWorld;
     m_pWorld = NULL;
     
+    AEntity::ClassTeardown();
     Messenger::Teardown();
 }
 
@@ -145,16 +148,14 @@ void Server::run()
         // Check game rules
         
         // Update all object states
+        AEntity::Update();
         
         // if any client needs a world update take world snapshot
         // Update clients if required
-        Messenger::Producer.ProcessEnqueuedMessages();
-        
-        //std::cout << "Starting the heartbeat" << std::endl;
-        //m_pTimer->schedule(m_pHeartbeat, 0, 1000);
+        //Messenger::Producer.ProcessEnqueuedMessages();
+        Messenger::GameEventProducer.ProcessEnqueuedMessages();
         
         decaf::lang::Thread::currentThread()->sleep(15);
-        Messenger::GameEventProducer.ProcessEnqueuedMessages();
     }
 }
 

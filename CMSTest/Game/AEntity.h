@@ -12,12 +12,14 @@
 #include "Poco/BasicEvent.h"
 #include <decaf/util/StlQueue.h>
 #include <string>
+#include <list>
 
 namespace gameevent
 {
     class EntityGameEvent;
 }
 class AB2DEntity;
+class Player;
 
 
 class AEntity
@@ -31,7 +33,14 @@ public:
     };
 
 private:
-    static uint64_t         s_ui64Count;
+    static uint64_t                         s_ui64Count;
+    static std::list<Player*>               s_listPlayers;
+    static std::list<Player*>               s_listPlayersSwap;
+    
+    //std::list<AEntity*>             m_listEntities;
+    //std::list<AEntity*>             m_listEntitiesSwap;
+    
+    
     
 protected:
     // Class(es)
@@ -63,8 +72,24 @@ protected:
     AEntity(const std::string& strUUID, uint64_t ui64Tag, AB2DEntity* pAB2DEntity  /* sink */);
 
 public:
+    // Class
     static _Serializer          Serializer;
+    
+    static void ClassSetup();
+    static void ClassTeardown();
+    
+    static void AddPlayer(const std::string& strUUID);
+    static void RemovePlayer(const std::string& strUUID);
+    static void Update();
 
+    // Security Event response
+    static void OnSecurityRequestJoin(const void* pSender, const std::string& strUUID);
+    static void OnSecurityRequestLeave(const void* pSender, const std::string& strUUID);
+    
+    // Messenger Event response
+    static void HandleMessengerConsumerEventPublisherCreateEntityRequest(const void* pSender, const AEntity& anEntity);
+    
+    // Instance
     // Constructor(s)
     AEntity();
     AEntity(const std::string& strUUID, uint64_t ui64Tag);

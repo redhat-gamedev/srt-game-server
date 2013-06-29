@@ -32,6 +32,10 @@ class Security :
     public cms::MessageListener,
     public cms::AsyncCallback
 {
+public:
+    
+    Poco::BasicEvent<int&>   IntEvent;
+
 protected:
     class _EventPublisher
     {
