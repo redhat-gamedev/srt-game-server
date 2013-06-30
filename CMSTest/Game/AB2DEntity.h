@@ -51,15 +51,17 @@ protected:
     class _Factory
     {
     protected:
-        //void CreateBody(const b2BodyDef& ab2BodyDef, const b2FixtureDef& ab2FixtureDef, void* pUserData = NULL);
+        // Constructor(s)
+        _Factory() {};
+        
+        // Destructor(s)
+        virtual ~_Factory() {};
+        
         b2Body* CreateBody(const _AB2DDefinition& aAB2DDefinition);
         
     public:
-        virtual void Create(const _AB2DDefinition& aB2DDefinition) {};
+        virtual AB2DEntity* Create(const _AB2DDefinition& aB2DDefinition) { return NULL; };
         virtual void Destroy(AB2DEntity* pB2DEntity) {};
-
-//        Poco::BasicEvent<AB2DEntity*&>    CreatedEvent;
-//        Poco::BasicEvent<AB2DEntity*&>    DestroyedEvent;
     };
     
     b2Body*         m_pb2Body;
@@ -74,16 +76,13 @@ protected:
     virtual ~AB2DEntity();
     
 public:
-    AEntity*&       ParentEntity = m_pParentEntity;
-    
     static _Serializer          Serializer;
-    //static _Factory             Factory;
-    
-    //void SetEntityParent(AEntity* pParentEntity);
     
     // Accessor(s)
     const b2Vec2& GetPosition() { return m_pb2Body->GetPosition(); }
     const b2Vec2& GetLinearVelocity() { return m_pb2Body->GetLinearVelocity(); }
+    AEntity* GetParentEntity() { return m_pParentEntity; }
+    void SetParentEntity(AEntity* pParentEntity);
     
     // Method(s)
     virtual void Move(float fX, float fY) {}

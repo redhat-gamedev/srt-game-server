@@ -59,6 +59,10 @@ public:
     
     // Input Event response
     void OnInputDualStick(const void* pSender, DualStick::PbDualStick& aPbDualStick);
+    
+    // Bullet Event response
+    void HandleBulletCreatedEvent(const void* pSender, Bullet*& pBullet);
+    void HandleBulletDestroyedEvent(const void* pSender, Bullet*& pBullet);
 };
 
 

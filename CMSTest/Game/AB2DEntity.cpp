@@ -84,37 +84,14 @@ void AB2DEntity::_Serializer::Deserialisze(const gameevent::EntityGameEvent* pEn
     
 }
 
-//b2Body* AB2DEntity::_Factory::CreateBody(const b2BodyDef& ab2BodyDef, const b2FixtureDef& ab2FixtureDef, void* pUserData)
 b2Body* AB2DEntity::_Factory::CreateBody(const _AB2DDefinition& aAB2DDefinition)
 {
-    b2Body* pb2Body = B2DWorld::world->CreateBody(&aAB2DDefinition.BodyDef);
+    b2Body* pb2Body = B2DWorld::Factory().CreateBody(&aAB2DDefinition.BodyDef);
     pb2Body->CreateFixture(&aAB2DDefinition.FixtureDef);
     pb2Body->SetUserData((void *)aAB2DDefinition.UserData);
     
     return pb2Body;
 }
-
-//void AB2DEntity::_Factory::Create(const b2BodyDef& ab2BodyDef, const b2FixtureDef& ab2FixtureDef, void* pUserData)
-//{
-//    xdispatch::queue("box2d").sync([=]
-//    {
-//        CreateBody(ab2BodyDef, ab2FixtureDef, pUserData);
-//        CreatedEvent(this, pb2Body);
-//    });
-//}
-//
-//void AB2DEntity::_Factory::Destroy(AB2DEntity* pB2DEntity)
-//{
-//    assert(pB2DEntity);
-//    
-//    xdispatch::queue("box2d").sync([=]
-//    {
-//        b2Body* pb2BodyCopy = pB2DEntity->m_pb2Body;
-//        DestroyedEvent(this, pB2DEntity);
-//        
-//        B2DWorld::world->DestroyBody(pb2BodyCopy);
-//    });
-//}
 
 AB2DEntity::_AB2DDefinition::_AB2DDefinition()
 {
@@ -149,24 +126,28 @@ AB2DEntity::AB2DEntity(const _AB2DDefinition& aAB2DDefinition, AEntity* pEntity)
 {
     assert(pEntity);
     
-    m_pb2Body = B2DWorld::world->CreateBody(&aAB2DDefinition.BodyDef);
+    m_pb2Body = B2DWorld::Factory().CreateBody(&aAB2DDefinition.BodyDef);
     m_pb2Body->CreateFixture(&aAB2DDefinition.FixtureDef);
     m_pb2Body->SetUserData((void *)pEntity);
 }
 
-//void AB2DEntity::SetParentEntity(AEntity* pParentEntity)
-//{
-//    assert(pParentEntity);
-//    
-//    m_pParentEntity = pParentEntity;
-//}
+void AB2DEntity::SetParentEntity(AEntity* pParentEntity)
+{
+    assert(pParentEntity);
+    
+    m_pParentEntity = pParentEntity;
+    if (m_pb2Body)
+    {
+        m_pb2Body->SetUserData((void*)pParentEntity);
+    }
+}
 
 // Destructor
 AB2DEntity::~AB2DEntity()
 {
     //std::cout << "AB2DEntity::~AB2DEntity()..." << std::endl;
     
-    B2DWorld::world->DestroyBody(m_pb2Body);
+    B2DWorld::Factory().DestroyBody(m_pb2Body);
     m_pb2Body = NULL;
 }
 

@@ -45,33 +45,39 @@ protected:
         
         // Destructor(s)
         ~_Factory();
-        
-        virtual void Create(const b2Vec2& b2v2GunPosition, const b2Vec2& b2v2GunVelocity, b2Vec2& b2v2FiringDirection);
-        virtual void Destroy(Bullet*& pBullet);
-        
+
     public:
         Poco::BasicEvent<Bullet*&>    CreatedEvent;
         Poco::BasicEvent<Bullet*&>    DestroyedEvent;
+    
+        virtual Bullet* Create(const std::string& strParentUUID, const b2Vec2& b2v2GunPosition, const b2Vec2& b2v2GunVelocity);
+        virtual void Destroy(Bullet*& pBullet);
         
         // Event response
-        void HandleB2DBulletCreatedEvent(const void* pSender, B2DBullet*& pB2DBullet);
-        void HandleB2DBulletDestroyedEvent(const void* pSender, B2DBullet*& pB2DBullet);
+//        void HandleB2DBulletCreatedEvent(const void* pSender, B2DBullet*& pB2DBullet);
+//        void HandleB2DBulletDestroyedEvent(const void* pSender, B2DBullet*& pB2DBullet);
     };
     
 public:
     static _EventPublisher          EventPublisher;
-    static _Factory                 Factory;
 
+    // Singleton
+    static _Factory& Factory()
+    {
+        static _Factory aFactory;
+        return aFactory;
+    }
+    
     // Constructor(s)
-    Bullet(B2DBullet* pB2DBullet);
-    //Bullet(const std::string& strUUID, const b2Vec2& b2v2GunPosition, const b2Vec2& b2v2GunVelocity, b2Vec2& b2v2FiringDirection);
+    Bullet(const std::string& strParentUUID, B2DBullet* pB2DBullet);
     
     // Destructor(s)
     ~Bullet();
     
     // Method(s)
     const bool Alive() { return m_bAlive; }
-    
+    void Fire(b2Vec2& b2v2FiringDirection);
+
     // Override(s)
     void Update();
 };

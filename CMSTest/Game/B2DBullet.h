@@ -31,18 +31,28 @@ public:
         
     protected:
         b2CircleShape       m_ab2CircleShape;
+        
     public:
         // Constructor(s)
         _B2DDefinition();
-        _B2DDefinition(const b2Vec2& b2v2GunPosition, const b2Vec2& b2v2GunVelocity, b2Vec2& b2v2FiringDirection, void* pUserData = NULL);
+        _B2DDefinition(const b2Vec2& b2v2GunPosition, const b2Vec2& b2v2GunVelocity, void* pUserData = NULL);
     };
     
 protected:
     class _Factory :
         public AB2DEntity::_Factory
     {
+        friend class B2DBullet;
+        
+    protected:
+        // Constructor(s)
+        _Factory() {};
+        
+        // Destructor(s)
+        ~_Factory() {};
+        
     public:
-        virtual void Create(const _B2DDefinition& aB2DDefinition);
+        virtual B2DBullet* Create(const _B2DDefinition& aB2DDefinition);
         virtual void Destroy(B2DBullet* pB2DBullet);
         
         Poco::BasicEvent<B2DBullet*&>    CreatedEvent;
@@ -56,15 +66,22 @@ protected:
 
     // Constructor(s)
     B2DBullet(b2Body* pb2Body);
-    B2DBullet(const b2Vec2& b2v2GunPosition, const b2Vec2& b2v2GunVelocity, b2Vec2& b2v2FiringDirection, AEntity* pBullet);
+//    B2DBullet(const b2Vec2& b2v2GunPosition, const b2Vec2& b2v2GunVelocity, b2Vec2& b2v2FiringDirection, AEntity* pBullet);
     
     // Destructor(s)
     ~B2DBullet();
 
 public:
-    //static _B2DDefinition       Definition;
-    static _Factory             Factory;
+    // Singleton
+    static _Factory& Factory()
+    {
+        static _Factory aFactory;
+        return aFactory;
+    }
     
+    // Method(s)
+    void Fire(b2Vec2& b2v2FiringDirection);
+
     // Callback(s)
 };
 

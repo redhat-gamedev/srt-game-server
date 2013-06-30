@@ -261,7 +261,6 @@
 		CCEB9EF8173FE24F00B3CE16 /* B2DBullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = B2DBullet.h; path = Game/B2DBullet.h; sourceTree = "<group>"; };
 		CCEB9EFA173FFB8E00B3CE16 /* AB2DEntity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AB2DEntity.cpp; path = Game/AB2DEntity.cpp; sourceTree = "<group>"; };
 		CCEB9EFB173FFB8E00B3CE16 /* AB2DEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AB2DEntity.h; path = Game/AB2DEntity.h; sourceTree = "<group>"; };
-		CCF21E6A1724B485006D1290 /* B2DWorld_BuildT.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = B2DWorld_BuildT.h; path = Game/B2DWorld_BuildT.h; sourceTree = "<group>"; };
 		CCFB9DDC1640ABB900F6DBA2 /* Box2D.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Box2D.xcodeproj; path = ../ThirdParty/box2d/Box2D/Build/xcode4/Box2D.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -450,7 +449,6 @@
 				CC2436D617492CFA00A8519D /* B2DPod.h */,
 				CCE449EC172313FD002A1937 /* B2DWorld.cpp */,
 				CCE449ED172313FD002A1937 /* B2DWorld.h */,
-				CCF21E6A1724B485006D1290 /* B2DWorld_BuildT.h */,
 				CCE449FD17231ADD002A1937 /* Bullet.cpp */,
 				CCE449FE17231ADD002A1937 /* Bullet.h */,
 				CCE449EE172313FD002A1937 /* Input.cpp */,

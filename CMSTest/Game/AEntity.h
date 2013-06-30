@@ -64,12 +64,12 @@ protected:
     class _Factory
     {
     protected:
-        virtual void Create(const std::string& strUUID, uint64_t ui64Tag) {};
+        virtual AEntity* Create(const std::string& strUUID, uint64_t ui64Tag) {};
         virtual void Destroy(AEntity*& pEntity) {};
         
     public:
-        Poco::BasicEvent<AEntity*&>    CreatedEvent;
-        Poco::BasicEvent<AEntity*&>    DestroyedEvent;
+//        Poco::BasicEvent<AEntity*&>    CreatedEvent;
+//        Poco::BasicEvent<AEntity*&>    DestroyedEvent;
     };
     
     // Class data
@@ -80,7 +80,7 @@ protected:
     AB2DEntity*             m_pB2DEntity;
 
     // Constructor(s)
-    AEntity(AB2DEntity* pB2DEntity, uint64_t ui64Tag);
+    //AEntity(AB2DEntity* pB2DEntity, uint64_t ui64Tag);
     AEntity(const std::string& strUUID, uint64_t ui64Tag, AB2DEntity* pAB2DEntity  /* sink */);
 
 public:

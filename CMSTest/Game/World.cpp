@@ -53,7 +53,7 @@ void World::Setup()
 {
     std::string     strWorldSimulationName = "WorldSimulationThread";
 
-    m_pB2DWorld = new B2DWorld();
+    //m_pB2DWorld = new B2DWorld();
 //    m_pSimulationSerialDispatchQueue = new xdispatch::queue("box2d");
     
     //std::cout << "Starting the world box2d simulation" << std::endl;
@@ -80,8 +80,8 @@ void World::Teardown()
 //    delete m_pSimulationSerialDispatchQueue;
 //    m_pSimulationSerialDispatchQueue = NULL;
  
-    delete m_pB2DWorld;
-    m_pB2DWorld = NULL;
+//    delete m_pB2DWorld;
+//    m_pB2DWorld = NULL;
 }
 
 // Constructor(s)
@@ -177,7 +177,5 @@ void World::b2WorldToPbWorld(b2World* pb2World, PbWorld*& pPbWorldDefault)
 // decaf::lang::Runnable implementation
 void World::Simulate()
 {
-    assert(m_pB2DWorld);
-    
-    m_pB2DWorld->Step();
+    B2DWorld::Instance().Step();
 }

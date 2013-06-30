@@ -21,6 +21,7 @@ namespace decaf
         class Thread;
     }
 }
+class Bullet;
 
 
 class Messenger// :
@@ -60,6 +61,9 @@ public:
     static void OnEntityCreated(const void* pSender, const AEntity::EType& anEntityType);
     static void OnEntityUpdated(const void* pSender, const AEntity::EType& anEntityType);
     static void OnEntityDestroyed(const void* pSender, const AEntity::EType& anEntityType);
+    
+    static void HandleBulletCreatedEvent(const void* pSender, Bullet*& pBullet);
+    static void HandleBulletDestroyedEvent(const void* pSender, Bullet*& pBullet);
     
     // decaf::lang::Runnable implementation
     //void run();
