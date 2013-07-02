@@ -90,11 +90,7 @@ void Player::Update()
     
     
 
-    B2DBullet::_Dependencies aB2DBulletDependencies(m_pB2DEntity->GetPosition(), m_pB2DEntity->GetLinearVelocity());
-    
-    B2DBullet* pB2DBullet = aB2DBulletFactory.Create(aB2DBulletDependencies);
-    Bullet::_Dependencies aBulletDependencies(m_strUUID, pB2DBullet);
-    Bullet* pBullet = aBulletFactory.Create(aBulletDependencies);
+
     
     for (int i = 0; i < vecPbDualStick.size(); ++i)
     {
@@ -125,6 +121,10 @@ void Player::Update()
                 //Bullet *pBullet = NULL;
                 //aBulletFactory.Create(Bullet::_Dependencies &aD)
                 //Bullet* pBullet = BulletFactory().Create(strUUID, m_pB2DEntity->GetPosition(), m_pB2DEntity->GetLinearVelocity());
+                B2DBullet::_Dependencies aB2DBulletDependencies(m_pB2DEntity->GetPosition(), m_pB2DEntity->GetLinearVelocity());
+                B2DBullet* pB2DBullet = aB2DBulletFactory.Create(aB2DBulletDependencies);
+                Bullet::_Dependencies aBulletDependencies(m_strUUID, pB2DBullet);
+                Bullet* pBullet = aBulletFactory.Create(aBulletDependencies);
                 pBullet->Fire(b2v2Shoot);
                 m_BulletQueue.lock();
                 m_BulletQueue.push(pBullet);
@@ -143,7 +143,7 @@ void Player::Update()
     m_BulletQueue.lock();
     while (!m_BulletQueue.empty())
     {
-        //Bullet* pBullet = NULL;
+        Bullet* pBullet = NULL;
         pBullet = m_BulletQueue.pop();
         pBullet->Update();
         if (!pBullet->Alive())
@@ -157,14 +157,14 @@ void Player::Update()
     }
     while (!aBulletToAddList.empty())
     {
-        //Bullet* pBullet = NULL;
+        Bullet* pBullet = NULL;
         pBullet = aBulletToAddList.front();
         aBulletToAddList.pop_front();
         m_BulletQueue.push(pBullet);
     }
     while (!aBulletToRemoveList.empty())
     {
-        //Bullet* pBullet = NULL;
+        Bullet* pBullet = NULL;
         pBullet = aBulletToRemoveList.front();
         aBulletToRemoveList.pop_front();
         //BulletFactory().Destroy(pBullet);

@@ -52,8 +52,9 @@ Bullet::Bullet(_Dependencies& theDependencies) :
     AEntity(theDependencies.ParentUUID,
             (uint64_t)MakeT<uint64_t>((uint32_t)AEntity::BULLET, s_ui32Count), theDependencies.pB2DBullet)
 {
-    
-    
+    assert(m_pB2DEntity);
+
+    m_pB2DEntity->SetParentEntity(this);
 }
 
 // Destructor(s)
