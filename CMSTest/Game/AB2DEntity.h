@@ -30,6 +30,7 @@ protected:
         b2BodyDef       m_ab2BodyDef;
         b2FixtureDef    m_ab2FixtureDef;
         void*           m_pUserData;
+        b2Body*         m_pb2Body;
         
         // Constructor(s)
         _AB2DDefinition();
@@ -39,6 +40,7 @@ protected:
         b2BodyDef&          BodyDef         = m_ab2BodyDef;
         b2FixtureDef&       FixtureDef      = m_ab2FixtureDef;
         void*&              UserData        = m_pUserData;
+        b2Body*&            pBody           = m_pb2Body;
     };
     
     class _Serializer

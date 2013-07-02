@@ -19,6 +19,23 @@ class AEntity;
 class B2DBullet :
     public AB2DEntity
 {
+public:
+    class _Dependencies :
+        public AB2DEntity::_AB2DDefinition
+    {
+    protected:
+        const b2Vec2&           m_b2v2GunPosition;
+        const b2Vec2&           m_b2v2GunVelocity;
+        b2CircleShape           m_b2CircleShape;
+        
+    public:
+        // Constructor
+        _Dependencies(const b2Vec2& b2v2GunPosition, const b2Vec2& b2v2GunVelocity);
+        
+        // Destructor()
+        ~_Dependencies() {};
+    };
+    
 private:
     
 protected:
@@ -38,7 +55,7 @@ public:
         _B2DDefinition(const b2Vec2& b2v2GunPosition, const b2Vec2& b2v2GunVelocity, void* pUserData = NULL);
     };
     
-protected:
+protected:    
     class _Factory :
         public AB2DEntity::_Factory
     {
@@ -68,10 +85,13 @@ protected:
     B2DBullet(b2Body* pb2Body);
 //    B2DBullet(const b2Vec2& b2v2GunPosition, const b2Vec2& b2v2GunVelocity, b2Vec2& b2v2FiringDirection, AEntity* pBullet);
     
+public:
+    // Constructor(s)
+    B2DBullet(_Dependencies& theDependencies);
+
     // Destructor(s)
     ~B2DBullet();
 
-public:
     // Singleton
     static _Factory& Factory()
     {

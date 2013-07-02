@@ -53,16 +53,8 @@ public:
     // Method(s)
     void Update();
     
-    // Event Firing Method(s)
-//    void FireCreatedEvent(const EntityData& anEntityData);
-//    void FireDestroyedEvent(const EntityData& anEntityData);
-    
     // Input Event response
-    void OnInputDualStick(const void* pSender, DualStick::PbDualStick& aPbDualStick);
-    
-    // Bullet Event response
-    void HandleBulletCreatedEvent(const void* pSender, Bullet*& pBullet);
-    void HandleBulletDestroyedEvent(const void* pSender, Bullet*& pBullet);
+    void OnInputDualStick(const void* pSender, DualStick::PbDualStick& aPbDualStick);    
 };
 
 

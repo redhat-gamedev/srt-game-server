@@ -19,6 +19,7 @@
 		CC2436E317492E8A00A8519D /* Messenger_Consumer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC2436E117492E8A00A8519D /* Messenger_Consumer.cpp */; };
 		CC488D27164EB5FD005078C3 /* libBox2D.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC488D20164EB5DE005078C3 /* libBox2D.a */; };
 		CC4FECE11662A3AA004810CC /* libProtocolBuffers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC4FECE01662A39A004810CC /* libProtocolBuffers.a */; };
+		CC51BA661781B7FA007F27F0 /* BulletFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC51BA641781B7FA007F27F0 /* BulletFactory.cpp */; };
 		CC68EA98163DA07400D225C2 /* CMSTest.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = CC68EA97163DA07400D225C2 /* CMSTest.1 */; };
 		CCA4C32C1687B45D006BAC1D /* xdispatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA4C32B1687B45D006BAC1D /* xdispatch.framework */; };
 		CCE449C217230E21002A1937 /* box2d.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CCE449B917230E21002A1937 /* box2d.pb.cc */; };
@@ -215,6 +216,10 @@
 		CC2436E117492E8A00A8519D /* Messenger_Consumer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Messenger_Consumer.cpp; path = Application/Messenger_Consumer.cpp; sourceTree = "<group>"; };
 		CC2436E217492E8A00A8519D /* Messenger_Consumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Messenger_Consumer.h; path = Application/Messenger_Consumer.h; sourceTree = "<group>"; };
 		CC4FECD81662A399004810CC /* ProtocolBuffers.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ProtocolBuffers.xcodeproj; path = ../ThirdParty/protobuf/ProtocolBuffers/ProtocolBuffers.xcodeproj; sourceTree = "<group>"; };
+		CC51BA641781B7FA007F27F0 /* BulletFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BulletFactory.cpp; path = Game/BulletFactory.cpp; sourceTree = "<group>"; };
+		CC51BA651781B7FA007F27F0 /* BulletFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BulletFactory.h; path = Game/BulletFactory.h; sourceTree = "<group>"; };
+		CC51BAAF17825523007F27F0 /* FactoryT.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FactoryT.h; path = Shared/FactoryT.h; sourceTree = "<group>"; };
+		CC51BAB017825A16007F27F0 /* B2DBulletFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = B2DBulletFactory.h; path = Game/B2DBulletFactory.h; sourceTree = "<group>"; };
 		CC68EA91163DA07400D225C2 /* CMSTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CMSTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC68EA97163DA07400D225C2 /* CMSTest.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = CMSTest.1; sourceTree = "<group>"; };
 		CCA4C32B1687B45D006BAC1D /* xdispatch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = xdispatch.framework; path = ../ThirdParty/xdispatch/build/bin/Debug/xdispatch.framework; sourceTree = "<group>"; };
@@ -432,6 +437,7 @@
 				CCE449DC17230F8E002A1937 /* Timer.cpp */,
 				CCE449DD17230F8E002A1937 /* Timer.h */,
 				CCE44A0017231FAD002A1937 /* MakeT.h */,
+				CC51BAAF17825523007F27F0 /* FactoryT.h */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -457,6 +463,9 @@
 				CCE449F1172313FD002A1937 /* Player.h */,
 				CCE44A011723265F002A1937 /* World.cpp */,
 				CCE44A021723265F002A1937 /* World.h */,
+				CC51BA641781B7FA007F27F0 /* BulletFactory.cpp */,
+				CC51BA651781B7FA007F27F0 /* BulletFactory.h */,
+				CC51BAB017825A16007F27F0 /* B2DBulletFactory.h */,
 			);
 			name = Game;
 			sourceTree = "<group>";
@@ -691,6 +700,7 @@
 				CC2436DD17492E0800A8519D /* Messenger_Producer.cpp in Sources */,
 				CC2436E017492E2E00A8519D /* Messenger.cpp in Sources */,
 				CC2436E317492E8A00A8519D /* Messenger_Consumer.cpp in Sources */,
+				CC51BA661781B7FA007F27F0 /* BulletFactory.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

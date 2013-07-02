@@ -44,6 +44,12 @@ protected:
     // Destructor(s)
     ~Messenger();
     
+    // Helper(s)
+    static void EnqueueEntityCreatedEvent(AEntity* pEntity);
+    static void EnqueueEntityUpdatedEvent(AEntity* pEntity);
+    static void EnqueueEntityDestroyedEvent(AEntity* pEntity);
+    
+    
 public:
     // World Simulation
     //static _Producer    Producer;
@@ -63,6 +69,7 @@ public:
     static void OnEntityDestroyed(const void* pSender, const AEntity::EType& anEntityType);
     
     static void HandleBulletCreatedEvent(const void* pSender, Bullet*& pBullet);
+    static void HandleBulletUpdatedEvent(const void* pSender, Bullet*& pBullet);
     static void HandleBulletDestroyedEvent(const void* pSender, Bullet*& pBullet);
     
     // decaf::lang::Runnable implementation

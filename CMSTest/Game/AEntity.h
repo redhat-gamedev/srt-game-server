@@ -24,6 +24,7 @@ class Player;
 
 class AEntity
 {
+    friend class BulletFactory;
 public:
     enum EType
     {
@@ -39,8 +40,6 @@ private:
     
     //std::list<AEntity*>             m_listEntities;
     //std::list<AEntity*>             m_listEntitiesSwap;
-    
-    
     
 protected:
     // Class(es)
@@ -61,16 +60,16 @@ protected:
         void Deserialisze(const gameevent::EntityGameEvent* pEntityGameEvent, AEntity*& anEntity);
     };
     
-    class _Factory
-    {
-    protected:
-        virtual AEntity* Create(const std::string& strUUID, uint64_t ui64Tag) {};
-        virtual void Destroy(AEntity*& pEntity) {};
-        
-    public:
-//        Poco::BasicEvent<AEntity*&>    CreatedEvent;
-//        Poco::BasicEvent<AEntity*&>    DestroyedEvent;
-    };
+//    class _Factory
+//    {
+//    protected:
+//        virtual AEntity* Create(const std::string& strUUID, uint64_t ui64Tag) { return NULL; };
+//        virtual void Destroy(AEntity*& pEntity) {};
+//        
+//    public:
+////        Poco::BasicEvent<AEntity*&>    CreatedEvent;
+////        Poco::BasicEvent<AEntity*&>    DestroyedEvent;
+//    };
     
     // Class data
     static decaf::util::StlQueue<AEntity*>          s_EntityQueue;

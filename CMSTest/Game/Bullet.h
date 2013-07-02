@@ -11,6 +11,7 @@
 
 #include "AEntity.h"
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
+#include "Poco/BasicEvent.h"
 #include <decaf/util/StlQueue.h>
 #include <string>
 
@@ -25,7 +26,27 @@ class Bullet :
     public AEntity
 {
     friend class Player;
-//    friend class B2DBullet;
+    friend class BulletFactory;
+
+public:
+    class _Dependencies
+    {
+    protected:
+        const std::string&      m_strParentUUID;
+        B2DBullet*              m_pB2DBullet;
+        
+    public:
+        // Constructor
+        _Dependencies(const std::string& strParentUUID, B2DBullet* pB2DBullet);
+        
+        // Destructor()
+        ~_Dependencies() {};
+        
+        // Properties
+        const std::string&      ParentUUID = m_strParentUUID;
+        B2DBullet*&             pB2DBullet = m_pB2DBullet;
+    };
+    
     
 private:
     static uint32_t         s_ui32Count;
@@ -34,42 +55,14 @@ protected:
     bool                    m_bAlive;
     Rock2D::Timer*          m_pLifeTimer;
     
-    class _Factory :
-        public AEntity::_Factory
-    {
-        friend class Bullet;
-        
-    protected:
-        // Constructor(s)
-        _Factory();
-        
-        // Destructor(s)
-        ~_Factory();
-
-    public:
-        Poco::BasicEvent<Bullet*&>    CreatedEvent;
-        Poco::BasicEvent<Bullet*&>    DestroyedEvent;
-    
-        virtual Bullet* Create(const std::string& strParentUUID, const b2Vec2& b2v2GunPosition, const b2Vec2& b2v2GunVelocity);
-        virtual void Destroy(Bullet*& pBullet);
-        
-        // Event response
-//        void HandleB2DBulletCreatedEvent(const void* pSender, B2DBullet*& pB2DBullet);
-//        void HandleB2DBulletDestroyedEvent(const void* pSender, B2DBullet*& pB2DBullet);
-    };
-    
 public:
-    static _EventPublisher          EventPublisher;
-
-    // Singleton
-    static _Factory& Factory()
-    {
-        static _Factory aFactory;
-        return aFactory;
-    }
+    // Event(s)
+    static Poco::BasicEvent<Bullet*&>    UpdatedEvent;
     
     // Constructor(s)
     Bullet(const std::string& strParentUUID, B2DBullet* pB2DBullet);
+    // Test
+    Bullet(_Dependencies& theDependencies);
     
     // Destructor(s)
     ~Bullet();
@@ -80,6 +73,9 @@ public:
 
     // Override(s)
     void Update();
+    
+    // Required Factory<T, D> Method(s)
+    void Configure(_Dependencies& theDependencies) {};
 };
 
 #endif /* defined(__CMSTest__Bullet__) */

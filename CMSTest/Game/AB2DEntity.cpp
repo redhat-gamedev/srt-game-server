@@ -14,7 +14,6 @@
 #include <assert.h>
 
 AB2DEntity::_Serializer                 AB2DEntity::Serializer;
-//AB2DEntity::_Factory                    AB2DEntity::Factory;
 
 using namespace gameevent;
 
