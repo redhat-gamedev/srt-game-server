@@ -47,7 +47,6 @@ public:
         B2DBullet*&             pB2DBullet = m_pB2DBullet;
     };
     
-    
 private:
     static uint32_t         s_ui32Count;
     
@@ -73,9 +72,6 @@ public:
 
     // Override(s)
     void Update();
-    
-    // Required Factory<T, D> Method(s)
-    void Configure(_Dependencies& theDependencies) {};
 };
 
 #endif /* defined(__CMSTest__Bullet__) */

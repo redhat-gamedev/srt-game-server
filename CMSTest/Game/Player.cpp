@@ -78,6 +78,9 @@ void Player::Update()
     assert(m_pB2DEntity);
     assert(m_pBulletTimer);
 
+    B2DBulletFactory& aB2DBulletFactory = B2DBulletFactory::Instance();
+    BulletFactory& aBulletFactory = BulletFactory::Instance();
+
     m_PbDualStickQueue.lock();
 //    decaf::util::StlQueue<DualStick::PbDualStick>   aPbDualStickQueueSwap = m_PbDualStickQueue;
     std::vector<DualStick::PbDualStick> vecPbDualStick = m_PbDualStickQueue.toArray();
@@ -85,12 +88,6 @@ void Player::Update()
     m_PbDualStickQueue.unlock();
     
     //while (!aPbDualStickQueueSwap.empty())
-    B2DBulletFactory& aB2DBulletFactory = B2DBulletFactory::Instance();
-    BulletFactory& aBulletFactory = BulletFactory::Instance();
-    
-    
-
-
     
     for (int i = 0; i < vecPbDualStick.size(); ++i)
     {
@@ -118,13 +115,12 @@ void Player::Update()
             {
                 m_pBulletTimer->Restart();
                 
-                //Bullet *pBullet = NULL;
-                //aBulletFactory.Create(Bullet::_Dependencies &aD)
-                //Bullet* pBullet = BulletFactory().Create(strUUID, m_pB2DEntity->GetPosition(), m_pB2DEntity->GetLinearVelocity());
                 B2DBullet::_Dependencies aB2DBulletDependencies(m_pB2DEntity->GetPosition(), m_pB2DEntity->GetLinearVelocity());
                 B2DBullet* pB2DBullet = aB2DBulletFactory.Create(aB2DBulletDependencies);
+                
                 Bullet::_Dependencies aBulletDependencies(m_strUUID, pB2DBullet);
                 Bullet* pBullet = aBulletFactory.Create(aBulletDependencies);
+                
                 pBullet->Fire(b2v2Shoot);
                 m_BulletQueue.lock();
                 m_BulletQueue.push(pBullet);

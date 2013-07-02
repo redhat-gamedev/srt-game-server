@@ -54,6 +54,8 @@ Bullet::Bullet(_Dependencies& theDependencies) :
 {
     assert(m_pB2DEntity);
 
+    ++s_ui32Count;
+    
     m_pB2DEntity->SetParentEntity(this);
 }
 
