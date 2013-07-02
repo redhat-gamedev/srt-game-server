@@ -40,11 +40,6 @@ private:
     
 protected:    
 
-    // Helper(s)
-
-    // Constructor(s)
-    //B2DBullet(b2Body* pb2Body);
-    
 public:
     // Constructor(s)
     B2DBullet(_Dependencies& theDependencies);
@@ -54,8 +49,6 @@ public:
 
     // Method(s)
     void Fire(b2Vec2& b2v2FiringDirection);
-
-    // Callback(s)
 };
 
 

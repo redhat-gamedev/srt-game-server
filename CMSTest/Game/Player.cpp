@@ -34,8 +34,6 @@ Player::Player(const std::string& strUUID) :
             (uint64_t)MakeT<uint64_t>((uint32_t)AEntity::POD, s_ui32Count),
             new B2DPod(this))
 {
-    using namespace std;
-    
     //cout << hex << "Player::Player() " << m_ui64Tag << endl;
     
     ++s_ui32Count;
@@ -48,7 +46,7 @@ Player::Player(const std::string& strUUID) :
 // Destructor(s)
 Player::~Player()
 {
-    using namespace std;
+    BulletFactory& aBulletFactory = BulletFactory::Instance();
     
     //cout << hex << "Player::~Player() " << m_ui64Tag << endl;
     
@@ -61,8 +59,7 @@ Player::~Player()
     while (!(m_BulletQueue.empty()))
     {
         pBullet = m_BulletQueue.pop();
-        delete pBullet;
-        pBullet = NULL;
+        aBulletFactory.Destroy(pBullet);
     }
     m_BulletQueue.unlock();
     

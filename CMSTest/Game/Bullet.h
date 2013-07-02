@@ -59,8 +59,6 @@ public:
     static Poco::BasicEvent<Bullet*&>    UpdatedEvent;
     
     // Constructor(s)
-    Bullet(const std::string& strParentUUID, B2DBullet* pB2DBullet);
-    // Test
     Bullet(_Dependencies& theDependencies);
     
     // Destructor(s)

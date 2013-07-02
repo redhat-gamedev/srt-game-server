@@ -32,6 +32,9 @@ public:
         static BulletFactory  aBulletFactory;
         return aBulletFactory;
     }
+    
+    // Method(s)
+    void Destroy(Bullet*& pBullet);
 };
 
 #endif /* defined(__CMSTest__Bullet_Factory__) */

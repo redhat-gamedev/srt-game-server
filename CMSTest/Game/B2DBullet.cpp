@@ -32,43 +32,10 @@ B2DBullet::_Dependencies::_Dependencies(const b2Vec2& b2v2GunPosition, const b2V
 }
 
 
-//B2DBullet* B2DBullet::_Factory::Create(const _B2DDefinition& aB2DDefinition)
-//{
-//    b2Body*     pb2Body = NULL;
-//    B2DBullet*  pB2DBullet = NULL;
-//    
-//    pb2Body = CreateBody(aB2DDefinition);
-//    pB2DBullet = new B2DBullet(pb2Body);
-//    
-//    CreatedEvent(this, pB2DBullet);
-//    
-//    return pB2DBullet;
-//}
-//
-//void B2DBullet::_Factory::Destroy(B2DBullet* pB2DBullet)
-//{
-//    assert(pB2DBullet);
-//    
-//    b2Body* pb2BodyCopy = pB2DBullet->m_pb2Body;
-//    B2DBullet* pB2DBulletCopy = pB2DBullet;
-//    
-//    DestroyedEvent(this, pB2DBulletCopy);
-//    B2DWorld::Factory().DestroyBody(pb2BodyCopy);
-//}
-
-// Constructor(s)
-//B2DBullet::B2DBullet(b2Body* pb2Body) :
-//    AB2DEntity(pb2Body)
-//{
-//    assert(pb2Body);
-//}
-
 // Constructor(s)
 B2DBullet::B2DBullet(B2DBullet::_Dependencies& theDependencies) :
-    //AB2DEntity(theDependencies.pBody)
     AB2DEntity(B2DWorld::Factory().CreateBody(&theDependencies.BodyDef))
 {
-//    m_pb2Body = B2DWorld::Factory().CreateBody(&m_ab2BodyDef);
     m_pb2Body->CreateFixture(&theDependencies.FixtureDef);
 }
 
@@ -77,10 +44,8 @@ B2DBullet::~B2DBullet()
 {
     //std::cout << "B2DBullet::~B2DBullet()..." << std::endl;
     
-    B2DWorld::Factory().DestroyBody(m_pb2Body);
+    //B2DWorld::Factory().DestroyBody(m_pb2Body);
 }
-
-// Helper(s)
 
 // Method(s)
 void B2DBullet::Fire(b2Vec2& b2v2FiringDirection)

@@ -19,11 +19,11 @@
 #include <string>
 #include <assert.h>
 
-//Bullet::_EventPublisher     Bullet::EventPublisher;
 Poco::BasicEvent<Bullet*&>  Bullet::UpdatedEvent;
 uint32_t                    Bullet::s_ui32Count = 1;
 
 
+// Constructor(s)
 Bullet::_Dependencies::_Dependencies(const std::string& strParentUUID, B2DBullet* pB2DBullet) :
     m_strParentUUID(strParentUUID),
     m_pB2DBullet(pB2DBullet)
@@ -34,18 +34,6 @@ Bullet::_Dependencies::_Dependencies(const std::string& strParentUUID, B2DBullet
 
 
 // Constructor(s)
-Bullet::Bullet(const std::string& strParentUUID, B2DBullet* pB2DBullet) :
-    m_bAlive(true),
-    m_pLifeTimer(new Rock2D::Timer(3000)),
-    AEntity(strParentUUID, (uint64_t)MakeT<uint64_t>((uint32_t)AEntity::BULLET, s_ui32Count), pB2DBullet)
-{
-    assert(pB2DBullet);
-
-    //cout << hex << "Bullet::Bullet() " << m_ui64Tag << endl;
-    
-    ++s_ui32Count;
-}
-
 Bullet::Bullet(_Dependencies& theDependencies) :
     m_bAlive(true),
     m_pLifeTimer(new Rock2D::Timer(3000)),
@@ -54,6 +42,8 @@ Bullet::Bullet(_Dependencies& theDependencies) :
 {
     assert(m_pB2DEntity);
 
+    //cout << hex << "Bullet::Bullet() " << m_ui64Tag << endl;
+    
     ++s_ui32Count;
     
     m_pB2DEntity->SetParentEntity(this);
@@ -62,8 +52,6 @@ Bullet::Bullet(_Dependencies& theDependencies) :
 // Destructor(s)
 Bullet::~Bullet()
 {
-    using namespace std;
-    
     //cout << hex << "Bullet::~Bullet() " << m_ui64Tag << endl;
     
     //--s_ui32Count;
