@@ -9,12 +9,15 @@
 #include "AEntity.h"
 #include "AB2DEntity.h"
 #include "Player.h"
+#include "PodFactory.h"
+#include "B2DPodFactory.h"
 #include "../Application/Messenger.h"
 #include "../Application/Messenger_Consumer.h"
 #include "../Application/Messenger_Producer.h"
 #include "../Application/Security.h"
 //#include "../Proto/GameEvent.pb.h"
 #include "../Proto/EntityGameEvent.pb.h"
+#include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include "Poco/FunctionDelegate.h"
 //#include <iostream>
 //#include <bitset>
@@ -82,14 +85,30 @@ void AEntity::AddPlayer(const std::string& strUUID)
     
     //    xdispatch::global_queue().sync([=]
     //    {
-    Player* pPlayer = new Player(strUUID);
-    s_listPlayers.push_front(pPlayer);
+    //Player* pPlayer = new Player(strUUID);
+    //s_listPlayers.push_front(pPlayer);
     //    });
+    
+    B2DPodFactory& aB2DPodFactory = B2DPodFactory::Instance();
+    PodFactory& aPodFactory = PodFactory::Instance();
+    
+    b2Vec2 b2v2Position;
+    b2v2Position.x = 0.0f;
+    b2v2Position.y = 0.0f;
+    const b2Vec2& b2v2PositionRef = b2v2Position;
+    B2DPod::_Dependencies aB2DPodDependencies(b2v2PositionRef);
+    B2DPod* pB2DPod = aB2DPodFactory.Create(aB2DPodDependencies);
+    
+    Player::_Dependencies aPodDependencies(strUUID, pB2DPod);
+    Player* pPlayer = aPodFactory.Create(aPodDependencies);
+    s_listPlayers.push_front(pPlayer);
 }
 
 void AEntity::RemovePlayer(const std::string& strUUID)
 {
     assert(strUUID.length() > 0);
+    
+    PodFactory& aPodFactory = PodFactory::Instance();
     
     //    xdispatch::global_queue().sync([=]
     //    {
@@ -103,7 +122,8 @@ void AEntity::RemovePlayer(const std::string& strUUID)
         if (pPlayer->ThisUUIDIsAMatch(strUUID))
         {
             s_listPlayers.erase(iterPlayerList);
-            delete pPlayer;
+            //delete pPlayer;
+            aPodFactory.Destroy(pPlayer);
             break;
         }
     }
@@ -158,16 +178,6 @@ AEntity::AEntity()
 {
     // Necessary due to xdispatch sync compile errors? /// rnk 061413
 }
-
-//AEntity::AEntity(AB2DEntity* pB2DEntity, uint64_t ui64Tag) :
-//    m_ui64Tag(ui64Tag),
-//    m_pB2DEntity(pB2DEntity)
-//{
-//    assert(pB2DEntity);
-//    assert(ui64Tag > 0);
-//    
-//    ++s_ui64Count;
-//}
 
 AEntity::AEntity(const std::string& strUUID, uint64_t ui64Tag) :
     m_strUUID(strUUID),

@@ -10,6 +10,7 @@
 #include "Bullet.h"
 #include "B2DBullet.h"
 #include "B2DBulletFactory.h"
+#include <assert.h>
 
 
 // Method(s)

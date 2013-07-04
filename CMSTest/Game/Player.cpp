@@ -23,10 +23,35 @@
 #include <iomanip>
 #include <assert.h>
 
-Player::_EventPublisher     Player::EventPublisher;
-uint32_t                    Player::s_ui32Count = 1;
+Poco::BasicEvent<Player*&>      Player::UpdatedEvent;
+uint32_t                        Player::s_ui32Count = 1;
 
 
+// Constructor(s)
+Player::_Dependencies::_Dependencies(const std::string& strUUID, B2DPod* pB2DPod) :
+    m_strUUID(strUUID),
+    m_pB2DPod(pB2DPod)
+{
+    assert(strUUID.length() > 0);
+    assert(pB2DPod);
+}
+
+// Constructor(s)
+Player::Player(_Dependencies& theDependencies) :
+    m_pBulletTimer(new Rock2D::Timer(500)),
+    AEntity(theDependencies.UUID,
+        (uint64_t)MakeT<uint64_t>((uint32_t)AEntity::POD, s_ui32Count), theDependencies.pB2DPod)
+{
+    assert(m_pB2DEntity);
+    
+    //cout << hex << "Bullet::Bullet() " << m_ui64Tag << endl;
+    
+    ++s_ui32Count;
+    
+    m_pB2DEntity->SetParentEntity(this);
+    
+    Input::EventPublisher.DualStickEvent += Poco::Delegate<Player, DualStick::PbDualStick>(this, &Player::OnInputDualStick);
+}
 // Constructor(s)
 Player::Player(const std::string& strUUID) :
     m_pBulletTimer(new Rock2D::Timer(500)),
@@ -40,7 +65,7 @@ Player::Player(const std::string& strUUID) :
     
     Input::EventPublisher.DualStickEvent += Poco::Delegate<Player, DualStick::PbDualStick>(this, &Player::OnInputDualStick);
 
-    EventPublisher.CreatedEvent(this, AEntity::POD);
+    //EventPublisher.CreatedEvent(this, AEntity::POD);
 }
 
 // Destructor(s)
@@ -66,7 +91,7 @@ Player::~Player()
     delete m_pBulletTimer;
     m_pBulletTimer = NULL;
     
-    EventPublisher.DestroyedEvent(this, AEntity::POD);
+    //EventPublisher.DestroyedEvent(this, AEntity::POD);
 }
 
 // Method(s)
@@ -129,7 +154,9 @@ void Player::Update()
     Rock2D::Timer::Update();
     m_pB2DEntity->Update();
 
-    EventPublisher.UpdatedEvent(this, AEntity::POD);
+    //EventPublisher.UpdatedEvent(this, AEntity::POD);
+    Player* pPlayer = this;
+    UpdatedEvent(this, pPlayer);
     
     std::list<Bullet*>      aBulletToRemoveList;
     std::list<Bullet*>      aBulletToAddList;

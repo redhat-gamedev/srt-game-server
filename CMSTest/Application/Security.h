@@ -26,6 +26,7 @@ namespace cms
 }
 class SimpleAsyncConsumer;
 class SimpleProducer;
+class Player;
 
 
 class Security :
@@ -72,8 +73,11 @@ public:
     virtual void onMessage(const cms::Message* pMessage);
     
     // Player Event response
-    void OnPlayerCreated(const void* pSender, const AEntity::EType& anEntityType);
-    void OnPlayerDestroyed(const void* pSender, const AEntity::EType& anEntityType);
+//    void OnPlayerCreated(const void* pSender, const AEntity::EType& anEntityType);
+//    void OnPlayerDestroyed(const void* pSender, const AEntity::EType& anEntityType);
+    void HandlePodCreatedEvent(const void* pSender, Player*& pPlayer);
+    void HandlePodDestroyedEvent(const void* pSender, Player*& pPlayer);
+    
     
     // cms::AsyncCallback implementation
     void onSuccess();

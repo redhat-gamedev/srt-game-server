@@ -19,6 +19,22 @@ class AEntity;
 class B2DPod :
     public AB2DEntity
 {
+public:
+    class _Dependencies :
+        public AB2DEntity::_AB2DDefinition
+    {
+    protected:
+        const b2Vec2&           m_b2v2Position;
+        b2CircleShape           m_b2CircleShape;
+        
+    public:
+        // Constructor
+        _Dependencies(const b2Vec2& b2v2Position);
+        
+        // Destructor()
+        ~_Dependencies() {};
+    };
+    
 protected:
     class _B2DDefinition :
         public AB2DEntity::_AB2DDefinition
@@ -38,6 +54,9 @@ protected:
 
 public:
     static _B2DDefinition        Definition;
+    
+    // Constructor(s)
+    B2DPod(_Dependencies& theDependencies);
     
     // Constructor(s)
     B2DPod(AEntity* pPlayer);

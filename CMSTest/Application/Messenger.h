@@ -22,6 +22,7 @@ namespace decaf
     }
 }
 class Bullet;
+class Player;
 
 
 class Messenger// :
@@ -67,6 +68,10 @@ public:
     static void OnEntityCreated(const void* pSender, const AEntity::EType& anEntityType);
     static void OnEntityUpdated(const void* pSender, const AEntity::EType& anEntityType);
     static void OnEntityDestroyed(const void* pSender, const AEntity::EType& anEntityType);
+
+    static void HandlePodCreatedEvent(const void* pSender, Player*& pPlayer);
+    static void HandlePodUpdatedEvent(const void* pSender, Player*& pPlayer);
+    static void HandlePodDestroyedEvent(const void* pSender, Player*& pPlayer);
     
     static void HandleBulletCreatedEvent(const void* pSender, Bullet*& pBullet);
     static void HandleBulletUpdatedEvent(const void* pSender, Bullet*& pBullet);

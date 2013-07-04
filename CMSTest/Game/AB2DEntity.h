@@ -50,22 +50,6 @@ protected:
         void Deserialisze(const gameevent::EntityGameEvent* pEntityGameEvent, AB2DEntity*& anEntity);
     };
     
-    class _Factory
-    {
-    protected:
-        // Constructor(s)
-        _Factory() {};
-        
-        // Destructor(s)
-        virtual ~_Factory() {};
-        
-        b2Body* CreateBody(const _AB2DDefinition& aAB2DDefinition);
-        
-    public:
-        virtual AB2DEntity* Create(const _AB2DDefinition& aB2DDefinition) { return NULL; };
-        virtual void Destroy(AB2DEntity* pB2DEntity) {};
-    };
-    
     b2Body*         m_pb2Body;
     AEntity*        m_pParentEntity;
     

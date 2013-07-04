@@ -7,11 +7,35 @@
 //
 
 #include "B2DPod.h"
+#include "B2DWorld.h"
 //#include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include <assert.h>
 
 B2DPod::_B2DDefinition          B2DPod::Definition;
 
+
+// Constructor
+B2DPod::_Dependencies::_Dependencies(const b2Vec2& b2v2Position) :
+    m_b2v2Position(b2v2Position)
+{
+    // Override the defaults where appropriate
+    // Set the size of our shape
+    m_b2CircleShape.m_radius = 1.0f;
+    
+    // Set the fixture and use the shape
+    m_ab2FixtureDef.filter.groupIndex = -1;
+    m_ab2FixtureDef.shape = &m_b2CircleShape;
+    
+    m_ab2BodyDef.position = b2v2Position;
+}
+
+
+// Constructor(s)
+B2DPod::B2DPod(B2DPod::_Dependencies& theDependencies) :
+    AB2DEntity(B2DWorld::Factory().CreateBody(&theDependencies.BodyDef))
+{
+    m_pb2Body->CreateFixture(&theDependencies.FixtureDef);
+}
 
 B2DPod::_B2DDefinition::_B2DDefinition() :
     AB2DEntity::_AB2DDefinition()

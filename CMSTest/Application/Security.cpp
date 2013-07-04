@@ -13,6 +13,7 @@
 #include "../Proto/Command.pb.h"
 #include "../Proto/SecurityCommand.pb.h"
 #include "../Game/Player.h"
+#include "../Game/PodFactory.h"
 #include "../Shared/SimpleAsyncConsumer.h"
 #include "../Shared/SimpleAsyncProducer.h"
 #include "Poco/Delegate.h"
@@ -43,7 +44,8 @@ Security::Security() :
     std::string     strSecurityInURI = "AAS.IN";
     std::string     strSecurityOutURI = "AAS.OUT";
     std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp&keepAlive=true";
-
+    PodFactory&  aPodFactory = PodFactory::Instance();
+    
     std::cout << "Security::Security()..." << std::endl;
     
     m_pSimpleAsyncConsumer = new SimpleAsyncConsumer(strBrokerURI, strSecurityInURI, false, true);
@@ -52,20 +54,24 @@ Security::Security() :
     
     m_pSimpleAsyncProducer = new SimpleProducer(strBrokerURI, strSecurityOutURI, true, true);
     
-//    Player::EventPublisher.CreatedEvent += Poco::Delegate<Security, const EntityData&>(this, &Security::OnPlayerCreated);
-//    Player::EventPublisher.DestroyedEvent += Poco::Delegate<Security, const EntityData&>(this, &Security::OnPlayerDestroyed);
-    Player::EventPublisher.CreatedEvent += Poco::Delegate<Security, const AEntity::EType&>(this, &Security::OnPlayerCreated);
-    Player::EventPublisher.DestroyedEvent += Poco::Delegate<Security, const AEntity::EType&>(this, &Security::OnPlayerDestroyed);
+//    Player::EventPublisher.CreatedEvent += Poco::Delegate<Security, const AEntity::EType&>(this, &Security::OnPlayerCreated);
+//    Player::EventPublisher.DestroyedEvent += Poco::Delegate<Security, const AEntity::EType&>(this, &Security::OnPlayerDestroyed);
+    
+    aPodFactory.CreatedEvent += Poco::Delegate<Security, Player*&>(this, &Security::HandlePodCreatedEvent);
+    aPodFactory.DestroyedEvent += Poco::Delegate<Security, Player*&>(this, &Security::HandlePodDestroyedEvent);
 }
 
 // Destructor
 Security::~Security()
 {
-//    Player::EventPublisher.DestroyedEvent -= Poco::Delegate<Security, const EntityData&>(this, &Security::OnPlayerDestroyed);
-//    Player::EventPublisher.CreatedEvent -= Poco::Delegate<Security, const EntityData&>(this, &Security::OnPlayerCreated);
-    Player::EventPublisher.DestroyedEvent -= Poco::Delegate<Security, const AEntity::EType&>(this, &Security::OnPlayerDestroyed);
-    Player::EventPublisher.CreatedEvent -= Poco::Delegate<Security, const AEntity::EType&>(this, &Security::OnPlayerCreated);
+    PodFactory&  aPodFactory = PodFactory::Instance();
     
+//    Player::EventPublisher.DestroyedEvent -= Poco::Delegate<Security, const AEntity::EType&>(this, &Security::OnPlayerDestroyed);
+//    Player::EventPublisher.CreatedEvent -= Poco::Delegate<Security, const AEntity::EType&>(this, &Security::OnPlayerCreated);
+    
+    aPodFactory.DestroyedEvent -= Poco::Delegate<Security, Player*&>(this, &Security::HandlePodDestroyedEvent);
+    aPodFactory.CreatedEvent -= Poco::Delegate<Security, Player*&>(this, &Security::HandlePodCreatedEvent);
+
     m_pSimpleAsyncProducer->close();
     delete m_pSimpleAsyncProducer;
     m_pSimpleAsyncProducer = NULL;
@@ -158,13 +164,14 @@ void Security::onMessage(const Message* pMessage)
 }
 
 // Player Event response
-void Security::OnPlayerCreated(const void* pSender, const AEntity::EType& anEntityType)
+//void Security::OnPlayerCreated(const void* pSender, const AEntity::EType& anEntityType)
+void Security::HandlePodCreatedEvent(const void* pSender, Player*& pPlayer)
 {
 //    assert(strUUID.length() > 0);
     
     std::string strPBBuffer = "";
     
-    const AEntity* pEntity = static_cast<const AEntity*>(pSender);
+    const AEntity* pEntity = static_cast<const AEntity*>(pPlayer);
     
     Command* pCommand = new Command();
     SecurityCommand* pSecurityCommand = pCommand->mutable_securitycommand();
@@ -183,13 +190,14 @@ void Security::OnPlayerCreated(const void* pSender, const AEntity::EType& anEnti
     FireHasJoinedEvent(pEntity->UUID);
 }
 
-void Security::OnPlayerDestroyed(const void* pSender, const AEntity::EType& anEntityType)
+//void Security::OnPlayerDestroyed(const void* pSender, const AEntity::EType& anEntityType)
+void Security::HandlePodDestroyedEvent(const void* pSender, Player*& pPlayer)
 {
 //    assert(strUUID.length() > 0);
     
     std::string strPBBuffer = "";
     
-    const AEntity* pEntity = static_cast<const AEntity*>(pSender);
+    const AEntity* pEntity = static_cast<const AEntity*>(pPlayer);
     
     Command* pCommand = new Command();
     SecurityCommand* pSecurityCommand = pCommand->mutable_securitycommand();

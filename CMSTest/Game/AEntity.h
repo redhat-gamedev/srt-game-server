@@ -60,17 +60,6 @@ protected:
         void Deserialisze(const gameevent::EntityGameEvent* pEntityGameEvent, AEntity*& anEntity);
     };
     
-//    class _Factory
-//    {
-//    protected:
-//        virtual AEntity* Create(const std::string& strUUID, uint64_t ui64Tag) { return NULL; };
-//        virtual void Destroy(AEntity*& pEntity) {};
-//        
-//    public:
-////        Poco::BasicEvent<AEntity*&>    CreatedEvent;
-////        Poco::BasicEvent<AEntity*&>    DestroyedEvent;
-//    };
-    
     // Class data
     static decaf::util::StlQueue<AEntity*>          s_EntityQueue;
     

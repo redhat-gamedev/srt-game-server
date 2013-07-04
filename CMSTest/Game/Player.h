@@ -11,8 +11,8 @@
 
 #include "AEntity.h"
 #include "../Proto/DualStick.pb.h"
-#include "Poco/BasicEvent.h"
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
+#include "Poco/BasicEvent.h"
 #include <decaf/util/StlQueue.h>
 #include <string>
 #include <list>
@@ -22,13 +22,35 @@ namespace Rock2D
     class Timer;
 }
 class Bullet;
+class B2DPod;
 
 
 class Player :
     public AEntity
 {
+    friend class PodFactory;
+    
 private:
     static uint32_t         s_ui32Count;
+    
+public:
+    class _Dependencies
+    {
+    protected:
+        const std::string&   m_strUUID;
+        B2DPod*              m_pB2DPod;
+        
+    public:
+        // Constructor
+        _Dependencies(const std::string& strUUID, B2DPod* pB2DPod);
+        
+        // Destructor()
+        ~_Dependencies() {};
+        
+        // Properties
+        const std::string&   UUID = m_strUUID;
+        B2DPod*&             pB2DPod = m_pB2DPod;
+    };
     
 protected:
     Rock2D::Timer*                      m_pBulletTimer;
@@ -42,7 +64,13 @@ protected:
     // Helper(s)
 
 public:
-    static _EventPublisher          EventPublisher;
+    //static _EventPublisher          EventPublisher;
+    
+    // Event(s)
+    static Poco::BasicEvent<Player*&>    UpdatedEvent;
+    
+    // Constructor(s)
+    Player(_Dependencies& theDependencies);
     
     // Constructor(s)
     Player(const std::string& strUUID);

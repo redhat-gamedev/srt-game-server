@@ -20,6 +20,7 @@
 		CC488D27164EB5FD005078C3 /* libBox2D.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC488D20164EB5DE005078C3 /* libBox2D.a */; };
 		CC4FECE11662A3AA004810CC /* libProtocolBuffers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC4FECE01662A39A004810CC /* libProtocolBuffers.a */; };
 		CC51BA661781B7FA007F27F0 /* BulletFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC51BA641781B7FA007F27F0 /* BulletFactory.cpp */; };
+		CC55B2741785028A00CCC6E5 /* PodFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC55B2731785028A00CCC6E5 /* PodFactory.cpp */; };
 		CC68EA98163DA07400D225C2 /* CMSTest.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = CC68EA97163DA07400D225C2 /* CMSTest.1 */; };
 		CCA4C32C1687B45D006BAC1D /* xdispatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA4C32B1687B45D006BAC1D /* xdispatch.framework */; };
 		CCE449C217230E21002A1937 /* box2d.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CCE449B917230E21002A1937 /* box2d.pb.cc */; };
@@ -220,6 +221,9 @@
 		CC51BA651781B7FA007F27F0 /* BulletFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BulletFactory.h; path = Game/BulletFactory.h; sourceTree = "<group>"; };
 		CC51BAAF17825523007F27F0 /* FactoryT.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FactoryT.h; path = Shared/FactoryT.h; sourceTree = "<group>"; };
 		CC51BAB017825A16007F27F0 /* B2DBulletFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = B2DBulletFactory.h; path = Game/B2DBulletFactory.h; sourceTree = "<group>"; };
+		CC55B2711785020700CCC6E5 /* B2DPodFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = B2DPodFactory.h; path = Game/B2DPodFactory.h; sourceTree = "<group>"; };
+		CC55B2721785025200CCC6E5 /* PodFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PodFactory.h; path = Game/PodFactory.h; sourceTree = "<group>"; };
+		CC55B2731785028A00CCC6E5 /* PodFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PodFactory.cpp; path = Game/PodFactory.cpp; sourceTree = "<group>"; };
 		CC68EA91163DA07400D225C2 /* CMSTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CMSTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC68EA97163DA07400D225C2 /* CMSTest.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = CMSTest.1; sourceTree = "<group>"; };
 		CCA4C32B1687B45D006BAC1D /* xdispatch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = xdispatch.framework; path = ../ThirdParty/xdispatch/build/bin/Debug/xdispatch.framework; sourceTree = "<group>"; };
@@ -466,6 +470,9 @@
 				CC51BA641781B7FA007F27F0 /* BulletFactory.cpp */,
 				CC51BA651781B7FA007F27F0 /* BulletFactory.h */,
 				CC51BAB017825A16007F27F0 /* B2DBulletFactory.h */,
+				CC55B2711785020700CCC6E5 /* B2DPodFactory.h */,
+				CC55B2721785025200CCC6E5 /* PodFactory.h */,
+				CC55B2731785028A00CCC6E5 /* PodFactory.cpp */,
 			);
 			name = Game;
 			sourceTree = "<group>";
@@ -701,6 +708,7 @@
 				CC2436E017492E2E00A8519D /* Messenger.cpp in Sources */,
 				CC2436E317492E8A00A8519D /* Messenger_Consumer.cpp in Sources */,
 				CC51BA661781B7FA007F27F0 /* BulletFactory.cpp in Sources */,
+				CC55B2741785028A00CCC6E5 /* PodFactory.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

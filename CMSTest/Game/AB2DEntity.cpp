@@ -83,15 +83,6 @@ void AB2DEntity::_Serializer::Deserialisze(const gameevent::EntityGameEvent* pEn
     
 }
 
-b2Body* AB2DEntity::_Factory::CreateBody(const _AB2DDefinition& aAB2DDefinition)
-{
-    b2Body* pb2Body = B2DWorld::Factory().CreateBody(&aAB2DDefinition.BodyDef);
-    pb2Body->CreateFixture(&aAB2DDefinition.FixtureDef);
-    pb2Body->SetUserData((void *)aAB2DDefinition.UserData);
-    
-    return pb2Body;
-}
-
 AB2DEntity::_AB2DDefinition::_AB2DDefinition()
 {
     // Define the dynamic body. We set its position

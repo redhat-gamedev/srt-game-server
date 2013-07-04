@@ -11,6 +11,7 @@
 #include "Messenger_Consumer.h"
 #include "../Game/AEntity.h"
 #include "../Game/Player.h"
+#include "../Game/PodFactory.h"
 #include "../Game/Bullet.h"
 #include "../Game/BulletFactory.h"
 #include "../Proto/GameEvent.pb.h"
@@ -50,7 +51,10 @@ void Messenger::Setup()
     std::string     strGameEventInDestinationURI = "GAME.EVENT.IN";
     std::string     strGameEventOutDestinationURI = "GAME.EVENT.OUT";
     std::string     strThreadName = "MessengerThread";
+
+    PodFactory&  aPodFactory = PodFactory::Instance();
     BulletFactory&  aBulletFactory = BulletFactory::Instance();
+
     
     s_pMessengerSerialDispatchQueue = new xdispatch::queue("messenger");
     
@@ -61,9 +65,9 @@ void Messenger::Setup()
     GameEventProducer.Setup(strBrokerURI, strGameEventOutDestinationURI);
     Consumer.Setup(strBrokerURI, strGameEventInDestinationURI);
     
-    Player::EventPublisher.CreatedEvent += Poco::FunctionDelegate<const AEntity::EType&>(&Messenger::OnEntityCreated);
-    Player::EventPublisher.UpdatedEvent += Poco::FunctionDelegate<const AEntity::EType&>(&Messenger::OnEntityUpdated);
-    Player::EventPublisher.DestroyedEvent += Poco::FunctionDelegate<const AEntity::EType&>(&Messenger::OnEntityDestroyed);
+    aPodFactory.CreatedEvent += Poco::FunctionDelegate<Player*&>(&Messenger::HandlePodCreatedEvent);
+    Player::UpdatedEvent += Poco::FunctionDelegate<Player*&>(&Messenger::HandlePodUpdatedEvent);
+    aPodFactory.DestroyedEvent += Poco::FunctionDelegate<Player*&>(&Messenger::HandlePodDestroyedEvent);
     
     aBulletFactory.CreatedEvent += Poco::FunctionDelegate<Bullet*&>(&Messenger::HandleBulletCreatedEvent);
     Bullet::UpdatedEvent += Poco::FunctionDelegate<Bullet*&>(&Messenger::HandleBulletUpdatedEvent);
@@ -76,6 +80,7 @@ void Messenger::Setup()
 
 void Messenger::Teardown()
 {
+    PodFactory&  aPodFactory = PodFactory::Instance();    
     BulletFactory&  aBulletFactory = BulletFactory::Instance();
     
 //    delete s_pThread;
@@ -85,10 +90,10 @@ void Messenger::Teardown()
     Bullet::UpdatedEvent -= Poco::FunctionDelegate<Bullet*&>(&Messenger::HandleBulletUpdatedEvent);
     aBulletFactory.CreatedEvent -= Poco::FunctionDelegate<Bullet*&>(&Messenger::HandleBulletCreatedEvent);
 
-    Player::EventPublisher.DestroyedEvent -= Poco::FunctionDelegate<const AEntity::EType&>(&Messenger::OnEntityDestroyed);
-    Player::EventPublisher.UpdatedEvent -= Poco::FunctionDelegate<const AEntity::EType&>(&Messenger::OnEntityUpdated);
-    Player::EventPublisher.CreatedEvent -= Poco::FunctionDelegate<const AEntity::EType&>(&Messenger::OnEntityCreated);
-
+    aPodFactory.DestroyedEvent -= Poco::FunctionDelegate<Player*&>(&Messenger::HandlePodDestroyedEvent);
+    Player::UpdatedEvent -= Poco::FunctionDelegate<Player*&>(&Messenger::HandlePodUpdatedEvent);
+    aPodFactory.CreatedEvent -= Poco::FunctionDelegate<Player*&>(&Messenger::HandlePodCreatedEvent);
+    
     GameEventProducer.Teardown();
     Consumer.Teardown();
     //Producer.Teardown();
@@ -286,6 +291,39 @@ void Messenger::HandleBulletUpdatedEvent(const void* pSender, Bullet*& pBullet)
     s_pMessengerSerialDispatchQueue->sync([=]
     {
         AEntity* pEntity = static_cast<AEntity*>(pBullet);
+        EnqueueEntityUpdatedEvent(pEntity);
+    });
+}
+
+void Messenger::HandlePodCreatedEvent(const void* pSender, Player*& pPlayer)
+{
+    assert(pPlayer);
+    
+    s_pMessengerSerialDispatchQueue->sync([=]
+    {
+        AEntity* pEntity = static_cast<AEntity*>(pPlayer);
+        EnqueueEntityCreatedEvent(pEntity);
+    });
+}
+
+void Messenger::HandlePodDestroyedEvent(const void* pSender, Player*& pPlayer)
+{
+    assert(pPlayer);
+    
+    s_pMessengerSerialDispatchQueue->sync([=]
+    {
+        AEntity* pEntity = static_cast<AEntity*>(pPlayer);
+        EnqueueEntityDestroyedEvent(pEntity);
+    });
+}
+
+void Messenger::HandlePodUpdatedEvent(const void* pSender, Player*& pPlayer)
+{
+    assert(pPlayer);
+    
+    s_pMessengerSerialDispatchQueue->sync([=]
+    {
+        AEntity* pEntity = static_cast<AEntity*>(pPlayer);
         EnqueueEntityUpdatedEvent(pEntity);
     });
 }
