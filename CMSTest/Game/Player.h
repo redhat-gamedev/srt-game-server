@@ -64,16 +64,11 @@ protected:
     // Helper(s)
 
 public:
-    //static _EventPublisher          EventPublisher;
-    
     // Event(s)
     static Poco::BasicEvent<Player*&>    UpdatedEvent;
     
     // Constructor(s)
     Player(_Dependencies& theDependencies);
-    
-    // Constructor(s)
-    Player(const std::string& strUUID);
     
     // Destructor(s)
     ~Player();

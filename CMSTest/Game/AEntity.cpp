@@ -85,9 +85,6 @@ void AEntity::AddPlayer(const std::string& strUUID)
     
     //    xdispatch::global_queue().sync([=]
     //    {
-    //Player* pPlayer = new Player(strUUID);
-    //s_listPlayers.push_front(pPlayer);
-    //    });
     
     B2DPodFactory& aB2DPodFactory = B2DPodFactory::Instance();
     PodFactory& aPodFactory = PodFactory::Instance();
@@ -102,6 +99,8 @@ void AEntity::AddPlayer(const std::string& strUUID)
     Player::_Dependencies aPodDependencies(strUUID, pB2DPod);
     Player* pPlayer = aPodFactory.Create(aPodDependencies);
     s_listPlayers.push_front(pPlayer);
+    
+    //    });    
 }
 
 void AEntity::RemovePlayer(const std::string& strUUID)
@@ -122,7 +121,6 @@ void AEntity::RemovePlayer(const std::string& strUUID)
         if (pPlayer->ThisUUIDIsAMatch(strUUID))
         {
             s_listPlayers.erase(iterPlayerList);
-            //delete pPlayer;
             aPodFactory.Destroy(pPlayer);
             break;
         }
@@ -205,12 +203,6 @@ AEntity::~AEntity()
 {
     //std::cout << "AEntity::~AEntity() " << m_ui64Tag << std::endl;
 
-//    if (m_pB2DEntity)
-//    {
-//        delete m_pB2DEntity;
-//        m_pB2DEntity = NULL;
-//    }
-    
     m_strUUID.clear();
     m_ui64Tag = 0;
     --s_ui64Count;
@@ -225,19 +217,4 @@ bool AEntity::ThisUUIDIsAMatch(const std::string& strUUID)
     }
     return false;
 }
-
-// Event Firing Method(s)
-//void AEntity::FireCreatedEvent(const std::string& strUUID)
-//void AEntity::FireCreatedEvent(const EntityData& anEntityData)
-//{
-//    //EventPublisher.CreatedEvent(this, strUUID);
-//    EventPublisher.CreatedEvent(this, anEntityData);
-//}
-//
-////void AEntity::FireDestroyedEvent(const std::string& strUUID)
-//void AEntity::FireDestroyedEvent(const EntityData& anEntityData)
-//{
-//    //EventPublisher.DestroyedEvent(this, strUUID);
-//    EventPublisher.DestroyedEvent(this, anEntityData);
-//}
 

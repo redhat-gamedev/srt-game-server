@@ -43,8 +43,6 @@ B2DBullet::B2DBullet(B2DBullet::_Dependencies& theDependencies) :
 B2DBullet::~B2DBullet()
 {
     //std::cout << "B2DBullet::~B2DBullet()..." << std::endl;
-    
-    //B2DWorld::Factory().DestroyBody(m_pb2Body);
 }
 
 // Method(s)

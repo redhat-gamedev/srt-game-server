@@ -11,8 +11,6 @@
 //#include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include <assert.h>
 
-B2DPod::_B2DDefinition          B2DPod::Definition;
-
 
 // Constructor
 B2DPod::_Dependencies::_Dependencies(const b2Vec2& b2v2Position) :
@@ -23,6 +21,9 @@ B2DPod::_Dependencies::_Dependencies(const b2Vec2& b2v2Position) :
     m_b2CircleShape.m_radius = 1.0f;
     
     // Set the fixture and use the shape
+//    m_ab2FixtureDef.density = 1.0f;
+//    m_ab2FixtureDef.friction = 0.3f;
+//    m_ab2FixtureDef.restitution = 0.3f;
     m_ab2FixtureDef.filter.groupIndex = -1;
     m_ab2FixtureDef.shape = &m_b2CircleShape;
     
@@ -37,36 +38,10 @@ B2DPod::B2DPod(B2DPod::_Dependencies& theDependencies) :
     m_pb2Body->CreateFixture(&theDependencies.FixtureDef);
 }
 
-B2DPod::_B2DDefinition::_B2DDefinition() :
-    AB2DEntity::_AB2DDefinition()
-{
-    // Override the defaults where appropriate
-    // Set the size of our shape
-    m_ab2CircleShape.m_radius = 1.0f;
-    
-    // Set the fixture and use the shape
-    m_ab2FixtureDef.density = 1.0f;
-    m_ab2FixtureDef.friction = 0.3f;
-    m_ab2FixtureDef.restitution = 0.3f;
-    m_ab2FixtureDef.filter.groupIndex = -1;
-    m_ab2FixtureDef.shape = &m_ab2CircleShape;
-}
-
-
-// Constructor(s)
-B2DPod::B2DPod(AEntity* pPlayer) :
-    AB2DEntity(Definition, pPlayer)
-{
-}
-
 // Destructor(s)
 B2DPod::~B2DPod()
 {
 }
-
-// Helper(s)
-
-// Callback(s)
 
 // Method(s)
 void B2DPod::Move(float fX, float fY)

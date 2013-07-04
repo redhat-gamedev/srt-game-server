@@ -52,22 +52,6 @@ Player::Player(_Dependencies& theDependencies) :
     
     Input::EventPublisher.DualStickEvent += Poco::Delegate<Player, DualStick::PbDualStick>(this, &Player::OnInputDualStick);
 }
-// Constructor(s)
-Player::Player(const std::string& strUUID) :
-    m_pBulletTimer(new Rock2D::Timer(500)),
-    AEntity(strUUID,
-            (uint64_t)MakeT<uint64_t>((uint32_t)AEntity::POD, s_ui32Count),
-            new B2DPod(this))
-{
-    //cout << hex << "Player::Player() " << m_ui64Tag << endl;
-    
-    ++s_ui32Count;
-    
-    Input::EventPublisher.DualStickEvent += Poco::Delegate<Player, DualStick::PbDualStick>(this, &Player::OnInputDualStick);
-
-    //EventPublisher.CreatedEvent(this, AEntity::POD);
-}
-
 // Destructor(s)
 Player::~Player()
 {
@@ -154,7 +138,6 @@ void Player::Update()
     Rock2D::Timer::Update();
     m_pB2DEntity->Update();
 
-    //EventPublisher.UpdatedEvent(this, AEntity::POD);
     Player* pPlayer = this;
     UpdatedEvent(this, pPlayer);
     
@@ -187,7 +170,6 @@ void Player::Update()
         Bullet* pBullet = NULL;
         pBullet = aBulletToRemoveList.front();
         aBulletToRemoveList.pop_front();
-        //BulletFactory().Destroy(pBullet);
         aBulletFactory.Destroy(pBullet);
     }
     m_BulletQueue.unlock();
