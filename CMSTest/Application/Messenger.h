@@ -65,10 +65,6 @@ public:
     //static void Send();
     
     // Entity Event response
-    static void OnEntityCreated(const void* pSender, const AEntity::EType& anEntityType);
-    static void OnEntityUpdated(const void* pSender, const AEntity::EType& anEntityType);
-    static void OnEntityDestroyed(const void* pSender, const AEntity::EType& anEntityType);
-
     static void HandlePodCreatedEvent(const void* pSender, Player*& pPlayer);
     static void HandlePodUpdatedEvent(const void* pSender, Player*& pPlayer);
     static void HandlePodDestroyedEvent(const void* pSender, Player*& pPlayer);

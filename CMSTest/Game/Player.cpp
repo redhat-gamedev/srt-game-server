@@ -11,6 +11,7 @@
 #include "BulletFactory.h"
 #include "B2DBulletFactory.h"
 #include "B2DWorld.h"
+#include "AB2DEntity.h"
 #include "World.h"
 #include "Timer.h"
 #include "B2DPod.h"
@@ -28,19 +29,19 @@ uint32_t                        Player::s_ui32Count = 1;
 
 
 // Constructor(s)
-Player::_Dependencies::_Dependencies(const std::string& strUUID, B2DPod* pB2DPod) :
+Player::_Dependencies::_Dependencies(const std::string& strUUID, AB2DEntity* pB2DEntity) :
     m_strUUID(strUUID),
-    m_pB2DPod(pB2DPod)
+    m_pB2DEntity(pB2DEntity)
 {
     assert(strUUID.length() > 0);
-    assert(pB2DPod);
+    assert(pB2DEntity);
 }
 
 // Constructor(s)
 Player::Player(_Dependencies& theDependencies) :
     m_pBulletTimer(new Rock2D::Timer(500)),
     AEntity(theDependencies.UUID,
-        (uint64_t)MakeT<uint64_t>((uint32_t)AEntity::POD, s_ui32Count), theDependencies.pB2DPod)
+        (uint64_t)MakeT<uint64_t>((uint32_t)AEntity::POD, s_ui32Count), theDependencies.pB2DEntity)
 {
     assert(m_pB2DEntity);
     

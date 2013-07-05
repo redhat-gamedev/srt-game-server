@@ -9,6 +9,7 @@
 #include "Bullet.h"
 
 #include "B2DWorld.h"
+#include "AB2DEntity.h"
 #include "B2DBullet.h"
 #include "Timer.h"
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
@@ -24,12 +25,12 @@ uint32_t                    Bullet::s_ui32Count = 1;
 
 
 // Constructor(s)
-Bullet::_Dependencies::_Dependencies(const std::string& strParentUUID, B2DBullet* pB2DBullet) :
-    m_strParentUUID(strParentUUID),
-    m_pB2DBullet(pB2DBullet)
+Bullet::_Dependencies::_Dependencies(const std::string& strUUID, AB2DEntity* pB2DEntity) :
+    m_strUUID(strUUID),
+    m_pB2DEntity(pB2DEntity)
 {
-    assert(strParentUUID.length() > 0);
-    assert(pB2DBullet);
+    assert(strUUID.length() > 0);
+    assert(pB2DEntity);
 }
 
 
@@ -37,8 +38,8 @@ Bullet::_Dependencies::_Dependencies(const std::string& strParentUUID, B2DBullet
 Bullet::Bullet(_Dependencies& theDependencies) :
     m_bAlive(true),
     m_pLifeTimer(new Rock2D::Timer(3000)),
-    AEntity(theDependencies.ParentUUID,
-            (uint64_t)MakeT<uint64_t>((uint32_t)AEntity::BULLET, s_ui32Count), theDependencies.pB2DBullet)
+    AEntity(theDependencies.UUID,
+            (uint64_t)MakeT<uint64_t>((uint32_t)AEntity::BULLET, s_ui32Count), theDependencies.pB2DEntity)
 {
     assert(m_pB2DEntity);
 

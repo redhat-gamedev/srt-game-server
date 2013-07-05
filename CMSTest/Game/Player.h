@@ -22,7 +22,7 @@ namespace Rock2D
     class Timer;
 }
 class Bullet;
-class B2DPod;
+class AB2DEntity;
 
 
 class Player :
@@ -38,18 +38,18 @@ public:
     {
     protected:
         const std::string&   m_strUUID;
-        B2DPod*              m_pB2DPod;
+        AB2DEntity*          m_pB2DEntity;
         
     public:
         // Constructor
-        _Dependencies(const std::string& strUUID, B2DPod* pB2DPod);
+        _Dependencies(const std::string& strUUID, AB2DEntity* pB2DEntity);
         
         // Destructor()
         ~_Dependencies() {};
         
         // Properties
         const std::string&   UUID = m_strUUID;
-        B2DPod*&             pB2DPod = m_pB2DPod;
+        AB2DEntity*&         pB2DEntity = m_pB2DEntity;
     };
     
 protected:

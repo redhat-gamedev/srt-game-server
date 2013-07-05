@@ -19,7 +19,7 @@ namespace Rock2D
 {
     class Timer;
 }
-class B2DBullet;
+class AB2DEntity;
 
 
 class Bullet :
@@ -32,19 +32,19 @@ public:
     class _Dependencies
     {
     protected:
-        const std::string&      m_strParentUUID;
-        B2DBullet*              m_pB2DBullet;
+        const std::string&      m_strUUID;
+        AB2DEntity*             m_pB2DEntity;
         
     public:
         // Constructor
-        _Dependencies(const std::string& strParentUUID, B2DBullet* pB2DBullet);
+        _Dependencies(const std::string& strUUID, AB2DEntity* pB2DEntity);
         
         // Destructor()
         ~_Dependencies() {};
         
         // Properties
-        const std::string&      ParentUUID = m_strParentUUID;
-        B2DBullet*&             pB2DBullet = m_pB2DBullet;
+        const std::string&      UUID = m_strUUID;
+        AB2DEntity*&            pB2DEntity = m_pB2DEntity;
     };
     
 private:

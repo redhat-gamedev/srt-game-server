@@ -120,85 +120,6 @@ void Messenger::SendUpdates()
     GameEventProducer.SendUpdates();
 }
 
-// Player Event response
-void Messenger::OnEntityCreated(const void* pSender, const AEntity::EType& anEntityType)
-{
-    using namespace gameevent;
-    
-    s_pMessengerSerialDispatchQueue->sync([=]
-    {
-        const AEntity* pEntity = static_cast<const AEntity*>(pSender);
-        
-        GameEvent aGameEvent;
-        GameEvent* pGameEvent = aGameEvent.New();
-        //GameEvent* pGameEvent = new GameEvent();
-        pGameEvent->set_type(GameEvent_GameEventType_ENTITY);
-        
-        EntityGameEvent* pEntityGameEvent = pGameEvent->mutable_entitygameevent();
-        assert(NULL != pEntityGameEvent);
-        pEntityGameEvent->set_type(EntityGameEvent_EntityGameEventType_CREATE);
-
-        AEntity::Serializer.Serialize(pEntity, pEntityGameEvent);
-        GameEventProducer.Enqueue(pGameEvent);
-    });
-}
-
-void Messenger::OnEntityUpdated(const void* pSender, const AEntity::EType& anEntityType)
-{
-    using namespace std;
-    using namespace gameevent;
-    
-    s_pMessengerSerialDispatchQueue->sync([=]
-    {
-        const AEntity* pEntity = static_cast<const AEntity*>(pSender);
-
-        GameEvent aGameEvent;
-        GameEvent* pGameEvent = aGameEvent.New();
-        //GameEvent* pGameEvent = new GameEvent();
-        pGameEvent->set_type(GameEvent_GameEventType_ENTITY);
-
-        EntityGameEvent* pEntityGameEvent = pGameEvent->mutable_entitygameevent();
-        assert(NULL != pEntityGameEvent);
-        pEntityGameEvent->set_type(EntityGameEvent_EntityGameEventType_UPDATE);
-
-        AEntity::Serializer.Serialize(pEntity, pEntityGameEvent);
-//        if (pEntityGameEvent)
-//        {
-//            uint64_t ui64Tag = pEntityGameEvent->entitytag();
-//            bitset<sizeof(uint64_t)*8>    aBitSet(ui64Tag);
-//            //cout << hex << pEntityGameEvent->entitytag() << endl;
-//            cout << aBitSet << endl;
-//        }
-        GameEventProducer.Enqueue(pGameEvent);
-    });
-}
-
-void Messenger::OnEntityDestroyed(const void* pSender, const AEntity::EType& anEntityType)
-{
-    using namespace gameevent;
-
-    s_pMessengerSerialDispatchQueue->sync([=]
-    {
-        const AEntity* pEntity = static_cast<const AEntity*>(pSender);
-        
-        GameEvent aGameEvent;
-        GameEvent* pGameEvent = aGameEvent.New();
-        //GameEvent* pGameEvent = new GameEvent();
-        pGameEvent->set_type(GameEvent_GameEventType_ENTITY);
-        
-        EntityGameEvent* pEntityGameEvent = pGameEvent->mutable_entitygameevent();
-        assert(NULL != pEntityGameEvent);
-        pEntityGameEvent->set_type(EntityGameEvent_EntityGameEventType_DESTROY);
-
-        AEntity::Serializer.Serialize(pEntity, pEntityGameEvent);
-        
-        //Producer.Enqueue(pGameEvent);
-        //std::cout << "OnEntityDestroyed message " << aGameEvent.DebugString() << std::endl;
-        GameEventProducer.Enqueue(pGameEvent);
-    });
-}
-
-
 // Helper(s)
 void Messenger::EnqueueEntityCreatedEvent(AEntity* pEntity)
 {
@@ -262,6 +183,7 @@ void Messenger::EnqueueEntityDestroyedEvent(AEntity* pEntity)
 }
 
 
+// Bullet Event response
 void Messenger::HandleBulletCreatedEvent(const void* pSender, Bullet*& pBullet)
 {
     assert(pBullet);
@@ -295,6 +217,7 @@ void Messenger::HandleBulletUpdatedEvent(const void* pSender, Bullet*& pBullet)
     });
 }
 
+// Player Event response
 void Messenger::HandlePodCreatedEvent(const void* pSender, Player*& pPlayer)
 {
     assert(pPlayer);
