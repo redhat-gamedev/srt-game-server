@@ -24,16 +24,6 @@ class SimpleAsyncProducer;
 
 class MessageDispatcher
 {
-private:
-protected:
-    decaf::util::StlQueue<std::pair<const unsigned char*, unsigned long>* >       m_aMessageQueue;
-    SimpleAsyncProducer*                                                m_pSimpleAsyncProducer;
-    
-    // Helper(s)
-    void                                    Enqueue(google::protobuf::Message* pMessage);
-    void                                    Enqueue(std::pair<const unsigned char*, unsigned long>* pMessagePair);
-    std::pair<const unsigned char*, unsigned long>*   MessageToPair(google::protobuf::Message* pMessage);
-    
 public:
     class _Dependencies
     {
@@ -48,12 +38,30 @@ public:
         // Destructor
         ~_Dependencies();
     };
+
+private:
+protected:
+    decaf::util::StlQueue<std::pair<const unsigned char*, unsigned long>* >       m_aMessageQueue;
+    SimpleAsyncProducer*                                                m_pSimpleAsyncProducer;
+    
+    // Helper(s)
+    void                                    Enqueue(google::protobuf::Message* pMessage);
+    void                                    Enqueue(std::pair<const unsigned char*, unsigned long>* pMessagePair);
+    std::pair<const unsigned char*, unsigned long>*   MessageToPair(google::protobuf::Message* pMessage);
     
     // Constructor
     MessageDispatcher(_Dependencies& theDependencies);
     
     // Destructor
     ~MessageDispatcher();
+
+public:
+    // Singleton
+    static MessageDispatcher& Instance(_Dependencies& theDependencies)//unsigned int uiCapacity)
+    {
+        static MessageDispatcher  aMessageDispatcher(theDependencies);
+        return aMessageDispatcher;
+    }
     
     // Method(s)
     // Dispatches all the messages it has received to the network

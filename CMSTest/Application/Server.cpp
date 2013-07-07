@@ -18,6 +18,11 @@
 #include "../Proto/box2d.pb.h"
 #include "../Shared/SimpleAsyncConsumer.h"
 #include "../Shared/SimpleAsyncProducer.h"
+#include "EventDispatcher.h"
+#include "MessageDispatcher.h"
+#include "PodFactory.h"
+#include "BulletFactory.h"
+#include "EntityGameEventFactory.h"
 #include "Poco/Delegate.h"
 #include "decaf/util/Timer.h"
 #include "decaf/lang/Thread.h"
@@ -64,6 +69,14 @@ Server::Server() :
     m_pSecurity(NULL),
     m_pMainThread(NULL)
 {
+    PodFactory&                 thePodFactory = PodFactory::Instance();
+    BulletFactory&              theBulletFactory = BulletFactory::Instance();
+    FactoryT<GameEvent, EntityGameEvent_Dependencies>&     theEntityGameEventFactory = FactoryT<GameEvent, EntityGameEvent_Dependencies>::Instance();
+    EventDispatcher::_Dependencies theEventDispatcherDependencies(thePodFactory, theBulletFactory, theEntityGameEventFactory);
+    
+    EventDispatcher& m_anEventDispatcher = EventDispatcher::Instance(&theEventDispatcherDependencies);
+    //EventDispatcher& anEventDispatcher = EventDispatcher::Instance();
+    
     Setup();
 }
 
@@ -79,9 +92,11 @@ void Server::Setup()
     std::cout << "Server::Setup()..." << std::endl;
 
     std::string     strMainThreadName = "ServerThread";
-
+    
     Messenger::Setup();
     AEntity::ClassSetup();
+
+    
     
     m_pWorld = new World();
     m_pInput = new Input();

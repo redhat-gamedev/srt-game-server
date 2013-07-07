@@ -12,8 +12,8 @@
 #include "PodFactory.h"
 #include "Bullet.h"
 #include "BulletFactory.h"
-#include "EntityGameEventFactory.h"
-#include "../proto/EntityGameEvent.pb.h"
+//#include "EntityGameEventFactory.h"
+//#include "../proto/EntityGameEvent.pb.h"
 #include "Poco/Delegate.h"
 #include <assert.h>
 
@@ -24,7 +24,7 @@ using namespace google::protobuf;
 // Constructor
 EventDispatcher::
 _Dependencies::
-_Dependencies(PodFactory& aPodFactory, BulletFactory& aBulletFactory, EntityGameEventFactory& anEntityGameEventFactory) :
+_Dependencies(PodFactory& aPodFactory, BulletFactory& aBulletFactory, FactoryT<gameevent::GameEvent, EntityGameEvent_Dependencies>& anEntityGameEventFactory) :
     m_aPodFactory(aPodFactory),
     m_aBulletFactory(aBulletFactory),
     m_anEntityGameEventFactory(anEntityGameEventFactory)
@@ -40,19 +40,21 @@ _Dependencies::
 }
 
 // Constructor(s)
-EventDispatcher::EventDispatcher(_Dependencies& theDependencies) :
-    m_anEntityGameEventFactory(theDependencies.m_anEntityGameEventFactory)
+EventDispatcher::EventDispatcher(_Dependencies* pDependencies) :
+    m_anEntityGameEventFactory(pDependencies->m_anEntityGameEventFactory)
 
 {
+    assert(pDependencies);
+    
    // Pod event observation
-    theDependencies.m_aPodFactory.CreatedEvent += Poco::Delegate<EventDispatcher, Player*&>(this, &EventDispatcher::HandlePodCreatedEvent);
+    pDependencies->m_aPodFactory.CreatedEvent += Poco::Delegate<EventDispatcher, Player*&>(this, &EventDispatcher::HandlePodCreatedEvent);
     Player::UpdatedEvent += Poco::Delegate<EventDispatcher, Player*&>(this, &EventDispatcher::HandlePodUpdatedEvent);
-    theDependencies.m_aPodFactory.DestroyedEvent += Poco::Delegate<EventDispatcher, Player*&>(this, &EventDispatcher::HandlePodDestroyedEvent);
+    pDependencies->m_aPodFactory.DestroyedEvent += Poco::Delegate<EventDispatcher, Player*&>(this, &EventDispatcher::HandlePodDestroyedEvent);
     
     // Bullet event observation
-    theDependencies.m_aBulletFactory.CreatedEvent += Poco::Delegate<EventDispatcher, Bullet*&>(this, &EventDispatcher::HandleBulletCreatedEvent);
+    pDependencies->m_aBulletFactory.CreatedEvent += Poco::Delegate<EventDispatcher, Bullet*&>(this, &EventDispatcher::HandleBulletCreatedEvent);
     Bullet::UpdatedEvent += Poco::Delegate<EventDispatcher, Bullet*&>(this, &EventDispatcher::HandleBulletUpdatedEvent);
-    theDependencies.m_aBulletFactory.DestroyedEvent += Poco::Delegate<EventDispatcher, Bullet*&>(this, &EventDispatcher::HandleBulletDestroyedEvent);
+    pDependencies->m_aBulletFactory.DestroyedEvent += Poco::Delegate<EventDispatcher, Bullet*&>(this, &EventDispatcher::HandleBulletDestroyedEvent);
 }
 
 // Destructor

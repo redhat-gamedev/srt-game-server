@@ -11,6 +11,8 @@
 
 #include "../proto/GameEvent.pb.h"
 #include "../proto/EntityGameEvent.pb.h"
+#include "EntityGameEventFactory.h"
+//#include "../Shared/FactoryT.h"
 #include "Poco/BasicEvent.h"
 #include <decaf/util/StlQueue.h>
 
@@ -29,20 +31,12 @@ class Player;
 class Bullet;
 class PodFactory;
 class BulletFactory;
-class EntityGameEventFactory;
+//class EntityGameEventFactory;
+class EntityGameEvent_Dependencies;
 
 
 class EventDispatcher
 {
-private:
-protected:
-    EntityGameEventFactory&                                 m_anEntityGameEventFactory;
-    decaf::util::StlQueue<google::protobuf::Message*>       m_anEventQueue;
-
-    // Helper(s)
-    void                            Enqueue(google::protobuf::Message* pMessage);
-    google::protobuf::Message*      Dequeue();
-    gameevent::GameEvent*           CreateGameEvent(gameevent::EntityGameEvent_EntityGameEventType eEntityGameEvent_EntityGameEventType, AEntity* pEntity);
 public:
     class _Dependencies
     {
@@ -51,23 +45,42 @@ public:
     public:
         PodFactory&                     m_aPodFactory;
         BulletFactory&                  m_aBulletFactory;
-        EntityGameEventFactory&         m_anEntityGameEventFactory;
+        FactoryT<gameevent::GameEvent, EntityGameEvent_Dependencies>&         m_anEntityGameEventFactory;
         
         // Constructor
-        _Dependencies(PodFactory& aPodFactory, BulletFactory& aBulletFactory, EntityGameEventFactory& pEntityGameEventFactory);
+        _Dependencies(PodFactory& aPodFactory, BulletFactory& aBulletFactory, FactoryT<gameevent::GameEvent, EntityGameEvent_Dependencies>& pEntityGameEventFactory);
         
         // Destructor
         ~_Dependencies();
     };
-    
-    // Event(s)
-    Poco::BasicEvent<google::protobuf::Message*&>   EventDispatchedEvent;
+
+private:
+protected:
+    FactoryT<gameevent::GameEvent, EntityGameEvent_Dependencies>&                                 m_anEntityGameEventFactory;
+    decaf::util::StlQueue<google::protobuf::Message*>       m_anEventQueue;
+
+    // Helper(s)
+    void                            Enqueue(google::protobuf::Message* pMessage);
+    google::protobuf::Message*      Dequeue();
+    gameevent::GameEvent*           CreateGameEvent(gameevent::EntityGameEvent_EntityGameEventType eEntityGameEvent_EntityGameEventType, AEntity* pEntity);
     
     // Constructor(s)
-    EventDispatcher(_Dependencies& theDependencies);
+    EventDispatcher(_Dependencies* pDependencies);
     
     // Destructor
     ~EventDispatcher();
+
+public:
+    // Event(s)
+    Poco::BasicEvent<google::protobuf::Message*&>   EventDispatchedEvent;
+    
+    // Singleton
+    static EventDispatcher& Instance(_Dependencies* pDependencies = NULL)//unsigned int uiCapacity)
+    {
+        static EventDispatcher  anEventDispatcher(pDependencies);
+        return anEventDispatcher;
+    }
+    
     
     // Method(s)
     // Dispatches all the events it has received to it's listeners

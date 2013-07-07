@@ -35,6 +35,8 @@ class Heartbeat;
 class World;
 class Player;
 //class Messenger;
+class EventDispatcher;
+class MessageDispatcher;
 
 using namespace decaf::lang;
 
@@ -63,6 +65,9 @@ protected:
     //Messenger*              m_pMessenger;
     
     decaf::lang::Thread*                        m_pMainThread;
+    
+    //EventDispatcher&        m_anEventDispatcher;
+    //MessageDispatcher&      m_aMessageDispatcher;
     
     // Helper(s)
     void Setup();

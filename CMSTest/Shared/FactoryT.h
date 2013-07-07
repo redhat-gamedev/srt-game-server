@@ -10,7 +10,7 @@
 #define CMSTest_FactoryT_h
 
 #include "Poco/BasicEvent.h"
-
+#include <limits>
 
 template <class T, class D>
 class FactoryT
@@ -45,13 +45,13 @@ public:
         CreatedEvent(this, pT);
         return pT;
     }
+    
     virtual void Destroy(T*& pT)
     {
         DestroyedEvent(this, pT);
         delete pT;
         pT = NULL;
     }
-
 };
 
 #endif
