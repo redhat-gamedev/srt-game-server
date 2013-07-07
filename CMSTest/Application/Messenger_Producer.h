@@ -16,7 +16,7 @@
 //#include <decaf/lang/Runnable.h>
 
 
-class SimpleProducer;
+class SimpleAsyncProducer;
 namespace google
 {
     namespace protobuf
@@ -39,7 +39,7 @@ class Messenger::_Producer// :
 private:
     
 protected:
-    SimpleProducer*                                         m_pSimpleProducer;
+    SimpleAsyncProducer*                                         m_pSimpleAsyncProducer;
     xdispatch::queue*                                       m_pProducerSerialDispatchQueue;
 //    xdispatch::timer*                                       m_pProducerDispatchTimer;
     decaf::util::StlQueue<::google::protobuf::Message*>     m_aMessageQueue;

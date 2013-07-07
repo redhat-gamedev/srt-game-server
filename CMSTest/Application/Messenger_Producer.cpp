@@ -24,7 +24,7 @@ using namespace cms;
 
 // Constructor(s)
 Messenger::_Producer::_Producer() :
-    m_pSimpleProducer(NULL),
+    m_pSimpleAsyncProducer(NULL),
     m_pProducerSerialDispatchQueue(NULL)//,
 //    m_pThread(NULL)
 //    m_pProducerDispatchTimer(NULL)
@@ -45,7 +45,7 @@ void Messenger::_Producer::Setup(std::string& strBrokerURI, std::string& strDest
     std::string     strDispatchQueueName = strDestinationURI + "-DispatchQueue";
     
     std::cout << "Starting the activemq simple producer" << std::endl;
-    m_pSimpleProducer = new SimpleProducer(strBrokerURI, strDestinationURI, true);
+    m_pSimpleAsyncProducer = new SimpleAsyncProducer(strBrokerURI, strDestinationURI, true);
     m_pProducerSerialDispatchQueue = new xdispatch::queue(strDispatchQueueName.c_str());
     
     //std::cout << "Starting the producer dispatch timer" << std::endl;
@@ -68,9 +68,9 @@ void Messenger::_Producer::Teardown()
     delete m_pProducerSerialDispatchQueue;
     m_pProducerSerialDispatchQueue = NULL;
     
-    m_pSimpleProducer->close();
-    delete m_pSimpleProducer;
-    m_pSimpleProducer = NULL;
+    m_pSimpleAsyncProducer->close();
+    delete m_pSimpleAsyncProducer;
+    m_pSimpleAsyncProducer = NULL;
 }
 
 // Method(s)
@@ -103,7 +103,7 @@ void Messenger::_Producer::SendUpdate(::google::protobuf::Message* pMessage)
     {
         GameEvent* pGameEvent = static_cast<GameEvent*>(pMessage);
         //EntityGameEvent* pEntityGameEvent = pGameEvent->entitygameevent();
-        const EntityGameEvent& anEntityGameEvent = pGameEvent->entitygameevent();
+        //const EntityGameEvent& anEntityGameEvent = pGameEvent->entitygameevent();
         //cout << hex << anEntityGameEvent.type() << endl;
 //        if (pEntityGameEvent)
         //{
@@ -119,7 +119,7 @@ void Messenger::_Producer::SendUpdate(::google::protobuf::Message* pMessage)
         unsigned long ulLength = strPBBuffer.length();
         if (ulLength > 0)
         {
-            m_pSimpleProducer->Send((const unsigned char*)pucText, (int)ulLength);
+            m_pSimpleAsyncProducer->Send((const unsigned char*)pucText, (int)ulLength);
         }
     }
     catch ( CMSException& e )

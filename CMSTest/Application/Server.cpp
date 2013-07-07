@@ -88,7 +88,7 @@ void Server::Setup()
     m_pSecurity = new Security();
 
     //m_pTimer = new decaf::util::Timer();
-    //m_pHeartbeatProducer = new SimpleProducer(strBrokerURI, strHeartbeatURI, true);
+    //m_pHeartbeatProducer = new SimpleAsyncProducer(strBrokerURI, strHeartbeatURI, true);
     //m_pHeartbeat = new Heartbeat();
     //Heartbeat::EventPublisher.BeatEvent += Poco::Delegate<Server, const int&>(this, &Server::OnHeartBeatBeat);
     

@@ -40,7 +40,7 @@ namespace cms
 }
 
 
-class SimpleProducer :
+class SimpleAsyncProducer :
     public decaf::lang::Runnable
 {
 private:
@@ -63,18 +63,18 @@ private:
 public:
     cms::Session*           m_pSession; //temp
     // Constructor(s)
-    SimpleProducer(const std::string& strBrokerURI,
+    SimpleAsyncProducer(const std::string& strBrokerURI,
                    const std::string& strDestinationURI,
                    bool bUseTopic = false,
                    bool bClientAck = false);
 
-    SimpleProducer(const std::string& strBrokerURI,
+    SimpleAsyncProducer(const std::string& strBrokerURI,
                    const cms::Destination* pDestination = NULL,
                    bool bUseTopic = false,
                    bool bClientAck = false);
     
     // Destructor(s)
-    virtual ~SimpleProducer();
+    virtual ~SimpleAsyncProducer();
     
     // Method(s)
     virtual void run();

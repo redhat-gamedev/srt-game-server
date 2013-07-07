@@ -58,6 +58,7 @@ public:
     // Game Event
     static _Producer    GameEventProducer;
     static _Consumer    Consumer;
+    //static _Consumer*   pConsumer;
     
     // Class function(s)
     static void Setup();

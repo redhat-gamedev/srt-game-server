@@ -9,6 +9,7 @@
 #include "Messenger.h"
 #include "Messenger_Producer.h"
 #include "Messenger_Consumer.h"
+//#include "Messenger_ConsumerFactory.h"
 #include "../Game/AEntity.h"
 #include "../Game/Player.h"
 #include "../Game/PodFactory.h"
@@ -16,6 +17,7 @@
 #include "../Game/BulletFactory.h"
 #include "../Proto/GameEvent.pb.h"
 #include "../Proto/EntityGameEvent.pb.h"
+//#include "../Shared/SimpleAsyncConsumer.h"
 #include "Poco/Delegate.h"
 #include "Poco/FunctionDelegate.h"
 //#include <decaf/lang/Thread.h>
@@ -27,6 +29,7 @@
 //Messenger::_Producer            Messenger::Producer;
 Messenger::_Producer            Messenger::GameEventProducer;
 Messenger::_Consumer            Messenger::Consumer;
+//Messenger::_Consumer*           Messenger::pConsumer = NULL;
 const std::string               Messenger::BrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp";
 xdispatch::queue*               Messenger::s_pMessengerSerialDispatchQueue = NULL;
 
@@ -54,8 +57,9 @@ void Messenger::Setup()
 
     PodFactory&  aPodFactory = PodFactory::Instance();
     BulletFactory&  aBulletFactory = BulletFactory::Instance();
+//    Messenger_ConsumerFactory& aMessengerConsumerFactory = Messenger_ConsumerFactory::Instance();
+//    Messenger::_Consumer::_Dependencies theMessengerConsumerDependencies(new SimpleAsyncConsumer(strBrokerURI, strGameEventInDestinationURI));
 
-    
     s_pMessengerSerialDispatchQueue = new xdispatch::queue("messenger");
     
     // World Simulation
@@ -64,11 +68,15 @@ void Messenger::Setup()
     // Game Event
     GameEventProducer.Setup(strBrokerURI, strGameEventOutDestinationURI);
     Consumer.Setup(strBrokerURI, strGameEventInDestinationURI);
+    //pConsumer = aMessengerConsumerFactory.Create(theMessengerConsumerDependencies);
     
+    
+    // Pod event observation
     aPodFactory.CreatedEvent += Poco::FunctionDelegate<Player*&>(&Messenger::HandlePodCreatedEvent);
     Player::UpdatedEvent += Poco::FunctionDelegate<Player*&>(&Messenger::HandlePodUpdatedEvent);
     aPodFactory.DestroyedEvent += Poco::FunctionDelegate<Player*&>(&Messenger::HandlePodDestroyedEvent);
     
+    // Bullet event observation
     aBulletFactory.CreatedEvent += Poco::FunctionDelegate<Bullet*&>(&Messenger::HandleBulletCreatedEvent);
     Bullet::UpdatedEvent += Poco::FunctionDelegate<Bullet*&>(&Messenger::HandleBulletUpdatedEvent);
     aBulletFactory.DestroyedEvent += Poco::FunctionDelegate<Bullet*&>(&Messenger::HandleBulletDestroyedEvent);

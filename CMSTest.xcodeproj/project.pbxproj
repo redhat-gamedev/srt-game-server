@@ -17,6 +17,10 @@
 		CC2436DD17492E0800A8519D /* Messenger_Producer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC2436DB17492E0800A8519D /* Messenger_Producer.cpp */; };
 		CC2436E017492E2E00A8519D /* Messenger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC2436DE17492E2E00A8519D /* Messenger.cpp */; };
 		CC2436E317492E8A00A8519D /* Messenger_Consumer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC2436E117492E8A00A8519D /* Messenger_Consumer.cpp */; };
+		CC386DD21789D45800AB41AF /* EventDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC386DD01789D45800AB41AF /* EventDispatcher.cpp */; };
+		CC386DD51789D58C00AB41AF /* EventDispatcherFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC386DD31789D58C00AB41AF /* EventDispatcherFactory.cpp */; };
+		CC386DD81789D86300AB41AF /* EntityGameEventFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC386DD61789D86300AB41AF /* EntityGameEventFactory.cpp */; };
+		CC386DDB178A033100AB41AF /* MessageDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC386DD9178A033100AB41AF /* MessageDispatcher.cpp */; };
 		CC488D27164EB5FD005078C3 /* libBox2D.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC488D20164EB5DE005078C3 /* libBox2D.a */; };
 		CC4FECE11662A3AA004810CC /* libProtocolBuffers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC4FECE01662A39A004810CC /* libProtocolBuffers.a */; };
 		CC51BA661781B7FA007F27F0 /* BulletFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC51BA641781B7FA007F27F0 /* BulletFactory.cpp */; };
@@ -216,6 +220,14 @@
 		CC2436DF17492E2E00A8519D /* Messenger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Messenger.h; path = Application/Messenger.h; sourceTree = "<group>"; };
 		CC2436E117492E8A00A8519D /* Messenger_Consumer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Messenger_Consumer.cpp; path = Application/Messenger_Consumer.cpp; sourceTree = "<group>"; };
 		CC2436E217492E8A00A8519D /* Messenger_Consumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Messenger_Consumer.h; path = Application/Messenger_Consumer.h; sourceTree = "<group>"; };
+		CC386DD01789D45800AB41AF /* EventDispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EventDispatcher.cpp; path = Game/EventDispatcher.cpp; sourceTree = "<group>"; };
+		CC386DD11789D45800AB41AF /* EventDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventDispatcher.h; path = Game/EventDispatcher.h; sourceTree = "<group>"; };
+		CC386DD31789D58C00AB41AF /* EventDispatcherFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EventDispatcherFactory.cpp; path = Game/EventDispatcherFactory.cpp; sourceTree = "<group>"; };
+		CC386DD41789D58C00AB41AF /* EventDispatcherFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventDispatcherFactory.h; path = Game/EventDispatcherFactory.h; sourceTree = "<group>"; };
+		CC386DD61789D86300AB41AF /* EntityGameEventFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EntityGameEventFactory.cpp; path = Game/EntityGameEventFactory.cpp; sourceTree = "<group>"; };
+		CC386DD71789D86300AB41AF /* EntityGameEventFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EntityGameEventFactory.h; path = Game/EntityGameEventFactory.h; sourceTree = "<group>"; };
+		CC386DD9178A033100AB41AF /* MessageDispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MessageDispatcher.cpp; path = Application/MessageDispatcher.cpp; sourceTree = "<group>"; };
+		CC386DDA178A033100AB41AF /* MessageDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageDispatcher.h; path = Application/MessageDispatcher.h; sourceTree = "<group>"; };
 		CC4FECD81662A399004810CC /* ProtocolBuffers.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ProtocolBuffers.xcodeproj; path = ../ThirdParty/protobuf/ProtocolBuffers/ProtocolBuffers.xcodeproj; sourceTree = "<group>"; };
 		CC51BA641781B7FA007F27F0 /* BulletFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BulletFactory.cpp; path = Game/BulletFactory.cpp; sourceTree = "<group>"; };
 		CC51BA651781B7FA007F27F0 /* BulletFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BulletFactory.h; path = Game/BulletFactory.h; sourceTree = "<group>"; };
@@ -426,6 +438,8 @@
 				CC2436DC17492E0800A8519D /* Messenger_Producer.h */,
 				CC2436E117492E8A00A8519D /* Messenger_Consumer.cpp */,
 				CC2436E217492E8A00A8519D /* Messenger_Consumer.h */,
+				CC386DD9178A033100AB41AF /* MessageDispatcher.cpp */,
+				CC386DDA178A033100AB41AF /* MessageDispatcher.h */,
 			);
 			name = Application;
 			sourceTree = "<group>";
@@ -473,6 +487,12 @@
 				CC55B2711785020700CCC6E5 /* B2DPodFactory.h */,
 				CC55B2721785025200CCC6E5 /* PodFactory.h */,
 				CC55B2731785028A00CCC6E5 /* PodFactory.cpp */,
+				CC386DD01789D45800AB41AF /* EventDispatcher.cpp */,
+				CC386DD11789D45800AB41AF /* EventDispatcher.h */,
+				CC386DD31789D58C00AB41AF /* EventDispatcherFactory.cpp */,
+				CC386DD41789D58C00AB41AF /* EventDispatcherFactory.h */,
+				CC386DD61789D86300AB41AF /* EntityGameEventFactory.cpp */,
+				CC386DD71789D86300AB41AF /* EntityGameEventFactory.h */,
 			);
 			name = Game;
 			sourceTree = "<group>";
@@ -709,6 +729,10 @@
 				CC2436E317492E8A00A8519D /* Messenger_Consumer.cpp in Sources */,
 				CC51BA661781B7FA007F27F0 /* BulletFactory.cpp in Sources */,
 				CC55B2741785028A00CCC6E5 /* PodFactory.cpp in Sources */,
+				CC386DD21789D45800AB41AF /* EventDispatcher.cpp in Sources */,
+				CC386DD51789D58C00AB41AF /* EventDispatcherFactory.cpp in Sources */,
+				CC386DD81789D86300AB41AF /* EntityGameEventFactory.cpp in Sources */,
+				CC386DDB178A033100AB41AF /* MessageDispatcher.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

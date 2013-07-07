@@ -25,7 +25,7 @@ namespace cms
     class CMSException;
 }
 class SimpleAsyncConsumer;
-class SimpleProducer;
+class SimpleAsyncProducer;
 class Player;
 
 
@@ -50,7 +50,7 @@ protected:
     
     std::map<std::string, std::string>              m_mapUUIDToSimpleAsyncProducers;
     SimpleAsyncConsumer*                            m_pSimpleAsyncConsumer;
-    SimpleProducer*                                 m_pSimpleAsyncProducer;
+    SimpleAsyncProducer*                                 m_pSimpleAsyncProducer;
     
 public:
     static _EventPublisher                          EventPublisher;

@@ -35,7 +35,9 @@ class AEntity;
 class Messenger::_Consumer :
     public cms::MessageListener
 {
-        friend class Messenger;
+    friend class Messenger;
+    //friend class Messenger_ConsumerFactory;
+    
 protected:
     class _EventPublisher
     {
@@ -44,6 +46,25 @@ protected:
         Poco::BasicEvent<const AEntity&>        ReceivedCreateEntityRequest;
         Poco::BasicEvent<const AEntity&>        ReceivedDestroyEntityRequest;
     };
+    
+//    class _Dependencies
+//    {
+//    private:
+//    protected:
+////        const std::string&           m_strBrokerURI;
+////        const str::string&           m_strDestinationURI;
+//        SimpleAsyncConsumer*&             m_pSimpleAsyncConsumer;
+//
+//    public:    
+//        SimpleAsyncConsumer*&       pSimpleAsyncConsumer = m_pSimpleAsyncConsumer;
+//        
+//        // Constructor
+////        _Dependencies(const std::string& strBrokerURI, const str::string& strDestinationURI);
+//        _Dependencies(SimpleAsyncConsumer*& pSimpleAsyncConsumer);
+//        
+//        // Destructor
+//        ~_Dependencies() {};
+//    };
     
 private:
     
@@ -60,6 +81,7 @@ public:
     
     // Constructor(s)
     _Consumer();
+    //_Consumer(_Dependencies& theDependencies);
     
     // Destructor(s)
     ~_Consumer();

@@ -52,7 +52,7 @@ Security::Security() :
     m_pSimpleAsyncConsumer->runConsumer();
     m_pSimpleAsyncConsumer->SetMessageListener(this);
     
-    m_pSimpleAsyncProducer = new SimpleProducer(strBrokerURI, strSecurityOutURI, true, true);
+    m_pSimpleAsyncProducer = new SimpleAsyncProducer(strBrokerURI, strSecurityOutURI, true, true);
     
 //    Player::EventPublisher.CreatedEvent += Poco::Delegate<Security, const AEntity::EType&>(this, &Security::OnPlayerCreated);
 //    Player::EventPublisher.DestroyedEvent += Poco::Delegate<Security, const AEntity::EType&>(this, &Security::OnPlayerDestroyed);
@@ -142,7 +142,7 @@ void Security::onMessage(const Message* pMessage)
             decaf::util::UUID aNewUUID = decaf::util::UUID::randomUUID();
             strUUID = aNewUUID.toString();
             // TODO: Make not super inefficient
-            SimpleProducer* pSimpleAsyncProducer = new SimpleProducer(strBrokerURI, pDestination, false, true);
+            SimpleAsyncProducer* pSimpleAsyncProducer = new SimpleAsyncProducer(strBrokerURI, pDestination, false, true);
             pSimpleAsyncProducer->Send(strUUID);
             delete pSimpleAsyncProducer;
             

@@ -21,12 +21,32 @@ using namespace cms;
 using namespace gameevent;
 
 
+// Constructor
+//Messenger::_Consumer::_Dependencies::_Dependencies(const std::string& strBrokerURI, const str::string& strDestinationURI)
+//{
+//    
+//}
+
+//Messenger::_Consumer::_Dependencies::_Dependencies(SimpleAsyncConsumer*& pSimpleAsyncConsumer) :
+//    m_pSimpleAsyncConsumer(pSimpleAsyncConsumer)
+//{
+//    assert(m_pSimpleAsyncConsumer);
+//    
+//}
+
 // Constructor(s)
 Messenger::_Consumer::_Consumer():
     m_pSimpleAsyncConsumer(NULL)
 {
 
 }
+
+//Messenger::_Consumer::_Consumer(_Dependencies& theDependencies) :
+//    m_pSimpleAsyncConsumer(theDependencies.pSimpleAsyncConsumer)
+//{
+//    assert(m_pSimpleAsyncConsumer);
+//    
+//}
 
 // Destructor(s)
 Messenger::_Consumer::~_Consumer()

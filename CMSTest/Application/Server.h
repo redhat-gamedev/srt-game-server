@@ -28,7 +28,7 @@ namespace decaf
         class Timer;
     }
 }
-class SimpleProducer;
+class SimpleAsyncProducer;
 class SimpleAsyncConsumer;
 class Security;
 class Heartbeat;
@@ -53,7 +53,7 @@ public:
 private:
     
 protected:
-    SimpleProducer*         m_pHeartbeatProducer;
+    SimpleAsyncProducer*         m_pHeartbeatProducer;
     SimpleAsyncConsumer*    m_pCommandConsumer;
     decaf::util::Timer*     m_pTimer;
     Heartbeat*              m_pHeartbeat;

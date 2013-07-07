@@ -41,7 +41,7 @@ using namespace std;
 
 
 // Constructor(s)
-SimpleProducer::SimpleProducer(
+SimpleAsyncProducer::SimpleAsyncProducer(
                                const std::string& strBrokerURI,
                                const std::string& strDestinationURI,
                                bool bUseTopic,
@@ -67,7 +67,7 @@ SimpleProducer::SimpleProducer(
     }
 }
 
-SimpleProducer::SimpleProducer(const std::string& strBrokerURI,
+SimpleAsyncProducer::SimpleAsyncProducer(const std::string& strBrokerURI,
                const cms::Destination* pDestination,
                bool bUseTopic,
                bool bClientAck)
@@ -91,13 +91,13 @@ SimpleProducer::SimpleProducer(const std::string& strBrokerURI,
     }
 }
 
-SimpleProducer::~SimpleProducer()
+SimpleAsyncProducer::~SimpleAsyncProducer()
 {
     Teardown();
 }
 
 // Helper(s)
-void SimpleProducer::Setup()
+void SimpleAsyncProducer::Setup()
 {
     // Create a ConnectionFactory
     auto_ptr<ActiveMQConnectionFactory> m_pConnectionFactory(new ActiveMQConnectionFactory( m_strBrokerURI ) );
@@ -146,7 +146,7 @@ void SimpleProducer::Setup()
     //string threadIdStr = Long::toString( llThreadId );
 }
 
-void SimpleProducer::Teardown()
+void SimpleAsyncProducer::Teardown()
 {
     // Destroy resources.
     try
@@ -208,12 +208,12 @@ void SimpleProducer::Teardown()
     m_pConnection = NULL;    
 }
 
-void SimpleProducer::close()
+void SimpleAsyncProducer::close()
 {
     Teardown();
 }
 
-void SimpleProducer::run()
+void SimpleAsyncProducer::run()
 {
 //    try
 //    {
@@ -253,7 +253,7 @@ void SimpleProducer::run()
 //    }
 }
 
-void SimpleProducer::Send(std::string& strToSend, cms::AsyncCallback* pAsyncCallback)
+void SimpleAsyncProducer::Send(std::string& strToSend, cms::AsyncCallback* pAsyncCallback)
 {
     static int ix = 0;
     TextMessage* pTextMessage = NULL;
@@ -280,7 +280,7 @@ void SimpleProducer::Send(std::string& strToSend, cms::AsyncCallback* pAsyncCall
     }
 }
 
-void SimpleProducer::Send(const unsigned char* pucArray, int iSize)
+void SimpleAsyncProducer::Send(const unsigned char* pucArray, int iSize)
 {
     assert(pucArray);
     assert(iSize > 0);

@@ -25,6 +25,10 @@ protected:
     virtual ~FactoryT<T, D>() {};
     
 public:
+    // Event(s)
+    Poco::BasicEvent<T*&>    CreatedEvent;
+    Poco::BasicEvent<T*&>    DestroyedEvent;
+    
     // Singleton
     static FactoryT<T, D>& Instance()//unsigned int uiCapacity)
     {
@@ -47,10 +51,7 @@ public:
         delete pT;
         pT = NULL;
     }
-    
-    // Event(s)
-    Poco::BasicEvent<T*&>    CreatedEvent;
-    Poco::BasicEvent<T*&>    DestroyedEvent;
+
 };
 
 #endif
