@@ -25,16 +25,6 @@ uint32_t                    Bullet::s_ui32Count = 1;
 
 
 // Constructor(s)
-Bullet::_Dependencies::_Dependencies(const std::string& strUUID, AB2DEntity* pB2DEntity) :
-    m_strUUID(strUUID),
-    m_pB2DEntity(pB2DEntity)
-{
-    assert(strUUID.length() > 0);
-    assert(pB2DEntity);
-}
-
-
-// Constructor(s)
 Bullet::Bullet(_Dependencies& theDependencies) :
     m_bAlive(true),
     m_pLifeTimer(new Rock2D::Timer(3000)),

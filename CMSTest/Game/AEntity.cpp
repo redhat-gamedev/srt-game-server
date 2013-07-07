@@ -30,6 +30,15 @@ std::list<Player*>                  AEntity::s_listPlayersSwap;
 uint64_t                            AEntity::s_ui64Count = 1;
 
 
+// Constructor(s)
+AEntity::_Dependencies::_Dependencies(const std::string& strUUID, AB2DEntity* pB2DEntity) :
+    m_strUUID(strUUID),
+    m_pB2DEntity(pB2DEntity)
+{
+    assert(strUUID.length() > 0);
+    assert(pB2DEntity);
+}
+
 void AEntity::_Serializer::Serialize(const AEntity* pEntity, gameevent::EntityGameEvent* pEntityGameEvent)
 {
     //using namespace std;

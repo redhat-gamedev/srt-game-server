@@ -28,25 +28,6 @@ class Bullet :
     friend class Player;
     friend class BulletFactory;
 
-public:
-    class _Dependencies
-    {
-    protected:
-        const std::string&      m_strUUID;
-        AB2DEntity*             m_pB2DEntity;
-        
-    public:
-        // Constructor
-        _Dependencies(const std::string& strUUID, AB2DEntity* pB2DEntity);
-        
-        // Destructor()
-        ~_Dependencies() {};
-        
-        // Properties
-        const std::string&      UUID = m_strUUID;
-        AB2DEntity*&            pB2DEntity = m_pB2DEntity;
-    };
-    
 private:
     static uint32_t         s_ui32Count;
     

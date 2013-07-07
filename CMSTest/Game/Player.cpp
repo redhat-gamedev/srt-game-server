@@ -29,15 +29,6 @@ uint32_t                        Player::s_ui32Count = 1;
 
 
 // Constructor(s)
-Player::_Dependencies::_Dependencies(const std::string& strUUID, AB2DEntity* pB2DEntity) :
-    m_strUUID(strUUID),
-    m_pB2DEntity(pB2DEntity)
-{
-    assert(strUUID.length() > 0);
-    assert(pB2DEntity);
-}
-
-// Constructor(s)
 Player::Player(_Dependencies& theDependencies) :
     m_pBulletTimer(new Rock2D::Timer(500)),
     AEntity(theDependencies.UUID,

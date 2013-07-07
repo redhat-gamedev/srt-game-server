@@ -33,6 +33,24 @@ public:
         NUMTYPES    = 2
     };
 
+    class _Dependencies
+    {
+    protected:
+        const std::string&      m_strUUID;
+        AB2DEntity*             m_pB2DEntity;
+        
+    public:
+        // Constructor
+        _Dependencies(const std::string& strUUID, AB2DEntity* pB2DEntity);
+        
+        // Destructor()
+        ~_Dependencies() {};
+        
+        // Properties
+        const std::string&      UUID = m_strUUID;
+        AB2DEntity*&            pB2DEntity = m_pB2DEntity;
+    };
+
 private:
     static uint64_t                         s_ui64Count;
     static std::list<Player*>               s_listPlayers;
@@ -42,17 +60,6 @@ private:
     //std::list<AEntity*>             m_listEntitiesSwap;
     
 protected:
-    // Class(es)
-    class _EventPublisher
-    {
-    public:
-        // Event(s)
-        Poco::BasicEvent<const AEntity::EType&>    CreatedEvent;
-        Poco::BasicEvent<const AEntity::EType&>    RetrievedEvent;
-        Poco::BasicEvent<const AEntity::EType&>    UpdatedEvent;
-        Poco::BasicEvent<const AEntity::EType&>    DestroyedEvent;
-    };
-
     class _Serializer
     {
     public:
