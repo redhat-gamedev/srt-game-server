@@ -10,8 +10,8 @@
 #include "World.h"
 //#include "Heartbeat.h"
 #include "Security.h"
-#include "Messenger.h"
-#include "Messenger_Consumer.h"
+//#include "Messenger.h"
+//#include "Messenger_Consumer.h"
 #include "AEntity.h"
 #include "decaf/lang/Thread.h"
 #include "decaf/lang/Runnable.h"
@@ -22,13 +22,15 @@
 
 
 // Constructor(s)
-Server::Server(EventDispatcher& theEventDispatcher, MessageDispatcher& theMessageDispatcher) :
+Server::Server(EventDispatcher& theEventDispatcher, EventConsumer& theEventConsumer, MessageDispatcher& theMessageDispatcher, MessageConsumer& theMessageConsumer) :
     m_pWorld(NULL),
     m_pInput(NULL),
     m_pSecurity(NULL),
     m_pMainThread(NULL),
     m_theEventDispatcher(theEventDispatcher),
-    m_theMessageDispatcher(theMessageDispatcher)
+    m_theEventConsumer(theEventConsumer),
+    m_theMessageDispatcher(theMessageDispatcher),
+    m_theMessageConsumer(theMessageConsumer)
 {
     Setup();
 }
@@ -46,7 +48,7 @@ void Server::Setup()
 
     std::string     strMainThreadName = "ServerThread";
     
-    Messenger::Setup();
+    //Messenger::Setup();
     AEntity::ClassSetup();
 
     m_pWorld = new World();
@@ -75,7 +77,7 @@ void Server::Teardown()
     m_pWorld = NULL;
     
     AEntity::ClassTeardown();
-    Messenger::Teardown();
+    //Messenger::Teardown();
 }
 
 // Method(s)
@@ -84,7 +86,9 @@ void Server::run()
     while (true)
     {
         // Receive incoming user commands
-        Messenger::Consumer.ProcessReceivedMessages();
+        //Messenger::Consumer.ProcessReceivedMessages();
+        m_theMessageConsumer.Dispatch();
+        m_theEventConsumer.Consume();
         
         // Run simulation step
         m_pWorld->Simulate();

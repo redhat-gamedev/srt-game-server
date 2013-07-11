@@ -11,11 +11,10 @@
 #include "Player.h"
 #include "PodFactory.h"
 #include "B2DPodFactory.h"
-#include "../Application/Messenger.h"
-#include "../Application/Messenger_Consumer.h"
+//#include "../Application/Messenger.h"
+//#include "../Application/Messenger_Consumer.h"
+#include "EventConsumer.h"
 #include "../Application/Security.h"
-//#include "../Proto/GameEvent.pb.h"
-#include "../Proto/EntityGameEvent.pb.h"
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include "Poco/FunctionDelegate.h"
 //#include <iostream>
@@ -76,12 +75,15 @@ void AEntity::ClassSetup()
     Security::EventPublisher.RequestJoinEvent += Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestJoin);
     Security::EventPublisher.RequestLeaveEvent += Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestLeave);
     
-    Messenger::Consumer.EventPublisher.ReceivedCreateEntityRequest += Poco::FunctionDelegate<const AEntity&>(&AEntity::HandleMessengerConsumerEventPublisherCreateEntityRequest);
+    //Messenger::Consumer.EventPublisher.ReceivedCreateEntityRequest += Poco::FunctionDelegate<const AEntity&>(&AEntity::HandleMessengerConsumerEventPublisherCreateEntityRequest);
+    
+    EventConsumer::Instance().EventConsumedEvent += Poco::FunctionDelegate<google::protobuf::Message*&>(&AEntity::HandleEventConsumedEvent);
 }
 
 void AEntity::ClassTeardown()
 {
-    Messenger::Consumer.EventPublisher.ReceivedCreateEntityRequest -= Poco::FunctionDelegate<const AEntity&>(&AEntity::HandleMessengerConsumerEventPublisherCreateEntityRequest);
+    //Messenger::Consumer.EventPublisher.ReceivedCreateEntityRequest -= Poco::FunctionDelegate<const AEntity&>(&AEntity::HandleMessengerConsumerEventPublisherCreateEntityRequest);
+    EventConsumer::Instance().EventConsumedEvent -= Poco::FunctionDelegate<google::protobuf::Message*&>(&AEntity::HandleEventConsumedEvent);
     
     Security::EventPublisher.RequestLeaveEvent -= Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestLeave);
     Security::EventPublisher.RequestJoinEvent -= Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestJoin);
@@ -154,7 +156,7 @@ void AEntity::OnSecurityRequestJoin(const void* pSender, const std::string& strU
 {
     assert(!strUUID.empty());
     
-    //AddPlayer(strUUID);
+    AddPlayer(strUUID);
 }
 
 void AEntity::OnSecurityRequestLeave(const void* pSender, const std::string& strUUID)
@@ -168,15 +170,22 @@ void AEntity::OnSecurityRequestLeave(const void* pSender, const std::string& str
 }
 
 // Messenger Event response
-void AEntity::HandleMessengerConsumerEventPublisherCreateEntityRequest(const void* pSender, const AEntity& anEntity)
-{
-    //m_pSimulationSerialDispatchQueue->sync([=]
-    //{
-       std::cout << "AEntity::HandleMessengerConsumerEventPublisherCreateEntityRequest" << std::endl;
-       AddPlayer(anEntity.UUID);
-    //});
-}
+//void AEntity::HandleMessengerConsumerEventPublisherCreateEntityRequest(const void* pSender, const AEntity& anEntity)
+//{
+//    //m_pSimulationSerialDispatchQueue->sync([=]
+//    //{
+//       std::cout << "AEntity::HandleMessengerConsumerEventPublisherCreateEntityRequest" << std::endl;
+//       AddPlayer(anEntity.UUID);
+//    //});
+//}
 
+// Event Consumer event response
+void AEntity::HandleEventConsumedEvent(const void* pSender, google::protobuf::Message*& pMessage)
+{
+    GameEvent* pGameEvent = NULL;
+    
+    pGameEvent = dynamic_cast<GameEvent*>(pMessage);
+}
 
 //// Instance
 // Constructor(s)

@@ -79,6 +79,29 @@ public:
         CreatedEvent(this, pGameEvent);
         return pGameEvent;
     }
+    virtual GameEvent* Create(std::pair<unsigned char*, unsigned long>* pRawBytesPair)
+    {
+        assert(pRawBytesPair);
+        
+        GameEvent aGameEvent;
+        GameEvent* pGameEvent = aGameEvent.New();
+        
+        unsigned long       iBodyBytes = 0;
+        unsigned char*      pucBodyBytes = NULL;
+        
+        pucBodyBytes = pRawBytesPair->first;
+        iBodyBytes = pRawBytesPair->second;
+        assert(pucBodyBytes);
+        assert(iBodyBytes > 0);
+        
+        pGameEvent->ParseFromArray(pucBodyBytes, iBodyBytes);
+        
+        delete[] pucBodyBytes;
+        pucBodyBytes = NULL;
+        delete pRawBytesPair;
+
+        return pGameEvent;
+    }
     virtual void Destroy(GameEvent*& pGameEvent)
     {
         DestroyedEvent(this, pGameEvent);

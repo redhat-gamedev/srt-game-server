@@ -9,15 +9,24 @@
 #ifndef __CMSTest__Entity__
 #define __CMSTest__Entity__
 
+#include "../Proto/GameEvent.pb.h"
+#include "../Proto/EntityGameEvent.pb.h"
 #include "Poco/BasicEvent.h"
 #include <decaf/util/StlQueue.h>
 #include <string>
 #include <list>
 
-namespace gameevent
-{
-    class EntityGameEvent;
-}
+//namespace google
+//{
+//    namespace protobuf
+//    {
+//        class Message;
+//    }
+//}
+//namespace gameevent
+//{
+//    class EntityGameEvent;
+//}
 class AB2DEntity;
 class Player;
 
@@ -94,7 +103,10 @@ public:
     static void OnSecurityRequestLeave(const void* pSender, const std::string& strUUID);
     
     // Messenger Event response
-    static void HandleMessengerConsumerEventPublisherCreateEntityRequest(const void* pSender, const AEntity& anEntity);
+    //static void HandleMessengerConsumerEventPublisherCreateEntityRequest(const void* pSender, const AEntity& anEntity);
+    
+    // Event Consumer event response
+    static void HandleEventConsumedEvent(const void* pSender, google::protobuf::Message*& pMessage);
     
     // Instance
     // Constructor(s)

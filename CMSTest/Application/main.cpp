@@ -17,8 +17,11 @@
 
 #include "Server.h"
 #include "MessageDispatcher.h"
+#include "MessageConsumer.h"
 #include "../Shared/SimpleAsyncProducer.h"
+#include "../Shared/SimpleAsyncConsumer.h"
 #include "../Game/EventDispatcher.h"
+#include "../Game/EventConsumer.h"
 #include "../Game/PodFactory.h"
 #include "../Game/BulletFactory.h"
 #include "../Game/EntityGameEventFactory.h"
@@ -34,8 +37,6 @@ int main(int argc, char* argv[])
     std::string     strGameEventOutDestinationURI = "GAME.EVENT.OUT";
     std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp&keepAlive=true";
     
-    
-    
     std::cout << "Starting..." << std::endl;
     std::cout << "Initializing the ActiveMQCPP library" << std::endl;
     activemq::library::ActiveMQCPP::initializeLibrary();
@@ -45,12 +46,19 @@ int main(int argc, char* argv[])
     FactoryT<GameEvent, EntityGameEvent_Dependencies>&          theEntityGameEventFactory = FactoryT<GameEvent, EntityGameEvent_Dependencies>::Instance();
     EventDispatcher::_Dependencies                              theEventDispatcherDependencies(thePodFactory, theBulletFactory, theEntityGameEventFactory);
     EventDispatcher&                                            theEventDispatcher = EventDispatcher::Instance(&theEventDispatcherDependencies);
-
+    
     SimpleAsyncProducer*                                        pSimpleAsyncProducer = new SimpleAsyncProducer(strBrokerURI, strGameEventOutDestinationURI, true);
     MessageDispatcher::_Dependencies                            theMessageDispatcherDependencies(pSimpleAsyncProducer);
     MessageDispatcher&                                          theMessageDispatcher = MessageDispatcher::Instance(&theMessageDispatcherDependencies);
     
-    Server* pServer = new Server(theEventDispatcher, theMessageDispatcher);
+    SimpleAsyncConsumer*                                        pSimpleAsyncConsumer = new SimpleAsyncConsumer(strBrokerURI, strGameEventInDestinationURI);
+    MessageConsumer::_Dependencies                              theMessageConsumerDependencies(pSimpleAsyncConsumer);
+    MessageConsumer&                                            theMessageConsumer = MessageConsumer::Instance(&theMessageConsumerDependencies);
+    
+    EventConsumer::_Dependencies                                theEventConsumerDependencies(&theMessageConsumer, theEntityGameEventFactory);
+    EventConsumer&                                              theEventConsumer = EventConsumer::Instance(&theEventConsumerDependencies);
+    
+    Server* pServer = new Server(theEventDispatcher, theEventConsumer, theMessageDispatcher, theMessageConsumer);
 
     //pServer->run();
     

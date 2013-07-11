@@ -9,8 +9,8 @@
 #ifndef __CMSTest__EventDispatcher__
 #define __CMSTest__EventDispatcher__
 
-#include "../proto/GameEvent.pb.h"
-#include "../proto/EntityGameEvent.pb.h"
+#include "../Proto/GameEvent.pb.h"
+#include "../Proto/EntityGameEvent.pb.h"
 #include "EntityGameEventFactory.h"
 //#include "../Shared/FactoryT.h"
 #include "Poco/BasicEvent.h"
