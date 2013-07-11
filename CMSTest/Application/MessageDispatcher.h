@@ -41,13 +41,13 @@ public:
 
 private:
 protected:
-    decaf::util::StlQueue<std::pair<const unsigned char*, unsigned long>* >       m_aMessageQueue;
-    SimpleAsyncProducer*                                                m_pSimpleAsyncProducer;
+    decaf::util::StlQueue<std::pair<const unsigned char*, unsigned long>* >         m_aMessageQueue;
+    SimpleAsyncProducer*                                                            m_pSimpleAsyncProducer;
     
     // Helper(s)
-    void                                    Enqueue(google::protobuf::Message* pMessage);
-    void                                    Enqueue(std::pair<const unsigned char*, unsigned long>* pMessagePair);
-    std::pair<const unsigned char*, unsigned long>*   MessageToPair(google::protobuf::Message* pMessage);
+    void                                                Enqueue(google::protobuf::Message* pMessage);
+    void                                                Enqueue(std::pair<const unsigned char*, unsigned long>* pMessagePair);
+    std::pair<const unsigned char*, unsigned long>*     MessageToPair(google::protobuf::Message* pMessage);
     
     // Constructor
     MessageDispatcher(_Dependencies* pDependencies);
