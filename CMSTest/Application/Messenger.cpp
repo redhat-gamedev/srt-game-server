@@ -66,7 +66,7 @@ void Messenger::Setup()
     //Producer.Setup(strBrokerURI, strWorldSimulationDestinationURI);
     
     // Game Event
-    GameEventProducer.Setup(strBrokerURI, strGameEventOutDestinationURI);
+    //GameEventProducer.Setup(strBrokerURI, strGameEventOutDestinationURI);
     Consumer.Setup(strBrokerURI, strGameEventInDestinationURI);
     //pConsumer = aMessengerConsumerFactory.Create(theMessengerConsumerDependencies);
     

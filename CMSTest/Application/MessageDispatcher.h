@@ -50,17 +50,17 @@ protected:
     std::pair<const unsigned char*, unsigned long>*   MessageToPair(google::protobuf::Message* pMessage);
     
     // Constructor
-    MessageDispatcher(_Dependencies& theDependencies);
+    MessageDispatcher(_Dependencies* pDependencies);
     
     // Destructor
     ~MessageDispatcher();
 
 public:
     // Singleton
-    static MessageDispatcher& Instance(_Dependencies& theDependencies)//unsigned int uiCapacity)
+    static MessageDispatcher& Instance(_Dependencies* pDependencies)//unsigned int uiCapacity)
     {
-        static MessageDispatcher  aMessageDispatcher(theDependencies);
-        return aMessageDispatcher;
+        static MessageDispatcher  theMessageDispatcher(pDependencies);
+        return theMessageDispatcher;
     }
     
     // Method(s)

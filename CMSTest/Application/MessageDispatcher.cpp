@@ -7,8 +7,10 @@
 //
 
 #include "MessageDispatcher.h"
+#include "../Game/EventDispatcher.h"
 #include "../Shared/SimpleAsyncProducer.h"
 #include "../proto/GameEvent.pb.h"
+#include "Poco/Delegate.h"
 #include <cms/CMSException.h>
 #include <google/protobuf/message.h>
 #include <string>
@@ -34,16 +36,25 @@ _Dependencies::
 
 
 // Constructor
-MessageDispatcher::MessageDispatcher(_Dependencies& theDependencies) :
-    m_pSimpleAsyncProducer(theDependencies.m_pSimpleAsyncProducer)
+MessageDispatcher::MessageDispatcher(_Dependencies* pDependencies)// :
+    //m_pSimpleAsyncProducer(pDependencies->m_pSimpleAsyncProducer)
 {
-    assert(m_pSimpleAsyncProducer);    
+    assert(pDependencies);
+    
+    m_pSimpleAsyncProducer = pDependencies->m_pSimpleAsyncProducer;
+    
+    EventDispatcher& theEventDispatcher = EventDispatcher::Instance();
+    theEventDispatcher.EventDispatchedEvent += Poco::Delegate<MessageDispatcher, google::protobuf::Message*&>(this, &MessageDispatcher::HandleEventDispatchedEvent);
+    
+    
+    assert(m_pSimpleAsyncProducer);
 }
 
 // Destructor
 MessageDispatcher::~MessageDispatcher()
 {
-    
+    EventDispatcher& theEventDispatcher = EventDispatcher::Instance();
+    theEventDispatcher.EventDispatchedEvent -= Poco::Delegate<MessageDispatcher, google::protobuf::Message*&>(this, &MessageDispatcher::HandleEventDispatchedEvent);
 }
 
 // Helper(s)

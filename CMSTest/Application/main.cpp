@@ -16,17 +16,41 @@
  */
 
 #include "Server.h"
+#include "MessageDispatcher.h"
+#include "../Shared/SimpleAsyncProducer.h"
+#include "../Game/EventDispatcher.h"
+#include "../Game/PodFactory.h"
+#include "../Game/BulletFactory.h"
+#include "../Game/EntityGameEventFactory.h"
 #include "activemq/library/ActiveMQCPP.h"
 #include <iostream>
 
 
 int main(int argc, char* argv[])
 {
+    std::string     strSecurityInURI = "AAS.IN";
+    std::string     strSecurityOutURI = "AAS.OUT";
+    std::string     strGameEventInDestinationURI = "GAME.EVENT.IN";
+    std::string     strGameEventOutDestinationURI = "GAME.EVENT.OUT";
+    std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp&keepAlive=true";
+    
+    
+    
     std::cout << "Starting..." << std::endl;
     std::cout << "Initializing the ActiveMQCPP library" << std::endl;
     activemq::library::ActiveMQCPP::initializeLibrary();
     
-    Server* pServer = new Server();
+    PodFactory&                                                 thePodFactory = PodFactory::Instance();
+    BulletFactory&                                              theBulletFactory = BulletFactory::Instance();
+    FactoryT<GameEvent, EntityGameEvent_Dependencies>&          theEntityGameEventFactory = FactoryT<GameEvent, EntityGameEvent_Dependencies>::Instance();
+    EventDispatcher::_Dependencies                              theEventDispatcherDependencies(thePodFactory, theBulletFactory, theEntityGameEventFactory);
+    EventDispatcher&                                            theEventDispatcher = EventDispatcher::Instance(&theEventDispatcherDependencies);
+
+    SimpleAsyncProducer*                                        pSimpleAsyncProducer = new SimpleAsyncProducer(strBrokerURI, strGameEventOutDestinationURI, true);
+    MessageDispatcher::_Dependencies                            theMessageDispatcherDependencies(pSimpleAsyncProducer);
+    MessageDispatcher&                                          theMessageDispatcher = MessageDispatcher::Instance(&theMessageDispatcherDependencies);
+    
+    Server* pServer = new Server(theEventDispatcher, theMessageDispatcher);
 
     //pServer->run();
     

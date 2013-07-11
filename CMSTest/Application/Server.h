@@ -9,11 +9,13 @@
 #ifndef __CMSTest__Server__
 #define __CMSTest__Server__
 
-#include "decaf/util/StlQueue.h"
+#include "EventDispatcher.h"
+#include "MessageDispatcher.h"
 #include "../Game/B2DWorld.h"
 #include "../Game/Input.h"
 #include "../Proto/box2d.pb.h"
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
+#include "decaf/util/StlQueue.h"
 #include <decaf/lang/Runnable.h>
 #include <string>
 
@@ -35,8 +37,8 @@ class Heartbeat;
 class World;
 class Player;
 //class Messenger;
-class EventDispatcher;
-class MessageDispatcher;
+//class EventDispatcher;
+//class MessageDispatcher;
 
 using namespace decaf::lang;
 
@@ -66,8 +68,8 @@ protected:
     
     decaf::lang::Thread*                        m_pMainThread;
     
-    //EventDispatcher&        m_anEventDispatcher;
-    //MessageDispatcher&      m_aMessageDispatcher;
+    EventDispatcher&        m_theEventDispatcher;
+    MessageDispatcher&      m_theMessageDispatcher;
     
     // Helper(s)
     void Setup();
@@ -75,7 +77,7 @@ protected:
     
 public:
     // Constructor(s)
-    Server();
+    Server(EventDispatcher& theEventDispatcher, MessageDispatcher& theMessageDispatcher);
     
     // Destructor(s)
     ~Server();

@@ -18,11 +18,9 @@
 #include "../Proto/box2d.pb.h"
 #include "../Shared/SimpleAsyncConsumer.h"
 #include "../Shared/SimpleAsyncProducer.h"
-#include "EventDispatcher.h"
+//#include "EventDispatcher.h"
 #include "MessageDispatcher.h"
-#include "PodFactory.h"
-#include "BulletFactory.h"
-#include "EntityGameEventFactory.h"
+
 #include "Poco/Delegate.h"
 #include "decaf/util/Timer.h"
 #include "decaf/lang/Thread.h"
@@ -59,7 +57,7 @@ using namespace box2d;
 
 
 // Constructor(s)
-Server::Server() :
+Server::Server(EventDispatcher& theEventDispatcher, MessageDispatcher& theMessageDispatcher) :
     m_pHeartbeatProducer(NULL),
     m_pCommandConsumer(NULL),
     m_pWorld(NULL),
@@ -67,16 +65,10 @@ Server::Server() :
     m_pHeartbeat(NULL),
     m_pInput(NULL),
     m_pSecurity(NULL),
-    m_pMainThread(NULL)
+    m_pMainThread(NULL),
+    m_theEventDispatcher(theEventDispatcher),
+    m_theMessageDispatcher(theMessageDispatcher)
 {
-    PodFactory&                 thePodFactory = PodFactory::Instance();
-    BulletFactory&              theBulletFactory = BulletFactory::Instance();
-    FactoryT<GameEvent, EntityGameEvent_Dependencies>&     theEntityGameEventFactory = FactoryT<GameEvent, EntityGameEvent_Dependencies>::Instance();
-    EventDispatcher::_Dependencies theEventDispatcherDependencies(thePodFactory, theBulletFactory, theEntityGameEventFactory);
-    
-    EventDispatcher& m_anEventDispatcher = EventDispatcher::Instance(&theEventDispatcherDependencies);
-    //EventDispatcher& anEventDispatcher = EventDispatcher::Instance();
-    
     Setup();
 }
 
@@ -165,10 +157,13 @@ void Server::run()
         // Update all object states
         AEntity::Update();
         
+        m_theEventDispatcher.Dispatch();
+        m_theMessageDispatcher.Dispatch();
+
         // if any client needs a world update take world snapshot
         // Update clients if required
         //Messenger::Producer.ProcessEnqueuedMessages();
-        Messenger::GameEventProducer.ProcessEnqueuedMessages();
+        //Messenger::GameEventProducer.ProcessEnqueuedMessages();
         
         decaf::lang::Thread::currentThread()->sleep(15);
     }

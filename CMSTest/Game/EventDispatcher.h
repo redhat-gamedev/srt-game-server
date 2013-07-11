@@ -80,8 +80,7 @@ public:
         static EventDispatcher  anEventDispatcher(pDependencies);
         return anEventDispatcher;
     }
-    
-    
+
     // Method(s)
     // Dispatches all the events it has received to it's listeners
     void Dispatch();
