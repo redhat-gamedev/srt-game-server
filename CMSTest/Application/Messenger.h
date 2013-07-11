@@ -31,11 +31,9 @@ class Messenger// :
 private:
     
 protected:
-    class _Producer;
     class _Consumer;
 
     static const std::string        BrokerURI;
-    static xdispatch::queue*        s_pMessengerSerialDispatchQueue;
     
     //static decaf::lang::Thread*     s_pThread;
     
@@ -44,35 +42,14 @@ protected:
     
     // Destructor(s)
     ~Messenger();
-    
-    // Helper(s)
-    static void EnqueueEntityCreatedEvent(AEntity* pEntity);
-    static void EnqueueEntityUpdatedEvent(AEntity* pEntity);
-    static void EnqueueEntityDestroyedEvent(AEntity* pEntity);
-    
-    
+
 public:
-    // World Simulation
-    //static _Producer    Producer;
-    
     // Game Event
-    static _Producer    GameEventProducer;
     static _Consumer    Consumer;
-    //static _Consumer*   pConsumer;
     
     // Class function(s)
     static void Setup();
     static void Teardown();
-    //static void Send();
-    
-    // Entity Event response
-    static void HandlePodCreatedEvent(const void* pSender, Player*& pPlayer);
-    static void HandlePodUpdatedEvent(const void* pSender, Player*& pPlayer);
-    static void HandlePodDestroyedEvent(const void* pSender, Player*& pPlayer);
-    
-    static void HandleBulletCreatedEvent(const void* pSender, Bullet*& pBullet);
-    static void HandleBulletUpdatedEvent(const void* pSender, Bullet*& pBullet);
-    static void HandleBulletDestroyedEvent(const void* pSender, Bullet*& pBullet);
     
     // decaf::lang::Runnable implementation
     //void run();

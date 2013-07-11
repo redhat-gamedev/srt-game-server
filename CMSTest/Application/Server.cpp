@@ -8,61 +8,22 @@
 
 #include "Server.h"
 #include "World.h"
-#include "Heartbeat.h"
+//#include "Heartbeat.h"
 #include "Security.h"
 #include "Messenger.h"
 #include "Messenger_Consumer.h"
-#include "Messenger_Producer.h"
 #include "AEntity.h"
-#include "../Game/Player.h"
-#include "../Proto/box2d.pb.h"
-#include "../Shared/SimpleAsyncConsumer.h"
-#include "../Shared/SimpleAsyncProducer.h"
-//#include "EventDispatcher.h"
-#include "MessageDispatcher.h"
-
-#include "Poco/Delegate.h"
-#include "decaf/util/Timer.h"
 #include "decaf/lang/Thread.h"
 #include "decaf/lang/Runnable.h"
-#include "decaf/util/concurrent/CountDownLatch.h"
-#include "activemq/core/ActiveMQConnectionFactory.h"
-#include "activemq/core/ActiveMQConnection.h"
-#include "activemq/transport/DefaultTransportListener.h"
-#include "activemq/library/ActiveMQCPP.h"
-#include "decaf/lang/Integer.h"
-#include "activemq/util/Config.h"
-#include "decaf/util/Date.h"
-#include "cms/Connection.h"
-#include "cms/Session.h"
-#include "cms/TextMessage.h"
-#include "cms/BytesMessage.h"
-#include "cms/MapMessage.h"
-#include "cms/ExceptionListener.h"
-#include "cms/MessageListener.h"
-#include "decaf/net/URI.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <iostream>
 #include <assert.h>
 
-using namespace activemq;
-using namespace activemq::core;
-using namespace activemq::transport;
-using namespace decaf::lang;
-using namespace decaf::util::concurrent;
-using namespace cms;
-using namespace std;
-using namespace box2d;
-
 
 // Constructor(s)
 Server::Server(EventDispatcher& theEventDispatcher, MessageDispatcher& theMessageDispatcher) :
-    m_pHeartbeatProducer(NULL),
-    m_pCommandConsumer(NULL),
     m_pWorld(NULL),
-    m_pTimer(NULL),
-    m_pHeartbeat(NULL),
     m_pInput(NULL),
     m_pSecurity(NULL),
     m_pMainThread(NULL),
@@ -88,17 +49,10 @@ void Server::Setup()
     Messenger::Setup();
     AEntity::ClassSetup();
 
-    
-    
     m_pWorld = new World();
     m_pInput = new Input();
     m_pSecurity = new Security();
 
-    //m_pTimer = new decaf::util::Timer();
-    //m_pHeartbeatProducer = new SimpleAsyncProducer(strBrokerURI, strHeartbeatURI, true);
-    //m_pHeartbeat = new Heartbeat();
-    //Heartbeat::EventPublisher.BeatEvent += Poco::Delegate<Server, const int&>(this, &Server::OnHeartBeatBeat);
-    
     std::cout << "Starting the world producer" << std::endl;
     m_pMainThread = new decaf::lang::Thread(this, strMainThreadName);
     m_pMainThread->start();
@@ -111,28 +65,11 @@ void Server::Teardown()
     delete m_pMainThread;
     m_pMainThread = NULL;
     
-    //Heartbeat::EventPublisher.BeatEvent -= Poco::Delegate<Server, const int&>(this, &Server::OnHeartBeatBeat);
-
-    //m_pTimer->cancel();
-    //delete m_pHeartbeat;
-    //m_pHeartbeat = NULL;
-
-    //m_pHeartbeatProducer->close();
-    //delete m_pHeartbeatProducer;
-    //m_pHeartbeatProducer = NULL;
-    
-    //delete m_pTimer;
-    //m_pTimer = NULL;
-    
     delete m_pSecurity;
     m_pSecurity = NULL;
     
     delete m_pInput;
     m_pInput = NULL;
-
-    //m_pCommandConsumer->close();
-    //delete m_pCommandConsumer;
-    //m_pCommandConsumer = NULL;
 
     delete m_pWorld;
     m_pWorld = NULL;
@@ -156,37 +93,12 @@ void Server::run()
         
         // Update all object states
         AEntity::Update();
-        
-        m_theEventDispatcher.Dispatch();
-        m_theMessageDispatcher.Dispatch();
 
         // if any client needs a world update take world snapshot
         // Update clients if required
-        //Messenger::Producer.ProcessEnqueuedMessages();
-        //Messenger::GameEventProducer.ProcessEnqueuedMessages();
+        m_theEventDispatcher.Dispatch();
+        m_theMessageDispatcher.Dispatch();
         
         decaf::lang::Thread::currentThread()->sleep(15);
-    }
-}
-
-// Heartbeat Event response
-void Server::OnHeartBeatBeat(const void* pSender, const int& iBeat)
-{
-    static char m_szBuf[0xFF];
-    static std::string strText = "";
-    
-    try
-    {
-        memset(m_szBuf, 0, sizeof(m_szBuf));
-        sprintf(m_szBuf, "%i", iBeat);
-        //printf("%s\n", m_szBuf);
-        strText = m_szBuf;
-        
-        m_pHeartbeatProducer->Send(strText);
-        strText.clear();
-    }
-    catch ( CMSException& e )
-    {
-        e.printStackTrace();
     }
 }

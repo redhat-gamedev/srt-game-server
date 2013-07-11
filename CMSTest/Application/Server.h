@@ -14,8 +14,6 @@
 #include "../Game/B2DWorld.h"
 #include "../Game/Input.h"
 #include "../Proto/box2d.pb.h"
-#include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
-#include "decaf/util/StlQueue.h"
 #include <decaf/lang/Runnable.h>
 #include <string>
 
@@ -30,15 +28,9 @@ namespace decaf
         class Timer;
     }
 }
-class SimpleAsyncProducer;
-class SimpleAsyncConsumer;
 class Security;
-class Heartbeat;
 class World;
 class Player;
-//class Messenger;
-//class EventDispatcher;
-//class MessageDispatcher;
 
 using namespace decaf::lang;
 
@@ -57,14 +49,9 @@ public:
 private:
     
 protected:
-    SimpleAsyncProducer*         m_pHeartbeatProducer;
-    SimpleAsyncConsumer*    m_pCommandConsumer;
-    decaf::util::Timer*     m_pTimer;
-    Heartbeat*              m_pHeartbeat;
     Input*                  m_pInput;
     Security*               m_pSecurity;
     World*                  m_pWorld;
-    //Messenger*              m_pMessenger;
     
     decaf::lang::Thread*                        m_pMainThread;
     
@@ -85,9 +72,6 @@ public:
     // Method(s)
     // decaf::lang::Runnable implementation
     void run();
-    
-    // Heartbeat Event response
-    void OnHeartBeatBeat(const void* pSender, const int& iBeat);
 };
 
 #endif /* defined(__CMSTest__Server__) */
