@@ -8,10 +8,7 @@
 
 #include "Server.h"
 #include "World.h"
-//#include "Heartbeat.h"
 #include "Security.h"
-//#include "Messenger.h"
-//#include "Messenger_Consumer.h"
 #include "AEntity.h"
 #include "decaf/lang/Thread.h"
 #include "decaf/lang/Runnable.h"
@@ -48,7 +45,6 @@ void Server::Setup()
 
     std::string     strMainThreadName = "ServerThread";
     
-    //Messenger::Setup();
     AEntity::ClassSetup();
 
     m_pWorld = new World();
@@ -77,7 +73,6 @@ void Server::Teardown()
     m_pWorld = NULL;
     
     AEntity::ClassTeardown();
-    //Messenger::Teardown();
 }
 
 // Method(s)
@@ -86,7 +81,6 @@ void Server::run()
     while (true)
     {
         // Receive incoming user commands
-        //Messenger::Consumer.ProcessReceivedMessages();
         m_theMessageConsumer.Dispatch();
         m_theEventConsumer.Consume();
         

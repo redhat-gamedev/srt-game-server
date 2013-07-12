@@ -102,9 +102,6 @@ public:
     static void OnSecurityRequestJoin(const void* pSender, const std::string& strUUID);
     static void OnSecurityRequestLeave(const void* pSender, const std::string& strUUID);
     
-    // Messenger Event response
-    //static void HandleMessengerConsumerEventPublisherCreateEntityRequest(const void* pSender, const AEntity& anEntity);
-    
     // Event Consumer event response
     static void HandleEventConsumedEvent(const void* pSender, google::protobuf::Message*& pMessage);
     

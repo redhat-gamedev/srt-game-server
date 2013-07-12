@@ -16,8 +16,6 @@
 		CC2436D117491B5800A8519D /* EntityGameEvent.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CC2436CB17491B5400A8519D /* EntityGameEvent.pb.cc */; };
 		CC2436D317491B5800A8519D /* GameEvent.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CC2436CE17491B5500A8519D /* GameEvent.pb.cc */; };
 		CC2436D717492CFA00A8519D /* B2DPod.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC2436D517492CFA00A8519D /* B2DPod.cpp */; };
-		CC2436E017492E2E00A8519D /* Messenger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC2436DE17492E2E00A8519D /* Messenger.cpp */; };
-		CC2436E317492E8A00A8519D /* Messenger_Consumer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC2436E117492E8A00A8519D /* Messenger_Consumer.cpp */; };
 		CC386DD21789D45800AB41AF /* EventDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC386DD01789D45800AB41AF /* EventDispatcher.cpp */; };
 		CC386DD81789D86300AB41AF /* EntityGameEventFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC386DD61789D86300AB41AF /* EntityGameEventFactory.cpp */; };
 		CC386DDB178A033100AB41AF /* MessageDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC386DD9178A033100AB41AF /* MessageDispatcher.cpp */; };
@@ -218,10 +216,6 @@
 		CC2436D017491B5700A8519D /* GameEvent.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; name = GameEvent.proto; path = Proto/GameEvent.proto; sourceTree = "<group>"; };
 		CC2436D517492CFA00A8519D /* B2DPod.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = B2DPod.cpp; path = Game/B2DPod.cpp; sourceTree = "<group>"; };
 		CC2436D617492CFA00A8519D /* B2DPod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = B2DPod.h; path = Game/B2DPod.h; sourceTree = "<group>"; };
-		CC2436DE17492E2E00A8519D /* Messenger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Messenger.cpp; path = Application/Messenger.cpp; sourceTree = "<group>"; };
-		CC2436DF17492E2E00A8519D /* Messenger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Messenger.h; path = Application/Messenger.h; sourceTree = "<group>"; };
-		CC2436E117492E8A00A8519D /* Messenger_Consumer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Messenger_Consumer.cpp; path = Application/Messenger_Consumer.cpp; sourceTree = "<group>"; };
-		CC2436E217492E8A00A8519D /* Messenger_Consumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Messenger_Consumer.h; path = Application/Messenger_Consumer.h; sourceTree = "<group>"; };
 		CC386DD01789D45800AB41AF /* EventDispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EventDispatcher.cpp; path = Game/EventDispatcher.cpp; sourceTree = "<group>"; };
 		CC386DD11789D45800AB41AF /* EventDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventDispatcher.h; path = Game/EventDispatcher.h; sourceTree = "<group>"; };
 		CC386DD61789D86300AB41AF /* EntityGameEventFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EntityGameEventFactory.cpp; path = Game/EntityGameEventFactory.cpp; sourceTree = "<group>"; };
@@ -425,8 +419,6 @@
 		CCE449C817230EE1002A1937 /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				CC2436DE17492E2E00A8519D /* Messenger.cpp */,
-				CC2436DF17492E2E00A8519D /* Messenger.h */,
 				CCE449E11723109C002A1937 /* Heartbeat.cpp */,
 				CCE449E21723109C002A1937 /* Heartbeat.h */,
 				CCE449C917230EF9002A1937 /* main.cpp */,
@@ -434,8 +426,6 @@
 				CCE449CB17230EF9002A1937 /* Security.h */,
 				CCE449CC17230EF9002A1937 /* Server.cpp */,
 				CCE449CD17230EF9002A1937 /* Server.h */,
-				CC2436E117492E8A00A8519D /* Messenger_Consumer.cpp */,
-				CC2436E217492E8A00A8519D /* Messenger_Consumer.h */,
 				CC386DD9178A033100AB41AF /* MessageDispatcher.cpp */,
 				CC386DDA178A033100AB41AF /* MessageDispatcher.h */,
 				CC1AD3A8178E3DAE000F134C /* MessageConsumer.cpp */,
@@ -724,8 +714,6 @@
 				CC2436D117491B5800A8519D /* EntityGameEvent.pb.cc in Sources */,
 				CC2436D317491B5800A8519D /* GameEvent.pb.cc in Sources */,
 				CC2436D717492CFA00A8519D /* B2DPod.cpp in Sources */,
-				CC2436E017492E2E00A8519D /* Messenger.cpp in Sources */,
-				CC2436E317492E8A00A8519D /* Messenger_Consumer.cpp in Sources */,
 				CC51BA661781B7FA007F27F0 /* BulletFactory.cpp in Sources */,
 				CC55B2741785028A00CCC6E5 /* PodFactory.cpp in Sources */,
 				CC386DD21789D45800AB41AF /* EventDispatcher.cpp in Sources */,

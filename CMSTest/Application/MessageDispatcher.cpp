@@ -85,12 +85,11 @@ std::pair<const unsigned char*, unsigned long>* MessageDispatcher::MessageToPair
     using namespace std;
     using namespace gameevent;
     
-    pair<const unsigned char*, unsigned long>*      pMessagePair = NULL;//new std::pair<const unsigned char*, int>();
+    pair<const unsigned char*, unsigned long>*      pMessagePair = NULL;
     const unsigned char*                            pucMessageBytes = NULL;
     
     if (NULL == pMessage)
     {
-        //printf("Messenger::_Producer::SendUpdate bailing on NULL pMessage");
         return NULL;
     }
     

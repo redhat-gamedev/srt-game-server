@@ -11,8 +11,6 @@
 #include "Player.h"
 #include "PodFactory.h"
 #include "B2DPodFactory.h"
-//#include "../Application/Messenger.h"
-//#include "../Application/Messenger_Consumer.h"
 #include "EventConsumer.h"
 #include "../Application/Security.h"
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
@@ -75,14 +73,11 @@ void AEntity::ClassSetup()
     Security::EventPublisher.RequestJoinEvent += Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestJoin);
     Security::EventPublisher.RequestLeaveEvent += Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestLeave);
     
-    //Messenger::Consumer.EventPublisher.ReceivedCreateEntityRequest += Poco::FunctionDelegate<const AEntity&>(&AEntity::HandleMessengerConsumerEventPublisherCreateEntityRequest);
-    
     EventConsumer::Instance().EventConsumedEvent += Poco::FunctionDelegate<google::protobuf::Message*&>(&AEntity::HandleEventConsumedEvent);
 }
 
 void AEntity::ClassTeardown()
 {
-    //Messenger::Consumer.EventPublisher.ReceivedCreateEntityRequest -= Poco::FunctionDelegate<const AEntity&>(&AEntity::HandleMessengerConsumerEventPublisherCreateEntityRequest);
     EventConsumer::Instance().EventConsumedEvent -= Poco::FunctionDelegate<google::protobuf::Message*&>(&AEntity::HandleEventConsumedEvent);
     
     Security::EventPublisher.RequestLeaveEvent -= Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestLeave);
@@ -168,16 +163,6 @@ void AEntity::OnSecurityRequestLeave(const void* pSender, const std::string& str
         RemovePlayer(strUUID);
 //    });
 }
-
-// Messenger Event response
-//void AEntity::HandleMessengerConsumerEventPublisherCreateEntityRequest(const void* pSender, const AEntity& anEntity)
-//{
-//    //m_pSimulationSerialDispatchQueue->sync([=]
-//    //{
-//       std::cout << "AEntity::HandleMessengerConsumerEventPublisherCreateEntityRequest" << std::endl;
-//       AddPlayer(anEntity.UUID);
-//    //});
-//}
 
 // Event Consumer event response
 void AEntity::HandleEventConsumedEvent(const void* pSender, google::protobuf::Message*& pMessage)

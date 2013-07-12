@@ -83,12 +83,10 @@ std::pair<unsigned char*, unsigned long>* MessageConsumer::MessageToPair(const c
     using namespace std;
     using namespace cms;
     
-    pair<unsigned char*, unsigned long>*    pMessagePair = NULL;//new std::pair<const unsigned char*, int>();
-    //unsigned char*                          pucMessageBytes = NULL;
+    pair<unsigned char*, unsigned long>*    pMessagePair = NULL;
     
     if (NULL == pMessage)
     {
-        //printf("Messenger::_Producer::SendUpdate bailing on NULL pMessage");
         return NULL;
     }
 
