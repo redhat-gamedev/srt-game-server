@@ -98,26 +98,13 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "CMSTest/Game/EventConsumer.cpp"
-         timestampString = "395277718.230923"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "81"
-         endingLineNumber = "81"
-         landmarkName = "EventConsumer::PairToMessage(std::pair&lt;unsigned char*, unsigned long&gt;* pMessagePair)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "CMSTest/Game/AEntity.cpp"
          timestampString = "395277391.085537"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "187"
          endingLineNumber = "187"
-         landmarkName = "AEntity::HandleEventConsumedEvent(const void* pSender, google::protobuf::Message* pMessage)"
+         landmarkName = "AEntity::HandleEventConsumedEvent(const void* pSender, google::protobuf::Message*&amp; pMessage)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -131,6 +118,32 @@
          startingLineNumber = "159"
          endingLineNumber = "159"
          landmarkName = "AEntity::OnSecurityRequestJoin(const void* pSender, const std::string&amp; strUUID)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CMSTest/Application/MessageConsumer.cpp"
+         timestampString = "395279646.110682"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "62"
+         endingLineNumber = "62"
+         landmarkName = "MessageConsumer::Enqueue(std::pair&lt;unsigned char*, unsigned long&gt;* pMessagePair)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CMSTest/Game/EventConsumer.cpp"
+         timestampString = "395280704.015207"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "96"
+         endingLineNumber = "96"
+         landmarkName = "EventConsumer::Consume()"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

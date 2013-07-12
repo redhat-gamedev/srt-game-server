@@ -84,7 +84,7 @@ std::pair<unsigned char*, unsigned long>* MessageConsumer::MessageToPair(const c
     using namespace cms;
     
     pair<unsigned char*, unsigned long>*    pMessagePair = NULL;//new std::pair<const unsigned char*, int>();
-    unsigned char*                          pucMessageBytes = NULL;
+    //unsigned char*                          pucMessageBytes = NULL;
     
     if (NULL == pMessage)
     {
@@ -96,7 +96,7 @@ std::pair<unsigned char*, unsigned long>* MessageConsumer::MessageToPair(const c
     int iBodyLength = pBytesMessage->getBodyLength();
     unsigned char* pucBodyBytesCopy = new unsigned char[iBodyLength];
     memcpy(pucBodyBytesCopy, pBytesMessage->getBodyBytes(), iBodyLength * sizeof(unsigned char));
-    pMessagePair = new pair<unsigned char*, unsigned long>(pucMessageBytes, iBodyLength);
+    pMessagePair = new pair<unsigned char*, unsigned long>(pucBodyBytesCopy, iBodyLength);
     
     return pMessagePair;
     

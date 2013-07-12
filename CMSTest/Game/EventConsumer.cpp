@@ -10,6 +10,7 @@
 #include "MessageConsumer.h"
 //#include "../Proto/GameEvent.pb.h"
 //ls #include "../Proto/EntityGameEvent.pb.h"
+#include "Poco/Delegate.h"
 #include <vector>
 #include <assert.h>
 
@@ -45,13 +46,15 @@ EventConsumer::EventConsumer(_Dependencies* pDependencies) :
     
     assert(m_pMessageConsumer);
     
+    m_pMessageConsumer->ReceivedCMSMessageEvent += Poco::Delegate<EventConsumer, std::pair<unsigned char*, unsigned long>*& >(this, &EventConsumer::HandleReceivedCMSMessageEvent);
+    
 }
 // EventConsumer(ConsumptionStrategy* pConsumptionStrategy);
 
 // Destructor
 EventConsumer::~EventConsumer()
 {
-    
+    m_pMessageConsumer->ReceivedCMSMessageEvent -= Poco::Delegate<EventConsumer, std::pair<unsigned char*, unsigned long>*& >(this, &EventConsumer::HandleReceivedCMSMessageEvent);
 }
 
 // Helper(s)
