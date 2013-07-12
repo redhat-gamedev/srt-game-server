@@ -19,13 +19,13 @@
 
 
 // Constructor(s)
-Server::Server(EventDispatcher& theEventDispatcher, EventConsumer& theEventConsumer, MessageDispatcher& theMessageDispatcher, MessageConsumer& theMessageConsumer) :
+Server::Server(EventDispatcher& theEventDispatcher, CommandConsumer& theCommandConsumer, MessageDispatcher& theMessageDispatcher, MessageConsumer& theMessageConsumer) :
     m_pWorld(NULL),
     m_pInput(NULL),
     m_pSecurity(NULL),
     m_pMainThread(NULL),
     m_theEventDispatcher(theEventDispatcher),
-    m_theEventConsumer(theEventConsumer),
+    m_theCommandConsumer(theCommandConsumer),
     m_theMessageDispatcher(theMessageDispatcher),
     m_theMessageConsumer(theMessageConsumer)
 {
@@ -82,7 +82,7 @@ void Server::run()
     {
         // Receive incoming user commands
         m_theMessageConsumer.Dispatch();
-        m_theEventConsumer.Consume();
+        m_theCommandConsumer.Consume();
         
         // Run simulation step
         m_pWorld->Simulate();

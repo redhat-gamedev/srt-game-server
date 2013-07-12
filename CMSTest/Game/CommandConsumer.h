@@ -1,13 +1,13 @@
 //
-//  EventConsumer.h
+//  CommandConsumer.h
 //  CMSTest
 //
 //  Created by Roddie Kieley on 13-07-10.
 //  Copyright (c) 2013 Roddie Kieley. All rights reserved.
 //
 
-#ifndef __CMSTest__EventConsumer__
-#define __CMSTest__EventConsumer__
+#ifndef __CMSTest__CommandConsumer__
+#define __CMSTest__CommandConsumer__
 
 #include "EntityGameEventFactory.h"
 #include "../Proto/GameEvent.pb.h"
@@ -58,7 +58,7 @@ class MessageConsumer;
 //    void Consume(google::protobuf::Message* pMessage);
 //};
 
-class EventConsumer
+class CommandConsumer
 {
 public:
     class _Dependencies
@@ -91,21 +91,21 @@ protected:
     
     
     // Constructor(s)
-    // EventConsumer(ConsumptionStrategy* pConsumptionStrategy);
-    EventConsumer(_Dependencies* pDependencies);
+    // CommandConsumer(ConsumptionStrategy* pConsumptionStrategy);
+    CommandConsumer(_Dependencies* pDependencies);
     
     // Destructor
-    ~EventConsumer();
+    ~CommandConsumer();
     
 public:
     // Event(s)
     Poco::BasicEvent<google::protobuf::Message*&>   EventConsumedEvent;
     
     // Singleton
-    static EventConsumer& Instance(_Dependencies* pDependencies = NULL)//unsigned int uiCapacity)
+    static CommandConsumer& Instance(_Dependencies* pDependencies = NULL)//unsigned int uiCapacity)
     {
-        static EventConsumer  anEventConsumer(pDependencies);
-        return anEventConsumer;
+        static CommandConsumer  anCommandConsumer(pDependencies);
+        return anCommandConsumer;
     }
 
     // Method(s)
@@ -115,4 +115,4 @@ public:
     void HandleReceivedCMSMessageEvent(const void* pSender, std::pair<unsigned char*, unsigned long>*& pMessagePair);
 };
 
-#endif /* defined(__CMSTest__EventConsumer__) */
+#endif /* defined(__CMSTest__CommandConsumer__) */

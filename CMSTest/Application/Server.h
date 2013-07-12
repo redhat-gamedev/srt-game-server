@@ -10,7 +10,7 @@
 #define __CMSTest__Server__
 
 #include "EventDispatcher.h"
-#include "EventConsumer.h"
+#include "CommandConsumer.h"
 #include "MessageDispatcher.h"
 #include "MessageConsumer.h"
 #include "../Game/B2DWorld.h"
@@ -58,7 +58,7 @@ protected:
     decaf::lang::Thread*    m_pMainThread;
     
     EventDispatcher&        m_theEventDispatcher;
-    EventConsumer&          m_theEventConsumer;
+    CommandConsumer&          m_theCommandConsumer;
     MessageDispatcher&      m_theMessageDispatcher;
     MessageConsumer&        m_theMessageConsumer;
     
@@ -68,7 +68,7 @@ protected:
     
 public:
     // Constructor(s)
-    Server(EventDispatcher& theEventDispatcher, EventConsumer& theEventConsumer, MessageDispatcher& theMessageDispatcher, MessageConsumer& theMessageConsumer);
+    Server(EventDispatcher& theEventDispatcher, CommandConsumer& theCommandConsumer, MessageDispatcher& theMessageDispatcher, MessageConsumer& theMessageConsumer);
     
     // Destructor(s)
     ~Server();

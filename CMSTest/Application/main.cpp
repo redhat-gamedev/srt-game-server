@@ -21,7 +21,7 @@
 #include "../Shared/SimpleAsyncProducer.h"
 #include "../Shared/SimpleAsyncConsumer.h"
 #include "../Game/EventDispatcher.h"
-#include "../Game/EventConsumer.h"
+#include "../Game/CommandConsumer.h"
 #include "../Game/PodFactory.h"
 #include "../Game/BulletFactory.h"
 #include "../Game/EntityGameEventFactory.h"
@@ -55,10 +55,10 @@ int main(int argc, char* argv[])
     MessageConsumer::_Dependencies                              theMessageConsumerDependencies(pSimpleAsyncConsumer);
     MessageConsumer&                                            theMessageConsumer = MessageConsumer::Instance(&theMessageConsumerDependencies);
     
-    EventConsumer::_Dependencies                                theEventConsumerDependencies(&theMessageConsumer, theEntityGameEventFactory);
-    EventConsumer&                                              theEventConsumer = EventConsumer::Instance(&theEventConsumerDependencies);
+    CommandConsumer::_Dependencies                                theCommandConsumerDependencies(&theMessageConsumer, theEntityGameEventFactory);
+    CommandConsumer&                                              theCommandConsumer = CommandConsumer::Instance(&theCommandConsumerDependencies);
     
-    Server* pServer = new Server(theEventDispatcher, theEventConsumer, theMessageDispatcher, theMessageConsumer);
+    Server* pServer = new Server(theEventDispatcher, theCommandConsumer, theMessageDispatcher, theMessageConsumer);
 
     //pServer->run();
     

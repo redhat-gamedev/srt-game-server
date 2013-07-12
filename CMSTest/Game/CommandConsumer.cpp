@@ -1,12 +1,12 @@
 //
-//  EventConsumer.cpp
+//  CommandConsumer.cpp
 //  CMSTest
 //
 //  Created by Roddie Kieley on 13-07-10.
 //  Copyright (c) 2013 Roddie Kieley. All rights reserved.
 //
 
-#include "EventConsumer.h"
+#include "CommandConsumer.h"
 #include "MessageConsumer.h"
 //#include "../Proto/GameEvent.pb.h"
 //ls #include "../Proto/EntityGameEvent.pb.h"
@@ -18,7 +18,7 @@ using namespace google::protobuf;
 
 
 // Constructor
-EventConsumer::
+CommandConsumer::
 _Dependencies::
 _Dependencies(MessageConsumer* pMessageConsumer, FactoryT<gameevent::GameEvent, EntityGameEvent_Dependencies>& anEntityGameEventFactory) :
     m_anEntityGameEventFactory(anEntityGameEventFactory),
@@ -28,7 +28,7 @@ _Dependencies(MessageConsumer* pMessageConsumer, FactoryT<gameevent::GameEvent, 
 }
 
 // Destructor
-EventConsumer::
+CommandConsumer::
 _Dependencies::
 ~_Dependencies()
 {
@@ -37,7 +37,7 @@ _Dependencies::
               
 // Constructor(s)
 // Constructor
-EventConsumer::EventConsumer(_Dependencies* pDependencies) :
+CommandConsumer::CommandConsumer(_Dependencies* pDependencies) :
     m_anEntityGameEventFactory(pDependencies->m_anEntityGameEventFactory)
 {
     assert(pDependencies);
@@ -46,19 +46,19 @@ EventConsumer::EventConsumer(_Dependencies* pDependencies) :
     
     assert(m_pMessageConsumer);
     
-    m_pMessageConsumer->ReceivedCMSMessageEvent += Poco::Delegate<EventConsumer, std::pair<unsigned char*, unsigned long>*& >(this, &EventConsumer::HandleReceivedCMSMessageEvent);
+    m_pMessageConsumer->ReceivedCMSMessageEvent += Poco::Delegate<CommandConsumer, std::pair<unsigned char*, unsigned long>*& >(this, &CommandConsumer::HandleReceivedCMSMessageEvent);
     
 }
-// EventConsumer(ConsumptionStrategy* pConsumptionStrategy);
+// CommandConsumer(ConsumptionStrategy* pConsumptionStrategy);
 
 // Destructor
-EventConsumer::~EventConsumer()
+CommandConsumer::~CommandConsumer()
 {
-    m_pMessageConsumer->ReceivedCMSMessageEvent -= Poco::Delegate<EventConsumer, std::pair<unsigned char*, unsigned long>*& >(this, &EventConsumer::HandleReceivedCMSMessageEvent);
+    m_pMessageConsumer->ReceivedCMSMessageEvent -= Poco::Delegate<CommandConsumer, std::pair<unsigned char*, unsigned long>*& >(this, &CommandConsumer::HandleReceivedCMSMessageEvent);
 }
 
 // Helper(s)
-void EventConsumer::Enqueue(google::protobuf::Message* pMessage)
+void CommandConsumer::Enqueue(google::protobuf::Message* pMessage)
 {
     assert(pMessage);
     
@@ -67,7 +67,7 @@ void EventConsumer::Enqueue(google::protobuf::Message* pMessage)
     m_anEventQueue.unlock();
 }
 
-void EventConsumer::Enqueue(std::pair<unsigned char*, unsigned long>* pMessagePair)
+void CommandConsumer::Enqueue(std::pair<unsigned char*, unsigned long>* pMessagePair)
 {
     assert(pMessagePair);
     
@@ -75,7 +75,7 @@ void EventConsumer::Enqueue(std::pair<unsigned char*, unsigned long>* pMessagePa
     Enqueue(pMessage);
 }
 
-Message* EventConsumer::PairToMessage(std::pair<unsigned char*, unsigned long>* pMessagePair)
+Message* CommandConsumer::PairToMessage(std::pair<unsigned char*, unsigned long>* pMessagePair)
 {
     using namespace gameevent;
     
@@ -87,7 +87,7 @@ Message* EventConsumer::PairToMessage(std::pair<unsigned char*, unsigned long>* 
 }
 
 // Method(s)
-void EventConsumer::Consume()
+void CommandConsumer::Consume()
 {
     Message* pMessage = NULL;
     m_anEventQueue.lock();
@@ -105,7 +105,7 @@ void EventConsumer::Consume()
 
 
 // Event response
-void EventConsumer::HandleReceivedCMSMessageEvent(const void* pSender, std::pair<unsigned char*, unsigned long>*& pMessagePair)
+void CommandConsumer::HandleReceivedCMSMessageEvent(const void* pSender, std::pair<unsigned char*, unsigned long>*& pMessagePair)
 {
     Enqueue(pMessagePair);
 }

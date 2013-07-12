@@ -121,7 +121,6 @@ void MessageConsumer::Dispatch()
                 std::pair<unsigned char*, unsigned long>* pMessagePair = m_aMessageQueue.pop();
                 if (pMessagePair->second > 0)
                 {
-                    //m_pSimpleAsyncProducer->Send(pMessagePair->first, pMessagePair->second);
                     ReceivedCMSMessageEvent(this, pMessagePair);
                 }
         }

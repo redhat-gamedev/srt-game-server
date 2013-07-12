@@ -11,7 +11,7 @@
 		CC0F90DC17179AF3006B9474 /* libssl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0F90DB17179AF3006B9474 /* libssl.dylib */; };
 		CC0F90DE17179B7A006B9474 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0F90DD17179B7A006B9474 /* libcrypto.dylib */; };
 		CC1AD3AA178E3DAE000F134C /* MessageConsumer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC1AD3A8178E3DAE000F134C /* MessageConsumer.cpp */; };
-		CC1AD3AD178E4DE6000F134C /* EventConsumer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC1AD3AB178E4DE6000F134C /* EventConsumer.cpp */; };
+		CC1AD3AD178E4DE6000F134C /* CommandConsumer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC1AD3AB178E4DE6000F134C /* CommandConsumer.cpp */; };
 		CC2436B517490AEA00A8519D /* SecurityCommand.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CC2436B217490AEA00A8519D /* SecurityCommand.pb.cc */; };
 		CC2436D117491B5800A8519D /* EntityGameEvent.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CC2436CB17491B5400A8519D /* EntityGameEvent.pb.cc */; };
 		CC2436D317491B5800A8519D /* GameEvent.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CC2436CE17491B5500A8519D /* GameEvent.pb.cc */; };
@@ -205,8 +205,8 @@
 		CC0F90DD17179B7A006B9474 /* libcrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.dylib; path = usr/lib/libcrypto.dylib; sourceTree = SDKROOT; };
 		CC1AD3A8178E3DAE000F134C /* MessageConsumer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MessageConsumer.cpp; path = Application/MessageConsumer.cpp; sourceTree = "<group>"; };
 		CC1AD3A9178E3DAE000F134C /* MessageConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageConsumer.h; path = Application/MessageConsumer.h; sourceTree = "<group>"; };
-		CC1AD3AB178E4DE6000F134C /* EventConsumer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EventConsumer.cpp; path = Game/EventConsumer.cpp; sourceTree = "<group>"; };
-		CC1AD3AC178E4DE6000F134C /* EventConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventConsumer.h; path = Game/EventConsumer.h; sourceTree = "<group>"; };
+		CC1AD3AB178E4DE6000F134C /* CommandConsumer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CommandConsumer.cpp; path = Game/CommandConsumer.cpp; sourceTree = "<group>"; };
+		CC1AD3AC178E4DE6000F134C /* CommandConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommandConsumer.h; path = Game/CommandConsumer.h; sourceTree = "<group>"; };
 		CC1AD3AE178F882D000F134C /* RawInputCommand.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; name = RawInputCommand.proto; path = Proto/RawInputCommand.proto; sourceTree = "<group>"; };
 		CC2436B217490AEA00A8519D /* SecurityCommand.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SecurityCommand.pb.cc; path = Proto/SecurityCommand.pb.cc; sourceTree = "<group>"; };
 		CC2436B317490AEA00A8519D /* SecurityCommand.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SecurityCommand.pb.h; path = Proto/SecurityCommand.pb.h; sourceTree = "<group>"; };
@@ -495,8 +495,8 @@
 				CC386DD11789D45800AB41AF /* EventDispatcher.h */,
 				CC386DD61789D86300AB41AF /* EntityGameEventFactory.cpp */,
 				CC386DD71789D86300AB41AF /* EntityGameEventFactory.h */,
-				CC1AD3AB178E4DE6000F134C /* EventConsumer.cpp */,
-				CC1AD3AC178E4DE6000F134C /* EventConsumer.h */,
+				CC1AD3AB178E4DE6000F134C /* CommandConsumer.cpp */,
+				CC1AD3AC178E4DE6000F134C /* CommandConsumer.h */,
 			);
 			name = Game;
 			sourceTree = "<group>";
@@ -734,7 +734,7 @@
 				CC386DD81789D86300AB41AF /* EntityGameEventFactory.cpp in Sources */,
 				CC386DDB178A033100AB41AF /* MessageDispatcher.cpp in Sources */,
 				CC1AD3AA178E3DAE000F134C /* MessageConsumer.cpp in Sources */,
-				CC1AD3AD178E4DE6000F134C /* EventConsumer.cpp in Sources */,
+				CC1AD3AD178E4DE6000F134C /* CommandConsumer.cpp in Sources */,
 				CCC70908178F93BD00E6992E /* RawInputCommand.pb.cc in Sources */,
 				CCC7090B178F93D800E6992E /* DualStickRawInputCommand.pb.cc in Sources */,
 			);
