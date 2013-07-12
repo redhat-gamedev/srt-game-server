@@ -26,6 +26,7 @@
 #include <google/protobuf/generated_enum_reflection.h>
 #include <google/protobuf/unknown_field_set.h>
 #include "SecurityCommand.pb.h"
+#include "RawInputCommand.pb.h"
 // @@protoc_insertion_point(includes)
 
 namespace command {
@@ -38,11 +39,12 @@ void protobuf_ShutdownFile_Command_2eproto();
 class Command;
 
 enum Command_CommandType {
-  Command_CommandType_SECURITY = 0
+  Command_CommandType_SECURITY = 0,
+  Command_CommandType_RAWINPUT = 1
 };
 bool Command_CommandType_IsValid(int value);
 const Command_CommandType Command_CommandType_CommandType_MIN = Command_CommandType_SECURITY;
-const Command_CommandType Command_CommandType_CommandType_MAX = Command_CommandType_SECURITY;
+const Command_CommandType Command_CommandType_CommandType_MAX = Command_CommandType_RAWINPUT;
 const int Command_CommandType_CommandType_ARRAYSIZE = Command_CommandType_CommandType_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* Command_CommandType_descriptor();
@@ -111,6 +113,7 @@ class Command : public ::google::protobuf::Message {
 
   typedef Command_CommandType CommandType;
   static const CommandType SECURITY = Command_CommandType_SECURITY;
+  static const CommandType RAWINPUT = Command_CommandType_RAWINPUT;
   static inline bool CommandType_IsValid(int value) {
     return Command_CommandType_IsValid(value);
   }
@@ -141,14 +144,23 @@ class Command : public ::google::protobuf::Message {
   inline ::command::Command_CommandType type() const;
   inline void set_type(::command::Command_CommandType value);
 
-  // optional .command.SecurityCommand securityCommand = 3;
+  // optional .command.SecurityCommand securityCommand = 2;
   inline bool has_securitycommand() const;
   inline void clear_securitycommand();
-  static const int kSecurityCommandFieldNumber = 3;
+  static const int kSecurityCommandFieldNumber = 2;
   inline const ::command::SecurityCommand& securitycommand() const;
   inline ::command::SecurityCommand* mutable_securitycommand();
   inline ::command::SecurityCommand* release_securitycommand();
   inline void set_allocated_securitycommand(::command::SecurityCommand* securitycommand);
+
+  // optional .command.RawInputCommand rawInputCommand = 3;
+  inline bool has_rawinputcommand() const;
+  inline void clear_rawinputcommand();
+  static const int kRawInputCommandFieldNumber = 3;
+  inline const ::command::RawInputCommand& rawinputcommand() const;
+  inline ::command::RawInputCommand* mutable_rawinputcommand();
+  inline ::command::RawInputCommand* release_rawinputcommand();
+  inline void set_allocated_rawinputcommand(::command::RawInputCommand* rawinputcommand);
 
   // @@protoc_insertion_point(class_scope:command.Command)
  private:
@@ -156,14 +168,17 @@ class Command : public ::google::protobuf::Message {
   inline void clear_has_type();
   inline void set_has_securitycommand();
   inline void clear_has_securitycommand();
+  inline void set_has_rawinputcommand();
+  inline void clear_has_rawinputcommand();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::command::SecurityCommand* securitycommand_;
+  ::command::RawInputCommand* rawinputcommand_;
   int type_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
   friend void  protobuf_AddDesc_Command_2eproto();
   friend void protobuf_AssignDesc_Command_2eproto();
@@ -202,7 +217,7 @@ inline void Command::set_type(::command::Command_CommandType value) {
   type_ = value;
 }
 
-// optional .command.SecurityCommand securityCommand = 3;
+// optional .command.SecurityCommand securityCommand = 2;
 inline bool Command::has_securitycommand() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -237,6 +252,44 @@ inline void Command::set_allocated_securitycommand(::command::SecurityCommand* s
     set_has_securitycommand();
   } else {
     clear_has_securitycommand();
+  }
+}
+
+// optional .command.RawInputCommand rawInputCommand = 3;
+inline bool Command::has_rawinputcommand() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void Command::set_has_rawinputcommand() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void Command::clear_has_rawinputcommand() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void Command::clear_rawinputcommand() {
+  if (rawinputcommand_ != NULL) rawinputcommand_->::command::RawInputCommand::Clear();
+  clear_has_rawinputcommand();
+}
+inline const ::command::RawInputCommand& Command::rawinputcommand() const {
+  return rawinputcommand_ != NULL ? *rawinputcommand_ : *default_instance_->rawinputcommand_;
+}
+inline ::command::RawInputCommand* Command::mutable_rawinputcommand() {
+  set_has_rawinputcommand();
+  if (rawinputcommand_ == NULL) rawinputcommand_ = new ::command::RawInputCommand;
+  return rawinputcommand_;
+}
+inline ::command::RawInputCommand* Command::release_rawinputcommand() {
+  clear_has_rawinputcommand();
+  ::command::RawInputCommand* temp = rawinputcommand_;
+  rawinputcommand_ = NULL;
+  return temp;
+}
+inline void Command::set_allocated_rawinputcommand(::command::RawInputCommand* rawinputcommand) {
+  delete rawinputcommand_;
+  rawinputcommand_ = rawinputcommand;
+  if (rawinputcommand) {
+    set_has_rawinputcommand();
+  } else {
+    clear_has_rawinputcommand();
   }
 }
 

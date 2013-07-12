@@ -104,7 +104,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "187"
          endingLineNumber = "187"
-         landmarkName = "AEntity::HandleEventConsumedEvent(const void* pSender, google::protobuf::Message*&amp; pMessage)"
+         landmarkName = "AEntity::AEntity(const std::string&amp; strUUID, uint64_t ui64Tag)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -117,20 +117,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "159"
          endingLineNumber = "159"
-         landmarkName = "AEntity::OnSecurityRequestJoin(const void* pSender, const std::string&amp; strUUID)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "CMSTest/Application/MessageConsumer.cpp"
-         timestampString = "395279646.110682"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "62"
-         endingLineNumber = "62"
-         landmarkName = "MessageConsumer::Enqueue(std::pair&lt;unsigned char*, unsigned long&gt;* pMessagePair)"
+         landmarkName = "AEntity::OnSecurityRequestLeave(const void* pSender, const std::string&amp; strUUID)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint

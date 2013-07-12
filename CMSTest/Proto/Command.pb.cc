@@ -35,9 +35,10 @@ void protobuf_AssignDesc_Command_2eproto() {
       "Command.proto");
   GOOGLE_CHECK(file != NULL);
   Command_descriptor_ = file->message_type(0);
-  static const int Command_offsets_[2] = {
+  static const int Command_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Command, type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Command, securitycommand_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Command, rawinputcommand_),
   };
   Command_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -81,12 +82,16 @@ void protobuf_AddDesc_Command_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::command::protobuf_AddDesc_SecurityCommand_2eproto();
+  ::command::protobuf_AddDesc_RawInputCommand_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\rCommand.proto\022\007command\032\025SecurityComman"
-    "d.proto\"\217\001\n\007Command\0224\n\004type\030\001 \002(\0162\034.comm"
-    "and.Command.CommandType:\010SECURITY\0221\n\017sec"
-    "urityCommand\030\003 \001(\0132\030.command.SecurityCom"
-    "mand\"\033\n\013CommandType\022\014\n\010SECURITY\020\000", 193);
+    "d.proto\032\025RawInputCommand.proto\"\320\001\n\007Comma"
+    "nd\0224\n\004type\030\001 \002(\0162\034.command.Command.Comma"
+    "ndType:\010SECURITY\0221\n\017securityCommand\030\002 \001("
+    "\0132\030.command.SecurityCommand\0221\n\017rawInputC"
+    "ommand\030\003 \001(\0132\030.command.RawInputCommand\")"
+    "\n\013CommandType\022\014\n\010SECURITY\020\000\022\014\n\010RAWINPUT\020"
+    "\001", 281);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "Command.proto", &protobuf_RegisterTypes);
   Command::default_instance_ = new Command();
@@ -110,6 +115,7 @@ const ::google::protobuf::EnumDescriptor* Command_CommandType_descriptor() {
 bool Command_CommandType_IsValid(int value) {
   switch(value) {
     case 0:
+    case 1:
       return true;
     default:
       return false;
@@ -118,6 +124,7 @@ bool Command_CommandType_IsValid(int value) {
 
 #ifndef _MSC_VER
 const Command_CommandType Command::SECURITY;
+const Command_CommandType Command::RAWINPUT;
 const Command_CommandType Command::CommandType_MIN;
 const Command_CommandType Command::CommandType_MAX;
 const int Command::CommandType_ARRAYSIZE;
@@ -125,6 +132,7 @@ const int Command::CommandType_ARRAYSIZE;
 #ifndef _MSC_VER
 const int Command::kTypeFieldNumber;
 const int Command::kSecurityCommandFieldNumber;
+const int Command::kRawInputCommandFieldNumber;
 #endif  // !_MSC_VER
 
 Command::Command()
@@ -134,6 +142,7 @@ Command::Command()
 
 void Command::InitAsDefaultInstance() {
   securitycommand_ = const_cast< ::command::SecurityCommand*>(&::command::SecurityCommand::default_instance());
+  rawinputcommand_ = const_cast< ::command::RawInputCommand*>(&::command::RawInputCommand::default_instance());
 }
 
 Command::Command(const Command& from)
@@ -146,6 +155,7 @@ void Command::SharedCtor() {
   _cached_size_ = 0;
   type_ = 0;
   securitycommand_ = NULL;
+  rawinputcommand_ = NULL;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -156,6 +166,7 @@ Command::~Command() {
 void Command::SharedDtor() {
   if (this != default_instance_) {
     delete securitycommand_;
+    delete rawinputcommand_;
   }
 }
 
@@ -186,6 +197,9 @@ void Command::Clear() {
     if (has_securitycommand()) {
       if (securitycommand_ != NULL) securitycommand_->::command::SecurityCommand::Clear();
     }
+    if (has_rawinputcommand()) {
+      if (rawinputcommand_ != NULL) rawinputcommand_->::command::RawInputCommand::Clear();
+    }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -213,17 +227,31 @@ bool Command::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(26)) goto parse_securityCommand;
+        if (input->ExpectTag(18)) goto parse_securityCommand;
         break;
       }
 
-      // optional .command.SecurityCommand securityCommand = 3;
-      case 3: {
+      // optional .command.SecurityCommand securityCommand = 2;
+      case 2: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_securityCommand:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_securitycommand()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(26)) goto parse_rawInputCommand;
+        break;
+      }
+
+      // optional .command.RawInputCommand rawInputCommand = 3;
+      case 3: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_rawInputCommand:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_rawinputcommand()));
         } else {
           goto handle_uninterpreted;
         }
@@ -255,10 +283,16 @@ void Command::SerializeWithCachedSizes(
       1, this->type(), output);
   }
 
-  // optional .command.SecurityCommand securityCommand = 3;
+  // optional .command.SecurityCommand securityCommand = 2;
   if (has_securitycommand()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      3, this->securitycommand(), output);
+      2, this->securitycommand(), output);
+  }
+
+  // optional .command.RawInputCommand rawInputCommand = 3;
+  if (has_rawinputcommand()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3, this->rawinputcommand(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -275,11 +309,18 @@ void Command::SerializeWithCachedSizes(
       1, this->type(), target);
   }
 
-  // optional .command.SecurityCommand securityCommand = 3;
+  // optional .command.SecurityCommand securityCommand = 2;
   if (has_securitycommand()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        3, this->securitycommand(), target);
+        2, this->securitycommand(), target);
+  }
+
+  // optional .command.RawInputCommand rawInputCommand = 3;
+  if (has_rawinputcommand()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        3, this->rawinputcommand(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -299,11 +340,18 @@ int Command::ByteSize() const {
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());
     }
 
-    // optional .command.SecurityCommand securityCommand = 3;
+    // optional .command.SecurityCommand securityCommand = 2;
     if (has_securitycommand()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->securitycommand());
+    }
+
+    // optional .command.RawInputCommand rawInputCommand = 3;
+    if (has_rawinputcommand()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->rawinputcommand());
     }
 
   }
@@ -339,6 +387,9 @@ void Command::MergeFrom(const Command& from) {
     if (from.has_securitycommand()) {
       mutable_securitycommand()->::command::SecurityCommand::MergeFrom(from.securitycommand());
     }
+    if (from.has_rawinputcommand()) {
+      mutable_rawinputcommand()->::command::RawInputCommand::MergeFrom(from.rawinputcommand());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -361,6 +412,9 @@ bool Command::IsInitialized() const {
   if (has_securitycommand()) {
     if (!this->securitycommand().IsInitialized()) return false;
   }
+  if (has_rawinputcommand()) {
+    if (!this->rawinputcommand().IsInitialized()) return false;
+  }
   return true;
 }
 
@@ -368,6 +422,7 @@ void Command::Swap(Command* other) {
   if (other != this) {
     std::swap(type_, other->type_);
     std::swap(securitycommand_, other->securitycommand_);
+    std::swap(rawinputcommand_, other->rawinputcommand_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

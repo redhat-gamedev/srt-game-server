@@ -8,7 +8,6 @@
 
 #include "MessageConsumer.h"
 #include "../Shared/SimpleAsyncConsumer.h"
-//#include "Poco/Delegate.h"
 #include <cms/BytesMessage.h>
 #include <cms/CMSException.h>
 #include <google/protobuf/message.h>

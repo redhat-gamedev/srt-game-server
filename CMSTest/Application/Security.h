@@ -50,7 +50,7 @@ protected:
     
     std::map<std::string, std::string>              m_mapUUIDToSimpleAsyncProducers;
     SimpleAsyncConsumer*                            m_pSimpleAsyncConsumer;
-    SimpleAsyncProducer*                                 m_pSimpleAsyncProducer;
+    SimpleAsyncProducer*                            m_pSimpleAsyncProducer;
     
 public:
     static _EventPublisher                          EventPublisher;
