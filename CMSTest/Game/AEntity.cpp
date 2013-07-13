@@ -70,18 +70,18 @@ void AEntity::_Serializer::Deserialisze(const gameevent::EntityGameEvent* pEntit
 //// Class
 void AEntity::ClassSetup()
 {
-    Security::EventPublisher.RequestJoinEvent += Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestJoin);
-    Security::EventPublisher.RequestLeaveEvent += Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestLeave);
+    //Security::EventPublisher.RequestJoinEvent += Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestJoin);
+    //Security::EventPublisher.RequestLeaveEvent += Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestLeave);
     
-    CommandConsumer::Instance().EventConsumedEvent += Poco::FunctionDelegate<google::protobuf::Message*&>(&AEntity::HandleEventConsumedEvent);
+    //CommandConsumer::Instance().EventConsumedEvent += Poco::FunctionDelegate<google::protobuf::Message*&>(&AEntity::HandleEventConsumedEvent);
 }
 
 void AEntity::ClassTeardown()
 {
-    CommandConsumer::Instance().EventConsumedEvent -= Poco::FunctionDelegate<google::protobuf::Message*&>(&AEntity::HandleEventConsumedEvent);
+    //CommandConsumer::Instance().EventConsumedEvent -= Poco::FunctionDelegate<google::protobuf::Message*&>(&AEntity::HandleEventConsumedEvent);
     
-    Security::EventPublisher.RequestLeaveEvent -= Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestLeave);
-    Security::EventPublisher.RequestJoinEvent -= Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestJoin);
+    //Security::EventPublisher.RequestLeaveEvent -= Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestLeave);
+    //Security::EventPublisher.RequestJoinEvent -= Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestJoin);
 }
 
 void AEntity::AddPlayer(const std::string& strUUID)
@@ -165,12 +165,12 @@ void AEntity::OnSecurityRequestLeave(const void* pSender, const std::string& str
 }
 
 // Event Consumer event response
-void AEntity::HandleEventConsumedEvent(const void* pSender, google::protobuf::Message*& pMessage)
-{
-    GameEvent* pGameEvent = NULL;
-    
-    pGameEvent = dynamic_cast<GameEvent*>(pMessage);
-}
+//void AEntity::HandleEventConsumedEvent(const void* pSender, google::protobuf::Message*& pMessage)
+//{
+//    GameEvent* pGameEvent = NULL;
+//    
+//    pGameEvent = dynamic_cast<GameEvent*>(pMessage);
+//}
 
 //// Instance
 // Constructor(s)

@@ -62,9 +62,9 @@ void CommandConsumer::Enqueue(google::protobuf::Message* pMessage)
 {
     assert(pMessage);
     
-    m_anEventQueue.lock();
-    m_anEventQueue.push(pMessage);
-    m_anEventQueue.unlock();
+    m_aCommandQueue.lock();
+    m_aCommandQueue.push(pMessage);
+    m_aCommandQueue.unlock();
 }
 
 void CommandConsumer::Enqueue(std::pair<unsigned char*, unsigned long>* pMessagePair)
@@ -90,13 +90,13 @@ Message* CommandConsumer::PairToMessage(std::pair<unsigned char*, unsigned long>
 void CommandConsumer::Consume()
 {
     Message* pMessage = NULL;
-    m_anEventQueue.lock();
-    while (!m_anEventQueue.empty())
+    m_aCommandQueue.lock();
+    while (!m_aCommandQueue.empty())
     {
-        pMessage = m_anEventQueue.pop();
-        EventConsumedEvent(this, pMessage);
+        pMessage = m_aCommandQueue.pop();
+        CommandConsumedEvent(this, pMessage);
     }
-    m_anEventQueue.unlock();
+    m_aCommandQueue.unlock();
 }
 // void Consume(google::protobuf::Message* pMessage)
 //{

@@ -103,7 +103,7 @@ public:
     static void OnSecurityRequestLeave(const void* pSender, const std::string& strUUID);
     
     // Event Consumer event response
-    static void HandleEventConsumedEvent(const void* pSender, google::protobuf::Message*& pMessage);
+    //static void HandleEventConsumedEvent(const void* pSender, google::protobuf::Message*& pMessage);
     
     // Instance
     // Constructor(s)

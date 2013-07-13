@@ -23,7 +23,7 @@
 //        class Message;
 //    }
 //}
-class MessageConsumer;
+
 //class EntityGameEvent_Dependencies;
 //class AEntity;
 
@@ -58,6 +58,10 @@ class MessageConsumer;
 //    void Consume(google::protobuf::Message* pMessage);
 //};
 
+class MessageConsumer;
+
+
+
 class CommandConsumer
 {
 public:
@@ -78,7 +82,7 @@ public:
 
 private:
 protected:
-    decaf::util::StlQueue<google::protobuf::Message*>                       m_anEventQueue;
+    decaf::util::StlQueue<google::protobuf::Message*>                       m_aCommandQueue;
     MessageConsumer*                                                        m_pMessageConsumer;
     FactoryT<gameevent::GameEvent, EntityGameEvent_Dependencies>&           m_anEntityGameEventFactory;
     
@@ -99,7 +103,7 @@ protected:
     
 public:
     // Event(s)
-    Poco::BasicEvent<google::protobuf::Message*&>   EventConsumedEvent;
+    Poco::BasicEvent<google::protobuf::Message*&>   CommandConsumedEvent;
     
     // Singleton
     static CommandConsumer& Instance(_Dependencies* pDependencies = NULL)//unsigned int uiCapacity)

@@ -28,6 +28,26 @@
 #include "activemq/library/ActiveMQCPP.h"
 #include <iostream>
 
+//class Base
+//{
+//public:
+//    virtual void Func()
+//    {
+//        std::cout << "Base::Func()" << std::endl;
+//    }
+//};
+//
+//
+//class Derived :
+//    public Base
+//{
+//public:
+//    virtual void Func()
+//    {
+//        std::cout << "Derived::Func()" << std::endl;
+//    }
+//};
+
 
 int main(int argc, char* argv[])
 {
@@ -40,6 +60,15 @@ int main(int argc, char* argv[])
     std::cout << "Starting..." << std::endl;
     std::cout << "Initializing the ActiveMQCPP library" << std::endl;
     activemq::library::ActiveMQCPP::initializeLibrary();
+    
+//    Base aBase;
+//    Derived aDerived;
+//    
+//    aBase.Func();
+//    aDerived.Func();
+//    Base& aBaseReference = aDerived;
+//    aBaseReference.Func();
+    
     
     PodFactory&                                                 thePodFactory = PodFactory::Instance();
     BulletFactory&                                              theBulletFactory = BulletFactory::Instance();

@@ -16,6 +16,7 @@
 		CC2436D117491B5800A8519D /* EntityGameEvent.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CC2436CB17491B5400A8519D /* EntityGameEvent.pb.cc */; };
 		CC2436D317491B5800A8519D /* GameEvent.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CC2436CE17491B5500A8519D /* GameEvent.pb.cc */; };
 		CC2436D717492CFA00A8519D /* B2DPod.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC2436D517492CFA00A8519D /* B2DPod.cpp */; };
+		CC366F801791D78200B698E6 /* CommandQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC366F7E1791D78200B698E6 /* CommandQueue.cpp */; };
 		CC386DD21789D45800AB41AF /* EventDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC386DD01789D45800AB41AF /* EventDispatcher.cpp */; };
 		CC386DD81789D86300AB41AF /* EntityGameEventFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC386DD61789D86300AB41AF /* EntityGameEventFactory.cpp */; };
 		CC386DDB178A033100AB41AF /* MessageDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC386DD9178A033100AB41AF /* MessageDispatcher.cpp */; };
@@ -27,6 +28,8 @@
 		CCA4C32C1687B45D006BAC1D /* xdispatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA4C32B1687B45D006BAC1D /* xdispatch.framework */; };
 		CCC70908178F93BD00E6992E /* RawInputCommand.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CCC70906178F93BD00E6992E /* RawInputCommand.pb.cc */; };
 		CCC7090B178F93D800E6992E /* DualStickRawInputCommand.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CCC70909178F93D800E6992E /* DualStickRawInputCommand.pb.cc */; };
+		CCC7090E178F9B4600E6992E /* ACommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCC7090C178F9B4600E6992E /* ACommand.cpp */; };
+		CCC70911178F9D3D00E6992E /* SecurityCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCC7090F178F9D3D00E6992E /* SecurityCommand.cpp */; };
 		CCE449C217230E21002A1937 /* box2d.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CCE449B917230E21002A1937 /* box2d.pb.cc */; };
 		CCE449C417230E21002A1937 /* Command.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CCE449BC17230E21002A1937 /* Command.pb.cc */; };
 		CCE449C617230E21002A1937 /* DualStick.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CCE449BF17230E21002A1937 /* DualStick.pb.cc */; };
@@ -219,6 +222,8 @@
 		CC2436D017491B5700A8519D /* GameEvent.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; name = GameEvent.proto; path = Proto/GameEvent.proto; sourceTree = "<group>"; };
 		CC2436D517492CFA00A8519D /* B2DPod.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = B2DPod.cpp; path = Game/B2DPod.cpp; sourceTree = "<group>"; };
 		CC2436D617492CFA00A8519D /* B2DPod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = B2DPod.h; path = Game/B2DPod.h; sourceTree = "<group>"; };
+		CC366F7E1791D78200B698E6 /* CommandQueue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CommandQueue.cpp; path = Game/CommandQueue.cpp; sourceTree = "<group>"; };
+		CC366F7F1791D78200B698E6 /* CommandQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommandQueue.h; path = Game/CommandQueue.h; sourceTree = "<group>"; };
 		CC386DD01789D45800AB41AF /* EventDispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EventDispatcher.cpp; path = Game/EventDispatcher.cpp; sourceTree = "<group>"; };
 		CC386DD11789D45800AB41AF /* EventDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventDispatcher.h; path = Game/EventDispatcher.h; sourceTree = "<group>"; };
 		CC386DD61789D86300AB41AF /* EntityGameEventFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EntityGameEventFactory.cpp; path = Game/EntityGameEventFactory.cpp; sourceTree = "<group>"; };
@@ -242,6 +247,10 @@
 		CCC70907178F93BD00E6992E /* RawInputCommand.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RawInputCommand.pb.h; path = Proto/RawInputCommand.pb.h; sourceTree = "<group>"; };
 		CCC70909178F93D800E6992E /* DualStickRawInputCommand.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DualStickRawInputCommand.pb.cc; path = Proto/DualStickRawInputCommand.pb.cc; sourceTree = "<group>"; };
 		CCC7090A178F93D800E6992E /* DualStickRawInputCommand.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DualStickRawInputCommand.pb.h; path = Proto/DualStickRawInputCommand.pb.h; sourceTree = "<group>"; };
+		CCC7090C178F9B4600E6992E /* ACommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ACommand.cpp; path = Shared/ACommand.cpp; sourceTree = "<group>"; };
+		CCC7090D178F9B4600E6992E /* ACommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACommand.h; path = Shared/ACommand.h; sourceTree = "<group>"; };
+		CCC7090F178F9D3D00E6992E /* SecurityCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SecurityCommand.cpp; path = Application/SecurityCommand.cpp; sourceTree = "<group>"; };
+		CCC70910178F9D3D00E6992E /* SecurityCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SecurityCommand.h; path = Application/SecurityCommand.h; sourceTree = "<group>"; };
 		CCE449B917230E21002A1937 /* box2d.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = box2d.pb.cc; path = Proto/box2d.pb.cc; sourceTree = "<group>"; };
 		CCE449BA17230E21002A1937 /* box2d.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = box2d.pb.h; path = Proto/box2d.pb.h; sourceTree = "<group>"; };
 		CCE449BB17230E21002A1937 /* box2d.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; name = box2d.proto; path = Proto/box2d.proto; sourceTree = "<group>"; };
@@ -444,6 +453,8 @@
 				CC386DDA178A033100AB41AF /* MessageDispatcher.h */,
 				CC1AD3A8178E3DAE000F134C /* MessageConsumer.cpp */,
 				CC1AD3A9178E3DAE000F134C /* MessageConsumer.h */,
+				CCC7090F178F9D3D00E6992E /* SecurityCommand.cpp */,
+				CCC70910178F9D3D00E6992E /* SecurityCommand.h */,
 			);
 			name = Application;
 			sourceTree = "<group>";
@@ -460,6 +471,8 @@
 				CCE449DD17230F8E002A1937 /* Timer.h */,
 				CCE44A0017231FAD002A1937 /* MakeT.h */,
 				CC51BAAF17825523007F27F0 /* FactoryT.h */,
+				CCC7090C178F9B4600E6992E /* ACommand.cpp */,
+				CCC7090D178F9B4600E6992E /* ACommand.h */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -497,6 +510,8 @@
 				CC386DD71789D86300AB41AF /* EntityGameEventFactory.h */,
 				CC1AD3AB178E4DE6000F134C /* CommandConsumer.cpp */,
 				CC1AD3AC178E4DE6000F134C /* CommandConsumer.h */,
+				CC366F7E1791D78200B698E6 /* CommandQueue.cpp */,
+				CC366F7F1791D78200B698E6 /* CommandQueue.h */,
 			);
 			name = Game;
 			sourceTree = "<group>";
@@ -737,6 +752,9 @@
 				CC1AD3AD178E4DE6000F134C /* CommandConsumer.cpp in Sources */,
 				CCC70908178F93BD00E6992E /* RawInputCommand.pb.cc in Sources */,
 				CCC7090B178F93D800E6992E /* DualStickRawInputCommand.pb.cc in Sources */,
+				CCC7090E178F9B4600E6992E /* ACommand.cpp in Sources */,
+				CCC70911178F9D3D00E6992E /* SecurityCommand.cpp in Sources */,
+				CC366F801791D78200B698E6 /* CommandQueue.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
