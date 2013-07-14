@@ -35,7 +35,6 @@
 		CCE449C217230E21002A1937 /* box2d.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CCE449B917230E21002A1937 /* box2d.pb.cc */; };
 		CCE449C617230E21002A1937 /* DualStick.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CCE449BF17230E21002A1937 /* DualStick.pb.cc */; };
 		CCE449D317230EF9002A1937 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449C917230EF9002A1937 /* main.cpp */; };
-		CCE449D417230EF9002A1937 /* Security.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449CA17230EF9002A1937 /* Security.cpp */; };
 		CCE449D517230EF9002A1937 /* Server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449CC17230EF9002A1937 /* Server.cpp */; };
 		CCE449DF17230F8E002A1937 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449DC17230F8E002A1937 /* Timer.cpp */; };
 		CCE449E31723109C002A1937 /* Heartbeat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449E11723109C002A1937 /* Heartbeat.cpp */; };
@@ -264,8 +263,6 @@
 		CCE449C017230E21002A1937 /* DualStick.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DualStick.pb.h; path = Proto/DualStick.pb.h; sourceTree = "<group>"; };
 		CCE449C117230E21002A1937 /* DualStick.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; name = DualStick.proto; path = Proto/DualStick.proto; sourceTree = "<group>"; };
 		CCE449C917230EF9002A1937 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = Application/main.cpp; sourceTree = "<group>"; };
-		CCE449CA17230EF9002A1937 /* Security.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Security.cpp; path = Application/Security.cpp; sourceTree = "<group>"; };
-		CCE449CB17230EF9002A1937 /* Security.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Security.h; path = Application/Security.h; sourceTree = "<group>"; };
 		CCE449CC17230EF9002A1937 /* Server.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Server.cpp; path = Application/Server.cpp; sourceTree = "<group>"; };
 		CCE449CD17230EF9002A1937 /* Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Server.h; path = Application/Server.h; sourceTree = "<group>"; };
 		CCE449DC17230F8E002A1937 /* Timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Timer.cpp; path = Shared/Timer.cpp; sourceTree = "<group>"; };
@@ -448,8 +445,6 @@
 				CCE449E11723109C002A1937 /* Heartbeat.cpp */,
 				CCE449E21723109C002A1937 /* Heartbeat.h */,
 				CCE449C917230EF9002A1937 /* main.cpp */,
-				CCE449CA17230EF9002A1937 /* Security.cpp */,
-				CCE449CB17230EF9002A1937 /* Security.h */,
 				CCE449CC17230EF9002A1937 /* Server.cpp */,
 				CCE449CD17230EF9002A1937 /* Server.h */,
 				CC386DD9178A033100AB41AF /* MessageDispatcher.cpp */,
@@ -729,7 +724,6 @@
 				CCE449C217230E21002A1937 /* box2d.pb.cc in Sources */,
 				CCE449C617230E21002A1937 /* DualStick.pb.cc in Sources */,
 				CCE449D317230EF9002A1937 /* main.cpp in Sources */,
-				CCE449D417230EF9002A1937 /* Security.cpp in Sources */,
 				CCE449D517230EF9002A1937 /* Server.cpp in Sources */,
 				CCE449DF17230F8E002A1937 /* Timer.cpp in Sources */,
 				CCE449E31723109C002A1937 /* Heartbeat.cpp in Sources */,

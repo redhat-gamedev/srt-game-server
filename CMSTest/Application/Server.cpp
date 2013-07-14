@@ -8,7 +8,7 @@
 
 #include "Server.h"
 #include "World.h"
-#include "Security.h"
+//#include "Security.h"
 #include "AEntity.h"
 #include "decaf/lang/Thread.h"
 #include "decaf/lang/Runnable.h"
@@ -26,7 +26,7 @@ Server::Server(EventDispatcher& theEventDispatcher,
                CommandQueue& theCommandQueue) :
     m_pWorld(NULL),
     m_pInput(NULL),
-    m_pSecurity(NULL),
+//    m_pSecurity(NULL),
     m_pMainThread(NULL),
     m_theEventDispatcher(theEventDispatcher),
     m_theMessageDispatcher(theMessageDispatcher),
@@ -54,7 +54,7 @@ void Server::Setup()
 
     m_pWorld = new World();
     m_pInput = new Input();
-    m_pSecurity = new Security();
+//    m_pSecurity = new Security();
 
     std::cout << "Starting the world producer" << std::endl;
     m_pMainThread = new decaf::lang::Thread(this, strMainThreadName);
@@ -68,8 +68,8 @@ void Server::Teardown()
     delete m_pMainThread;
     m_pMainThread = NULL;
     
-    delete m_pSecurity;
-    m_pSecurity = NULL;
+//    delete m_pSecurity;
+//    m_pSecurity = NULL;
     
     delete m_pInput;
     m_pInput = NULL;

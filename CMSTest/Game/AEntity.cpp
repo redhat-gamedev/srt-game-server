@@ -12,7 +12,9 @@
 #include "PodFactory.h"
 #include "B2DPodFactory.h"
 #include "CommandConsumer.h"
-#include "../Application/Security.h"
+#include "../Shared/ACommand.h"
+#include "../Application/SecurityCommand.h"
+#include "../Shared/FactoryT.h"
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include "Poco/FunctionDelegate.h"
 //#include <iostream>
@@ -74,6 +76,11 @@ void AEntity::ClassSetup()
     //Security::EventPublisher.RequestLeaveEvent += Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestLeave);
     
     //CommandConsumer::Instance().EventConsumedEvent += Poco::FunctionDelegate<google::protobuf::Message*&>(&AEntity::HandleEventConsumedEvent);
+    
+    FactoryT<SecurityCommand, SecurityCommand::_SecurityDependencies>&      theSecurityCommandFactory = FactoryT<SecurityCommand, SecurityCommand::_SecurityDependencies>::Instance();
+    
+    theSecurityCommandFactory.CreatedEvent += Poco::FunctionDelegate<SecurityCommand*&>(&AEntity::HandleSecurityCommandFactoryCreated);
+    theSecurityCommandFactory.DestroyedEvent += Poco::FunctionDelegate<SecurityCommand*&>(&AEntity::HandleSecurityCommandFactoryDestroyed);
 }
 
 void AEntity::ClassTeardown()
@@ -82,6 +89,11 @@ void AEntity::ClassTeardown()
     
     //Security::EventPublisher.RequestLeaveEvent -= Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestLeave);
     //Security::EventPublisher.RequestJoinEvent -= Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestJoin);
+    
+    FactoryT<SecurityCommand, SecurityCommand::_SecurityDependencies>&      theSecurityCommandFactory = FactoryT<SecurityCommand, SecurityCommand::_SecurityDependencies>::Instance();
+    
+    theSecurityCommandFactory.DestroyedEvent -= Poco::FunctionDelegate<SecurityCommand*&>(&AEntity::HandleSecurityCommandFactoryDestroyed);
+    theSecurityCommandFactory.CreatedEvent -= Poco::FunctionDelegate<SecurityCommand*&>(&AEntity::HandleSecurityCommandFactoryCreated);
 }
 
 void AEntity::AddPlayer(const std::string& strUUID)
@@ -171,6 +183,22 @@ void AEntity::OnSecurityRequestLeave(const void* pSender, const std::string& str
 //    
 //    pGameEvent = dynamic_cast<GameEvent*>(pMessage);
 //}
+
+void AEntity::HandleSecurityCommandFactoryCreated(const void* pSender, SecurityCommand*& pSecurityCommand)
+{
+    assert(pSecurityCommand);
+    
+    pSecurityCommand->JoinedEvent += Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestJoin);
+    pSecurityCommand->LeftEvent += Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestLeave);
+}
+
+void AEntity::HandleSecurityCommandFactoryDestroyed(const void* pSender, SecurityCommand*& pSecurityCommand)
+{
+    assert(pSecurityCommand);
+    
+    pSecurityCommand->LeftEvent -= Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestLeave);
+    pSecurityCommand->JoinedEvent -= Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestJoin);
+}
 
 //// Instance
 // Constructor(s)

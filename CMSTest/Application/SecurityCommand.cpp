@@ -7,6 +7,8 @@
 //
 
 #include "SecurityCommand.h"
+#include "../Proto/CommandBuffer.pb.h"
+#include "../Proto/SecurityCommandBuffer.pb.h"
 #include "../Shared/SimpleAsyncProducer.h"
 #include <cms/Destination.h>
 #include <cms/BytesMessage.h>
@@ -49,23 +51,35 @@ SecurityCommand::~SecurityCommand()
 // Method(s)
 void SecurityCommand::Execute()
 {
-    // Join stuff
-    // don't forget to ->clone() the reply to destination if lifetime is impt
-//    const cms::Destination* pDestination = pBytesMessage->getCMSReplyTo();
-
+    using namespace usx::geofactions;
+    
     assert(m_pBytesMessage);
 
     std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp&keepAlive=true";
+    std::string     strUUID = "";
+    const SecurityCommandBuffer& aSecurityCommandBuffer = m_pCommand->securitycommandbuffer();
     
-    decaf::util::UUID aNewUUID = decaf::util::UUID::randomUUID();
-    std::string strUUID = aNewUUID.toString();
-    const cms::Destination* pReplyToDestination = m_pBytesMessage->getCMSReplyTo();
-    assert(pReplyToDestination);
+    if (SecurityCommandBuffer_SecurityCommandBufferType_JOIN == aSecurityCommandBuffer.type())
+    {
+        decaf::util::UUID aNewUUID = decaf::util::UUID::randomUUID();
+        strUUID = aNewUUID.toString();
+        const cms::Destination* pReplyToDestination = m_pBytesMessage->getCMSReplyTo();
+        assert(pReplyToDestination);
 
-    // TODO: Make not super inefficient
-    SimpleAsyncProducer* pSimpleAsyncProducer = new SimpleAsyncProducer(strBrokerURI, pReplyToDestination, false, true);
-    pSimpleAsyncProducer->Send(strUUID);
-    delete pSimpleAsyncProducer;
+        // TODO: Make not super inefficient
+        SimpleAsyncProducer* pSimpleAsyncProducer = new SimpleAsyncProducer(strBrokerURI, pReplyToDestination, false, true);
+        pSimpleAsyncProducer->Send(strUUID);
+        delete pSimpleAsyncProducer;
+        
+        JoinedEvent(this, strUUID);
+    }
+    else if (SecurityCommandBuffer_SecurityCommandBufferType_LEAVE == aSecurityCommandBuffer.type())
+    {
+        assert(aSecurityCommandBuffer.has_uuid());
+        strUUID = aSecurityCommandBuffer.uuid();
+        
+        LeftEvent(this, strUUID);
+    }
 }
 
 

@@ -16,19 +16,9 @@
 #include <string>
 #include <list>
 
-//namespace google
-//{
-//    namespace protobuf
-//    {
-//        class Message;
-//    }
-//}
-//namespace gameevent
-//{
-//    class EntityGameEvent;
-//}
 class AB2DEntity;
 class Player;
+class SecurityCommand;
 
 
 class AEntity
@@ -104,6 +94,10 @@ public:
     
     // Event Consumer event response
     //static void HandleEventConsumedEvent(const void* pSender, google::protobuf::Message*& pMessage);
+
+    static void HandleSecurityCommandFactoryCreated(const void* pSender, SecurityCommand*& pSecurityCommand);
+    static void HandleSecurityCommandFactoryDestroyed(const void* pSender, SecurityCommand*& pSecurityCommand);
+    
     
     // Instance
     // Constructor(s)

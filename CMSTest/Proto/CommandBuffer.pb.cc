@@ -84,12 +84,12 @@ void protobuf_AddDesc_CommandBuffer_2eproto() {
   ::usx::geofactions::protobuf_AddDesc_SecurityCommandBuffer_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\023CommandBuffer.proto\022\017usx.geofactions\032\033"
-    "SecurityCommandBuffer.proto\"\303\001\n\rCommandB"
-    "uffer\022H\n\004type\030\001 \002(\01620.usx.geofactions.Co"
-    "mmandBuffer.CommandBufferType:\010SECURITY\022"
-    "E\n\025securityCommandBuffer\030\002 \001(\0132&.usx.geo"
-    "factions.SecurityCommandBuffer\"!\n\021Comman"
-    "dBufferType\022\014\n\010SECURITY\020\000", 265);
+    "SecurityCommandBuffer.proto\"\317\001\n\rCommandB"
+    "uffer\022G\n\004type\030\001 \002(\01620.usx.geofactions.Co"
+    "mmandBuffer.CommandBufferType:\007UNKNOWN\022E"
+    "\n\025securityCommandBuffer\030\002 \001(\0132&.usx.geof"
+    "actions.SecurityCommandBuffer\".\n\021Command"
+    "BufferType\022\013\n\007UNKNOWN\020\000\022\014\n\010SECURITY\020\001", 277);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "CommandBuffer.proto", &protobuf_RegisterTypes);
   CommandBuffer::default_instance_ = new CommandBuffer();
@@ -113,6 +113,7 @@ const ::google::protobuf::EnumDescriptor* CommandBuffer_CommandBufferType_descri
 bool CommandBuffer_CommandBufferType_IsValid(int value) {
   switch(value) {
     case 0:
+    case 1:
       return true;
     default:
       return false;
@@ -120,6 +121,7 @@ bool CommandBuffer_CommandBufferType_IsValid(int value) {
 }
 
 #ifndef _MSC_VER
+const CommandBuffer_CommandBufferType CommandBuffer::UNKNOWN;
 const CommandBuffer_CommandBufferType CommandBuffer::SECURITY;
 const CommandBuffer_CommandBufferType CommandBuffer::CommandBufferType_MIN;
 const CommandBuffer_CommandBufferType CommandBuffer::CommandBufferType_MAX;
@@ -200,7 +202,7 @@ bool CommandBuffer::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .usx.geofactions.CommandBuffer.CommandBufferType type = 1 [default = SECURITY];
+      // required .usx.geofactions.CommandBuffer.CommandBufferType type = 1 [default = UNKNOWN];
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
@@ -252,7 +254,7 @@ bool CommandBuffer::MergePartialFromCodedStream(
 
 void CommandBuffer::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required .usx.geofactions.CommandBuffer.CommandBufferType type = 1 [default = SECURITY];
+  // required .usx.geofactions.CommandBuffer.CommandBufferType type = 1 [default = UNKNOWN];
   if (has_type()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       1, this->type(), output);
@@ -272,7 +274,7 @@ void CommandBuffer::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* CommandBuffer::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required .usx.geofactions.CommandBuffer.CommandBufferType type = 1 [default = SECURITY];
+  // required .usx.geofactions.CommandBuffer.CommandBufferType type = 1 [default = UNKNOWN];
   if (has_type()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       1, this->type(), target);
@@ -296,7 +298,7 @@ int CommandBuffer::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .usx.geofactions.CommandBuffer.CommandBufferType type = 1 [default = SECURITY];
+    // required .usx.geofactions.CommandBuffer.CommandBufferType type = 1 [default = UNKNOWN];
     if (has_type()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());

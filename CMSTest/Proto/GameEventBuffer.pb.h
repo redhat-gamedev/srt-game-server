@@ -39,10 +39,11 @@ void protobuf_ShutdownFile_GameEventBuffer_2eproto();
 class GameEventBuffer;
 
 enum GameEventBuffer_GameEventBufferType {
-  GameEventBuffer_GameEventBufferType_ENTITY = 0
+  GameEventBuffer_GameEventBufferType_UNKNOWN = 0,
+  GameEventBuffer_GameEventBufferType_ENTITY = 1
 };
 bool GameEventBuffer_GameEventBufferType_IsValid(int value);
-const GameEventBuffer_GameEventBufferType GameEventBuffer_GameEventBufferType_GameEventBufferType_MIN = GameEventBuffer_GameEventBufferType_ENTITY;
+const GameEventBuffer_GameEventBufferType GameEventBuffer_GameEventBufferType_GameEventBufferType_MIN = GameEventBuffer_GameEventBufferType_UNKNOWN;
 const GameEventBuffer_GameEventBufferType GameEventBuffer_GameEventBufferType_GameEventBufferType_MAX = GameEventBuffer_GameEventBufferType_ENTITY;
 const int GameEventBuffer_GameEventBufferType_GameEventBufferType_ARRAYSIZE = GameEventBuffer_GameEventBufferType_GameEventBufferType_MAX + 1;
 
@@ -111,6 +112,7 @@ class GameEventBuffer : public ::google::protobuf::Message {
   // nested types ----------------------------------------------------
 
   typedef GameEventBuffer_GameEventBufferType GameEventBufferType;
+  static const GameEventBufferType UNKNOWN = GameEventBuffer_GameEventBufferType_UNKNOWN;
   static const GameEventBufferType ENTITY = GameEventBuffer_GameEventBufferType_ENTITY;
   static inline bool GameEventBufferType_IsValid(int value) {
     return GameEventBuffer_GameEventBufferType_IsValid(value);
@@ -135,17 +137,17 @@ class GameEventBuffer : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .usx.geofactions.GameEventBuffer.GameEventBufferType type = 1 [default = ENTITY];
+  // required .usx.geofactions.GameEventBuffer.GameEventBufferType type = 1 [default = UNKNOWN];
   inline bool has_type() const;
   inline void clear_type();
   static const int kTypeFieldNumber = 1;
   inline ::usx::geofactions::GameEventBuffer_GameEventBufferType type() const;
   inline void set_type(::usx::geofactions::GameEventBuffer_GameEventBufferType value);
 
-  // optional .usx.geofactions.EntityGameEventBuffer entityGameEventBuffer = 3;
+  // optional .usx.geofactions.EntityGameEventBuffer entityGameEventBuffer = 2;
   inline bool has_entitygameeventbuffer() const;
   inline void clear_entitygameeventbuffer();
-  static const int kEntityGameEventBufferFieldNumber = 3;
+  static const int kEntityGameEventBufferFieldNumber = 2;
   inline const ::usx::geofactions::EntityGameEventBuffer& entitygameeventbuffer() const;
   inline ::usx::geofactions::EntityGameEventBuffer* mutable_entitygameeventbuffer();
   inline ::usx::geofactions::EntityGameEventBuffer* release_entitygameeventbuffer();
@@ -180,7 +182,7 @@ class GameEventBuffer : public ::google::protobuf::Message {
 
 // GameEventBuffer
 
-// required .usx.geofactions.GameEventBuffer.GameEventBufferType type = 1 [default = ENTITY];
+// required .usx.geofactions.GameEventBuffer.GameEventBufferType type = 1 [default = UNKNOWN];
 inline bool GameEventBuffer::has_type() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -203,7 +205,7 @@ inline void GameEventBuffer::set_type(::usx::geofactions::GameEventBuffer_GameEv
   type_ = value;
 }
 
-// optional .usx.geofactions.EntityGameEventBuffer entityGameEventBuffer = 3;
+// optional .usx.geofactions.EntityGameEventBuffer entityGameEventBuffer = 2;
 inline bool GameEventBuffer::has_entitygameeventbuffer() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }

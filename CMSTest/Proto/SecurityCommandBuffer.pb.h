@@ -38,11 +38,12 @@ void protobuf_ShutdownFile_SecurityCommandBuffer_2eproto();
 class SecurityCommandBuffer;
 
 enum SecurityCommandBuffer_SecurityCommandBufferType {
-  SecurityCommandBuffer_SecurityCommandBufferType_JOIN = 0,
-  SecurityCommandBuffer_SecurityCommandBufferType_LEAVE = 1
+  SecurityCommandBuffer_SecurityCommandBufferType_UNKNOWN = 0,
+  SecurityCommandBuffer_SecurityCommandBufferType_JOIN = 1,
+  SecurityCommandBuffer_SecurityCommandBufferType_LEAVE = 2
 };
 bool SecurityCommandBuffer_SecurityCommandBufferType_IsValid(int value);
-const SecurityCommandBuffer_SecurityCommandBufferType SecurityCommandBuffer_SecurityCommandBufferType_SecurityCommandBufferType_MIN = SecurityCommandBuffer_SecurityCommandBufferType_JOIN;
+const SecurityCommandBuffer_SecurityCommandBufferType SecurityCommandBuffer_SecurityCommandBufferType_SecurityCommandBufferType_MIN = SecurityCommandBuffer_SecurityCommandBufferType_UNKNOWN;
 const SecurityCommandBuffer_SecurityCommandBufferType SecurityCommandBuffer_SecurityCommandBufferType_SecurityCommandBufferType_MAX = SecurityCommandBuffer_SecurityCommandBufferType_LEAVE;
 const int SecurityCommandBuffer_SecurityCommandBufferType_SecurityCommandBufferType_ARRAYSIZE = SecurityCommandBuffer_SecurityCommandBufferType_SecurityCommandBufferType_MAX + 1;
 
@@ -111,6 +112,7 @@ class SecurityCommandBuffer : public ::google::protobuf::Message {
   // nested types ----------------------------------------------------
 
   typedef SecurityCommandBuffer_SecurityCommandBufferType SecurityCommandBufferType;
+  static const SecurityCommandBufferType UNKNOWN = SecurityCommandBuffer_SecurityCommandBufferType_UNKNOWN;
   static const SecurityCommandBufferType JOIN = SecurityCommandBuffer_SecurityCommandBufferType_JOIN;
   static const SecurityCommandBufferType LEAVE = SecurityCommandBuffer_SecurityCommandBufferType_LEAVE;
   static inline bool SecurityCommandBufferType_IsValid(int value) {
@@ -136,7 +138,7 @@ class SecurityCommandBuffer : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .usx.geofactions.SecurityCommandBuffer.SecurityCommandBufferType type = 1;
+  // required .usx.geofactions.SecurityCommandBuffer.SecurityCommandBufferType type = 1 [default = UNKNOWN];
   inline bool has_type() const;
   inline void clear_type();
   static const int kTypeFieldNumber = 1;
@@ -184,7 +186,7 @@ class SecurityCommandBuffer : public ::google::protobuf::Message {
 
 // SecurityCommandBuffer
 
-// required .usx.geofactions.SecurityCommandBuffer.SecurityCommandBufferType type = 1;
+// required .usx.geofactions.SecurityCommandBuffer.SecurityCommandBufferType type = 1 [default = UNKNOWN];
 inline bool SecurityCommandBuffer::has_type() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }

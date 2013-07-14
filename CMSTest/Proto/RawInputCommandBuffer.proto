@@ -7,9 +7,11 @@ message RawInputCommandBuffer
 {
     enum RawInputCommandBufferType
     {
-        DUALSTICK = 0;
+        UNKNOWN = 0;
+        DUALSTICK = 1;
     }
-    required RawInputCommandBufferType type = 1 [default = DUALSTICK];
+    required RawInputCommandBufferType type = 1 [default = UNKNOWN];
+
     required string UUID = 2;
     optional DualStickRawInputCommandBuffer dualStickRawInputCommandBuffer = 3;
 }

@@ -84,12 +84,13 @@ void protobuf_AddDesc_GameEventBuffer_2eproto() {
   ::usx::geofactions::protobuf_AddDesc_EntityGameEventBuffer_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\025GameEventBuffer.proto\022\017usx.geofactions"
-    "\032\033EntityGameEventBuffer.proto\"\307\001\n\017GameEv"
-    "entBuffer\022J\n\004type\030\001 \002(\01624.usx.geofaction"
-    "s.GameEventBuffer.GameEventBufferType:\006E"
-    "NTITY\022E\n\025entityGameEventBuffer\030\003 \001(\0132&.u"
-    "sx.geofactions.EntityGameEventBuffer\"!\n\023"
-    "GameEventBufferType\022\n\n\006ENTITY\020\000", 271);
+    "\032\033EntityGameEventBuffer.proto\"\325\001\n\017GameEv"
+    "entBuffer\022K\n\004type\030\001 \002(\01624.usx.geofaction"
+    "s.GameEventBuffer.GameEventBufferType:\007U"
+    "NKNOWN\022E\n\025entityGameEventBuffer\030\002 \001(\0132&."
+    "usx.geofactions.EntityGameEventBuffer\".\n"
+    "\023GameEventBufferType\022\013\n\007UNKNOWN\020\000\022\n\n\006ENT"
+    "ITY\020\001", 285);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "GameEventBuffer.proto", &protobuf_RegisterTypes);
   GameEventBuffer::default_instance_ = new GameEventBuffer();
@@ -113,6 +114,7 @@ const ::google::protobuf::EnumDescriptor* GameEventBuffer_GameEventBufferType_de
 bool GameEventBuffer_GameEventBufferType_IsValid(int value) {
   switch(value) {
     case 0:
+    case 1:
       return true;
     default:
       return false;
@@ -120,6 +122,7 @@ bool GameEventBuffer_GameEventBufferType_IsValid(int value) {
 }
 
 #ifndef _MSC_VER
+const GameEventBuffer_GameEventBufferType GameEventBuffer::UNKNOWN;
 const GameEventBuffer_GameEventBufferType GameEventBuffer::ENTITY;
 const GameEventBuffer_GameEventBufferType GameEventBuffer::GameEventBufferType_MIN;
 const GameEventBuffer_GameEventBufferType GameEventBuffer::GameEventBufferType_MAX;
@@ -200,7 +203,7 @@ bool GameEventBuffer::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .usx.geofactions.GameEventBuffer.GameEventBufferType type = 1 [default = ENTITY];
+      // required .usx.geofactions.GameEventBuffer.GameEventBufferType type = 1 [default = UNKNOWN];
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
@@ -216,12 +219,12 @@ bool GameEventBuffer::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(26)) goto parse_entityGameEventBuffer;
+        if (input->ExpectTag(18)) goto parse_entityGameEventBuffer;
         break;
       }
 
-      // optional .usx.geofactions.EntityGameEventBuffer entityGameEventBuffer = 3;
-      case 3: {
+      // optional .usx.geofactions.EntityGameEventBuffer entityGameEventBuffer = 2;
+      case 2: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_entityGameEventBuffer:
@@ -252,16 +255,16 @@ bool GameEventBuffer::MergePartialFromCodedStream(
 
 void GameEventBuffer::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required .usx.geofactions.GameEventBuffer.GameEventBufferType type = 1 [default = ENTITY];
+  // required .usx.geofactions.GameEventBuffer.GameEventBufferType type = 1 [default = UNKNOWN];
   if (has_type()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       1, this->type(), output);
   }
 
-  // optional .usx.geofactions.EntityGameEventBuffer entityGameEventBuffer = 3;
+  // optional .usx.geofactions.EntityGameEventBuffer entityGameEventBuffer = 2;
   if (has_entitygameeventbuffer()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      3, this->entitygameeventbuffer(), output);
+      2, this->entitygameeventbuffer(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -272,17 +275,17 @@ void GameEventBuffer::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* GameEventBuffer::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required .usx.geofactions.GameEventBuffer.GameEventBufferType type = 1 [default = ENTITY];
+  // required .usx.geofactions.GameEventBuffer.GameEventBufferType type = 1 [default = UNKNOWN];
   if (has_type()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       1, this->type(), target);
   }
 
-  // optional .usx.geofactions.EntityGameEventBuffer entityGameEventBuffer = 3;
+  // optional .usx.geofactions.EntityGameEventBuffer entityGameEventBuffer = 2;
   if (has_entitygameeventbuffer()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        3, this->entitygameeventbuffer(), target);
+        2, this->entitygameeventbuffer(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -296,13 +299,13 @@ int GameEventBuffer::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .usx.geofactions.GameEventBuffer.GameEventBufferType type = 1 [default = ENTITY];
+    // required .usx.geofactions.GameEventBuffer.GameEventBufferType type = 1 [default = UNKNOWN];
     if (has_type()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());
     }
 
-    // optional .usx.geofactions.EntityGameEventBuffer entityGameEventBuffer = 3;
+    // optional .usx.geofactions.EntityGameEventBuffer entityGameEventBuffer = 2;
     if (has_entitygameeventbuffer()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(

@@ -10,12 +10,9 @@
 #define __CMSTest__SecurityCommand__
 
 #include "../Shared/ACommand.h"
+#include "Poco/BasicEvent.h"
+#include <string>
 
-namespace command
-{
-    class Command;
-    class SecurityCommand;
-}
 namespace google
 {
     namespace protobuf
@@ -49,6 +46,10 @@ public:
 private:
 protected:
 public:
+    // Event(s)
+    Poco::BasicEvent<const std::string&>      JoinedEvent;
+    Poco::BasicEvent<const std::string&>      LeftEvent;
+    
     // Constructor
     SecurityCommand(_SecurityDependencies& theDependencies);
     

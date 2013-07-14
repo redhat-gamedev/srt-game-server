@@ -53,7 +53,7 @@ private:
     
 protected:
     Input*                  m_pInput;
-    Security*               m_pSecurity;
+//    Security*               m_pSecurity;
     World*                  m_pWorld;
     
     decaf::lang::Thread*    m_pMainThread;

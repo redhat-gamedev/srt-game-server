@@ -7,8 +7,10 @@ message GameEventBuffer
 {
 	enum GameEventBufferType
 	{
-		ENTITY = 0;
+        UNKNOWN = 0;
+		ENTITY = 1;
 	}
-	required GameEventBufferType type = 1 [default = ENTITY];
-	optional EntityGameEventBuffer entityGameEventBuffer = 3;
+	required GameEventBufferType type = 1 [default = UNKNOWN];
+	
+    optional EntityGameEventBuffer entityGameEventBuffer = 2;
 }

@@ -86,13 +86,14 @@ void protobuf_AddDesc_EntityGameEventBuffer_2eproto() {
   ::box2d::protobuf_AddDesc_box2d_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\033EntityGameEventBuffer.proto\022\017usx.geofa"
-    "ctions\032\013box2d.proto\"\365\001\n\025EntityGameEventB"
-    "uffer\022N\n\004type\030\001 \002(\0162@.usx.geofactions.En"
+    "ctions\032\013box2d.proto\"\213\002\n\025EntityGameEventB"
+    "uffer\022W\n\004type\030\001 \002(\0162@.usx.geofactions.En"
     "tityGameEventBuffer.EntityGameEventBuffe"
-    "rType\022\021\n\tentityTag\030\002 \002(\004\022\014\n\004UUID\030\003 \001(\t\022\033"
-    "\n\004body\030\004 \001(\0132\r.box2d.PbBody\"N\n\031EntityGam"
-    "eEventBufferType\022\n\n\006CREATE\020\000\022\014\n\010RETRIEVE"
-    "\020\001\022\n\n\006UPDATE\020\002\022\013\n\007DESTROY\020\003", 307);
+    "rType:\007UNKNOWN\022\021\n\tentityTag\030\002 \002(\004\022\014\n\004UUI"
+    "D\030\003 \001(\t\022\033\n\004body\030\004 \001(\0132\r.box2d.PbBody\"[\n\031"
+    "EntityGameEventBufferType\022\013\n\007UNKNOWN\020\000\022\n"
+    "\n\006CREATE\020\001\022\014\n\010RETRIEVE\020\002\022\n\n\006UPDATE\020\003\022\013\n\007"
+    "DESTROY\020\004", 329);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "EntityGameEventBuffer.proto", &protobuf_RegisterTypes);
   EntityGameEventBuffer::default_instance_ = new EntityGameEventBuffer();
@@ -119,6 +120,7 @@ bool EntityGameEventBuffer_EntityGameEventBufferType_IsValid(int value) {
     case 1:
     case 2:
     case 3:
+    case 4:
       return true;
     default:
       return false;
@@ -126,6 +128,7 @@ bool EntityGameEventBuffer_EntityGameEventBufferType_IsValid(int value) {
 }
 
 #ifndef _MSC_VER
+const EntityGameEventBuffer_EntityGameEventBufferType EntityGameEventBuffer::UNKNOWN;
 const EntityGameEventBuffer_EntityGameEventBufferType EntityGameEventBuffer::CREATE;
 const EntityGameEventBuffer_EntityGameEventBufferType EntityGameEventBuffer::RETRIEVE;
 const EntityGameEventBuffer_EntityGameEventBufferType EntityGameEventBuffer::UPDATE;
@@ -222,7 +225,7 @@ bool EntityGameEventBuffer::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .usx.geofactions.EntityGameEventBuffer.EntityGameEventBufferType type = 1;
+      // required .usx.geofactions.EntityGameEventBuffer.EntityGameEventBufferType type = 1 [default = UNKNOWN];
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
@@ -307,7 +310,7 @@ bool EntityGameEventBuffer::MergePartialFromCodedStream(
 
 void EntityGameEventBuffer::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required .usx.geofactions.EntityGameEventBuffer.EntityGameEventBufferType type = 1;
+  // required .usx.geofactions.EntityGameEventBuffer.EntityGameEventBufferType type = 1 [default = UNKNOWN];
   if (has_type()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       1, this->type(), output);
@@ -341,7 +344,7 @@ void EntityGameEventBuffer::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* EntityGameEventBuffer::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required .usx.geofactions.EntityGameEventBuffer.EntityGameEventBufferType type = 1;
+  // required .usx.geofactions.EntityGameEventBuffer.EntityGameEventBufferType type = 1 [default = UNKNOWN];
   if (has_type()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       1, this->type(), target);
@@ -380,7 +383,7 @@ int EntityGameEventBuffer::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .usx.geofactions.EntityGameEventBuffer.EntityGameEventBufferType type = 1;
+    // required .usx.geofactions.EntityGameEventBuffer.EntityGameEventBufferType type = 1 [default = UNKNOWN];
     if (has_type()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());

@@ -5,10 +5,11 @@ message SecurityCommandBuffer
 {
 	enum SecurityCommandBufferType
 	{
-		JOIN = 0;
-		LEAVE = 1;
+        UNKNOWN = 0;
+		JOIN = 1;
+		LEAVE = 2;
 	}
-	required SecurityCommandBufferType type = 1;
+	required SecurityCommandBufferType type = 1 [default = UNKNOWN];
 
 	optional string UUID = 2;
 }

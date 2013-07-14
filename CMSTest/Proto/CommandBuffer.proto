@@ -8,10 +8,12 @@ message CommandBuffer
 {
 	enum CommandBufferType
 	{
-		SECURITY = 0;
-        //RAWINPUT = 1;
+        UNKNOWN = 0;
+		SECURITY = 1;
+        //RAWINPUT = 2;
 	}
-	required CommandBufferType type = 1 [default = SECURITY];
+	required CommandBufferType type = 1 [default = UNKNOWN];
+    
     optional SecurityCommandBuffer securityCommandBuffer = 2;
     //optional RawInputCommandBuffer rawInputCommandBuffer = 3;
 }

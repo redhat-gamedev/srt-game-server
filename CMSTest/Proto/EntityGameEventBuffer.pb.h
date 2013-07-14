@@ -39,13 +39,14 @@ void protobuf_ShutdownFile_EntityGameEventBuffer_2eproto();
 class EntityGameEventBuffer;
 
 enum EntityGameEventBuffer_EntityGameEventBufferType {
-  EntityGameEventBuffer_EntityGameEventBufferType_CREATE = 0,
-  EntityGameEventBuffer_EntityGameEventBufferType_RETRIEVE = 1,
-  EntityGameEventBuffer_EntityGameEventBufferType_UPDATE = 2,
-  EntityGameEventBuffer_EntityGameEventBufferType_DESTROY = 3
+  EntityGameEventBuffer_EntityGameEventBufferType_UNKNOWN = 0,
+  EntityGameEventBuffer_EntityGameEventBufferType_CREATE = 1,
+  EntityGameEventBuffer_EntityGameEventBufferType_RETRIEVE = 2,
+  EntityGameEventBuffer_EntityGameEventBufferType_UPDATE = 3,
+  EntityGameEventBuffer_EntityGameEventBufferType_DESTROY = 4
 };
 bool EntityGameEventBuffer_EntityGameEventBufferType_IsValid(int value);
-const EntityGameEventBuffer_EntityGameEventBufferType EntityGameEventBuffer_EntityGameEventBufferType_EntityGameEventBufferType_MIN = EntityGameEventBuffer_EntityGameEventBufferType_CREATE;
+const EntityGameEventBuffer_EntityGameEventBufferType EntityGameEventBuffer_EntityGameEventBufferType_EntityGameEventBufferType_MIN = EntityGameEventBuffer_EntityGameEventBufferType_UNKNOWN;
 const EntityGameEventBuffer_EntityGameEventBufferType EntityGameEventBuffer_EntityGameEventBufferType_EntityGameEventBufferType_MAX = EntityGameEventBuffer_EntityGameEventBufferType_DESTROY;
 const int EntityGameEventBuffer_EntityGameEventBufferType_EntityGameEventBufferType_ARRAYSIZE = EntityGameEventBuffer_EntityGameEventBufferType_EntityGameEventBufferType_MAX + 1;
 
@@ -114,6 +115,7 @@ class EntityGameEventBuffer : public ::google::protobuf::Message {
   // nested types ----------------------------------------------------
 
   typedef EntityGameEventBuffer_EntityGameEventBufferType EntityGameEventBufferType;
+  static const EntityGameEventBufferType UNKNOWN = EntityGameEventBuffer_EntityGameEventBufferType_UNKNOWN;
   static const EntityGameEventBufferType CREATE = EntityGameEventBuffer_EntityGameEventBufferType_CREATE;
   static const EntityGameEventBufferType RETRIEVE = EntityGameEventBuffer_EntityGameEventBufferType_RETRIEVE;
   static const EntityGameEventBufferType UPDATE = EntityGameEventBuffer_EntityGameEventBufferType_UPDATE;
@@ -141,7 +143,7 @@ class EntityGameEventBuffer : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .usx.geofactions.EntityGameEventBuffer.EntityGameEventBufferType type = 1;
+  // required .usx.geofactions.EntityGameEventBuffer.EntityGameEventBufferType type = 1 [default = UNKNOWN];
   inline bool has_type() const;
   inline void clear_type();
   static const int kTypeFieldNumber = 1;
@@ -211,7 +213,7 @@ class EntityGameEventBuffer : public ::google::protobuf::Message {
 
 // EntityGameEventBuffer
 
-// required .usx.geofactions.EntityGameEventBuffer.EntityGameEventBufferType type = 1;
+// required .usx.geofactions.EntityGameEventBuffer.EntityGameEventBufferType type = 1 [default = UNKNOWN];
 inline bool EntityGameEventBuffer::has_type() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }

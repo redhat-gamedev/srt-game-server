@@ -79,7 +79,7 @@ int main(int argc, char* argv[])
     
     PodFactory&                                                 thePodFactory = PodFactory::Instance();
     BulletFactory&                                              theBulletFactory = BulletFactory::Instance();
-    FactoryT<GameEventBuffer, EntityGameEvent_Dependencies>&          theEntityGameEventFactory = FactoryT<GameEventBuffer, EntityGameEvent_Dependencies>::Instance();
+    FactoryT<GameEventBuffer, EntityGameEvent_Dependencies>&    theEntityGameEventFactory = FactoryT<GameEventBuffer, EntityGameEvent_Dependencies>::Instance();
     EventDispatcher::_Dependencies                              theEventDispatcherDependencies(thePodFactory, theBulletFactory, theEntityGameEventFactory);
     EventDispatcher&                                            theEventDispatcher = EventDispatcher::Instance(&theEventDispatcherDependencies);
     
@@ -91,13 +91,13 @@ int main(int argc, char* argv[])
     MessageConsumer::_Dependencies                              theMessageConsumerDependencies(pSimpleAsyncConsumer);
     MessageConsumer&                                            theMessageConsumer = MessageConsumer::Instance(&theMessageConsumerDependencies);
 
-    FactoryT<usx::geofactions::CommandBuffer, SecurityCommand_Dependencies>&     theSecurityCommandBufferFactory = FactoryT<usx::geofactions::CommandBuffer, SecurityCommand_Dependencies>::Instance();
-    CommandConsumer::_Dependencies                                theCommandConsumerDependencies(&theMessageConsumer, theSecurityCommandBufferFactory);
-    CommandConsumer&                                              theCommandConsumer = CommandConsumer::Instance(&theCommandConsumerDependencies);
+    FactoryT<usx::geofactions::CommandBuffer, SecurityCommand_Dependencies>&    theSecurityCommandBufferFactory = FactoryT<usx::geofactions::CommandBuffer, SecurityCommand_Dependencies>::Instance();
+    CommandConsumer::_Dependencies                                              theCommandConsumerDependencies(&theMessageConsumer, theSecurityCommandBufferFactory);
+    CommandConsumer&                                                            theCommandConsumer = CommandConsumer::Instance(&theCommandConsumerDependencies);
     
     FactoryT<::SecurityCommand, ::SecurityCommand::_SecurityDependencies>&      theSecurityCommandFactory = FactoryT<::SecurityCommand, ::SecurityCommand::_SecurityDependencies>::Instance();
-    CommandQueue::_Dependencies                                 theCommandQueueDependencies(theSecurityCommandFactory, theCommandConsumer);
-    CommandQueue&                                               theCommandQueue = CommandQueue::Instance(&theCommandQueueDependencies);
+    CommandQueue::_Dependencies                                                 theCommandQueueDependencies(theSecurityCommandFactory, theCommandConsumer);
+    CommandQueue&                                                               theCommandQueue = CommandQueue::Instance(&theCommandQueueDependencies);
     
     Server* pServer = new Server(theEventDispatcher,
                                  theMessageDispatcher,

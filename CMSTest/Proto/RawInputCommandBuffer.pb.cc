@@ -86,13 +86,13 @@ void protobuf_AddDesc_RawInputCommandBuffer_2eproto() {
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\033RawInputCommandBuffer.proto\022\017usx.geofa"
     "ctions\032$DualStickRawInputCommandBuffer.p"
-    "roto\"\205\002\n\025RawInputCommandBuffer\022Y\n\004type\030\001"
+    "roto\"\220\002\n\025RawInputCommandBuffer\022W\n\004type\030\001"
     " \002(\0162@.usx.geofactions.RawInputCommandBu"
-    "ffer.RawInputCommandBufferType:\tDUALSTIC"
-    "K\022\014\n\004UUID\030\002 \002(\t\022W\n\036dualStickRawInputComm"
-    "andBuffer\030\003 \001(\0132/.usx.geofactions.DualSt"
-    "ickRawInputCommandBuffer\"*\n\031RawInputComm"
-    "andBufferType\022\r\n\tDUALSTICK\020\000", 348);
+    "ffer.RawInputCommandBufferType:\007UNKNOWN\022"
+    "\014\n\004UUID\030\002 \002(\t\022W\n\036dualStickRawInputComman"
+    "dBuffer\030\003 \001(\0132/.usx.geofactions.DualStic"
+    "kRawInputCommandBuffer\"7\n\031RawInputComman"
+    "dBufferType\022\013\n\007UNKNOWN\020\000\022\r\n\tDUALSTICK\020\001", 359);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "RawInputCommandBuffer.proto", &protobuf_RegisterTypes);
   RawInputCommandBuffer::default_instance_ = new RawInputCommandBuffer();
@@ -116,6 +116,7 @@ const ::google::protobuf::EnumDescriptor* RawInputCommandBuffer_RawInputCommandB
 bool RawInputCommandBuffer_RawInputCommandBufferType_IsValid(int value) {
   switch(value) {
     case 0:
+    case 1:
       return true;
     default:
       return false;
@@ -123,6 +124,7 @@ bool RawInputCommandBuffer_RawInputCommandBufferType_IsValid(int value) {
 }
 
 #ifndef _MSC_VER
+const RawInputCommandBuffer_RawInputCommandBufferType RawInputCommandBuffer::UNKNOWN;
 const RawInputCommandBuffer_RawInputCommandBufferType RawInputCommandBuffer::DUALSTICK;
 const RawInputCommandBuffer_RawInputCommandBufferType RawInputCommandBuffer::RawInputCommandBufferType_MIN;
 const RawInputCommandBuffer_RawInputCommandBufferType RawInputCommandBuffer::RawInputCommandBufferType_MAX;
@@ -213,7 +215,7 @@ bool RawInputCommandBuffer::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .usx.geofactions.RawInputCommandBuffer.RawInputCommandBufferType type = 1 [default = DUALSTICK];
+      // required .usx.geofactions.RawInputCommandBuffer.RawInputCommandBufferType type = 1 [default = UNKNOWN];
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
@@ -282,7 +284,7 @@ bool RawInputCommandBuffer::MergePartialFromCodedStream(
 
 void RawInputCommandBuffer::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required .usx.geofactions.RawInputCommandBuffer.RawInputCommandBufferType type = 1 [default = DUALSTICK];
+  // required .usx.geofactions.RawInputCommandBuffer.RawInputCommandBufferType type = 1 [default = UNKNOWN];
   if (has_type()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       1, this->type(), output);
@@ -311,7 +313,7 @@ void RawInputCommandBuffer::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* RawInputCommandBuffer::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required .usx.geofactions.RawInputCommandBuffer.RawInputCommandBufferType type = 1 [default = DUALSTICK];
+  // required .usx.geofactions.RawInputCommandBuffer.RawInputCommandBufferType type = 1 [default = UNKNOWN];
   if (has_type()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       1, this->type(), target);
@@ -345,7 +347,7 @@ int RawInputCommandBuffer::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .usx.geofactions.RawInputCommandBuffer.RawInputCommandBufferType type = 1 [default = DUALSTICK];
+    // required .usx.geofactions.RawInputCommandBuffer.RawInputCommandBufferType type = 1 [default = UNKNOWN];
     if (has_type()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());

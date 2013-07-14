@@ -39,10 +39,11 @@ void protobuf_ShutdownFile_CommandBuffer_2eproto();
 class CommandBuffer;
 
 enum CommandBuffer_CommandBufferType {
-  CommandBuffer_CommandBufferType_SECURITY = 0
+  CommandBuffer_CommandBufferType_UNKNOWN = 0,
+  CommandBuffer_CommandBufferType_SECURITY = 1
 };
 bool CommandBuffer_CommandBufferType_IsValid(int value);
-const CommandBuffer_CommandBufferType CommandBuffer_CommandBufferType_CommandBufferType_MIN = CommandBuffer_CommandBufferType_SECURITY;
+const CommandBuffer_CommandBufferType CommandBuffer_CommandBufferType_CommandBufferType_MIN = CommandBuffer_CommandBufferType_UNKNOWN;
 const CommandBuffer_CommandBufferType CommandBuffer_CommandBufferType_CommandBufferType_MAX = CommandBuffer_CommandBufferType_SECURITY;
 const int CommandBuffer_CommandBufferType_CommandBufferType_ARRAYSIZE = CommandBuffer_CommandBufferType_CommandBufferType_MAX + 1;
 
@@ -111,6 +112,7 @@ class CommandBuffer : public ::google::protobuf::Message {
   // nested types ----------------------------------------------------
 
   typedef CommandBuffer_CommandBufferType CommandBufferType;
+  static const CommandBufferType UNKNOWN = CommandBuffer_CommandBufferType_UNKNOWN;
   static const CommandBufferType SECURITY = CommandBuffer_CommandBufferType_SECURITY;
   static inline bool CommandBufferType_IsValid(int value) {
     return CommandBuffer_CommandBufferType_IsValid(value);
@@ -135,7 +137,7 @@ class CommandBuffer : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .usx.geofactions.CommandBuffer.CommandBufferType type = 1 [default = SECURITY];
+  // required .usx.geofactions.CommandBuffer.CommandBufferType type = 1 [default = UNKNOWN];
   inline bool has_type() const;
   inline void clear_type();
   static const int kTypeFieldNumber = 1;
@@ -180,7 +182,7 @@ class CommandBuffer : public ::google::protobuf::Message {
 
 // CommandBuffer
 
-// required .usx.geofactions.CommandBuffer.CommandBufferType type = 1 [default = SECURITY];
+// required .usx.geofactions.CommandBuffer.CommandBufferType type = 1 [default = UNKNOWN];
 inline bool CommandBuffer::has_type() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }

@@ -39,10 +39,11 @@ void protobuf_ShutdownFile_RawInputCommandBuffer_2eproto();
 class RawInputCommandBuffer;
 
 enum RawInputCommandBuffer_RawInputCommandBufferType {
-  RawInputCommandBuffer_RawInputCommandBufferType_DUALSTICK = 0
+  RawInputCommandBuffer_RawInputCommandBufferType_UNKNOWN = 0,
+  RawInputCommandBuffer_RawInputCommandBufferType_DUALSTICK = 1
 };
 bool RawInputCommandBuffer_RawInputCommandBufferType_IsValid(int value);
-const RawInputCommandBuffer_RawInputCommandBufferType RawInputCommandBuffer_RawInputCommandBufferType_RawInputCommandBufferType_MIN = RawInputCommandBuffer_RawInputCommandBufferType_DUALSTICK;
+const RawInputCommandBuffer_RawInputCommandBufferType RawInputCommandBuffer_RawInputCommandBufferType_RawInputCommandBufferType_MIN = RawInputCommandBuffer_RawInputCommandBufferType_UNKNOWN;
 const RawInputCommandBuffer_RawInputCommandBufferType RawInputCommandBuffer_RawInputCommandBufferType_RawInputCommandBufferType_MAX = RawInputCommandBuffer_RawInputCommandBufferType_DUALSTICK;
 const int RawInputCommandBuffer_RawInputCommandBufferType_RawInputCommandBufferType_ARRAYSIZE = RawInputCommandBuffer_RawInputCommandBufferType_RawInputCommandBufferType_MAX + 1;
 
@@ -111,6 +112,7 @@ class RawInputCommandBuffer : public ::google::protobuf::Message {
   // nested types ----------------------------------------------------
 
   typedef RawInputCommandBuffer_RawInputCommandBufferType RawInputCommandBufferType;
+  static const RawInputCommandBufferType UNKNOWN = RawInputCommandBuffer_RawInputCommandBufferType_UNKNOWN;
   static const RawInputCommandBufferType DUALSTICK = RawInputCommandBuffer_RawInputCommandBufferType_DUALSTICK;
   static inline bool RawInputCommandBufferType_IsValid(int value) {
     return RawInputCommandBuffer_RawInputCommandBufferType_IsValid(value);
@@ -135,7 +137,7 @@ class RawInputCommandBuffer : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .usx.geofactions.RawInputCommandBuffer.RawInputCommandBufferType type = 1 [default = DUALSTICK];
+  // required .usx.geofactions.RawInputCommandBuffer.RawInputCommandBufferType type = 1 [default = UNKNOWN];
   inline bool has_type() const;
   inline void clear_type();
   static const int kTypeFieldNumber = 1;
@@ -195,7 +197,7 @@ class RawInputCommandBuffer : public ::google::protobuf::Message {
 
 // RawInputCommandBuffer
 
-// required .usx.geofactions.RawInputCommandBuffer.RawInputCommandBufferType type = 1 [default = DUALSTICK];
+// required .usx.geofactions.RawInputCommandBuffer.RawInputCommandBufferType type = 1 [default = UNKNOWN];
 inline bool RawInputCommandBuffer::has_type() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
