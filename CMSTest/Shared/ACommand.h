@@ -38,8 +38,8 @@ public:
     private:
     protected:
     public:
-        const cms::BytesMessage*        m_pBytesMessage;
-        usx::geofactions::CommandBuffer*               m_pCommand;
+        const cms::BytesMessage*                        m_pBytesMessage;
+        usx::geofactions::CommandBuffer*                m_pCommand;
         
         // Constructor
         _Dependencies(usx::geofactions::CommandBuffer* pCommand, const cms::BytesMessage* pBytesMessage);
@@ -49,8 +49,8 @@ public:
     };
     
 protected:
-    const cms::BytesMessage*        m_pBytesMessage;
-    usx::geofactions::CommandBuffer*               m_pCommand;
+    const cms::BytesMessage*                        m_pBytesMessage;
+    usx::geofactions::CommandBuffer*                m_pCommand;
     
     // Constructor
     ACommand(_Dependencies& theDependencies);

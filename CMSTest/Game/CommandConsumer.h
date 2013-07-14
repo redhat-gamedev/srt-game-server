@@ -75,8 +75,8 @@ public:
     private:
     protected:
     public:
-        MessageConsumer*                                                        m_pMessageConsumer;
-        FactoryT<usx::geofactions::CommandBuffer, SecurityCommand_Dependencies>&       m_aSecurityCommandFactory;
+        MessageConsumer*                                                                m_pMessageConsumer;
+        FactoryT<usx::geofactions::CommandBuffer, SecurityCommand_Dependencies>&        m_aSecurityCommandFactory;
         
         // Constructor
         _Dependencies(MessageConsumer* pMessageConsumer, FactoryT<usx::geofactions::CommandBuffer, SecurityCommand_Dependencies>& anSecurityCommandFactory);

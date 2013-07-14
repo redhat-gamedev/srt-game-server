@@ -1,6 +1,16 @@
 package usx.geofactions;
 
 
+message JoinSecurityCommandBuffer
+{
+
+}
+
+message LeaveSecurityCommandBuffer
+{
+    required string UUID = 1;
+}
+
 message SecurityCommandBuffer
 {
 	enum SecurityCommandBufferType
@@ -12,4 +22,7 @@ message SecurityCommandBuffer
 	required SecurityCommandBufferType type = 1 [default = UNKNOWN];
 
 	optional string UUID = 2;
+
+    optional JoinSecurityCommandBuffer joinSecurityCommandBuffer = 3;
+    optional LeaveSecurityCommandBuffer leaveSecurityCommandBuffer = 4;
 }

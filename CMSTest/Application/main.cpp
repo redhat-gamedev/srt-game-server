@@ -95,9 +95,13 @@ int main(int argc, char* argv[])
     CommandConsumer::_Dependencies                                              theCommandConsumerDependencies(&theMessageConsumer, theSecurityCommandBufferFactory);
     CommandConsumer&                                                            theCommandConsumer = CommandConsumer::Instance(&theCommandConsumerDependencies);
     
-    FactoryT<::SecurityCommand, ::SecurityCommand::_SecurityDependencies>&      theSecurityCommandFactory = FactoryT<::SecurityCommand, ::SecurityCommand::_SecurityDependencies>::Instance();
-    CommandQueue::_Dependencies                                                 theCommandQueueDependencies(theSecurityCommandFactory, theCommandConsumer);
-    CommandQueue&                                                               theCommandQueue = CommandQueue::Instance(&theCommandQueueDependencies);
+//    FactoryT<::SecurityCommand, ::SecurityCommand::_SecurityDependencies>&      theSecurityCommandFactory = FactoryT<::SecurityCommand, ::SecurityCommand::_SecurityDependencies>::Instance();
+//    CommandQueue::_Dependencies                                                 theCommandQueueDependencies(theSecurityCommandFactory, theCommandConsumer);
+    FactoryT<JoinSecurityCommand, JoinSecurityCommand::_SecurityDependencies>&      theJoinSecurityCommandFactory = FactoryT<JoinSecurityCommand, JoinSecurityCommand::_SecurityDependencies>::Instance();
+    FactoryT<LeaveSecurityCommand, LeaveSecurityCommand::_SecurityDependencies>&      theLeaveSecurityCommandFactory = FactoryT<LeaveSecurityCommand, LeaveSecurityCommand::_SecurityDependencies>::Instance();
+    CommandQueue::_Dependencies                                                     theCommandQueueDependencies(
+                                                                                                                theJoinSecurityCommandFactory, theLeaveSecurityCommandFactory,                                                               theCommandConsumer);
+    CommandQueue&                                                                   theCommandQueue = CommandQueue::Instance(&theCommandQueueDependencies);
     
     Server* pServer = new Server(theEventDispatcher,
                                  theMessageDispatcher,

@@ -77,10 +77,15 @@ void AEntity::ClassSetup()
     
     //CommandConsumer::Instance().EventConsumedEvent += Poco::FunctionDelegate<google::protobuf::Message*&>(&AEntity::HandleEventConsumedEvent);
     
-    FactoryT<SecurityCommand, SecurityCommand::_SecurityDependencies>&      theSecurityCommandFactory = FactoryT<SecurityCommand, SecurityCommand::_SecurityDependencies>::Instance();
+    FactoryT<JoinSecurityCommand, SecurityCommand::_SecurityDependencies>&      theJoinSecurityCommandFactory = FactoryT<JoinSecurityCommand, SecurityCommand::_SecurityDependencies>::Instance();
     
-    theSecurityCommandFactory.CreatedEvent += Poco::FunctionDelegate<SecurityCommand*&>(&AEntity::HandleSecurityCommandFactoryCreated);
-    theSecurityCommandFactory.DestroyedEvent += Poco::FunctionDelegate<SecurityCommand*&>(&AEntity::HandleSecurityCommandFactoryDestroyed);
+    theJoinSecurityCommandFactory.CreatedEvent += Poco::FunctionDelegate<JoinSecurityCommand*&>(&AEntity::HandleJoinSecurityCommandFactoryCreated);
+    theJoinSecurityCommandFactory.DestroyedEvent += Poco::FunctionDelegate<JoinSecurityCommand*&>(&AEntity::HandleJoinSecurityCommandFactoryDestroyed);
+
+    FactoryT<LeaveSecurityCommand, SecurityCommand::_SecurityDependencies>&      theLeaveSecurityCommandFactory = FactoryT<LeaveSecurityCommand, SecurityCommand::_SecurityDependencies>::Instance();
+    
+    theLeaveSecurityCommandFactory.CreatedEvent += Poco::FunctionDelegate<LeaveSecurityCommand*&>(&AEntity::HandleLeaveSecurityCommandFactoryCreated);
+    theLeaveSecurityCommandFactory.DestroyedEvent += Poco::FunctionDelegate<LeaveSecurityCommand*&>(&AEntity::HandleLeaveSecurityCommandFactoryDestroyed);
 }
 
 void AEntity::ClassTeardown()
@@ -90,10 +95,15 @@ void AEntity::ClassTeardown()
     //Security::EventPublisher.RequestLeaveEvent -= Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestLeave);
     //Security::EventPublisher.RequestJoinEvent -= Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestJoin);
     
-    FactoryT<SecurityCommand, SecurityCommand::_SecurityDependencies>&      theSecurityCommandFactory = FactoryT<SecurityCommand, SecurityCommand::_SecurityDependencies>::Instance();
+    FactoryT<JoinSecurityCommand, SecurityCommand::_SecurityDependencies>&      theJoinSecurityCommandFactory = FactoryT<JoinSecurityCommand, SecurityCommand::_SecurityDependencies>::Instance();
     
-    theSecurityCommandFactory.DestroyedEvent -= Poco::FunctionDelegate<SecurityCommand*&>(&AEntity::HandleSecurityCommandFactoryDestroyed);
-    theSecurityCommandFactory.CreatedEvent -= Poco::FunctionDelegate<SecurityCommand*&>(&AEntity::HandleSecurityCommandFactoryCreated);
+    theJoinSecurityCommandFactory.DestroyedEvent -= Poco::FunctionDelegate<JoinSecurityCommand*&>(&AEntity::HandleJoinSecurityCommandFactoryDestroyed);
+    theJoinSecurityCommandFactory.CreatedEvent -= Poco::FunctionDelegate<JoinSecurityCommand*&>(&AEntity::HandleJoinSecurityCommandFactoryCreated);
+    
+    FactoryT<LeaveSecurityCommand, SecurityCommand::_SecurityDependencies>&      theLeaveSecurityCommandFactory = FactoryT<LeaveSecurityCommand, SecurityCommand::_SecurityDependencies>::Instance();
+    
+    theLeaveSecurityCommandFactory.DestroyedEvent -= Poco::FunctionDelegate<LeaveSecurityCommand*&>(&AEntity::HandleLeaveSecurityCommandFactoryDestroyed);
+    theLeaveSecurityCommandFactory.CreatedEvent -= Poco::FunctionDelegate<LeaveSecurityCommand*&>(&AEntity::HandleLeaveSecurityCommandFactoryCreated);
 }
 
 void AEntity::AddPlayer(const std::string& strUUID)
@@ -184,20 +194,47 @@ void AEntity::OnSecurityRequestLeave(const void* pSender, const std::string& str
 //    pGameEvent = dynamic_cast<GameEvent*>(pMessage);
 //}
 
-void AEntity::HandleSecurityCommandFactoryCreated(const void* pSender, SecurityCommand*& pSecurityCommand)
+//void AEntity::HandleSecurityCommandFactoryCreated(const void* pSender, SecurityCommand*& pSecurityCommand)
+//{
+//    assert(pSecurityCommand);
+//    
+//    pSecurityCommand->JoinedEvent += Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestJoin);
+//    pSecurityCommand->LeftEvent += Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestLeave);
+//}
+//
+//void AEntity::HandleSecurityCommandFactoryDestroyed(const void* pSender, SecurityCommand*& pSecurityCommand)
+//{
+//    assert(pSecurityCommand);
+//    
+//    pSecurityCommand->LeftEvent -= Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestLeave);
+//    pSecurityCommand->JoinedEvent -= Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestJoin);
+//}
+void AEntity::HandleJoinSecurityCommandFactoryCreated(const void* pSender, JoinSecurityCommand*& pJoinSecurityCommand)
 {
-    assert(pSecurityCommand);
+    assert(pJoinSecurityCommand);
     
-    pSecurityCommand->JoinedEvent += Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestJoin);
-    pSecurityCommand->LeftEvent += Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestLeave);
+    pJoinSecurityCommand->ExecutedEvent += Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestJoin);
 }
 
-void AEntity::HandleSecurityCommandFactoryDestroyed(const void* pSender, SecurityCommand*& pSecurityCommand)
+void AEntity::HandleJoinSecurityCommandFactoryDestroyed(const void* pSender, JoinSecurityCommand*& pJoinSecurityCommand)
 {
-    assert(pSecurityCommand);
+    assert(pJoinSecurityCommand);
     
-    pSecurityCommand->LeftEvent -= Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestLeave);
-    pSecurityCommand->JoinedEvent -= Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestJoin);
+    pJoinSecurityCommand->ExecutedEvent -= Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestJoin);
+}
+
+void AEntity::HandleLeaveSecurityCommandFactoryCreated(const void* pSender, LeaveSecurityCommand*& pLeaveSecurityCommand)
+{
+    assert(pLeaveSecurityCommand);
+    
+    pLeaveSecurityCommand->ExecutedEvent += Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestLeave);
+}
+
+void AEntity::HandleLeaveSecurityCommandFactoryDestroyed(const void* pSender, LeaveSecurityCommand*& pLeaveSecurityCommand)
+{
+    assert(pLeaveSecurityCommand);
+    
+    pLeaveSecurityCommand->ExecutedEvent -= Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestLeave);
 }
 
 //// Instance

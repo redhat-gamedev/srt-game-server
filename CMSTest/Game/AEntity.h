@@ -18,7 +18,8 @@
 
 class AB2DEntity;
 class Player;
-class SecurityCommand;
+class JoinSecurityCommand;
+class LeaveSecurityCommand;
 
 
 class AEntity
@@ -93,11 +94,10 @@ public:
     static void OnSecurityRequestLeave(const void* pSender, const std::string& strUUID);
     
     // Event Consumer event response
-    //static void HandleEventConsumedEvent(const void* pSender, google::protobuf::Message*& pMessage);
-
-    static void HandleSecurityCommandFactoryCreated(const void* pSender, SecurityCommand*& pSecurityCommand);
-    static void HandleSecurityCommandFactoryDestroyed(const void* pSender, SecurityCommand*& pSecurityCommand);
-    
+    static void HandleJoinSecurityCommandFactoryCreated(const void* pSender, JoinSecurityCommand*& pJoinSecurityCommand);
+    static void HandleJoinSecurityCommandFactoryDestroyed(const void* pSender, JoinSecurityCommand*& pJoinSecurityCommand);
+    static void HandleLeaveSecurityCommandFactoryCreated(const void* pSender, LeaveSecurityCommand*& pLeaveSecurityCommand);
+    static void HandleLeaveSecurityCommandFactoryDestroyed(const void* pSender, LeaveSecurityCommand*& pLeaveSecurityCommand);
     
     // Instance
     // Constructor(s)

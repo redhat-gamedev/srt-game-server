@@ -36,20 +36,27 @@ public:
     private:
     protected:
     public:
-        CommandConsumer&                                                        m_aCommandConsumer;
-        FactoryT<::SecurityCommand, ::SecurityCommand::_SecurityDependencies>&      m_aSecurityCommandFactory;
+        CommandConsumer&                                                                m_aCommandConsumer;
+        //FactoryT<::SecurityCommand, ::SecurityCommand::_SecurityDependencies>&        m_aSecurityCommandFactory;
+        FactoryT<JoinSecurityCommand, JoinSecurityCommand::_SecurityDependencies>&      m_aJoinSecurityCommandFactory;
+        FactoryT<LeaveSecurityCommand, LeaveSecurityCommand::_SecurityDependencies>&    m_aLeaveSecurityCommandFactory;
         
         // Constructor
-        _Dependencies(FactoryT<::SecurityCommand, ::SecurityCommand::_SecurityDependencies>& aSecurityCommandFactory, CommandConsumer& aCommandConsumer);
+        //_Dependencies(FactoryT<::SecurityCommand, ::SecurityCommand::_SecurityDependencies>& aSecurityCommandFactory, CommandConsumer& aCommandConsumer);
+        _Dependencies(FactoryT<JoinSecurityCommand, JoinSecurityCommand::_SecurityDependencies>& aJoinSecurityCommandFactory,
+                      FactoryT<LeaveSecurityCommand, LeaveSecurityCommand::_SecurityDependencies>& aLeaveSecurityCommandFactory,
+                      CommandConsumer& aCommandConsumer);
         
         // Destructor
         ~_Dependencies();
     };
 private:
 protected:
-    CommandConsumer&                                                        m_aCommandConsumer;
-    FactoryT<::SecurityCommand, ::SecurityCommand::_SecurityDependencies>&      m_aSecurityCommandFactory;
-    decaf::util::StlQueue<ACommand*>                                        m_aCommandQueue;
+    CommandConsumer&                                                                m_aCommandConsumer;
+    //FactoryT<::SecurityCommand, ::SecurityCommand::_SecurityDependencies>&        m_aSecurityCommandFactory;
+    FactoryT<JoinSecurityCommand, JoinSecurityCommand::_SecurityDependencies>&      m_aJoinSecurityCommandFactory;
+    FactoryT<LeaveSecurityCommand, LeaveSecurityCommand::_SecurityDependencies>&    m_aLeaveSecurityCommandFactory;
+    decaf::util::StlQueue<ACommand*>                                                m_aCommandQueue;
 
 
     // Constructor

@@ -47,35 +47,56 @@ private:
 protected:
 public:
     // Event(s)
-    Poco::BasicEvent<const std::string&>      JoinedEvent;
-    Poco::BasicEvent<const std::string&>      LeftEvent;
-    
+//    Poco::BasicEvent<const std::string&>      JoinedEvent;
+//    Poco::BasicEvent<const std::string&>      LeftEvent;
+//    
     // Constructor
     SecurityCommand(_SecurityDependencies& theDependencies);
     
     // Destructor
-    ~SecurityCommand();
+    virtual ~SecurityCommand();
+    
+    // Method(s)
+    virtual void Execute() = 0;
+};
+
+class JoinSecurityCommand :
+    public SecurityCommand
+{
+private:
+protected:
+public:
+    // Event(s)
+    Poco::BasicEvent<const std::string&>      ExecutedEvent;
+    
+    // Constructor
+    JoinSecurityCommand(_SecurityDependencies& theDependencies);
+    
+    // Destructor
+    ~JoinSecurityCommand();
     
     // Method(s)
     virtual void Execute();
 };
 
-//class JoinSecurityCommand :
-//    public SecurityCommand
-//{
-//private:
-//protected:
-//public:
-//    // Constructor
-//    JoinSecurityCommand(_Dependencies& theDependencies);
-//    
-//    // Destructor
-//    ~JoinSecurityCommand();
-//    
-//    // Method(s)
-//    virtual void Execute();
-//};
-
+class LeaveSecurityCommand :
+    public SecurityCommand
+{
+private:
+protected:
+public:
+    // Event(s)
+    Poco::BasicEvent<const std::string&>      ExecutedEvent;
+    
+    // Constructor
+    LeaveSecurityCommand(_SecurityDependencies& theDependencies);
+    
+    // Destructor
+    ~LeaveSecurityCommand();
+    
+    // Method(s)
+    virtual void Execute();
+};
 
 
 #endif /* defined(__CMSTest__SecurityCommand__) */

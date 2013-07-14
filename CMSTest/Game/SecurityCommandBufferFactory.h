@@ -81,11 +81,11 @@ public:
         CommandBuffer aCommand;
         CommandBuffer* pCommand = aCommand.New();
         
-        unsigned long       iBodyBytes = 0;
+        int       iBodyBytes = 0;
         unsigned char*      pucBodyBytes = NULL;
         
         pucBodyBytes = pRawBytesPair->first;
-        iBodyBytes = pRawBytesPair->second;
+        iBodyBytes = (int)(pRawBytesPair->second);
         assert(pucBodyBytes);
         assert(iBodyBytes > 0);
         
@@ -135,6 +135,165 @@ protected:
     //    }
     //
     //    virtual SecurityCommand* Create(SecurityCommand_Dependencies& anSecurityCommand_Dependencies);
+};
+
+template<>
+class FactoryT<JoinSecurityCommandBuffer, SecurityCommand_Dependencies>
+{
+private:
+    
+protected:
+    // Constructor(s)
+    FactoryT<JoinSecurityCommandBuffer, SecurityCommand_Dependencies>() {};//unsigned int uiCapacity, unsigned int uiPeakCapacity) {};
+    
+    // Destructor(s)
+    virtual ~FactoryT<JoinSecurityCommandBuffer, SecurityCommand_Dependencies>() {};
+    
+public:
+    // Singleton
+    static FactoryT<JoinSecurityCommandBuffer, SecurityCommand_Dependencies>& Instance()//unsigned int uiCapacity)
+    {
+        static FactoryT<JoinSecurityCommandBuffer, SecurityCommand_Dependencies>  aCommandFactory;
+        return aCommandFactory;
+    }
+    
+    // Method(s)
+    virtual CommandBuffer* Create(SecurityCommand_Dependencies& theSecurityCommand_Dependencies)
+    {
+        CommandBuffer aCommand;
+        CommandBuffer* pCommand = aCommand.New();
+        
+        pCommand->set_type(CommandBuffer_CommandBufferType_SECURITY);
+        
+        usx::geofactions::SecurityCommandBuffer* pSecurityCommand = pCommand->mutable_securitycommandbuffer();
+        assert(NULL != pSecurityCommand);
+        //pSecurityCommand->set_type(theSecurityCommand_Dependencies.m_anSecurityCommandBufferType);
+        pSecurityCommand->set_type(SecurityCommandBuffer_SecurityCommandBufferType_JOIN);
+        
+        usx::geofactions::JoinSecurityCommandBuffer* pJoinSecurityCommand = pSecurityCommand->mutable_joinsecuritycommandbuffer();
+        
+        CreatedEvent(this, pCommand);
+        return pCommand;
+    }
+    virtual CommandBuffer* Create(std::pair<unsigned char*, unsigned long>* pRawBytesPair)
+    {
+        assert(pRawBytesPair);
+        
+        CommandBuffer aCommand;
+        CommandBuffer* pCommand = aCommand.New();
+        
+        int       iBodyBytes = 0;
+        unsigned char*      pucBodyBytes = NULL;
+        
+        pucBodyBytes = pRawBytesPair->first;
+        iBodyBytes = (int)(pRawBytesPair->second);
+        assert(pucBodyBytes);
+        assert(iBodyBytes > 0);
+        
+        pCommand->ParseFromArray(pucBodyBytes, iBodyBytes);
+        assert(CommandBuffer_CommandBufferType_SECURITY == pCommand->type());
+        const SecurityCommandBuffer& aSecurityCommand = pCommand->securitycommandbuffer();
+        if (SecurityCommandBuffer_SecurityCommandBufferType_JOIN == aSecurityCommand.type())
+        {
+            int i = 0;
+            ++i;
+        }
+        delete[] pucBodyBytes;
+        pucBodyBytes = NULL;
+        delete pRawBytesPair;
+        
+        return pCommand;
+    }
+    virtual void Destroy(CommandBuffer*& pCommand)
+    {
+        DestroyedEvent(this, pCommand);
+        delete pCommand;
+        pCommand = NULL;
+    }
+    
+    // Event(s)
+    Poco::BasicEvent<CommandBuffer*&>    CreatedEvent;
+    Poco::BasicEvent<CommandBuffer*&>    DestroyedEvent;
+};
+
+template<>
+class FactoryT<LeaveSecurityCommandBuffer, SecurityCommand_Dependencies>
+{
+private:
+    
+protected:
+    // Constructor(s)
+    FactoryT<LeaveSecurityCommandBuffer, SecurityCommand_Dependencies>() {};//unsigned int uiCapacity, unsigned int uiPeakCapacity) {};
+    
+    // Destructor(s)
+    virtual ~FactoryT<LeaveSecurityCommandBuffer, SecurityCommand_Dependencies>() {};
+    
+public:
+    // Singleton
+    static FactoryT<LeaveSecurityCommandBuffer, SecurityCommand_Dependencies>& Instance()//unsigned int uiCapacity)
+    {
+        static FactoryT<LeaveSecurityCommandBuffer, SecurityCommand_Dependencies>  aCommandFactory;
+        return aCommandFactory;
+    }
+    
+    // Method(s)
+    virtual CommandBuffer* Create(SecurityCommand_Dependencies& theSecurityCommand_Dependencies)
+    {
+        CommandBuffer aCommand;
+        CommandBuffer* pCommand = aCommand.New();
+        
+        pCommand->set_type(CommandBuffer_CommandBufferType_SECURITY);
+        
+        usx::geofactions::SecurityCommandBuffer* pSecurityCommand = pCommand->mutable_securitycommandbuffer();
+        assert(NULL != pSecurityCommand);
+        //pSecurityCommand->set_type(theSecurityCommand_Dependencies.m_anSecurityCommandBufferType);
+        pSecurityCommand->set_type(SecurityCommandBuffer_SecurityCommandBufferType_LEAVE);
+        
+        usx::geofactions::LeaveSecurityCommandBuffer* pLeaveSecurityCommand = pSecurityCommand->mutable_leavesecuritycommandbuffer();
+        pLeaveSecurityCommand->set_uuid("test");
+        
+        CreatedEvent(this, pCommand);
+        return pCommand;
+    }
+    virtual CommandBuffer* Create(std::pair<unsigned char*, unsigned long>* pRawBytesPair)
+    {
+        assert(pRawBytesPair);
+        
+        CommandBuffer aCommand;
+        CommandBuffer* pCommand = aCommand.New();
+        
+        int       iBodyBytes = 0;
+        unsigned char*      pucBodyBytes = NULL;
+        
+        pucBodyBytes = pRawBytesPair->first;
+        iBodyBytes = (int)(pRawBytesPair->second);
+        assert(pucBodyBytes);
+        assert(iBodyBytes > 0);
+        
+        pCommand->ParseFromArray(pucBodyBytes, iBodyBytes);
+        assert(CommandBuffer_CommandBufferType_SECURITY == pCommand->type());
+        const SecurityCommandBuffer& aSecurityCommand = pCommand->securitycommandbuffer();
+        if (SecurityCommandBuffer_SecurityCommandBufferType_JOIN == aSecurityCommand.type())
+        {
+            int i = 0;
+            ++i;
+        }
+        delete[] pucBodyBytes;
+        pucBodyBytes = NULL;
+        delete pRawBytesPair;
+        
+        return pCommand;
+    }
+    virtual void Destroy(CommandBuffer*& pCommand)
+    {
+        DestroyedEvent(this, pCommand);
+        delete pCommand;
+        pCommand = NULL;
+    }
+    
+    // Event(s)
+    Poco::BasicEvent<CommandBuffer*&>    CreatedEvent;
+    Poco::BasicEvent<CommandBuffer*&>    DestroyedEvent;
 };
 
 #endif /* defined(__CMSTest__CommandBufferFactory__) */

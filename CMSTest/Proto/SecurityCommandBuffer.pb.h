@@ -35,6 +35,8 @@ void  protobuf_AddDesc_SecurityCommandBuffer_2eproto();
 void protobuf_AssignDesc_SecurityCommandBuffer_2eproto();
 void protobuf_ShutdownFile_SecurityCommandBuffer_2eproto();
 
+class JoinSecurityCommandBuffer;
+class LeaveSecurityCommandBuffer;
 class SecurityCommandBuffer;
 
 enum SecurityCommandBuffer_SecurityCommandBufferType {
@@ -58,6 +60,165 @@ inline bool SecurityCommandBuffer_SecurityCommandBufferType_Parse(
     SecurityCommandBuffer_SecurityCommandBufferType_descriptor(), name, value);
 }
 // ===================================================================
+
+class JoinSecurityCommandBuffer : public ::google::protobuf::Message {
+ public:
+  JoinSecurityCommandBuffer();
+  virtual ~JoinSecurityCommandBuffer();
+
+  JoinSecurityCommandBuffer(const JoinSecurityCommandBuffer& from);
+
+  inline JoinSecurityCommandBuffer& operator=(const JoinSecurityCommandBuffer& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const JoinSecurityCommandBuffer& default_instance();
+
+  void Swap(JoinSecurityCommandBuffer* other);
+
+  // implements Message ----------------------------------------------
+
+  JoinSecurityCommandBuffer* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const JoinSecurityCommandBuffer& from);
+  void MergeFrom(const JoinSecurityCommandBuffer& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // @@protoc_insertion_point(class_scope:usx.geofactions.JoinSecurityCommandBuffer)
+ private:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[1];
+
+  friend void  protobuf_AddDesc_SecurityCommandBuffer_2eproto();
+  friend void protobuf_AssignDesc_SecurityCommandBuffer_2eproto();
+  friend void protobuf_ShutdownFile_SecurityCommandBuffer_2eproto();
+
+  void InitAsDefaultInstance();
+  static JoinSecurityCommandBuffer* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class LeaveSecurityCommandBuffer : public ::google::protobuf::Message {
+ public:
+  LeaveSecurityCommandBuffer();
+  virtual ~LeaveSecurityCommandBuffer();
+
+  LeaveSecurityCommandBuffer(const LeaveSecurityCommandBuffer& from);
+
+  inline LeaveSecurityCommandBuffer& operator=(const LeaveSecurityCommandBuffer& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const LeaveSecurityCommandBuffer& default_instance();
+
+  void Swap(LeaveSecurityCommandBuffer* other);
+
+  // implements Message ----------------------------------------------
+
+  LeaveSecurityCommandBuffer* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const LeaveSecurityCommandBuffer& from);
+  void MergeFrom(const LeaveSecurityCommandBuffer& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string UUID = 1;
+  inline bool has_uuid() const;
+  inline void clear_uuid();
+  static const int kUUIDFieldNumber = 1;
+  inline const ::std::string& uuid() const;
+  inline void set_uuid(const ::std::string& value);
+  inline void set_uuid(const char* value);
+  inline void set_uuid(const char* value, size_t size);
+  inline ::std::string* mutable_uuid();
+  inline ::std::string* release_uuid();
+  inline void set_allocated_uuid(::std::string* uuid);
+
+  // @@protoc_insertion_point(class_scope:usx.geofactions.LeaveSecurityCommandBuffer)
+ private:
+  inline void set_has_uuid();
+  inline void clear_has_uuid();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::std::string* uuid_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_SecurityCommandBuffer_2eproto();
+  friend void protobuf_AssignDesc_SecurityCommandBuffer_2eproto();
+  friend void protobuf_ShutdownFile_SecurityCommandBuffer_2eproto();
+
+  void InitAsDefaultInstance();
+  static LeaveSecurityCommandBuffer* default_instance_;
+};
+// -------------------------------------------------------------------
 
 class SecurityCommandBuffer : public ::google::protobuf::Message {
  public:
@@ -157,20 +318,44 @@ class SecurityCommandBuffer : public ::google::protobuf::Message {
   inline ::std::string* release_uuid();
   inline void set_allocated_uuid(::std::string* uuid);
 
+  // optional .usx.geofactions.JoinSecurityCommandBuffer joinSecurityCommandBuffer = 3;
+  inline bool has_joinsecuritycommandbuffer() const;
+  inline void clear_joinsecuritycommandbuffer();
+  static const int kJoinSecurityCommandBufferFieldNumber = 3;
+  inline const ::usx::geofactions::JoinSecurityCommandBuffer& joinsecuritycommandbuffer() const;
+  inline ::usx::geofactions::JoinSecurityCommandBuffer* mutable_joinsecuritycommandbuffer();
+  inline ::usx::geofactions::JoinSecurityCommandBuffer* release_joinsecuritycommandbuffer();
+  inline void set_allocated_joinsecuritycommandbuffer(::usx::geofactions::JoinSecurityCommandBuffer* joinsecuritycommandbuffer);
+
+  // optional .usx.geofactions.LeaveSecurityCommandBuffer leaveSecurityCommandBuffer = 4;
+  inline bool has_leavesecuritycommandbuffer() const;
+  inline void clear_leavesecuritycommandbuffer();
+  static const int kLeaveSecurityCommandBufferFieldNumber = 4;
+  inline const ::usx::geofactions::LeaveSecurityCommandBuffer& leavesecuritycommandbuffer() const;
+  inline ::usx::geofactions::LeaveSecurityCommandBuffer* mutable_leavesecuritycommandbuffer();
+  inline ::usx::geofactions::LeaveSecurityCommandBuffer* release_leavesecuritycommandbuffer();
+  inline void set_allocated_leavesecuritycommandbuffer(::usx::geofactions::LeaveSecurityCommandBuffer* leavesecuritycommandbuffer);
+
   // @@protoc_insertion_point(class_scope:usx.geofactions.SecurityCommandBuffer)
  private:
   inline void set_has_type();
   inline void clear_has_type();
   inline void set_has_uuid();
   inline void clear_has_uuid();
+  inline void set_has_joinsecuritycommandbuffer();
+  inline void clear_has_joinsecuritycommandbuffer();
+  inline void set_has_leavesecuritycommandbuffer();
+  inline void clear_has_leavesecuritycommandbuffer();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::std::string* uuid_;
+  ::usx::geofactions::JoinSecurityCommandBuffer* joinsecuritycommandbuffer_;
+  ::usx::geofactions::LeaveSecurityCommandBuffer* leavesecuritycommandbuffer_;
   int type_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
   friend void  protobuf_AddDesc_SecurityCommandBuffer_2eproto();
   friend void protobuf_AssignDesc_SecurityCommandBuffer_2eproto();
@@ -183,6 +368,84 @@ class SecurityCommandBuffer : public ::google::protobuf::Message {
 
 
 // ===================================================================
+
+// JoinSecurityCommandBuffer
+
+// -------------------------------------------------------------------
+
+// LeaveSecurityCommandBuffer
+
+// required string UUID = 1;
+inline bool LeaveSecurityCommandBuffer::has_uuid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void LeaveSecurityCommandBuffer::set_has_uuid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void LeaveSecurityCommandBuffer::clear_has_uuid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void LeaveSecurityCommandBuffer::clear_uuid() {
+  if (uuid_ != &::google::protobuf::internal::kEmptyString) {
+    uuid_->clear();
+  }
+  clear_has_uuid();
+}
+inline const ::std::string& LeaveSecurityCommandBuffer::uuid() const {
+  return *uuid_;
+}
+inline void LeaveSecurityCommandBuffer::set_uuid(const ::std::string& value) {
+  set_has_uuid();
+  if (uuid_ == &::google::protobuf::internal::kEmptyString) {
+    uuid_ = new ::std::string;
+  }
+  uuid_->assign(value);
+}
+inline void LeaveSecurityCommandBuffer::set_uuid(const char* value) {
+  set_has_uuid();
+  if (uuid_ == &::google::protobuf::internal::kEmptyString) {
+    uuid_ = new ::std::string;
+  }
+  uuid_->assign(value);
+}
+inline void LeaveSecurityCommandBuffer::set_uuid(const char* value, size_t size) {
+  set_has_uuid();
+  if (uuid_ == &::google::protobuf::internal::kEmptyString) {
+    uuid_ = new ::std::string;
+  }
+  uuid_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* LeaveSecurityCommandBuffer::mutable_uuid() {
+  set_has_uuid();
+  if (uuid_ == &::google::protobuf::internal::kEmptyString) {
+    uuid_ = new ::std::string;
+  }
+  return uuid_;
+}
+inline ::std::string* LeaveSecurityCommandBuffer::release_uuid() {
+  clear_has_uuid();
+  if (uuid_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = uuid_;
+    uuid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void LeaveSecurityCommandBuffer::set_allocated_uuid(::std::string* uuid) {
+  if (uuid_ != &::google::protobuf::internal::kEmptyString) {
+    delete uuid_;
+  }
+  if (uuid) {
+    set_has_uuid();
+    uuid_ = uuid;
+  } else {
+    clear_has_uuid();
+    uuid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// -------------------------------------------------------------------
 
 // SecurityCommandBuffer
 
@@ -276,6 +539,82 @@ inline void SecurityCommandBuffer::set_allocated_uuid(::std::string* uuid) {
   } else {
     clear_has_uuid();
     uuid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// optional .usx.geofactions.JoinSecurityCommandBuffer joinSecurityCommandBuffer = 3;
+inline bool SecurityCommandBuffer::has_joinsecuritycommandbuffer() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void SecurityCommandBuffer::set_has_joinsecuritycommandbuffer() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void SecurityCommandBuffer::clear_has_joinsecuritycommandbuffer() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void SecurityCommandBuffer::clear_joinsecuritycommandbuffer() {
+  if (joinsecuritycommandbuffer_ != NULL) joinsecuritycommandbuffer_->::usx::geofactions::JoinSecurityCommandBuffer::Clear();
+  clear_has_joinsecuritycommandbuffer();
+}
+inline const ::usx::geofactions::JoinSecurityCommandBuffer& SecurityCommandBuffer::joinsecuritycommandbuffer() const {
+  return joinsecuritycommandbuffer_ != NULL ? *joinsecuritycommandbuffer_ : *default_instance_->joinsecuritycommandbuffer_;
+}
+inline ::usx::geofactions::JoinSecurityCommandBuffer* SecurityCommandBuffer::mutable_joinsecuritycommandbuffer() {
+  set_has_joinsecuritycommandbuffer();
+  if (joinsecuritycommandbuffer_ == NULL) joinsecuritycommandbuffer_ = new ::usx::geofactions::JoinSecurityCommandBuffer;
+  return joinsecuritycommandbuffer_;
+}
+inline ::usx::geofactions::JoinSecurityCommandBuffer* SecurityCommandBuffer::release_joinsecuritycommandbuffer() {
+  clear_has_joinsecuritycommandbuffer();
+  ::usx::geofactions::JoinSecurityCommandBuffer* temp = joinsecuritycommandbuffer_;
+  joinsecuritycommandbuffer_ = NULL;
+  return temp;
+}
+inline void SecurityCommandBuffer::set_allocated_joinsecuritycommandbuffer(::usx::geofactions::JoinSecurityCommandBuffer* joinsecuritycommandbuffer) {
+  delete joinsecuritycommandbuffer_;
+  joinsecuritycommandbuffer_ = joinsecuritycommandbuffer;
+  if (joinsecuritycommandbuffer) {
+    set_has_joinsecuritycommandbuffer();
+  } else {
+    clear_has_joinsecuritycommandbuffer();
+  }
+}
+
+// optional .usx.geofactions.LeaveSecurityCommandBuffer leaveSecurityCommandBuffer = 4;
+inline bool SecurityCommandBuffer::has_leavesecuritycommandbuffer() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void SecurityCommandBuffer::set_has_leavesecuritycommandbuffer() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void SecurityCommandBuffer::clear_has_leavesecuritycommandbuffer() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void SecurityCommandBuffer::clear_leavesecuritycommandbuffer() {
+  if (leavesecuritycommandbuffer_ != NULL) leavesecuritycommandbuffer_->::usx::geofactions::LeaveSecurityCommandBuffer::Clear();
+  clear_has_leavesecuritycommandbuffer();
+}
+inline const ::usx::geofactions::LeaveSecurityCommandBuffer& SecurityCommandBuffer::leavesecuritycommandbuffer() const {
+  return leavesecuritycommandbuffer_ != NULL ? *leavesecuritycommandbuffer_ : *default_instance_->leavesecuritycommandbuffer_;
+}
+inline ::usx::geofactions::LeaveSecurityCommandBuffer* SecurityCommandBuffer::mutable_leavesecuritycommandbuffer() {
+  set_has_leavesecuritycommandbuffer();
+  if (leavesecuritycommandbuffer_ == NULL) leavesecuritycommandbuffer_ = new ::usx::geofactions::LeaveSecurityCommandBuffer;
+  return leavesecuritycommandbuffer_;
+}
+inline ::usx::geofactions::LeaveSecurityCommandBuffer* SecurityCommandBuffer::release_leavesecuritycommandbuffer() {
+  clear_has_leavesecuritycommandbuffer();
+  ::usx::geofactions::LeaveSecurityCommandBuffer* temp = leavesecuritycommandbuffer_;
+  leavesecuritycommandbuffer_ = NULL;
+  return temp;
+}
+inline void SecurityCommandBuffer::set_allocated_leavesecuritycommandbuffer(::usx::geofactions::LeaveSecurityCommandBuffer* leavesecuritycommandbuffer) {
+  delete leavesecuritycommandbuffer_;
+  leavesecuritycommandbuffer_ = leavesecuritycommandbuffer;
+  if (leavesecuritycommandbuffer) {
+    set_has_leavesecuritycommandbuffer();
+  } else {
+    clear_has_leavesecuritycommandbuffer();
   }
 }
 

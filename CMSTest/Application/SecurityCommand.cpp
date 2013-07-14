@@ -49,54 +49,102 @@ SecurityCommand::~SecurityCommand()
 }
 
 // Method(s)
-void SecurityCommand::Execute()
+//void SecurityCommand::Execute()
+//{
+//    using namespace usx::geofactions;
+//    
+//    assert(m_pBytesMessage);
+//
+//    std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp&keepAlive=true";
+//    std::string     strUUID = "";
+//    const SecurityCommandBuffer& aSecurityCommandBuffer = m_pCommand->securitycommandbuffer();
+//    
+//    if (SecurityCommandBuffer_SecurityCommandBufferType_JOIN == aSecurityCommandBuffer.type())
+//    {
+//        decaf::util::UUID aNewUUID = decaf::util::UUID::randomUUID();
+//        strUUID = aNewUUID.toString();
+//        const cms::Destination* pReplyToDestination = m_pBytesMessage->getCMSReplyTo();
+//        assert(pReplyToDestination);
+//
+//        // TODO: Make not super inefficient
+//        SimpleAsyncProducer* pSimpleAsyncProducer = new SimpleAsyncProducer(strBrokerURI, pReplyToDestination, false, true);
+//        pSimpleAsyncProducer->Send(strUUID);
+//        delete pSimpleAsyncProducer;
+//        
+//        JoinedEvent(this, strUUID);
+//    }
+//    else if (SecurityCommandBuffer_SecurityCommandBufferType_LEAVE == aSecurityCommandBuffer.type())
+//    {
+//        assert(aSecurityCommandBuffer.has_uuid());
+//        strUUID = aSecurityCommandBuffer.uuid();
+//        
+//        LeftEvent(this, strUUID);
+//    }
+//}
+
+
+// Constructor
+JoinSecurityCommand::JoinSecurityCommand(_SecurityDependencies& theDependencies) :
+    SecurityCommand(theDependencies)
+{
+    
+}
+
+// Destructor
+JoinSecurityCommand::~JoinSecurityCommand()
+{
+    
+}
+
+// Method(s)
+void JoinSecurityCommand::Execute()
 {
     using namespace usx::geofactions;
     
     assert(m_pBytesMessage);
-
+    assert(m_pCommand);
+    
     std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp&keepAlive=true";
     std::string     strUUID = "";
     const SecurityCommandBuffer& aSecurityCommandBuffer = m_pCommand->securitycommandbuffer();
     
-    if (SecurityCommandBuffer_SecurityCommandBufferType_JOIN == aSecurityCommandBuffer.type())
-    {
-        decaf::util::UUID aNewUUID = decaf::util::UUID::randomUUID();
-        strUUID = aNewUUID.toString();
-        const cms::Destination* pReplyToDestination = m_pBytesMessage->getCMSReplyTo();
-        assert(pReplyToDestination);
-
-        // TODO: Make not super inefficient
-        SimpleAsyncProducer* pSimpleAsyncProducer = new SimpleAsyncProducer(strBrokerURI, pReplyToDestination, false, true);
-        pSimpleAsyncProducer->Send(strUUID);
-        delete pSimpleAsyncProducer;
-        
-        JoinedEvent(this, strUUID);
-    }
-    else if (SecurityCommandBuffer_SecurityCommandBufferType_LEAVE == aSecurityCommandBuffer.type())
-    {
-        assert(aSecurityCommandBuffer.has_uuid());
-        strUUID = aSecurityCommandBuffer.uuid();
-        
-        LeftEvent(this, strUUID);
-    }
+    decaf::util::UUID aNewUUID = decaf::util::UUID::randomUUID();
+    strUUID = aNewUUID.toString();
+    const cms::Destination* pReplyToDestination = m_pBytesMessage->getCMSReplyTo();
+    assert(pReplyToDestination);
+    
+    // TODO: Make not super inefficient
+    SimpleAsyncProducer* pSimpleAsyncProducer = new SimpleAsyncProducer(strBrokerURI, pReplyToDestination, false, true);
+    pSimpleAsyncProducer->Send(strUUID);
+    delete pSimpleAsyncProducer;
+    
+    ExecutedEvent(this, strUUID);
 }
 
 
-//// Constructor
-//JoinSecurityCommand::JoinSecurityCommand(_Dependencies& theDependencies) :
-//    SecurityCommand(theDependencies)
-//{
-//    
-//}
-//
-//// Destructor
-//JoinSecurityCommand::JoinSecurityCommand()
-//{
-//    
-//}
-//
-//// Method(s)
-//void JoinSecurityCommand::Execute()
-//{
-//}
+// Constructor
+LeaveSecurityCommand::LeaveSecurityCommand(_SecurityDependencies& theDependencies) :
+    SecurityCommand(theDependencies)
+{
+    
+}
+
+// Destructor
+LeaveSecurityCommand::~LeaveSecurityCommand()
+{
+
+}
+
+// Method(s)
+void LeaveSecurityCommand::Execute()
+{
+    using namespace usx::geofactions;
+    
+    assert(m_pCommand);
+    
+    const SecurityCommandBuffer& aSecurityCommandBuffer = m_pCommand->securitycommandbuffer();
+    const LeaveSecurityCommandBuffer& aLeaveSecurityCommandBuffer = aSecurityCommandBuffer.leavesecuritycommandbuffer();
+    const std::string& strUUID = aLeaveSecurityCommandBuffer.uuid();
+    
+    ExecutedEvent(this, strUUID);
+}
