@@ -1,0 +1,17 @@
+package CommandBuffers;
+
+import "SecurityCommandBuffer.proto";
+import "RawInputCommandBuffer.proto";
+
+
+message CommandBuffer
+{
+	enum CommandBufferType
+	{
+		SECURITY = 0;
+        RAWINPUT = 1;
+	}
+	required CommandBufferType type = 1 [default = SECURITY];
+    optional SecurityCommandBuffer securityCommandBuffer = 2;
+    optional RawInputCommandBuffer rawInputCommandBuffer = 3;
+}

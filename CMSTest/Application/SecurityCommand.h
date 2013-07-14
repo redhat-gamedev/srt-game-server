@@ -40,7 +40,7 @@ public:
     protected:
     public:
         // Constructor
-        _SecurityDependencies(command::Command* pCommand, const cms::BytesMessage* pBytesMessage);
+        _SecurityDependencies(CommandBuffers::CommandBuffer* pCommand, const cms::BytesMessage* pBytesMessage);
         
         // Destructor
         ~_SecurityDependencies();
@@ -58,7 +58,6 @@ public:
     // Method(s)
     virtual void Execute();
 };
-
 
 //class JoinSecurityCommand :
 //    public SecurityCommand

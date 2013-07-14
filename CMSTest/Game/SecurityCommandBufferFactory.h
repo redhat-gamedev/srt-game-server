@@ -10,11 +10,11 @@
 #define __CMSTest__CommandBufferFactory__
 
 #include "../Shared/FactoryT.h"
-#include "../Proto/Command.pb.h"
-#include "../Proto/SecurityCommand.pb.h"
+#include "../Proto/CommandBuffer.pb.h"
+#include "../Proto/SecurityCommandBuffer.pb.h"
 #include <assert.h>
 
-using namespace command;
+using namespace CommandBuffers;
 
 
 class SecurityCommand_Dependencies
@@ -22,10 +22,10 @@ class SecurityCommand_Dependencies
 private:
 protected:
 public:
-    const SecurityCommand_SecurityCommandType&      m_anSecurityCommandType;
+    const SecurityCommandBuffer_SecurityCommandBufferType&      m_anSecurityCommandBufferType;
     
     // Constructor
-    SecurityCommand_Dependencies(const SecurityCommand_SecurityCommandType& anSecurityCommandType);
+    SecurityCommand_Dependencies(const SecurityCommandBuffer_SecurityCommandBufferType& anSecurityCommandBufferType);
     
     // Destructor
     ~SecurityCommand_Dependencies();
@@ -40,46 +40,46 @@ public:
 //
 
 template<>
-class FactoryT<Command, SecurityCommand_Dependencies>
+class FactoryT<CommandBuffer, SecurityCommand_Dependencies>
 {
 private:
     
 protected:
     // Constructor(s)
-    FactoryT<Command, SecurityCommand_Dependencies>() {};//unsigned int uiCapacity, unsigned int uiPeakCapacity) {};
+    FactoryT<CommandBuffer, SecurityCommand_Dependencies>() {};//unsigned int uiCapacity, unsigned int uiPeakCapacity) {};
     
     // Destructor(s)
-    virtual ~FactoryT<Command, SecurityCommand_Dependencies>() {};
+    virtual ~FactoryT<CommandBuffer, SecurityCommand_Dependencies>() {};
     
 public:
     // Singleton
-    static FactoryT<Command, SecurityCommand_Dependencies>& Instance()//unsigned int uiCapacity)
+    static FactoryT<CommandBuffer, SecurityCommand_Dependencies>& Instance()//unsigned int uiCapacity)
     {
-        static FactoryT<Command, SecurityCommand_Dependencies>  aCommandFactory;
+        static FactoryT<CommandBuffer, SecurityCommand_Dependencies>  aCommandFactory;
         return aCommandFactory;
     }
     
     // Method(s)
-    virtual Command* Create(SecurityCommand_Dependencies& theSecurityCommand_Dependencies)
+    virtual CommandBuffer* Create(SecurityCommand_Dependencies& theSecurityCommand_Dependencies)
     {
-        Command aCommand;
-        Command* pCommand = aCommand.New();
+        CommandBuffer aCommand;
+        CommandBuffer* pCommand = aCommand.New();
         
-        pCommand->set_type(Command_CommandType_SECURITY);
+        pCommand->set_type(CommandBuffer_CommandBufferType_SECURITY);
         
-        command::SecurityCommand* pSecurityCommand = pCommand->mutable_securitycommand();
+        CommandBuffers::SecurityCommandBuffer* pSecurityCommand = pCommand->mutable_securitycommandbuffer();
         assert(NULL != pSecurityCommand);
-        pSecurityCommand->set_type(theSecurityCommand_Dependencies.m_anSecurityCommandType);
+        pSecurityCommand->set_type(theSecurityCommand_Dependencies.m_anSecurityCommandBufferType);
         
         CreatedEvent(this, pCommand);
         return pCommand;
     }
-    virtual Command* Create(std::pair<unsigned char*, unsigned long>* pRawBytesPair)
+    virtual CommandBuffer* Create(std::pair<unsigned char*, unsigned long>* pRawBytesPair)
     {
         assert(pRawBytesPair);
         
-        Command aCommand;
-        Command* pCommand = aCommand.New();
+        CommandBuffer aCommand;
+        CommandBuffer* pCommand = aCommand.New();
         
         unsigned long       iBodyBytes = 0;
         unsigned char*      pucBodyBytes = NULL;
@@ -97,7 +97,7 @@ public:
         
         return pCommand;
     }
-    virtual void Destroy(Command*& pCommand)
+    virtual void Destroy(CommandBuffer*& pCommand)
     {
         DestroyedEvent(this, pCommand);
         delete pCommand;
@@ -105,12 +105,12 @@ public:
     }
     
     // Event(s)
-    Poco::BasicEvent<Command*&>    CreatedEvent;
-    Poco::BasicEvent<Command*&>    DestroyedEvent;
+    Poco::BasicEvent<CommandBuffer*&>    CreatedEvent;
+    Poco::BasicEvent<CommandBuffer*&>    DestroyedEvent;
 };
 
 class SecurityCommandFactory :
-    public FactoryT<Command, SecurityCommand_Dependencies>
+    public FactoryT<CommandBuffer, SecurityCommand_Dependencies>
 {
 private:
 protected:

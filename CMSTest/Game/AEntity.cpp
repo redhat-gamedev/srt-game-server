@@ -35,11 +35,11 @@ AEntity::_Dependencies::_Dependencies(const std::string& strUUID, AB2DEntity* pB
     assert(pB2DEntity);
 }
 
-void AEntity::_Serializer::Serialize(const AEntity* pEntity, gameevent::EntityGameEvent* pEntityGameEvent)
+void AEntity::_Serializer::Serialize(const AEntity* pEntity, GameEventBuffers::EntityGameEventBuffer* pEntityGameEvent)
 {
     //using namespace std;
     using namespace box2d;
-    using namespace gameevent;
+    using namespace GameEventBuffers;
     
     assert(pEntityGameEvent);
     
@@ -61,7 +61,7 @@ void AEntity::_Serializer::Serialize(const AEntity* pEntity, gameevent::EntityGa
     pEntity->m_pB2DEntity->Serializer.Serialize(pEntity->m_pB2DEntity, pEntityGameEvent);
 }
 
-void AEntity::_Serializer::Deserialisze(const gameevent::EntityGameEvent* pEntityGameEvent, AEntity*& pEntity)
+void AEntity::_Serializer::Deserialisze(const GameEventBuffers::EntityGameEventBuffer* pEntityGameEvent, AEntity*& pEntity)
 {
     
     

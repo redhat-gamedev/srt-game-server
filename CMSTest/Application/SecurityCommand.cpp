@@ -19,7 +19,7 @@
 // Constructor
 SecurityCommand::
 _SecurityDependencies::
-_SecurityDependencies(command::Command* pCommand, const cms::BytesMessage* pBytesMessage) :
+_SecurityDependencies(CommandBuffers::CommandBuffer* pCommand, const cms::BytesMessage* pBytesMessage) :
     ACommand::_Dependencies(pCommand, pBytesMessage)
 {    
 }

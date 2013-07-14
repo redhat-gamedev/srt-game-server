@@ -1,11 +1,11 @@
-package gameevent;
+package GameEventBuffers;
 
 import "box2d.proto";
 
 
-message EntityGameEvent
+message EntityGameEventBuffer
 {
-	enum EntityGameEventType
+	enum EntityGameEventBufferType
 	{
 		CREATE = 0;
         RETRIEVE = 1;
@@ -13,7 +13,7 @@ message EntityGameEvent
         DESTROY = 3;
 	}
 
-	required EntityGameEventType type = 1;
+	required EntityGameEventBufferType type = 1;
     required uint64 entityTag = 2;
 
 	optional string UUID = 3;

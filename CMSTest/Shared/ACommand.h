@@ -9,9 +9,9 @@
 #ifndef __CMSTest__Command__
 #define __CMSTest__Command__
 
-namespace command
+namespace CommandBuffers
 {
-    class Command;
+    class CommandBuffer;
 }
 namespace cms
 {
@@ -36,10 +36,10 @@ public:
     protected:
     public:
         const cms::BytesMessage*        m_pBytesMessage;
-        command::Command*               m_pCommand;
+        CommandBuffers::CommandBuffer*               m_pCommand;
         
         // Constructor
-        _Dependencies(command::Command* pCommand, const cms::BytesMessage* pBytesMessage);
+        _Dependencies(CommandBuffers::CommandBuffer* pCommand, const cms::BytesMessage* pBytesMessage);
         
         // Destructor
         virtual ~_Dependencies();
@@ -47,7 +47,7 @@ public:
     
 protected:
     const cms::BytesMessage*        m_pBytesMessage;
-    command::Command*               m_pCommand;
+    CommandBuffers::CommandBuffer*               m_pCommand;
     
     // Constructor
     ACommand(_Dependencies& theDependencies);

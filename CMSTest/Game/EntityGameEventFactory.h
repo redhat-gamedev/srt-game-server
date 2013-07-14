@@ -10,12 +10,12 @@
 #define __CMSTest__GameEventFactory__
 
 #include "../Shared/FactoryT.h"
-#include "../proto/GameEvent.pb.h"
-#include "../proto/EntityGameEvent.pb.h"
+#include "../proto/GameEventBuffer.pb.h"
+#include "../proto/EntityGameEventBuffer.pb.h"
 #include "AEntity.h"
 #include <assert.h>
 
-using namespace gameevent;
+using namespace GameEventBuffers;
 
 class AEntity;
 
@@ -25,11 +25,11 @@ class EntityGameEvent_Dependencies
 private:
 protected:
 public:
-    const EntityGameEvent_EntityGameEventType&      m_anEntityGameEventType;
+    const EntityGameEventBuffer_EntityGameEventBufferType&      m_anEntityGameEventBufferType;
     AEntity*&                                       m_pEntity;
     
     // Constructor
-    EntityGameEvent_Dependencies(const EntityGameEvent_EntityGameEventType& anEntityGameEventType, AEntity*& pEntity);
+    EntityGameEvent_Dependencies(const EntityGameEventBuffer_EntityGameEventBufferType& anEntityGameEventBufferType, AEntity*& pEntity);
     
     // Destructor
     ~EntityGameEvent_Dependencies();
@@ -44,47 +44,47 @@ public:
 //
 
 template<>
-class FactoryT<GameEvent, EntityGameEvent_Dependencies>
+class FactoryT<GameEventBuffer, EntityGameEvent_Dependencies>
 {
 private:
     
 protected:
     // Constructor(s)
-    FactoryT<GameEvent, EntityGameEvent_Dependencies>() {};//unsigned int uiCapacity, unsigned int uiPeakCapacity) {};
+    FactoryT<GameEventBuffer, EntityGameEvent_Dependencies>() {};//unsigned int uiCapacity, unsigned int uiPeakCapacity) {};
     
     // Destructor(s)
-    virtual ~FactoryT<GameEvent, EntityGameEvent_Dependencies>() {};
+    virtual ~FactoryT<GameEventBuffer, EntityGameEvent_Dependencies>() {};
     
 public:
     // Singleton
-    static FactoryT<GameEvent, EntityGameEvent_Dependencies>& Instance()//unsigned int uiCapacity)
+    static FactoryT<GameEventBuffer, EntityGameEvent_Dependencies>& Instance()//unsigned int uiCapacity)
     {
-        static FactoryT<GameEvent, EntityGameEvent_Dependencies>  aGameEventFactory;
+        static FactoryT<GameEventBuffer, EntityGameEvent_Dependencies>  aGameEventFactory;
         return aGameEventFactory;
     }
     
     // Method(s)
-    virtual GameEvent* Create(EntityGameEvent_Dependencies& theEntityGameEvent_Dependencies)
+    virtual GameEventBuffer* Create(EntityGameEvent_Dependencies& theEntityGameEvent_Dependencies)
     {
-        GameEvent aGameEvent;
-        GameEvent* pGameEvent = aGameEvent.New();
+        GameEventBuffer aGameEvent;
+        GameEventBuffer* pGameEvent = aGameEvent.New();
         
-        pGameEvent->set_type(GameEvent_GameEventType_ENTITY);
+        pGameEvent->set_type(GameEventBuffer_GameEventBufferType_ENTITY);
         
-        EntityGameEvent* pEntityGameEvent = pGameEvent->mutable_entitygameevent();
+        EntityGameEventBuffer* pEntityGameEvent = pGameEvent->mutable_entitygameeventbuffer();
         assert(NULL != pEntityGameEvent);
-        pEntityGameEvent->set_type(theEntityGameEvent_Dependencies.m_anEntityGameEventType);
+        pEntityGameEvent->set_type(theEntityGameEvent_Dependencies.m_anEntityGameEventBufferType);
         AEntity::Serializer.Serialize(theEntityGameEvent_Dependencies.m_pEntity, pEntityGameEvent);
         
         CreatedEvent(this, pGameEvent);
         return pGameEvent;
     }
-    virtual GameEvent* Create(std::pair<unsigned char*, unsigned long>* pRawBytesPair)
+    virtual GameEventBuffer* Create(std::pair<unsigned char*, unsigned long>* pRawBytesPair)
     {
         assert(pRawBytesPair);
         
-        GameEvent aGameEvent;
-        GameEvent* pGameEvent = aGameEvent.New();
+        GameEventBuffer aGameEvent;
+        GameEventBuffer* pGameEvent = aGameEvent.New();
         
         unsigned long       iBodyBytes = 0;
         unsigned char*      pucBodyBytes = NULL;
@@ -102,7 +102,7 @@ public:
 
         return pGameEvent;
     }
-    virtual void Destroy(GameEvent*& pGameEvent)
+    virtual void Destroy(GameEventBuffer*& pGameEvent)
     {
         DestroyedEvent(this, pGameEvent);
         delete pGameEvent;
@@ -110,12 +110,12 @@ public:
     }
     
     // Event(s)
-    Poco::BasicEvent<GameEvent*&>    CreatedEvent;
-    Poco::BasicEvent<GameEvent*&>    DestroyedEvent;
+    Poco::BasicEvent<GameEventBuffer*&>    CreatedEvent;
+    Poco::BasicEvent<GameEventBuffer*&>    DestroyedEvent;
 };
 
 class EntityGameEventFactory :
-    public FactoryT<GameEvent, EntityGameEvent_Dependencies>
+    public FactoryT<GameEventBuffer, EntityGameEvent_Dependencies>
 {
 private:
 protected:

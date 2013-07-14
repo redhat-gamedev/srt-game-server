@@ -7,14 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CC0BFD501792E6F300AE7B01 /* CommandBuffer.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CC0BFD441792E6F200AE7B01 /* CommandBuffer.pb.cc */; };
+		CC0BFD511792E6F300AE7B01 /* DualStickRawInputCommandBuffer.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CC0BFD461792E6F300AE7B01 /* DualStickRawInputCommandBuffer.pb.cc */; };
+		CC0BFD521792E6F300AE7B01 /* EntityGameEventBuffer.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CC0BFD481792E6F300AE7B01 /* EntityGameEventBuffer.pb.cc */; };
+		CC0BFD531792E6F300AE7B01 /* GameEventBuffer.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CC0BFD4A1792E6F300AE7B01 /* GameEventBuffer.pb.cc */; };
+		CC0BFD541792E6F300AE7B01 /* RawInputCommandBuffer.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CC0BFD4C1792E6F300AE7B01 /* RawInputCommandBuffer.pb.cc */; };
+		CC0BFD551792E6F300AE7B01 /* SecurityCommandBuffer.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CC0BFD4E1792E6F300AE7B01 /* SecurityCommandBuffer.pb.cc */; };
 		CC0F90D817179815006B9474 /* libactivemq-cpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0F90D7171797FF006B9474 /* libactivemq-cpp.a */; };
 		CC0F90DC17179AF3006B9474 /* libssl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0F90DB17179AF3006B9474 /* libssl.dylib */; };
 		CC0F90DE17179B7A006B9474 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0F90DD17179B7A006B9474 /* libcrypto.dylib */; };
 		CC1AD3AA178E3DAE000F134C /* MessageConsumer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC1AD3A8178E3DAE000F134C /* MessageConsumer.cpp */; };
 		CC1AD3AD178E4DE6000F134C /* CommandConsumer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC1AD3AB178E4DE6000F134C /* CommandConsumer.cpp */; };
-		CC2436B517490AEA00A8519D /* SecurityCommand.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CC2436B217490AEA00A8519D /* SecurityCommand.pb.cc */; };
-		CC2436D117491B5800A8519D /* EntityGameEvent.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CC2436CB17491B5400A8519D /* EntityGameEvent.pb.cc */; };
-		CC2436D317491B5800A8519D /* GameEvent.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CC2436CE17491B5500A8519D /* GameEvent.pb.cc */; };
 		CC2436D717492CFA00A8519D /* B2DPod.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC2436D517492CFA00A8519D /* B2DPod.cpp */; };
 		CC3156AE1792D69900B1B41D /* SecurityCommandBufferFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC3156AC1792D69900B1B41D /* SecurityCommandBufferFactory.cpp */; };
 		CC366F801791D78200B698E6 /* CommandQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC366F7E1791D78200B698E6 /* CommandQueue.cpp */; };
@@ -27,12 +30,9 @@
 		CC55B2741785028A00CCC6E5 /* PodFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC55B2731785028A00CCC6E5 /* PodFactory.cpp */; };
 		CC68EA98163DA07400D225C2 /* CMSTest.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = CC68EA97163DA07400D225C2 /* CMSTest.1 */; };
 		CCA4C32C1687B45D006BAC1D /* xdispatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA4C32B1687B45D006BAC1D /* xdispatch.framework */; };
-		CCC70908178F93BD00E6992E /* RawInputCommand.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CCC70906178F93BD00E6992E /* RawInputCommand.pb.cc */; };
-		CCC7090B178F93D800E6992E /* DualStickRawInputCommand.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CCC70909178F93D800E6992E /* DualStickRawInputCommand.pb.cc */; };
 		CCC7090E178F9B4600E6992E /* ACommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCC7090C178F9B4600E6992E /* ACommand.cpp */; };
 		CCC70911178F9D3D00E6992E /* SecurityCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCC7090F178F9D3D00E6992E /* SecurityCommand.cpp */; };
 		CCE449C217230E21002A1937 /* box2d.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CCE449B917230E21002A1937 /* box2d.pb.cc */; };
-		CCE449C417230E21002A1937 /* Command.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CCE449BC17230E21002A1937 /* Command.pb.cc */; };
 		CCE449C617230E21002A1937 /* DualStick.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CCE449BF17230E21002A1937 /* DualStick.pb.cc */; };
 		CCE449D317230EF9002A1937 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449C917230EF9002A1937 /* main.cpp */; };
 		CCE449D417230EF9002A1937 /* Security.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449CA17230EF9002A1937 /* Security.cpp */; };
@@ -204,6 +204,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CC0BFD441792E6F200AE7B01 /* CommandBuffer.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CommandBuffer.pb.cc; path = Proto/CommandBuffer.pb.cc; sourceTree = "<group>"; };
+		CC0BFD451792E6F200AE7B01 /* CommandBuffer.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommandBuffer.pb.h; path = Proto/CommandBuffer.pb.h; sourceTree = "<group>"; };
+		CC0BFD461792E6F300AE7B01 /* DualStickRawInputCommandBuffer.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DualStickRawInputCommandBuffer.pb.cc; path = Proto/DualStickRawInputCommandBuffer.pb.cc; sourceTree = "<group>"; };
+		CC0BFD471792E6F300AE7B01 /* DualStickRawInputCommandBuffer.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DualStickRawInputCommandBuffer.pb.h; path = Proto/DualStickRawInputCommandBuffer.pb.h; sourceTree = "<group>"; };
+		CC0BFD481792E6F300AE7B01 /* EntityGameEventBuffer.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EntityGameEventBuffer.pb.cc; path = Proto/EntityGameEventBuffer.pb.cc; sourceTree = "<group>"; };
+		CC0BFD491792E6F300AE7B01 /* EntityGameEventBuffer.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EntityGameEventBuffer.pb.h; path = Proto/EntityGameEventBuffer.pb.h; sourceTree = "<group>"; };
+		CC0BFD4A1792E6F300AE7B01 /* GameEventBuffer.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GameEventBuffer.pb.cc; path = Proto/GameEventBuffer.pb.cc; sourceTree = "<group>"; };
+		CC0BFD4B1792E6F300AE7B01 /* GameEventBuffer.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameEventBuffer.pb.h; path = Proto/GameEventBuffer.pb.h; sourceTree = "<group>"; };
+		CC0BFD4C1792E6F300AE7B01 /* RawInputCommandBuffer.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RawInputCommandBuffer.pb.cc; path = Proto/RawInputCommandBuffer.pb.cc; sourceTree = "<group>"; };
+		CC0BFD4D1792E6F300AE7B01 /* RawInputCommandBuffer.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RawInputCommandBuffer.pb.h; path = Proto/RawInputCommandBuffer.pb.h; sourceTree = "<group>"; };
+		CC0BFD4E1792E6F300AE7B01 /* SecurityCommandBuffer.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SecurityCommandBuffer.pb.cc; path = Proto/SecurityCommandBuffer.pb.cc; sourceTree = "<group>"; };
+		CC0BFD4F1792E6F300AE7B01 /* SecurityCommandBuffer.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SecurityCommandBuffer.pb.h; path = Proto/SecurityCommandBuffer.pb.h; sourceTree = "<group>"; };
 		CC0F90CF171797FE006B9474 /* activemq-cpp.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "activemq-cpp.xcodeproj"; path = "../ThirdParty/activemq-cpp/activemq-cpp/activemq-cpp.xcodeproj"; sourceTree = "<group>"; };
 		CC0F90DB17179AF3006B9474 /* libssl.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libssl.dylib; path = usr/lib/libssl.dylib; sourceTree = SDKROOT; };
 		CC0F90DD17179B7A006B9474 /* libcrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.dylib; path = usr/lib/libcrypto.dylib; sourceTree = SDKROOT; };
@@ -211,16 +223,10 @@
 		CC1AD3A9178E3DAE000F134C /* MessageConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageConsumer.h; path = Application/MessageConsumer.h; sourceTree = "<group>"; };
 		CC1AD3AB178E4DE6000F134C /* CommandConsumer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CommandConsumer.cpp; path = Game/CommandConsumer.cpp; sourceTree = "<group>"; };
 		CC1AD3AC178E4DE6000F134C /* CommandConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommandConsumer.h; path = Game/CommandConsumer.h; sourceTree = "<group>"; };
-		CC1AD3AE178F882D000F134C /* RawInputCommand.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; name = RawInputCommand.proto; path = Proto/RawInputCommand.proto; sourceTree = "<group>"; };
-		CC2436B217490AEA00A8519D /* SecurityCommand.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SecurityCommand.pb.cc; path = Proto/SecurityCommand.pb.cc; sourceTree = "<group>"; };
-		CC2436B317490AEA00A8519D /* SecurityCommand.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SecurityCommand.pb.h; path = Proto/SecurityCommand.pb.h; sourceTree = "<group>"; };
-		CC2436B417490AEA00A8519D /* SecurityCommand.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; name = SecurityCommand.proto; path = Proto/SecurityCommand.proto; sourceTree = "<group>"; };
-		CC2436CB17491B5400A8519D /* EntityGameEvent.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EntityGameEvent.pb.cc; path = Proto/EntityGameEvent.pb.cc; sourceTree = "<group>"; };
-		CC2436CC17491B5400A8519D /* EntityGameEvent.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EntityGameEvent.pb.h; path = Proto/EntityGameEvent.pb.h; sourceTree = "<group>"; };
-		CC2436CD17491B5500A8519D /* EntityGameEvent.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; name = EntityGameEvent.proto; path = Proto/EntityGameEvent.proto; sourceTree = "<group>"; };
-		CC2436CE17491B5500A8519D /* GameEvent.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GameEvent.pb.cc; path = Proto/GameEvent.pb.cc; sourceTree = "<group>"; };
-		CC2436CF17491B5600A8519D /* GameEvent.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameEvent.pb.h; path = Proto/GameEvent.pb.h; sourceTree = "<group>"; };
-		CC2436D017491B5700A8519D /* GameEvent.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; name = GameEvent.proto; path = Proto/GameEvent.proto; sourceTree = "<group>"; };
+		CC1AD3AE178F882D000F134C /* RawInputCommandBuffer.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; name = RawInputCommandBuffer.proto; path = Proto/RawInputCommandBuffer.proto; sourceTree = "<group>"; };
+		CC2436B417490AEA00A8519D /* SecurityCommandBuffer.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; name = SecurityCommandBuffer.proto; path = Proto/SecurityCommandBuffer.proto; sourceTree = "<group>"; };
+		CC2436CD17491B5500A8519D /* EntityGameEventBuffer.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; name = EntityGameEventBuffer.proto; path = Proto/EntityGameEventBuffer.proto; sourceTree = "<group>"; };
+		CC2436D017491B5700A8519D /* GameEventBuffer.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; name = GameEventBuffer.proto; path = Proto/GameEventBuffer.proto; sourceTree = "<group>"; };
 		CC2436D517492CFA00A8519D /* B2DPod.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = B2DPod.cpp; path = Game/B2DPod.cpp; sourceTree = "<group>"; };
 		CC2436D617492CFA00A8519D /* B2DPod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = B2DPod.h; path = Game/B2DPod.h; sourceTree = "<group>"; };
 		CC3156AC1792D69900B1B41D /* SecurityCommandBufferFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SecurityCommandBufferFactory.cpp; path = Game/SecurityCommandBufferFactory.cpp; sourceTree = "<group>"; };
@@ -245,11 +251,7 @@
 		CC68EA97163DA07400D225C2 /* CMSTest.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = CMSTest.1; sourceTree = "<group>"; };
 		CCA4C32B1687B45D006BAC1D /* xdispatch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = xdispatch.framework; path = ../ThirdParty/xdispatch/build/bin/Debug/xdispatch.framework; sourceTree = "<group>"; };
 		CCBB79AF1749CBEF00E74F08 /* Poco.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Poco.xcodeproj; path = "../ThirdParty/poco/cmake-build/Poco.xcodeproj"; sourceTree = "<group>"; };
-		CCC70904178F8E6500E6992E /* DualStickRawInputCommand.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; name = DualStickRawInputCommand.proto; path = Proto/DualStickRawInputCommand.proto; sourceTree = "<group>"; };
-		CCC70906178F93BD00E6992E /* RawInputCommand.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RawInputCommand.pb.cc; path = Proto/RawInputCommand.pb.cc; sourceTree = "<group>"; };
-		CCC70907178F93BD00E6992E /* RawInputCommand.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RawInputCommand.pb.h; path = Proto/RawInputCommand.pb.h; sourceTree = "<group>"; };
-		CCC70909178F93D800E6992E /* DualStickRawInputCommand.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DualStickRawInputCommand.pb.cc; path = Proto/DualStickRawInputCommand.pb.cc; sourceTree = "<group>"; };
-		CCC7090A178F93D800E6992E /* DualStickRawInputCommand.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DualStickRawInputCommand.pb.h; path = Proto/DualStickRawInputCommand.pb.h; sourceTree = "<group>"; };
+		CCC70904178F8E6500E6992E /* DualStickRawInputCommandBuffer.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; name = DualStickRawInputCommandBuffer.proto; path = Proto/DualStickRawInputCommandBuffer.proto; sourceTree = "<group>"; };
 		CCC7090C178F9B4600E6992E /* ACommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ACommand.cpp; path = Shared/ACommand.cpp; sourceTree = "<group>"; };
 		CCC7090D178F9B4600E6992E /* ACommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACommand.h; path = Shared/ACommand.h; sourceTree = "<group>"; };
 		CCC7090F178F9D3D00E6992E /* SecurityCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SecurityCommand.cpp; path = Application/SecurityCommand.cpp; sourceTree = "<group>"; };
@@ -257,9 +259,7 @@
 		CCE449B917230E21002A1937 /* box2d.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = box2d.pb.cc; path = Proto/box2d.pb.cc; sourceTree = "<group>"; };
 		CCE449BA17230E21002A1937 /* box2d.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = box2d.pb.h; path = Proto/box2d.pb.h; sourceTree = "<group>"; };
 		CCE449BB17230E21002A1937 /* box2d.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; name = box2d.proto; path = Proto/box2d.proto; sourceTree = "<group>"; };
-		CCE449BC17230E21002A1937 /* Command.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Command.pb.cc; path = Proto/Command.pb.cc; sourceTree = "<group>"; };
-		CCE449BD17230E21002A1937 /* Command.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Command.pb.h; path = Proto/Command.pb.h; sourceTree = "<group>"; };
-		CCE449BE17230E21002A1937 /* Command.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; name = Command.proto; path = Proto/Command.proto; sourceTree = "<group>"; };
+		CCE449BE17230E21002A1937 /* CommandBuffer.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; name = CommandBuffer.proto; path = Proto/CommandBuffer.proto; sourceTree = "<group>"; };
 		CCE449BF17230E21002A1937 /* DualStick.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DualStick.pb.cc; path = Proto/DualStick.pb.cc; sourceTree = "<group>"; };
 		CCE449C017230E21002A1937 /* DualStick.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DualStick.pb.h; path = Proto/DualStick.pb.h; sourceTree = "<group>"; };
 		CCE449C117230E21002A1937 /* DualStick.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; name = DualStick.proto; path = Proto/DualStick.proto; sourceTree = "<group>"; };
@@ -330,30 +330,30 @@
 		CC19F7A1168CCC9E007B694E /* Proto */ = {
 			isa = PBXGroup;
 			children = (
-				CCC70909178F93D800E6992E /* DualStickRawInputCommand.pb.cc */,
-				CCC7090A178F93D800E6992E /* DualStickRawInputCommand.pb.h */,
-				CCC70906178F93BD00E6992E /* RawInputCommand.pb.cc */,
-				CCC70907178F93BD00E6992E /* RawInputCommand.pb.h */,
-				CC2436CB17491B5400A8519D /* EntityGameEvent.pb.cc */,
-				CC2436CC17491B5400A8519D /* EntityGameEvent.pb.h */,
-				CC2436CD17491B5500A8519D /* EntityGameEvent.proto */,
-				CC2436CE17491B5500A8519D /* GameEvent.pb.cc */,
-				CC2436CF17491B5600A8519D /* GameEvent.pb.h */,
-				CC2436D017491B5700A8519D /* GameEvent.proto */,
-				CC2436B217490AEA00A8519D /* SecurityCommand.pb.cc */,
-				CC2436B317490AEA00A8519D /* SecurityCommand.pb.h */,
-				CC2436B417490AEA00A8519D /* SecurityCommand.proto */,
+				CC0BFD441792E6F200AE7B01 /* CommandBuffer.pb.cc */,
+				CC0BFD451792E6F200AE7B01 /* CommandBuffer.pb.h */,
+				CC0BFD461792E6F300AE7B01 /* DualStickRawInputCommandBuffer.pb.cc */,
+				CC0BFD471792E6F300AE7B01 /* DualStickRawInputCommandBuffer.pb.h */,
+				CC0BFD481792E6F300AE7B01 /* EntityGameEventBuffer.pb.cc */,
+				CC0BFD491792E6F300AE7B01 /* EntityGameEventBuffer.pb.h */,
+				CC0BFD4A1792E6F300AE7B01 /* GameEventBuffer.pb.cc */,
+				CC0BFD4B1792E6F300AE7B01 /* GameEventBuffer.pb.h */,
+				CC0BFD4C1792E6F300AE7B01 /* RawInputCommandBuffer.pb.cc */,
+				CC0BFD4D1792E6F300AE7B01 /* RawInputCommandBuffer.pb.h */,
+				CC0BFD4E1792E6F300AE7B01 /* SecurityCommandBuffer.pb.cc */,
+				CC0BFD4F1792E6F300AE7B01 /* SecurityCommandBuffer.pb.h */,
+				CC2436CD17491B5500A8519D /* EntityGameEventBuffer.proto */,
+				CC2436D017491B5700A8519D /* GameEventBuffer.proto */,
+				CC2436B417490AEA00A8519D /* SecurityCommandBuffer.proto */,
 				CCE449B917230E21002A1937 /* box2d.pb.cc */,
 				CCE449BA17230E21002A1937 /* box2d.pb.h */,
 				CCE449BB17230E21002A1937 /* box2d.proto */,
-				CCE449BC17230E21002A1937 /* Command.pb.cc */,
-				CCE449BD17230E21002A1937 /* Command.pb.h */,
-				CCE449BE17230E21002A1937 /* Command.proto */,
+				CCE449BE17230E21002A1937 /* CommandBuffer.proto */,
 				CCE449BF17230E21002A1937 /* DualStick.pb.cc */,
 				CCE449C017230E21002A1937 /* DualStick.pb.h */,
 				CCE449C117230E21002A1937 /* DualStick.proto */,
-				CC1AD3AE178F882D000F134C /* RawInputCommand.proto */,
-				CCC70904178F8E6500E6992E /* DualStickRawInputCommand.proto */,
+				CC1AD3AE178F882D000F134C /* RawInputCommandBuffer.proto */,
+				CCC70904178F8E6500E6992E /* DualStickRawInputCommandBuffer.proto */,
 			);
 			name = Proto;
 			sourceTree = "<group>";
@@ -727,7 +727,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCE449C217230E21002A1937 /* box2d.pb.cc in Sources */,
-				CCE449C417230E21002A1937 /* Command.pb.cc in Sources */,
 				CCE449C617230E21002A1937 /* DualStick.pb.cc in Sources */,
 				CCE449D317230EF9002A1937 /* main.cpp in Sources */,
 				CCE449D417230EF9002A1937 /* Security.cpp in Sources */,
@@ -744,9 +743,6 @@
 				CCE44A0317232660002A1937 /* World.cpp in Sources */,
 				CCEB9EF9173FE24F00B3CE16 /* B2DBullet.cpp in Sources */,
 				CCEB9EFC173FFB8F00B3CE16 /* AB2DEntity.cpp in Sources */,
-				CC2436B517490AEA00A8519D /* SecurityCommand.pb.cc in Sources */,
-				CC2436D117491B5800A8519D /* EntityGameEvent.pb.cc in Sources */,
-				CC2436D317491B5800A8519D /* GameEvent.pb.cc in Sources */,
 				CC2436D717492CFA00A8519D /* B2DPod.cpp in Sources */,
 				CC51BA661781B7FA007F27F0 /* BulletFactory.cpp in Sources */,
 				CC55B2741785028A00CCC6E5 /* PodFactory.cpp in Sources */,
@@ -755,12 +751,16 @@
 				CC386DDB178A033100AB41AF /* MessageDispatcher.cpp in Sources */,
 				CC1AD3AA178E3DAE000F134C /* MessageConsumer.cpp in Sources */,
 				CC1AD3AD178E4DE6000F134C /* CommandConsumer.cpp in Sources */,
-				CCC70908178F93BD00E6992E /* RawInputCommand.pb.cc in Sources */,
-				CCC7090B178F93D800E6992E /* DualStickRawInputCommand.pb.cc in Sources */,
 				CCC7090E178F9B4600E6992E /* ACommand.cpp in Sources */,
 				CCC70911178F9D3D00E6992E /* SecurityCommand.cpp in Sources */,
 				CC366F801791D78200B698E6 /* CommandQueue.cpp in Sources */,
 				CC3156AE1792D69900B1B41D /* SecurityCommandBufferFactory.cpp in Sources */,
+				CC0BFD501792E6F300AE7B01 /* CommandBuffer.pb.cc in Sources */,
+				CC0BFD511792E6F300AE7B01 /* DualStickRawInputCommandBuffer.pb.cc in Sources */,
+				CC0BFD521792E6F300AE7B01 /* EntityGameEventBuffer.pb.cc in Sources */,
+				CC0BFD531792E6F300AE7B01 /* GameEventBuffer.pb.cc in Sources */,
+				CC0BFD541792E6F300AE7B01 /* RawInputCommandBuffer.pb.cc in Sources */,
+				CC0BFD551792E6F300AE7B01 /* SecurityCommandBuffer.pb.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

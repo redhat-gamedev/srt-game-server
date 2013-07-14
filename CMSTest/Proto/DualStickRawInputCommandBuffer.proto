@@ -1,9 +1,9 @@
-package command;
+package CommandBuffers;
 
 import "box2d.proto";
 
 
-message DualStickRawInputCommand
+message DualStickRawInputCommandBuffer
 {
     required box2d.PbVec2 pbv2Move = 1;
     required box2d.PbVec2 pbv2Shoot = 2;

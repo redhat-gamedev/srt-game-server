@@ -10,8 +10,8 @@
 #define __CMSTest__CommandConsumer__
 
 #include "SecurityCommandBufferFactory.h"
-#include "../Proto/Command.pb.h"
-#include "../Proto/SecurityCommand.pb.h"
+#include "../Proto/CommandBuffer.pb.h"
+#include "../Proto/SecurityCommandBuffer.pb.h"
 #include "Poco/BasicEvent.h"
 #include "Poco/Tuple.h"
 #include <decaf/util/StlQueue.h>
@@ -76,10 +76,10 @@ public:
     protected:
     public:
         MessageConsumer*                                                        m_pMessageConsumer;
-        FactoryT<command::Command, SecurityCommand_Dependencies>&       m_aSecurityCommandFactory;
+        FactoryT<CommandBuffers::CommandBuffer, SecurityCommand_Dependencies>&       m_aSecurityCommandFactory;
         
         // Constructor
-        _Dependencies(MessageConsumer* pMessageConsumer, FactoryT<command::Command, SecurityCommand_Dependencies>& anSecurityCommandFactory);
+        _Dependencies(MessageConsumer* pMessageConsumer, FactoryT<CommandBuffers::CommandBuffer, SecurityCommand_Dependencies>& anSecurityCommandFactory);
         
         // Destructor
         ~_Dependencies();
@@ -88,7 +88,7 @@ public:
 private:
 protected:
     MessageConsumer*                                                        m_pMessageConsumer;
-    FactoryT<command::Command, SecurityCommand_Dependencies>&       m_aSecurityCommandFactory;
+    FactoryT<CommandBuffers::CommandBuffer, SecurityCommand_Dependencies>&       m_aSecurityCommandFactory;
     decaf::util::StlQueue<Poco::Tuple<cms::BytesMessage*, google::protobuf::Message*>* >                       m_aTupleQueue;
     // ConsumptionStrategy*     pConsumptionStrategy;
     

@@ -13,18 +13,18 @@
 #include "Bullet.h"
 #include "BulletFactory.h"
 //#include "EntityGameEventFactory.h"
-//#include "../proto/EntityGameEvent.pb.h"
+//#include "../proto/EntityGameEventBuffer.pb.h"
 #include "Poco/Delegate.h"
 #include <assert.h>
 
-using namespace gameevent;
+using namespace GameEventBuffers;
 using namespace google::protobuf;
 
 
 // Constructor
 EventDispatcher::
 _Dependencies::
-_Dependencies(PodFactory& aPodFactory, BulletFactory& aBulletFactory, FactoryT<gameevent::GameEvent, EntityGameEvent_Dependencies>& anEntityGameEventFactory) :
+_Dependencies(PodFactory& aPodFactory, BulletFactory& aBulletFactory, FactoryT<GameEventBuffers::GameEventBuffer, EntityGameEvent_Dependencies>& anEntityGameEventFactory) :
     m_aPodFactory(aPodFactory),
     m_aBulletFactory(aBulletFactory),
     m_anEntityGameEventFactory(anEntityGameEventFactory)
@@ -82,10 +82,10 @@ Message* EventDispatcher::Dequeue()
     return pMessage;
 }
 
-GameEvent* EventDispatcher::CreateGameEvent(EntityGameEvent_EntityGameEventType eEntityGameEvent_EntityGameEventType, AEntity* pEntity)
+GameEventBuffer* EventDispatcher::CreateGameEvent(EntityGameEventBuffer_EntityGameEventBufferType eEntityGameEvent_EntityGameEventBufferType, AEntity* pEntity)
 {
-    EntityGameEvent_Dependencies anEntityGameEvent_Dependencies(eEntityGameEvent_EntityGameEventType, pEntity);
-    GameEvent* pGameEvent = m_anEntityGameEventFactory.Create(anEntityGameEvent_Dependencies);
+    EntityGameEvent_Dependencies anEntityGameEvent_Dependencies(eEntityGameEvent_EntityGameEventBufferType, pEntity);
+    GameEventBuffer* pGameEvent = m_anEntityGameEventFactory.Create(anEntityGameEvent_Dependencies);
     
     return pGameEvent;
 }
@@ -108,39 +108,39 @@ void EventDispatcher::Dispatch()
 void EventDispatcher::HandlePodCreatedEvent(const void* pSender, Player*& pPlayer)
 {
 //    AEntity* pEntity = static_cast<AEntity*>(pPlayer);
-//    EntityGameEvent_Dependencies anEntityGameEvent_Dependencies(EntityGameEvent_EntityGameEventType_CREATE, pEntity);
+//    EntityGameEvent_Dependencies anEntityGameEvent_Dependencies(EntityGameEvent_EntityGameEventBufferType_CREATE, pEntity);
 //    
 //    GameEvent* pGameEvent = m_anEntityGameEventFactory.Create(anEntityGameEvent_Dependencies);
 //    Enqueue(pGameEvent);
 
-    GameEvent* pGameEvent = CreateGameEvent(EntityGameEvent_EntityGameEventType_CREATE, static_cast<AEntity*>(pPlayer));
+    GameEventBuffer* pGameEvent = CreateGameEvent(EntityGameEventBuffer_EntityGameEventBufferType_CREATE, static_cast<AEntity*>(pPlayer));
     Enqueue(pGameEvent);
 }
 
 void EventDispatcher::HandlePodUpdatedEvent(const void* pSender, Player*& pPlayer)
 {
-    GameEvent* pGameEvent = CreateGameEvent(EntityGameEvent_EntityGameEventType_UPDATE, static_cast<AEntity*>(pPlayer));
+    GameEventBuffer* pGameEvent = CreateGameEvent(EntityGameEventBuffer_EntityGameEventBufferType_UPDATE, static_cast<AEntity*>(pPlayer));
     Enqueue(pGameEvent);}
 
 void EventDispatcher::HandlePodDestroyedEvent(const void* pSender, Player*& pPlayer)
 {
-    GameEvent* pGameEvent = CreateGameEvent(EntityGameEvent_EntityGameEventType_DESTROY, static_cast<AEntity*>(pPlayer));
+    GameEventBuffer* pGameEvent = CreateGameEvent(EntityGameEventBuffer_EntityGameEventBufferType_DESTROY, static_cast<AEntity*>(pPlayer));
     Enqueue(pGameEvent);}
 
 void EventDispatcher::HandleBulletCreatedEvent(const void* pSender, Bullet*& pBullet)
 {
-    GameEvent* pGameEvent = CreateGameEvent(EntityGameEvent_EntityGameEventType_CREATE, static_cast<AEntity*>(pBullet));
+    GameEventBuffer* pGameEvent = CreateGameEvent(EntityGameEventBuffer_EntityGameEventBufferType_CREATE, static_cast<AEntity*>(pBullet));
     Enqueue(pGameEvent);
 }
 
 void EventDispatcher::HandleBulletUpdatedEvent(const void* pSender, Bullet*& pBullet)
 {
-    GameEvent* pGameEvent = CreateGameEvent(EntityGameEvent_EntityGameEventType_UPDATE, static_cast<AEntity*>(pBullet));
+    GameEventBuffer* pGameEvent = CreateGameEvent(EntityGameEventBuffer_EntityGameEventBufferType_UPDATE, static_cast<AEntity*>(pBullet));
     Enqueue(pGameEvent);
 }
 
 void EventDispatcher::HandleBulletDestroyedEvent(const void* pSender, Bullet*& pBullet)
 {
-    GameEvent* pGameEvent = CreateGameEvent(EntityGameEvent_EntityGameEventType_DESTROY, static_cast<AEntity*>(pBullet));
+    GameEventBuffer* pGameEvent = CreateGameEvent(EntityGameEventBuffer_EntityGameEventBufferType_DESTROY, static_cast<AEntity*>(pBullet));
     Enqueue(pGameEvent);
 }

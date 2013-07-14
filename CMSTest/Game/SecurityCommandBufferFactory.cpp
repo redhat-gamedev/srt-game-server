@@ -12,8 +12,8 @@
 
 // Constructor
 SecurityCommand_Dependencies::
-SecurityCommand_Dependencies(const SecurityCommand_SecurityCommandType& anSecurityCommandType) :
-    m_anSecurityCommandType(anSecurityCommandType)
+SecurityCommand_Dependencies(const SecurityCommandBuffer_SecurityCommandBufferType& anSecurityCommandBufferType) :
+    m_anSecurityCommandBufferType(anSecurityCommandBufferType)
 {
 }
 

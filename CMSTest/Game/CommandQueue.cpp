@@ -9,7 +9,7 @@
 #include "CommandQueue.h"
 #include "CommandConsumer.h"
 #include "ACommand.h"
-#include "../Proto/Command.pb.h"
+#include "../Proto/CommandBuffer.pb.h"
 #include "Poco/Delegate.h"
 
 
@@ -69,7 +69,7 @@ void CommandQueue::Execute()
 // CommandConsumer Event response
 void CommandQueue::HandleCommandConsumedEvent(const void* pSender, Poco::Tuple<cms::BytesMessage*, google::protobuf::Message*>*& pTuple)
 {
-    command::Command* pCommand = dynamic_cast<command::Command*>(pTuple->get<1>());
+    CommandBuffers::CommandBuffer* pCommand = dynamic_cast<CommandBuffers::CommandBuffer*>(pTuple->get<1>());
     cms::BytesMessage* pBytesMessage = pTuple->get<0>();
     
     ::SecurityCommand::_SecurityDependencies theSecurityCommandDependencies(pCommand, pBytesMessage);

@@ -1,0 +1,15 @@
+package CommandBuffers;
+
+import "DualStickRawInputCommandBuffer.proto";
+
+
+message RawInputCommandBuffer
+{
+    enum RawInputCommandBufferType
+    {
+        DUALSTICK = 0;
+    }
+    required RawInputCommandBufferType type = 1 [default = DUALSTICK];
+    required string UUID = 2;
+    optional DualStickRawInputCommandBuffer dualStickRawInputCommandBuffer = 3;
+}

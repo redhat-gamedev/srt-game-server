@@ -1,0 +1,14 @@
+package GameEventBuffers;
+
+import "EntityGameEventBuffer.proto";
+
+
+message GameEventBuffer
+{
+	enum GameEventBufferType
+	{
+		ENTITY = 0;
+	}
+	required GameEventBufferType type = 1 [default = ENTITY];
+	optional EntityGameEventBuffer entityGameEventBuffer = 3;
+}

@@ -1,0 +1,14 @@
+package CommandBuffers;
+
+
+message SecurityCommandBuffer
+{
+	enum SecurityCommandBufferType
+	{
+		JOIN = 0;
+		LEAVE = 1;
+	}
+	required SecurityCommandBufferType type = 1;
+
+	optional string UUID = 2;
+}

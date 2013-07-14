@@ -10,8 +10,8 @@
 //#include "../Game/AEntity.h"
 #include "../Proto/DualStick.pb.h"
 #include "../Proto/box2d.pb.h"
-#include "../Proto/Command.pb.h"
-#include "../Proto/SecurityCommand.pb.h"
+#include "../Proto/CommandBuffer.pb.h"
+#include "../Proto/SecurityCommandBuffer.pb.h"
 #include "../Game/Player.h"
 #include "../Game/PodFactory.h"
 #include "../Shared/SimpleAsyncConsumer.h"
@@ -31,7 +31,7 @@
 //Security::_EventPublisher           Security::EventPublisher;
 
 using namespace cms;
-using namespace command;
+using namespace CommandBuffers;
 
 
 // Constructor(s)
@@ -109,7 +109,7 @@ void Security::onMessage(const Message* pMessage)
     
     static int              count = 0;
 //    bool                    clientAck = false;
-    Command                 aCommand;
+    CommandBuffer                 aCommand;
     std::string             strUUID = "";
     std::string             strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp";
     
@@ -131,9 +131,9 @@ void Security::onMessage(const Message* pMessage)
         
         aCommand.ParseFromArray(pucBodyBytes, iBodyBytes);
 
-        assert(Command_CommandType_SECURITY == aCommand.type());
-        const SecurityCommand& aSecurityCommand = aCommand.securitycommand();
-        if (SecurityCommand_SecurityCommandType_JOIN == aSecurityCommand.type())
+        assert(CommandBuffer_CommandBufferType_SECURITY == aCommand.type());
+        const SecurityCommandBuffer& aSecurityCommand = aCommand.securitycommandbuffer();
+        if (SecurityCommandBuffer_SecurityCommandBufferType_JOIN == aSecurityCommand.type())
         {
             // Join stuff
             // don't forget to ->clone() the reply to destination if lifetime is impt
@@ -149,7 +149,7 @@ void Security::onMessage(const Message* pMessage)
             FireRequestJoinEvent(strUUID);
         }
 
-        if (SecurityCommand_SecurityCommandType_LEAVE == aSecurityCommand.type())
+        if (SecurityCommandBuffer_SecurityCommandBufferType_LEAVE == aSecurityCommand.type())
         {
             assert(aSecurityCommand.has_uuid());
             strUUID = aSecurityCommand.uuid();
@@ -173,14 +173,14 @@ void Security::HandlePodCreatedEvent(const void* pSender, Player*& pPlayer)
     
     const AEntity* pEntity = static_cast<const AEntity*>(pPlayer);
     
-    Command* pCommand = new Command();
-    SecurityCommand* pSecurityCommand = pCommand->mutable_securitycommand();
+    CommandBuffer* pCommand = new CommandBuffer();
+    SecurityCommandBuffer* pSecurityCommand = pCommand->mutable_securitycommandbuffer();
     assert(NULL != pSecurityCommand);
     
-    pCommand->set_type(Command_CommandType_SECURITY);
+    pCommand->set_type(CommandBuffer_CommandBufferType_SECURITY);
     //pSecurityCommand->set_uuid(strUUID);
     pSecurityCommand->set_uuid(pEntity->UUID);
-    pSecurityCommand->set_type(SecurityCommand_SecurityCommandType_JOIN);
+    pSecurityCommand->set_type(SecurityCommandBuffer_SecurityCommandBufferType_JOIN);
     
     pCommand->SerializeToString(&strPBBuffer);
     const char* pucText = strPBBuffer.c_str();
@@ -199,14 +199,14 @@ void Security::HandlePodDestroyedEvent(const void* pSender, Player*& pPlayer)
     
     const AEntity* pEntity = static_cast<const AEntity*>(pPlayer);
     
-    Command* pCommand = new Command();
-    SecurityCommand* pSecurityCommand = pCommand->mutable_securitycommand();
+    CommandBuffer* pCommand = new CommandBuffer();
+    SecurityCommandBuffer* pSecurityCommand = pCommand->mutable_securitycommandbuffer();
     assert(NULL != pSecurityCommand);
     
-    pCommand->set_type(Command_CommandType_SECURITY);
+    pCommand->set_type(CommandBuffer_CommandBufferType_SECURITY);
     //pSecurityCommand->set_uuid(strUUID);
     pSecurityCommand->set_uuid(pEntity->UUID);
-    pSecurityCommand->set_type(SecurityCommand_SecurityCommandType_LEAVE);
+    pSecurityCommand->set_type(SecurityCommandBuffer_SecurityCommandBufferType_LEAVE);
     
     pCommand->SerializeToString(&strPBBuffer);
     const char* pucText = strPBBuffer.c_str();

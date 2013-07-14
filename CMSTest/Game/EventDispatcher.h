@@ -9,8 +9,8 @@
 #ifndef __CMSTest__EventDispatcher__
 #define __CMSTest__EventDispatcher__
 
-#include "../Proto/GameEvent.pb.h"
-#include "../Proto/EntityGameEvent.pb.h"
+#include "../Proto/GameEventBuffer.pb.h"
+#include "../Proto/EntityGameEventBuffer.pb.h"
 #include "EntityGameEventFactory.h"
 //#include "../Shared/FactoryT.h"
 #include "Poco/BasicEvent.h"
@@ -45,10 +45,10 @@ public:
     public:
         PodFactory&                     m_aPodFactory;
         BulletFactory&                  m_aBulletFactory;
-        FactoryT<gameevent::GameEvent, EntityGameEvent_Dependencies>&         m_anEntityGameEventFactory;
+        FactoryT<GameEventBuffers::GameEventBuffer, EntityGameEvent_Dependencies>&         m_anEntityGameEventFactory;
         
         // Constructor
-        _Dependencies(PodFactory& aPodFactory, BulletFactory& aBulletFactory, FactoryT<gameevent::GameEvent, EntityGameEvent_Dependencies>& pEntityGameEventFactory);
+        _Dependencies(PodFactory& aPodFactory, BulletFactory& aBulletFactory, FactoryT<GameEventBuffers::GameEventBuffer, EntityGameEvent_Dependencies>& pEntityGameEventFactory);
         
         // Destructor
         ~_Dependencies();
@@ -56,13 +56,13 @@ public:
 
 private:
 protected:
-    FactoryT<gameevent::GameEvent, EntityGameEvent_Dependencies>&                                 m_anEntityGameEventFactory;
+    FactoryT<GameEventBuffers::GameEventBuffer, EntityGameEvent_Dependencies>&                                 m_anEntityGameEventFactory;
     decaf::util::StlQueue<google::protobuf::Message*>       m_anEventQueue;
 
     // Helper(s)
     void                            Enqueue(google::protobuf::Message* pMessage);
     google::protobuf::Message*      Dequeue();
-    gameevent::GameEvent*           CreateGameEvent(gameevent::EntityGameEvent_EntityGameEventType eEntityGameEvent_EntityGameEventType, AEntity* pEntity);
+    GameEventBuffers::GameEventBuffer*           CreateGameEvent(GameEventBuffers::EntityGameEventBuffer_EntityGameEventBufferType eEntityGameEvent_EntityGameEventBufferType, AEntity* pEntity);
     
     // Constructor(s)
     EventDispatcher(_Dependencies* pDependencies);

@@ -13,7 +13,7 @@
 // Constructor
 ACommand::
 _Dependencies::
-_Dependencies(command::Command* pCommand, const cms::BytesMessage* pBytesMessage) :
+_Dependencies(CommandBuffers::CommandBuffer* pCommand, const cms::BytesMessage* pBytesMessage) :
     m_pCommand(pCommand),
     m_pBytesMessage(pBytesMessage)
 {

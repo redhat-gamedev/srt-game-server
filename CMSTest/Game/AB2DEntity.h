@@ -12,9 +12,9 @@
 #include "Poco/BasicEvent.h"
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 
-namespace gameevent
+namespace GameEventBuffers
 {
-    class EntityGameEvent;
+    class EntityGameEventBuffer;
 }
 class AEntity;
 
@@ -46,8 +46,8 @@ protected:
     class _Serializer
     {
     public:
-        void Serialize(const AB2DEntity* anEntity, gameevent::EntityGameEvent* pEntityGameEvent);
-        void Deserialisze(const gameevent::EntityGameEvent* pEntityGameEvent, AB2DEntity*& anEntity);
+        void Serialize(const AB2DEntity* anEntity, GameEventBuffers::EntityGameEventBuffer* pEntityGameEvent);
+        void Deserialisze(const GameEventBuffers::EntityGameEventBuffer* pEntityGameEvent, AB2DEntity*& anEntity);
     };
     
     b2Body*         m_pb2Body;

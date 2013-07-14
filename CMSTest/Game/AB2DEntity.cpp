@@ -9,16 +9,16 @@
 #include "AB2DEntity.h"
 #include "B2DWorld.h"
 #include "AEntity.h"
-#include "../Proto/EntityGameEvent.pb.h"
+#include "../Proto/EntityGameEventBuffer.pb.h"
 #include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
 #include <assert.h>
 
 AB2DEntity::_Serializer                 AB2DEntity::Serializer;
 
-using namespace gameevent;
+using namespace GameEventBuffers;
 
 
-void AB2DEntity::_Serializer::Serialize(const AB2DEntity* pB2DEntity, gameevent::EntityGameEvent* pEntityGameEvent)
+void AB2DEntity::_Serializer::Serialize(const AB2DEntity* pB2DEntity, GameEventBuffers::EntityGameEventBuffer* pEntityGameEvent)
 {
     using namespace box2d;
     
@@ -77,7 +77,7 @@ void AB2DEntity::_Serializer::Serialize(const AB2DEntity* pB2DEntity, gameevent:
     }
 }
 
-void AB2DEntity::_Serializer::Deserialisze(const gameevent::EntityGameEvent* pEntityGameEvent, AB2DEntity*& pEntity)
+void AB2DEntity::_Serializer::Deserialisze(const GameEventBuffers::EntityGameEventBuffer* pEntityGameEvent, AB2DEntity*& pEntity)
 {
     
     

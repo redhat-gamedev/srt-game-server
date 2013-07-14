@@ -9,8 +9,8 @@
 #ifndef __CMSTest__Entity__
 #define __CMSTest__Entity__
 
-#include "../Proto/GameEvent.pb.h"
-#include "../Proto/EntityGameEvent.pb.h"
+#include "../Proto/GameEventBuffer.pb.h"
+#include "../Proto/EntityGameEventBuffer.pb.h"
 #include "Poco/BasicEvent.h"
 #include <decaf/util/StlQueue.h>
 #include <string>
@@ -72,8 +72,8 @@ protected:
     class _Serializer
     {
     public:
-        void Serialize(const AEntity* anEntity, gameevent::EntityGameEvent* pEntityGameEvent);
-        void Deserialisze(const gameevent::EntityGameEvent* pEntityGameEvent, AEntity*& anEntity);
+        void Serialize(const AEntity* anEntity, GameEventBuffers::EntityGameEventBuffer* pEntityGameEvent);
+        void Deserialisze(const GameEventBuffers::EntityGameEventBuffer* pEntityGameEvent, AEntity*& anEntity);
     };
     
     // Class data

@@ -9,7 +9,7 @@
 #include "MessageDispatcher.h"
 #include "../Game/EventDispatcher.h"
 #include "../Shared/SimpleAsyncProducer.h"
-#include "../proto/GameEvent.pb.h"
+#include "../proto/GameEventBuffer.pb.h"
 #include "Poco/Delegate.h"
 #include <cms/CMSException.h>
 #include <google/protobuf/message.h>
@@ -83,7 +83,7 @@ std::pair<const unsigned char*, unsigned long>* MessageDispatcher::MessageToPair
     assert(pMessage);
 
     using namespace std;
-    using namespace gameevent;
+    using namespace GameEventBuffers;
     
     pair<const unsigned char*, unsigned long>*      pMessagePair = NULL;
     const unsigned char*                            pucMessageBytes = NULL;

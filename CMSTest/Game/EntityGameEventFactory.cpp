@@ -12,8 +12,8 @@
 
 // Constructor
 EntityGameEvent_Dependencies::
-EntityGameEvent_Dependencies(const EntityGameEvent_EntityGameEventType& anEntityGameEventType, AEntity*& pEntity) :
-    m_anEntityGameEventType(anEntityGameEventType),
+EntityGameEvent_Dependencies(const EntityGameEventBuffer_EntityGameEventBufferType& anEntityGameEventBufferType, AEntity*& pEntity) :
+    m_anEntityGameEventBufferType(anEntityGameEventBufferType),
     m_pEntity(pEntity)
 {
     assert(m_pEntity);
