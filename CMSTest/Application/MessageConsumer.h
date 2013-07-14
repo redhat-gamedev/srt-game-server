@@ -54,7 +54,7 @@ private:
 protected:
     //decaf::util::StlQueue<std::pair<unsigned char*, unsigned long>* >         m_aMessageQueue;
     decaf::util::StlQueue<Poco::Tuple<cms::BytesMessage*>* >          m_aTupleQueue;
-    SimpleAsyncConsumer*                                                    m_pSimpleAsyncConsumer;
+    SimpleAsyncConsumer*                                              m_pSimpleAsyncConsumer;
     
     // Helper(s)
     void                                                Enqueue(cms::BytesMessage* pBytesMessage);

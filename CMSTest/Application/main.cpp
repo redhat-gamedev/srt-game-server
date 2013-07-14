@@ -27,6 +27,9 @@
 #include "../Game/PodFactory.h"
 #include "../Game/BulletFactory.h"
 #include "../Game/EntityGameEventFactory.h"
+#include "../Proto/Command.pb.h"
+#include "../Proto/SecurityCommand.pb.h"
+#include "../Game/SecurityCommandBufferFactory.h"
 #include "../Shared/FactoryT.h"
 #include "activemq/library/ActiveMQCPP.h"
 #include <iostream>
@@ -87,12 +90,13 @@ int main(int argc, char* argv[])
     SimpleAsyncConsumer*                                        pSimpleAsyncConsumer = new SimpleAsyncConsumer(strBrokerURI, strCommandInDestinationURI);
     MessageConsumer::_Dependencies                              theMessageConsumerDependencies(pSimpleAsyncConsumer);
     MessageConsumer&                                            theMessageConsumer = MessageConsumer::Instance(&theMessageConsumerDependencies);
-    
-    CommandConsumer::_Dependencies                                theCommandConsumerDependencies(&theMessageConsumer, theEntityGameEventFactory);
+
+    FactoryT<command::Command, SecurityCommand_Dependencies>&     theSecurityCommandBufferFactory = FactoryT<command::Command, SecurityCommand_Dependencies>::Instance();
+    CommandConsumer::_Dependencies                                theCommandConsumerDependencies(&theMessageConsumer, theSecurityCommandBufferFactory);
     CommandConsumer&                                              theCommandConsumer = CommandConsumer::Instance(&theCommandConsumerDependencies);
     
-    FactoryT<SecurityCommand, SecurityCommand::_SecurityDependencies>&      aSecurityCommandFactory = FactoryT<SecurityCommand, SecurityCommand::_SecurityDependencies>::Instance();
-    CommandQueue::_Dependencies                                 theCommandQueueDependencies(aSecurityCommandFactory, theCommandConsumer);
+    FactoryT<::SecurityCommand, ::SecurityCommand::_SecurityDependencies>&      theSecurityCommandFactory = FactoryT<::SecurityCommand, ::SecurityCommand::_SecurityDependencies>::Instance();
+    CommandQueue::_Dependencies                                 theCommandQueueDependencies(theSecurityCommandFactory, theCommandConsumer);
     CommandQueue&                                               theCommandQueue = CommandQueue::Instance(&theCommandQueueDependencies);
     
     Server* pServer = new Server(theEventDispatcher,

@@ -8,8 +8,8 @@
 
 #include "CommandConsumer.h"
 #include "MessageConsumer.h"
-//#include "../Proto/GameEvent.pb.h"
-//ls #include "../Proto/EntityGameEvent.pb.h"
+//#include "../Proto/Command.pb.h"
+//ls #include "../Proto/SecurityCommand.pb.h"
 #include "Poco/Delegate.h"
 #include <cms/BytesMessage.h>
 #include <cms/CMSException.h>
@@ -22,8 +22,8 @@ using namespace google::protobuf;
 // Constructor
 CommandConsumer::
 _Dependencies::
-_Dependencies(MessageConsumer* pMessageConsumer, FactoryT<gameevent::GameEvent, EntityGameEvent_Dependencies>& anEntityGameEventFactory) :
-    m_anEntityGameEventFactory(anEntityGameEventFactory),
+_Dependencies(MessageConsumer* pMessageConsumer, FactoryT<command::Command, SecurityCommand_Dependencies>& anSecurityCommandFactory) :
+    m_aSecurityCommandFactory(anSecurityCommandFactory),
     m_pMessageConsumer(pMessageConsumer)
 {
     assert(m_pMessageConsumer);
@@ -40,7 +40,7 @@ _Dependencies::
 // Constructor(s)
 // Constructor
 CommandConsumer::CommandConsumer(_Dependencies* pDependencies) :
-    m_anEntityGameEventFactory(pDependencies->m_anEntityGameEventFactory)
+    m_aSecurityCommandFactory(pDependencies->m_aSecurityCommandFactory)
 {
     assert(pDependencies);
     
@@ -73,16 +73,13 @@ void CommandConsumer::Enqueue(Poco::Tuple<cms::BytesMessage*>* pTuple)
 {
     assert(pTuple);
     
-    using namespace gameevent;
+    using namespace command;
     
     cms::BytesMessage* pBytesMessage = pTuple->get<0>();
     std::pair<unsigned char*, unsigned long>* pMessagePair = MessageToPair(pBytesMessage);
     assert(pMessagePair);
     
-    
-    /// TODO: 071313 Replace this with CommandFactory!!!
-    google::protobuf::Message* pMessage = m_anEntityGameEventFactory.Create(pMessagePair);
-    delete pMessagePair;
+    google::protobuf::Message* pMessage = m_aSecurityCommandFactory.Create(pMessagePair);
     
     Poco::Tuple<cms::BytesMessage*, google::protobuf::Message*>* pNewTuple = new Poco::Tuple<cms::BytesMessage*, google::protobuf::Message*>(pBytesMessage, pMessage);
     
@@ -90,6 +87,9 @@ void CommandConsumer::Enqueue(Poco::Tuple<cms::BytesMessage*>* pTuple)
     m_aTupleQueue.lock();
     m_aTupleQueue.push(pNewTuple);
     m_aTupleQueue.unlock();
+    
+    delete pMessagePair;
+    delete pTuple;
 }
 
 void CommandConsumer::Enqueue(std::pair<unsigned char*, unsigned long>* pMessagePair)
@@ -102,11 +102,9 @@ void CommandConsumer::Enqueue(std::pair<unsigned char*, unsigned long>* pMessage
 
 Message* CommandConsumer::PairToMessage(std::pair<unsigned char*, unsigned long>* pMessagePair)
 {
-    using namespace gameevent;
-    
     assert(pMessagePair);
 
-    Message* pMessage = m_anEntityGameEventFactory.Create(pMessagePair);
+    Message* pMessage = m_aSecurityCommandFactory.Create(pMessagePair);
     
     return pMessage;
 }

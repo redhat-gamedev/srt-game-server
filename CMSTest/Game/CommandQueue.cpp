@@ -17,7 +17,7 @@
 // Constructor
 CommandQueue::
 _Dependencies::
-_Dependencies(FactoryT<SecurityCommand, SecurityCommand::_SecurityDependencies>& aSecurityCommandFactory, CommandConsumer& aCommandConsumer) :
+_Dependencies(FactoryT<::SecurityCommand, ::SecurityCommand::_SecurityDependencies>& aSecurityCommandFactory, CommandConsumer& aCommandConsumer) :
     m_aSecurityCommandFactory(aSecurityCommandFactory),
     m_aCommandConsumer(aCommandConsumer)
 {
@@ -72,8 +72,8 @@ void CommandQueue::HandleCommandConsumedEvent(const void* pSender, Poco::Tuple<c
     command::Command* pCommand = dynamic_cast<command::Command*>(pTuple->get<1>());
     cms::BytesMessage* pBytesMessage = pTuple->get<0>();
     
-    SecurityCommand::_SecurityDependencies theSecurityCommandDependencies(pCommand, pBytesMessage);
-    SecurityCommand* pSecurityCommand = m_aSecurityCommandFactory.Create(theSecurityCommandDependencies);
+    ::SecurityCommand::_SecurityDependencies theSecurityCommandDependencies(pCommand, pBytesMessage);
+    ::SecurityCommand* pSecurityCommand = m_aSecurityCommandFactory.Create(theSecurityCommandDependencies);
     
     m_aCommandQueue.lock();
     m_aCommandQueue.push(pSecurityCommand);

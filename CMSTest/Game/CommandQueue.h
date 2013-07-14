@@ -10,7 +10,7 @@
 #define __CMSTest__CommandQueue__
 
 #include "../Shared/FactoryT.h"
-#include "SecurityCommand.h"
+#include "../Application/SecurityCommand.h"
 #include "Poco/Tuple.h"
 #include <decaf/util/StlQueue.h>
 
@@ -37,10 +37,10 @@ public:
     protected:
     public:
         CommandConsumer&                                                        m_aCommandConsumer;
-        FactoryT<SecurityCommand, SecurityCommand::_SecurityDependencies>&      m_aSecurityCommandFactory;
+        FactoryT<::SecurityCommand, ::SecurityCommand::_SecurityDependencies>&      m_aSecurityCommandFactory;
         
         // Constructor
-        _Dependencies(FactoryT<SecurityCommand, SecurityCommand::_SecurityDependencies>& aSecurityCommandFactory, CommandConsumer& aCommandConsumer);
+        _Dependencies(FactoryT<::SecurityCommand, ::SecurityCommand::_SecurityDependencies>& aSecurityCommandFactory, CommandConsumer& aCommandConsumer);
         
         // Destructor
         ~_Dependencies();
@@ -48,7 +48,7 @@ public:
 private:
 protected:
     CommandConsumer&                                                        m_aCommandConsumer;
-    FactoryT<SecurityCommand, SecurityCommand::_SecurityDependencies>&      m_aSecurityCommandFactory;
+    FactoryT<::SecurityCommand, ::SecurityCommand::_SecurityDependencies>&      m_aSecurityCommandFactory;
     decaf::util::StlQueue<ACommand*>                                        m_aCommandQueue;
 
 

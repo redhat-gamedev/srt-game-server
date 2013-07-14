@@ -9,9 +9,9 @@
 #ifndef __CMSTest__CommandConsumer__
 #define __CMSTest__CommandConsumer__
 
-#include "EntityGameEventFactory.h"
-#include "../Proto/GameEvent.pb.h"
-#include "../Proto/EntityGameEvent.pb.h"
+#include "SecurityCommandBufferFactory.h"
+#include "../Proto/Command.pb.h"
+#include "../Proto/SecurityCommand.pb.h"
 #include "Poco/BasicEvent.h"
 #include "Poco/Tuple.h"
 #include <decaf/util/StlQueue.h>
@@ -25,7 +25,7 @@
 //    }
 //}
 
-//class EntityGameEvent_Dependencies;
+//class SecurityCommand_Dependencies;
 //class AEntity;
 
 //class IConsumptionStrategy
@@ -51,7 +51,7 @@
 //    }
 //}
 //
-//class GameEventMessageConsumptionStrategy :
+//class CommandMessageConsumptionStrategy :
 //    public IConsumptionStrategy
 //{
 //public:
@@ -76,10 +76,10 @@ public:
     protected:
     public:
         MessageConsumer*                                                        m_pMessageConsumer;
-        FactoryT<gameevent::GameEvent, EntityGameEvent_Dependencies>&           m_anEntityGameEventFactory;
+        FactoryT<command::Command, SecurityCommand_Dependencies>&       m_aSecurityCommandFactory;
         
         // Constructor
-        _Dependencies(MessageConsumer* pMessageConsumer, FactoryT<gameevent::GameEvent, EntityGameEvent_Dependencies>& anEntityGameEventFactory);
+        _Dependencies(MessageConsumer* pMessageConsumer, FactoryT<command::Command, SecurityCommand_Dependencies>& anSecurityCommandFactory);
         
         // Destructor
         ~_Dependencies();
@@ -88,7 +88,7 @@ public:
 private:
 protected:
     MessageConsumer*                                                        m_pMessageConsumer;
-    FactoryT<gameevent::GameEvent, EntityGameEvent_Dependencies>&           m_anEntityGameEventFactory;
+    FactoryT<command::Command, SecurityCommand_Dependencies>&       m_aSecurityCommandFactory;
     decaf::util::StlQueue<Poco::Tuple<cms::BytesMessage*, google::protobuf::Message*>* >                       m_aTupleQueue;
     // ConsumptionStrategy*     pConsumptionStrategy;
     
