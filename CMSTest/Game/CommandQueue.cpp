@@ -7,12 +7,17 @@
 //
 
 #include "CommandQueue.h"
+#include "CommandConsumer.h"
+#include "ACommand.h"
+#include "../Proto/Command.pb.h"
+#include "Poco/Delegate.h"
+
 
 
 // Constructor
 CommandQueue::
 _Dependencies::
-_Dependencies(FactoryT<SecurityCommand, SecurityCommand::_Dependencies>& aSecurityCommandFactory, CommandConsumer& aCommandConsumer) :
+_Dependencies(FactoryT<SecurityCommand, SecurityCommand::_SecurityDependencies>& aSecurityCommandFactory, CommandConsumer& aCommandConsumer) :
     m_aSecurityCommandFactory(aSecurityCommandFactory),
     m_aCommandConsumer(aCommandConsumer)
 {
@@ -29,31 +34,48 @@ _Dependencies::
 
 
 // Constructor
-CommandQueue::CommandQueue(_Dependencies& theDependencies) :
-    m_aSecurityCommandFactory(theDependencies.m_aSecurityCommandFactory),
-    m_aCommandConsumer(theDependencies.m_aCommandConsumer)
+CommandQueue::CommandQueue(_Dependencies* pDependencies) :
+    m_aSecurityCommandFactory(pDependencies->m_aSecurityCommandFactory),
+    m_aCommandConsumer(pDependencies->m_aCommandConsumer)
 {
+    using namespace Poco;
+    using namespace cms;
     
+    m_aCommandConsumer.CommandConsumedEvent += Delegate<CommandQueue, Tuple<BytesMessage*, google::protobuf::Message*>*& >(this, &CommandQueue::HandleCommandConsumedEvent);
 }
 
 // Destructor
 CommandQueue::~CommandQueue()
 {
+    using namespace Poco;
+    using namespace cms;
     
+    m_aCommandConsumer.CommandConsumedEvent -= Delegate<CommandQueue, Tuple<BytesMessage*, google::protobuf::Message*>*& >(this, &CommandQueue::HandleCommandConsumedEvent);
 }
 
 // Method(s)
 void CommandQueue::Execute()
 {
-    
+    ACommand* pCommand = NULL;
+    m_aCommandQueue.lock();
+    while (!m_aCommandQueue.empty())
+    {
+        pCommand = m_aCommandQueue.pop();
+        pCommand->Execute();
+    }
+    m_aCommandQueue.unlock();
 }
 
 // CommandConsumer Event response
-void CommandQueue::HandleCommandConsumedEvent(const void* pSender, google::protobuf::Message*& pMessage)
+void CommandQueue::HandleCommandConsumedEvent(const void* pSender, Poco::Tuple<cms::BytesMessage*, google::protobuf::Message*>*& pTuple)
 {
-    SecurityCommand::_Dependencies theSecurityCommandDependencies(*pMessage, );
+    command::Command* pCommand = dynamic_cast<command::Command*>(pTuple->get<1>());
+    cms::BytesMessage* pBytesMessage = pTuple->get<0>();
     
+    SecurityCommand::_SecurityDependencies theSecurityCommandDependencies(pCommand, pBytesMessage);
+    SecurityCommand* pSecurityCommand = m_aSecurityCommandFactory.Create(theSecurityCommandDependencies);
     
-    SecurityCommand* pSecurityCommand = m_aSecurityCommandFactory.Create(<#ACommand::_Dependencies &aD#>)
-    
+    m_aCommandQueue.lock();
+    m_aCommandQueue.push(pSecurityCommand);
+    m_aCommandQueue.unlock();
 }

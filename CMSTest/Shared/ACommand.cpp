@@ -7,14 +7,18 @@
 //
 
 #include "ACommand.h"
+#include <assert.h>
 
 
 // Constructor
 ACommand::
 _Dependencies::
-_Dependencies(command::Command& aCommand) :
-    m_aCommand(aCommand)
+_Dependencies(command::Command* pCommand, const cms::BytesMessage* pBytesMessage) :
+    m_pCommand(pCommand),
+    m_pBytesMessage(pBytesMessage)
 {
+    assert(m_pCommand);
+    assert(m_pBytesMessage);
     
 }
 
@@ -29,9 +33,11 @@ _Dependencies::
 
 // Constructor
 ACommand::ACommand(_Dependencies& theDependencies) :
-    m_aCommand(theDependencies.m_aCommand)
+    m_pCommand(theDependencies.m_pCommand),
+    m_pBytesMessage(theDependencies.m_pBytesMessage)
 {
-    
+    assert(m_pCommand);
+    assert(m_pBytesMessage);
 }
 
 // Destructor

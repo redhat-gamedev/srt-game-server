@@ -13,6 +13,10 @@ namespace command
 {
     class Command;
 }
+namespace cms
+{
+    class BytesMessage;
+}
 
 
 class ICommand
@@ -31,17 +35,19 @@ public:
     private:
     protected:
     public:
-        command::Command&       m_aCommand;
+        const cms::BytesMessage*        m_pBytesMessage;
+        command::Command*               m_pCommand;
         
         // Constructor
-        _Dependencies(command::Command& aCommand);
+        _Dependencies(command::Command* pCommand, const cms::BytesMessage* pBytesMessage);
         
         // Destructor
         virtual ~_Dependencies();
     };
     
 protected:
-    command::Command&       m_aCommand;
+    const cms::BytesMessage*        m_pBytesMessage;
+    command::Command*               m_pCommand;
     
     // Constructor
     ACommand(_Dependencies& theDependencies);

@@ -11,6 +11,8 @@
 //#include "../Proto/GameEvent.pb.h"
 //ls #include "../Proto/EntityGameEvent.pb.h"
 #include "Poco/Delegate.h"
+#include <cms/BytesMessage.h>
+#include <cms/CMSException.h>
 #include <vector>
 #include <assert.h>
 
@@ -46,7 +48,7 @@ CommandConsumer::CommandConsumer(_Dependencies* pDependencies) :
     
     assert(m_pMessageConsumer);
     
-    m_pMessageConsumer->ReceivedCMSMessageEvent += Poco::Delegate<CommandConsumer, std::pair<unsigned char*, unsigned long>*& >(this, &CommandConsumer::HandleReceivedCMSMessageEvent);
+    m_pMessageConsumer->ReceivedCMSMessageEvent += Poco::Delegate<CommandConsumer, Poco::Tuple<cms::BytesMessage*>*& >(this, &CommandConsumer::HandleReceivedCMSMessageEvent);
     
 }
 // CommandConsumer(ConsumptionStrategy* pConsumptionStrategy);
@@ -54,7 +56,7 @@ CommandConsumer::CommandConsumer(_Dependencies* pDependencies) :
 // Destructor
 CommandConsumer::~CommandConsumer()
 {
-    m_pMessageConsumer->ReceivedCMSMessageEvent -= Poco::Delegate<CommandConsumer, std::pair<unsigned char*, unsigned long>*& >(this, &CommandConsumer::HandleReceivedCMSMessageEvent);
+    m_pMessageConsumer->ReceivedCMSMessageEvent -= Poco::Delegate<CommandConsumer, Poco::Tuple<cms::BytesMessage*>*& >(this, &CommandConsumer::HandleReceivedCMSMessageEvent);
 }
 
 // Helper(s)
@@ -62,9 +64,32 @@ void CommandConsumer::Enqueue(google::protobuf::Message* pMessage)
 {
     assert(pMessage);
     
-    m_aCommandQueue.lock();
-    m_aCommandQueue.push(pMessage);
-    m_aCommandQueue.unlock();
+    m_aTupleQueue.lock();
+//    m_aTupleQueue.push(pMessage);
+    m_aTupleQueue.unlock();
+}
+
+void CommandConsumer::Enqueue(Poco::Tuple<cms::BytesMessage*>* pTuple)
+{
+    assert(pTuple);
+    
+    using namespace gameevent;
+    
+    cms::BytesMessage* pBytesMessage = pTuple->get<0>();
+    std::pair<unsigned char*, unsigned long>* pMessagePair = MessageToPair(pBytesMessage);
+    assert(pMessagePair);
+    
+    
+    /// TODO: 071313 Replace this with CommandFactory!!!
+    google::protobuf::Message* pMessage = m_anEntityGameEventFactory.Create(pMessagePair);
+    delete pMessagePair;
+    
+    Poco::Tuple<cms::BytesMessage*, google::protobuf::Message*>* pNewTuple = new Poco::Tuple<cms::BytesMessage*, google::protobuf::Message*>(pBytesMessage, pMessage);
+    
+    //pTuple->set<1>(pMessage);
+    m_aTupleQueue.lock();
+    m_aTupleQueue.push(pNewTuple);
+    m_aTupleQueue.unlock();
 }
 
 void CommandConsumer::Enqueue(std::pair<unsigned char*, unsigned long>* pMessagePair)
@@ -86,26 +111,46 @@ Message* CommandConsumer::PairToMessage(std::pair<unsigned char*, unsigned long>
     return pMessage;
 }
 
+std::pair<unsigned char*, unsigned long>* CommandConsumer::MessageToPair(cms::BytesMessage* pBytesMessage)
+{
+    assert(pBytesMessage);
+    
+    using namespace std;
+    using namespace cms;
+    
+    pair<unsigned char*, unsigned long>*    pMessagePair = NULL;
+    
+    pBytesMessage->reset();
+    int iBodyLength = pBytesMessage->getBodyLength();
+    unsigned char* pucBodyBytesCopy = new unsigned char[iBodyLength];
+    memcpy(pucBodyBytesCopy, pBytesMessage->getBodyBytes(), iBodyLength * sizeof(unsigned char));
+    pMessagePair = new pair<unsigned char*, unsigned long>(pucBodyBytesCopy, iBodyLength);
+    
+    return pMessagePair;
+}
+
 // Method(s)
 void CommandConsumer::Consume()
 {
-    Message* pMessage = NULL;
-    m_aCommandQueue.lock();
-    while (!m_aCommandQueue.empty())
+    Poco::Tuple<cms::BytesMessage*, google::protobuf::Message*>* pTuple = NULL;
+    m_aTupleQueue.lock();
+    while (!m_aTupleQueue.empty())
     {
-        pMessage = m_aCommandQueue.pop();
-        CommandConsumedEvent(this, pMessage);
+        pTuple = m_aTupleQueue.pop();
+        CommandConsumedEvent(this, pTuple);
     }
-    m_aCommandQueue.unlock();
+    m_aTupleQueue.unlock();
 }
+
+// Event response
+void CommandConsumer::HandleReceivedCMSMessageEvent(const void* pSender, Poco::Tuple<cms::BytesMessage*>*& pTuple)
+{
+    Enqueue(pTuple);
+}
+
 // void Consume(google::protobuf::Message* pMessage)
 //{
 //      m_pConsumptionStrategy->Consume();
 //}
 
 
-// Event response
-void CommandConsumer::HandleReceivedCMSMessageEvent(const void* pSender, std::pair<unsigned char*, unsigned long>*& pMessagePair)
-{
-    Enqueue(pMessagePair);
-}

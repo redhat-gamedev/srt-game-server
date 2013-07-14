@@ -13,12 +13,21 @@
 
 namespace command
 {
+    class Command;
     class SecurityCommand;
+}
+namespace google
+{
+    namespace protobuf
+    {
+        class Message;
+    }
 }
 namespace cms
 {
-    class Destination;
+    class BytesMessage;
 }
+
 
 class SecurityCommand :
     public ACommand
@@ -30,10 +39,8 @@ public:
     private:
     protected:
     public:
-        const cms::Destination*           m_pReplyToDestination;
-        
         // Constructor
-        _SecurityDependencies(command::Command& aCommand, const cms::Destination* pDestination);
+        _SecurityDependencies(command::Command* pCommand, const cms::BytesMessage* pBytesMessage);
         
         // Destructor
         ~_SecurityDependencies();
@@ -41,8 +48,6 @@ public:
     
 private:
 protected:
-    const cms::Destination*           m_pReplyToDestination;
-    
 public:
     // Constructor
     SecurityCommand(_SecurityDependencies& theDependencies);

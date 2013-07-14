@@ -53,7 +53,7 @@ protected:
     SimpleAsyncProducer*                            m_pSimpleAsyncProducer;
     
 public:
-    static _EventPublisher                          EventPublisher;
+    //static _EventPublisher                          EventPublisher;
 
     // Constructor(s)
     Security();

@@ -9,6 +9,7 @@
 #include "SecurityCommand.h"
 #include "../Shared/SimpleAsyncProducer.h"
 #include <cms/Destination.h>
+#include <cms/BytesMessage.h>
 //#include <cms/TemporaryQueue.h>
 #include <decaf/util/UUID.h>
 #include <string>
@@ -18,12 +19,9 @@
 // Constructor
 SecurityCommand::
 _SecurityDependencies::
-_SecurityDependencies(command::Command& aCommand, const cms::Destination* pReplyToDestination) :
-    m_pReplyToDestination(pReplyToDestination),
-    ACommand::_Dependencies(aCommand)
-{
-    assert(m_pReplyToDestination);
-    
+_SecurityDependencies(command::Command* pCommand, const cms::BytesMessage* pBytesMessage) :
+    ACommand::_Dependencies(pCommand, pBytesMessage)
+{    
 }
 
 // Destructor
@@ -37,7 +35,6 @@ _SecurityDependencies::
 
 // Constructor
 SecurityCommand::SecurityCommand(_SecurityDependencies& theDependencies) :
-    m_pReplyToDestination(theDependencies.m_pReplyToDestination),
     ACommand(theDependencies)
 {
     
@@ -56,15 +53,17 @@ void SecurityCommand::Execute()
     // don't forget to ->clone() the reply to destination if lifetime is impt
 //    const cms::Destination* pDestination = pBytesMessage->getCMSReplyTo();
 
-    assert(m_pReplyToDestination);
+    assert(m_pBytesMessage);
 
     std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp&keepAlive=true";
     
     decaf::util::UUID aNewUUID = decaf::util::UUID::randomUUID();
     std::string strUUID = aNewUUID.toString();
+    const cms::Destination* pReplyToDestination = m_pBytesMessage->getCMSReplyTo();
+    assert(pReplyToDestination);
 
     // TODO: Make not super inefficient
-    SimpleAsyncProducer* pSimpleAsyncProducer = new SimpleAsyncProducer(strBrokerURI, m_pReplyToDestination, false, true);
+    SimpleAsyncProducer* pSimpleAsyncProducer = new SimpleAsyncProducer(strBrokerURI, pReplyToDestination, false, true);
     pSimpleAsyncProducer->Send(strUUID);
     delete pSimpleAsyncProducer;
 }

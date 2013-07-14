@@ -28,7 +28,7 @@
 #include <string>
 #include <iostream>
 
-Security::_EventPublisher           Security::EventPublisher;
+//Security::_EventPublisher           Security::EventPublisher;
 
 using namespace cms;
 using namespace command;
@@ -44,62 +44,62 @@ Security::Security() :
     std::string     strSecurityInURI = "AAS.IN";
     std::string     strSecurityOutURI = "AAS.OUT";
     std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp&keepAlive=true";
-    PodFactory&  aPodFactory = PodFactory::Instance();
+    //PodFactory&  aPodFactory = PodFactory::Instance();
     
-    std::cout << "Security::Security()..." << std::endl;
+    //std::cout << "Security::Security()..." << std::endl;
     
-    m_pSimpleAsyncConsumer = new SimpleAsyncConsumer(strBrokerURI, strSecurityInURI, false, true);
-    m_pSimpleAsyncConsumer->runConsumer();
-    m_pSimpleAsyncConsumer->SetMessageListener(this);
-    
-    m_pSimpleAsyncProducer = new SimpleAsyncProducer(strBrokerURI, strSecurityOutURI, true, true);
+//    m_pSimpleAsyncConsumer = new SimpleAsyncConsumer(strBrokerURI, strSecurityInURI, false, true);
+//    m_pSimpleAsyncConsumer->runConsumer();
+//    m_pSimpleAsyncConsumer->SetMessageListener(this);
+//    
+//    m_pSimpleAsyncProducer = new SimpleAsyncProducer(strBrokerURI, strSecurityOutURI, true, true);
     
 //    Player::EventPublisher.CreatedEvent += Poco::Delegate<Security, const AEntity::EType&>(this, &Security::OnPlayerCreated);
 //    Player::EventPublisher.DestroyedEvent += Poco::Delegate<Security, const AEntity::EType&>(this, &Security::OnPlayerDestroyed);
     
-    aPodFactory.CreatedEvent += Poco::Delegate<Security, Player*&>(this, &Security::HandlePodCreatedEvent);
-    aPodFactory.DestroyedEvent += Poco::Delegate<Security, Player*&>(this, &Security::HandlePodDestroyedEvent);
+//    aPodFactory.CreatedEvent += Poco::Delegate<Security, Player*&>(this, &Security::HandlePodCreatedEvent);
+//    aPodFactory.DestroyedEvent += Poco::Delegate<Security, Player*&>(this, &Security::HandlePodDestroyedEvent);
 }
 
 // Destructor
 Security::~Security()
 {
-    PodFactory&  aPodFactory = PodFactory::Instance();
+    //PodFactory&  aPodFactory = PodFactory::Instance();
     
 //    Player::EventPublisher.DestroyedEvent -= Poco::Delegate<Security, const AEntity::EType&>(this, &Security::OnPlayerDestroyed);
 //    Player::EventPublisher.CreatedEvent -= Poco::Delegate<Security, const AEntity::EType&>(this, &Security::OnPlayerCreated);
     
-    aPodFactory.DestroyedEvent -= Poco::Delegate<Security, Player*&>(this, &Security::HandlePodDestroyedEvent);
-    aPodFactory.CreatedEvent -= Poco::Delegate<Security, Player*&>(this, &Security::HandlePodCreatedEvent);
-
-    m_pSimpleAsyncProducer->close();
-    delete m_pSimpleAsyncProducer;
-    m_pSimpleAsyncProducer = NULL;
-    
-    m_pSimpleAsyncConsumer->close();
-    delete m_pSimpleAsyncConsumer;
-    m_pSimpleAsyncConsumer = NULL;
+//    aPodFactory.DestroyedEvent -= Poco::Delegate<Security, Player*&>(this, &Security::HandlePodDestroyedEvent);
+//    aPodFactory.CreatedEvent -= Poco::Delegate<Security, Player*&>(this, &Security::HandlePodCreatedEvent);
+//
+//    m_pSimpleAsyncProducer->close();
+//    delete m_pSimpleAsyncProducer;
+//    m_pSimpleAsyncProducer = NULL;
+//    
+//    m_pSimpleAsyncConsumer->close();
+//    delete m_pSimpleAsyncConsumer;
+//    m_pSimpleAsyncConsumer = NULL;
 }
 
 // Event Firing Method(s)
 void Security::FireRequestJoinEvent(const std::string& strUUID)
 {
-    EventPublisher.RequestJoinEvent(this, strUUID);
+    //EventPublisher.RequestJoinEvent(this, strUUID);
 }
 
 void Security::FireRequestLeaveEvent(const std::string& strUUID)
 {
-    EventPublisher.RequestLeaveEvent(this, strUUID);
+    //EventPublisher.RequestLeaveEvent(this, strUUID);
 }
 
 void Security::FireHasJoinedEvent(const std::string& strUUID)
 {
-    EventPublisher.HasJoinedEvent(this, strUUID);
+    //EventPublisher.HasJoinedEvent(this, strUUID);
 }
 
 void Security::FireHasLeftEvent(const std::string& strUUID)
 {
-    EventPublisher.HasLeftEvent(this, strUUID);
+    //EventPublisher.HasLeftEvent(this, strUUID);
 }
 
 // MessageListener implementation

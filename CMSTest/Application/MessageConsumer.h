@@ -10,6 +10,7 @@
 #define __CMSTest__MessageConsumer__
 
 #include "Poco/BasicEvent.h"
+#include "Poco/Tuple.h"
 #include <cms/MessageListener.h>
 #include <decaf/util/StlQueue.h>
 #include <utility>
@@ -51,13 +52,14 @@ public:
     
 private:
 protected:
-    decaf::util::StlQueue<std::pair<unsigned char*, unsigned long>* >         m_aMessageQueue;
-    SimpleAsyncConsumer*                                                      m_pSimpleAsyncConsumer;
+    //decaf::util::StlQueue<std::pair<unsigned char*, unsigned long>* >         m_aMessageQueue;
+    decaf::util::StlQueue<Poco::Tuple<cms::BytesMessage*>* >          m_aTupleQueue;
+    SimpleAsyncConsumer*                                                    m_pSimpleAsyncConsumer;
     
     // Helper(s)
-    void                                                Enqueue(const cms::Message* pMessage);
+    void                                                Enqueue(cms::BytesMessage* pBytesMessage);
     void                                                Enqueue(std::pair<unsigned char*, unsigned long>* pMessagePair);
-    std::pair<unsigned char*, unsigned long>*           MessageToPair(const cms::Message* pMessage);
+    std::pair<unsigned char*, unsigned long>*           MessageToPair(cms::BytesMessage* pMessage);
     
     // Constructor
     MessageConsumer(_Dependencies* pDependencies);
@@ -66,7 +68,8 @@ protected:
     ~MessageConsumer();
     
 public:
-    Poco::BasicEvent<std::pair<unsigned char*, unsigned long>*& >              ReceivedCMSMessageEvent;
+    //Poco::BasicEvent<std::pair<unsigned char*, unsigned long>*& >              ReceivedCMSMessageEvent;
+    Poco::BasicEvent<Poco::Tuple<cms::BytesMessage*>*& >              ReceivedCMSMessageEvent;
     
     // Singleton
     static MessageConsumer& Instance(_Dependencies* pDependencies)//unsigned int uiCapacity)

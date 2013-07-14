@@ -18,13 +18,16 @@
 #include "Server.h"
 #include "MessageDispatcher.h"
 #include "MessageConsumer.h"
+#include "SecurityCommand.h"
 #include "../Shared/SimpleAsyncProducer.h"
 #include "../Shared/SimpleAsyncConsumer.h"
 #include "../Game/EventDispatcher.h"
 #include "../Game/CommandConsumer.h"
+#include "../Game/CommandQueue.h"
 #include "../Game/PodFactory.h"
 #include "../Game/BulletFactory.h"
 #include "../Game/EntityGameEventFactory.h"
+#include "../Shared/FactoryT.h"
 #include "activemq/library/ActiveMQCPP.h"
 #include <iostream>
 
@@ -51,11 +54,13 @@
 
 int main(int argc, char* argv[])
 {
-    std::string     strSecurityInURI = "AAS.IN";
-    std::string     strSecurityOutURI = "AAS.OUT";
-    std::string     strGameEventInDestinationURI = "GAME.EVENT.IN";
-    std::string     strGameEventOutDestinationURI = "GAME.EVENT.OUT";
+    //std::string     strSecurityInURI = "AAS.IN";
+    //std::string     strSecurityOutURI = "AAS.OUT";
+    //std::string     strGameEventInDestinationURI = "GAME.EVENT.IN";
+    
     std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp&keepAlive=true";
+    std::string     strCommandInDestinationURI = "COMMAND.IN";
+    std::string     strGameEventOutDestinationURI = "GAME.EVENT.OUT";
     
     std::cout << "Starting..." << std::endl;
     std::cout << "Initializing the ActiveMQCPP library" << std::endl;
@@ -69,7 +74,6 @@ int main(int argc, char* argv[])
 //    Base& aBaseReference = aDerived;
 //    aBaseReference.Func();
     
-    
     PodFactory&                                                 thePodFactory = PodFactory::Instance();
     BulletFactory&                                              theBulletFactory = BulletFactory::Instance();
     FactoryT<GameEvent, EntityGameEvent_Dependencies>&          theEntityGameEventFactory = FactoryT<GameEvent, EntityGameEvent_Dependencies>::Instance();
@@ -80,14 +84,22 @@ int main(int argc, char* argv[])
     MessageDispatcher::_Dependencies                            theMessageDispatcherDependencies(pSimpleAsyncProducer);
     MessageDispatcher&                                          theMessageDispatcher = MessageDispatcher::Instance(&theMessageDispatcherDependencies);
     
-    SimpleAsyncConsumer*                                        pSimpleAsyncConsumer = new SimpleAsyncConsumer(strBrokerURI, strGameEventInDestinationURI);
+    SimpleAsyncConsumer*                                        pSimpleAsyncConsumer = new SimpleAsyncConsumer(strBrokerURI, strCommandInDestinationURI);
     MessageConsumer::_Dependencies                              theMessageConsumerDependencies(pSimpleAsyncConsumer);
     MessageConsumer&                                            theMessageConsumer = MessageConsumer::Instance(&theMessageConsumerDependencies);
     
     CommandConsumer::_Dependencies                                theCommandConsumerDependencies(&theMessageConsumer, theEntityGameEventFactory);
     CommandConsumer&                                              theCommandConsumer = CommandConsumer::Instance(&theCommandConsumerDependencies);
     
-    Server* pServer = new Server(theEventDispatcher, theCommandConsumer, theMessageDispatcher, theMessageConsumer);
+    FactoryT<SecurityCommand, SecurityCommand::_SecurityDependencies>&      aSecurityCommandFactory = FactoryT<SecurityCommand, SecurityCommand::_SecurityDependencies>::Instance();
+    CommandQueue::_Dependencies                                 theCommandQueueDependencies(aSecurityCommandFactory, theCommandConsumer);
+    CommandQueue&                                               theCommandQueue = CommandQueue::Instance(&theCommandQueueDependencies);
+    
+    Server* pServer = new Server(theEventDispatcher,
+                                 theMessageDispatcher,
+                                 theMessageConsumer,
+                                 theCommandConsumer,
+                                 theCommandQueue);
 
     //pServer->run();
     

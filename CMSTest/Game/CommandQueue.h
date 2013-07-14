@@ -11,6 +11,8 @@
 
 #include "../Shared/FactoryT.h"
 #include "SecurityCommand.h"
+#include "Poco/Tuple.h"
+#include <decaf/util/StlQueue.h>
 
 namespace google
 {
@@ -18,6 +20,10 @@ namespace google
     {
         class Message;
     }
+}
+namespace cms
+{
+    class BytesMessage;
 }
 class CommandConsumer;
 
@@ -30,32 +36,41 @@ public:
     private:
     protected:
     public:
-        CommandConsumer&                                                m_aCommandConsumer;
-        FactoryT<SecurityCommand, SecurityCommand::_Dependencies>&      m_aSecurityCommandFactory;
+        CommandConsumer&                                                        m_aCommandConsumer;
+        FactoryT<SecurityCommand, SecurityCommand::_SecurityDependencies>&      m_aSecurityCommandFactory;
         
         // Constructor
-        _Dependencies(FactoryT<SecurityCommand, SecurityCommand::_Dependencies>& aSecurityCommandFactory, CommandConsumer& aCommandConsumer);
+        _Dependencies(FactoryT<SecurityCommand, SecurityCommand::_SecurityDependencies>& aSecurityCommandFactory, CommandConsumer& aCommandConsumer);
         
         // Destructor
         ~_Dependencies();
     };
 private:
 protected:
-    CommandConsumer&                                                m_aCommandConsumer;
-    FactoryT<SecurityCommand, SecurityCommand::_Dependencies>&      m_aSecurityCommandFactory;
-    
-public:
+    CommandConsumer&                                                        m_aCommandConsumer;
+    FactoryT<SecurityCommand, SecurityCommand::_SecurityDependencies>&      m_aSecurityCommandFactory;
+    decaf::util::StlQueue<ACommand*>                                        m_aCommandQueue;
+
+
     // Constructor
-    CommandQueue(_Dependencies& theDependencies);
+    CommandQueue(_Dependencies* pDependencies);
     
     // Destructor
     ~CommandQueue();
 
+public:
+    // Singleton
+    static CommandQueue& Instance(_Dependencies* pDependencies = NULL)//unsigned int uiCapacity)
+    {
+        static CommandQueue  aCommandQueue(pDependencies);
+        return aCommandQueue;
+    }
+    
     // Method(s)
     void Execute();
     
     // CommandConsumer Event response
-    void HandleCommandConsumedEvent(const void* pSender, google::protobuf::Message*& pMessage);
+    void HandleCommandConsumedEvent(const void* pSender, Poco::Tuple<cms::BytesMessage*, google::protobuf::Message*>*& pTuple);
     
 };
 

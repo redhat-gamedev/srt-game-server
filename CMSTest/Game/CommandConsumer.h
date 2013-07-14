@@ -13,6 +13,7 @@
 #include "../Proto/GameEvent.pb.h"
 #include "../Proto/EntityGameEvent.pb.h"
 #include "Poco/BasicEvent.h"
+#include "Poco/Tuple.h"
 #include <decaf/util/StlQueue.h>
 #include <utility>
 
@@ -58,8 +59,12 @@
 //    void Consume(google::protobuf::Message* pMessage);
 //};
 
+namespace cms
+{
+    class Message;
+    class BytesMessage;
+}
 class MessageConsumer;
-
 
 
 class CommandConsumer
@@ -82,28 +87,30 @@ public:
 
 private:
 protected:
-    decaf::util::StlQueue<google::protobuf::Message*>                       m_aCommandQueue;
     MessageConsumer*                                                        m_pMessageConsumer;
     FactoryT<gameevent::GameEvent, EntityGameEvent_Dependencies>&           m_anEntityGameEventFactory;
-    
-    // Helper(s)
-    void                                                Enqueue(google::protobuf::Message* pMessage);
-    void                                                Enqueue(std::pair<unsigned char*, unsigned long>* pMessagePair);
-    google::protobuf::Message*                          PairToMessage(std::pair<unsigned char*, unsigned long>* pMessagePair);
-    
+    decaf::util::StlQueue<Poco::Tuple<cms::BytesMessage*, google::protobuf::Message*>* >                       m_aTupleQueue;
     // ConsumptionStrategy*     pConsumptionStrategy;
     
     
+    // Helper(s)
+    void                                                Enqueue(google::protobuf::Message* pMessage);
+    void                                                Enqueue(Poco::Tuple<cms::BytesMessage*>* pTuple);
+    void                                                Enqueue(std::pair<unsigned char*, unsigned long>* pMessagePair);
+    google::protobuf::Message*                          PairToMessage(std::pair<unsigned char*, unsigned long>* pMessagePair);
+    std::pair<unsigned char*, unsigned long>*           MessageToPair(cms::BytesMessage* pBytesMessage);
+    
+    
     // Constructor(s)
-    // CommandConsumer(ConsumptionStrategy* pConsumptionStrategy);
     CommandConsumer(_Dependencies* pDependencies);
+    // CommandConsumer(ConsumptionStrategy* pConsumptionStrategy);
     
     // Destructor
     ~CommandConsumer();
     
 public:
     // Event(s)
-    Poco::BasicEvent<google::protobuf::Message*&>   CommandConsumedEvent;
+    Poco::BasicEvent<Poco::Tuple<cms::BytesMessage*, google::protobuf::Message*>*& >   CommandConsumedEvent;
     
     // Singleton
     static CommandConsumer& Instance(_Dependencies* pDependencies = NULL)//unsigned int uiCapacity)
@@ -116,7 +123,7 @@ public:
     void Consume();
     
     // Event response
-    void HandleReceivedCMSMessageEvent(const void* pSender, std::pair<unsigned char*, unsigned long>*& pMessagePair);
+    void HandleReceivedCMSMessageEvent(const void* pSender, Poco::Tuple<cms::BytesMessage*>*& pTuple);
 };
 
 #endif /* defined(__CMSTest__CommandConsumer__) */
