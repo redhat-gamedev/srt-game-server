@@ -1,7 +1,7 @@
 package usx.geofactions;
 
 import "SecurityCommandBuffer.proto";
-import "RawInputCommandBuffer.proto";
+//import "RawInputCommandBuffer.proto";
 
 
 message CommandBuffer
@@ -9,9 +9,9 @@ message CommandBuffer
 	enum CommandBufferType
 	{
 		SECURITY = 0;
-        RAWINPUT = 1;
+        //RAWINPUT = 1;
 	}
 	required CommandBufferType type = 1 [default = SECURITY];
     optional SecurityCommandBuffer securityCommandBuffer = 2;
-    optional RawInputCommandBuffer rawInputCommandBuffer = 3;
+    //optional RawInputCommandBuffer rawInputCommandBuffer = 3;
 }

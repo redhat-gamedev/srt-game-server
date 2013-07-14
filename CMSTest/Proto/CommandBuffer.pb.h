@@ -26,7 +26,6 @@
 #include <google/protobuf/generated_enum_reflection.h>
 #include <google/protobuf/unknown_field_set.h>
 #include "SecurityCommandBuffer.pb.h"
-#include "RawInputCommandBuffer.pb.h"
 // @@protoc_insertion_point(includes)
 
 namespace usx {
@@ -40,12 +39,11 @@ void protobuf_ShutdownFile_CommandBuffer_2eproto();
 class CommandBuffer;
 
 enum CommandBuffer_CommandBufferType {
-  CommandBuffer_CommandBufferType_SECURITY = 0,
-  CommandBuffer_CommandBufferType_RAWINPUT = 1
+  CommandBuffer_CommandBufferType_SECURITY = 0
 };
 bool CommandBuffer_CommandBufferType_IsValid(int value);
 const CommandBuffer_CommandBufferType CommandBuffer_CommandBufferType_CommandBufferType_MIN = CommandBuffer_CommandBufferType_SECURITY;
-const CommandBuffer_CommandBufferType CommandBuffer_CommandBufferType_CommandBufferType_MAX = CommandBuffer_CommandBufferType_RAWINPUT;
+const CommandBuffer_CommandBufferType CommandBuffer_CommandBufferType_CommandBufferType_MAX = CommandBuffer_CommandBufferType_SECURITY;
 const int CommandBuffer_CommandBufferType_CommandBufferType_ARRAYSIZE = CommandBuffer_CommandBufferType_CommandBufferType_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* CommandBuffer_CommandBufferType_descriptor();
@@ -114,7 +112,6 @@ class CommandBuffer : public ::google::protobuf::Message {
 
   typedef CommandBuffer_CommandBufferType CommandBufferType;
   static const CommandBufferType SECURITY = CommandBuffer_CommandBufferType_SECURITY;
-  static const CommandBufferType RAWINPUT = CommandBuffer_CommandBufferType_RAWINPUT;
   static inline bool CommandBufferType_IsValid(int value) {
     return CommandBuffer_CommandBufferType_IsValid(value);
   }
@@ -154,32 +151,20 @@ class CommandBuffer : public ::google::protobuf::Message {
   inline ::usx::geofactions::SecurityCommandBuffer* release_securitycommandbuffer();
   inline void set_allocated_securitycommandbuffer(::usx::geofactions::SecurityCommandBuffer* securitycommandbuffer);
 
-  // optional .usx.geofactions.RawInputCommandBuffer rawInputCommandBuffer = 3;
-  inline bool has_rawinputcommandbuffer() const;
-  inline void clear_rawinputcommandbuffer();
-  static const int kRawInputCommandBufferFieldNumber = 3;
-  inline const ::usx::geofactions::RawInputCommandBuffer& rawinputcommandbuffer() const;
-  inline ::usx::geofactions::RawInputCommandBuffer* mutable_rawinputcommandbuffer();
-  inline ::usx::geofactions::RawInputCommandBuffer* release_rawinputcommandbuffer();
-  inline void set_allocated_rawinputcommandbuffer(::usx::geofactions::RawInputCommandBuffer* rawinputcommandbuffer);
-
   // @@protoc_insertion_point(class_scope:usx.geofactions.CommandBuffer)
  private:
   inline void set_has_type();
   inline void clear_has_type();
   inline void set_has_securitycommandbuffer();
   inline void clear_has_securitycommandbuffer();
-  inline void set_has_rawinputcommandbuffer();
-  inline void clear_has_rawinputcommandbuffer();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::usx::geofactions::SecurityCommandBuffer* securitycommandbuffer_;
-  ::usx::geofactions::RawInputCommandBuffer* rawinputcommandbuffer_;
   int type_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
   friend void  protobuf_AddDesc_CommandBuffer_2eproto();
   friend void protobuf_AssignDesc_CommandBuffer_2eproto();
@@ -253,44 +238,6 @@ inline void CommandBuffer::set_allocated_securitycommandbuffer(::usx::geofaction
     set_has_securitycommandbuffer();
   } else {
     clear_has_securitycommandbuffer();
-  }
-}
-
-// optional .usx.geofactions.RawInputCommandBuffer rawInputCommandBuffer = 3;
-inline bool CommandBuffer::has_rawinputcommandbuffer() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void CommandBuffer::set_has_rawinputcommandbuffer() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void CommandBuffer::clear_has_rawinputcommandbuffer() {
-  _has_bits_[0] &= ~0x00000004u;
-}
-inline void CommandBuffer::clear_rawinputcommandbuffer() {
-  if (rawinputcommandbuffer_ != NULL) rawinputcommandbuffer_->::usx::geofactions::RawInputCommandBuffer::Clear();
-  clear_has_rawinputcommandbuffer();
-}
-inline const ::usx::geofactions::RawInputCommandBuffer& CommandBuffer::rawinputcommandbuffer() const {
-  return rawinputcommandbuffer_ != NULL ? *rawinputcommandbuffer_ : *default_instance_->rawinputcommandbuffer_;
-}
-inline ::usx::geofactions::RawInputCommandBuffer* CommandBuffer::mutable_rawinputcommandbuffer() {
-  set_has_rawinputcommandbuffer();
-  if (rawinputcommandbuffer_ == NULL) rawinputcommandbuffer_ = new ::usx::geofactions::RawInputCommandBuffer;
-  return rawinputcommandbuffer_;
-}
-inline ::usx::geofactions::RawInputCommandBuffer* CommandBuffer::release_rawinputcommandbuffer() {
-  clear_has_rawinputcommandbuffer();
-  ::usx::geofactions::RawInputCommandBuffer* temp = rawinputcommandbuffer_;
-  rawinputcommandbuffer_ = NULL;
-  return temp;
-}
-inline void CommandBuffer::set_allocated_rawinputcommandbuffer(::usx::geofactions::RawInputCommandBuffer* rawinputcommandbuffer) {
-  delete rawinputcommandbuffer_;
-  rawinputcommandbuffer_ = rawinputcommandbuffer;
-  if (rawinputcommandbuffer) {
-    set_has_rawinputcommandbuffer();
-  } else {
-    clear_has_rawinputcommandbuffer();
   }
 }
 

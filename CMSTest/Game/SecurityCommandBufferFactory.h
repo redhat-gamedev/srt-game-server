@@ -90,7 +90,13 @@ public:
         assert(iBodyBytes > 0);
         
         pCommand->ParseFromArray(pucBodyBytes, iBodyBytes);
-        
+        assert(CommandBuffer_CommandBufferType_SECURITY == pCommand->type());
+        const SecurityCommandBuffer& aSecurityCommand = pCommand->securitycommandbuffer();
+        if (SecurityCommandBuffer_SecurityCommandBufferType_JOIN == aSecurityCommand.type())
+        {
+            int i = 0;
+            ++i;
+        }
         delete[] pucBodyBytes;
         pucBodyBytes = NULL;
         delete pRawBytesPair;

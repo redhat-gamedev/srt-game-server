@@ -88,7 +88,7 @@ void CommandConsumer::Enqueue(Poco::Tuple<cms::BytesMessage*>* pTuple)
     m_aTupleQueue.push(pNewTuple);
     m_aTupleQueue.unlock();
     
-    delete pMessagePair;
+    //delete pMessagePair;
     delete pTuple;
 }
 
