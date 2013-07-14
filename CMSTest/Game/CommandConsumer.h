@@ -76,10 +76,10 @@ public:
     protected:
     public:
         MessageConsumer*                                                        m_pMessageConsumer;
-        FactoryT<CommandBuffers::CommandBuffer, SecurityCommand_Dependencies>&       m_aSecurityCommandFactory;
+        FactoryT<usx::geofactions::CommandBuffer, SecurityCommand_Dependencies>&       m_aSecurityCommandFactory;
         
         // Constructor
-        _Dependencies(MessageConsumer* pMessageConsumer, FactoryT<CommandBuffers::CommandBuffer, SecurityCommand_Dependencies>& anSecurityCommandFactory);
+        _Dependencies(MessageConsumer* pMessageConsumer, FactoryT<usx::geofactions::CommandBuffer, SecurityCommand_Dependencies>& anSecurityCommandFactory);
         
         // Destructor
         ~_Dependencies();
@@ -88,7 +88,7 @@ public:
 private:
 protected:
     MessageConsumer*                                                        m_pMessageConsumer;
-    FactoryT<CommandBuffers::CommandBuffer, SecurityCommand_Dependencies>&       m_aSecurityCommandFactory;
+    FactoryT<usx::geofactions::CommandBuffer, SecurityCommand_Dependencies>&       m_aSecurityCommandFactory;
     decaf::util::StlQueue<Poco::Tuple<cms::BytesMessage*, google::protobuf::Message*>* >                       m_aTupleQueue;
     // ConsumptionStrategy*     pConsumptionStrategy;
     

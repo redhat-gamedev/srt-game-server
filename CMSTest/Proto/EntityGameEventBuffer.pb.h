@@ -28,7 +28,8 @@
 #include "box2d.pb.h"
 // @@protoc_insertion_point(includes)
 
-namespace GameEventBuffers {
+namespace usx {
+namespace geofactions {
 
 // Internal implementation detail -- do not call these.
 void  protobuf_AddDesc_EntityGameEventBuffer_2eproto();
@@ -140,12 +141,12 @@ class EntityGameEventBuffer : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .GameEventBuffers.EntityGameEventBuffer.EntityGameEventBufferType type = 1;
+  // required .usx.geofactions.EntityGameEventBuffer.EntityGameEventBufferType type = 1;
   inline bool has_type() const;
   inline void clear_type();
   static const int kTypeFieldNumber = 1;
-  inline ::GameEventBuffers::EntityGameEventBuffer_EntityGameEventBufferType type() const;
-  inline void set_type(::GameEventBuffers::EntityGameEventBuffer_EntityGameEventBufferType value);
+  inline ::usx::geofactions::EntityGameEventBuffer_EntityGameEventBufferType type() const;
+  inline void set_type(::usx::geofactions::EntityGameEventBuffer_EntityGameEventBufferType value);
 
   // required uint64 entityTag = 2;
   inline bool has_entitytag() const;
@@ -175,7 +176,7 @@ class EntityGameEventBuffer : public ::google::protobuf::Message {
   inline ::box2d::PbBody* release_body();
   inline void set_allocated_body(::box2d::PbBody* body);
 
-  // @@protoc_insertion_point(class_scope:GameEventBuffers.EntityGameEventBuffer)
+  // @@protoc_insertion_point(class_scope:usx.geofactions.EntityGameEventBuffer)
  private:
   inline void set_has_type();
   inline void clear_has_type();
@@ -210,7 +211,7 @@ class EntityGameEventBuffer : public ::google::protobuf::Message {
 
 // EntityGameEventBuffer
 
-// required .GameEventBuffers.EntityGameEventBuffer.EntityGameEventBufferType type = 1;
+// required .usx.geofactions.EntityGameEventBuffer.EntityGameEventBufferType type = 1;
 inline bool EntityGameEventBuffer::has_type() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -224,11 +225,11 @@ inline void EntityGameEventBuffer::clear_type() {
   type_ = 0;
   clear_has_type();
 }
-inline ::GameEventBuffers::EntityGameEventBuffer_EntityGameEventBufferType EntityGameEventBuffer::type() const {
-  return static_cast< ::GameEventBuffers::EntityGameEventBuffer_EntityGameEventBufferType >(type_);
+inline ::usx::geofactions::EntityGameEventBuffer_EntityGameEventBufferType EntityGameEventBuffer::type() const {
+  return static_cast< ::usx::geofactions::EntityGameEventBuffer_EntityGameEventBufferType >(type_);
 }
-inline void EntityGameEventBuffer::set_type(::GameEventBuffers::EntityGameEventBuffer_EntityGameEventBufferType value) {
-  assert(::GameEventBuffers::EntityGameEventBuffer_EntityGameEventBufferType_IsValid(value));
+inline void EntityGameEventBuffer::set_type(::usx::geofactions::EntityGameEventBuffer_EntityGameEventBufferType value) {
+  assert(::usx::geofactions::EntityGameEventBuffer_EntityGameEventBufferType_IsValid(value));
   set_has_type();
   type_ = value;
 }
@@ -366,15 +367,16 @@ inline void EntityGameEventBuffer::set_allocated_body(::box2d::PbBody* body) {
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace GameEventBuffers
+}  // namespace geofactions
+}  // namespace usx
 
 #ifndef SWIG
 namespace google {
 namespace protobuf {
 
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::GameEventBuffers::EntityGameEventBuffer_EntityGameEventBufferType>() {
-  return ::GameEventBuffers::EntityGameEventBuffer_EntityGameEventBufferType_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::usx::geofactions::EntityGameEventBuffer_EntityGameEventBufferType>() {
+  return ::usx::geofactions::EntityGameEventBuffer_EntityGameEventBufferType_descriptor();
 }
 
 }  // namespace google

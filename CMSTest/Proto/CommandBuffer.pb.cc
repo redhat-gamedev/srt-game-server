@@ -16,7 +16,8 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 
-namespace CommandBuffers {
+namespace usx {
+namespace geofactions {
 
 namespace {
 
@@ -81,19 +82,19 @@ void protobuf_AddDesc_CommandBuffer_2eproto() {
   already_here = true;
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-  ::CommandBuffers::protobuf_AddDesc_SecurityCommandBuffer_2eproto();
-  ::CommandBuffers::protobuf_AddDesc_RawInputCommandBuffer_2eproto();
+  ::usx::geofactions::protobuf_AddDesc_SecurityCommandBuffer_2eproto();
+  ::usx::geofactions::protobuf_AddDesc_RawInputCommandBuffer_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\023CommandBuffer.proto\022\016CommandBuffers\032\033S"
-    "ecurityCommandBuffer.proto\032\033RawInputComm"
-    "andBuffer.proto\"\225\002\n\rCommandBuffer\022G\n\004typ"
-    "e\030\001 \002(\0162/.CommandBuffers.CommandBuffer.C"
-    "ommandBufferType:\010SECURITY\022D\n\025securityCo"
-    "mmandBuffer\030\002 \001(\0132%.CommandBuffers.Secur"
-    "ityCommandBuffer\022D\n\025rawInputCommandBuffe"
-    "r\030\003 \001(\0132%.CommandBuffers.RawInputCommand"
-    "Buffer\"/\n\021CommandBufferType\022\014\n\010SECURITY\020"
-    "\000\022\014\n\010RAWINPUT\020\001", 375);
+    "\n\023CommandBuffer.proto\022\017usx.geofactions\032\033"
+    "SecurityCommandBuffer.proto\032\033RawInputCom"
+    "mandBuffer.proto\"\230\002\n\rCommandBuffer\022H\n\004ty"
+    "pe\030\001 \002(\01620.usx.geofactions.CommandBuffer"
+    ".CommandBufferType:\010SECURITY\022E\n\025security"
+    "CommandBuffer\030\002 \001(\0132&.usx.geofactions.Se"
+    "curityCommandBuffer\022E\n\025rawInputCommandBu"
+    "ffer\030\003 \001(\0132&.usx.geofactions.RawInputCom"
+    "mandBuffer\"/\n\021CommandBufferType\022\014\n\010SECUR"
+    "ITY\020\000\022\014\n\010RAWINPUT\020\001", 379);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "CommandBuffer.proto", &protobuf_RegisterTypes);
   CommandBuffer::default_instance_ = new CommandBuffer();
@@ -143,8 +144,8 @@ CommandBuffer::CommandBuffer()
 }
 
 void CommandBuffer::InitAsDefaultInstance() {
-  securitycommandbuffer_ = const_cast< ::CommandBuffers::SecurityCommandBuffer*>(&::CommandBuffers::SecurityCommandBuffer::default_instance());
-  rawinputcommandbuffer_ = const_cast< ::CommandBuffers::RawInputCommandBuffer*>(&::CommandBuffers::RawInputCommandBuffer::default_instance());
+  securitycommandbuffer_ = const_cast< ::usx::geofactions::SecurityCommandBuffer*>(&::usx::geofactions::SecurityCommandBuffer::default_instance());
+  rawinputcommandbuffer_ = const_cast< ::usx::geofactions::RawInputCommandBuffer*>(&::usx::geofactions::RawInputCommandBuffer::default_instance());
 }
 
 CommandBuffer::CommandBuffer(const CommandBuffer& from)
@@ -197,10 +198,10 @@ void CommandBuffer::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     type_ = 0;
     if (has_securitycommandbuffer()) {
-      if (securitycommandbuffer_ != NULL) securitycommandbuffer_->::CommandBuffers::SecurityCommandBuffer::Clear();
+      if (securitycommandbuffer_ != NULL) securitycommandbuffer_->::usx::geofactions::SecurityCommandBuffer::Clear();
     }
     if (has_rawinputcommandbuffer()) {
-      if (rawinputcommandbuffer_ != NULL) rawinputcommandbuffer_->::CommandBuffers::RawInputCommandBuffer::Clear();
+      if (rawinputcommandbuffer_ != NULL) rawinputcommandbuffer_->::usx::geofactions::RawInputCommandBuffer::Clear();
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -213,7 +214,7 @@ bool CommandBuffer::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .CommandBuffers.CommandBuffer.CommandBufferType type = 1 [default = SECURITY];
+      // required .usx.geofactions.CommandBuffer.CommandBufferType type = 1 [default = SECURITY];
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
@@ -221,8 +222,8 @@ bool CommandBuffer::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::CommandBuffers::CommandBuffer_CommandBufferType_IsValid(value)) {
-            set_type(static_cast< ::CommandBuffers::CommandBuffer_CommandBufferType >(value));
+          if (::usx::geofactions::CommandBuffer_CommandBufferType_IsValid(value)) {
+            set_type(static_cast< ::usx::geofactions::CommandBuffer_CommandBufferType >(value));
           } else {
             mutable_unknown_fields()->AddVarint(1, value);
           }
@@ -233,7 +234,7 @@ bool CommandBuffer::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .CommandBuffers.SecurityCommandBuffer securityCommandBuffer = 2;
+      // optional .usx.geofactions.SecurityCommandBuffer securityCommandBuffer = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -247,7 +248,7 @@ bool CommandBuffer::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .CommandBuffers.RawInputCommandBuffer rawInputCommandBuffer = 3;
+      // optional .usx.geofactions.RawInputCommandBuffer rawInputCommandBuffer = 3;
       case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -279,19 +280,19 @@ bool CommandBuffer::MergePartialFromCodedStream(
 
 void CommandBuffer::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required .CommandBuffers.CommandBuffer.CommandBufferType type = 1 [default = SECURITY];
+  // required .usx.geofactions.CommandBuffer.CommandBufferType type = 1 [default = SECURITY];
   if (has_type()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       1, this->type(), output);
   }
 
-  // optional .CommandBuffers.SecurityCommandBuffer securityCommandBuffer = 2;
+  // optional .usx.geofactions.SecurityCommandBuffer securityCommandBuffer = 2;
   if (has_securitycommandbuffer()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       2, this->securitycommandbuffer(), output);
   }
 
-  // optional .CommandBuffers.RawInputCommandBuffer rawInputCommandBuffer = 3;
+  // optional .usx.geofactions.RawInputCommandBuffer rawInputCommandBuffer = 3;
   if (has_rawinputcommandbuffer()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       3, this->rawinputcommandbuffer(), output);
@@ -305,20 +306,20 @@ void CommandBuffer::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* CommandBuffer::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required .CommandBuffers.CommandBuffer.CommandBufferType type = 1 [default = SECURITY];
+  // required .usx.geofactions.CommandBuffer.CommandBufferType type = 1 [default = SECURITY];
   if (has_type()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       1, this->type(), target);
   }
 
-  // optional .CommandBuffers.SecurityCommandBuffer securityCommandBuffer = 2;
+  // optional .usx.geofactions.SecurityCommandBuffer securityCommandBuffer = 2;
   if (has_securitycommandbuffer()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         2, this->securitycommandbuffer(), target);
   }
 
-  // optional .CommandBuffers.RawInputCommandBuffer rawInputCommandBuffer = 3;
+  // optional .usx.geofactions.RawInputCommandBuffer rawInputCommandBuffer = 3;
   if (has_rawinputcommandbuffer()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -336,20 +337,20 @@ int CommandBuffer::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .CommandBuffers.CommandBuffer.CommandBufferType type = 1 [default = SECURITY];
+    // required .usx.geofactions.CommandBuffer.CommandBufferType type = 1 [default = SECURITY];
     if (has_type()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());
     }
 
-    // optional .CommandBuffers.SecurityCommandBuffer securityCommandBuffer = 2;
+    // optional .usx.geofactions.SecurityCommandBuffer securityCommandBuffer = 2;
     if (has_securitycommandbuffer()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->securitycommandbuffer());
     }
 
-    // optional .CommandBuffers.RawInputCommandBuffer rawInputCommandBuffer = 3;
+    // optional .usx.geofactions.RawInputCommandBuffer rawInputCommandBuffer = 3;
     if (has_rawinputcommandbuffer()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -387,10 +388,10 @@ void CommandBuffer::MergeFrom(const CommandBuffer& from) {
       set_type(from.type());
     }
     if (from.has_securitycommandbuffer()) {
-      mutable_securitycommandbuffer()->::CommandBuffers::SecurityCommandBuffer::MergeFrom(from.securitycommandbuffer());
+      mutable_securitycommandbuffer()->::usx::geofactions::SecurityCommandBuffer::MergeFrom(from.securitycommandbuffer());
     }
     if (from.has_rawinputcommandbuffer()) {
-      mutable_rawinputcommandbuffer()->::CommandBuffers::RawInputCommandBuffer::MergeFrom(from.rawinputcommandbuffer());
+      mutable_rawinputcommandbuffer()->::usx::geofactions::RawInputCommandBuffer::MergeFrom(from.rawinputcommandbuffer());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -442,6 +443,7 @@ void CommandBuffer::Swap(CommandBuffer* other) {
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace CommandBuffers
+}  // namespace geofactions
+}  // namespace usx
 
 // @@protoc_insertion_point(global_scope)

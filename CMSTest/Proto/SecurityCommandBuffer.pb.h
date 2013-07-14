@@ -27,7 +27,8 @@
 #include <google/protobuf/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
 
-namespace CommandBuffers {
+namespace usx {
+namespace geofactions {
 
 // Internal implementation detail -- do not call these.
 void  protobuf_AddDesc_SecurityCommandBuffer_2eproto();
@@ -135,12 +136,12 @@ class SecurityCommandBuffer : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .CommandBuffers.SecurityCommandBuffer.SecurityCommandBufferType type = 1;
+  // required .usx.geofactions.SecurityCommandBuffer.SecurityCommandBufferType type = 1;
   inline bool has_type() const;
   inline void clear_type();
   static const int kTypeFieldNumber = 1;
-  inline ::CommandBuffers::SecurityCommandBuffer_SecurityCommandBufferType type() const;
-  inline void set_type(::CommandBuffers::SecurityCommandBuffer_SecurityCommandBufferType value);
+  inline ::usx::geofactions::SecurityCommandBuffer_SecurityCommandBufferType type() const;
+  inline void set_type(::usx::geofactions::SecurityCommandBuffer_SecurityCommandBufferType value);
 
   // optional string UUID = 2;
   inline bool has_uuid() const;
@@ -154,7 +155,7 @@ class SecurityCommandBuffer : public ::google::protobuf::Message {
   inline ::std::string* release_uuid();
   inline void set_allocated_uuid(::std::string* uuid);
 
-  // @@protoc_insertion_point(class_scope:CommandBuffers.SecurityCommandBuffer)
+  // @@protoc_insertion_point(class_scope:usx.geofactions.SecurityCommandBuffer)
  private:
   inline void set_has_type();
   inline void clear_has_type();
@@ -183,7 +184,7 @@ class SecurityCommandBuffer : public ::google::protobuf::Message {
 
 // SecurityCommandBuffer
 
-// required .CommandBuffers.SecurityCommandBuffer.SecurityCommandBufferType type = 1;
+// required .usx.geofactions.SecurityCommandBuffer.SecurityCommandBufferType type = 1;
 inline bool SecurityCommandBuffer::has_type() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -197,11 +198,11 @@ inline void SecurityCommandBuffer::clear_type() {
   type_ = 0;
   clear_has_type();
 }
-inline ::CommandBuffers::SecurityCommandBuffer_SecurityCommandBufferType SecurityCommandBuffer::type() const {
-  return static_cast< ::CommandBuffers::SecurityCommandBuffer_SecurityCommandBufferType >(type_);
+inline ::usx::geofactions::SecurityCommandBuffer_SecurityCommandBufferType SecurityCommandBuffer::type() const {
+  return static_cast< ::usx::geofactions::SecurityCommandBuffer_SecurityCommandBufferType >(type_);
 }
-inline void SecurityCommandBuffer::set_type(::CommandBuffers::SecurityCommandBuffer_SecurityCommandBufferType value) {
-  assert(::CommandBuffers::SecurityCommandBuffer_SecurityCommandBufferType_IsValid(value));
+inline void SecurityCommandBuffer::set_type(::usx::geofactions::SecurityCommandBuffer_SecurityCommandBufferType value) {
+  assert(::usx::geofactions::SecurityCommandBuffer_SecurityCommandBufferType_IsValid(value));
   set_has_type();
   type_ = value;
 }
@@ -279,15 +280,16 @@ inline void SecurityCommandBuffer::set_allocated_uuid(::std::string* uuid) {
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace CommandBuffers
+}  // namespace geofactions
+}  // namespace usx
 
 #ifndef SWIG
 namespace google {
 namespace protobuf {
 
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::CommandBuffers::SecurityCommandBuffer_SecurityCommandBufferType>() {
-  return ::CommandBuffers::SecurityCommandBuffer_SecurityCommandBufferType_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::usx::geofactions::SecurityCommandBuffer_SecurityCommandBufferType>() {
+  return ::usx::geofactions::SecurityCommandBuffer_SecurityCommandBufferType_descriptor();
 }
 
 }  // namespace google

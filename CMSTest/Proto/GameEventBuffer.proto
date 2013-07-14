@@ -1,4 +1,4 @@
-package GameEventBuffers;
+package usx.geofactions;
 
 import "EntityGameEventBuffer.proto";
 

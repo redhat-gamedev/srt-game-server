@@ -40,7 +40,7 @@ public:
     protected:
     public:
         // Constructor
-        _SecurityDependencies(CommandBuffers::CommandBuffer* pCommand, const cms::BytesMessage* pBytesMessage);
+        _SecurityDependencies(usx::geofactions::CommandBuffer* pCommand, const cms::BytesMessage* pBytesMessage);
         
         // Destructor
         ~_SecurityDependencies();

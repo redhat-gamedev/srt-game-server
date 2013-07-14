@@ -28,7 +28,8 @@
 #include "EntityGameEventBuffer.pb.h"
 // @@protoc_insertion_point(includes)
 
-namespace GameEventBuffers {
+namespace usx {
+namespace geofactions {
 
 // Internal implementation detail -- do not call these.
 void  protobuf_AddDesc_GameEventBuffer_2eproto();
@@ -134,23 +135,23 @@ class GameEventBuffer : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .GameEventBuffers.GameEventBuffer.GameEventBufferType type = 1 [default = ENTITY];
+  // required .usx.geofactions.GameEventBuffer.GameEventBufferType type = 1 [default = ENTITY];
   inline bool has_type() const;
   inline void clear_type();
   static const int kTypeFieldNumber = 1;
-  inline ::GameEventBuffers::GameEventBuffer_GameEventBufferType type() const;
-  inline void set_type(::GameEventBuffers::GameEventBuffer_GameEventBufferType value);
+  inline ::usx::geofactions::GameEventBuffer_GameEventBufferType type() const;
+  inline void set_type(::usx::geofactions::GameEventBuffer_GameEventBufferType value);
 
-  // optional .GameEventBuffers.EntityGameEventBuffer entityGameEventBuffer = 3;
+  // optional .usx.geofactions.EntityGameEventBuffer entityGameEventBuffer = 3;
   inline bool has_entitygameeventbuffer() const;
   inline void clear_entitygameeventbuffer();
   static const int kEntityGameEventBufferFieldNumber = 3;
-  inline const ::GameEventBuffers::EntityGameEventBuffer& entitygameeventbuffer() const;
-  inline ::GameEventBuffers::EntityGameEventBuffer* mutable_entitygameeventbuffer();
-  inline ::GameEventBuffers::EntityGameEventBuffer* release_entitygameeventbuffer();
-  inline void set_allocated_entitygameeventbuffer(::GameEventBuffers::EntityGameEventBuffer* entitygameeventbuffer);
+  inline const ::usx::geofactions::EntityGameEventBuffer& entitygameeventbuffer() const;
+  inline ::usx::geofactions::EntityGameEventBuffer* mutable_entitygameeventbuffer();
+  inline ::usx::geofactions::EntityGameEventBuffer* release_entitygameeventbuffer();
+  inline void set_allocated_entitygameeventbuffer(::usx::geofactions::EntityGameEventBuffer* entitygameeventbuffer);
 
-  // @@protoc_insertion_point(class_scope:GameEventBuffers.GameEventBuffer)
+  // @@protoc_insertion_point(class_scope:usx.geofactions.GameEventBuffer)
  private:
   inline void set_has_type();
   inline void clear_has_type();
@@ -159,7 +160,7 @@ class GameEventBuffer : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::GameEventBuffers::EntityGameEventBuffer* entitygameeventbuffer_;
+  ::usx::geofactions::EntityGameEventBuffer* entitygameeventbuffer_;
   int type_;
 
   mutable int _cached_size_;
@@ -179,7 +180,7 @@ class GameEventBuffer : public ::google::protobuf::Message {
 
 // GameEventBuffer
 
-// required .GameEventBuffers.GameEventBuffer.GameEventBufferType type = 1 [default = ENTITY];
+// required .usx.geofactions.GameEventBuffer.GameEventBufferType type = 1 [default = ENTITY];
 inline bool GameEventBuffer::has_type() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -193,16 +194,16 @@ inline void GameEventBuffer::clear_type() {
   type_ = 0;
   clear_has_type();
 }
-inline ::GameEventBuffers::GameEventBuffer_GameEventBufferType GameEventBuffer::type() const {
-  return static_cast< ::GameEventBuffers::GameEventBuffer_GameEventBufferType >(type_);
+inline ::usx::geofactions::GameEventBuffer_GameEventBufferType GameEventBuffer::type() const {
+  return static_cast< ::usx::geofactions::GameEventBuffer_GameEventBufferType >(type_);
 }
-inline void GameEventBuffer::set_type(::GameEventBuffers::GameEventBuffer_GameEventBufferType value) {
-  assert(::GameEventBuffers::GameEventBuffer_GameEventBufferType_IsValid(value));
+inline void GameEventBuffer::set_type(::usx::geofactions::GameEventBuffer_GameEventBufferType value) {
+  assert(::usx::geofactions::GameEventBuffer_GameEventBufferType_IsValid(value));
   set_has_type();
   type_ = value;
 }
 
-// optional .GameEventBuffers.EntityGameEventBuffer entityGameEventBuffer = 3;
+// optional .usx.geofactions.EntityGameEventBuffer entityGameEventBuffer = 3;
 inline bool GameEventBuffer::has_entitygameeventbuffer() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -213,24 +214,24 @@ inline void GameEventBuffer::clear_has_entitygameeventbuffer() {
   _has_bits_[0] &= ~0x00000002u;
 }
 inline void GameEventBuffer::clear_entitygameeventbuffer() {
-  if (entitygameeventbuffer_ != NULL) entitygameeventbuffer_->::GameEventBuffers::EntityGameEventBuffer::Clear();
+  if (entitygameeventbuffer_ != NULL) entitygameeventbuffer_->::usx::geofactions::EntityGameEventBuffer::Clear();
   clear_has_entitygameeventbuffer();
 }
-inline const ::GameEventBuffers::EntityGameEventBuffer& GameEventBuffer::entitygameeventbuffer() const {
+inline const ::usx::geofactions::EntityGameEventBuffer& GameEventBuffer::entitygameeventbuffer() const {
   return entitygameeventbuffer_ != NULL ? *entitygameeventbuffer_ : *default_instance_->entitygameeventbuffer_;
 }
-inline ::GameEventBuffers::EntityGameEventBuffer* GameEventBuffer::mutable_entitygameeventbuffer() {
+inline ::usx::geofactions::EntityGameEventBuffer* GameEventBuffer::mutable_entitygameeventbuffer() {
   set_has_entitygameeventbuffer();
-  if (entitygameeventbuffer_ == NULL) entitygameeventbuffer_ = new ::GameEventBuffers::EntityGameEventBuffer;
+  if (entitygameeventbuffer_ == NULL) entitygameeventbuffer_ = new ::usx::geofactions::EntityGameEventBuffer;
   return entitygameeventbuffer_;
 }
-inline ::GameEventBuffers::EntityGameEventBuffer* GameEventBuffer::release_entitygameeventbuffer() {
+inline ::usx::geofactions::EntityGameEventBuffer* GameEventBuffer::release_entitygameeventbuffer() {
   clear_has_entitygameeventbuffer();
-  ::GameEventBuffers::EntityGameEventBuffer* temp = entitygameeventbuffer_;
+  ::usx::geofactions::EntityGameEventBuffer* temp = entitygameeventbuffer_;
   entitygameeventbuffer_ = NULL;
   return temp;
 }
-inline void GameEventBuffer::set_allocated_entitygameeventbuffer(::GameEventBuffers::EntityGameEventBuffer* entitygameeventbuffer) {
+inline void GameEventBuffer::set_allocated_entitygameeventbuffer(::usx::geofactions::EntityGameEventBuffer* entitygameeventbuffer) {
   delete entitygameeventbuffer_;
   entitygameeventbuffer_ = entitygameeventbuffer;
   if (entitygameeventbuffer) {
@@ -243,15 +244,16 @@ inline void GameEventBuffer::set_allocated_entitygameeventbuffer(::GameEventBuff
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace GameEventBuffers
+}  // namespace geofactions
+}  // namespace usx
 
 #ifndef SWIG
 namespace google {
 namespace protobuf {
 
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::GameEventBuffers::GameEventBuffer_GameEventBufferType>() {
-  return ::GameEventBuffers::GameEventBuffer_GameEventBufferType_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::usx::geofactions::GameEventBuffer_GameEventBufferType>() {
+  return ::usx::geofactions::GameEventBuffer_GameEventBufferType_descriptor();
 }
 
 }  // namespace google

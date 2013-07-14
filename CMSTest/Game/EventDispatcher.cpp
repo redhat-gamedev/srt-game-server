@@ -17,14 +17,14 @@
 #include "Poco/Delegate.h"
 #include <assert.h>
 
-using namespace GameEventBuffers;
+using namespace usx::geofactions;
 using namespace google::protobuf;
 
 
 // Constructor
 EventDispatcher::
 _Dependencies::
-_Dependencies(PodFactory& aPodFactory, BulletFactory& aBulletFactory, FactoryT<GameEventBuffers::GameEventBuffer, EntityGameEvent_Dependencies>& anEntityGameEventFactory) :
+_Dependencies(PodFactory& aPodFactory, BulletFactory& aBulletFactory, FactoryT<usx::geofactions::GameEventBuffer, EntityGameEvent_Dependencies>& anEntityGameEventFactory) :
     m_aPodFactory(aPodFactory),
     m_aBulletFactory(aBulletFactory),
     m_anEntityGameEventFactory(anEntityGameEventFactory)

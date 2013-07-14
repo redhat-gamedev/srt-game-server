@@ -15,10 +15,10 @@
 
 AB2DEntity::_Serializer                 AB2DEntity::Serializer;
 
-using namespace GameEventBuffers;
+using namespace usx::geofactions;
 
 
-void AB2DEntity::_Serializer::Serialize(const AB2DEntity* pB2DEntity, GameEventBuffers::EntityGameEventBuffer* pEntityGameEvent)
+void AB2DEntity::_Serializer::Serialize(const AB2DEntity* pB2DEntity, usx::geofactions::EntityGameEventBuffer* pEntityGameEvent)
 {
     using namespace box2d;
     
@@ -77,7 +77,7 @@ void AB2DEntity::_Serializer::Serialize(const AB2DEntity* pB2DEntity, GameEventB
     }
 }
 
-void AB2DEntity::_Serializer::Deserialisze(const GameEventBuffers::EntityGameEventBuffer* pEntityGameEvent, AB2DEntity*& pEntity)
+void AB2DEntity::_Serializer::Deserialisze(const usx::geofactions::EntityGameEventBuffer* pEntityGameEvent, AB2DEntity*& pEntity)
 {
     
     

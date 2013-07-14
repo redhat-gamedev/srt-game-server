@@ -1,4 +1,4 @@
-package CommandBuffers;
+package usx.geofactions;
 
 
 message SecurityCommandBuffer

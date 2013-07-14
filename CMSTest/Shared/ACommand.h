@@ -9,9 +9,12 @@
 #ifndef __CMSTest__Command__
 #define __CMSTest__Command__
 
-namespace CommandBuffers
+namespace usx
 {
-    class CommandBuffer;
+    namespace geofactions
+    {
+        class CommandBuffer;
+    }
 }
 namespace cms
 {
@@ -36,10 +39,10 @@ public:
     protected:
     public:
         const cms::BytesMessage*        m_pBytesMessage;
-        CommandBuffers::CommandBuffer*               m_pCommand;
+        usx::geofactions::CommandBuffer*               m_pCommand;
         
         // Constructor
-        _Dependencies(CommandBuffers::CommandBuffer* pCommand, const cms::BytesMessage* pBytesMessage);
+        _Dependencies(usx::geofactions::CommandBuffer* pCommand, const cms::BytesMessage* pBytesMessage);
         
         // Destructor
         virtual ~_Dependencies();
@@ -47,7 +50,7 @@ public:
     
 protected:
     const cms::BytesMessage*        m_pBytesMessage;
-    CommandBuffers::CommandBuffer*               m_pCommand;
+    usx::geofactions::CommandBuffer*               m_pCommand;
     
     // Constructor
     ACommand(_Dependencies& theDependencies);

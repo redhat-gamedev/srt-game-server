@@ -28,7 +28,8 @@
 #include "DualStickRawInputCommandBuffer.pb.h"
 // @@protoc_insertion_point(includes)
 
-namespace CommandBuffers {
+namespace usx {
+namespace geofactions {
 
 // Internal implementation detail -- do not call these.
 void  protobuf_AddDesc_RawInputCommandBuffer_2eproto();
@@ -134,12 +135,12 @@ class RawInputCommandBuffer : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .CommandBuffers.RawInputCommandBuffer.RawInputCommandBufferType type = 1 [default = DUALSTICK];
+  // required .usx.geofactions.RawInputCommandBuffer.RawInputCommandBufferType type = 1 [default = DUALSTICK];
   inline bool has_type() const;
   inline void clear_type();
   static const int kTypeFieldNumber = 1;
-  inline ::CommandBuffers::RawInputCommandBuffer_RawInputCommandBufferType type() const;
-  inline void set_type(::CommandBuffers::RawInputCommandBuffer_RawInputCommandBufferType value);
+  inline ::usx::geofactions::RawInputCommandBuffer_RawInputCommandBufferType type() const;
+  inline void set_type(::usx::geofactions::RawInputCommandBuffer_RawInputCommandBufferType value);
 
   // required string UUID = 2;
   inline bool has_uuid() const;
@@ -153,16 +154,16 @@ class RawInputCommandBuffer : public ::google::protobuf::Message {
   inline ::std::string* release_uuid();
   inline void set_allocated_uuid(::std::string* uuid);
 
-  // optional .CommandBuffers.DualStickRawInputCommandBuffer dualStickRawInputCommandBuffer = 3;
+  // optional .usx.geofactions.DualStickRawInputCommandBuffer dualStickRawInputCommandBuffer = 3;
   inline bool has_dualstickrawinputcommandbuffer() const;
   inline void clear_dualstickrawinputcommandbuffer();
   static const int kDualStickRawInputCommandBufferFieldNumber = 3;
-  inline const ::CommandBuffers::DualStickRawInputCommandBuffer& dualstickrawinputcommandbuffer() const;
-  inline ::CommandBuffers::DualStickRawInputCommandBuffer* mutable_dualstickrawinputcommandbuffer();
-  inline ::CommandBuffers::DualStickRawInputCommandBuffer* release_dualstickrawinputcommandbuffer();
-  inline void set_allocated_dualstickrawinputcommandbuffer(::CommandBuffers::DualStickRawInputCommandBuffer* dualstickrawinputcommandbuffer);
+  inline const ::usx::geofactions::DualStickRawInputCommandBuffer& dualstickrawinputcommandbuffer() const;
+  inline ::usx::geofactions::DualStickRawInputCommandBuffer* mutable_dualstickrawinputcommandbuffer();
+  inline ::usx::geofactions::DualStickRawInputCommandBuffer* release_dualstickrawinputcommandbuffer();
+  inline void set_allocated_dualstickrawinputcommandbuffer(::usx::geofactions::DualStickRawInputCommandBuffer* dualstickrawinputcommandbuffer);
 
-  // @@protoc_insertion_point(class_scope:CommandBuffers.RawInputCommandBuffer)
+  // @@protoc_insertion_point(class_scope:usx.geofactions.RawInputCommandBuffer)
  private:
   inline void set_has_type();
   inline void clear_has_type();
@@ -174,7 +175,7 @@ class RawInputCommandBuffer : public ::google::protobuf::Message {
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::std::string* uuid_;
-  ::CommandBuffers::DualStickRawInputCommandBuffer* dualstickrawinputcommandbuffer_;
+  ::usx::geofactions::DualStickRawInputCommandBuffer* dualstickrawinputcommandbuffer_;
   int type_;
 
   mutable int _cached_size_;
@@ -194,7 +195,7 @@ class RawInputCommandBuffer : public ::google::protobuf::Message {
 
 // RawInputCommandBuffer
 
-// required .CommandBuffers.RawInputCommandBuffer.RawInputCommandBufferType type = 1 [default = DUALSTICK];
+// required .usx.geofactions.RawInputCommandBuffer.RawInputCommandBufferType type = 1 [default = DUALSTICK];
 inline bool RawInputCommandBuffer::has_type() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -208,11 +209,11 @@ inline void RawInputCommandBuffer::clear_type() {
   type_ = 0;
   clear_has_type();
 }
-inline ::CommandBuffers::RawInputCommandBuffer_RawInputCommandBufferType RawInputCommandBuffer::type() const {
-  return static_cast< ::CommandBuffers::RawInputCommandBuffer_RawInputCommandBufferType >(type_);
+inline ::usx::geofactions::RawInputCommandBuffer_RawInputCommandBufferType RawInputCommandBuffer::type() const {
+  return static_cast< ::usx::geofactions::RawInputCommandBuffer_RawInputCommandBufferType >(type_);
 }
-inline void RawInputCommandBuffer::set_type(::CommandBuffers::RawInputCommandBuffer_RawInputCommandBufferType value) {
-  assert(::CommandBuffers::RawInputCommandBuffer_RawInputCommandBufferType_IsValid(value));
+inline void RawInputCommandBuffer::set_type(::usx::geofactions::RawInputCommandBuffer_RawInputCommandBufferType value) {
+  assert(::usx::geofactions::RawInputCommandBuffer_RawInputCommandBufferType_IsValid(value));
   set_has_type();
   type_ = value;
 }
@@ -287,7 +288,7 @@ inline void RawInputCommandBuffer::set_allocated_uuid(::std::string* uuid) {
   }
 }
 
-// optional .CommandBuffers.DualStickRawInputCommandBuffer dualStickRawInputCommandBuffer = 3;
+// optional .usx.geofactions.DualStickRawInputCommandBuffer dualStickRawInputCommandBuffer = 3;
 inline bool RawInputCommandBuffer::has_dualstickrawinputcommandbuffer() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -298,24 +299,24 @@ inline void RawInputCommandBuffer::clear_has_dualstickrawinputcommandbuffer() {
   _has_bits_[0] &= ~0x00000004u;
 }
 inline void RawInputCommandBuffer::clear_dualstickrawinputcommandbuffer() {
-  if (dualstickrawinputcommandbuffer_ != NULL) dualstickrawinputcommandbuffer_->::CommandBuffers::DualStickRawInputCommandBuffer::Clear();
+  if (dualstickrawinputcommandbuffer_ != NULL) dualstickrawinputcommandbuffer_->::usx::geofactions::DualStickRawInputCommandBuffer::Clear();
   clear_has_dualstickrawinputcommandbuffer();
 }
-inline const ::CommandBuffers::DualStickRawInputCommandBuffer& RawInputCommandBuffer::dualstickrawinputcommandbuffer() const {
+inline const ::usx::geofactions::DualStickRawInputCommandBuffer& RawInputCommandBuffer::dualstickrawinputcommandbuffer() const {
   return dualstickrawinputcommandbuffer_ != NULL ? *dualstickrawinputcommandbuffer_ : *default_instance_->dualstickrawinputcommandbuffer_;
 }
-inline ::CommandBuffers::DualStickRawInputCommandBuffer* RawInputCommandBuffer::mutable_dualstickrawinputcommandbuffer() {
+inline ::usx::geofactions::DualStickRawInputCommandBuffer* RawInputCommandBuffer::mutable_dualstickrawinputcommandbuffer() {
   set_has_dualstickrawinputcommandbuffer();
-  if (dualstickrawinputcommandbuffer_ == NULL) dualstickrawinputcommandbuffer_ = new ::CommandBuffers::DualStickRawInputCommandBuffer;
+  if (dualstickrawinputcommandbuffer_ == NULL) dualstickrawinputcommandbuffer_ = new ::usx::geofactions::DualStickRawInputCommandBuffer;
   return dualstickrawinputcommandbuffer_;
 }
-inline ::CommandBuffers::DualStickRawInputCommandBuffer* RawInputCommandBuffer::release_dualstickrawinputcommandbuffer() {
+inline ::usx::geofactions::DualStickRawInputCommandBuffer* RawInputCommandBuffer::release_dualstickrawinputcommandbuffer() {
   clear_has_dualstickrawinputcommandbuffer();
-  ::CommandBuffers::DualStickRawInputCommandBuffer* temp = dualstickrawinputcommandbuffer_;
+  ::usx::geofactions::DualStickRawInputCommandBuffer* temp = dualstickrawinputcommandbuffer_;
   dualstickrawinputcommandbuffer_ = NULL;
   return temp;
 }
-inline void RawInputCommandBuffer::set_allocated_dualstickrawinputcommandbuffer(::CommandBuffers::DualStickRawInputCommandBuffer* dualstickrawinputcommandbuffer) {
+inline void RawInputCommandBuffer::set_allocated_dualstickrawinputcommandbuffer(::usx::geofactions::DualStickRawInputCommandBuffer* dualstickrawinputcommandbuffer) {
   delete dualstickrawinputcommandbuffer_;
   dualstickrawinputcommandbuffer_ = dualstickrawinputcommandbuffer;
   if (dualstickrawinputcommandbuffer) {
@@ -328,15 +329,16 @@ inline void RawInputCommandBuffer::set_allocated_dualstickrawinputcommandbuffer(
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace CommandBuffers
+}  // namespace geofactions
+}  // namespace usx
 
 #ifndef SWIG
 namespace google {
 namespace protobuf {
 
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::CommandBuffers::RawInputCommandBuffer_RawInputCommandBufferType>() {
-  return ::CommandBuffers::RawInputCommandBuffer_RawInputCommandBufferType_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::usx::geofactions::RawInputCommandBuffer_RawInputCommandBufferType>() {
+  return ::usx::geofactions::RawInputCommandBuffer_RawInputCommandBufferType_descriptor();
 }
 
 }  // namespace google

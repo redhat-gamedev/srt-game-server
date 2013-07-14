@@ -83,7 +83,7 @@ std::pair<const unsigned char*, unsigned long>* MessageDispatcher::MessageToPair
     assert(pMessage);
 
     using namespace std;
-    using namespace GameEventBuffers;
+    using namespace usx::geofactions;
     
     pair<const unsigned char*, unsigned long>*      pMessagePair = NULL;
     const unsigned char*                            pucMessageBytes = NULL;

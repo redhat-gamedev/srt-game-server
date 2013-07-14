@@ -16,7 +16,8 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 
-namespace CommandBuffers {
+namespace usx {
+namespace geofactions {
 
 namespace {
 
@@ -80,11 +81,11 @@ void protobuf_AddDesc_DualStickRawInputCommandBuffer_2eproto() {
 
   ::box2d::protobuf_AddDesc_box2d_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n$DualStickRawInputCommandBuffer.proto\022\016"
-    "CommandBuffers\032\013box2d.proto\"c\n\036DualStick"
-    "RawInputCommandBuffer\022\037\n\010pbv2Move\030\001 \002(\0132"
-    "\r.box2d.PbVec2\022 \n\tpbv2Shoot\030\002 \002(\0132\r.box2"
-    "d.PbVec2", 168);
+    "\n$DualStickRawInputCommandBuffer.proto\022\017"
+    "usx.geofactions\032\013box2d.proto\"c\n\036DualStic"
+    "kRawInputCommandBuffer\022\037\n\010pbv2Move\030\001 \002(\013"
+    "2\r.box2d.PbVec2\022 \n\tpbv2Shoot\030\002 \002(\0132\r.box"
+    "2d.PbVec2", 169);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "DualStickRawInputCommandBuffer.proto", &protobuf_RegisterTypes);
   DualStickRawInputCommandBuffer::default_instance_ = new DualStickRawInputCommandBuffer();
@@ -366,6 +367,7 @@ void DualStickRawInputCommandBuffer::Swap(DualStickRawInputCommandBuffer* other)
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace CommandBuffers
+}  // namespace geofactions
+}  // namespace usx
 
 // @@protoc_insertion_point(global_scope)

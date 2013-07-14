@@ -14,7 +14,7 @@
 #include "../Proto/SecurityCommandBuffer.pb.h"
 #include <assert.h>
 
-using namespace CommandBuffers;
+using namespace usx::geofactions;
 
 
 class SecurityCommand_Dependencies
@@ -67,7 +67,7 @@ public:
         
         pCommand->set_type(CommandBuffer_CommandBufferType_SECURITY);
         
-        CommandBuffers::SecurityCommandBuffer* pSecurityCommand = pCommand->mutable_securitycommandbuffer();
+        usx::geofactions::SecurityCommandBuffer* pSecurityCommand = pCommand->mutable_securitycommandbuffer();
         assert(NULL != pSecurityCommand);
         pSecurityCommand->set_type(theSecurityCommand_Dependencies.m_anSecurityCommandBufferType);
         

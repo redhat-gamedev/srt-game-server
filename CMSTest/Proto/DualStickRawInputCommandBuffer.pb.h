@@ -27,7 +27,8 @@
 #include "box2d.pb.h"
 // @@protoc_insertion_point(includes)
 
-namespace CommandBuffers {
+namespace usx {
+namespace geofactions {
 
 // Internal implementation detail -- do not call these.
 void  protobuf_AddDesc_DualStickRawInputCommandBuffer_2eproto();
@@ -110,7 +111,7 @@ class DualStickRawInputCommandBuffer : public ::google::protobuf::Message {
   inline ::box2d::PbVec2* release_pbv2shoot();
   inline void set_allocated_pbv2shoot(::box2d::PbVec2* pbv2shoot);
 
-  // @@protoc_insertion_point(class_scope:CommandBuffers.DualStickRawInputCommandBuffer)
+  // @@protoc_insertion_point(class_scope:usx.geofactions.DualStickRawInputCommandBuffer)
  private:
   inline void set_has_pbv2move();
   inline void clear_has_pbv2move();
@@ -218,7 +219,8 @@ inline void DualStickRawInputCommandBuffer::set_allocated_pbv2shoot(::box2d::PbV
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace CommandBuffers
+}  // namespace geofactions
+}  // namespace usx
 
 #ifndef SWIG
 namespace google {

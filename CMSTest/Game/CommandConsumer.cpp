@@ -22,7 +22,7 @@ using namespace google::protobuf;
 // Constructor
 CommandConsumer::
 _Dependencies::
-_Dependencies(MessageConsumer* pMessageConsumer, FactoryT<CommandBuffers::CommandBuffer, SecurityCommand_Dependencies>& anSecurityCommandFactory) :
+_Dependencies(MessageConsumer* pMessageConsumer, FactoryT<usx::geofactions::CommandBuffer, SecurityCommand_Dependencies>& anSecurityCommandFactory) :
     m_aSecurityCommandFactory(anSecurityCommandFactory),
     m_pMessageConsumer(pMessageConsumer)
 {
@@ -73,7 +73,7 @@ void CommandConsumer::Enqueue(Poco::Tuple<cms::BytesMessage*>* pTuple)
 {
     assert(pTuple);
     
-    using namespace CommandBuffers;
+    using namespace usx::geofactions;
     
     cms::BytesMessage* pBytesMessage = pTuple->get<0>();
     std::pair<unsigned char*, unsigned long>* pMessagePair = MessageToPair(pBytesMessage);

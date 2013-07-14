@@ -1,4 +1,4 @@
-package CommandBuffers;
+package usx.geofactions;
 
 import "SecurityCommandBuffer.proto";
 import "RawInputCommandBuffer.proto";

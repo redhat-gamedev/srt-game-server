@@ -91,7 +91,7 @@ int main(int argc, char* argv[])
     MessageConsumer::_Dependencies                              theMessageConsumerDependencies(pSimpleAsyncConsumer);
     MessageConsumer&                                            theMessageConsumer = MessageConsumer::Instance(&theMessageConsumerDependencies);
 
-    FactoryT<CommandBuffers::CommandBuffer, SecurityCommand_Dependencies>&     theSecurityCommandBufferFactory = FactoryT<CommandBuffers::CommandBuffer, SecurityCommand_Dependencies>::Instance();
+    FactoryT<usx::geofactions::CommandBuffer, SecurityCommand_Dependencies>&     theSecurityCommandBufferFactory = FactoryT<usx::geofactions::CommandBuffer, SecurityCommand_Dependencies>::Instance();
     CommandConsumer::_Dependencies                                theCommandConsumerDependencies(&theMessageConsumer, theSecurityCommandBufferFactory);
     CommandConsumer&                                              theCommandConsumer = CommandConsumer::Instance(&theCommandConsumerDependencies);
     

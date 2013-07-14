@@ -45,10 +45,10 @@ public:
     public:
         PodFactory&                     m_aPodFactory;
         BulletFactory&                  m_aBulletFactory;
-        FactoryT<GameEventBuffers::GameEventBuffer, EntityGameEvent_Dependencies>&         m_anEntityGameEventFactory;
+        FactoryT<usx::geofactions::GameEventBuffer, EntityGameEvent_Dependencies>&         m_anEntityGameEventFactory;
         
         // Constructor
-        _Dependencies(PodFactory& aPodFactory, BulletFactory& aBulletFactory, FactoryT<GameEventBuffers::GameEventBuffer, EntityGameEvent_Dependencies>& pEntityGameEventFactory);
+        _Dependencies(PodFactory& aPodFactory, BulletFactory& aBulletFactory, FactoryT<usx::geofactions::GameEventBuffer, EntityGameEvent_Dependencies>& pEntityGameEventFactory);
         
         // Destructor
         ~_Dependencies();
@@ -56,13 +56,13 @@ public:
 
 private:
 protected:
-    FactoryT<GameEventBuffers::GameEventBuffer, EntityGameEvent_Dependencies>&                                 m_anEntityGameEventFactory;
+    FactoryT<usx::geofactions::GameEventBuffer, EntityGameEvent_Dependencies>&                                 m_anEntityGameEventFactory;
     decaf::util::StlQueue<google::protobuf::Message*>       m_anEventQueue;
 
     // Helper(s)
     void                            Enqueue(google::protobuf::Message* pMessage);
     google::protobuf::Message*      Dequeue();
-    GameEventBuffers::GameEventBuffer*           CreateGameEvent(GameEventBuffers::EntityGameEventBuffer_EntityGameEventBufferType eEntityGameEvent_EntityGameEventBufferType, AEntity* pEntity);
+    usx::geofactions::GameEventBuffer*           CreateGameEvent(usx::geofactions::EntityGameEventBuffer_EntityGameEventBufferType eEntityGameEvent_EntityGameEventBufferType, AEntity* pEntity);
     
     // Constructor(s)
     EventDispatcher(_Dependencies* pDependencies);

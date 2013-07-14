@@ -16,7 +16,8 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 
-namespace CommandBuffers {
+namespace usx {
+namespace geofactions {
 
 namespace {
 
@@ -81,12 +82,12 @@ void protobuf_AddDesc_SecurityCommandBuffer_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\033SecurityCommandBuffer.proto\022\016CommandBu"
-    "ffers\"\246\001\n\025SecurityCommandBuffer\022M\n\004type\030"
-    "\001 \002(\0162\?.CommandBuffers.SecurityCommandBu"
-    "ffer.SecurityCommandBufferType\022\014\n\004UUID\030\002"
-    " \001(\t\"0\n\031SecurityCommandBufferType\022\010\n\004JOI"
-    "N\020\000\022\t\n\005LEAVE\020\001", 214);
+    "\n\033SecurityCommandBuffer.proto\022\017usx.geofa"
+    "ctions\"\247\001\n\025SecurityCommandBuffer\022N\n\004type"
+    "\030\001 \002(\0162@.usx.geofactions.SecurityCommand"
+    "Buffer.SecurityCommandBufferType\022\014\n\004UUID"
+    "\030\002 \001(\t\"0\n\031SecurityCommandBufferType\022\010\n\004J"
+    "OIN\020\000\022\t\n\005LEAVE\020\001", 216);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "SecurityCommandBuffer.proto", &protobuf_RegisterTypes);
   SecurityCommandBuffer::default_instance_ = new SecurityCommandBuffer();
@@ -202,7 +203,7 @@ bool SecurityCommandBuffer::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .CommandBuffers.SecurityCommandBuffer.SecurityCommandBufferType type = 1;
+      // required .usx.geofactions.SecurityCommandBuffer.SecurityCommandBufferType type = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
@@ -210,8 +211,8 @@ bool SecurityCommandBuffer::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::CommandBuffers::SecurityCommandBuffer_SecurityCommandBufferType_IsValid(value)) {
-            set_type(static_cast< ::CommandBuffers::SecurityCommandBuffer_SecurityCommandBufferType >(value));
+          if (::usx::geofactions::SecurityCommandBuffer_SecurityCommandBufferType_IsValid(value)) {
+            set_type(static_cast< ::usx::geofactions::SecurityCommandBuffer_SecurityCommandBufferType >(value));
           } else {
             mutable_unknown_fields()->AddVarint(1, value);
           }
@@ -257,7 +258,7 @@ bool SecurityCommandBuffer::MergePartialFromCodedStream(
 
 void SecurityCommandBuffer::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required .CommandBuffers.SecurityCommandBuffer.SecurityCommandBufferType type = 1;
+  // required .usx.geofactions.SecurityCommandBuffer.SecurityCommandBufferType type = 1;
   if (has_type()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       1, this->type(), output);
@@ -280,7 +281,7 @@ void SecurityCommandBuffer::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* SecurityCommandBuffer::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required .CommandBuffers.SecurityCommandBuffer.SecurityCommandBufferType type = 1;
+  // required .usx.geofactions.SecurityCommandBuffer.SecurityCommandBufferType type = 1;
   if (has_type()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       1, this->type(), target);
@@ -307,7 +308,7 @@ int SecurityCommandBuffer::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .CommandBuffers.SecurityCommandBuffer.SecurityCommandBufferType type = 1;
+    // required .usx.geofactions.SecurityCommandBuffer.SecurityCommandBufferType type = 1;
     if (has_type()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());
@@ -396,6 +397,7 @@ void SecurityCommandBuffer::Swap(SecurityCommandBuffer* other) {
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace CommandBuffers
+}  // namespace geofactions
+}  // namespace usx
 
 // @@protoc_insertion_point(global_scope)

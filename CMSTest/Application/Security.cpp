@@ -31,7 +31,7 @@
 //Security::_EventPublisher           Security::EventPublisher;
 
 using namespace cms;
-using namespace CommandBuffers;
+using namespace usx::geofactions;
 
 
 // Constructor(s)

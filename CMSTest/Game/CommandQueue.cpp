@@ -69,7 +69,7 @@ void CommandQueue::Execute()
 // CommandConsumer Event response
 void CommandQueue::HandleCommandConsumedEvent(const void* pSender, Poco::Tuple<cms::BytesMessage*, google::protobuf::Message*>*& pTuple)
 {
-    CommandBuffers::CommandBuffer* pCommand = dynamic_cast<CommandBuffers::CommandBuffer*>(pTuple->get<1>());
+    usx::geofactions::CommandBuffer* pCommand = dynamic_cast<usx::geofactions::CommandBuffer*>(pTuple->get<1>());
     cms::BytesMessage* pBytesMessage = pTuple->get<0>();
     
     ::SecurityCommand::_SecurityDependencies theSecurityCommandDependencies(pCommand, pBytesMessage);

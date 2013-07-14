@@ -15,7 +15,7 @@
 #include "AEntity.h"
 #include <assert.h>
 
-using namespace GameEventBuffers;
+using namespace usx::geofactions;
 
 class AEntity;
 

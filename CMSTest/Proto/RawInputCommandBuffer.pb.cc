@@ -16,7 +16,8 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 
-namespace CommandBuffers {
+namespace usx {
+namespace geofactions {
 
 namespace {
 
@@ -81,17 +82,17 @@ void protobuf_AddDesc_RawInputCommandBuffer_2eproto() {
   already_here = true;
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-  ::CommandBuffers::protobuf_AddDesc_DualStickRawInputCommandBuffer_2eproto();
+  ::usx::geofactions::protobuf_AddDesc_DualStickRawInputCommandBuffer_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\033RawInputCommandBuffer.proto\022\016CommandBu"
-    "ffers\032$DualStickRawInputCommandBuffer.pr"
-    "oto\"\203\002\n\025RawInputCommandBuffer\022X\n\004type\030\001 "
-    "\002(\0162\?.CommandBuffers.RawInputCommandBuff"
-    "er.RawInputCommandBufferType:\tDUALSTICK\022"
-    "\014\n\004UUID\030\002 \002(\t\022V\n\036dualStickRawInputComman"
-    "dBuffer\030\003 \001(\0132..CommandBuffers.DualStick"
-    "RawInputCommandBuffer\"*\n\031RawInputCommand"
-    "BufferType\022\r\n\tDUALSTICK\020\000", 345);
+    "\n\033RawInputCommandBuffer.proto\022\017usx.geofa"
+    "ctions\032$DualStickRawInputCommandBuffer.p"
+    "roto\"\205\002\n\025RawInputCommandBuffer\022Y\n\004type\030\001"
+    " \002(\0162@.usx.geofactions.RawInputCommandBu"
+    "ffer.RawInputCommandBufferType:\tDUALSTIC"
+    "K\022\014\n\004UUID\030\002 \002(\t\022W\n\036dualStickRawInputComm"
+    "andBuffer\030\003 \001(\0132/.usx.geofactions.DualSt"
+    "ickRawInputCommandBuffer\"*\n\031RawInputComm"
+    "andBufferType\022\r\n\tDUALSTICK\020\000", 348);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "RawInputCommandBuffer.proto", &protobuf_RegisterTypes);
   RawInputCommandBuffer::default_instance_ = new RawInputCommandBuffer();
@@ -139,7 +140,7 @@ RawInputCommandBuffer::RawInputCommandBuffer()
 }
 
 void RawInputCommandBuffer::InitAsDefaultInstance() {
-  dualstickrawinputcommandbuffer_ = const_cast< ::CommandBuffers::DualStickRawInputCommandBuffer*>(&::CommandBuffers::DualStickRawInputCommandBuffer::default_instance());
+  dualstickrawinputcommandbuffer_ = const_cast< ::usx::geofactions::DualStickRawInputCommandBuffer*>(&::usx::geofactions::DualStickRawInputCommandBuffer::default_instance());
 }
 
 RawInputCommandBuffer::RawInputCommandBuffer(const RawInputCommandBuffer& from)
@@ -199,7 +200,7 @@ void RawInputCommandBuffer::Clear() {
       }
     }
     if (has_dualstickrawinputcommandbuffer()) {
-      if (dualstickrawinputcommandbuffer_ != NULL) dualstickrawinputcommandbuffer_->::CommandBuffers::DualStickRawInputCommandBuffer::Clear();
+      if (dualstickrawinputcommandbuffer_ != NULL) dualstickrawinputcommandbuffer_->::usx::geofactions::DualStickRawInputCommandBuffer::Clear();
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -212,7 +213,7 @@ bool RawInputCommandBuffer::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .CommandBuffers.RawInputCommandBuffer.RawInputCommandBufferType type = 1 [default = DUALSTICK];
+      // required .usx.geofactions.RawInputCommandBuffer.RawInputCommandBufferType type = 1 [default = DUALSTICK];
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
@@ -220,8 +221,8 @@ bool RawInputCommandBuffer::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::CommandBuffers::RawInputCommandBuffer_RawInputCommandBufferType_IsValid(value)) {
-            set_type(static_cast< ::CommandBuffers::RawInputCommandBuffer_RawInputCommandBufferType >(value));
+          if (::usx::geofactions::RawInputCommandBuffer_RawInputCommandBufferType_IsValid(value)) {
+            set_type(static_cast< ::usx::geofactions::RawInputCommandBuffer_RawInputCommandBufferType >(value));
           } else {
             mutable_unknown_fields()->AddVarint(1, value);
           }
@@ -249,7 +250,7 @@ bool RawInputCommandBuffer::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .CommandBuffers.DualStickRawInputCommandBuffer dualStickRawInputCommandBuffer = 3;
+      // optional .usx.geofactions.DualStickRawInputCommandBuffer dualStickRawInputCommandBuffer = 3;
       case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -281,7 +282,7 @@ bool RawInputCommandBuffer::MergePartialFromCodedStream(
 
 void RawInputCommandBuffer::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required .CommandBuffers.RawInputCommandBuffer.RawInputCommandBufferType type = 1 [default = DUALSTICK];
+  // required .usx.geofactions.RawInputCommandBuffer.RawInputCommandBufferType type = 1 [default = DUALSTICK];
   if (has_type()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       1, this->type(), output);
@@ -296,7 +297,7 @@ void RawInputCommandBuffer::SerializeWithCachedSizes(
       2, this->uuid(), output);
   }
 
-  // optional .CommandBuffers.DualStickRawInputCommandBuffer dualStickRawInputCommandBuffer = 3;
+  // optional .usx.geofactions.DualStickRawInputCommandBuffer dualStickRawInputCommandBuffer = 3;
   if (has_dualstickrawinputcommandbuffer()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       3, this->dualstickrawinputcommandbuffer(), output);
@@ -310,7 +311,7 @@ void RawInputCommandBuffer::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* RawInputCommandBuffer::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required .CommandBuffers.RawInputCommandBuffer.RawInputCommandBufferType type = 1 [default = DUALSTICK];
+  // required .usx.geofactions.RawInputCommandBuffer.RawInputCommandBufferType type = 1 [default = DUALSTICK];
   if (has_type()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       1, this->type(), target);
@@ -326,7 +327,7 @@ void RawInputCommandBuffer::SerializeWithCachedSizes(
         2, this->uuid(), target);
   }
 
-  // optional .CommandBuffers.DualStickRawInputCommandBuffer dualStickRawInputCommandBuffer = 3;
+  // optional .usx.geofactions.DualStickRawInputCommandBuffer dualStickRawInputCommandBuffer = 3;
   if (has_dualstickrawinputcommandbuffer()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -344,7 +345,7 @@ int RawInputCommandBuffer::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .CommandBuffers.RawInputCommandBuffer.RawInputCommandBufferType type = 1 [default = DUALSTICK];
+    // required .usx.geofactions.RawInputCommandBuffer.RawInputCommandBufferType type = 1 [default = DUALSTICK];
     if (has_type()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());
@@ -357,7 +358,7 @@ int RawInputCommandBuffer::ByteSize() const {
           this->uuid());
     }
 
-    // optional .CommandBuffers.DualStickRawInputCommandBuffer dualStickRawInputCommandBuffer = 3;
+    // optional .usx.geofactions.DualStickRawInputCommandBuffer dualStickRawInputCommandBuffer = 3;
     if (has_dualstickrawinputcommandbuffer()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -398,7 +399,7 @@ void RawInputCommandBuffer::MergeFrom(const RawInputCommandBuffer& from) {
       set_uuid(from.uuid());
     }
     if (from.has_dualstickrawinputcommandbuffer()) {
-      mutable_dualstickrawinputcommandbuffer()->::CommandBuffers::DualStickRawInputCommandBuffer::MergeFrom(from.dualstickrawinputcommandbuffer());
+      mutable_dualstickrawinputcommandbuffer()->::usx::geofactions::DualStickRawInputCommandBuffer::MergeFrom(from.dualstickrawinputcommandbuffer());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -447,6 +448,7 @@ void RawInputCommandBuffer::Swap(RawInputCommandBuffer* other) {
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace CommandBuffers
+}  // namespace geofactions
+}  // namespace usx
 
 // @@protoc_insertion_point(global_scope)
