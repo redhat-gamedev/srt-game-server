@@ -17,48 +17,6 @@
 #include <decaf/util/StlQueue.h>
 #include <utility>
 
-//namespace google
-//{
-//    namespace protobuf
-//    {
-//        class Message;
-//    }
-//}
-
-//class SecurityCommand_Dependencies;
-//class AEntity;
-
-//class IConsumptionStrategy
-//{
-//public:
-//    virtual void Consume(google::protobuf::Message* pMessage) = 0;
-//};
-//
-//template <class T> // where T == google::protobuf::Message*
-//class ConsumptionStrategyT :
-//    IConsumptionStrategy
-//{
-//public:
-//    // Method(s)
-//    void Consume(google::protobuf::Message* pMessage)
-//    {
-//        T   aTEvent;
-//        
-//        if (aTEvent.ParseFromArray(pucBodyBytes, iBodyBytes))
-//        {
-//            func[aTEvent.type()]();
-//        }
-//    }
-//}
-//
-//class CommandMessageConsumptionStrategy :
-//    public IConsumptionStrategy
-//{
-//public:
-//    // Method(s)
-//    void Consume(google::protobuf::Message* pMessage);
-//};
-
 namespace cms
 {
     class Message;
@@ -90,20 +48,14 @@ protected:
     MessageConsumer*                                                        m_pMessageConsumer;
     FactoryT<usx::geofactions::CommandBuffer, SecurityCommand_Dependencies>&       m_aSecurityCommandFactory;
     decaf::util::StlQueue<Poco::Tuple<cms::BytesMessage*, google::protobuf::Message*>* >                       m_aTupleQueue;
-    // ConsumptionStrategy*     pConsumptionStrategy;
     
     
     // Helper(s)
-    void                                                Enqueue(google::protobuf::Message* pMessage);
     void                                                Enqueue(Poco::Tuple<cms::BytesMessage*>* pTuple);
-    void                                                Enqueue(std::pair<unsigned char*, unsigned long>* pMessagePair);
-    google::protobuf::Message*                          PairToMessage(std::pair<unsigned char*, unsigned long>* pMessagePair);
     std::pair<unsigned char*, unsigned long>*           MessageToPair(cms::BytesMessage* pBytesMessage);
-    
     
     // Constructor(s)
     CommandConsumer(_Dependencies* pDependencies);
-    // CommandConsumer(ConsumptionStrategy* pConsumptionStrategy);
     
     // Destructor
     ~CommandConsumer();

@@ -55,51 +55,17 @@ MessageConsumer::~MessageConsumer()
 }
 
 // Helper(s)
-void MessageConsumer::Enqueue(std::pair<unsigned char*, unsigned long>* pMessagePair)
-{
-//    m_aTupleQueue.lock();
-//    m_aTupleQueue.push(pMessagePair);
-//    m_aTupleQueue.unlock();
-}
-
 void MessageConsumer::Enqueue(cms::BytesMessage* pBytesMessage)
 {
     assert(pBytesMessage);
     
-//    std::pair<unsigned char*, unsigned long>* pMessagePair = MessageToPair(pMessage);
-//    if (!pMessagePair)
-//    {
-//        return;
-//    }
-//    
-//    Enqueue(pMessagePair);
-    
     Poco::Tuple<cms::BytesMessage*>*    pTuple = new Poco::Tuple<cms::BytesMessage*>(pBytesMessage);
-    
     m_aTupleQueue.lock();
     m_aTupleQueue.push(pTuple);
     m_aTupleQueue.unlock();
 }
 
-std::pair<unsigned char*, unsigned long>* MessageConsumer::MessageToPair(cms::BytesMessage* pBytesMessage)
-{
-    assert(pBytesMessage);
-    
-    using namespace std;
-    using namespace cms;
-    
-    pair<unsigned char*, unsigned long>*    pMessagePair = NULL;
-    
-    pBytesMessage->reset();
-    int iBodyLength = pBytesMessage->getBodyLength();
-    unsigned char* pucBodyBytesCopy = new unsigned char[iBodyLength];
-    memcpy(pucBodyBytesCopy, pBytesMessage->getBodyBytes(), iBodyLength * sizeof(unsigned char));
-    pMessagePair = new pair<unsigned char*, unsigned long>(pucBodyBytesCopy, iBodyLength);
-    
-    return pMessagePair;
-}
-
-// MessageListener implementation
+// cms::MessageListener implementation
 void MessageConsumer::onMessage(const cms::Message* pMessage)
 {
     assert(pMessage);

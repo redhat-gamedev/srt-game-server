@@ -34,33 +34,11 @@
 #include "activemq/library/ActiveMQCPP.h"
 #include <iostream>
 
-//class Base
-//{
-//public:
-//    virtual void Func()
-//    {
-//        std::cout << "Base::Func()" << std::endl;
-//    }
-//};
-//
-//
-//class Derived :
-//    public Base
-//{
-//public:
-//    virtual void Func()
-//    {
-//        std::cout << "Derived::Func()" << std::endl;
-//    }
-//};
-
 
 int main(int argc, char* argv[])
 {
     //std::string     strSecurityInURI = "AAS.IN";
     //std::string     strSecurityOutURI = "AAS.OUT";
-    //std::string     strGameEventInDestinationURI = "GAME.EVENT.IN";
-    
     std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp&keepAlive=true";
     std::string     strCommandInDestinationURI = "COMMAND.IN";
     std::string     strGameEventOutDestinationURI = "GAME.EVENT.OUT";
@@ -68,14 +46,6 @@ int main(int argc, char* argv[])
     std::cout << "Starting..." << std::endl;
     std::cout << "Initializing the ActiveMQCPP library" << std::endl;
     activemq::library::ActiveMQCPP::initializeLibrary();
-    
-//    Base aBase;
-//    Derived aDerived;
-//    
-//    aBase.Func();
-//    aDerived.Func();
-//    Base& aBaseReference = aDerived;
-//    aBaseReference.Func();
     
     PodFactory&                                                 thePodFactory = PodFactory::Instance();
     BulletFactory&                                              theBulletFactory = BulletFactory::Instance();
@@ -95,8 +65,6 @@ int main(int argc, char* argv[])
     CommandConsumer::_Dependencies                                              theCommandConsumerDependencies(&theMessageConsumer, theSecurityCommandBufferFactory);
     CommandConsumer&                                                            theCommandConsumer = CommandConsumer::Instance(&theCommandConsumerDependencies);
     
-//    FactoryT<::SecurityCommand, ::SecurityCommand::_SecurityDependencies>&      theSecurityCommandFactory = FactoryT<::SecurityCommand, ::SecurityCommand::_SecurityDependencies>::Instance();
-//    CommandQueue::_Dependencies                                                 theCommandQueueDependencies(theSecurityCommandFactory, theCommandConsumer);
     FactoryT<JoinSecurityCommand, JoinSecurityCommand::_SecurityDependencies>&      theJoinSecurityCommandFactory = FactoryT<JoinSecurityCommand, JoinSecurityCommand::_SecurityDependencies>::Instance();
     FactoryT<LeaveSecurityCommand, LeaveSecurityCommand::_SecurityDependencies>&      theLeaveSecurityCommandFactory = FactoryT<LeaveSecurityCommand, LeaveSecurityCommand::_SecurityDependencies>::Instance();
     CommandQueue::_Dependencies                                                     theCommandQueueDependencies(

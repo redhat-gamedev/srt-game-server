@@ -35,14 +35,6 @@ public:
     ~EntityGameEvent_Dependencies();
 };
 
-//template<class T, class D>
-//class FactoryT<T*, D*> :
-//    public FactoryT<EntityGameEvent*, EntityGameEvent_Dependencies>
-//
-//template<>
-//class FactoryT<EntityGameEvent*, EntityGameEvent_Dependencies>
-//
-
 template<>
 class FactoryT<GameEventBuffer, EntityGameEvent_Dependencies>
 {
@@ -135,6 +127,5 @@ protected:
 //    
 //    virtual EntityGameEvent* Create(EntityGameEvent_Dependencies& anEntityGameEvent_Dependencies);
 };
-    
 
 #endif /* defined(__CMSTest__GameEventFactory__) */

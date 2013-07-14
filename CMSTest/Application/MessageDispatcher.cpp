@@ -36,8 +36,7 @@ _Dependencies::
 
 
 // Constructor
-MessageDispatcher::MessageDispatcher(_Dependencies* pDependencies)// :
-    //m_pSimpleAsyncProducer(pDependencies->m_pSimpleAsyncProducer)
+MessageDispatcher::MessageDispatcher(_Dependencies* pDependencies)
 {
     assert(pDependencies);
     
@@ -132,7 +131,7 @@ void MessageDispatcher::Dispatch()
             std::pair<const unsigned char*, unsigned long>* pMessagePair = m_aMessageQueue.pop();
             if (pMessagePair->second > 0)
             {
-                m_pSimpleAsyncProducer->Send(pMessagePair->first, pMessagePair->second);
+                m_pSimpleAsyncProducer->Send(pMessagePair->first, (int)pMessagePair->second);
             }
         }
         catch ( cms::CMSException& e )

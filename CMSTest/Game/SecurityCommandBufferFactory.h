@@ -250,6 +250,8 @@ public:
         pSecurityCommand->set_type(SecurityCommandBuffer_SecurityCommandBufferType_LEAVE);
         
         usx::geofactions::LeaveSecurityCommandBuffer* pLeaveSecurityCommand = pSecurityCommand->mutable_leavesecuritycommandbuffer();
+        
+        // TODO: 071413 Add UUID to the SecurityCommandDependencies and fix this!
         pLeaveSecurityCommand->set_uuid("test");
         
         CreatedEvent(this, pCommand);

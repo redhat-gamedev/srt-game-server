@@ -46,10 +46,6 @@ public:
 private:
 protected:
 public:
-    // Event(s)
-//    Poco::BasicEvent<const std::string&>      JoinedEvent;
-//    Poco::BasicEvent<const std::string&>      LeftEvent;
-//    
     // Constructor
     SecurityCommand(_SecurityDependencies& theDependencies);
     

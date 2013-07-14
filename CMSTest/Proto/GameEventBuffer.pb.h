@@ -36,15 +36,39 @@ void  protobuf_AddDesc_GameEventBuffer_2eproto();
 void protobuf_AssignDesc_GameEventBuffer_2eproto();
 void protobuf_ShutdownFile_GameEventBuffer_2eproto();
 
+class JoinSecurityGameEventBuffer;
+class LeaveSecurityGameEventBuffer;
+class SecurityGameEventBuffer;
 class GameEventBuffer;
 
+enum SecurityGameEventBuffer_SecurityGameEventBufferType {
+  SecurityGameEventBuffer_SecurityGameEventBufferType_UNKNOWN = 0,
+  SecurityGameEventBuffer_SecurityGameEventBufferType_JOIN = 1,
+  SecurityGameEventBuffer_SecurityGameEventBufferType_LEAVE = 2
+};
+bool SecurityGameEventBuffer_SecurityGameEventBufferType_IsValid(int value);
+const SecurityGameEventBuffer_SecurityGameEventBufferType SecurityGameEventBuffer_SecurityGameEventBufferType_SecurityGameEventBufferType_MIN = SecurityGameEventBuffer_SecurityGameEventBufferType_UNKNOWN;
+const SecurityGameEventBuffer_SecurityGameEventBufferType SecurityGameEventBuffer_SecurityGameEventBufferType_SecurityGameEventBufferType_MAX = SecurityGameEventBuffer_SecurityGameEventBufferType_LEAVE;
+const int SecurityGameEventBuffer_SecurityGameEventBufferType_SecurityGameEventBufferType_ARRAYSIZE = SecurityGameEventBuffer_SecurityGameEventBufferType_SecurityGameEventBufferType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* SecurityGameEventBuffer_SecurityGameEventBufferType_descriptor();
+inline const ::std::string& SecurityGameEventBuffer_SecurityGameEventBufferType_Name(SecurityGameEventBuffer_SecurityGameEventBufferType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    SecurityGameEventBuffer_SecurityGameEventBufferType_descriptor(), value);
+}
+inline bool SecurityGameEventBuffer_SecurityGameEventBufferType_Parse(
+    const ::std::string& name, SecurityGameEventBuffer_SecurityGameEventBufferType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<SecurityGameEventBuffer_SecurityGameEventBufferType>(
+    SecurityGameEventBuffer_SecurityGameEventBufferType_descriptor(), name, value);
+}
 enum GameEventBuffer_GameEventBufferType {
   GameEventBuffer_GameEventBufferType_UNKNOWN = 0,
-  GameEventBuffer_GameEventBufferType_ENTITY = 1
+  GameEventBuffer_GameEventBufferType_ENTITY = 1,
+  GameEventBuffer_GameEventBufferType_SECURITY = 2
 };
 bool GameEventBuffer_GameEventBufferType_IsValid(int value);
 const GameEventBuffer_GameEventBufferType GameEventBuffer_GameEventBufferType_GameEventBufferType_MIN = GameEventBuffer_GameEventBufferType_UNKNOWN;
-const GameEventBuffer_GameEventBufferType GameEventBuffer_GameEventBufferType_GameEventBufferType_MAX = GameEventBuffer_GameEventBufferType_ENTITY;
+const GameEventBuffer_GameEventBufferType GameEventBuffer_GameEventBufferType_GameEventBufferType_MAX = GameEventBuffer_GameEventBufferType_SECURITY;
 const int GameEventBuffer_GameEventBufferType_GameEventBufferType_ARRAYSIZE = GameEventBuffer_GameEventBufferType_GameEventBufferType_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* GameEventBuffer_GameEventBufferType_descriptor();
@@ -58,6 +82,311 @@ inline bool GameEventBuffer_GameEventBufferType_Parse(
     GameEventBuffer_GameEventBufferType_descriptor(), name, value);
 }
 // ===================================================================
+
+class JoinSecurityGameEventBuffer : public ::google::protobuf::Message {
+ public:
+  JoinSecurityGameEventBuffer();
+  virtual ~JoinSecurityGameEventBuffer();
+
+  JoinSecurityGameEventBuffer(const JoinSecurityGameEventBuffer& from);
+
+  inline JoinSecurityGameEventBuffer& operator=(const JoinSecurityGameEventBuffer& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const JoinSecurityGameEventBuffer& default_instance();
+
+  void Swap(JoinSecurityGameEventBuffer* other);
+
+  // implements Message ----------------------------------------------
+
+  JoinSecurityGameEventBuffer* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const JoinSecurityGameEventBuffer& from);
+  void MergeFrom(const JoinSecurityGameEventBuffer& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string UUID = 1;
+  inline bool has_uuid() const;
+  inline void clear_uuid();
+  static const int kUUIDFieldNumber = 1;
+  inline const ::std::string& uuid() const;
+  inline void set_uuid(const ::std::string& value);
+  inline void set_uuid(const char* value);
+  inline void set_uuid(const char* value, size_t size);
+  inline ::std::string* mutable_uuid();
+  inline ::std::string* release_uuid();
+  inline void set_allocated_uuid(::std::string* uuid);
+
+  // @@protoc_insertion_point(class_scope:usx.geofactions.JoinSecurityGameEventBuffer)
+ private:
+  inline void set_has_uuid();
+  inline void clear_has_uuid();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::std::string* uuid_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_GameEventBuffer_2eproto();
+  friend void protobuf_AssignDesc_GameEventBuffer_2eproto();
+  friend void protobuf_ShutdownFile_GameEventBuffer_2eproto();
+
+  void InitAsDefaultInstance();
+  static JoinSecurityGameEventBuffer* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class LeaveSecurityGameEventBuffer : public ::google::protobuf::Message {
+ public:
+  LeaveSecurityGameEventBuffer();
+  virtual ~LeaveSecurityGameEventBuffer();
+
+  LeaveSecurityGameEventBuffer(const LeaveSecurityGameEventBuffer& from);
+
+  inline LeaveSecurityGameEventBuffer& operator=(const LeaveSecurityGameEventBuffer& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const LeaveSecurityGameEventBuffer& default_instance();
+
+  void Swap(LeaveSecurityGameEventBuffer* other);
+
+  // implements Message ----------------------------------------------
+
+  LeaveSecurityGameEventBuffer* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const LeaveSecurityGameEventBuffer& from);
+  void MergeFrom(const LeaveSecurityGameEventBuffer& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string UUID = 1;
+  inline bool has_uuid() const;
+  inline void clear_uuid();
+  static const int kUUIDFieldNumber = 1;
+  inline const ::std::string& uuid() const;
+  inline void set_uuid(const ::std::string& value);
+  inline void set_uuid(const char* value);
+  inline void set_uuid(const char* value, size_t size);
+  inline ::std::string* mutable_uuid();
+  inline ::std::string* release_uuid();
+  inline void set_allocated_uuid(::std::string* uuid);
+
+  // @@protoc_insertion_point(class_scope:usx.geofactions.LeaveSecurityGameEventBuffer)
+ private:
+  inline void set_has_uuid();
+  inline void clear_has_uuid();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::std::string* uuid_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_GameEventBuffer_2eproto();
+  friend void protobuf_AssignDesc_GameEventBuffer_2eproto();
+  friend void protobuf_ShutdownFile_GameEventBuffer_2eproto();
+
+  void InitAsDefaultInstance();
+  static LeaveSecurityGameEventBuffer* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class SecurityGameEventBuffer : public ::google::protobuf::Message {
+ public:
+  SecurityGameEventBuffer();
+  virtual ~SecurityGameEventBuffer();
+
+  SecurityGameEventBuffer(const SecurityGameEventBuffer& from);
+
+  inline SecurityGameEventBuffer& operator=(const SecurityGameEventBuffer& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const SecurityGameEventBuffer& default_instance();
+
+  void Swap(SecurityGameEventBuffer* other);
+
+  // implements Message ----------------------------------------------
+
+  SecurityGameEventBuffer* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const SecurityGameEventBuffer& from);
+  void MergeFrom(const SecurityGameEventBuffer& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  typedef SecurityGameEventBuffer_SecurityGameEventBufferType SecurityGameEventBufferType;
+  static const SecurityGameEventBufferType UNKNOWN = SecurityGameEventBuffer_SecurityGameEventBufferType_UNKNOWN;
+  static const SecurityGameEventBufferType JOIN = SecurityGameEventBuffer_SecurityGameEventBufferType_JOIN;
+  static const SecurityGameEventBufferType LEAVE = SecurityGameEventBuffer_SecurityGameEventBufferType_LEAVE;
+  static inline bool SecurityGameEventBufferType_IsValid(int value) {
+    return SecurityGameEventBuffer_SecurityGameEventBufferType_IsValid(value);
+  }
+  static const SecurityGameEventBufferType SecurityGameEventBufferType_MIN =
+    SecurityGameEventBuffer_SecurityGameEventBufferType_SecurityGameEventBufferType_MIN;
+  static const SecurityGameEventBufferType SecurityGameEventBufferType_MAX =
+    SecurityGameEventBuffer_SecurityGameEventBufferType_SecurityGameEventBufferType_MAX;
+  static const int SecurityGameEventBufferType_ARRAYSIZE =
+    SecurityGameEventBuffer_SecurityGameEventBufferType_SecurityGameEventBufferType_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  SecurityGameEventBufferType_descriptor() {
+    return SecurityGameEventBuffer_SecurityGameEventBufferType_descriptor();
+  }
+  static inline const ::std::string& SecurityGameEventBufferType_Name(SecurityGameEventBufferType value) {
+    return SecurityGameEventBuffer_SecurityGameEventBufferType_Name(value);
+  }
+  static inline bool SecurityGameEventBufferType_Parse(const ::std::string& name,
+      SecurityGameEventBufferType* value) {
+    return SecurityGameEventBuffer_SecurityGameEventBufferType_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+
+  // required .usx.geofactions.SecurityGameEventBuffer.SecurityGameEventBufferType type = 1 [default = UNKNOWN];
+  inline bool has_type() const;
+  inline void clear_type();
+  static const int kTypeFieldNumber = 1;
+  inline ::usx::geofactions::SecurityGameEventBuffer_SecurityGameEventBufferType type() const;
+  inline void set_type(::usx::geofactions::SecurityGameEventBuffer_SecurityGameEventBufferType value);
+
+  // optional .usx.geofactions.JoinSecurityGameEventBuffer joinSecurityGameEventBuffer = 3;
+  inline bool has_joinsecuritygameeventbuffer() const;
+  inline void clear_joinsecuritygameeventbuffer();
+  static const int kJoinSecurityGameEventBufferFieldNumber = 3;
+  inline const ::usx::geofactions::JoinSecurityGameEventBuffer& joinsecuritygameeventbuffer() const;
+  inline ::usx::geofactions::JoinSecurityGameEventBuffer* mutable_joinsecuritygameeventbuffer();
+  inline ::usx::geofactions::JoinSecurityGameEventBuffer* release_joinsecuritygameeventbuffer();
+  inline void set_allocated_joinsecuritygameeventbuffer(::usx::geofactions::JoinSecurityGameEventBuffer* joinsecuritygameeventbuffer);
+
+  // optional .usx.geofactions.LeaveSecurityGameEventBuffer leaveSecurityGameEventBuffer = 4;
+  inline bool has_leavesecuritygameeventbuffer() const;
+  inline void clear_leavesecuritygameeventbuffer();
+  static const int kLeaveSecurityGameEventBufferFieldNumber = 4;
+  inline const ::usx::geofactions::LeaveSecurityGameEventBuffer& leavesecuritygameeventbuffer() const;
+  inline ::usx::geofactions::LeaveSecurityGameEventBuffer* mutable_leavesecuritygameeventbuffer();
+  inline ::usx::geofactions::LeaveSecurityGameEventBuffer* release_leavesecuritygameeventbuffer();
+  inline void set_allocated_leavesecuritygameeventbuffer(::usx::geofactions::LeaveSecurityGameEventBuffer* leavesecuritygameeventbuffer);
+
+  // @@protoc_insertion_point(class_scope:usx.geofactions.SecurityGameEventBuffer)
+ private:
+  inline void set_has_type();
+  inline void clear_has_type();
+  inline void set_has_joinsecuritygameeventbuffer();
+  inline void clear_has_joinsecuritygameeventbuffer();
+  inline void set_has_leavesecuritygameeventbuffer();
+  inline void clear_has_leavesecuritygameeventbuffer();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::usx::geofactions::JoinSecurityGameEventBuffer* joinsecuritygameeventbuffer_;
+  ::usx::geofactions::LeaveSecurityGameEventBuffer* leavesecuritygameeventbuffer_;
+  int type_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void  protobuf_AddDesc_GameEventBuffer_2eproto();
+  friend void protobuf_AssignDesc_GameEventBuffer_2eproto();
+  friend void protobuf_ShutdownFile_GameEventBuffer_2eproto();
+
+  void InitAsDefaultInstance();
+  static SecurityGameEventBuffer* default_instance_;
+};
+// -------------------------------------------------------------------
 
 class GameEventBuffer : public ::google::protobuf::Message {
  public:
@@ -114,6 +443,7 @@ class GameEventBuffer : public ::google::protobuf::Message {
   typedef GameEventBuffer_GameEventBufferType GameEventBufferType;
   static const GameEventBufferType UNKNOWN = GameEventBuffer_GameEventBufferType_UNKNOWN;
   static const GameEventBufferType ENTITY = GameEventBuffer_GameEventBufferType_ENTITY;
+  static const GameEventBufferType SECURITY = GameEventBuffer_GameEventBufferType_SECURITY;
   static inline bool GameEventBufferType_IsValid(int value) {
     return GameEventBuffer_GameEventBufferType_IsValid(value);
   }
@@ -153,20 +483,32 @@ class GameEventBuffer : public ::google::protobuf::Message {
   inline ::usx::geofactions::EntityGameEventBuffer* release_entitygameeventbuffer();
   inline void set_allocated_entitygameeventbuffer(::usx::geofactions::EntityGameEventBuffer* entitygameeventbuffer);
 
+  // optional .usx.geofactions.SecurityGameEventBuffer securityGameEventBuffer = 3;
+  inline bool has_securitygameeventbuffer() const;
+  inline void clear_securitygameeventbuffer();
+  static const int kSecurityGameEventBufferFieldNumber = 3;
+  inline const ::usx::geofactions::SecurityGameEventBuffer& securitygameeventbuffer() const;
+  inline ::usx::geofactions::SecurityGameEventBuffer* mutable_securitygameeventbuffer();
+  inline ::usx::geofactions::SecurityGameEventBuffer* release_securitygameeventbuffer();
+  inline void set_allocated_securitygameeventbuffer(::usx::geofactions::SecurityGameEventBuffer* securitygameeventbuffer);
+
   // @@protoc_insertion_point(class_scope:usx.geofactions.GameEventBuffer)
  private:
   inline void set_has_type();
   inline void clear_has_type();
   inline void set_has_entitygameeventbuffer();
   inline void clear_has_entitygameeventbuffer();
+  inline void set_has_securitygameeventbuffer();
+  inline void clear_has_securitygameeventbuffer();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::usx::geofactions::EntityGameEventBuffer* entitygameeventbuffer_;
+  ::usx::geofactions::SecurityGameEventBuffer* securitygameeventbuffer_;
   int type_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
   friend void  protobuf_AddDesc_GameEventBuffer_2eproto();
   friend void protobuf_AssignDesc_GameEventBuffer_2eproto();
@@ -179,6 +521,257 @@ class GameEventBuffer : public ::google::protobuf::Message {
 
 
 // ===================================================================
+
+// JoinSecurityGameEventBuffer
+
+// required string UUID = 1;
+inline bool JoinSecurityGameEventBuffer::has_uuid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void JoinSecurityGameEventBuffer::set_has_uuid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void JoinSecurityGameEventBuffer::clear_has_uuid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void JoinSecurityGameEventBuffer::clear_uuid() {
+  if (uuid_ != &::google::protobuf::internal::kEmptyString) {
+    uuid_->clear();
+  }
+  clear_has_uuid();
+}
+inline const ::std::string& JoinSecurityGameEventBuffer::uuid() const {
+  return *uuid_;
+}
+inline void JoinSecurityGameEventBuffer::set_uuid(const ::std::string& value) {
+  set_has_uuid();
+  if (uuid_ == &::google::protobuf::internal::kEmptyString) {
+    uuid_ = new ::std::string;
+  }
+  uuid_->assign(value);
+}
+inline void JoinSecurityGameEventBuffer::set_uuid(const char* value) {
+  set_has_uuid();
+  if (uuid_ == &::google::protobuf::internal::kEmptyString) {
+    uuid_ = new ::std::string;
+  }
+  uuid_->assign(value);
+}
+inline void JoinSecurityGameEventBuffer::set_uuid(const char* value, size_t size) {
+  set_has_uuid();
+  if (uuid_ == &::google::protobuf::internal::kEmptyString) {
+    uuid_ = new ::std::string;
+  }
+  uuid_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* JoinSecurityGameEventBuffer::mutable_uuid() {
+  set_has_uuid();
+  if (uuid_ == &::google::protobuf::internal::kEmptyString) {
+    uuid_ = new ::std::string;
+  }
+  return uuid_;
+}
+inline ::std::string* JoinSecurityGameEventBuffer::release_uuid() {
+  clear_has_uuid();
+  if (uuid_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = uuid_;
+    uuid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void JoinSecurityGameEventBuffer::set_allocated_uuid(::std::string* uuid) {
+  if (uuid_ != &::google::protobuf::internal::kEmptyString) {
+    delete uuid_;
+  }
+  if (uuid) {
+    set_has_uuid();
+    uuid_ = uuid;
+  } else {
+    clear_has_uuid();
+    uuid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// -------------------------------------------------------------------
+
+// LeaveSecurityGameEventBuffer
+
+// required string UUID = 1;
+inline bool LeaveSecurityGameEventBuffer::has_uuid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void LeaveSecurityGameEventBuffer::set_has_uuid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void LeaveSecurityGameEventBuffer::clear_has_uuid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void LeaveSecurityGameEventBuffer::clear_uuid() {
+  if (uuid_ != &::google::protobuf::internal::kEmptyString) {
+    uuid_->clear();
+  }
+  clear_has_uuid();
+}
+inline const ::std::string& LeaveSecurityGameEventBuffer::uuid() const {
+  return *uuid_;
+}
+inline void LeaveSecurityGameEventBuffer::set_uuid(const ::std::string& value) {
+  set_has_uuid();
+  if (uuid_ == &::google::protobuf::internal::kEmptyString) {
+    uuid_ = new ::std::string;
+  }
+  uuid_->assign(value);
+}
+inline void LeaveSecurityGameEventBuffer::set_uuid(const char* value) {
+  set_has_uuid();
+  if (uuid_ == &::google::protobuf::internal::kEmptyString) {
+    uuid_ = new ::std::string;
+  }
+  uuid_->assign(value);
+}
+inline void LeaveSecurityGameEventBuffer::set_uuid(const char* value, size_t size) {
+  set_has_uuid();
+  if (uuid_ == &::google::protobuf::internal::kEmptyString) {
+    uuid_ = new ::std::string;
+  }
+  uuid_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* LeaveSecurityGameEventBuffer::mutable_uuid() {
+  set_has_uuid();
+  if (uuid_ == &::google::protobuf::internal::kEmptyString) {
+    uuid_ = new ::std::string;
+  }
+  return uuid_;
+}
+inline ::std::string* LeaveSecurityGameEventBuffer::release_uuid() {
+  clear_has_uuid();
+  if (uuid_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = uuid_;
+    uuid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void LeaveSecurityGameEventBuffer::set_allocated_uuid(::std::string* uuid) {
+  if (uuid_ != &::google::protobuf::internal::kEmptyString) {
+    delete uuid_;
+  }
+  if (uuid) {
+    set_has_uuid();
+    uuid_ = uuid;
+  } else {
+    clear_has_uuid();
+    uuid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// -------------------------------------------------------------------
+
+// SecurityGameEventBuffer
+
+// required .usx.geofactions.SecurityGameEventBuffer.SecurityGameEventBufferType type = 1 [default = UNKNOWN];
+inline bool SecurityGameEventBuffer::has_type() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void SecurityGameEventBuffer::set_has_type() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void SecurityGameEventBuffer::clear_has_type() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void SecurityGameEventBuffer::clear_type() {
+  type_ = 0;
+  clear_has_type();
+}
+inline ::usx::geofactions::SecurityGameEventBuffer_SecurityGameEventBufferType SecurityGameEventBuffer::type() const {
+  return static_cast< ::usx::geofactions::SecurityGameEventBuffer_SecurityGameEventBufferType >(type_);
+}
+inline void SecurityGameEventBuffer::set_type(::usx::geofactions::SecurityGameEventBuffer_SecurityGameEventBufferType value) {
+  assert(::usx::geofactions::SecurityGameEventBuffer_SecurityGameEventBufferType_IsValid(value));
+  set_has_type();
+  type_ = value;
+}
+
+// optional .usx.geofactions.JoinSecurityGameEventBuffer joinSecurityGameEventBuffer = 3;
+inline bool SecurityGameEventBuffer::has_joinsecuritygameeventbuffer() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void SecurityGameEventBuffer::set_has_joinsecuritygameeventbuffer() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void SecurityGameEventBuffer::clear_has_joinsecuritygameeventbuffer() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void SecurityGameEventBuffer::clear_joinsecuritygameeventbuffer() {
+  if (joinsecuritygameeventbuffer_ != NULL) joinsecuritygameeventbuffer_->::usx::geofactions::JoinSecurityGameEventBuffer::Clear();
+  clear_has_joinsecuritygameeventbuffer();
+}
+inline const ::usx::geofactions::JoinSecurityGameEventBuffer& SecurityGameEventBuffer::joinsecuritygameeventbuffer() const {
+  return joinsecuritygameeventbuffer_ != NULL ? *joinsecuritygameeventbuffer_ : *default_instance_->joinsecuritygameeventbuffer_;
+}
+inline ::usx::geofactions::JoinSecurityGameEventBuffer* SecurityGameEventBuffer::mutable_joinsecuritygameeventbuffer() {
+  set_has_joinsecuritygameeventbuffer();
+  if (joinsecuritygameeventbuffer_ == NULL) joinsecuritygameeventbuffer_ = new ::usx::geofactions::JoinSecurityGameEventBuffer;
+  return joinsecuritygameeventbuffer_;
+}
+inline ::usx::geofactions::JoinSecurityGameEventBuffer* SecurityGameEventBuffer::release_joinsecuritygameeventbuffer() {
+  clear_has_joinsecuritygameeventbuffer();
+  ::usx::geofactions::JoinSecurityGameEventBuffer* temp = joinsecuritygameeventbuffer_;
+  joinsecuritygameeventbuffer_ = NULL;
+  return temp;
+}
+inline void SecurityGameEventBuffer::set_allocated_joinsecuritygameeventbuffer(::usx::geofactions::JoinSecurityGameEventBuffer* joinsecuritygameeventbuffer) {
+  delete joinsecuritygameeventbuffer_;
+  joinsecuritygameeventbuffer_ = joinsecuritygameeventbuffer;
+  if (joinsecuritygameeventbuffer) {
+    set_has_joinsecuritygameeventbuffer();
+  } else {
+    clear_has_joinsecuritygameeventbuffer();
+  }
+}
+
+// optional .usx.geofactions.LeaveSecurityGameEventBuffer leaveSecurityGameEventBuffer = 4;
+inline bool SecurityGameEventBuffer::has_leavesecuritygameeventbuffer() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void SecurityGameEventBuffer::set_has_leavesecuritygameeventbuffer() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void SecurityGameEventBuffer::clear_has_leavesecuritygameeventbuffer() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void SecurityGameEventBuffer::clear_leavesecuritygameeventbuffer() {
+  if (leavesecuritygameeventbuffer_ != NULL) leavesecuritygameeventbuffer_->::usx::geofactions::LeaveSecurityGameEventBuffer::Clear();
+  clear_has_leavesecuritygameeventbuffer();
+}
+inline const ::usx::geofactions::LeaveSecurityGameEventBuffer& SecurityGameEventBuffer::leavesecuritygameeventbuffer() const {
+  return leavesecuritygameeventbuffer_ != NULL ? *leavesecuritygameeventbuffer_ : *default_instance_->leavesecuritygameeventbuffer_;
+}
+inline ::usx::geofactions::LeaveSecurityGameEventBuffer* SecurityGameEventBuffer::mutable_leavesecuritygameeventbuffer() {
+  set_has_leavesecuritygameeventbuffer();
+  if (leavesecuritygameeventbuffer_ == NULL) leavesecuritygameeventbuffer_ = new ::usx::geofactions::LeaveSecurityGameEventBuffer;
+  return leavesecuritygameeventbuffer_;
+}
+inline ::usx::geofactions::LeaveSecurityGameEventBuffer* SecurityGameEventBuffer::release_leavesecuritygameeventbuffer() {
+  clear_has_leavesecuritygameeventbuffer();
+  ::usx::geofactions::LeaveSecurityGameEventBuffer* temp = leavesecuritygameeventbuffer_;
+  leavesecuritygameeventbuffer_ = NULL;
+  return temp;
+}
+inline void SecurityGameEventBuffer::set_allocated_leavesecuritygameeventbuffer(::usx::geofactions::LeaveSecurityGameEventBuffer* leavesecuritygameeventbuffer) {
+  delete leavesecuritygameeventbuffer_;
+  leavesecuritygameeventbuffer_ = leavesecuritygameeventbuffer;
+  if (leavesecuritygameeventbuffer) {
+    set_has_leavesecuritygameeventbuffer();
+  } else {
+    clear_has_leavesecuritygameeventbuffer();
+  }
+}
+
+// -------------------------------------------------------------------
 
 // GameEventBuffer
 
@@ -243,6 +836,44 @@ inline void GameEventBuffer::set_allocated_entitygameeventbuffer(::usx::geofacti
   }
 }
 
+// optional .usx.geofactions.SecurityGameEventBuffer securityGameEventBuffer = 3;
+inline bool GameEventBuffer::has_securitygameeventbuffer() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void GameEventBuffer::set_has_securitygameeventbuffer() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void GameEventBuffer::clear_has_securitygameeventbuffer() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void GameEventBuffer::clear_securitygameeventbuffer() {
+  if (securitygameeventbuffer_ != NULL) securitygameeventbuffer_->::usx::geofactions::SecurityGameEventBuffer::Clear();
+  clear_has_securitygameeventbuffer();
+}
+inline const ::usx::geofactions::SecurityGameEventBuffer& GameEventBuffer::securitygameeventbuffer() const {
+  return securitygameeventbuffer_ != NULL ? *securitygameeventbuffer_ : *default_instance_->securitygameeventbuffer_;
+}
+inline ::usx::geofactions::SecurityGameEventBuffer* GameEventBuffer::mutable_securitygameeventbuffer() {
+  set_has_securitygameeventbuffer();
+  if (securitygameeventbuffer_ == NULL) securitygameeventbuffer_ = new ::usx::geofactions::SecurityGameEventBuffer;
+  return securitygameeventbuffer_;
+}
+inline ::usx::geofactions::SecurityGameEventBuffer* GameEventBuffer::release_securitygameeventbuffer() {
+  clear_has_securitygameeventbuffer();
+  ::usx::geofactions::SecurityGameEventBuffer* temp = securitygameeventbuffer_;
+  securitygameeventbuffer_ = NULL;
+  return temp;
+}
+inline void GameEventBuffer::set_allocated_securitygameeventbuffer(::usx::geofactions::SecurityGameEventBuffer* securitygameeventbuffer) {
+  delete securitygameeventbuffer_;
+  securitygameeventbuffer_ = securitygameeventbuffer;
+  if (securitygameeventbuffer) {
+    set_has_securitygameeventbuffer();
+  } else {
+    clear_has_securitygameeventbuffer();
+  }
+}
+
 
 // @@protoc_insertion_point(namespace_scope)
 
@@ -253,6 +884,10 @@ inline void GameEventBuffer::set_allocated_entitygameeventbuffer(::usx::geofacti
 namespace google {
 namespace protobuf {
 
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::usx::geofactions::SecurityGameEventBuffer_SecurityGameEventBufferType>() {
+  return ::usx::geofactions::SecurityGameEventBuffer_SecurityGameEventBufferType_descriptor();
+}
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::usx::geofactions::GameEventBuffer_GameEventBufferType>() {
   return ::usx::geofactions::GameEventBuffer_GameEventBufferType_descriptor();

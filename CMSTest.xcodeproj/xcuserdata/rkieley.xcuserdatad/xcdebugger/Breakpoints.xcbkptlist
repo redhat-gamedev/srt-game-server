@@ -98,17 +98,6 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "CMSTest/Game/CommandQueue.cpp"
-         timestampString = "395532151.643545"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "76"
-         endingLineNumber = "76">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "../ThirdParty/activemq-cpp/activemq-cpp/src/main/activemq/commands/ActiveMQBytesMessage.cpp"
          timestampString = "395445625.358666"
          startingColumnNumber = "9223372036854775807"
@@ -304,19 +293,6 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "CMSTest/Game/CommandQueue.cpp"
-         timestampString = "395532151.643545"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "68"
-         endingLineNumber = "68"
-         landmarkName = "CommandQueue::Execute()"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "CMSTest/Game/AEntity.cpp"
          timestampString = "395532388.918939"
          startingColumnNumber = "9223372036854775807"
@@ -376,32 +352,6 @@
          startingLineNumber = "223"
          endingLineNumber = "223"
          landmarkName = "AEntity::HandleJoinSecurityCommandFactoryDestroyed(const void* pSender, JoinSecurityCommand*&amp; pJoinSecurityCommand)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "CMSTest/Game/CommandQueue.cpp"
-         timestampString = "395532176.697855"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "118"
-         endingLineNumber = "118"
-         landmarkName = "CommandQueue::HandleCommandConsumedEvent(const void* pSender, Poco::Tuple&lt;cms::BytesMessage*, google::protobuf::Message*&gt;*&amp; pTuple)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "CMSTest/Game/CommandQueue.cpp"
-         timestampString = "395532178.316529"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "123"
-         endingLineNumber = "123"
-         landmarkName = "CommandQueue::HandleCommandConsumedEvent(const void* pSender, Poco::Tuple&lt;cms::BytesMessage*, google::protobuf::Message*&gt;*&amp; pTuple)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint

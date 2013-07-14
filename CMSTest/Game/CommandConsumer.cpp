@@ -8,8 +8,6 @@
 
 #include "CommandConsumer.h"
 #include "MessageConsumer.h"
-//#include "../Proto/CommandBuffer.pb.h"
-//ls #include "../Proto/SecurityCommandBuffer.pb.h"
 #include "Poco/Delegate.h"
 #include <cms/BytesMessage.h>
 #include <cms/CMSException.h>
@@ -51,7 +49,6 @@ CommandConsumer::CommandConsumer(_Dependencies* pDependencies) :
     m_pMessageConsumer->ReceivedCMSMessageEvent += Poco::Delegate<CommandConsumer, Poco::Tuple<cms::BytesMessage*>*& >(this, &CommandConsumer::HandleReceivedCMSMessageEvent);
     
 }
-// CommandConsumer(ConsumptionStrategy* pConsumptionStrategy);
 
 // Destructor
 CommandConsumer::~CommandConsumer()
@@ -60,15 +57,6 @@ CommandConsumer::~CommandConsumer()
 }
 
 // Helper(s)
-void CommandConsumer::Enqueue(google::protobuf::Message* pMessage)
-{
-    assert(pMessage);
-    
-    m_aTupleQueue.lock();
-//    m_aTupleQueue.push(pMessage);
-    m_aTupleQueue.unlock();
-}
-
 void CommandConsumer::Enqueue(Poco::Tuple<cms::BytesMessage*>* pTuple)
 {
     assert(pTuple);
@@ -90,23 +78,6 @@ void CommandConsumer::Enqueue(Poco::Tuple<cms::BytesMessage*>* pTuple)
     
     //delete pMessagePair;
     delete pTuple;
-}
-
-void CommandConsumer::Enqueue(std::pair<unsigned char*, unsigned long>* pMessagePair)
-{
-    assert(pMessagePair);
-    
-    Message* pMessage = PairToMessage(pMessagePair);
-    Enqueue(pMessage);
-}
-
-Message* CommandConsumer::PairToMessage(std::pair<unsigned char*, unsigned long>* pMessagePair)
-{
-    assert(pMessagePair);
-
-    Message* pMessage = m_aSecurityCommandFactory.Create(pMessagePair);
-    
-    return pMessage;
 }
 
 std::pair<unsigned char*, unsigned long>* CommandConsumer::MessageToPair(cms::BytesMessage* pBytesMessage)
@@ -145,10 +116,3 @@ void CommandConsumer::HandleReceivedCMSMessageEvent(const void* pSender, Poco::T
 {
     Enqueue(pTuple);
 }
-
-// void Consume(google::protobuf::Message* pMessage)
-//{
-//      m_pConsumptionStrategy->Consume();
-//}
-
-

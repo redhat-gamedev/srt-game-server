@@ -12,8 +12,6 @@
 #include "PodFactory.h"
 #include "Bullet.h"
 #include "BulletFactory.h"
-//#include "EntityGameEventFactory.h"
-//#include "../proto/EntityGameEventBuffer.pb.h"
 #include "Poco/Delegate.h"
 #include <assert.h>
 
@@ -107,12 +105,6 @@ void EventDispatcher::Dispatch()
 // Entity event response
 void EventDispatcher::HandlePodCreatedEvent(const void* pSender, Player*& pPlayer)
 {
-//    AEntity* pEntity = static_cast<AEntity*>(pPlayer);
-//    EntityGameEvent_Dependencies anEntityGameEvent_Dependencies(EntityGameEvent_EntityGameEventBufferType_CREATE, pEntity);
-//    
-//    GameEvent* pGameEvent = m_anEntityGameEventFactory.Create(anEntityGameEvent_Dependencies);
-//    Enqueue(pGameEvent);
-
     GameEventBuffer* pGameEvent = CreateGameEvent(EntityGameEventBuffer_EntityGameEventBufferType_CREATE, static_cast<AEntity*>(pPlayer));
     Enqueue(pGameEvent);
 }

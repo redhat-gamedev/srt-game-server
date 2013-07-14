@@ -16,9 +16,6 @@
 #include "Poco/BasicEvent.h"
 #include <decaf/util/StlQueue.h>
 
-//using namespace decaf;
-//using namespace decaf::util;
-
 namespace google
 {
     namespace protobuf

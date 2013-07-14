@@ -52,14 +52,11 @@ public:
     
 private:
 protected:
-    //decaf::util::StlQueue<std::pair<unsigned char*, unsigned long>* >         m_aMessageQueue;
     decaf::util::StlQueue<Poco::Tuple<cms::BytesMessage*>* >          m_aTupleQueue;
     SimpleAsyncConsumer*                                              m_pSimpleAsyncConsumer;
     
     // Helper(s)
     void                                                Enqueue(cms::BytesMessage* pBytesMessage);
-    void                                                Enqueue(std::pair<unsigned char*, unsigned long>* pMessagePair);
-    std::pair<unsigned char*, unsigned long>*           MessageToPair(cms::BytesMessage* pMessage);
     
     // Constructor
     MessageConsumer(_Dependencies* pDependencies);
@@ -68,7 +65,6 @@ protected:
     ~MessageConsumer();
     
 public:
-    //Poco::BasicEvent<std::pair<unsigned char*, unsigned long>*& >              ReceivedCMSMessageEvent;
     Poco::BasicEvent<Poco::Tuple<cms::BytesMessage*>*& >              ReceivedCMSMessageEvent;
     
     // Singleton
