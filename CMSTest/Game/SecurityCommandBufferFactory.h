@@ -12,6 +12,7 @@
 #include "../Shared/FactoryT.h"
 #include "../Proto/CommandBuffer.pb.h"
 #include "../Proto/SecurityCommandBuffer.pb.h"
+#include <string>
 #include <assert.h>
 
 using namespace usx::geofactions;
@@ -30,6 +31,24 @@ public:
     // Destructor
     ~SecurityCommand_Dependencies();
 };
+
+
+class LeaveSecurityCommand_Dependencies :
+    public SecurityCommand_Dependencies
+{
+private:
+protected:
+public:
+    const std::string&           m_strUUID;
+    
+    // Constructor
+    LeaveSecurityCommand_Dependencies(const SecurityCommandBuffer_SecurityCommandBufferType& anSecurityCommandBufferType,
+                                      const std::string& strUUID);
+    
+    // Destructor
+    ~LeaveSecurityCommand_Dependencies();
+};
+
 
 //template<class T, class D>
 //class FactoryT<T*, D*> :
@@ -217,27 +236,27 @@ public:
 };
 
 template<>
-class FactoryT<LeaveSecurityCommandBuffer, SecurityCommand_Dependencies>
+class FactoryT<LeaveSecurityCommandBuffer, LeaveSecurityCommand_Dependencies>
 {
 private:
     
 protected:
     // Constructor(s)
-    FactoryT<LeaveSecurityCommandBuffer, SecurityCommand_Dependencies>() {};//unsigned int uiCapacity, unsigned int uiPeakCapacity) {};
+    FactoryT<LeaveSecurityCommandBuffer, LeaveSecurityCommand_Dependencies>() {};//unsigned int uiCapacity, unsigned int uiPeakCapacity) {};
     
     // Destructor(s)
-    virtual ~FactoryT<LeaveSecurityCommandBuffer, SecurityCommand_Dependencies>() {};
+    virtual ~FactoryT<LeaveSecurityCommandBuffer, LeaveSecurityCommand_Dependencies>() {};
     
 public:
     // Singleton
-    static FactoryT<LeaveSecurityCommandBuffer, SecurityCommand_Dependencies>& Instance()//unsigned int uiCapacity)
+    static FactoryT<LeaveSecurityCommandBuffer, LeaveSecurityCommand_Dependencies>& Instance()//unsigned int uiCapacity)
     {
-        static FactoryT<LeaveSecurityCommandBuffer, SecurityCommand_Dependencies>  aCommandFactory;
+        static FactoryT<LeaveSecurityCommandBuffer, LeaveSecurityCommand_Dependencies>  aCommandFactory;
         return aCommandFactory;
     }
     
     // Method(s)
-    virtual CommandBuffer* Create(SecurityCommand_Dependencies& theSecurityCommand_Dependencies)
+    virtual CommandBuffer* Create(LeaveSecurityCommand_Dependencies& theLeaveSecurityCommand_Dependencies)
     {
         CommandBuffer aCommand;
         CommandBuffer* pCommand = aCommand.New();
@@ -252,7 +271,8 @@ public:
         usx::geofactions::LeaveSecurityCommandBuffer* pLeaveSecurityCommand = pSecurityCommand->mutable_leavesecuritycommandbuffer();
         
         // TODO: 071413 Add UUID to the SecurityCommandDependencies and fix this!
-        pLeaveSecurityCommand->set_uuid("test");
+        //pLeaveSecurityCommand->set_uuid("test");
+        pLeaveSecurityCommand->set_uuid(theLeaveSecurityCommand_Dependencies.m_strUUID);
         
         CreatedEvent(this, pCommand);
         return pCommand;
@@ -275,7 +295,7 @@ public:
         pCommand->ParseFromArray(pucBodyBytes, iBodyBytes);
         assert(CommandBuffer_CommandBufferType_SECURITY == pCommand->type());
         const SecurityCommandBuffer& aSecurityCommand = pCommand->securitycommandbuffer();
-        if (SecurityCommandBuffer_SecurityCommandBufferType_JOIN == aSecurityCommand.type())
+        if (SecurityCommandBuffer_SecurityCommandBufferType_LEAVE == aSecurityCommand.type())
         {
             int i = 0;
             ++i;

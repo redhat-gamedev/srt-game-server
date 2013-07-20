@@ -92,6 +92,11 @@ void JoinSecurityCommand::Execute()
 LeaveSecurityCommand::LeaveSecurityCommand(_SecurityDependencies& theDependencies) :
     SecurityCommand(theDependencies)
 {
+    //assert(m_pBytesMessage);
+    //assert(m_pCommand);
+
+    //const SecurityCommandBuffer& aSecurityCommandBuffer = pCommandBuffer->securitycommandbuffer();
+    
     
 }
 

@@ -32,3 +32,19 @@ SecurityCommand_Dependencies::
 //    CreatedEvent(this, pSecurityCommand);
 //    return pSecurityCommand;
 //}
+
+// Constructor
+LeaveSecurityCommand_Dependencies::
+LeaveSecurityCommand_Dependencies(const SecurityCommandBuffer_SecurityCommandBufferType& anSecurityCommandBufferType,
+                                  const std::string& strUUID) :
+    m_strUUID(strUUID),
+    SecurityCommand_Dependencies(anSecurityCommandBufferType)
+{
+}
+
+// Destructor
+LeaveSecurityCommand_Dependencies::
+~LeaveSecurityCommand_Dependencies()
+{
+    
+}
