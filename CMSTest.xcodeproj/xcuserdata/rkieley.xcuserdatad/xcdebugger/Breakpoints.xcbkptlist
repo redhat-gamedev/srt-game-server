@@ -77,9 +77,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "97"
-         endingLineNumber = "97"
-         landmarkName = "Create(std::pair&lt;unsigned char*, unsigned long&gt;* pRawBytesPair)"
-         landmarkType = "7">
+         endingLineNumber = "97">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -389,6 +387,84 @@
          startingLineNumber = "118"
          endingLineNumber = "118"
          landmarkName = "LeaveSecurityCommand::Execute()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CMSTest/Game/EventDispatcher.cpp"
+         timestampString = "396038282.295229"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "216"
+         endingLineNumber = "216"
+         landmarkName = "EventDispatcher::HandleJoinSecurityCommandExecutedEvent(const void* pSender, const std::string&amp; strUUID)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CMSTest/Game/EventDispatcher.cpp"
+         timestampString = "396038283.614889"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "222"
+         endingLineNumber = "222"
+         landmarkName = "EventDispatcher::HandleLeaveSecurityCommandExecutedEvent(const void* pSender, const std::string&amp; strUUID)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CMSTest/Game/EventDispatcher.cpp"
+         timestampString = "396038460.993883"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "191"
+         endingLineNumber = "191"
+         landmarkName = "EventDispatcher::HandleJoinSecurityCommandFactoryCreatedEvent(const void* pSender, JoinSecurityCommand*&amp; pJoinSecurityCommand)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CMSTest/Game/EventDispatcher.cpp"
+         timestampString = "396038461.990076"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "198"
+         endingLineNumber = "198"
+         landmarkName = "EventDispatcher::HandleJoinSecurityCommandFactoryDestroyedEvent(const void* pSender, JoinSecurityCommand*&amp; pJoinSecurityCommand)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CMSTest/Game/EventDispatcher.cpp"
+         timestampString = "396038463.134756"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "204"
+         endingLineNumber = "204"
+         landmarkName = "EventDispatcher::HandleLeaveSecurityCommandFactoryCreatedEvent(const void* pSender, LeaveSecurityCommand*&amp; pLeaveSecurityCommand)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CMSTest/Game/EventDispatcher.cpp"
+         timestampString = "396038465.093842"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "211"
+         endingLineNumber = "211"
+         landmarkName = "EventDispatcher::HandleLeaveSecurityCommandFactoryDestroyedEvent(const void* pSender, LeaveSecurityCommand*&amp; pLeaveSecurityCommand)"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

@@ -27,6 +27,7 @@
 #include "../Game/PodFactory.h"
 #include "../Game/BulletFactory.h"
 #include "../Game/EntityGameEventFactory.h"
+#include "../Game/SecurityGameEventFactory.h"
 #include "../Proto/CommandBuffer.pb.h"
 #include "../Proto/SecurityCommandBuffer.pb.h"
 #include "../Game/SecurityCommandBufferFactory.h"
@@ -50,7 +51,11 @@ int main(int argc, char* argv[])
     PodFactory&                                                 thePodFactory = PodFactory::Instance();
     BulletFactory&                                              theBulletFactory = BulletFactory::Instance();
     FactoryT<GameEventBuffer, EntityGameEvent_Dependencies>&    theEntityGameEventFactory = FactoryT<GameEventBuffer, EntityGameEvent_Dependencies>::Instance();
-    EventDispatcher::_Dependencies                              theEventDispatcherDependencies(thePodFactory, theBulletFactory, theEntityGameEventFactory);
+    FactoryT<GameEventBuffer, SecurityGameEvent_Dependencies>&    theSecurityGameEventFactory = FactoryT<GameEventBuffer, SecurityGameEvent_Dependencies>::Instance();
+    EventDispatcher::_Dependencies                              theEventDispatcherDependencies(thePodFactory,
+         theBulletFactory,
+         theEntityGameEventFactory,
+         theSecurityGameEventFactory);
     EventDispatcher&                                            theEventDispatcher = EventDispatcher::Instance(&theEventDispatcherDependencies);
     
     SimpleAsyncProducer*                                        pSimpleAsyncProducer = new SimpleAsyncProducer(strBrokerURI, strGameEventOutDestinationURI, true);
