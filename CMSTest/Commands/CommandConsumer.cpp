@@ -7,7 +7,7 @@
 //
 
 #include "CommandConsumer.h"
-#include "MessageConsumer.h"
+#include "../Network/MessageConsumer.h"
 #include "Poco/Delegate.h"
 #include <cms/BytesMessage.h>
 #include <cms/CMSException.h>

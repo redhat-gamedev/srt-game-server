@@ -7,7 +7,7 @@
 //
 
 #include "MessageConsumer.h"
-#include "../Network/SimpleAsyncConsumer.h"
+#include "SimpleAsyncConsumer.h"
 #include <cms/BytesMessage.h>
 #include <cms/CMSException.h>
 #include <google/protobuf/message.h>

@@ -16,9 +16,9 @@
  */
 
 #include "Server.h"
-#include "MessageDispatcher.h"
-#include "MessageConsumer.h"
-#include "SecurityCommand.h"
+#include "../Network/MessageDispatcher.h"
+#include "../Network/MessageConsumer.h"
+#include "../Commands/SecurityCommand.h"
 #include "../Network/SimpleAsyncProducer.h"
 #include "../Network/SimpleAsyncConsumer.h"
 #include "../Events/EventDispatcher.h"

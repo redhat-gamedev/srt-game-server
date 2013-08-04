@@ -11,7 +11,7 @@
 #include "Pod.h"
 #include "PodFactory.h"
 #include "B2DPodFactory.h"
-#include "CommandConsumer.h"
+#include "../Commands/CommandConsumer.h"
 #include "../Commands/ACommand.h"
 #include "../Commands/SecurityCommand.h"
 #include "../Shared/FactoryT.h"

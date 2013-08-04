@@ -9,11 +9,11 @@
 #ifndef __CMSTest__Server__
 #define __CMSTest__Server__
 
-#include "EventDispatcher.h"
-#include "MessageDispatcher.h"
-#include "MessageConsumer.h"
-#include "CommandConsumer.h"
-#include "CommandQueue.h"
+#include "../Events/EventDispatcher.h"
+#include "../Network/MessageDispatcher.h"
+#include "../Network/MessageConsumer.h"
+#include "../Commands/CommandConsumer.h"
+#include "../Commands/CommandQueue.h"
 #include "../Game/B2DWorld.h"
 #include "../Game/Input.h"
 #include "../Proto/box2d.pb.h"

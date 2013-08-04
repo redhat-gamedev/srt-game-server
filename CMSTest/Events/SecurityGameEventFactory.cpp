@@ -7,7 +7,6 @@
 //
 
 #include "SecurityGameEventFactory.h"
-
 #include <assert.h>
 
 

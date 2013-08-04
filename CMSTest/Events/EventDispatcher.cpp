@@ -7,11 +7,11 @@
 //
 
 #include "EventDispatcher.h"
-#include "AEntity.h"
-#include "Pod.h"
-#include "PodFactory.h"
-#include "Bullet.h"
-#include "BulletFactory.h"
+#include "../Game/AEntity.h"
+#include "../Game/Pod.h"
+#include "../Game/PodFactory.h"
+#include "../Game/Bullet.h"
+#include "../Game/BulletFactory.h"
 #include "../Commands/ACommand.h"
 #include "../Commands/SecurityCommand.h"
 #include "../Shared/FactoryT.h"

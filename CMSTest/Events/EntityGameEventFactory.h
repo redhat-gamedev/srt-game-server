@@ -12,7 +12,7 @@
 #include "../Shared/FactoryT.h"
 #include "../proto/GameEventBuffer.pb.h"
 #include "../proto/EntityGameEventBuffer.pb.h"
-#include "AEntity.h"
+#include "../Game/AEntity.h"
 #include <assert.h>
 
 using namespace usx::geofactions;
