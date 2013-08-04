@@ -87,6 +87,7 @@ void Player::Update()
 
     B2DBulletFactory& aB2DBulletFactory = B2DBulletFactory::Instance();
     BulletFactory& aBulletFactory = BulletFactory::Instance();
+
 #if 0
 //    m_PbDualStickQueue.lock();
 //    std::vector<DualStick::PbDualStick> vecPbDualStick = m_PbDualStickQueue.toArray();
@@ -137,6 +138,43 @@ void Player::Update()
         }
     }
 #endif
+    
+    //b2Vec2  b2v2Move;
+    //b2Vec2  b2v2Shoot;
+    m_b2v2MoveQueue.lock();
+    std::vector<b2Vec2> vecb2v2Move = m_b2v2MoveQueue.toArray();
+    m_b2v2MoveQueue.clear();
+    m_b2v2MoveQueue.unlock();
+    
+    for (int i = 0; i < vecb2v2Move.size(); ++i)
+    {
+        m_pB2DEntity->Move(vecb2v2Move[i].x, vecb2v2Move[i].y);
+    }
+    
+    m_b2v2ShootQueue.lock();
+    std::vector<b2Vec2> vecb2v2Shoot = m_b2v2ShootQueue.toArray();
+    m_b2v2ShootQueue.clear();
+    m_b2v2ShootQueue.unlock();
+
+    for (int i = 0; i < vecb2v2Shoot.size(); ++i)
+    {
+        if (m_pBulletTimer->Status() == Rock2D::Timer::EXPIRED)
+        {
+            m_pBulletTimer->Restart();
+            
+            B2DBullet::_Dependencies aB2DBulletDependencies(m_pB2DEntity->GetPosition(), m_pB2DEntity->GetLinearVelocity());
+            B2DBullet* pB2DBullet = aB2DBulletFactory.Create(aB2DBulletDependencies);
+            
+            Bullet::_Dependencies aBulletDependencies(m_strUUID, pB2DBullet);
+            Bullet* pBullet = aBulletFactory.Create(aBulletDependencies);
+            
+            pBullet->Fire(vecb2v2Shoot[i]);
+            m_BulletQueue.lock();
+            m_BulletQueue.push(pBullet);
+            m_BulletQueue.unlock();
+        }
+    }
+    
     Rock2D::Timer::Update();
     m_pB2DEntity->Update();
 
@@ -200,9 +238,36 @@ void Player::HandleDualStickRawInputCommandFactoryDestroyedEvent(const void* pSe
 }
 
 void Player::HandleDualStickRawInputCommandExecutedEvent(const void* pSender, const std::string& strUUID)
+//void Player::HandleDualStickRawInputCommandExecutedEvent(const void* pSender, const std::string& strUUID, b2Vec2& b2v2Move, b2Vec2& b2v2Shoot)
 {
     //GameEventBuffer* pGameEvent = CreateGameEvent(SecurityGameEventBuffer_SecurityGameEventBufferType_JOIN, strUUID);
     //Enqueue(pGameEvent);
-    int i = 0;
-    ++i;
+
+    if (m_strUUID != strUUID)
+    {
+        return;
+    }
+    
+    const DualStickRawInputCommand* pDualStickInputCommand = static_cast<const DualStickRawInputCommand*>(pSender);
+    assert(pDualStickInputCommand);
+    
+    if (((pDualStickInputCommand->m_b2v2Move.x > 0.0f) ||
+        (pDualStickInputCommand->m_b2v2Move.x < 0.0f)) ||
+        ((pDualStickInputCommand->m_b2v2Move.y > 0.0f) ||
+         (pDualStickInputCommand->m_b2v2Move.y < 0.0f)))
+    {
+        m_b2v2MoveQueue.lock();
+        m_b2v2MoveQueue.push(b2Vec2(pDualStickInputCommand->m_b2v2Move.x, pDualStickInputCommand->m_b2v2Move.y));
+        m_b2v2MoveQueue.unlock();
+    }
+    
+    if (((pDualStickInputCommand->m_b2v2Shoot.x > 0.0f)  ||
+         (pDualStickInputCommand->m_b2v2Shoot.x < 0.0f)) ||
+        ((pDualStickInputCommand->m_b2v2Shoot.y > 0.0f)  ||
+         (pDualStickInputCommand->m_b2v2Shoot.y < 0.0f)))
+    {
+        m_b2v2ShootQueue.lock();
+        m_b2v2ShootQueue.push(b2Vec2(pDualStickInputCommand->m_b2v2Shoot.x, pDualStickInputCommand->m_b2v2Shoot.y));
+        m_b2v2ShootQueue.unlock();
+    }
 }

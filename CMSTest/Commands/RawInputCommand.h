@@ -10,6 +10,7 @@
 #define __CMSTest__RawInputCommand__
 
 #include "../Shared/ACommand.h"
+#include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include "Poco/BasicEvent.h"
 
 namespace google
@@ -23,6 +24,7 @@ namespace cms
 {
     class BytesMessage;
 }
+//struct b2Vec2;
 
 
 class RawInputCommand :
@@ -62,8 +64,11 @@ class DualStickRawInputCommand :
 private:
 protected:
 public:
+    b2Vec2          m_b2v2Move;
+    b2Vec2          m_b2v2Shoot;
     // Event(s)
     Poco::BasicEvent<const std::string&>      ExecutedEvent;
+    //Poco::BasicEvent<const std::string&, b2Vec2& b2v2Move, b2Vec2& b2v2Shoot>      ExecutedEvent;
     
     // Constructor
     DualStickRawInputCommand(_RawInputDependencies& theDependencies);

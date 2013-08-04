@@ -39,6 +39,8 @@ protected:
     Rock2D::Timer*                      m_pBulletTimer;
     decaf::util::StlQueue<Bullet*>      m_BulletQueue;
     
+    decaf::util::StlQueue<b2Vec2>       m_b2v2MoveQueue;
+    
     decaf::util::StlQueue<b2Vec2>       m_b2v2ShootQueue;
     decaf::util::StlQueue<b2Vec2>       m_b2v2ShootSwapQueue;
     
@@ -64,6 +66,7 @@ public:
     void HandleDualStickRawInputCommandFactoryCreatedEvent(const void* pSender, DualStickRawInputCommand*& pDualStickRawInputCommand);
     void HandleDualStickRawInputCommandFactoryDestroyedEvent(const void* pSender, DualStickRawInputCommand*& pDualStickRawInputCommand);
     void HandleDualStickRawInputCommandExecutedEvent(const void* pSender, const std::string& strUUID);
+    //void HandleDualStickRawInputCommandExecutedEvent(const void* pSender, const std::string& strUUID, b2Vec2& b2v2Move, b2Vec2& b2v2Shoot);
 };
 
 
