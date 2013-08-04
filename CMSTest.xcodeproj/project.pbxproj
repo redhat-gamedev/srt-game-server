@@ -30,9 +30,9 @@
 		CC51BA661781B7FA007F27F0 /* BulletFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC51BA641781B7FA007F27F0 /* BulletFactory.cpp */; };
 		CC55B2741785028A00CCC6E5 /* PodFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC55B2731785028A00CCC6E5 /* PodFactory.cpp */; };
 		CC5A8E7617AE92B800C8567B /* RawInputCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC5A8E7417AE92B800C8567B /* RawInputCommand.cpp */; };
+		CC5A8E7917AEC78B00C8567B /* ACommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC5A8E7717AEC78B00C8567B /* ACommand.cpp */; };
 		CC68EA98163DA07400D225C2 /* CMSTest.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = CC68EA97163DA07400D225C2 /* CMSTest.1 */; };
 		CCA4C32C1687B45D006BAC1D /* xdispatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA4C32B1687B45D006BAC1D /* xdispatch.framework */; };
-		CCC7090E178F9B4600E6992E /* ACommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCC7090C178F9B4600E6992E /* ACommand.cpp */; };
 		CCC70911178F9D3D00E6992E /* SecurityCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCC7090F178F9D3D00E6992E /* SecurityCommand.cpp */; };
 		CCE449C217230E21002A1937 /* box2d.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CCE449B917230E21002A1937 /* box2d.pb.cc */; };
 		CCE449D317230EF9002A1937 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449C917230EF9002A1937 /* main.cpp */; };
@@ -250,13 +250,13 @@
 		CC55B2731785028A00CCC6E5 /* PodFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PodFactory.cpp; path = Game/PodFactory.cpp; sourceTree = "<group>"; };
 		CC5A8E7417AE92B800C8567B /* RawInputCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RawInputCommand.cpp; path = Commands/RawInputCommand.cpp; sourceTree = "<group>"; };
 		CC5A8E7517AE92B800C8567B /* RawInputCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RawInputCommand.h; path = Commands/RawInputCommand.h; sourceTree = "<group>"; };
+		CC5A8E7717AEC78B00C8567B /* ACommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ACommand.cpp; path = Commands/ACommand.cpp; sourceTree = "<group>"; };
+		CC5A8E7817AEC78B00C8567B /* ACommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACommand.h; path = Commands/ACommand.h; sourceTree = "<group>"; };
 		CC68EA91163DA07400D225C2 /* CMSTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CMSTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC68EA97163DA07400D225C2 /* CMSTest.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = CMSTest.1; sourceTree = "<group>"; };
 		CCA4C32B1687B45D006BAC1D /* xdispatch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = xdispatch.framework; path = ../ThirdParty/xdispatch/build/bin/Debug/xdispatch.framework; sourceTree = "<group>"; };
 		CCBB79AF1749CBEF00E74F08 /* Poco.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Poco.xcodeproj; path = "../ThirdParty/poco/cmake-build/Poco.xcodeproj"; sourceTree = "<group>"; };
 		CCC70904178F8E6500E6992E /* DualStickRawInputCommandBuffer.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; name = DualStickRawInputCommandBuffer.proto; path = Proto/DualStickRawInputCommandBuffer.proto; sourceTree = "<group>"; };
-		CCC7090C178F9B4600E6992E /* ACommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ACommand.cpp; path = Shared/ACommand.cpp; sourceTree = "<group>"; };
-		CCC7090D178F9B4600E6992E /* ACommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACommand.h; path = Shared/ACommand.h; sourceTree = "<group>"; };
 		CCC7090F178F9D3D00E6992E /* SecurityCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SecurityCommand.cpp; path = Application/SecurityCommand.cpp; sourceTree = "<group>"; };
 		CCC70910178F9D3D00E6992E /* SecurityCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SecurityCommand.h; path = Application/SecurityCommand.h; sourceTree = "<group>"; };
 		CCE449B917230E21002A1937 /* box2d.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = box2d.pb.cc; path = Proto/box2d.pb.cc; sourceTree = "<group>"; };
@@ -375,6 +375,8 @@
 		CC5A8E7317AE926E00C8567B /* Commands */ = {
 			isa = PBXGroup;
 			children = (
+				CC5A8E7717AEC78B00C8567B /* ACommand.cpp */,
+				CC5A8E7817AEC78B00C8567B /* ACommand.h */,
 				CC5A8E7417AE92B800C8567B /* RawInputCommand.cpp */,
 				CC5A8E7517AE92B800C8567B /* RawInputCommand.h */,
 			);
@@ -477,8 +479,6 @@
 				CCE449DD17230F8E002A1937 /* Timer.h */,
 				CCE44A0017231FAD002A1937 /* MakeT.h */,
 				CC51BAAF17825523007F27F0 /* FactoryT.h */,
-				CCC7090C178F9B4600E6992E /* ACommand.cpp */,
-				CCC7090D178F9B4600E6992E /* ACommand.h */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -753,7 +753,6 @@
 				CC386DDB178A033100AB41AF /* MessageDispatcher.cpp in Sources */,
 				CC1AD3AA178E3DAE000F134C /* MessageConsumer.cpp in Sources */,
 				CC1AD3AD178E4DE6000F134C /* CommandConsumer.cpp in Sources */,
-				CCC7090E178F9B4600E6992E /* ACommand.cpp in Sources */,
 				CCC70911178F9D3D00E6992E /* SecurityCommand.cpp in Sources */,
 				CC366F801791D78200B698E6 /* CommandQueue.cpp in Sources */,
 				CC3156AE1792D69900B1B41D /* SecurityCommandBufferFactory.cpp in Sources */,
@@ -765,6 +764,7 @@
 				CC0BFD551792E6F300AE7B01 /* SecurityCommandBuffer.pb.cc in Sources */,
 				CC425F65179B0AD6001F410B /* SecurityGameEventFactory.cpp in Sources */,
 				CC5A8E7617AE92B800C8567B /* RawInputCommand.cpp in Sources */,
+				CC5A8E7917AEC78B00C8567B /* ACommand.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

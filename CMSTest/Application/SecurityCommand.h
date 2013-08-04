@@ -9,7 +9,7 @@
 #ifndef __CMSTest__SecurityCommand__
 #define __CMSTest__SecurityCommand__
 
-#include "../Shared/ACommand.h"
+#include "../Commands/ACommand.h"
 #include "Poco/BasicEvent.h"
 #include <string>
 

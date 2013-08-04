@@ -11,7 +11,7 @@
 
 #include "AEntity.h"
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
-#include "../Shared/ACommand.h"
+#include "../Commands/ACommand.h"
 #include "../Commands/RawInputCommand.h"
 #include "Poco/BasicEvent.h"
 #include <decaf/util/StlQueue.h>

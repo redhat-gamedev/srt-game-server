@@ -12,7 +12,7 @@
 #include "PodFactory.h"
 #include "Bullet.h"
 #include "BulletFactory.h"
-#include "../Shared/ACommand.h"
+#include "../Commands/ACommand.h"
 #include "../Application/SecurityCommand.h"
 #include "../Shared/FactoryT.h"
 #include "Poco/Delegate.h"

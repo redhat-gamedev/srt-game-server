@@ -9,7 +9,7 @@
 #ifndef __CMSTest__RawInputCommand__
 #define __CMSTest__RawInputCommand__
 
-#include "../Shared/ACommand.h"
+#include "../Commands/ACommand.h"
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include "Poco/BasicEvent.h"
 
