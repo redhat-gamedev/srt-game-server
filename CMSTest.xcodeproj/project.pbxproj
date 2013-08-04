@@ -18,10 +18,7 @@
 		CC0F90DE17179B7A006B9474 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0F90DD17179B7A006B9474 /* libcrypto.dylib */; };
 		CC1AD3AA178E3DAE000F134C /* MessageConsumer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC1AD3A8178E3DAE000F134C /* MessageConsumer.cpp */; };
 		CC2436D717492CFA00A8519D /* B2DPod.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC2436D517492CFA00A8519D /* B2DPod.cpp */; };
-		CC386DD21789D45800AB41AF /* EventDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC386DD01789D45800AB41AF /* EventDispatcher.cpp */; };
-		CC386DD81789D86300AB41AF /* EntityGameEventFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC386DD61789D86300AB41AF /* EntityGameEventFactory.cpp */; };
 		CC386DDB178A033100AB41AF /* MessageDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC386DD9178A033100AB41AF /* MessageDispatcher.cpp */; };
-		CC425F65179B0AD6001F410B /* SecurityGameEventFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC425F63179B0AD5001F410B /* SecurityGameEventFactory.cpp */; };
 		CC488D27164EB5FD005078C3 /* libBox2D.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC488D20164EB5DE005078C3 /* libBox2D.a */; };
 		CC4FECE11662A3AA004810CC /* libProtocolBuffers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC4FECE01662A39A004810CC /* libProtocolBuffers.a */; };
 		CC51BA661781B7FA007F27F0 /* BulletFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC51BA641781B7FA007F27F0 /* BulletFactory.cpp */; };
@@ -32,6 +29,9 @@
 		CC5A8E7F17AEC92000C8567B /* SecurityCommandBufferFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC5A8E7D17AEC92000C8567B /* SecurityCommandBufferFactory.cpp */; };
 		CC5A8E8417AECA1C00C8567B /* CommandConsumer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC5A8E8017AECA1C00C8567B /* CommandConsumer.cpp */; };
 		CC5A8E8517AECA1C00C8567B /* CommandQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC5A8E8217AECA1C00C8567B /* CommandQueue.cpp */; };
+		CC5A8E8D17AECAEC00C8567B /* EntityGameEventFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC5A8E8717AECAEC00C8567B /* EntityGameEventFactory.cpp */; };
+		CC5A8E8E17AECAEC00C8567B /* EventDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC5A8E8917AECAEC00C8567B /* EventDispatcher.cpp */; };
+		CC5A8E8F17AECAEC00C8567B /* SecurityGameEventFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC5A8E8B17AECAEC00C8567B /* SecurityGameEventFactory.cpp */; };
 		CC68EA98163DA07400D225C2 /* CMSTest.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = CC68EA97163DA07400D225C2 /* CMSTest.1 */; };
 		CCA4C32C1687B45D006BAC1D /* xdispatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA4C32B1687B45D006BAC1D /* xdispatch.framework */; };
 		CCE449C217230E21002A1937 /* box2d.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CCE449B917230E21002A1937 /* box2d.pb.cc */; };
@@ -226,14 +226,8 @@
 		CC2436D017491B5700A8519D /* GameEventBuffer.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; name = GameEventBuffer.proto; path = Proto/GameEventBuffer.proto; sourceTree = "<group>"; };
 		CC2436D517492CFA00A8519D /* B2DPod.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = B2DPod.cpp; path = Game/B2DPod.cpp; sourceTree = "<group>"; };
 		CC2436D617492CFA00A8519D /* B2DPod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = B2DPod.h; path = Game/B2DPod.h; sourceTree = "<group>"; };
-		CC386DD01789D45800AB41AF /* EventDispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EventDispatcher.cpp; path = Game/EventDispatcher.cpp; sourceTree = "<group>"; };
-		CC386DD11789D45800AB41AF /* EventDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventDispatcher.h; path = Game/EventDispatcher.h; sourceTree = "<group>"; };
-		CC386DD61789D86300AB41AF /* EntityGameEventFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EntityGameEventFactory.cpp; path = Game/EntityGameEventFactory.cpp; sourceTree = "<group>"; };
-		CC386DD71789D86300AB41AF /* EntityGameEventFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EntityGameEventFactory.h; path = Game/EntityGameEventFactory.h; sourceTree = "<group>"; };
 		CC386DD9178A033100AB41AF /* MessageDispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MessageDispatcher.cpp; path = Application/MessageDispatcher.cpp; sourceTree = "<group>"; };
 		CC386DDA178A033100AB41AF /* MessageDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageDispatcher.h; path = Application/MessageDispatcher.h; sourceTree = "<group>"; };
-		CC425F63179B0AD5001F410B /* SecurityGameEventFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SecurityGameEventFactory.cpp; path = Game/SecurityGameEventFactory.cpp; sourceTree = "<group>"; };
-		CC425F64179B0AD6001F410B /* SecurityGameEventFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SecurityGameEventFactory.h; path = Game/SecurityGameEventFactory.h; sourceTree = "<group>"; };
 		CC4FECD81662A399004810CC /* ProtocolBuffers.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ProtocolBuffers.xcodeproj; path = ../ThirdParty/protobuf/ProtocolBuffers/ProtocolBuffers.xcodeproj; sourceTree = "<group>"; };
 		CC51BA641781B7FA007F27F0 /* BulletFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BulletFactory.cpp; path = Game/BulletFactory.cpp; sourceTree = "<group>"; };
 		CC51BA651781B7FA007F27F0 /* BulletFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BulletFactory.h; path = Game/BulletFactory.h; sourceTree = "<group>"; };
@@ -254,6 +248,12 @@
 		CC5A8E8117AECA1C00C8567B /* CommandConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommandConsumer.h; path = Commands/CommandConsumer.h; sourceTree = "<group>"; };
 		CC5A8E8217AECA1C00C8567B /* CommandQueue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CommandQueue.cpp; path = Commands/CommandQueue.cpp; sourceTree = "<group>"; };
 		CC5A8E8317AECA1C00C8567B /* CommandQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommandQueue.h; path = Commands/CommandQueue.h; sourceTree = "<group>"; };
+		CC5A8E8717AECAEC00C8567B /* EntityGameEventFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EntityGameEventFactory.cpp; path = Events/EntityGameEventFactory.cpp; sourceTree = "<group>"; };
+		CC5A8E8817AECAEC00C8567B /* EntityGameEventFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EntityGameEventFactory.h; path = Events/EntityGameEventFactory.h; sourceTree = "<group>"; };
+		CC5A8E8917AECAEC00C8567B /* EventDispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EventDispatcher.cpp; path = Events/EventDispatcher.cpp; sourceTree = "<group>"; };
+		CC5A8E8A17AECAEC00C8567B /* EventDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventDispatcher.h; path = Events/EventDispatcher.h; sourceTree = "<group>"; };
+		CC5A8E8B17AECAEC00C8567B /* SecurityGameEventFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SecurityGameEventFactory.cpp; path = Events/SecurityGameEventFactory.cpp; sourceTree = "<group>"; };
+		CC5A8E8C17AECAEC00C8567B /* SecurityGameEventFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SecurityGameEventFactory.h; path = Events/SecurityGameEventFactory.h; sourceTree = "<group>"; };
 		CC68EA91163DA07400D225C2 /* CMSTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CMSTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC68EA97163DA07400D225C2 /* CMSTest.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = CMSTest.1; sourceTree = "<group>"; };
 		CCA4C32B1687B45D006BAC1D /* xdispatch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = xdispatch.framework; path = ../ThirdParty/xdispatch/build/bin/Debug/xdispatch.framework; sourceTree = "<group>"; };
@@ -391,6 +391,19 @@
 			name = Commands;
 			sourceTree = "<group>";
 		};
+		CC5A8E8617AECA8F00C8567B /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				CC5A8E8717AECAEC00C8567B /* EntityGameEventFactory.cpp */,
+				CC5A8E8817AECAEC00C8567B /* EntityGameEventFactory.h */,
+				CC5A8E8917AECAEC00C8567B /* EventDispatcher.cpp */,
+				CC5A8E8A17AECAEC00C8567B /* EventDispatcher.h */,
+				CC5A8E8B17AECAEC00C8567B /* SecurityGameEventFactory.cpp */,
+				CC5A8E8C17AECAEC00C8567B /* SecurityGameEventFactory.h */,
+			);
+			name = Events;
+			sourceTree = "<group>";
+		};
 		CC68EA86163DA07400D225C2 = {
 			isa = PBXGroup;
 			children = (
@@ -415,6 +428,7 @@
 		CC68EA94163DA07400D225C2 /* CMSTest */ = {
 			isa = PBXGroup;
 			children = (
+				CC5A8E8617AECA8F00C8567B /* Events */,
 				CC5A8E7317AE926E00C8567B /* Commands */,
 				CCE449D917230F6B002A1937 /* Game */,
 				CCE449D817230F64002A1937 /* Shared */,
@@ -516,12 +530,6 @@
 				CC55B2711785020700CCC6E5 /* B2DPodFactory.h */,
 				CC55B2721785025200CCC6E5 /* PodFactory.h */,
 				CC55B2731785028A00CCC6E5 /* PodFactory.cpp */,
-				CC386DD01789D45800AB41AF /* EventDispatcher.cpp */,
-				CC386DD11789D45800AB41AF /* EventDispatcher.h */,
-				CC386DD61789D86300AB41AF /* EntityGameEventFactory.cpp */,
-				CC386DD71789D86300AB41AF /* EntityGameEventFactory.h */,
-				CC425F63179B0AD5001F410B /* SecurityGameEventFactory.cpp */,
-				CC425F64179B0AD6001F410B /* SecurityGameEventFactory.h */,
 			);
 			name = Game;
 			sourceTree = "<group>";
@@ -748,8 +756,6 @@
 				CC2436D717492CFA00A8519D /* B2DPod.cpp in Sources */,
 				CC51BA661781B7FA007F27F0 /* BulletFactory.cpp in Sources */,
 				CC55B2741785028A00CCC6E5 /* PodFactory.cpp in Sources */,
-				CC386DD21789D45800AB41AF /* EventDispatcher.cpp in Sources */,
-				CC386DD81789D86300AB41AF /* EntityGameEventFactory.cpp in Sources */,
 				CC386DDB178A033100AB41AF /* MessageDispatcher.cpp in Sources */,
 				CC1AD3AA178E3DAE000F134C /* MessageConsumer.cpp in Sources */,
 				CC0BFD501792E6F300AE7B01 /* CommandBuffer.pb.cc in Sources */,
@@ -758,13 +764,15 @@
 				CC0BFD531792E6F300AE7B01 /* GameEventBuffer.pb.cc in Sources */,
 				CC0BFD541792E6F300AE7B01 /* RawInputCommandBuffer.pb.cc in Sources */,
 				CC0BFD551792E6F300AE7B01 /* SecurityCommandBuffer.pb.cc in Sources */,
-				CC425F65179B0AD6001F410B /* SecurityGameEventFactory.cpp in Sources */,
 				CC5A8E7617AE92B800C8567B /* RawInputCommand.cpp in Sources */,
 				CC5A8E7917AEC78B00C8567B /* ACommand.cpp in Sources */,
 				CC5A8E7C17AEC86800C8567B /* SecurityCommand.cpp in Sources */,
 				CC5A8E7F17AEC92000C8567B /* SecurityCommandBufferFactory.cpp in Sources */,
 				CC5A8E8417AECA1C00C8567B /* CommandConsumer.cpp in Sources */,
 				CC5A8E8517AECA1C00C8567B /* CommandQueue.cpp in Sources */,
+				CC5A8E8D17AECAEC00C8567B /* EntityGameEventFactory.cpp in Sources */,
+				CC5A8E8E17AECAEC00C8567B /* EventDispatcher.cpp in Sources */,
+				CC5A8E8F17AECAEC00C8567B /* SecurityGameEventFactory.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
