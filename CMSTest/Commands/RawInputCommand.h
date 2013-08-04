@@ -57,26 +57,4 @@ public:
     virtual void Execute() = 0;
 };
 
-
-class DualStickRawInputCommand :
-    public RawInputCommand
-{
-private:
-protected:
-public:
-    b2Vec2          m_b2v2Move;
-    b2Vec2          m_b2v2Shoot;
-    // Event(s)
-    Poco::BasicEvent<const std::string&>      ExecutedEvent;
-    //Poco::BasicEvent<const std::string&, b2Vec2& b2v2Move, b2Vec2& b2v2Shoot>      ExecutedEvent;
-    
-    // Constructor
-    DualStickRawInputCommand(_RawInputDependencies& theDependencies);
-    
-    // Destructor
-    ~DualStickRawInputCommand();
-    
-    // Method(s)
-    virtual void Execute();
-};
 #endif /* defined(__CMSTest__RawInputCommand__) */

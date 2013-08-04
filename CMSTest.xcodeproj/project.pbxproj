@@ -36,6 +36,7 @@
 		CC5A8E9C17AECC6F00C8567B /* MessageDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC5A8E9917AECC6F00C8567B /* MessageDispatcher.cpp */; };
 		CC5A8E9F17AECFB800C8567B /* JoinSecurityCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC5A8E9D17AECFB600C8567B /* JoinSecurityCommand.cpp */; };
 		CC5A8EA217AED0EE00C8567B /* LeaveSecurityCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC5A8EA017AED0EC00C8567B /* LeaveSecurityCommand.cpp */; };
+		CC5A8EA517AED22800C8567B /* DualStickRawInputCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC5A8EA317AED22500C8567B /* DualStickRawInputCommand.cpp */; };
 		CC68EA98163DA07400D225C2 /* CMSTest.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = CC68EA97163DA07400D225C2 /* CMSTest.1 */; };
 		CCA4C32C1687B45D006BAC1D /* xdispatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA4C32B1687B45D006BAC1D /* xdispatch.framework */; };
 		CCE449C217230E21002A1937 /* box2d.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CCE449B917230E21002A1937 /* box2d.pb.cc */; };
@@ -264,6 +265,8 @@
 		CC5A8E9E17AECFB700C8567B /* JoinSecurityCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JoinSecurityCommand.h; path = Commands/JoinSecurityCommand.h; sourceTree = "<group>"; };
 		CC5A8EA017AED0EC00C8567B /* LeaveSecurityCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LeaveSecurityCommand.cpp; path = Commands/LeaveSecurityCommand.cpp; sourceTree = "<group>"; };
 		CC5A8EA117AED0ED00C8567B /* LeaveSecurityCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LeaveSecurityCommand.h; path = Commands/LeaveSecurityCommand.h; sourceTree = "<group>"; };
+		CC5A8EA317AED22500C8567B /* DualStickRawInputCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DualStickRawInputCommand.cpp; path = Commands/DualStickRawInputCommand.cpp; sourceTree = "<group>"; };
+		CC5A8EA417AED22700C8567B /* DualStickRawInputCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DualStickRawInputCommand.h; path = Commands/DualStickRawInputCommand.h; sourceTree = "<group>"; };
 		CC68EA91163DA07400D225C2 /* CMSTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CMSTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC68EA97163DA07400D225C2 /* CMSTest.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = CMSTest.1; sourceTree = "<group>"; };
 		CCA4C32B1687B45D006BAC1D /* xdispatch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = xdispatch.framework; path = ../ThirdParty/xdispatch/build/bin/Debug/xdispatch.framework; sourceTree = "<group>"; };
@@ -397,6 +400,8 @@
 				CC5A8E9E17AECFB700C8567B /* JoinSecurityCommand.h */,
 				CC5A8EA017AED0EC00C8567B /* LeaveSecurityCommand.cpp */,
 				CC5A8EA117AED0ED00C8567B /* LeaveSecurityCommand.h */,
+				CC5A8EA317AED22500C8567B /* DualStickRawInputCommand.cpp */,
+				CC5A8EA417AED22700C8567B /* DualStickRawInputCommand.h */,
 			);
 			name = Commands;
 			sourceTree = "<group>";
@@ -793,6 +798,7 @@
 				CC5A8E9C17AECC6F00C8567B /* MessageDispatcher.cpp in Sources */,
 				CC5A8E9F17AECFB800C8567B /* JoinSecurityCommand.cpp in Sources */,
 				CC5A8EA217AED0EE00C8567B /* LeaveSecurityCommand.cpp in Sources */,
+				CC5A8EA517AED22800C8567B /* DualStickRawInputCommand.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

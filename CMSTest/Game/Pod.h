@@ -13,6 +13,7 @@
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include "../Commands/ACommand.h"
 #include "../Commands/RawInputCommand.h"
+#include "../Commands/DualStickRawInputCommand.h"
 #include "Poco/BasicEvent.h"
 #include <decaf/util/StlQueue.h>
 #include <string>

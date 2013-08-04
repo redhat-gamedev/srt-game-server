@@ -14,6 +14,7 @@
 #include "JoinSecurityCommand.h"
 #include "LeaveSecurityCommand.h"
 #include "RawInputCommand.h"
+#include "DualStickRawInputCommand.h"
 #include "Poco/Tuple.h"
 #include <decaf/util/StlQueue.h>
 
