@@ -9,12 +9,12 @@
 #ifndef CMSTest_PodFactory_h
 #define CMSTest_PodFactory_h
 
-#include "Player.h"
+#include "Pod.h"
 #include "../Shared/FactoryT.h"
 
 
 class PodFactory :
-    public FactoryT<Player, Player::_Dependencies>
+    public FactoryT<Pod, Pod::_Dependencies>
 {
 private:
     
@@ -34,7 +34,7 @@ public:
     }
     
     // Method(s)
-    void Destroy(Player*& pPod);
+    void Destroy(Pod*& pPod);
 };
 
 #endif

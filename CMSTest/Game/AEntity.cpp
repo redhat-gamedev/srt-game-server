@@ -8,7 +8,7 @@
 
 #include "AEntity.h"
 #include "AB2DEntity.h"
-#include "Player.h"
+#include "Pod.h"
 #include "PodFactory.h"
 #include "B2DPodFactory.h"
 #include "CommandConsumer.h"
@@ -23,8 +23,8 @@
 
 decaf::util::StlQueue<AEntity*>     AEntity::s_EntityQueue;
 AEntity::_Serializer                AEntity::Serializer;
-std::list<Player*>                  AEntity::s_listPlayers;
-std::list<Player*>                  AEntity::s_listPlayersSwap;
+std::list<Pod*>                  AEntity::s_listPods;
+std::list<Pod*>                  AEntity::s_listPodsSwap;
 uint64_t                            AEntity::s_ui64Count = 1;
 
 
@@ -100,7 +100,7 @@ void AEntity::ClassTeardown()
     theLeaveSecurityCommandFactory.CreatedEvent -= Poco::FunctionDelegate<LeaveSecurityCommand*&>(&AEntity::HandleLeaveSecurityCommandFactoryCreated);
 }
 
-void AEntity::AddPlayer(const std::string& strUUID)
+void AEntity::AddPod(const std::string& strUUID)
 {
     assert(strUUID.length() > 0);
     
@@ -117,14 +117,14 @@ void AEntity::AddPlayer(const std::string& strUUID)
     B2DPod::_Dependencies aB2DPodDependencies(b2v2PositionRef);
     B2DPod* pB2DPod = aB2DPodFactory.Create(aB2DPodDependencies);
     
-    Player::_Dependencies aPodDependencies(strUUID, pB2DPod);
-    Player* pPlayer = aPodFactory.Create(aPodDependencies);
-    s_listPlayers.push_front(pPlayer);
+    Pod::_Dependencies aPodDependencies(strUUID, pB2DPod);
+    Pod* pPod = aPodFactory.Create(aPodDependencies);
+    s_listPods.push_front(pPod);
     
     //    });    
 }
 
-void AEntity::RemovePlayer(const std::string& strUUID)
+void AEntity::RemovePod(const std::string& strUUID)
 {
     assert(strUUID.length() > 0);
     
@@ -132,17 +132,17 @@ void AEntity::RemovePlayer(const std::string& strUUID)
     
     //    xdispatch::global_queue().sync([=]
     //    {
-    std::list<Player*>::iterator    iterPlayerList;
-    Player* pPlayer = NULL;
+    std::list<Pod*>::iterator    iterPodList;
+    Pod* pPod = NULL;
     
-    iterPlayerList = s_listPlayers.begin();
-    for (;iterPlayerList != s_listPlayers.end(); iterPlayerList++)
+    iterPodList = s_listPods.begin();
+    for (;iterPodList != s_listPods.end(); iterPodList++)
     {
-        pPlayer = *iterPlayerList;
-        if (pPlayer->ThisUUIDIsAMatch(strUUID))
+        pPod = *iterPodList;
+        if (pPod->ThisUUIDIsAMatch(strUUID))
         {
-            s_listPlayers.erase(iterPlayerList);
-            aPodFactory.Destroy(pPlayer);
+            s_listPods.erase(iterPodList);
+            aPodFactory.Destroy(pPod);
             break;
         }
     }
@@ -151,14 +151,14 @@ void AEntity::RemovePlayer(const std::string& strUUID)
 
 void AEntity::Update()
 {
-    s_listPlayersSwap = s_listPlayers;
-    Player*     pPlayer = NULL;
-    while (!(s_listPlayersSwap.empty()))
+    s_listPodsSwap = s_listPods;
+    Pod*     pPod = NULL;
+    while (!(s_listPodsSwap.empty()))
     {
-        pPlayer = s_listPlayersSwap.front();
-        s_listPlayersSwap.pop_front();
-        assert(pPlayer);
-        pPlayer->Update();
+        pPod = s_listPodsSwap.front();
+        s_listPodsSwap.pop_front();
+        assert(pPod);
+        pPod->Update();
     }
 }
 
@@ -167,7 +167,7 @@ void AEntity::OnSecurityRequestJoin(const void* pSender, const std::string& strU
 {
     assert(!strUUID.empty());
     
-    AddPlayer(strUUID);
+    AddPod(strUUID);
 }
 
 void AEntity::OnSecurityRequestLeave(const void* pSender, const std::string& strUUID)
@@ -176,7 +176,7 @@ void AEntity::OnSecurityRequestLeave(const void* pSender, const std::string& str
     
 //    m_pSimulationSerialDispatchQueue->sync([=]
 //    {
-        RemovePlayer(strUUID);
+        RemovePod(strUUID);
 //    });
 }
 

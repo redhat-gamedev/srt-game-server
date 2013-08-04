@@ -1,13 +1,13 @@
 //
-//  Player.h
+//  Pod.h
 //  CMSTest
 //
 //  Created by Roddie Kieley on 12-12-15.
 //  Copyright (c) 2012 Roddie Kieley. All rights reserved.
 //
 
-#ifndef __CMSTest__Player__
-#define __CMSTest__Player__
+#ifndef __CMSTest__Pod__
+#define __CMSTest__Pod__
 
 #include "AEntity.h"
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
@@ -26,7 +26,7 @@ class Bullet;
 class AB2DEntity;
 
 
-class Player :
+class Pod :
     public AEntity
 {
     friend class PodFactory;
@@ -45,13 +45,13 @@ protected:
 
 public:
     // Event(s)
-    static Poco::BasicEvent<Player*&>    UpdatedEvent;
+    static Poco::BasicEvent<Pod*&>    UpdatedEvent;
     
     // Constructor(s)
-    Player(_Dependencies& theDependencies);
+    Pod(_Dependencies& theDependencies);
     
     // Destructor(s)
-    ~Player();
+    ~Pod();
     
     // Method(s)
     void Update();
@@ -63,4 +63,4 @@ public:
 };
 
 
-#endif /* defined(__CMSTest__Player__) */
+#endif /* defined(__CMSTest__Pod__) */

@@ -25,7 +25,7 @@ namespace google
     }
 }
 class AEntity;
-class Player;
+class Pod;
 class Bullet;
 class PodFactory;
 class BulletFactory;
@@ -97,9 +97,9 @@ public:
     void Dispatch();
     
     // Entity event response
-    void HandlePodCreatedEvent(const void* pSender, Player*& pPlayer);
-    void HandlePodUpdatedEvent(const void* pSender, Player*& pPlayer);
-    void HandlePodDestroyedEvent(const void* pSender, Player*& pPlayer);
+    void HandlePodCreatedEvent(const void* pSender, Pod*& pPod);
+    void HandlePodUpdatedEvent(const void* pSender, Pod*& pPod);
+    void HandlePodDestroyedEvent(const void* pSender, Pod*& pPod);
     
     void HandleBulletCreatedEvent(const void* pSender, Bullet*& pBullet);
     void HandleBulletUpdatedEvent(const void* pSender, Bullet*& pBullet);

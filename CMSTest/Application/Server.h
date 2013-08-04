@@ -33,7 +33,7 @@ namespace decaf
 }
 class Security;
 class World;
-class Player;
+class Pod;
 
 using namespace decaf::lang;
 

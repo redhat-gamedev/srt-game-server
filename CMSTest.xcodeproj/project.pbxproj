@@ -42,7 +42,7 @@
 		CCE449E81723111C002A1937 /* SimpleAsyncConsumer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449E41723111C002A1937 /* SimpleAsyncConsumer.cpp */; };
 		CCE449E91723111C002A1937 /* SimpleAsyncProducer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449E61723111C002A1937 /* SimpleAsyncProducer.cpp */; };
 		CCE449F5172313FD002A1937 /* B2DWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449EC172313FD002A1937 /* B2DWorld.cpp */; };
-		CCE449F7172313FD002A1937 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449F0172313FD002A1937 /* Player.cpp */; };
+		CCE449F7172313FD002A1937 /* Pod.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449F0172313FD002A1937 /* Pod.cpp */; };
 		CCE449FC172317CA002A1937 /* AEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449FA172317C9002A1937 /* AEntity.cpp */; };
 		CCE449FF17231ADD002A1937 /* Bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449FD17231ADD002A1937 /* Bullet.cpp */; };
 		CCE44A0317232660002A1937 /* World.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE44A011723265F002A1937 /* World.cpp */; };
@@ -279,8 +279,8 @@
 		CCE449ED172313FD002A1937 /* B2DWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = B2DWorld.h; path = Game/B2DWorld.h; sourceTree = "<group>"; };
 		CCE449EE172313FD002A1937 /* Input.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Input.cpp; path = Game/Input.cpp; sourceTree = "<group>"; };
 		CCE449EF172313FD002A1937 /* Input.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Input.h; path = Game/Input.h; sourceTree = "<group>"; };
-		CCE449F0172313FD002A1937 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Player.cpp; path = Game/Player.cpp; sourceTree = "<group>"; };
-		CCE449F1172313FD002A1937 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Player.h; path = Game/Player.h; sourceTree = "<group>"; };
+		CCE449F0172313FD002A1937 /* Pod.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Pod.cpp; path = Game/Pod.cpp; sourceTree = "<group>"; };
+		CCE449F1172313FD002A1937 /* Pod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Pod.h; path = Game/Pod.h; sourceTree = "<group>"; };
 		CCE449FA172317C9002A1937 /* AEntity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AEntity.cpp; path = Game/AEntity.cpp; sourceTree = "<group>"; };
 		CCE449FB172317CA002A1937 /* AEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AEntity.h; path = Game/AEntity.h; sourceTree = "<group>"; };
 		CCE449FD17231ADD002A1937 /* Bullet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Bullet.cpp; path = Game/Bullet.cpp; sourceTree = "<group>"; };
@@ -500,8 +500,8 @@
 				CCE449FE17231ADD002A1937 /* Bullet.h */,
 				CCE449EE172313FD002A1937 /* Input.cpp */,
 				CCE449EF172313FD002A1937 /* Input.h */,
-				CCE449F0172313FD002A1937 /* Player.cpp */,
-				CCE449F1172313FD002A1937 /* Player.h */,
+				CCE449F0172313FD002A1937 /* Pod.cpp */,
+				CCE449F1172313FD002A1937 /* Pod.h */,
 				CCE44A011723265F002A1937 /* World.cpp */,
 				CCE44A021723265F002A1937 /* World.h */,
 				CC51BA641781B7FA007F27F0 /* BulletFactory.cpp */,
@@ -739,7 +739,7 @@
 				CCE449E81723111C002A1937 /* SimpleAsyncConsumer.cpp in Sources */,
 				CCE449E91723111C002A1937 /* SimpleAsyncProducer.cpp in Sources */,
 				CCE449F5172313FD002A1937 /* B2DWorld.cpp in Sources */,
-				CCE449F7172313FD002A1937 /* Player.cpp in Sources */,
+				CCE449F7172313FD002A1937 /* Pod.cpp in Sources */,
 				CCE449FC172317CA002A1937 /* AEntity.cpp in Sources */,
 				CCE449FF17231ADD002A1937 /* Bullet.cpp in Sources */,
 				CCE44A0317232660002A1937 /* World.cpp in Sources */,

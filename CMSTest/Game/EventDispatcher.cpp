@@ -8,7 +8,7 @@
 
 #include "EventDispatcher.h"
 #include "AEntity.h"
-#include "Player.h"
+#include "Pod.h"
 #include "PodFactory.h"
 #include "Bullet.h"
 #include "BulletFactory.h"
@@ -55,9 +55,9 @@ EventDispatcher::EventDispatcher(_Dependencies* pDependencies) :
     assert(pDependencies);
     
    // Pod event observation
-    m_aPodFactory.CreatedEvent += Poco::Delegate<EventDispatcher, Player*&>(this, &EventDispatcher::HandlePodCreatedEvent);
-    Player::UpdatedEvent += Poco::Delegate<EventDispatcher, Player*&>(this, &EventDispatcher::HandlePodUpdatedEvent);
-    m_aPodFactory.DestroyedEvent += Poco::Delegate<EventDispatcher, Player*&>(this, &EventDispatcher::HandlePodDestroyedEvent);
+    m_aPodFactory.CreatedEvent += Poco::Delegate<EventDispatcher, Pod*&>(this, &EventDispatcher::HandlePodCreatedEvent);
+    Pod::UpdatedEvent += Poco::Delegate<EventDispatcher, Pod*&>(this, &EventDispatcher::HandlePodUpdatedEvent);
+    m_aPodFactory.DestroyedEvent += Poco::Delegate<EventDispatcher, Pod*&>(this, &EventDispatcher::HandlePodDestroyedEvent);
     
     // Bullet event observation
     m_aBulletFactory.CreatedEvent += Poco::Delegate<EventDispatcher, Bullet*&>(this, &EventDispatcher::HandleBulletCreatedEvent);
@@ -85,9 +85,9 @@ EventDispatcher::~EventDispatcher()
     m_aBulletFactory.DestroyedEvent -= Poco::Delegate<EventDispatcher, Bullet*&>(this, &EventDispatcher::HandleBulletDestroyedEvent);
     
     // Pod event observation
-    m_aPodFactory.CreatedEvent -= Poco::Delegate<EventDispatcher, Player*&>(this, &EventDispatcher::HandlePodCreatedEvent);
-    Player::UpdatedEvent -= Poco::Delegate<EventDispatcher, Player*&>(this, &EventDispatcher::HandlePodUpdatedEvent);
-    m_aPodFactory.DestroyedEvent -= Poco::Delegate<EventDispatcher, Player*&>(this, &EventDispatcher::HandlePodDestroyedEvent);
+    m_aPodFactory.CreatedEvent -= Poco::Delegate<EventDispatcher, Pod*&>(this, &EventDispatcher::HandlePodCreatedEvent);
+    Pod::UpdatedEvent -= Poco::Delegate<EventDispatcher, Pod*&>(this, &EventDispatcher::HandlePodUpdatedEvent);
+    m_aPodFactory.DestroyedEvent -= Poco::Delegate<EventDispatcher, Pod*&>(this, &EventDispatcher::HandlePodDestroyedEvent);
     
     FactoryT<JoinSecurityCommand, SecurityCommand::_SecurityDependencies>&      theJoinSecurityCommandFactory = FactoryT<JoinSecurityCommand, SecurityCommand::_SecurityDependencies>::Instance();
     
@@ -149,20 +149,20 @@ void EventDispatcher::Dispatch()
 }
 
 // Entity event response
-void EventDispatcher::HandlePodCreatedEvent(const void* pSender, Player*& pPlayer)
+void EventDispatcher::HandlePodCreatedEvent(const void* pSender, Pod*& pPod)
 {
-    GameEventBuffer* pGameEvent = CreateGameEvent(EntityGameEventBuffer_EntityGameEventBufferType_CREATE, static_cast<AEntity*>(pPlayer));
+    GameEventBuffer* pGameEvent = CreateGameEvent(EntityGameEventBuffer_EntityGameEventBufferType_CREATE, static_cast<AEntity*>(pPod));
     Enqueue(pGameEvent);
 }
 
-void EventDispatcher::HandlePodUpdatedEvent(const void* pSender, Player*& pPlayer)
+void EventDispatcher::HandlePodUpdatedEvent(const void* pSender, Pod*& pPod)
 {
-    GameEventBuffer* pGameEvent = CreateGameEvent(EntityGameEventBuffer_EntityGameEventBufferType_UPDATE, static_cast<AEntity*>(pPlayer));
+    GameEventBuffer* pGameEvent = CreateGameEvent(EntityGameEventBuffer_EntityGameEventBufferType_UPDATE, static_cast<AEntity*>(pPod));
     Enqueue(pGameEvent);}
 
-void EventDispatcher::HandlePodDestroyedEvent(const void* pSender, Player*& pPlayer)
+void EventDispatcher::HandlePodDestroyedEvent(const void* pSender, Pod*& pPod)
 {
-    GameEventBuffer* pGameEvent = CreateGameEvent(EntityGameEventBuffer_EntityGameEventBufferType_DESTROY, static_cast<AEntity*>(pPlayer));
+    GameEventBuffer* pGameEvent = CreateGameEvent(EntityGameEventBuffer_EntityGameEventBufferType_DESTROY, static_cast<AEntity*>(pPod));
     Enqueue(pGameEvent);}
 
 void EventDispatcher::HandleBulletCreatedEvent(const void* pSender, Bullet*& pBullet)

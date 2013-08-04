@@ -1,12 +1,12 @@
 //
-//  Player.cpp
+//  Pod.cpp
 //  CMSTest
 //
 //  Created by Roddie Kieley on 12-12-15.
 //  Copyright (c) 2012 Roddie Kieley. All rights reserved.
 //
 
-#include "Player.h"
+#include "Pod.h"
 #include "Bullet.h"
 #include "BulletFactory.h"
 #include "B2DBulletFactory.h"
@@ -23,12 +23,12 @@
 #include <iomanip>
 #include <assert.h>
 
-Poco::BasicEvent<Player*&>      Player::UpdatedEvent;
-uint32_t                        Player::s_ui32Count = 1;
+Poco::BasicEvent<Pod*&>      Pod::UpdatedEvent;
+uint32_t                        Pod::s_ui32Count = 1;
 
 
 // Constructor(s)
-Player::Player(_Dependencies& theDependencies) :
+Pod::Pod(_Dependencies& theDependencies) :
     m_pBulletTimer(new Rock2D::Timer(500)),
     AEntity(theDependencies.UUID,
         (uint64_t)MakeT<uint64_t>((uint32_t)AEntity::POD, s_ui32Count), theDependencies.pB2DEntity)
@@ -43,20 +43,20 @@ Player::Player(_Dependencies& theDependencies) :
     
     FactoryT<DualStickRawInputCommand, RawInputCommand::_RawInputDependencies>&      theDualStickRawInputCommandFactory = FactoryT<DualStickRawInputCommand, RawInputCommand::_RawInputDependencies>::Instance();
     
-    theDualStickRawInputCommandFactory.CreatedEvent += Poco::Delegate<Player, DualStickRawInputCommand*&>(this, &Player::HandleDualStickRawInputCommandFactoryCreatedEvent);
-    theDualStickRawInputCommandFactory.DestroyedEvent += Poco::Delegate<Player, DualStickRawInputCommand*&>(this, &Player::HandleDualStickRawInputCommandFactoryDestroyedEvent);
+    theDualStickRawInputCommandFactory.CreatedEvent += Poco::Delegate<Pod, DualStickRawInputCommand*&>(this, &Pod::HandleDualStickRawInputCommandFactoryCreatedEvent);
+    theDualStickRawInputCommandFactory.DestroyedEvent += Poco::Delegate<Pod, DualStickRawInputCommand*&>(this, &Pod::HandleDualStickRawInputCommandFactoryDestroyedEvent);
 }
 // Destructor(s)
-Player::~Player()
+Pod::~Pod()
 {
     FactoryT<DualStickRawInputCommand, RawInputCommand::_RawInputDependencies>&      theDualStickRawInputCommandFactory = FactoryT<DualStickRawInputCommand, RawInputCommand::_RawInputDependencies>::Instance();
     
-    theDualStickRawInputCommandFactory.DestroyedEvent -= Poco::Delegate<Player, DualStickRawInputCommand*&>(this, &Player::HandleDualStickRawInputCommandFactoryDestroyedEvent);
-    theDualStickRawInputCommandFactory.CreatedEvent -= Poco::Delegate<Player, DualStickRawInputCommand*&>(this, &Player::HandleDualStickRawInputCommandFactoryCreatedEvent);
+    theDualStickRawInputCommandFactory.DestroyedEvent -= Poco::Delegate<Pod, DualStickRawInputCommand*&>(this, &Pod::HandleDualStickRawInputCommandFactoryDestroyedEvent);
+    theDualStickRawInputCommandFactory.CreatedEvent -= Poco::Delegate<Pod, DualStickRawInputCommand*&>(this, &Pod::HandleDualStickRawInputCommandFactoryCreatedEvent);
 
     BulletFactory& aBulletFactory = BulletFactory::Instance();
     
-    //cout << hex << "Player::~Player() " << m_ui64Tag << endl;
+    //cout << hex << "Pod::~Pod() " << m_ui64Tag << endl;
     
     //--s_ui32Count;
 
@@ -76,7 +76,7 @@ Player::~Player()
 }
 
 // Method(s)
-void Player::Update()
+void Pod::Update()
 {
     assert(m_pB2DEntity);
     assert(m_pBulletTimer);
@@ -121,8 +121,8 @@ void Player::Update()
     Rock2D::Timer::Update();
     m_pB2DEntity->Update();
 
-    Player* pPlayer = this;
-    UpdatedEvent(this, pPlayer);
+    Pod* pPod = this;
+    UpdatedEvent(this, pPod);
     
     std::list<Bullet*>      aBulletToRemoveList;
     std::list<Bullet*>      aBulletToAddList;
@@ -158,21 +158,21 @@ void Player::Update()
     m_BulletQueue.unlock();
 }
 
-void Player::HandleDualStickRawInputCommandFactoryCreatedEvent(const void* pSender, DualStickRawInputCommand*& pDualStickRawInputCommand)
+void Pod::HandleDualStickRawInputCommandFactoryCreatedEvent(const void* pSender, DualStickRawInputCommand*& pDualStickRawInputCommand)
 {
     assert(pDualStickRawInputCommand);
     
-    pDualStickRawInputCommand->ExecutedEvent += Poco::Delegate<Player, const std::string&>(this, &Player::HandleDualStickRawInputCommandExecutedEvent);
+    pDualStickRawInputCommand->ExecutedEvent += Poco::Delegate<Pod, const std::string&>(this, &Pod::HandleDualStickRawInputCommandExecutedEvent);
 }
 
-void Player::HandleDualStickRawInputCommandFactoryDestroyedEvent(const void* pSender, DualStickRawInputCommand*& pDualStickRawInputCommand)
+void Pod::HandleDualStickRawInputCommandFactoryDestroyedEvent(const void* pSender, DualStickRawInputCommand*& pDualStickRawInputCommand)
 {
     assert(pDualStickRawInputCommand);
     
-    pDualStickRawInputCommand->ExecutedEvent -= Poco::Delegate<Player, const std::string&>(this, &Player::HandleDualStickRawInputCommandExecutedEvent);
+    pDualStickRawInputCommand->ExecutedEvent -= Poco::Delegate<Pod, const std::string&>(this, &Pod::HandleDualStickRawInputCommandExecutedEvent);
 }
 
-void Player::HandleDualStickRawInputCommandExecutedEvent(const void* pSender, const std::string& strUUID)
+void Pod::HandleDualStickRawInputCommandExecutedEvent(const void* pSender, const std::string& strUUID)
 {
     if (m_strUUID != strUUID)
     {

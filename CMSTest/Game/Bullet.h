@@ -25,7 +25,7 @@ class AB2DEntity;
 class Bullet :
     public AEntity
 {
-    friend class Player;
+    friend class Pod;
     friend class BulletFactory;
 
 private:

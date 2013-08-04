@@ -7,18 +7,18 @@
 //
 
 #include "PodFactory.h"
-#include "Player.h"
+#include "Pod.h"
 #include "B2DPod.h"
 #include "B2DPodFactory.h"
 #include <assert.h>
 
 
 // Method(s)
-void PodFactory::Destroy(Player*& pPod)
+void PodFactory::Destroy(Pod*& pPod)
 {
     assert(pPod);
     
     B2DPod* pB2DPod = (B2DPod*)pPod->m_pB2DEntity;
-    FactoryT<Player, Player::_Dependencies>::Destroy(pPod);
+    FactoryT<Pod, Pod::_Dependencies>::Destroy(pPod);
     B2DPodFactory::Instance().Destroy(pB2DPod);
 }

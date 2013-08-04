@@ -17,7 +17,7 @@
 #include <list>
 
 class AB2DEntity;
-class Player;
+class Pod;
 class JoinSecurityCommand;
 class LeaveSecurityCommand;
 
@@ -53,8 +53,8 @@ public:
 
 private:
     static uint64_t                         s_ui64Count;
-    static std::list<Player*>               s_listPlayers;
-    static std::list<Player*>               s_listPlayersSwap;
+    static std::list<Pod*>               s_listPods;
+    static std::list<Pod*>               s_listPodsSwap;
     
     //std::list<AEntity*>             m_listEntities;
     //std::list<AEntity*>             m_listEntitiesSwap;
@@ -85,8 +85,8 @@ public:
     static void ClassSetup();
     static void ClassTeardown();
     
-    static void AddPlayer(const std::string& strUUID);
-    static void RemovePlayer(const std::string& strUUID);
+    static void AddPod(const std::string& strUUID);
+    static void RemovePod(const std::string& strUUID);
     static void Update();
 
     // Security Event response
