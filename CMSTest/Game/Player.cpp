@@ -43,10 +43,19 @@ Player::Player(_Dependencies& theDependencies) :
     m_pB2DEntity->SetParentEntity(this);
     
     //Input::EventPublisher.DualStickEvent += Poco::Delegate<Player, DualStick::PbDualStick>(this, &Player::OnInputDualStick);
+    FactoryT<DualStickRawInputCommand, RawInputCommand::_RawInputDependencies>&      theDualStickRawInputCommandFactory = FactoryT<DualStickRawInputCommand, RawInputCommand::_RawInputDependencies>::Instance();
+    
+    theDualStickRawInputCommandFactory.CreatedEvent += Poco::Delegate<Player, DualStickRawInputCommand*&>(this, &Player::HandleDualStickRawInputCommandFactoryCreatedEvent);
+    theDualStickRawInputCommandFactory.DestroyedEvent += Poco::Delegate<Player, DualStickRawInputCommand*&>(this, &Player::HandleDualStickRawInputCommandFactoryDestroyedEvent);
 }
 // Destructor(s)
 Player::~Player()
 {
+    FactoryT<DualStickRawInputCommand, RawInputCommand::_RawInputDependencies>&      theDualStickRawInputCommandFactory = FactoryT<DualStickRawInputCommand, RawInputCommand::_RawInputDependencies>::Instance();
+    
+    theDualStickRawInputCommandFactory.DestroyedEvent -= Poco::Delegate<Player, DualStickRawInputCommand*&>(this, &Player::HandleDualStickRawInputCommandFactoryDestroyedEvent);
+    theDualStickRawInputCommandFactory.CreatedEvent -= Poco::Delegate<Player, DualStickRawInputCommand*&>(this, &Player::HandleDualStickRawInputCommandFactoryCreatedEvent);
+
     BulletFactory& aBulletFactory = BulletFactory::Instance();
     
     //cout << hex << "Player::~Player() " << m_ui64Tag << endl;
@@ -175,3 +184,25 @@ void Player::Update()
 //    m_PbDualStickQueue.push(aPbDualStick);
 //    m_PbDualStickQueue.unlock();
 //}
+
+void Player::HandleDualStickRawInputCommandFactoryCreatedEvent(const void* pSender, DualStickRawInputCommand*& pDualStickRawInputCommand)
+{
+    assert(pDualStickRawInputCommand);
+    
+    pDualStickRawInputCommand->ExecutedEvent += Poco::Delegate<Player, const std::string&>(this, &Player::HandleDualStickRawInputCommandExecutedEvent);
+}
+
+void Player::HandleDualStickRawInputCommandFactoryDestroyedEvent(const void* pSender, DualStickRawInputCommand*& pDualStickRawInputCommand)
+{
+    assert(pDualStickRawInputCommand);
+    
+    pDualStickRawInputCommand->ExecutedEvent -= Poco::Delegate<Player, const std::string&>(this, &Player::HandleDualStickRawInputCommandExecutedEvent);
+}
+
+void Player::HandleDualStickRawInputCommandExecutedEvent(const void* pSender, const std::string& strUUID)
+{
+    //GameEventBuffer* pGameEvent = CreateGameEvent(SecurityGameEventBuffer_SecurityGameEventBufferType_JOIN, strUUID);
+    //Enqueue(pGameEvent);
+    int i = 0;
+    ++i;
+}

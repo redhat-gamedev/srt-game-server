@@ -30,6 +30,7 @@
 #include "../Game/SecurityGameEventFactory.h"
 #include "../Proto/CommandBuffer.pb.h"
 #include "../Proto/SecurityCommandBuffer.pb.h"
+#include "../Proto/RawInputCommandBuffer.pb.h"
 #include "../Game/SecurityCommandBufferFactory.h"
 #include "../Shared/FactoryT.h"
 #include "activemq/library/ActiveMQCPP.h"
@@ -51,11 +52,11 @@ int main(int argc, char* argv[])
     PodFactory&                                                 thePodFactory = PodFactory::Instance();
     BulletFactory&                                              theBulletFactory = BulletFactory::Instance();
     FactoryT<GameEventBuffer, EntityGameEvent_Dependencies>&    theEntityGameEventFactory = FactoryT<GameEventBuffer, EntityGameEvent_Dependencies>::Instance();
-    FactoryT<GameEventBuffer, SecurityGameEvent_Dependencies>&    theSecurityGameEventFactory = FactoryT<GameEventBuffer, SecurityGameEvent_Dependencies>::Instance();
+    FactoryT<GameEventBuffer, SecurityGameEvent_Dependencies>&  theSecurityGameEventFactory = FactoryT<GameEventBuffer, SecurityGameEvent_Dependencies>::Instance();
     EventDispatcher::_Dependencies                              theEventDispatcherDependencies(thePodFactory,
-         theBulletFactory,
-         theEntityGameEventFactory,
-         theSecurityGameEventFactory);
+                                                                                               theBulletFactory,
+                                                                                               theEntityGameEventFactory,
+                                                                                               theSecurityGameEventFactory);
     EventDispatcher&                                            theEventDispatcher = EventDispatcher::Instance(&theEventDispatcherDependencies);
     
     SimpleAsyncProducer*                                        pSimpleAsyncProducer = new SimpleAsyncProducer(strBrokerURI, strGameEventOutDestinationURI, true);
@@ -70,11 +71,14 @@ int main(int argc, char* argv[])
     CommandConsumer::_Dependencies                                              theCommandConsumerDependencies(&theMessageConsumer, theSecurityCommandBufferFactory);
     CommandConsumer&                                                            theCommandConsumer = CommandConsumer::Instance(&theCommandConsumerDependencies);
     
-    FactoryT<JoinSecurityCommand, JoinSecurityCommand::_SecurityDependencies>&      theJoinSecurityCommandFactory = FactoryT<JoinSecurityCommand, JoinSecurityCommand::_SecurityDependencies>::Instance();
-    FactoryT<LeaveSecurityCommand, LeaveSecurityCommand::_SecurityDependencies>&      theLeaveSecurityCommandFactory = FactoryT<LeaveSecurityCommand, LeaveSecurityCommand::_SecurityDependencies>::Instance();
-    CommandQueue::_Dependencies                                                     theCommandQueueDependencies(
-                                                                                                                theJoinSecurityCommandFactory, theLeaveSecurityCommandFactory,                                                               theCommandConsumer);
-    CommandQueue&                                                                   theCommandQueue = CommandQueue::Instance(&theCommandQueueDependencies);
+    FactoryT<JoinSecurityCommand, JoinSecurityCommand::_SecurityDependencies>&              theJoinSecurityCommandFactory = FactoryT<JoinSecurityCommand, JoinSecurityCommand::_SecurityDependencies>::Instance();
+    FactoryT<LeaveSecurityCommand, LeaveSecurityCommand::_SecurityDependencies>&            theLeaveSecurityCommandFactory = FactoryT<LeaveSecurityCommand, LeaveSecurityCommand::_SecurityDependencies>::Instance();
+    FactoryT<DualStickRawInputCommand, DualStickRawInputCommand::_RawInputDependencies>&    theDualStickRawInputCommandFactory = FactoryT<DualStickRawInputCommand, DualStickRawInputCommand::_RawInputDependencies>::Instance();
+    CommandQueue::_Dependencies                                                             theCommandQueueDependencies(theJoinSecurityCommandFactory,
+                                                                                                                        theLeaveSecurityCommandFactory,
+                                                                                                                        theDualStickRawInputCommandFactory,
+                                                                                                                        theCommandConsumer);
+    CommandQueue&                                                                           theCommandQueue = CommandQueue::Instance(&theCommandQueueDependencies);
     
     Server* pServer = new Server(theEventDispatcher,
                                  theMessageDispatcher,

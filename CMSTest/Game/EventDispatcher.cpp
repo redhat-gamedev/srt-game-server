@@ -195,7 +195,8 @@ void EventDispatcher::HandleJoinSecurityCommandFactoryDestroyedEvent(const void*
 {
     assert(pJoinSecurityCommand);
     
-    pJoinSecurityCommand->ExecutedEvent -= Poco::Delegate<EventDispatcher, const std::string&>(this, &EventDispatcher::HandleJoinSecurityCommandExecutedEvent);}
+    pJoinSecurityCommand->ExecutedEvent -= Poco::Delegate<EventDispatcher, const std::string&>(this, &EventDispatcher::HandleJoinSecurityCommandExecutedEvent);
+}
 
 void EventDispatcher::HandleLeaveSecurityCommandFactoryCreatedEvent(const void* pSender, LeaveSecurityCommand*& pLeaveSecurityCommand)
 {

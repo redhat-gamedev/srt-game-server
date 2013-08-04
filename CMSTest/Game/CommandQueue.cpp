@@ -19,9 +19,11 @@ CommandQueue::
 _Dependencies::
 _Dependencies(FactoryT<JoinSecurityCommand, JoinSecurityCommand::_SecurityDependencies>& aJoinSecurityCommandFactory,
               FactoryT<LeaveSecurityCommand, LeaveSecurityCommand::_SecurityDependencies>& aLeaveSecurityCommandFactory,
+              FactoryT<DualStickRawInputCommand, DualStickRawInputCommand::_RawInputDependencies>&    aDualStickRawInputCommandFactory,
               CommandConsumer& aCommandConsumer) :
     m_aJoinSecurityCommandFactory(aJoinSecurityCommandFactory),
     m_aLeaveSecurityCommandFactory(aLeaveSecurityCommandFactory),
+    m_aDualStickRawInputCommandFactory(aDualStickRawInputCommandFactory),
     m_aCommandConsumer(aCommandConsumer)
 {
     
@@ -40,6 +42,7 @@ _Dependencies::
 CommandQueue::CommandQueue(_Dependencies* pDependencies) :
     m_aJoinSecurityCommandFactory(pDependencies->m_aJoinSecurityCommandFactory),
     m_aLeaveSecurityCommandFactory(pDependencies->m_aLeaveSecurityCommandFactory),
+    m_aDualStickRawInputCommandFactory(pDependencies->m_aDualStickRawInputCommandFactory),
     m_aCommandConsumer(pDependencies->m_aCommandConsumer)
 {
     using namespace Poco;
@@ -101,10 +104,8 @@ void CommandQueue::HandleCommandConsumedEvent(const void* pSender, Poco::Tuple<c
         const RawInputCommandBuffer& aRawInputCommandBuffer = pCommandBuffer->rawinputcommandbuffer();
         if (usx::geofactions::RawInputCommandBuffer_RawInputCommandBufferType_DUALSTICK == aRawInputCommandBuffer.type())
         {
-            //JoinSecurityCommand::_SecurityDependencies theJoinSecurityCommandDependencies(pCommandBuffer, pBytesMessage);
-            //pCommand = m_aJoinSecurityCommandFactory.Create(theJoinSecurityCommandDependencies);
-            int i = 0;
-            ++i;
+            DualStickRawInputCommand::_RawInputDependencies theDualStickRawInputCommandDependencies(pCommandBuffer, pBytesMessage);
+            pCommand = m_aDualStickRawInputCommandFactory.Create(theDualStickRawInputCommandDependencies);
         }
         else //usx::geofactions::SecurityCommandBuffer_SecurityCommandBufferType_UNKNOWN
         {

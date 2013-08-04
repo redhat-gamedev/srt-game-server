@@ -21,8 +21,8 @@
 // Constructor
 SecurityCommand::
 _SecurityDependencies::
-_SecurityDependencies(usx::geofactions::CommandBuffer* pCommand, const cms::BytesMessage* pBytesMessage) :
-    ACommand::_Dependencies(pCommand, pBytesMessage)
+_SecurityDependencies(usx::geofactions::CommandBuffer* pCommandBuffer, const cms::BytesMessage* pBytesMessage) :
+    ACommand::_Dependencies(pCommandBuffer, pBytesMessage)
 {    
 }
 
@@ -68,11 +68,11 @@ void JoinSecurityCommand::Execute()
     using namespace usx::geofactions;
     
     assert(m_pBytesMessage);
-    assert(m_pCommand);
+    assert(m_pCommandBuffer);
     
     std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp&keepAlive=true";
     std::string     strUUID = "";
-    const SecurityCommandBuffer& aSecurityCommandBuffer = m_pCommand->securitycommandbuffer();
+    const SecurityCommandBuffer& aSecurityCommandBuffer = m_pCommandBuffer->securitycommandbuffer();
     
     decaf::util::UUID aNewUUID = decaf::util::UUID::randomUUID();
     strUUID = aNewUUID.toString();
@@ -111,9 +111,9 @@ void LeaveSecurityCommand::Execute()
 {
     using namespace usx::geofactions;
     
-    assert(m_pCommand);
+    assert(m_pCommandBuffer);
     
-    const SecurityCommandBuffer& aSecurityCommandBuffer = m_pCommand->securitycommandbuffer();
+    const SecurityCommandBuffer& aSecurityCommandBuffer = m_pCommandBuffer->securitycommandbuffer();
     const LeaveSecurityCommandBuffer& aLeaveSecurityCommandBuffer = aSecurityCommandBuffer.leavesecuritycommandbuffer();
     const std::string& strUUID = aLeaveSecurityCommandBuffer.uuid();
     

@@ -39,10 +39,10 @@ public:
     protected:
     public:
         const cms::BytesMessage*                        m_pBytesMessage;
-        usx::geofactions::CommandBuffer*                m_pCommand;
+        usx::geofactions::CommandBuffer*                m_pCommandBuffer;
         
         // Constructor
-        _Dependencies(usx::geofactions::CommandBuffer* pCommand, const cms::BytesMessage* pBytesMessage);
+        _Dependencies(usx::geofactions::CommandBuffer* pCommandBuffer, const cms::BytesMessage* pBytesMessage);
         
         // Destructor
         virtual ~_Dependencies();
@@ -50,7 +50,7 @@ public:
     
 protected:
     const cms::BytesMessage*                        m_pBytesMessage;
-    usx::geofactions::CommandBuffer*                m_pCommand;
+    usx::geofactions::CommandBuffer*                m_pCommandBuffer;
     
     // Constructor
     ACommand(_Dependencies& theDependencies);

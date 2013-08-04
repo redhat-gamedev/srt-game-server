@@ -11,6 +11,7 @@
 
 #include "../Shared/FactoryT.h"
 #include "../Application/SecurityCommand.h"
+#include "../Commands/RawInputCommand.h"
 #include "Poco/Tuple.h"
 #include <decaf/util/StlQueue.h>
 
@@ -39,10 +40,12 @@ public:
         CommandConsumer&                                                                m_aCommandConsumer;
         FactoryT<JoinSecurityCommand, JoinSecurityCommand::_SecurityDependencies>&      m_aJoinSecurityCommandFactory;
         FactoryT<LeaveSecurityCommand, LeaveSecurityCommand::_SecurityDependencies>&    m_aLeaveSecurityCommandFactory;
+        FactoryT<DualStickRawInputCommand, DualStickRawInputCommand::_RawInputDependencies>&    m_aDualStickRawInputCommandFactory;
         
         // Constructor
         _Dependencies(FactoryT<JoinSecurityCommand, JoinSecurityCommand::_SecurityDependencies>& aJoinSecurityCommandFactory,
                       FactoryT<LeaveSecurityCommand, LeaveSecurityCommand::_SecurityDependencies>& aLeaveSecurityCommandFactory,
+                      FactoryT<DualStickRawInputCommand, DualStickRawInputCommand::_RawInputDependencies>&    aDualStickRawInputCommandFactory,
                       CommandConsumer& aCommandConsumer);
         
         // Destructor
@@ -53,6 +56,7 @@ protected:
     CommandConsumer&                                                                m_aCommandConsumer;
     FactoryT<JoinSecurityCommand, JoinSecurityCommand::_SecurityDependencies>&      m_aJoinSecurityCommandFactory;
     FactoryT<LeaveSecurityCommand, LeaveSecurityCommand::_SecurityDependencies>&    m_aLeaveSecurityCommandFactory;
+    FactoryT<DualStickRawInputCommand, DualStickRawInputCommand::_RawInputDependencies>&    m_aDualStickRawInputCommandFactory;
     decaf::util::StlQueue<ACommand*>                                                m_aCommandQueue;
 
 

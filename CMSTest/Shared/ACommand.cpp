@@ -13,11 +13,11 @@
 // Constructor
 ACommand::
 _Dependencies::
-_Dependencies(usx::geofactions::CommandBuffer* pCommand, const cms::BytesMessage* pBytesMessage) :
-    m_pCommand(pCommand),
+_Dependencies(usx::geofactions::CommandBuffer* pCommandBuffer, const cms::BytesMessage* pBytesMessage) :
+    m_pCommandBuffer(pCommandBuffer),
     m_pBytesMessage(pBytesMessage)
 {
-    assert(m_pCommand);
+    assert(m_pCommandBuffer);
     assert(m_pBytesMessage);
     
 }
@@ -33,10 +33,10 @@ _Dependencies::
 
 // Constructor
 ACommand::ACommand(_Dependencies& theDependencies) :
-    m_pCommand(theDependencies.m_pCommand),
+    m_pCommandBuffer(theDependencies.m_pCommandBuffer),
     m_pBytesMessage(theDependencies.m_pBytesMessage)
 {
-    assert(m_pCommand);
+    assert(m_pCommandBuffer);
     assert(m_pBytesMessage);
 }
 

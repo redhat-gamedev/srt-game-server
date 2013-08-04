@@ -12,6 +12,8 @@
 #include "AEntity.h"
 //#include "../Proto/DualStick.pb.h"
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
+#include "../Shared/ACommand.h"
+#include "../Commands/RawInputCommand.h"
 #include "Poco/BasicEvent.h"
 #include <decaf/util/StlQueue.h>
 #include <string>
@@ -59,6 +61,9 @@ public:
     
     // Input Event response
     //void OnInputDualStick(const void* pSender, DualStick::PbDualStick& aPbDualStick);
+    void HandleDualStickRawInputCommandFactoryCreatedEvent(const void* pSender, DualStickRawInputCommand*& pDualStickRawInputCommand);
+    void HandleDualStickRawInputCommandFactoryDestroyedEvent(const void* pSender, DualStickRawInputCommand*& pDualStickRawInputCommand);
+    void HandleDualStickRawInputCommandExecutedEvent(const void* pSender, const std::string& strUUID);
 };
 
 

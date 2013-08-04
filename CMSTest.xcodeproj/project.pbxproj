@@ -29,6 +29,7 @@
 		CC4FECE11662A3AA004810CC /* libProtocolBuffers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC4FECE01662A39A004810CC /* libProtocolBuffers.a */; };
 		CC51BA661781B7FA007F27F0 /* BulletFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC51BA641781B7FA007F27F0 /* BulletFactory.cpp */; };
 		CC55B2741785028A00CCC6E5 /* PodFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC55B2731785028A00CCC6E5 /* PodFactory.cpp */; };
+		CC5A8E7617AE92B800C8567B /* RawInputCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC5A8E7417AE92B800C8567B /* RawInputCommand.cpp */; };
 		CC68EA98163DA07400D225C2 /* CMSTest.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = CC68EA97163DA07400D225C2 /* CMSTest.1 */; };
 		CCA4C32C1687B45D006BAC1D /* xdispatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA4C32B1687B45D006BAC1D /* xdispatch.framework */; };
 		CCC7090E178F9B4600E6992E /* ACommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCC7090C178F9B4600E6992E /* ACommand.cpp */; };
@@ -247,6 +248,8 @@
 		CC55B2711785020700CCC6E5 /* B2DPodFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = B2DPodFactory.h; path = Game/B2DPodFactory.h; sourceTree = "<group>"; };
 		CC55B2721785025200CCC6E5 /* PodFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PodFactory.h; path = Game/PodFactory.h; sourceTree = "<group>"; };
 		CC55B2731785028A00CCC6E5 /* PodFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PodFactory.cpp; path = Game/PodFactory.cpp; sourceTree = "<group>"; };
+		CC5A8E7417AE92B800C8567B /* RawInputCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RawInputCommand.cpp; path = Commands/RawInputCommand.cpp; sourceTree = "<group>"; };
+		CC5A8E7517AE92B800C8567B /* RawInputCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RawInputCommand.h; path = Commands/RawInputCommand.h; sourceTree = "<group>"; };
 		CC68EA91163DA07400D225C2 /* CMSTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CMSTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC68EA97163DA07400D225C2 /* CMSTest.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = CMSTest.1; sourceTree = "<group>"; };
 		CCA4C32B1687B45D006BAC1D /* xdispatch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = xdispatch.framework; path = ../ThirdParty/xdispatch/build/bin/Debug/xdispatch.framework; sourceTree = "<group>"; };
@@ -369,6 +372,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		CC5A8E7317AE926E00C8567B /* Commands */ = {
+			isa = PBXGroup;
+			children = (
+				CC5A8E7417AE92B800C8567B /* RawInputCommand.cpp */,
+				CC5A8E7517AE92B800C8567B /* RawInputCommand.h */,
+			);
+			name = Commands;
+			sourceTree = "<group>";
+		};
 		CC68EA86163DA07400D225C2 = {
 			isa = PBXGroup;
 			children = (
@@ -393,6 +405,7 @@
 		CC68EA94163DA07400D225C2 /* CMSTest */ = {
 			isa = PBXGroup;
 			children = (
+				CC5A8E7317AE926E00C8567B /* Commands */,
 				CCE449D917230F6B002A1937 /* Game */,
 				CCE449D817230F64002A1937 /* Shared */,
 				CCE449C817230EE1002A1937 /* Application */,
@@ -751,6 +764,7 @@
 				CC0BFD541792E6F300AE7B01 /* RawInputCommandBuffer.pb.cc in Sources */,
 				CC0BFD551792E6F300AE7B01 /* SecurityCommandBuffer.pb.cc in Sources */,
 				CC425F65179B0AD6001F410B /* SecurityGameEventFactory.cpp in Sources */,
+				CC5A8E7617AE92B800C8567B /* RawInputCommand.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
