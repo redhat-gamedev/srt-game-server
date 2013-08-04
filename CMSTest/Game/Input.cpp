@@ -10,7 +10,7 @@
 #if 0
 #include "../Proto/DualStick.pb.h"
 #include "../Proto/box2d.pb.h"
-#include "../Shared/SimpleAsyncConsumer.h"
+#include "../Network/SimpleAsyncConsumer.h"
 #include <cms/CMSException.h>
 //#include <cms/Message.h>
 #include <cms/TextMessage.h>

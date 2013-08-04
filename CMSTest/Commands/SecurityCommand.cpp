@@ -9,7 +9,7 @@
 #include "SecurityCommand.h"
 #include "../Proto/CommandBuffer.pb.h"
 #include "../Proto/SecurityCommandBuffer.pb.h"
-#include "../Shared/SimpleAsyncProducer.h"
+#include "../Network/SimpleAsyncProducer.h"
 #include <cms/Destination.h>
 #include <cms/BytesMessage.h>
 //#include <cms/TemporaryQueue.h>

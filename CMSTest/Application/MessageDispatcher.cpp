@@ -8,7 +8,7 @@
 
 #include "MessageDispatcher.h"
 #include "../Events/EventDispatcher.h"
-#include "../Shared/SimpleAsyncProducer.h"
+#include "../Network/SimpleAsyncProducer.h"
 #include "../proto/GameEventBuffer.pb.h"
 #include "Poco/Delegate.h"
 #include <cms/CMSException.h>

@@ -32,6 +32,8 @@
 		CC5A8E8D17AECAEC00C8567B /* EntityGameEventFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC5A8E8717AECAEC00C8567B /* EntityGameEventFactory.cpp */; };
 		CC5A8E8E17AECAEC00C8567B /* EventDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC5A8E8917AECAEC00C8567B /* EventDispatcher.cpp */; };
 		CC5A8E8F17AECAEC00C8567B /* SecurityGameEventFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC5A8E8B17AECAEC00C8567B /* SecurityGameEventFactory.cpp */; };
+		CC5A8E9517AECBE900C8567B /* SimpleAsyncConsumer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC5A8E9117AECBE900C8567B /* SimpleAsyncConsumer.cpp */; };
+		CC5A8E9617AECBE900C8567B /* SimpleAsyncProducer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC5A8E9317AECBE900C8567B /* SimpleAsyncProducer.cpp */; };
 		CC68EA98163DA07400D225C2 /* CMSTest.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = CC68EA97163DA07400D225C2 /* CMSTest.1 */; };
 		CCA4C32C1687B45D006BAC1D /* xdispatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA4C32B1687B45D006BAC1D /* xdispatch.framework */; };
 		CCE449C217230E21002A1937 /* box2d.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CCE449B917230E21002A1937 /* box2d.pb.cc */; };
@@ -39,8 +41,6 @@
 		CCE449D517230EF9002A1937 /* Server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449CC17230EF9002A1937 /* Server.cpp */; };
 		CCE449DF17230F8E002A1937 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449DC17230F8E002A1937 /* Timer.cpp */; };
 		CCE449E31723109C002A1937 /* Heartbeat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449E11723109C002A1937 /* Heartbeat.cpp */; };
-		CCE449E81723111C002A1937 /* SimpleAsyncConsumer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449E41723111C002A1937 /* SimpleAsyncConsumer.cpp */; };
-		CCE449E91723111C002A1937 /* SimpleAsyncProducer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449E61723111C002A1937 /* SimpleAsyncProducer.cpp */; };
 		CCE449F5172313FD002A1937 /* B2DWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449EC172313FD002A1937 /* B2DWorld.cpp */; };
 		CCE449F7172313FD002A1937 /* Pod.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449F0172313FD002A1937 /* Pod.cpp */; };
 		CCE449FC172317CA002A1937 /* AEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449FA172317C9002A1937 /* AEntity.cpp */; };
@@ -254,6 +254,10 @@
 		CC5A8E8A17AECAEC00C8567B /* EventDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventDispatcher.h; path = Events/EventDispatcher.h; sourceTree = "<group>"; };
 		CC5A8E8B17AECAEC00C8567B /* SecurityGameEventFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SecurityGameEventFactory.cpp; path = Events/SecurityGameEventFactory.cpp; sourceTree = "<group>"; };
 		CC5A8E8C17AECAEC00C8567B /* SecurityGameEventFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SecurityGameEventFactory.h; path = Events/SecurityGameEventFactory.h; sourceTree = "<group>"; };
+		CC5A8E9117AECBE900C8567B /* SimpleAsyncConsumer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SimpleAsyncConsumer.cpp; path = Network/SimpleAsyncConsumer.cpp; sourceTree = "<group>"; };
+		CC5A8E9217AECBE900C8567B /* SimpleAsyncConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimpleAsyncConsumer.h; path = Network/SimpleAsyncConsumer.h; sourceTree = "<group>"; };
+		CC5A8E9317AECBE900C8567B /* SimpleAsyncProducer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SimpleAsyncProducer.cpp; path = Network/SimpleAsyncProducer.cpp; sourceTree = "<group>"; };
+		CC5A8E9417AECBE900C8567B /* SimpleAsyncProducer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimpleAsyncProducer.h; path = Network/SimpleAsyncProducer.h; sourceTree = "<group>"; };
 		CC68EA91163DA07400D225C2 /* CMSTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CMSTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC68EA97163DA07400D225C2 /* CMSTest.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = CMSTest.1; sourceTree = "<group>"; };
 		CCA4C32B1687B45D006BAC1D /* xdispatch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = xdispatch.framework; path = ../ThirdParty/xdispatch/build/bin/Debug/xdispatch.framework; sourceTree = "<group>"; };
@@ -271,10 +275,6 @@
 		CCE449E017230FD2002A1937 /* Types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Types.h; path = Shared/Types.h; sourceTree = "<group>"; };
 		CCE449E11723109C002A1937 /* Heartbeat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Heartbeat.cpp; path = Application/Heartbeat.cpp; sourceTree = "<group>"; };
 		CCE449E21723109C002A1937 /* Heartbeat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Heartbeat.h; path = Application/Heartbeat.h; sourceTree = "<group>"; };
-		CCE449E41723111C002A1937 /* SimpleAsyncConsumer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SimpleAsyncConsumer.cpp; path = Shared/SimpleAsyncConsumer.cpp; sourceTree = "<group>"; };
-		CCE449E51723111C002A1937 /* SimpleAsyncConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimpleAsyncConsumer.h; path = Shared/SimpleAsyncConsumer.h; sourceTree = "<group>"; };
-		CCE449E61723111C002A1937 /* SimpleAsyncProducer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SimpleAsyncProducer.cpp; path = Shared/SimpleAsyncProducer.cpp; sourceTree = "<group>"; };
-		CCE449E71723111C002A1937 /* SimpleAsyncProducer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimpleAsyncProducer.h; path = Shared/SimpleAsyncProducer.h; sourceTree = "<group>"; };
 		CCE449EC172313FD002A1937 /* B2DWorld.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = B2DWorld.cpp; path = Game/B2DWorld.cpp; sourceTree = "<group>"; };
 		CCE449ED172313FD002A1937 /* B2DWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = B2DWorld.h; path = Game/B2DWorld.h; sourceTree = "<group>"; };
 		CCE449EE172313FD002A1937 /* Input.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Input.cpp; path = Game/Input.cpp; sourceTree = "<group>"; };
@@ -404,6 +404,17 @@
 			name = Events;
 			sourceTree = "<group>";
 		};
+		CC5A8E9017AECBB200C8567B /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				CC5A8E9117AECBE900C8567B /* SimpleAsyncConsumer.cpp */,
+				CC5A8E9217AECBE900C8567B /* SimpleAsyncConsumer.h */,
+				CC5A8E9317AECBE900C8567B /* SimpleAsyncProducer.cpp */,
+				CC5A8E9417AECBE900C8567B /* SimpleAsyncProducer.h */,
+			);
+			name = Network;
+			sourceTree = "<group>";
+		};
 		CC68EA86163DA07400D225C2 = {
 			isa = PBXGroup;
 			children = (
@@ -428,6 +439,7 @@
 		CC68EA94163DA07400D225C2 /* CMSTest */ = {
 			isa = PBXGroup;
 			children = (
+				CC5A8E9017AECBB200C8567B /* Network */,
 				CC5A8E8617AECA8F00C8567B /* Events */,
 				CC5A8E7317AE926E00C8567B /* Commands */,
 				CCE449D917230F6B002A1937 /* Game */,
@@ -490,10 +502,6 @@
 		CCE449D817230F64002A1937 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				CCE449E41723111C002A1937 /* SimpleAsyncConsumer.cpp */,
-				CCE449E51723111C002A1937 /* SimpleAsyncConsumer.h */,
-				CCE449E61723111C002A1937 /* SimpleAsyncProducer.cpp */,
-				CCE449E71723111C002A1937 /* SimpleAsyncProducer.h */,
 				CCE449E017230FD2002A1937 /* Types.h */,
 				CCE449DC17230F8E002A1937 /* Timer.cpp */,
 				CCE449DD17230F8E002A1937 /* Timer.h */,
@@ -744,8 +752,6 @@
 				CCE449D517230EF9002A1937 /* Server.cpp in Sources */,
 				CCE449DF17230F8E002A1937 /* Timer.cpp in Sources */,
 				CCE449E31723109C002A1937 /* Heartbeat.cpp in Sources */,
-				CCE449E81723111C002A1937 /* SimpleAsyncConsumer.cpp in Sources */,
-				CCE449E91723111C002A1937 /* SimpleAsyncProducer.cpp in Sources */,
 				CCE449F5172313FD002A1937 /* B2DWorld.cpp in Sources */,
 				CCE449F7172313FD002A1937 /* Pod.cpp in Sources */,
 				CCE449FC172317CA002A1937 /* AEntity.cpp in Sources */,
@@ -773,6 +779,8 @@
 				CC5A8E8D17AECAEC00C8567B /* EntityGameEventFactory.cpp in Sources */,
 				CC5A8E8E17AECAEC00C8567B /* EventDispatcher.cpp in Sources */,
 				CC5A8E8F17AECAEC00C8567B /* SecurityGameEventFactory.cpp in Sources */,
+				CC5A8E9517AECBE900C8567B /* SimpleAsyncConsumer.cpp in Sources */,
+				CC5A8E9617AECBE900C8567B /* SimpleAsyncProducer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
