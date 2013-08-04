@@ -412,7 +412,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "160"
          endingLineNumber = "160"
-         landmarkName = "EventDispatcher::HandlePodUpdatedEvent(const void* pSender, Player*&amp; pPlayer)"
+         landmarkName = "EventDispatcher::HandlePodUpdatedEvent(const void* pSender, Pod*&amp; pPod)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint

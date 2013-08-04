@@ -10,7 +10,7 @@
 #define __CMSTest__CommandQueue__
 
 #include "../Shared/FactoryT.h"
-#include "../Application/SecurityCommand.h"
+#include "../Commands/SecurityCommand.h"
 #include "../Commands/RawInputCommand.h"
 #include "Poco/Tuple.h"
 #include <decaf/util/StlQueue.h>

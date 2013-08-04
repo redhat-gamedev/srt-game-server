@@ -13,7 +13,7 @@
 #include "B2DPodFactory.h"
 #include "CommandConsumer.h"
 #include "../Commands/ACommand.h"
-#include "../Application/SecurityCommand.h"
+#include "../Commands/SecurityCommand.h"
 #include "../Shared/FactoryT.h"
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include "Poco/FunctionDelegate.h"

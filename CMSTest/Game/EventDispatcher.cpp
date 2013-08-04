@@ -13,7 +13,7 @@
 #include "Bullet.h"
 #include "BulletFactory.h"
 #include "../Commands/ACommand.h"
-#include "../Application/SecurityCommand.h"
+#include "../Commands/SecurityCommand.h"
 #include "../Shared/FactoryT.h"
 #include "Poco/Delegate.h"
 #include <assert.h>
