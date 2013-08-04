@@ -24,7 +24,7 @@ Server::Server(EventDispatcher& theEventDispatcher,
                CommandConsumer& theCommandConsumer,
                CommandQueue& theCommandQueue) :
     m_pWorld(NULL),
-    m_pInput(NULL),
+    //m_pInput(NULL),
     m_pMainThread(NULL),
     m_theEventDispatcher(theEventDispatcher),
     m_theMessageDispatcher(theMessageDispatcher),
@@ -51,7 +51,7 @@ void Server::Setup()
     AEntity::ClassSetup();
 
     m_pWorld = new World();
-    m_pInput = new Input();
+    //m_pInput = new Input();
 
     std::cout << "Starting the world producer" << std::endl;
     m_pMainThread = new decaf::lang::Thread(this, strMainThreadName);
@@ -65,8 +65,8 @@ void Server::Teardown()
     delete m_pMainThread;
     m_pMainThread = NULL;
     
-    delete m_pInput;
-    m_pInput = NULL;
+//    delete m_pInput;
+//    m_pInput = NULL;
 
     delete m_pWorld;
     m_pWorld = NULL;

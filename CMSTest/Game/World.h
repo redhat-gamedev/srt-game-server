@@ -63,7 +63,8 @@ protected:
     void Setup();
     void Teardown();
     void b2Vec2ToPbVec2(b2Vec2* pb2Vec2);
-    void b2WorldToPbWorld(b2World* pb2World, ::box2d::PbWorld*& pPbWorldDefault);
+    //void b2WorldToPbWorld(b2World* pb2World, ::box2d::PbWorld*& pPbWorldDefault);
+    void b2WorldToPbWorld(b2World* pb2World, box2d::PbWorld*& pPbWorldDefault);
     
 public:
     static B2DWorld*               m_pB2DWorld;

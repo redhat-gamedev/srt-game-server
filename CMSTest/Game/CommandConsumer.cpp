@@ -67,6 +67,8 @@ void CommandConsumer::Enqueue(Poco::Tuple<cms::BytesMessage*>* pTuple)
     std::pair<unsigned char*, unsigned long>* pMessagePair = MessageToPair(pBytesMessage);
     assert(pMessagePair);
     
+    /// TODO: 08/03/13
+    /// Obviously need more general command factory depending on the type of message payload received
     google::protobuf::Message* pMessage = m_aSecurityCommandFactory.Create(pMessagePair);
     
     Poco::Tuple<cms::BytesMessage*, google::protobuf::Message*>* pNewTuple = new Poco::Tuple<cms::BytesMessage*, google::protobuf::Message*>(pBytesMessage, pMessage);

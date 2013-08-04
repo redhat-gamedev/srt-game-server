@@ -394,38 +394,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CMSTest/Game/EventDispatcher.cpp"
-         timestampString = "396038282.295229"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "216"
-         endingLineNumber = "216"
-         landmarkName = "EventDispatcher::HandleJoinSecurityCommandExecutedEvent(const void* pSender, const std::string&amp; strUUID)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "CMSTest/Game/EventDispatcher.cpp"
          timestampString = "396038283.614889"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "222"
          endingLineNumber = "222"
          landmarkName = "EventDispatcher::HandleLeaveSecurityCommandExecutedEvent(const void* pSender, const std::string&amp; strUUID)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "CMSTest/Game/EventDispatcher.cpp"
-         timestampString = "396038460.993883"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "191"
-         endingLineNumber = "191"
-         landmarkName = "EventDispatcher::HandleJoinSecurityCommandFactoryCreatedEvent(const void* pSender, JoinSecurityCommand*&amp; pJoinSecurityCommand)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -465,6 +439,32 @@
          startingLineNumber = "211"
          endingLineNumber = "211"
          landmarkName = "EventDispatcher::HandleLeaveSecurityCommandFactoryDestroyedEvent(const void* pSender, LeaveSecurityCommand*&amp; pLeaveSecurityCommand)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CMSTest/Game/CommandQueue.cpp"
+         timestampString = "397264955.560502"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "106"
+         endingLineNumber = "106"
+         landmarkName = "CommandQueue::HandleCommandConsumedEvent(const void* pSender, Poco::Tuple&lt;cms::BytesMessage*, google::protobuf::Message*&gt;*&amp; pTuple)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CMSTest/Game/CommandQueue.cpp"
+         timestampString = "397264956.517134"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "111"
+         endingLineNumber = "111"
+         landmarkName = "CommandQueue::HandleCommandConsumedEvent(const void* pSender, Poco::Tuple&lt;cms::BytesMessage*, google::protobuf::Message*&gt;*&amp; pTuple)"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

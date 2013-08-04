@@ -352,8 +352,7 @@ void protobuf_AddDesc_box2d_2eproto() {
     "STANCE\020\001\022\014\n\010REVOLUTE\020\002\022\r\n\tPRISMATIC\020\003\022\n\n"
     "\006PULLEY\020\004\022\t\n\005MOUSE\020\005\022\010\n\004GEAR\020\006\022\t\n\005WHEEL\020"
     "\007\022\010\n\004WELD\020\010\022\014\n\010FRICTION\020\t\022\010\n\004ROPE\020\n\022\023\n\017C"
-    "ONSTANT_VOLUME\020\013\022\010\n\004LINE\020\014B\030\n\017org.box2d."
-    "protoB\005Box2D", 2372);
+    "ONSTANT_VOLUME\020\013\022\010\n\004LINE\020\014", 2346);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "box2d.proto", &protobuf_RegisterTypes);
   PbVec2::default_instance_ = new PbVec2();

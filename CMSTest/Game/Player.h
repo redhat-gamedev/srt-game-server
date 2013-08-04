@@ -10,7 +10,7 @@
 #define __CMSTest__Player__
 
 #include "AEntity.h"
-#include "../Proto/DualStick.pb.h"
+//#include "../Proto/DualStick.pb.h"
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include "Poco/BasicEvent.h"
 #include <decaf/util/StlQueue.h>
@@ -40,7 +40,7 @@ protected:
     decaf::util::StlQueue<b2Vec2>       m_b2v2ShootQueue;
     decaf::util::StlQueue<b2Vec2>       m_b2v2ShootSwapQueue;
     
-    decaf::util::StlQueue<DualStick::PbDualStick>   m_PbDualStickQueue;
+    //decaf::util::StlQueue<DualStick::PbDualStick>   m_PbDualStickQueue;
 
     // Helper(s)
 
@@ -58,7 +58,7 @@ public:
     void Update();
     
     // Input Event response
-    void OnInputDualStick(const void* pSender, DualStick::PbDualStick& aPbDualStick);    
+    //void OnInputDualStick(const void* pSender, DualStick::PbDualStick& aPbDualStick);
 };
 
 

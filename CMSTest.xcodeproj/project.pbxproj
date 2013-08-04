@@ -34,7 +34,6 @@
 		CCC7090E178F9B4600E6992E /* ACommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCC7090C178F9B4600E6992E /* ACommand.cpp */; };
 		CCC70911178F9D3D00E6992E /* SecurityCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCC7090F178F9D3D00E6992E /* SecurityCommand.cpp */; };
 		CCE449C217230E21002A1937 /* box2d.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CCE449B917230E21002A1937 /* box2d.pb.cc */; };
-		CCE449C617230E21002A1937 /* DualStick.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CCE449BF17230E21002A1937 /* DualStick.pb.cc */; };
 		CCE449D317230EF9002A1937 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449C917230EF9002A1937 /* main.cpp */; };
 		CCE449D517230EF9002A1937 /* Server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449CC17230EF9002A1937 /* Server.cpp */; };
 		CCE449DF17230F8E002A1937 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449DC17230F8E002A1937 /* Timer.cpp */; };
@@ -42,7 +41,6 @@
 		CCE449E81723111C002A1937 /* SimpleAsyncConsumer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449E41723111C002A1937 /* SimpleAsyncConsumer.cpp */; };
 		CCE449E91723111C002A1937 /* SimpleAsyncProducer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449E61723111C002A1937 /* SimpleAsyncProducer.cpp */; };
 		CCE449F5172313FD002A1937 /* B2DWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449EC172313FD002A1937 /* B2DWorld.cpp */; };
-		CCE449F6172313FD002A1937 /* Input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449EE172313FD002A1937 /* Input.cpp */; };
 		CCE449F7172313FD002A1937 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449F0172313FD002A1937 /* Player.cpp */; };
 		CCE449FC172317CA002A1937 /* AEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449FA172317C9002A1937 /* AEntity.cpp */; };
 		CCE449FF17231ADD002A1937 /* Bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE449FD17231ADD002A1937 /* Bullet.cpp */; };
@@ -262,9 +260,6 @@
 		CCE449BA17230E21002A1937 /* box2d.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = box2d.pb.h; path = Proto/box2d.pb.h; sourceTree = "<group>"; };
 		CCE449BB17230E21002A1937 /* box2d.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; name = box2d.proto; path = Proto/box2d.proto; sourceTree = "<group>"; };
 		CCE449BE17230E21002A1937 /* CommandBuffer.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; name = CommandBuffer.proto; path = Proto/CommandBuffer.proto; sourceTree = "<group>"; };
-		CCE449BF17230E21002A1937 /* DualStick.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DualStick.pb.cc; path = Proto/DualStick.pb.cc; sourceTree = "<group>"; };
-		CCE449C017230E21002A1937 /* DualStick.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DualStick.pb.h; path = Proto/DualStick.pb.h; sourceTree = "<group>"; };
-		CCE449C117230E21002A1937 /* DualStick.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; name = DualStick.proto; path = Proto/DualStick.proto; sourceTree = "<group>"; };
 		CCE449C917230EF9002A1937 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = Application/main.cpp; sourceTree = "<group>"; };
 		CCE449CC17230EF9002A1937 /* Server.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Server.cpp; path = Application/Server.cpp; sourceTree = "<group>"; };
 		CCE449CD17230EF9002A1937 /* Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Server.h; path = Application/Server.h; sourceTree = "<group>"; };
@@ -349,9 +344,6 @@
 				CCE449BA17230E21002A1937 /* box2d.pb.h */,
 				CCE449BB17230E21002A1937 /* box2d.proto */,
 				CCE449BE17230E21002A1937 /* CommandBuffer.proto */,
-				CCE449BF17230E21002A1937 /* DualStick.pb.cc */,
-				CCE449C017230E21002A1937 /* DualStick.pb.h */,
-				CCE449C117230E21002A1937 /* DualStick.proto */,
 				CC1AD3AE178F882D000F134C /* RawInputCommandBuffer.proto */,
 				CCC70904178F8E6500E6992E /* DualStickRawInputCommandBuffer.proto */,
 			);
@@ -727,7 +719,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCE449C217230E21002A1937 /* box2d.pb.cc in Sources */,
-				CCE449C617230E21002A1937 /* DualStick.pb.cc in Sources */,
 				CCE449D317230EF9002A1937 /* main.cpp in Sources */,
 				CCE449D517230EF9002A1937 /* Server.cpp in Sources */,
 				CCE449DF17230F8E002A1937 /* Timer.cpp in Sources */,
@@ -735,7 +726,6 @@
 				CCE449E81723111C002A1937 /* SimpleAsyncConsumer.cpp in Sources */,
 				CCE449E91723111C002A1937 /* SimpleAsyncProducer.cpp in Sources */,
 				CCE449F5172313FD002A1937 /* B2DWorld.cpp in Sources */,
-				CCE449F6172313FD002A1937 /* Input.cpp in Sources */,
 				CCE449F7172313FD002A1937 /* Player.cpp in Sources */,
 				CCE449FC172317CA002A1937 /* AEntity.cpp in Sources */,
 				CCE449FF17231ADD002A1937 /* Bullet.cpp in Sources */,

@@ -36,9 +36,10 @@ void protobuf_AssignDesc_CommandBuffer_2eproto() {
       "CommandBuffer.proto");
   GOOGLE_CHECK(file != NULL);
   CommandBuffer_descriptor_ = file->message_type(0);
-  static const int CommandBuffer_offsets_[2] = {
+  static const int CommandBuffer_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CommandBuffer, type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CommandBuffer, securitycommandbuffer_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CommandBuffer, rawinputcommandbuffer_),
   };
   CommandBuffer_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -82,14 +83,18 @@ void protobuf_AddDesc_CommandBuffer_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::usx::geofactions::protobuf_AddDesc_SecurityCommandBuffer_2eproto();
+  ::usx::geofactions::protobuf_AddDesc_RawInputCommandBuffer_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\023CommandBuffer.proto\022\017usx.geofactions\032\033"
-    "SecurityCommandBuffer.proto\"\317\001\n\rCommandB"
-    "uffer\022G\n\004type\030\001 \002(\01620.usx.geofactions.Co"
-    "mmandBuffer.CommandBufferType:\007UNKNOWN\022E"
-    "\n\025securityCommandBuffer\030\002 \001(\0132&.usx.geof"
-    "actions.SecurityCommandBuffer\".\n\021Command"
-    "BufferType\022\013\n\007UNKNOWN\020\000\022\014\n\010SECURITY\020\001", 277);
+    "SecurityCommandBuffer.proto\032\033RawInputCom"
+    "mandBuffer.proto\"\244\002\n\rCommandBuffer\022G\n\004ty"
+    "pe\030\001 \002(\01620.usx.geofactions.CommandBuffer"
+    ".CommandBufferType:\007UNKNOWN\022E\n\025securityC"
+    "ommandBuffer\030\002 \001(\0132&.usx.geofactions.Sec"
+    "urityCommandBuffer\022E\n\025rawInputCommandBuf"
+    "fer\030\003 \001(\0132&.usx.geofactions.RawInputComm"
+    "andBuffer\"<\n\021CommandBufferType\022\013\n\007UNKNOW"
+    "N\020\000\022\014\n\010SECURITY\020\001\022\014\n\010RAWINPUT\020\002", 391);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "CommandBuffer.proto", &protobuf_RegisterTypes);
   CommandBuffer::default_instance_ = new CommandBuffer();
@@ -114,6 +119,7 @@ bool CommandBuffer_CommandBufferType_IsValid(int value) {
   switch(value) {
     case 0:
     case 1:
+    case 2:
       return true;
     default:
       return false;
@@ -123,6 +129,7 @@ bool CommandBuffer_CommandBufferType_IsValid(int value) {
 #ifndef _MSC_VER
 const CommandBuffer_CommandBufferType CommandBuffer::UNKNOWN;
 const CommandBuffer_CommandBufferType CommandBuffer::SECURITY;
+const CommandBuffer_CommandBufferType CommandBuffer::RAWINPUT;
 const CommandBuffer_CommandBufferType CommandBuffer::CommandBufferType_MIN;
 const CommandBuffer_CommandBufferType CommandBuffer::CommandBufferType_MAX;
 const int CommandBuffer::CommandBufferType_ARRAYSIZE;
@@ -130,6 +137,7 @@ const int CommandBuffer::CommandBufferType_ARRAYSIZE;
 #ifndef _MSC_VER
 const int CommandBuffer::kTypeFieldNumber;
 const int CommandBuffer::kSecurityCommandBufferFieldNumber;
+const int CommandBuffer::kRawInputCommandBufferFieldNumber;
 #endif  // !_MSC_VER
 
 CommandBuffer::CommandBuffer()
@@ -139,6 +147,7 @@ CommandBuffer::CommandBuffer()
 
 void CommandBuffer::InitAsDefaultInstance() {
   securitycommandbuffer_ = const_cast< ::usx::geofactions::SecurityCommandBuffer*>(&::usx::geofactions::SecurityCommandBuffer::default_instance());
+  rawinputcommandbuffer_ = const_cast< ::usx::geofactions::RawInputCommandBuffer*>(&::usx::geofactions::RawInputCommandBuffer::default_instance());
 }
 
 CommandBuffer::CommandBuffer(const CommandBuffer& from)
@@ -151,6 +160,7 @@ void CommandBuffer::SharedCtor() {
   _cached_size_ = 0;
   type_ = 0;
   securitycommandbuffer_ = NULL;
+  rawinputcommandbuffer_ = NULL;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -161,6 +171,7 @@ CommandBuffer::~CommandBuffer() {
 void CommandBuffer::SharedDtor() {
   if (this != default_instance_) {
     delete securitycommandbuffer_;
+    delete rawinputcommandbuffer_;
   }
 }
 
@@ -190,6 +201,9 @@ void CommandBuffer::Clear() {
     type_ = 0;
     if (has_securitycommandbuffer()) {
       if (securitycommandbuffer_ != NULL) securitycommandbuffer_->::usx::geofactions::SecurityCommandBuffer::Clear();
+    }
+    if (has_rawinputcommandbuffer()) {
+      if (rawinputcommandbuffer_ != NULL) rawinputcommandbuffer_->::usx::geofactions::RawInputCommandBuffer::Clear();
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -232,6 +246,20 @@ bool CommandBuffer::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
+        if (input->ExpectTag(26)) goto parse_rawInputCommandBuffer;
+        break;
+      }
+
+      // optional .usx.geofactions.RawInputCommandBuffer rawInputCommandBuffer = 3;
+      case 3: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_rawInputCommandBuffer:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_rawinputcommandbuffer()));
+        } else {
+          goto handle_uninterpreted;
+        }
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -266,6 +294,12 @@ void CommandBuffer::SerializeWithCachedSizes(
       2, this->securitycommandbuffer(), output);
   }
 
+  // optional .usx.geofactions.RawInputCommandBuffer rawInputCommandBuffer = 3;
+  if (has_rawinputcommandbuffer()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3, this->rawinputcommandbuffer(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -285,6 +319,13 @@ void CommandBuffer::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         2, this->securitycommandbuffer(), target);
+  }
+
+  // optional .usx.geofactions.RawInputCommandBuffer rawInputCommandBuffer = 3;
+  if (has_rawinputcommandbuffer()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        3, this->rawinputcommandbuffer(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -309,6 +350,13 @@ int CommandBuffer::ByteSize() const {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->securitycommandbuffer());
+    }
+
+    // optional .usx.geofactions.RawInputCommandBuffer rawInputCommandBuffer = 3;
+    if (has_rawinputcommandbuffer()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->rawinputcommandbuffer());
     }
 
   }
@@ -344,6 +392,9 @@ void CommandBuffer::MergeFrom(const CommandBuffer& from) {
     if (from.has_securitycommandbuffer()) {
       mutable_securitycommandbuffer()->::usx::geofactions::SecurityCommandBuffer::MergeFrom(from.securitycommandbuffer());
     }
+    if (from.has_rawinputcommandbuffer()) {
+      mutable_rawinputcommandbuffer()->::usx::geofactions::RawInputCommandBuffer::MergeFrom(from.rawinputcommandbuffer());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -366,6 +417,9 @@ bool CommandBuffer::IsInitialized() const {
   if (has_securitycommandbuffer()) {
     if (!this->securitycommandbuffer().IsInitialized()) return false;
   }
+  if (has_rawinputcommandbuffer()) {
+    if (!this->rawinputcommandbuffer().IsInitialized()) return false;
+  }
   return true;
 }
 
@@ -373,6 +427,7 @@ void CommandBuffer::Swap(CommandBuffer* other) {
   if (other != this) {
     std::swap(type_, other->type_);
     std::swap(securitycommandbuffer_, other->securitycommandbuffer_);
+    std::swap(rawinputcommandbuffer_, other->rawinputcommandbuffer_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

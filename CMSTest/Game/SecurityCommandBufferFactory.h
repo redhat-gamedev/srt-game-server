@@ -100,7 +100,7 @@ public:
         CommandBuffer aCommand;
         CommandBuffer* pCommand = aCommand.New();
         
-        int       iBodyBytes = 0;
+        int                 iBodyBytes = 0;
         unsigned char*      pucBodyBytes = NULL;
         
         pucBodyBytes = pRawBytesPair->first;
@@ -109,13 +109,13 @@ public:
         assert(iBodyBytes > 0);
         
         pCommand->ParseFromArray(pucBodyBytes, iBodyBytes);
-        assert(CommandBuffer_CommandBufferType_SECURITY == pCommand->type());
-        const SecurityCommandBuffer& aSecurityCommand = pCommand->securitycommandbuffer();
-        if (SecurityCommandBuffer_SecurityCommandBufferType_JOIN == aSecurityCommand.type())
-        {
-            int i = 0;
-            ++i;
-        }
+        //assert(CommandBuffer_CommandBufferType_SECURITY == pCommand->type());
+        //const SecurityCommandBuffer& aSecurityCommand = pCommand->securitycommandbuffer();
+        //if (SecurityCommandBuffer_SecurityCommandBufferType_JOIN == aSecurityCommand.type())
+        //{
+        //    int i = 0;
+        //    ++i;
+        //}
         delete[] pucBodyBytes;
         pucBodyBytes = NULL;
         delete pRawBytesPair;

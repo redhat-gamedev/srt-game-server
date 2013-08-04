@@ -8,7 +8,7 @@
 
 #ifndef __CMSTest__Input__
 #define __CMSTest__Input__
-
+#if 0
 #include "../Proto/DualStick.pb.h"
 #include "../Proto/box2d.pb.h"
 #include "Poco/BasicEvent.h"
@@ -51,5 +51,5 @@ public:
     // Event Firing Method(s)
     void FireDualStickEvent(DualStick::PbDualStick aPbDualStick);
 };
-
+#endif
 #endif /* defined(__CMSTest__Input__) */

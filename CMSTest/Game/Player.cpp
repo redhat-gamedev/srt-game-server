@@ -15,7 +15,7 @@
 #include "World.h"
 #include "Timer.h"
 #include "B2DPod.h"
-#include "Input.h"
+//#include "Input.h"
 #include "Poco/Delegate.h"
 #include "../Proto/box2d.pb.h"
 #include "../Shared/MakeT.h"
@@ -42,7 +42,7 @@ Player::Player(_Dependencies& theDependencies) :
     
     m_pB2DEntity->SetParentEntity(this);
     
-    Input::EventPublisher.DualStickEvent += Poco::Delegate<Player, DualStick::PbDualStick>(this, &Player::OnInputDualStick);
+    //Input::EventPublisher.DualStickEvent += Poco::Delegate<Player, DualStick::PbDualStick>(this, &Player::OnInputDualStick);
 }
 // Destructor(s)
 Player::~Player()
@@ -53,7 +53,7 @@ Player::~Player()
     
     //--s_ui32Count;
 
-    Input::EventPublisher.DualStickEvent -= Poco::Delegate<Player, DualStick::PbDualStick>(this, &Player::OnInputDualStick);
+    //Input::EventPublisher.DualStickEvent -= Poco::Delegate<Player, DualStick::PbDualStick>(this, &Player::OnInputDualStick);
     
     m_BulletQueue.lock();
     Bullet* pBullet = NULL;
@@ -78,22 +78,23 @@ void Player::Update()
 
     B2DBulletFactory& aB2DBulletFactory = B2DBulletFactory::Instance();
     BulletFactory& aBulletFactory = BulletFactory::Instance();
-
-    m_PbDualStickQueue.lock();
-//    decaf::util::StlQueue<DualStick::PbDualStick>   aPbDualStickQueueSwap = m_PbDualStickQueue;
-    std::vector<DualStick::PbDualStick> vecPbDualStick = m_PbDualStickQueue.toArray();
-    m_PbDualStickQueue.clear();
-    m_PbDualStickQueue.unlock();
+#if 0
+//    m_PbDualStickQueue.lock();
+//    std::vector<DualStick::PbDualStick> vecPbDualStick = m_PbDualStickQueue.toArray();
+//    m_PbDualStickQueue.clear();
+//    m_PbDualStickQueue.unlock();
     
     //while (!aPbDualStickQueueSwap.empty())
     
-    for (int i = 0; i < vecPbDualStick.size(); ++i)
+    //for (int i = 0; i < vecPbDualStick.size(); ++i)
     {
         //DualStick::PbDualStick aPbDualStick = aPbDualStickQueueSwap.pop();
-        DualStick::PbDualStick aPbDualStick = vecPbDualStick[i];
-        const box2d::PbVec2& pbv2Move = aPbDualStick.pbv2move();
-        const box2d::PbVec2& pbv2Shoot = aPbDualStick.pbv2shoot();
-        const std::string& strUUID = aPbDualStick.uuid();
+        //DualStick::PbDualStick aPbDualStick = vecPbDualStick[i];
+        //const box2d::PbVec2& pbv2Move = aPbDualStick.pbv2move();
+        //const box2d::PbVec2& pbv2Shoot = aPbDualStick.pbv2shoot();
+//        const box2d::PbVec2& pbv2Move = aPbDualStick.pbv2move();
+//        const box2d::PbVec2& pbv2Shoot = aPbDualStick.pbv2shoot();
+        const std::string& strUUID = "";//aPbDualStick.uuid();
 
         if (strUUID != m_strUUID)
         {
@@ -126,7 +127,7 @@ void Player::Update()
             }
         }
     }
-
+#endif
     Rock2D::Timer::Update();
     m_pB2DEntity->Update();
 
@@ -168,9 +169,9 @@ void Player::Update()
 }
 
 // Input Event response
-void Player::OnInputDualStick(const void* pSender, DualStick::PbDualStick& aPbDualStick)
-{
-    m_PbDualStickQueue.lock();
-    m_PbDualStickQueue.push(aPbDualStick);
-    m_PbDualStickQueue.unlock();
-}
+//void Player::OnInputDualStick(const void* pSender, DualStick::PbDualStick& aPbDualStick)
+//{
+//    m_PbDualStickQueue.lock();
+//    m_PbDualStickQueue.push(aPbDualStick);
+//    m_PbDualStickQueue.unlock();
+//}

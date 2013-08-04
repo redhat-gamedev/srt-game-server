@@ -52,7 +52,7 @@ public:
 private:
     
 protected:
-    Input*                  m_pInput;
+    //Input*                  m_pInput;
     World*                  m_pWorld;
     
     decaf::lang::Thread*    m_pMainThread;

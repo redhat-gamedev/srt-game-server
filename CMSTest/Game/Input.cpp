@@ -7,6 +7,7 @@
 //
 
 #include "Input.h"
+#if 0
 #include "../Proto/DualStick.pb.h"
 #include "../Proto/box2d.pb.h"
 #include "../Shared/SimpleAsyncConsumer.h"
@@ -96,3 +97,4 @@ void Input::FireDualStickEvent(DualStick::PbDualStick aPbDualStick)
 {
     EventPublisher.DualStickEvent(this, aPbDualStick);
 }
+#endif

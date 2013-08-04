@@ -45,9 +45,9 @@ public:
 
 private:
 protected:
-    MessageConsumer*                                                        m_pMessageConsumer;
-    FactoryT<usx::geofactions::CommandBuffer, SecurityCommand_Dependencies>&       m_aSecurityCommandFactory;
-    decaf::util::StlQueue<Poco::Tuple<cms::BytesMessage*, google::protobuf::Message*>* >                       m_aTupleQueue;
+    MessageConsumer*                                                                        m_pMessageConsumer;
+    FactoryT<usx::geofactions::CommandBuffer, SecurityCommand_Dependencies>&                m_aSecurityCommandFactory;
+    decaf::util::StlQueue<Poco::Tuple<cms::BytesMessage*, google::protobuf::Message*>* >    m_aTupleQueue;
     
     
     // Helper(s)

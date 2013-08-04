@@ -96,6 +96,21 @@ void CommandQueue::HandleCommandConsumedEvent(const void* pSender, Poco::Tuple<c
             assert(false);
         }
     }
+    else if (usx::geofactions::CommandBuffer_CommandBufferType_RAWINPUT == pCommandBuffer->type())
+    {
+        const RawInputCommandBuffer& aRawInputCommandBuffer = pCommandBuffer->rawinputcommandbuffer();
+        if (usx::geofactions::RawInputCommandBuffer_RawInputCommandBufferType_DUALSTICK == aRawInputCommandBuffer.type())
+        {
+            //JoinSecurityCommand::_SecurityDependencies theJoinSecurityCommandDependencies(pCommandBuffer, pBytesMessage);
+            //pCommand = m_aJoinSecurityCommandFactory.Create(theJoinSecurityCommandDependencies);
+            int i = 0;
+            ++i;
+        }
+        else //usx::geofactions::SecurityCommandBuffer_SecurityCommandBufferType_UNKNOWN
+        {
+            assert(false);
+        }
+    }
     else //usx::geofactions::CommandBuffer_CommandBufferType_UNKNOWN:
     {
         assert(false);
