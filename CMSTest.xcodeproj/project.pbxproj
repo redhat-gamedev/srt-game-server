@@ -16,9 +16,7 @@
 		CC0F90D817179815006B9474 /* libactivemq-cpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0F90D7171797FF006B9474 /* libactivemq-cpp.a */; };
 		CC0F90DC17179AF3006B9474 /* libssl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0F90DB17179AF3006B9474 /* libssl.dylib */; };
 		CC0F90DE17179B7A006B9474 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0F90DD17179B7A006B9474 /* libcrypto.dylib */; };
-		CC1AD3AA178E3DAE000F134C /* MessageConsumer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC1AD3A8178E3DAE000F134C /* MessageConsumer.cpp */; };
 		CC2436D717492CFA00A8519D /* B2DPod.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC2436D517492CFA00A8519D /* B2DPod.cpp */; };
-		CC386DDB178A033100AB41AF /* MessageDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC386DD9178A033100AB41AF /* MessageDispatcher.cpp */; };
 		CC488D27164EB5FD005078C3 /* libBox2D.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC488D20164EB5DE005078C3 /* libBox2D.a */; };
 		CC4FECE11662A3AA004810CC /* libProtocolBuffers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC4FECE01662A39A004810CC /* libProtocolBuffers.a */; };
 		CC51BA661781B7FA007F27F0 /* BulletFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC51BA641781B7FA007F27F0 /* BulletFactory.cpp */; };
@@ -34,6 +32,8 @@
 		CC5A8E8F17AECAEC00C8567B /* SecurityGameEventFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC5A8E8B17AECAEC00C8567B /* SecurityGameEventFactory.cpp */; };
 		CC5A8E9517AECBE900C8567B /* SimpleAsyncConsumer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC5A8E9117AECBE900C8567B /* SimpleAsyncConsumer.cpp */; };
 		CC5A8E9617AECBE900C8567B /* SimpleAsyncProducer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC5A8E9317AECBE900C8567B /* SimpleAsyncProducer.cpp */; };
+		CC5A8E9B17AECC6F00C8567B /* MessageConsumer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC5A8E9717AECC6F00C8567B /* MessageConsumer.cpp */; };
+		CC5A8E9C17AECC6F00C8567B /* MessageDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC5A8E9917AECC6F00C8567B /* MessageDispatcher.cpp */; };
 		CC68EA98163DA07400D225C2 /* CMSTest.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = CC68EA97163DA07400D225C2 /* CMSTest.1 */; };
 		CCA4C32C1687B45D006BAC1D /* xdispatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA4C32B1687B45D006BAC1D /* xdispatch.framework */; };
 		CCE449C217230E21002A1937 /* box2d.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CCE449B917230E21002A1937 /* box2d.pb.cc */; };
@@ -218,16 +218,12 @@
 		CC0F90CF171797FE006B9474 /* activemq-cpp.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "activemq-cpp.xcodeproj"; path = "../ThirdParty/activemq-cpp/activemq-cpp/activemq-cpp.xcodeproj"; sourceTree = "<group>"; };
 		CC0F90DB17179AF3006B9474 /* libssl.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libssl.dylib; path = usr/lib/libssl.dylib; sourceTree = SDKROOT; };
 		CC0F90DD17179B7A006B9474 /* libcrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.dylib; path = usr/lib/libcrypto.dylib; sourceTree = SDKROOT; };
-		CC1AD3A8178E3DAE000F134C /* MessageConsumer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MessageConsumer.cpp; path = Application/MessageConsumer.cpp; sourceTree = "<group>"; };
-		CC1AD3A9178E3DAE000F134C /* MessageConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageConsumer.h; path = Application/MessageConsumer.h; sourceTree = "<group>"; };
 		CC1AD3AE178F882D000F134C /* RawInputCommandBuffer.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; name = RawInputCommandBuffer.proto; path = Proto/RawInputCommandBuffer.proto; sourceTree = "<group>"; };
 		CC2436B417490AEA00A8519D /* SecurityCommandBuffer.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; name = SecurityCommandBuffer.proto; path = Proto/SecurityCommandBuffer.proto; sourceTree = "<group>"; };
 		CC2436CD17491B5500A8519D /* EntityGameEventBuffer.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; name = EntityGameEventBuffer.proto; path = Proto/EntityGameEventBuffer.proto; sourceTree = "<group>"; };
 		CC2436D017491B5700A8519D /* GameEventBuffer.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; name = GameEventBuffer.proto; path = Proto/GameEventBuffer.proto; sourceTree = "<group>"; };
 		CC2436D517492CFA00A8519D /* B2DPod.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = B2DPod.cpp; path = Game/B2DPod.cpp; sourceTree = "<group>"; };
 		CC2436D617492CFA00A8519D /* B2DPod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = B2DPod.h; path = Game/B2DPod.h; sourceTree = "<group>"; };
-		CC386DD9178A033100AB41AF /* MessageDispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MessageDispatcher.cpp; path = Application/MessageDispatcher.cpp; sourceTree = "<group>"; };
-		CC386DDA178A033100AB41AF /* MessageDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageDispatcher.h; path = Application/MessageDispatcher.h; sourceTree = "<group>"; };
 		CC4FECD81662A399004810CC /* ProtocolBuffers.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ProtocolBuffers.xcodeproj; path = ../ThirdParty/protobuf/ProtocolBuffers/ProtocolBuffers.xcodeproj; sourceTree = "<group>"; };
 		CC51BA641781B7FA007F27F0 /* BulletFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BulletFactory.cpp; path = Game/BulletFactory.cpp; sourceTree = "<group>"; };
 		CC51BA651781B7FA007F27F0 /* BulletFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BulletFactory.h; path = Game/BulletFactory.h; sourceTree = "<group>"; };
@@ -258,6 +254,10 @@
 		CC5A8E9217AECBE900C8567B /* SimpleAsyncConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimpleAsyncConsumer.h; path = Network/SimpleAsyncConsumer.h; sourceTree = "<group>"; };
 		CC5A8E9317AECBE900C8567B /* SimpleAsyncProducer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SimpleAsyncProducer.cpp; path = Network/SimpleAsyncProducer.cpp; sourceTree = "<group>"; };
 		CC5A8E9417AECBE900C8567B /* SimpleAsyncProducer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimpleAsyncProducer.h; path = Network/SimpleAsyncProducer.h; sourceTree = "<group>"; };
+		CC5A8E9717AECC6F00C8567B /* MessageConsumer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MessageConsumer.cpp; path = Network/MessageConsumer.cpp; sourceTree = "<group>"; };
+		CC5A8E9817AECC6F00C8567B /* MessageConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageConsumer.h; path = Network/MessageConsumer.h; sourceTree = "<group>"; };
+		CC5A8E9917AECC6F00C8567B /* MessageDispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MessageDispatcher.cpp; path = Network/MessageDispatcher.cpp; sourceTree = "<group>"; };
+		CC5A8E9A17AECC6F00C8567B /* MessageDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageDispatcher.h; path = Network/MessageDispatcher.h; sourceTree = "<group>"; };
 		CC68EA91163DA07400D225C2 /* CMSTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CMSTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC68EA97163DA07400D225C2 /* CMSTest.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = CMSTest.1; sourceTree = "<group>"; };
 		CCA4C32B1687B45D006BAC1D /* xdispatch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = xdispatch.framework; path = ../ThirdParty/xdispatch/build/bin/Debug/xdispatch.framework; sourceTree = "<group>"; };
@@ -407,6 +407,10 @@
 		CC5A8E9017AECBB200C8567B /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				CC5A8E9717AECC6F00C8567B /* MessageConsumer.cpp */,
+				CC5A8E9817AECC6F00C8567B /* MessageConsumer.h */,
+				CC5A8E9917AECC6F00C8567B /* MessageDispatcher.cpp */,
+				CC5A8E9A17AECC6F00C8567B /* MessageDispatcher.h */,
 				CC5A8E9117AECBE900C8567B /* SimpleAsyncConsumer.cpp */,
 				CC5A8E9217AECBE900C8567B /* SimpleAsyncConsumer.h */,
 				CC5A8E9317AECBE900C8567B /* SimpleAsyncProducer.cpp */,
@@ -491,10 +495,6 @@
 				CCE449C917230EF9002A1937 /* main.cpp */,
 				CCE449CC17230EF9002A1937 /* Server.cpp */,
 				CCE449CD17230EF9002A1937 /* Server.h */,
-				CC386DD9178A033100AB41AF /* MessageDispatcher.cpp */,
-				CC386DDA178A033100AB41AF /* MessageDispatcher.h */,
-				CC1AD3A8178E3DAE000F134C /* MessageConsumer.cpp */,
-				CC1AD3A9178E3DAE000F134C /* MessageConsumer.h */,
 			);
 			name = Application;
 			sourceTree = "<group>";
@@ -762,8 +762,6 @@
 				CC2436D717492CFA00A8519D /* B2DPod.cpp in Sources */,
 				CC51BA661781B7FA007F27F0 /* BulletFactory.cpp in Sources */,
 				CC55B2741785028A00CCC6E5 /* PodFactory.cpp in Sources */,
-				CC386DDB178A033100AB41AF /* MessageDispatcher.cpp in Sources */,
-				CC1AD3AA178E3DAE000F134C /* MessageConsumer.cpp in Sources */,
 				CC0BFD501792E6F300AE7B01 /* CommandBuffer.pb.cc in Sources */,
 				CC0BFD511792E6F300AE7B01 /* DualStickRawInputCommandBuffer.pb.cc in Sources */,
 				CC0BFD521792E6F300AE7B01 /* EntityGameEventBuffer.pb.cc in Sources */,
@@ -781,6 +779,8 @@
 				CC5A8E8F17AECAEC00C8567B /* SecurityGameEventFactory.cpp in Sources */,
 				CC5A8E9517AECBE900C8567B /* SimpleAsyncConsumer.cpp in Sources */,
 				CC5A8E9617AECBE900C8567B /* SimpleAsyncProducer.cpp in Sources */,
+				CC5A8E9B17AECC6F00C8567B /* MessageConsumer.cpp in Sources */,
+				CC5A8E9C17AECC6F00C8567B /* MessageDispatcher.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
