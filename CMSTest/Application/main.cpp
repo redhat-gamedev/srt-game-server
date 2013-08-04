@@ -31,7 +31,7 @@
 #include "../Proto/CommandBuffer.pb.h"
 #include "../Proto/SecurityCommandBuffer.pb.h"
 #include "../Proto/RawInputCommandBuffer.pb.h"
-#include "../Game/SecurityCommandBufferFactory.h"
+#include "../Commands/SecurityCommandBufferFactory.h"
 #include "../Shared/FactoryT.h"
 #include "activemq/library/ActiveMQCPP.h"
 #include <iostream>
