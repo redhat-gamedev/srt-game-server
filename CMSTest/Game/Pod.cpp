@@ -24,7 +24,7 @@
 #include <assert.h>
 
 Poco::BasicEvent<Pod*&>      Pod::UpdatedEvent;
-uint32_t                        Pod::s_ui32Count = 1;
+uint32_t                     Pod::s_ui32Count = 1;
 
 
 // Constructor(s)
@@ -35,7 +35,7 @@ Pod::Pod(_Dependencies& theDependencies) :
 {
     assert(m_pB2DEntity);
     
-    //cout << hex << "Bullet::Bullet() " << m_ui64Tag << endl;
+    //cout << hex << "Pod::Pod() " << m_ui64Tag << endl;
     
     ++s_ui32Count;
     

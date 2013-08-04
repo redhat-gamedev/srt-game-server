@@ -14,6 +14,8 @@
 #include "../Commands/CommandConsumer.h"
 #include "../Commands/ACommand.h"
 #include "../Commands/SecurityCommand.h"
+#include "../Commands/JoinSecurityCommand.h"
+#include "../Commands/LeaveSecurityCommand.h"
 #include "../Shared/FactoryT.h"
 #include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include "Poco/FunctionDelegate.h"

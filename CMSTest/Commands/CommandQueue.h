@@ -11,6 +11,8 @@
 
 #include "../Shared/FactoryT.h"
 #include "SecurityCommand.h"
+#include "JoinSecurityCommand.h"
+#include "LeaveSecurityCommand.h"
 #include "RawInputCommand.h"
 #include "Poco/Tuple.h"
 #include <decaf/util/StlQueue.h>

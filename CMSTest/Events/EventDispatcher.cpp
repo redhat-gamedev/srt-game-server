@@ -14,6 +14,8 @@
 #include "../Game/BulletFactory.h"
 #include "../Commands/ACommand.h"
 #include "../Commands/SecurityCommand.h"
+#include "../Commands/JoinSecurityCommand.h"
+#include "../Commands/LeaveSecurityCommand.h"
 #include "../Shared/FactoryT.h"
 #include "Poco/Delegate.h"
 #include <assert.h>

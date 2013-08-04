@@ -19,6 +19,8 @@
 #include "../Network/MessageDispatcher.h"
 #include "../Network/MessageConsumer.h"
 #include "../Commands/SecurityCommand.h"
+#include "../Commands/JoinSecurityCommand.h"
+#include "../Commands/LeaveSecurityCommand.h"
 #include "../Network/SimpleAsyncProducer.h"
 #include "../Network/SimpleAsyncConsumer.h"
 #include "../Events/EventDispatcher.h"
