@@ -15,7 +15,6 @@
 #include "World.h"
 #include "Timer.h"
 #include "B2DPod.h"
-//#include "Input.h"
 #include "Poco/Delegate.h"
 #include "../Proto/box2d.pb.h"
 #include "../Shared/MakeT.h"
@@ -42,7 +41,6 @@ Player::Player(_Dependencies& theDependencies) :
     
     m_pB2DEntity->SetParentEntity(this);
     
-    //Input::EventPublisher.DualStickEvent += Poco::Delegate<Player, DualStick::PbDualStick>(this, &Player::OnInputDualStick);
     FactoryT<DualStickRawInputCommand, RawInputCommand::_RawInputDependencies>&      theDualStickRawInputCommandFactory = FactoryT<DualStickRawInputCommand, RawInputCommand::_RawInputDependencies>::Instance();
     
     theDualStickRawInputCommandFactory.CreatedEvent += Poco::Delegate<Player, DualStickRawInputCommand*&>(this, &Player::HandleDualStickRawInputCommandFactoryCreatedEvent);
@@ -62,8 +60,6 @@ Player::~Player()
     
     //--s_ui32Count;
 
-    //Input::EventPublisher.DualStickEvent -= Poco::Delegate<Player, DualStick::PbDualStick>(this, &Player::OnInputDualStick);
-    
     m_BulletQueue.lock();
     Bullet* pBullet = NULL;
     while (!(m_BulletQueue.empty()))
@@ -88,59 +84,6 @@ void Player::Update()
     B2DBulletFactory& aB2DBulletFactory = B2DBulletFactory::Instance();
     BulletFactory& aBulletFactory = BulletFactory::Instance();
 
-#if 0
-//    m_PbDualStickQueue.lock();
-//    std::vector<DualStick::PbDualStick> vecPbDualStick = m_PbDualStickQueue.toArray();
-//    m_PbDualStickQueue.clear();
-//    m_PbDualStickQueue.unlock();
-    
-    //while (!aPbDualStickQueueSwap.empty())
-    
-    //for (int i = 0; i < vecPbDualStick.size(); ++i)
-    {
-        //DualStick::PbDualStick aPbDualStick = aPbDualStickQueueSwap.pop();
-        //DualStick::PbDualStick aPbDualStick = vecPbDualStick[i];
-        //const box2d::PbVec2& pbv2Move = aPbDualStick.pbv2move();
-        //const box2d::PbVec2& pbv2Shoot = aPbDualStick.pbv2shoot();
-//        const box2d::PbVec2& pbv2Move = aPbDualStick.pbv2move();
-//        const box2d::PbVec2& pbv2Shoot = aPbDualStick.pbv2shoot();
-        const std::string& strUUID = "";//aPbDualStick.uuid();
-
-        if (strUUID != m_strUUID)
-        {
-            return;
-        }
-    
-        b2Vec2 b2v2Shoot;
-        b2v2Shoot.x = pbv2Shoot.x();
-        b2v2Shoot.y = pbv2Shoot.y();
-
-        m_pB2DEntity->Move(pbv2Move.x(), pbv2Move.y());
-
-        if (((b2v2Shoot.x < 0.0f) || (b2v2Shoot.x > 0.0f)) ||
-            ((b2v2Shoot.y < 0.0f) || (b2v2Shoot.y > 0.0f)))
-        {
-            if (m_pBulletTimer->Status() == Rock2D::Timer::EXPIRED)
-            {
-                m_pBulletTimer->Restart();
-                
-                B2DBullet::_Dependencies aB2DBulletDependencies(m_pB2DEntity->GetPosition(), m_pB2DEntity->GetLinearVelocity());
-                B2DBullet* pB2DBullet = aB2DBulletFactory.Create(aB2DBulletDependencies);
-                
-                Bullet::_Dependencies aBulletDependencies(m_strUUID, pB2DBullet);
-                Bullet* pBullet = aBulletFactory.Create(aBulletDependencies);
-                
-                pBullet->Fire(b2v2Shoot);
-                m_BulletQueue.lock();
-                m_BulletQueue.push(pBullet);
-                m_BulletQueue.unlock();
-            }
-        }
-    }
-#endif
-    
-    //b2Vec2  b2v2Move;
-    //b2Vec2  b2v2Shoot;
     m_b2v2MoveQueue.lock();
     std::vector<b2Vec2> vecb2v2Move = m_b2v2MoveQueue.toArray();
     m_b2v2MoveQueue.clear();
@@ -215,14 +158,6 @@ void Player::Update()
     m_BulletQueue.unlock();
 }
 
-// Input Event response
-//void Player::OnInputDualStick(const void* pSender, DualStick::PbDualStick& aPbDualStick)
-//{
-//    m_PbDualStickQueue.lock();
-//    m_PbDualStickQueue.push(aPbDualStick);
-//    m_PbDualStickQueue.unlock();
-//}
-
 void Player::HandleDualStickRawInputCommandFactoryCreatedEvent(const void* pSender, DualStickRawInputCommand*& pDualStickRawInputCommand)
 {
     assert(pDualStickRawInputCommand);
@@ -238,11 +173,7 @@ void Player::HandleDualStickRawInputCommandFactoryDestroyedEvent(const void* pSe
 }
 
 void Player::HandleDualStickRawInputCommandExecutedEvent(const void* pSender, const std::string& strUUID)
-//void Player::HandleDualStickRawInputCommandExecutedEvent(const void* pSender, const std::string& strUUID, b2Vec2& b2v2Move, b2Vec2& b2v2Shoot)
 {
-    //GameEventBuffer* pGameEvent = CreateGameEvent(SecurityGameEventBuffer_SecurityGameEventBufferType_JOIN, strUUID);
-    //Enqueue(pGameEvent);
-
     if (m_strUUID != strUUID)
     {
         return;
