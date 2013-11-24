@@ -53,7 +53,7 @@
 		CCE9087316516221005F2E72 /* libaprutil-1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE9087116516221005F2E72 /* libaprutil-1.dylib */; };
 		CCEB9EF9173FE24F00B3CE16 /* B2DBullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCEB9EF7173FE24F00B3CE16 /* B2DBullet.cpp */; };
 		CCEB9EFC173FFB8F00B3CE16 /* AB2DEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCEB9EFA173FFB8E00B3CE16 /* AB2DEntity.cpp */; };
-		CCF958581749CC2E00CA57B9 /* libPocoFoundation.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CCBB79C51749CBEF00E74F08 /* libPocoFoundation.dylib */; };
+		CCF958581749CC2E00CA57B9 /* libPocoFoundationd.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CCBB79C51749CBEF00E74F08 /* libPocoFoundationd.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +98,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = CC22AEFC16629B6C00E22E62;
 			remoteInfo = ProtocolBuffers;
+		};
+		CC6F03ED18419D8600B1D70C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CCBB79AF1749CBEF00E74F08 /* Poco.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = AD41312A29E14135B9C16FA9;
+			remoteInfo = PocoMongoDB;
 		};
 		CCBB79C41749CBEF00E74F08 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -169,26 +176,12 @@
 			remoteGlobalIDString = 4FE2DA3B3B4D40CCABE237FE;
 			remoteInfo = PocoDataSQLite;
 		};
-		CCBB79D81749CBEF00E74F08 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CCBB79AF1749CBEF00E74F08 /* Poco.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = C78E66B3D06A4F51BB87A8CF;
-			remoteInfo = PocoDataODBC;
-		};
 		CCBB79DA1749CBEF00E74F08 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CCBB79AF1749CBEF00E74F08 /* Poco.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 701B6181A5B841CEB14FD0E8;
 			remoteInfo = PocoZip;
-		};
-		CCBB79DC1749CBEF00E74F08 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CCBB79AF1749CBEF00E74F08 /* Poco.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CA5202A5D17F4023AC842CD9;
-			remoteInfo = mod_poco;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -311,7 +304,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CCF958581749CC2E00CA57B9 /* libPocoFoundation.dylib in Frameworks */,
+				CCF958581749CC2E00CA57B9 /* libPocoFoundationd.dylib in Frameworks */,
 				CC0F90D817179815006B9474 /* libactivemq-cpp.a in Frameworks */,
 				CCE9087216516221005F2E72 /* libapr-1.dylib in Frameworks */,
 				CCE9087316516221005F2E72 /* libaprutil-1.dylib in Frameworks */,
@@ -485,19 +478,18 @@
 		CCBB79B01749CBEF00E74F08 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CCBB79C51749CBEF00E74F08 /* libPocoFoundation.dylib */,
-				CCBB79C71749CBEF00E74F08 /* libPocoXML.dylib */,
-				CCBB79C91749CBEF00E74F08 /* libPocoJSON.dylib */,
-				CCBB79CB1749CBEF00E74F08 /* libPocoPDF.dylib */,
-				CCBB79CD1749CBEF00E74F08 /* libPocoUtil.dylib */,
-				CCBB79CF1749CBEF00E74F08 /* libPocoNet.dylib */,
-				CCBB79D11749CBEF00E74F08 /* libPocoNetSSL.dylib */,
-				CCBB79D31749CBEF00E74F08 /* libPocoCrypto.dylib */,
-				CCBB79D51749CBEF00E74F08 /* libPocoData.dylib */,
-				CCBB79D71749CBEF00E74F08 /* libPocoDataSQLite.dylib */,
-				CCBB79D91749CBEF00E74F08 /* libPocoDataODBC.dylib */,
-				CCBB79DB1749CBEF00E74F08 /* libPocoZip.dylib */,
-				CCBB79DD1749CBEF00E74F08 /* libmod_poco.dylib */,
+				CCBB79C51749CBEF00E74F08 /* libPocoFoundationd.dylib */,
+				CCBB79C71749CBEF00E74F08 /* libPocoXMLd.dylib */,
+				CCBB79C91749CBEF00E74F08 /* libPocoJSONd.dylib */,
+				CC6F03EE18419D8600B1D70C /* libPocoMongoDBd.dylib */,
+				CCBB79CB1749CBEF00E74F08 /* libPocoPDFd.dylib */,
+				CCBB79CD1749CBEF00E74F08 /* libPocoUtild.dylib */,
+				CCBB79CF1749CBEF00E74F08 /* libPocoNetd.dylib */,
+				CCBB79D11749CBEF00E74F08 /* libPocoNetSSLd.dylib */,
+				CCBB79D31749CBEF00E74F08 /* libPocoCryptod.dylib */,
+				CCBB79D51749CBEF00E74F08 /* libPocoDatad.dylib */,
+				CCBB79D71749CBEF00E74F08 /* libPocoDataSQLited.dylib */,
+				CCBB79DB1749CBEF00E74F08 /* libPocoZipd.dylib */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -664,95 +656,100 @@
 			remoteRef = CC4FECDF1662A39A004810CC /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		CCBB79C51749CBEF00E74F08 /* libPocoFoundation.dylib */ = {
+		CC6F03EE18419D8600B1D70C /* libPocoMongoDBd.dylib */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.dylib";
-			path = libPocoFoundation.dylib;
+			name = libPocoMongoDBd.dylib;
+			path = libPocoMongoDBd.22.dylib;
+			remoteRef = CC6F03ED18419D8600B1D70C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CCBB79C51749CBEF00E74F08 /* libPocoFoundationd.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			name = libPocoFoundationd.dylib;
+			path = libPocoFoundationd.22.dylib;
 			remoteRef = CCBB79C41749CBEF00E74F08 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		CCBB79C71749CBEF00E74F08 /* libPocoXML.dylib */ = {
+		CCBB79C71749CBEF00E74F08 /* libPocoXMLd.dylib */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.dylib";
-			path = libPocoXML.dylib;
+			name = libPocoXMLd.dylib;
+			path = libPocoXMLd.22.dylib;
 			remoteRef = CCBB79C61749CBEF00E74F08 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		CCBB79C91749CBEF00E74F08 /* libPocoJSON.dylib */ = {
+		CCBB79C91749CBEF00E74F08 /* libPocoJSONd.dylib */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.dylib";
-			path = libPocoJSON.dylib;
+			name = libPocoJSONd.dylib;
+			path = libPocoJSONd.22.dylib;
 			remoteRef = CCBB79C81749CBEF00E74F08 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		CCBB79CB1749CBEF00E74F08 /* libPocoPDF.dylib */ = {
+		CCBB79CB1749CBEF00E74F08 /* libPocoPDFd.dylib */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.dylib";
-			path = libPocoPDF.dylib;
+			name = libPocoPDFd.dylib;
+			path = libPocoPDFd.22.dylib;
 			remoteRef = CCBB79CA1749CBEF00E74F08 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		CCBB79CD1749CBEF00E74F08 /* libPocoUtil.dylib */ = {
+		CCBB79CD1749CBEF00E74F08 /* libPocoUtild.dylib */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.dylib";
-			path = libPocoUtil.dylib;
+			name = libPocoUtild.dylib;
+			path = libPocoUtild.22.dylib;
 			remoteRef = CCBB79CC1749CBEF00E74F08 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		CCBB79CF1749CBEF00E74F08 /* libPocoNet.dylib */ = {
+		CCBB79CF1749CBEF00E74F08 /* libPocoNetd.dylib */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.dylib";
-			path = libPocoNet.dylib;
+			name = libPocoNetd.dylib;
+			path = libPocoNetd.22.dylib;
 			remoteRef = CCBB79CE1749CBEF00E74F08 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		CCBB79D11749CBEF00E74F08 /* libPocoNetSSL.dylib */ = {
+		CCBB79D11749CBEF00E74F08 /* libPocoNetSSLd.dylib */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.dylib";
-			path = libPocoNetSSL.dylib;
+			name = libPocoNetSSLd.dylib;
+			path = libPocoNetSSLd.22.dylib;
 			remoteRef = CCBB79D01749CBEF00E74F08 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		CCBB79D31749CBEF00E74F08 /* libPocoCrypto.dylib */ = {
+		CCBB79D31749CBEF00E74F08 /* libPocoCryptod.dylib */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.dylib";
-			path = libPocoCrypto.dylib;
+			name = libPocoCryptod.dylib;
+			path = libPocoCryptod.22.dylib;
 			remoteRef = CCBB79D21749CBEF00E74F08 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		CCBB79D51749CBEF00E74F08 /* libPocoData.dylib */ = {
+		CCBB79D51749CBEF00E74F08 /* libPocoDatad.dylib */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.dylib";
-			path = libPocoData.dylib;
+			name = libPocoDatad.dylib;
+			path = libPocoDatad.22.dylib;
 			remoteRef = CCBB79D41749CBEF00E74F08 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		CCBB79D71749CBEF00E74F08 /* libPocoDataSQLite.dylib */ = {
+		CCBB79D71749CBEF00E74F08 /* libPocoDataSQLited.dylib */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.dylib";
-			path = libPocoDataSQLite.dylib;
+			name = libPocoDataSQLited.dylib;
+			path = libPocoDataSQLited.22.dylib;
 			remoteRef = CCBB79D61749CBEF00E74F08 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		CCBB79D91749CBEF00E74F08 /* libPocoDataODBC.dylib */ = {
+		CCBB79DB1749CBEF00E74F08 /* libPocoZipd.dylib */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.dylib";
-			path = libPocoDataODBC.dylib;
-			remoteRef = CCBB79D81749CBEF00E74F08 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CCBB79DB1749CBEF00E74F08 /* libPocoZip.dylib */ = {
-			isa = PBXReferenceProxy;
-			fileType = "compiled.mach-o.dylib";
-			path = libPocoZip.dylib;
+			name = libPocoZipd.dylib;
+			path = libPocoZipd.22.dylib;
 			remoteRef = CCBB79DA1749CBEF00E74F08 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CCBB79DD1749CBEF00E74F08 /* libmod_poco.dylib */ = {
-			isa = PBXReferenceProxy;
-			fileType = "compiled.mach-o.dylib";
-			path = libmod_poco.dylib;
-			remoteRef = CCBB79DC1749CBEF00E74F08 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -832,7 +829,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -856,7 +853,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
@@ -879,7 +876,7 @@
 					"\"$(SRCROOT)/../ThirdParty/poco/lib/Darwin/x86_64\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../ThirdParty/activemq-cpp/activemq-cpp/src/main\" \"$(SRCROOT)/../ThirdParty/box2d/Box2D/\" \"$(SRCROOT)/../ThirdParty/poco/Foundation/include/\"";
 			};
 			name = Debug;
@@ -903,7 +900,7 @@
 					"\"$(SRCROOT)/../ThirdParty/poco/lib/Darwin/x86_64\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../ThirdParty/activemq-cpp/activemq-cpp/src/main\" \"$(SRCROOT)/../ThirdParty/box2d/Box2D/\" \"$(SRCROOT)/../ThirdParty/poco/Foundation/include/\"";
 			};
 			name = Release;

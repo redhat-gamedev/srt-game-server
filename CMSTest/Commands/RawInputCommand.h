@@ -10,8 +10,6 @@
 #define __CMSTest__RawInputCommand__
 
 #include "ACommand.h"
-#include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
-#include "Poco/BasicEvent.h"
 
 namespace google
 {

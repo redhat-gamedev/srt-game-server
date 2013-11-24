@@ -31,7 +31,7 @@ uint32_t                     Pod::s_ui32Count = 1;
 Pod::Pod(_Dependencies& theDependencies) :
     m_pBulletTimer(new Rock2D::Timer(500)),
     AEntity(theDependencies.UUID,
-        (uint64_t)MakeT<uint64_t>((uint32_t)AEntity::POD, s_ui32Count), theDependencies.pB2DEntity)
+            (uint64_t)MakeT<uint64_t>((uint32_t)AEntity::POD, s_ui32Count), theDependencies.pB2DEntity)
 {
     assert(m_pB2DEntity);
     
