@@ -67,13 +67,11 @@ EventDispatcher::EventDispatcher(_Dependencies* pDependencies) :
     m_aBulletFactory.DestroyedEvent += Poco::Delegate<EventDispatcher, Bullet*&>(this, &EventDispatcher::HandleBulletDestroyedEvent);
     
     
-    FactoryT<JoinSecurityCommand, SecurityCommand::_SecurityDependencies>&      theJoinSecurityCommandFactory = FactoryT<JoinSecurityCommand, SecurityCommand::_SecurityDependencies>::Instance();
-    
+    auto& theJoinSecurityCommandFactory = FactoryT<JoinSecurityCommand, SecurityCommand::_SecurityDependencies>::Instance();
     theJoinSecurityCommandFactory.CreatedEvent += Poco::Delegate<EventDispatcher, JoinSecurityCommand*&>(this, &EventDispatcher::HandleJoinSecurityCommandFactoryCreatedEvent);
     theJoinSecurityCommandFactory.DestroyedEvent += Poco::Delegate<EventDispatcher, JoinSecurityCommand*&>(this, &EventDispatcher::HandleJoinSecurityCommandFactoryDestroyedEvent);
     
-    FactoryT<LeaveSecurityCommand, SecurityCommand::_SecurityDependencies>&      theLeaveSecurityCommandFactory = FactoryT<LeaveSecurityCommand, SecurityCommand::_SecurityDependencies>::Instance();
-    
+    auto& theLeaveSecurityCommandFactory = FactoryT<LeaveSecurityCommand, SecurityCommand::_SecurityDependencies>::Instance();
     theLeaveSecurityCommandFactory.CreatedEvent += Poco::Delegate<EventDispatcher, LeaveSecurityCommand*&>(this, &EventDispatcher::HandleLeaveSecurityCommandFactoryCreatedEvent);
     theLeaveSecurityCommandFactory.DestroyedEvent += Poco::Delegate<EventDispatcher, LeaveSecurityCommand*&>(this, &EventDispatcher::HandleLeaveSecurityCommandFactoryDestroyedEvent);
 }
@@ -91,13 +89,11 @@ EventDispatcher::~EventDispatcher()
     Pod::UpdatedEvent -= Poco::Delegate<EventDispatcher, Pod*&>(this, &EventDispatcher::HandlePodUpdatedEvent);
     m_aPodFactory.DestroyedEvent -= Poco::Delegate<EventDispatcher, Pod*&>(this, &EventDispatcher::HandlePodDestroyedEvent);
     
-    FactoryT<JoinSecurityCommand, SecurityCommand::_SecurityDependencies>&      theJoinSecurityCommandFactory = FactoryT<JoinSecurityCommand, SecurityCommand::_SecurityDependencies>::Instance();
-    
+    auto& theJoinSecurityCommandFactory = FactoryT<JoinSecurityCommand, SecurityCommand::_SecurityDependencies>::Instance();
     theJoinSecurityCommandFactory.CreatedEvent -= Poco::Delegate<EventDispatcher, JoinSecurityCommand*&>(this, &EventDispatcher::HandleJoinSecurityCommandFactoryCreatedEvent);
     theJoinSecurityCommandFactory.DestroyedEvent -= Poco::Delegate<EventDispatcher, JoinSecurityCommand*&>(this, &EventDispatcher::HandleJoinSecurityCommandFactoryDestroyedEvent);
     
-    FactoryT<LeaveSecurityCommand, SecurityCommand::_SecurityDependencies>&      theLeaveSecurityCommandFactory = FactoryT<LeaveSecurityCommand, SecurityCommand::_SecurityDependencies>::Instance();
-    
+    auto& theLeaveSecurityCommandFactory = FactoryT<LeaveSecurityCommand, SecurityCommand::_SecurityDependencies>::Instance();
     theLeaveSecurityCommandFactory.CreatedEvent -= Poco::Delegate<EventDispatcher, LeaveSecurityCommand*&>(this, &EventDispatcher::HandleLeaveSecurityCommandFactoryCreatedEvent);
     theLeaveSecurityCommandFactory.DestroyedEvent -= Poco::Delegate<EventDispatcher, LeaveSecurityCommand*&>(this, &EventDispatcher::HandleLeaveSecurityCommandFactoryDestroyedEvent);
 }

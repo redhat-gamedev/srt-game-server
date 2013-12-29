@@ -51,42 +51,32 @@ int main(int argc, char* argv[])
     std::cout << "Initializing the ActiveMQCPP library" << std::endl;
     activemq::library::ActiveMQCPP::initializeLibrary();
     
-    PodFactory&                                                 thePodFactory = PodFactory::Instance();
-    BulletFactory&                                              theBulletFactory = BulletFactory::Instance();
-    FactoryT<GameEventBuffer, EntityGameEvent_Dependencies>&    theEntityGameEventFactory = FactoryT<GameEventBuffer, EntityGameEvent_Dependencies>::Instance();
-    FactoryT<GameEventBuffer, SecurityGameEvent_Dependencies>&  theSecurityGameEventFactory = FactoryT<GameEventBuffer, SecurityGameEvent_Dependencies>::Instance();
-    EventDispatcher::_Dependencies                              theEventDispatcherDependencies(thePodFactory,
-                                                                                               theBulletFactory,
-                                                                                               theEntityGameEventFactory,
-                                                                                               theSecurityGameEventFactory);
-    EventDispatcher&                                            theEventDispatcher = EventDispatcher::Instance(&theEventDispatcherDependencies);
+    PodFactory&                     thePodFactory = PodFactory::Instance();
+    BulletFactory&                  theBulletFactory = BulletFactory::Instance();
+    auto&                           theEntityGameEventFactory = FactoryT<GameEventBuffer, EntityGameEvent_Dependencies>::Instance();
+    auto&                           theSecurityGameEventFactory = FactoryT<GameEventBuffer, SecurityGameEvent_Dependencies>::Instance();
+    EventDispatcher::_Dependencies  theEventDispatcherDependencies(thePodFactory, theBulletFactory, theEntityGameEventFactory, theSecurityGameEventFactory);
+    EventDispatcher&                theEventDispatcher = EventDispatcher::Instance(&theEventDispatcherDependencies);
     
-    SimpleAsyncProducer*                                        pSimpleAsyncProducer = new SimpleAsyncProducer(strBrokerURI, strGameEventOutDestinationURI, true);
-    MessageDispatcher::_Dependencies                            theMessageDispatcherDependencies(pSimpleAsyncProducer);
-    MessageDispatcher&                                          theMessageDispatcher = MessageDispatcher::Instance(&theMessageDispatcherDependencies);
+    SimpleAsyncProducer*                pSimpleAsyncProducer = new SimpleAsyncProducer(strBrokerURI, strGameEventOutDestinationURI, true);
+    MessageDispatcher::_Dependencies    theMessageDispatcherDependencies(pSimpleAsyncProducer);
+    MessageDispatcher&                  theMessageDispatcher = MessageDispatcher::Instance(&theMessageDispatcherDependencies);
     
-    SimpleAsyncConsumer*                                        pSimpleAsyncConsumer = new SimpleAsyncConsumer(strBrokerURI, strCommandInDestinationURI);
-    MessageConsumer::_Dependencies                              theMessageConsumerDependencies(pSimpleAsyncConsumer);
-    MessageConsumer&                                            theMessageConsumer = MessageConsumer::Instance(&theMessageConsumerDependencies);
+    SimpleAsyncConsumer*                pSimpleAsyncConsumer = new SimpleAsyncConsumer(strBrokerURI, strCommandInDestinationURI);
+    MessageConsumer::_Dependencies      theMessageConsumerDependencies(pSimpleAsyncConsumer);
+    MessageConsumer&                    theMessageConsumer = MessageConsumer::Instance(&theMessageConsumerDependencies);
 
-    FactoryT<usx::geofactions::CommandBuffer, SecurityCommand_Dependencies>&    theSecurityCommandBufferFactory = FactoryT<usx::geofactions::CommandBuffer, SecurityCommand_Dependencies>::Instance();
-    CommandConsumer::_Dependencies                                              theCommandConsumerDependencies(&theMessageConsumer, theSecurityCommandBufferFactory);
-    CommandConsumer&                                                            theCommandConsumer = CommandConsumer::Instance(&theCommandConsumerDependencies);
+    auto&                               theSecurityCommandBufferFactory = FactoryT<usx::geofactions::CommandBuffer, SecurityCommand_Dependencies>::Instance();
+    CommandConsumer::_Dependencies      theCommandConsumerDependencies(&theMessageConsumer, theSecurityCommandBufferFactory);
+    CommandConsumer&                    theCommandConsumer = CommandConsumer::Instance(&theCommandConsumerDependencies);
     
-    FactoryT<JoinSecurityCommand, JoinSecurityCommand::_SecurityDependencies>&              theJoinSecurityCommandFactory = FactoryT<JoinSecurityCommand, JoinSecurityCommand::_SecurityDependencies>::Instance();
-    FactoryT<LeaveSecurityCommand, LeaveSecurityCommand::_SecurityDependencies>&            theLeaveSecurityCommandFactory = FactoryT<LeaveSecurityCommand, LeaveSecurityCommand::_SecurityDependencies>::Instance();
-    FactoryT<DualStickRawInputCommand, DualStickRawInputCommand::_RawInputDependencies>&    theDualStickRawInputCommandFactory = FactoryT<DualStickRawInputCommand, DualStickRawInputCommand::_RawInputDependencies>::Instance();
-    CommandQueue::_Dependencies                                                             theCommandQueueDependencies(theJoinSecurityCommandFactory,
-                                                                                                                        theLeaveSecurityCommandFactory,
-                                                                                                                        theDualStickRawInputCommandFactory,
-                                                                                                                        theCommandConsumer);
-    CommandQueue&                                                                           theCommandQueue = CommandQueue::Instance(&theCommandQueueDependencies);
+    auto&                           theJoinSecurityCommandFactory = FactoryT<JoinSecurityCommand, JoinSecurityCommand::_SecurityDependencies>::Instance();
+    auto&                           theLeaveSecurityCommandFactory = FactoryT<LeaveSecurityCommand, LeaveSecurityCommand::_SecurityDependencies>::Instance();
+    auto&                           theDualStickRawInputCommandFactory = FactoryT<DualStickRawInputCommand, DualStickRawInputCommand::_RawInputDependencies>::Instance();
+    CommandQueue::_Dependencies     theCommandQueueDependencies(theJoinSecurityCommandFactory, theLeaveSecurityCommandFactory, theDualStickRawInputCommandFactory, theCommandConsumer);
+    CommandQueue&                   theCommandQueue = CommandQueue::Instance(&theCommandQueueDependencies);
     
-    Server* pServer = new Server(theEventDispatcher,
-                                 theMessageDispatcher,
-                                 theMessageConsumer,
-                                 theCommandConsumer,
-                                 theCommandQueue);
+    Server* pServer = new Server(theEventDispatcher, theMessageDispatcher, theMessageConsumer, theCommandConsumer, theCommandQueue);
 
     //pServer->run();
     
