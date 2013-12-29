@@ -18,13 +18,13 @@ B2DPod::_Dependencies::_Dependencies(const b2Vec2& b2v2Position) :
 {
     // Override the defaults where appropriate
     // Set the size of our shape
-    m_b2CircleShape.m_radius = 1.0f;
+    m_b2CircleShape.m_radius = 2.0f;
     
     // Set the fixture and use the shape
 //    m_ab2FixtureDef.density = 1.0f;
 //    m_ab2FixtureDef.friction = 0.3f;
 //    m_ab2FixtureDef.restitution = 0.3f;
-    m_ab2FixtureDef.filter.groupIndex = -1;
+    m_ab2FixtureDef.filter.groupIndex = 1;
     m_ab2FixtureDef.shape = &m_b2CircleShape;
     
     m_ab2BodyDef.position = b2v2Position;
