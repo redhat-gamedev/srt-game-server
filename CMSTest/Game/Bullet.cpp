@@ -73,5 +73,5 @@ void Bullet::Update()
     Bullet* pBullet = this;
     UpdatedEvent(this, pBullet);
     
-    std::cout << "Bullet Position x " << ((B2DBullet*)m_pB2DEntity)->GetPosition().x << " y " << ((B2DBullet*)m_pB2DEntity)->GetPosition().y << std::endl;
+    //std::cout << "Bullet Position x " << ((B2DBullet*)m_pB2DEntity)->GetPosition().x << " y " << ((B2DBullet*)m_pB2DEntity)->GetPosition().y << std::endl;
 }

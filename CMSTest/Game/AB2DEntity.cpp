@@ -137,7 +137,7 @@ void AB2DEntity::SetParentEntity(AEntity* pParentEntity)
 
 void AB2DEntity::SetGroupIndex(int16_t i16GroupIndex)
 {
-    assert(i16GroupIndex > 0);
+    assert(i16GroupIndex < 0);
     assert(m_pb2Fixture);
 
     const b2Filter& ab2fdCurrent = m_pb2Fixture->GetFilterData();

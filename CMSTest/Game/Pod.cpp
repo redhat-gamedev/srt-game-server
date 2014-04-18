@@ -40,8 +40,10 @@ Pod::Pod(_Dependencies& theDependencies) :
     ++s_ui32Count;
     
     m_pB2DEntity->SetParentEntity(this);
+    std::cout << "Setting pod GroupIndex to " << s_i16GroupCount << std::endl;
+    m_pB2DEntity->SetGroupIndex(s_i16GroupCount);
     
-    FactoryT<DualStickRawInputCommand, RawInputCommand::_RawInputDependencies>&      theDualStickRawInputCommandFactory = FactoryT<DualStickRawInputCommand, RawInputCommand::_RawInputDependencies>::Instance();
+    auto&      theDualStickRawInputCommandFactory = FactoryT<DualStickRawInputCommand, RawInputCommand::_RawInputDependencies>::Instance();
     
     theDualStickRawInputCommandFactory.CreatedEvent += Poco::Delegate<Pod, DualStickRawInputCommand*&>(this, &Pod::HandleDualStickRawInputCommandFactoryCreatedEvent);
     theDualStickRawInputCommandFactory.DestroyedEvent += Poco::Delegate<Pod, DualStickRawInputCommand*&>(this, &Pod::HandleDualStickRawInputCommandFactoryDestroyedEvent);
@@ -49,7 +51,7 @@ Pod::Pod(_Dependencies& theDependencies) :
 // Destructor(s)
 Pod::~Pod()
 {
-    FactoryT<DualStickRawInputCommand, RawInputCommand::_RawInputDependencies>&      theDualStickRawInputCommandFactory = FactoryT<DualStickRawInputCommand, RawInputCommand::_RawInputDependencies>::Instance();
+    auto&      theDualStickRawInputCommandFactory = FactoryT<DualStickRawInputCommand, RawInputCommand::_RawInputDependencies>::Instance();
     
     theDualStickRawInputCommandFactory.DestroyedEvent -= Poco::Delegate<Pod, DualStickRawInputCommand*&>(this, &Pod::HandleDualStickRawInputCommandFactoryDestroyedEvent);
     theDualStickRawInputCommandFactory.CreatedEvent -= Poco::Delegate<Pod, DualStickRawInputCommand*&>(this, &Pod::HandleDualStickRawInputCommandFactoryCreatedEvent);
@@ -107,6 +109,7 @@ void Pod::Update()
             
             B2DBullet::_Dependencies aB2DBulletDependencies(m_pB2DEntity->GetPosition(), m_pB2DEntity->GetLinearVelocity());
             B2DBullet* pB2DBullet = aB2DBulletFactory.Create(aB2DBulletDependencies);
+            pB2DBullet->SetGroupIndex(s_i16GroupCount);
             
             Bullet::_Dependencies aBulletDependencies(m_strUUID, pB2DBullet);
             Bullet* pBullet = aBulletFactory.Create(aBulletDependencies);

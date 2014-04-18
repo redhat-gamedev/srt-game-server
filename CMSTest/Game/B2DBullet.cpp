@@ -39,6 +39,7 @@ B2DBullet::B2DBullet(B2DBullet::_Dependencies& theDependencies) :
     AB2DEntity(B2DWorld::Factory().CreateBody(&theDependencies.BodyDef))
 {
     m_pb2Body->CreateFixture(&theDependencies.FixtureDef);
+    m_pb2Fixture = m_pb2Body->GetFixtureList();
 }
 
 // Destructor(s)

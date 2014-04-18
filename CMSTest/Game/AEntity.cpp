@@ -28,7 +28,7 @@ AEntity::_Serializer                AEntity::Serializer;
 std::list<Pod*>                 AEntity::s_listPods;
 std::list<Pod*>                 AEntity::s_listPodsSwap;
 uint64_t                        AEntity::s_ui64Count = 1;
-int16_t                         AEntity::s_i16GroupCount = 1;
+int16_t                         AEntity::s_i16GroupCount = 0;
 
 
 // Constructor(s)
@@ -250,6 +250,11 @@ AEntity::AEntity(const std::string& strUUID, uint64_t ui64Tag, AB2DEntity* pAB2D
     assert(pAB2DEntity);
     
     ++s_ui64Count;
+    --s_i16GroupCount;
+    if (s_i16GroupCount < -32767)
+    {
+        s_i16GroupCount = -1;
+    }
 }
 
 // Destructor(s)
