@@ -25,23 +25,30 @@
 
 Poco::BasicEvent<Pod*&>      Pod::UpdatedEvent;
 uint32_t                     Pod::s_ui32Count = 1;
-
+int16_t                      Pod::s_i16GroupCount = 0;
 
 // Constructor(s)
 Pod::Pod(_Dependencies& theDependencies) :
     m_pBulletTimer(new Rock2D::Timer(500)),
     AEntity(theDependencies.UUID,
-            (uint64_t)MakeT<uint64_t>((uint32_t)AEntity::POD, s_ui32Count), theDependencies.pB2DEntity)
+            (uint64_t)MakeT<uint64_t>((uint32_t)AEntity::POD, s_ui32Count), theDependencies.pB2DEntity),
+    m_i16GroupCount(0)
 {
     assert(m_pB2DEntity);
     
     //cout << hex << "Pod::Pod() " << m_ui64Tag << endl;
     
     ++s_ui32Count;
+    --s_i16GroupCount;
+    if (s_i16GroupCount < -32767)
+    {
+        s_i16GroupCount = -1;
+    }
+    m_i16GroupCount = s_i16GroupCount;
     
     m_pB2DEntity->SetParentEntity(this);
-    std::cout << "Setting pod GroupIndex to " << s_i16GroupCount << std::endl;
-    m_pB2DEntity->SetGroupIndex(s_i16GroupCount);
+    std::cout << "Setting pod GroupIndex to " << m_i16GroupCount << std::endl;
+    m_pB2DEntity->SetGroupIndex(m_i16GroupCount);
     
     auto&      theDualStickRawInputCommandFactory = FactoryT<DualStickRawInputCommand, RawInputCommand::_RawInputDependencies>::Instance();
     
@@ -109,11 +116,11 @@ void Pod::Update()
             
             B2DBullet::_Dependencies aB2DBulletDependencies(m_pB2DEntity->GetPosition(), m_pB2DEntity->GetLinearVelocity());
             B2DBullet* pB2DBullet = aB2DBulletFactory.Create(aB2DBulletDependencies);
-            pB2DBullet->SetGroupIndex(s_i16GroupCount);
             
             Bullet::_Dependencies aBulletDependencies(m_strUUID, pB2DBullet);
             Bullet* pBullet = aBulletFactory.Create(aBulletDependencies);
             
+            pB2DBullet->SetGroupIndex(m_i16GroupCount);
             pBullet->Fire(vecb2v2Shoot[i]);
             m_BulletQueue.lock();
             m_BulletQueue.push(pBullet);

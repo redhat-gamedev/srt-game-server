@@ -69,7 +69,6 @@ protected:
     
     // Class data
     static decaf::util::StlQueue<AEntity*>          s_EntityQueue;
-    static int16_t                                  s_i16GroupCount;    
     
     std::string             m_strUUID;
     uint64_t                m_ui64Tag;

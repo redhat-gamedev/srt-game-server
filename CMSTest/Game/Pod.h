@@ -34,6 +34,8 @@ class Pod :
     
 private:
     static uint32_t         s_ui32Count;
+    static int16_t          s_i16GroupCount;
+    
     
 protected:
     Rock2D::Timer*                      m_pBulletTimer;
@@ -41,6 +43,8 @@ protected:
     
     decaf::util::StlQueue<b2Vec2>       m_b2v2MoveQueue;
     decaf::util::StlQueue<b2Vec2>       m_b2v2ShootQueue;
+    
+    int16_t                 m_i16GroupCount;
     
     // Helper(s)
 
