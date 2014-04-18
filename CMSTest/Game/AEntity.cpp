@@ -25,9 +25,10 @@
 
 decaf::util::StlQueue<AEntity*>     AEntity::s_EntityQueue;
 AEntity::_Serializer                AEntity::Serializer;
-std::list<Pod*>                  AEntity::s_listPods;
-std::list<Pod*>                  AEntity::s_listPodsSwap;
-uint64_t                            AEntity::s_ui64Count = 1;
+std::list<Pod*>                 AEntity::s_listPods;
+std::list<Pod*>                 AEntity::s_listPodsSwap;
+uint64_t                        AEntity::s_ui64Count = 1;
+int16_t                         AEntity::s_i16GroupCount = 1;
 
 
 // Constructor(s)
@@ -76,12 +77,11 @@ void AEntity::ClassSetup()
 {
     //CommandConsumer::Instance().EventConsumedEvent += Poco::FunctionDelegate<google::protobuf::Message*&>(&AEntity::HandleEventConsumedEvent);
     
-    FactoryT<JoinSecurityCommand, SecurityCommand::_SecurityDependencies>&      theJoinSecurityCommandFactory = FactoryT<JoinSecurityCommand, SecurityCommand::_SecurityDependencies>::Instance();
+    auto& theJoinSecurityCommandFactory = FactoryT<JoinSecurityCommand, SecurityCommand::_SecurityDependencies>::Instance();
+    auto& theLeaveSecurityCommandFactory = FactoryT<LeaveSecurityCommand, SecurityCommand::_SecurityDependencies>::Instance();
     
     theJoinSecurityCommandFactory.CreatedEvent += Poco::FunctionDelegate<JoinSecurityCommand*&>(&AEntity::HandleJoinSecurityCommandFactoryCreated);
     theJoinSecurityCommandFactory.DestroyedEvent += Poco::FunctionDelegate<JoinSecurityCommand*&>(&AEntity::HandleJoinSecurityCommandFactoryDestroyed);
-
-    FactoryT<LeaveSecurityCommand, SecurityCommand::_SecurityDependencies>&      theLeaveSecurityCommandFactory = FactoryT<LeaveSecurityCommand, SecurityCommand::_SecurityDependencies>::Instance();
     
     theLeaveSecurityCommandFactory.CreatedEvent += Poco::FunctionDelegate<LeaveSecurityCommand*&>(&AEntity::HandleLeaveSecurityCommandFactoryCreated);
     theLeaveSecurityCommandFactory.DestroyedEvent += Poco::FunctionDelegate<LeaveSecurityCommand*&>(&AEntity::HandleLeaveSecurityCommandFactoryDestroyed);
@@ -91,12 +91,11 @@ void AEntity::ClassTeardown()
 {
     //CommandConsumer::Instance().EventConsumedEvent -= Poco::FunctionDelegate<google::protobuf::Message*&>(&AEntity::HandleEventConsumedEvent);
     
-    FactoryT<JoinSecurityCommand, SecurityCommand::_SecurityDependencies>&      theJoinSecurityCommandFactory = FactoryT<JoinSecurityCommand, SecurityCommand::_SecurityDependencies>::Instance();
+    auto& theJoinSecurityCommandFactory = FactoryT<JoinSecurityCommand, SecurityCommand::_SecurityDependencies>::Instance();
+    auto& theLeaveSecurityCommandFactory = FactoryT<LeaveSecurityCommand, SecurityCommand::_SecurityDependencies>::Instance();
     
     theJoinSecurityCommandFactory.DestroyedEvent -= Poco::FunctionDelegate<JoinSecurityCommand*&>(&AEntity::HandleJoinSecurityCommandFactoryDestroyed);
     theJoinSecurityCommandFactory.CreatedEvent -= Poco::FunctionDelegate<JoinSecurityCommand*&>(&AEntity::HandleJoinSecurityCommandFactoryCreated);
-    
-    FactoryT<LeaveSecurityCommand, SecurityCommand::_SecurityDependencies>&      theLeaveSecurityCommandFactory = FactoryT<LeaveSecurityCommand, SecurityCommand::_SecurityDependencies>::Instance();
     
     theLeaveSecurityCommandFactory.DestroyedEvent -= Poco::FunctionDelegate<LeaveSecurityCommand*&>(&AEntity::HandleLeaveSecurityCommandFactoryDestroyed);
     theLeaveSecurityCommandFactory.CreatedEvent -= Poco::FunctionDelegate<LeaveSecurityCommand*&>(&AEntity::HandleLeaveSecurityCommandFactoryCreated);
@@ -105,9 +104,6 @@ void AEntity::ClassTeardown()
 void AEntity::AddPod(const std::string& strUUID)
 {
     assert(strUUID.length() > 0);
-    
-    //    xdispatch::global_queue().sync([=]
-    //    {
     
     B2DPodFactory& aB2DPodFactory = B2DPodFactory::Instance();
     PodFactory& aPodFactory = PodFactory::Instance();
@@ -122,8 +118,6 @@ void AEntity::AddPod(const std::string& strUUID)
     Pod::_Dependencies aPodDependencies(strUUID, pB2DPod);
     Pod* pPod = aPodFactory.Create(aPodDependencies);
     s_listPods.push_front(pPod);
-    
-    //    });    
 }
 
 void AEntity::RemovePod(const std::string& strUUID)
@@ -131,9 +125,6 @@ void AEntity::RemovePod(const std::string& strUUID)
     assert(strUUID.length() > 0);
     
     PodFactory& aPodFactory = PodFactory::Instance();
-    
-    //    xdispatch::global_queue().sync([=]
-    //    {
     std::list<Pod*>::iterator    iterPodList;
     Pod* pPod = NULL;
     
@@ -148,13 +139,13 @@ void AEntity::RemovePod(const std::string& strUUID)
             break;
         }
     }
-    //    });
 }
 
 void AEntity::Update()
 {
     s_listPodsSwap = s_listPods;
     Pod*     pPod = NULL;
+    
     while (!(s_listPodsSwap.empty()))
     {
         pPod = s_listPodsSwap.front();
@@ -280,4 +271,3 @@ bool AEntity::ThisUUIDIsAMatch(const std::string& strUUID)
     }
     return false;
 }
-

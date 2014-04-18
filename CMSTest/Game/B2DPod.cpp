@@ -25,6 +25,8 @@ B2DPod::_Dependencies::_Dependencies(const b2Vec2& b2v2Position) :
 //    m_ab2FixtureDef.friction = 0.3f;
 //    m_ab2FixtureDef.restitution = 0.3f;
     m_ab2FixtureDef.filter.groupIndex = 1;
+    //m_ab2FixtureDef.filter.categoryBits = POD;//0x0002;
+    //m_ab2FixtureDef.filter.maskBits = BOUNDARY | BULLET;//0x0004;
     m_ab2FixtureDef.shape = &m_b2CircleShape;
     
     m_ab2BodyDef.position = b2v2Position;

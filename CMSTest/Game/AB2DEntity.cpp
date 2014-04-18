@@ -112,13 +112,16 @@ AB2DEntity::AB2DEntity(b2Body* pb2Body) :
 }
 
 AB2DEntity::AB2DEntity(const _AB2DDefinition& aAB2DDefinition, AEntity* pEntity) :
-    m_pb2Body(NULL)
+    m_pb2Body(NULL),
+    m_pb2Fixture(NULL)
 {
     assert(pEntity);
     
     m_pb2Body = B2DWorld::Factory().CreateBody(&aAB2DDefinition.BodyDef);
-    m_pb2Body->CreateFixture(&aAB2DDefinition.FixtureDef);
+    m_pb2Fixture = m_pb2Body->CreateFixture(&aAB2DDefinition.FixtureDef);
     m_pb2Body->SetUserData((void *)pEntity);
+    
+    assert(m_pb2Fixture);
 }
 
 void AB2DEntity::SetParentEntity(AEntity* pParentEntity)
@@ -130,6 +133,17 @@ void AB2DEntity::SetParentEntity(AEntity* pParentEntity)
     {
         m_pb2Body->SetUserData((void*)pParentEntity);
     }
+}
+
+void AB2DEntity::SetGroupIndex(int16_t i16GroupIndex)
+{
+    assert(i16GroupIndex > 0);
+    assert(m_pb2Fixture);
+
+    const b2Filter& ab2fdCurrent = m_pb2Fixture->GetFilterData();
+    b2Filter ab2fdNew(ab2fdCurrent);
+    ab2fdNew.groupIndex = i16GroupIndex;
+    m_pb2Fixture->SetFilterData(ab2fdNew);
 }
 
 // Destructor

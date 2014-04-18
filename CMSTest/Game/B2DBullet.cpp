@@ -24,7 +24,9 @@ B2DBullet::_Dependencies::_Dependencies(const b2Vec2& b2v2GunPosition, const b2V
     m_b2CircleShape.m_radius = 0.25f;
     
     // Set the fixture and use the shape
-    m_ab2FixtureDef.filter.groupIndex = -1;
+    //m_ab2FixtureDef.filter.groupIndex = -1;
+    m_ab2FixtureDef.filter.categoryBits = BULLET;//0x0004;
+    m_ab2FixtureDef.filter.maskBits = BOUNDARY | POD;//0x0002;
     m_ab2FixtureDef.shape = &m_b2CircleShape;
     
     m_ab2BodyDef.position = b2v2GunPosition;
@@ -48,8 +50,12 @@ B2DBullet::~B2DBullet()
 // Method(s)
 void B2DBullet::Fire(b2Vec2& b2v2FiringDirection)
 {
+    using namespace std;
+    
     b2v2FiringDirection.Normalize();
     b2Vec2 b2v2Force = b2v2FiringDirection;
+    //cout << "b2v2FiringDirection x " << b2v2FiringDirection.x << " y " << b2v2FiringDirection.y << endl;
     b2v2Force *= 40.0f;
+    //cout << "b2v2Force x " << b2v2Force.x << " y " << b2v2Force.y << endl;
     m_pb2Body->ApplyForceToCenter(b2v2Force, false);
 }

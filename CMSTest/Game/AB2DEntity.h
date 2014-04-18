@@ -27,6 +27,17 @@ class AB2DEntity
     friend class AEntity;
     
 protected:
+    enum _AB2DCollisionFilterBits
+    {
+        BOUNDARY =          0x0001,
+        POD =               0x0002,
+        BULLET =            0x0004,
+        FRIENDLY_SHIP =     0x0008,
+        ENEMY_SHIP =        0x0010,
+        FRIENDLY_AIRCRAFT = 0x0020,
+        ENEMY_AIRCRAFT =    0x0040
+    };
+    
     class _AB2DDefinition
     {
     protected:
@@ -34,6 +45,8 @@ protected:
         b2FixtureDef    m_ab2FixtureDef;
         void*           m_pUserData;
         b2Body*         m_pb2Body;
+        _AB2DCollisionFilterBits   m_eCategoryBits;
+        _AB2DCollisionFilterBits   m_eMaskBits;
         
         // Constructor(s)
         _AB2DDefinition();
@@ -44,6 +57,8 @@ protected:
         b2FixtureDef&       FixtureDef      = m_ab2FixtureDef;
         void*&              UserData        = m_pUserData;
         b2Body*&            pBody           = m_pb2Body;
+        _AB2DCollisionFilterBits&   eCategoryBits       = m_eCategoryBits;
+        _AB2DCollisionFilterBits&   eMaskBits           = m_eMaskBits;
     };
     
     class _Serializer
@@ -54,6 +69,7 @@ protected:
     };
     
     b2Body*         m_pb2Body;
+    b2Fixture*      m_pb2Fixture;
     AEntity*        m_pParentEntity;
     
     // Constructor(s)
@@ -72,6 +88,7 @@ public:
     const b2Vec2& GetLinearVelocity() { return m_pb2Body->GetLinearVelocity(); }
     AEntity* GetParentEntity() { return m_pParentEntity; }
     void SetParentEntity(AEntity* pParentEntity);
+    void SetGroupIndex(int16_t i16GroupIndex);
     
     // Method(s)
     virtual void Move(float fX, float fY) {}

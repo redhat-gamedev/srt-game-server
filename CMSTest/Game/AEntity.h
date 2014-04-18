@@ -52,7 +52,7 @@ public:
     };
 
 private:
-    static uint64_t                         s_ui64Count;
+    static uint64_t                      s_ui64Count;
     static std::list<Pod*>               s_listPods;
     static std::list<Pod*>               s_listPodsSwap;
     
@@ -69,6 +69,7 @@ protected:
     
     // Class data
     static decaf::util::StlQueue<AEntity*>          s_EntityQueue;
+    static int16_t                                  s_i16GroupCount;    
     
     std::string             m_strUUID;
     uint64_t                m_ui64Tag;
