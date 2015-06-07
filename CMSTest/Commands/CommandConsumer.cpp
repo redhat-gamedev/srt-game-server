@@ -71,7 +71,7 @@ void CommandConsumer::Enqueue(Poco::Tuple<cms::BytesMessage*>* pTuple)
     /// Obviously need more general command factory depending on the type of message payload received
     google::protobuf::Message* pMessage = m_aSecurityCommandFactory.Create(pMessagePair);
     
-    Poco::Tuple<cms::BytesMessage*, google::protobuf::Message*>* pNewTuple = new Poco::Tuple<cms::BytesMessage*, google::protobuf::Message*>(pBytesMessage, pMessage);
+    auto* pNewTuple = new Poco::Tuple<cms::BytesMessage*, google::protobuf::Message*>(pBytesMessage, pMessage);
     
     //pTuple->set<1>(pMessage);
     m_aTupleQueue.lock();
