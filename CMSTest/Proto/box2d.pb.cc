@@ -444,6 +444,7 @@ const int PbVec2::kYFieldNumber;
 PbVec2::PbVec2()
   : ::google::protobuf::Message() {
   SharedCtor();
+  // @@protoc_insertion_point(constructor:box2d.PbVec2)
 }
 
 void PbVec2::InitAsDefaultInstance() {
@@ -453,6 +454,7 @@ PbVec2::PbVec2(const PbVec2& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:box2d.PbVec2)
 }
 
 void PbVec2::SharedCtor() {
@@ -463,6 +465,7 @@ void PbVec2::SharedCtor() {
 }
 
 PbVec2::~PbVec2() {
+  // @@protoc_insertion_point(destructor:box2d.PbVec2)
   SharedDtor();
 }
 
@@ -493,30 +496,44 @@ PbVec2* PbVec2::New() const {
 }
 
 void PbVec2::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    x_ = 0;
-    y_ = 0;
-  }
+#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
+  &reinterpret_cast<PbVec2*>(16)->f) - \
+   reinterpret_cast<char*>(16))
+
+#define ZR_(first, last) do {                              \
+    size_t f = OFFSET_OF_FIELD_(first);                    \
+    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
+    ::memset(&first, 0, n);                                \
+  } while (0)
+
+  ZR_(x_, y_);
+
+#undef OFFSET_OF_FIELD_
+#undef ZR_
+
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
 
 bool PbVec2::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
+  // @@protoc_insertion_point(parse_start:box2d.PbVec2)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required float x = 1;
       case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+        if (tag == 13) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &x_)));
           set_has_x();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(21)) goto parse_y;
         break;
@@ -524,25 +541,25 @@ bool PbVec2::MergePartialFromCodedStream(
 
       // required float y = 2;
       case 2: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+        if (tag == 21) {
          parse_y:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &y_)));
           set_has_y();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
-        if (input->ExpectAtEnd()) return true;
+        if (input->ExpectAtEnd()) goto success;
         break;
       }
 
       default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
+          goto success;
         }
         DO_(::google::protobuf::internal::WireFormat::SkipField(
               input, tag, mutable_unknown_fields()));
@@ -550,12 +567,18 @@ bool PbVec2::MergePartialFromCodedStream(
       }
     }
   }
+success:
+  // @@protoc_insertion_point(parse_success:box2d.PbVec2)
   return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:box2d.PbVec2)
+  return false;
 #undef DO_
 }
 
 void PbVec2::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:box2d.PbVec2)
   // required float x = 1;
   if (has_x()) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(1, this->x(), output);
@@ -570,10 +593,12 @@ void PbVec2::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
+  // @@protoc_insertion_point(serialize_end:box2d.PbVec2)
 }
 
 ::google::protobuf::uint8* PbVec2::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:box2d.PbVec2)
   // required float x = 1;
   if (has_x()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(1, this->x(), target);
@@ -588,6 +613,7 @@ void PbVec2::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
+  // @@protoc_insertion_point(serialize_to_array_end:box2d.PbVec2)
   return target;
 }
 
@@ -690,6 +716,7 @@ const int PbFilter::kGroupIndexFieldNumber;
 PbFilter::PbFilter()
   : ::google::protobuf::Message() {
   SharedCtor();
+  // @@protoc_insertion_point(constructor:box2d.PbFilter)
 }
 
 void PbFilter::InitAsDefaultInstance() {
@@ -699,6 +726,7 @@ PbFilter::PbFilter(const PbFilter& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:box2d.PbFilter)
 }
 
 void PbFilter::SharedCtor() {
@@ -710,6 +738,7 @@ void PbFilter::SharedCtor() {
 }
 
 PbFilter::~PbFilter() {
+  // @@protoc_insertion_point(destructor:box2d.PbFilter)
   SharedDtor();
 }
 
@@ -740,31 +769,44 @@ PbFilter* PbFilter::New() const {
 }
 
 void PbFilter::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    category_bits_ = 0;
-    mask_bits_ = 0;
-    group_index_ = 0;
-  }
+#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
+  &reinterpret_cast<PbFilter*>(16)->f) - \
+   reinterpret_cast<char*>(16))
+
+#define ZR_(first, last) do {                              \
+    size_t f = OFFSET_OF_FIELD_(first);                    \
+    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
+    ::memset(&first, 0, n);                                \
+  } while (0)
+
+  ZR_(category_bits_, group_index_);
+
+#undef OFFSET_OF_FIELD_
+#undef ZR_
+
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
 
 bool PbFilter::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
+  // @@protoc_insertion_point(parse_start:box2d.PbFilter)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // optional int32 category_bits = 1;
       case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 8) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &category_bits_)));
           set_has_category_bits();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(16)) goto parse_mask_bits;
         break;
@@ -772,15 +814,14 @@ bool PbFilter::MergePartialFromCodedStream(
 
       // optional int32 mask_bits = 2;
       case 2: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 16) {
          parse_mask_bits:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &mask_bits_)));
           set_has_mask_bits();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(24)) goto parse_group_index;
         break;
@@ -788,25 +829,25 @@ bool PbFilter::MergePartialFromCodedStream(
 
       // optional int32 group_index = 3;
       case 3: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 24) {
          parse_group_index:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &group_index_)));
           set_has_group_index();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
-        if (input->ExpectAtEnd()) return true;
+        if (input->ExpectAtEnd()) goto success;
         break;
       }
 
       default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
+          goto success;
         }
         DO_(::google::protobuf::internal::WireFormat::SkipField(
               input, tag, mutable_unknown_fields()));
@@ -814,12 +855,18 @@ bool PbFilter::MergePartialFromCodedStream(
       }
     }
   }
+success:
+  // @@protoc_insertion_point(parse_success:box2d.PbFilter)
   return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:box2d.PbFilter)
+  return false;
 #undef DO_
 }
 
 void PbFilter::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:box2d.PbFilter)
   // optional int32 category_bits = 1;
   if (has_category_bits()) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->category_bits(), output);
@@ -839,10 +886,12 @@ void PbFilter::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
+  // @@protoc_insertion_point(serialize_end:box2d.PbFilter)
 }
 
 ::google::protobuf::uint8* PbFilter::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:box2d.PbFilter)
   // optional int32 category_bits = 1;
   if (has_category_bits()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->category_bits(), target);
@@ -862,6 +911,7 @@ void PbFilter::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
+  // @@protoc_insertion_point(serialize_to_array_end:box2d.PbFilter)
   return target;
 }
 
@@ -982,6 +1032,7 @@ const int PbShape::kCentroidFieldNumber;
 PbShape::PbShape()
   : ::google::protobuf::Message() {
   SharedCtor();
+  // @@protoc_insertion_point(constructor:box2d.PbShape)
 }
 
 void PbShape::InitAsDefaultInstance() {
@@ -993,6 +1044,7 @@ PbShape::PbShape(const PbShape& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:box2d.PbShape)
 }
 
 void PbShape::SharedCtor() {
@@ -1006,6 +1058,7 @@ void PbShape::SharedCtor() {
 }
 
 PbShape::~PbShape() {
+  // @@protoc_insertion_point(destructor:box2d.PbShape)
   SharedDtor();
 }
 
@@ -1038,7 +1091,7 @@ PbShape* PbShape::New() const {
 }
 
 void PbShape::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+  if (_has_bits_[0 / 32] & 79) {
     tag_ = GOOGLE_LONGLONG(0);
     type_ = 1;
     if (has_center()) {
@@ -1057,20 +1110,23 @@ void PbShape::Clear() {
 
 bool PbShape::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
+  // @@protoc_insertion_point(parse_start:box2d.PbShape)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(16383);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // optional int64 tag = 1;
       case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 8) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
                  input, &tag_)));
           set_has_tag();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(16)) goto parse_type;
         break;
@@ -1078,8 +1134,7 @@ bool PbShape::MergePartialFromCodedStream(
 
       // required .box2d.PbShapeType type = 2;
       case 2: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 16) {
          parse_type:
           int value;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
@@ -1091,7 +1146,7 @@ bool PbShape::MergePartialFromCodedStream(
             mutable_unknown_fields()->AddVarint(2, value);
           }
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(82)) goto parse_center;
         break;
@@ -1099,13 +1154,12 @@ bool PbShape::MergePartialFromCodedStream(
 
       // optional .box2d.PbVec2 center = 10;
       case 10: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 82) {
          parse_center:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_center()));
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(93)) goto parse_radius;
         break;
@@ -1113,15 +1167,14 @@ bool PbShape::MergePartialFromCodedStream(
 
       // optional float radius = 11;
       case 11: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+        if (tag == 93) {
          parse_radius:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &radius_)));
           set_has_radius();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(162)) goto parse_points;
         break;
@@ -1129,13 +1182,12 @@ bool PbShape::MergePartialFromCodedStream(
 
       // repeated .box2d.PbVec2 points = 20;
       case 20: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 162) {
          parse_points:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                 input, add_points()));
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(162)) goto parse_points;
         if (input->ExpectTag(170)) goto parse_normals;
@@ -1144,13 +1196,12 @@ bool PbShape::MergePartialFromCodedStream(
 
       // repeated .box2d.PbVec2 normals = 21;
       case 21: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 170) {
          parse_normals:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                 input, add_normals()));
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(170)) goto parse_normals;
         if (input->ExpectTag(178)) goto parse_centroid;
@@ -1159,23 +1210,23 @@ bool PbShape::MergePartialFromCodedStream(
 
       // optional .box2d.PbVec2 centroid = 22;
       case 22: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 178) {
          parse_centroid:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_centroid()));
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
-        if (input->ExpectAtEnd()) return true;
+        if (input->ExpectAtEnd()) goto success;
         break;
       }
 
       default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
+          goto success;
         }
         DO_(::google::protobuf::internal::WireFormat::SkipField(
               input, tag, mutable_unknown_fields()));
@@ -1183,12 +1234,18 @@ bool PbShape::MergePartialFromCodedStream(
       }
     }
   }
+success:
+  // @@protoc_insertion_point(parse_success:box2d.PbShape)
   return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:box2d.PbShape)
+  return false;
 #undef DO_
 }
 
 void PbShape::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:box2d.PbShape)
   // optional int64 tag = 1;
   if (has_tag()) {
     ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->tag(), output);
@@ -1233,10 +1290,12 @@ void PbShape::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
+  // @@protoc_insertion_point(serialize_end:box2d.PbShape)
 }
 
 ::google::protobuf::uint8* PbShape::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:box2d.PbShape)
   // optional int64 tag = 1;
   if (has_tag()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->tag(), target);
@@ -1285,6 +1344,7 @@ void PbShape::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
+  // @@protoc_insertion_point(serialize_to_array_end:box2d.PbShape)
   return target;
 }
 
@@ -1406,12 +1466,8 @@ bool PbShape::IsInitialized() const {
   if (has_center()) {
     if (!this->center().IsInitialized()) return false;
   }
-  for (int i = 0; i < points_size(); i++) {
-    if (!this->points(i).IsInitialized()) return false;
-  }
-  for (int i = 0; i < normals_size(); i++) {
-    if (!this->normals(i).IsInitialized()) return false;
-  }
+  if (!::google::protobuf::internal::AllAreInitialized(this->points())) return false;
+  if (!::google::protobuf::internal::AllAreInitialized(this->normals())) return false;
   if (has_centroid()) {
     if (!this->centroid().IsInitialized()) return false;
   }
@@ -1457,6 +1513,7 @@ const int PbFixture::kShapeFieldNumber;
 PbFixture::PbFixture()
   : ::google::protobuf::Message() {
   SharedCtor();
+  // @@protoc_insertion_point(constructor:box2d.PbFixture)
 }
 
 void PbFixture::InitAsDefaultInstance() {
@@ -1468,6 +1525,7 @@ PbFixture::PbFixture(const PbFixture& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:box2d.PbFixture)
 }
 
 void PbFixture::SharedCtor() {
@@ -1483,6 +1541,7 @@ void PbFixture::SharedCtor() {
 }
 
 PbFixture::~PbFixture() {
+  // @@protoc_insertion_point(destructor:box2d.PbFixture)
   SharedDtor();
 }
 
@@ -1515,12 +1574,18 @@ PbFixture* PbFixture::New() const {
 }
 
 void PbFixture::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    tag_ = GOOGLE_LONGLONG(0);
-    restitution_ = 0;
-    friction_ = 0;
-    density_ = 0;
-    sensor_ = false;
+#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
+  &reinterpret_cast<PbFixture*>(16)->f) - \
+   reinterpret_cast<char*>(16))
+
+#define ZR_(first, last) do {                              \
+    size_t f = OFFSET_OF_FIELD_(first);                    \
+    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
+    ::memset(&first, 0, n);                                \
+  } while (0)
+
+  if (_has_bits_[0 / 32] & 127) {
+    ZR_(tag_, sensor_);
     if (has_filter()) {
       if (filter_ != NULL) filter_->::box2d::PbFilter::Clear();
     }
@@ -1528,26 +1593,33 @@ void PbFixture::Clear() {
       if (shape_ != NULL) shape_->::box2d::PbShape::Clear();
     }
   }
+
+#undef OFFSET_OF_FIELD_
+#undef ZR_
+
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
 
 bool PbFixture::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
+  // @@protoc_insertion_point(parse_start:box2d.PbFixture)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // optional int64 tag = 1;
       case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 8) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
                  input, &tag_)));
           set_has_tag();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(21)) goto parse_restitution;
         break;
@@ -1555,15 +1627,14 @@ bool PbFixture::MergePartialFromCodedStream(
 
       // optional float restitution = 2;
       case 2: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+        if (tag == 21) {
          parse_restitution:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &restitution_)));
           set_has_restitution();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(29)) goto parse_friction;
         break;
@@ -1571,15 +1642,14 @@ bool PbFixture::MergePartialFromCodedStream(
 
       // optional float friction = 3;
       case 3: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+        if (tag == 29) {
          parse_friction:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &friction_)));
           set_has_friction();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(37)) goto parse_density;
         break;
@@ -1587,15 +1657,14 @@ bool PbFixture::MergePartialFromCodedStream(
 
       // optional float density = 4;
       case 4: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+        if (tag == 37) {
          parse_density:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &density_)));
           set_has_density();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(40)) goto parse_sensor;
         break;
@@ -1603,15 +1672,14 @@ bool PbFixture::MergePartialFromCodedStream(
 
       // optional bool sensor = 5;
       case 5: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 40) {
          parse_sensor:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
                  input, &sensor_)));
           set_has_sensor();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(82)) goto parse_filter;
         break;
@@ -1619,13 +1687,12 @@ bool PbFixture::MergePartialFromCodedStream(
 
       // optional .box2d.PbFilter filter = 10;
       case 10: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 82) {
          parse_filter:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_filter()));
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(90)) goto parse_shape;
         break;
@@ -1633,23 +1700,23 @@ bool PbFixture::MergePartialFromCodedStream(
 
       // optional .box2d.PbShape shape = 11;
       case 11: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 90) {
          parse_shape:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_shape()));
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
-        if (input->ExpectAtEnd()) return true;
+        if (input->ExpectAtEnd()) goto success;
         break;
       }
 
       default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
+          goto success;
         }
         DO_(::google::protobuf::internal::WireFormat::SkipField(
               input, tag, mutable_unknown_fields()));
@@ -1657,12 +1724,18 @@ bool PbFixture::MergePartialFromCodedStream(
       }
     }
   }
+success:
+  // @@protoc_insertion_point(parse_success:box2d.PbFixture)
   return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:box2d.PbFixture)
+  return false;
 #undef DO_
 }
 
 void PbFixture::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:box2d.PbFixture)
   // optional int64 tag = 1;
   if (has_tag()) {
     ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->tag(), output);
@@ -1704,10 +1777,12 @@ void PbFixture::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
+  // @@protoc_insertion_point(serialize_end:box2d.PbFixture)
 }
 
 ::google::protobuf::uint8* PbFixture::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:box2d.PbFixture)
   // optional int64 tag = 1;
   if (has_tag()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->tag(), target);
@@ -1751,6 +1826,7 @@ void PbFixture::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
+  // @@protoc_insertion_point(serialize_to_array_end:box2d.PbFixture)
   return target;
 }
 
@@ -1940,6 +2016,7 @@ const int PbJoint::kTargetVolumeFieldNumber;
 PbJoint::PbJoint()
   : ::google::protobuf::Message() {
   SharedCtor();
+  // @@protoc_insertion_point(constructor:box2d.PbJoint)
 }
 
 void PbJoint::InitAsDefaultInstance() {
@@ -1955,6 +2032,7 @@ PbJoint::PbJoint(const PbJoint& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:box2d.PbJoint)
 }
 
 void PbJoint::SharedCtor() {
@@ -1998,6 +2076,7 @@ void PbJoint::SharedCtor() {
 }
 
 PbJoint::~PbJoint() {
+  // @@protoc_insertion_point(destructor:box2d.PbJoint)
   SharedDtor();
 }
 
@@ -2034,11 +2113,21 @@ PbJoint* PbJoint::New() const {
 }
 
 void PbJoint::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
+  &reinterpret_cast<PbJoint*>(16)->f) - \
+   reinterpret_cast<char*>(16))
+
+#define ZR_(first, last) do {                              \
+    size_t f = OFFSET_OF_FIELD_(first);                    \
+    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
+    ::memset(&first, 0, n);                                \
+  } while (0)
+
+  if (_has_bits_[0 / 32] & 255) {
+    ZR_(body_b_, ref_angle_);
     tag_ = GOOGLE_LONGLONG(0);
     type_ = 1;
     body_a_ = 0;
-    body_b_ = 0;
     collideconnected_ = false;
     if (has_local_anchor_a()) {
       if (local_anchor_a_ != NULL) local_anchor_a_->::box2d::PbVec2::Clear();
@@ -2046,51 +2135,40 @@ void PbJoint::Clear() {
     if (has_local_anchor_b()) {
       if (local_anchor_b_ != NULL) local_anchor_b_->::box2d::PbVec2::Clear();
     }
-    ref_angle_ = 0;
   }
-  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
-    enable_limit_ = false;
-    lower_limit_ = 0;
-    upper_limit_ = 0;
-    enable_motor_ = false;
-    motor_speed_ = 0;
-    max_motor_torque_ = 0;
+  if (_has_bits_[8 / 32] & 65280) {
+    ZR_(enable_limit_, motor_speed_);
+    ZR_(max_motor_torque_, max_motor_force_);
     if (has_local_axis_a()) {
       if (local_axis_a_ != NULL) local_axis_a_->::box2d::PbVec2::Clear();
     }
-    max_motor_force_ = 0;
   }
-  if (_has_bits_[16 / 32] & (0xffu << (16 % 32))) {
-    length_ = 0;
-    frequency_ = 0;
-    damping_ratio_ = 0;
+  if (_has_bits_[16 / 32] & 16711680) {
+    ZR_(length_, frequency_);
+    ZR_(damping_ratio_, length_a_);
+    ZR_(length_b_, ratio_);
     if (has_ground_anchor_a()) {
       if (ground_anchor_a_ != NULL) ground_anchor_a_->::box2d::PbVec2::Clear();
     }
     if (has_ground_anchor_b()) {
       if (ground_anchor_b_ != NULL) ground_anchor_b_->::box2d::PbVec2::Clear();
     }
-    length_a_ = 0;
-    length_b_ = 0;
-    ratio_ = 0;
   }
-  if (_has_bits_[24 / 32] & (0xffu << (24 % 32))) {
-    max_length_a_ = 0;
-    max_length_b_ = 0;
+  if (_has_bits_[24 / 32] & 4278190080) {
+    ZR_(max_length_a_, max_length_b_);
+    ZR_(max_force_, spring_damping_ratio_);
     if (has_target()) {
       if (target_ != NULL) target_->::box2d::PbVec2::Clear();
     }
-    max_force_ = 0;
-    joint1_ = 0;
-    joint2_ = 0;
-    spring_frequency_ = 0;
-    spring_damping_ratio_ = 0;
   }
-  if (_has_bits_[32 / 32] & (0xffu << (32 % 32))) {
+  if (_has_bits_[32 / 32] & 19) {
+    ZR_(max_length_, target_volume_);
     max_torque_ = 0;
-    max_length_ = 0;
-    target_volume_ = 0;
   }
+
+#undef OFFSET_OF_FIELD_
+#undef ZR_
+
   bodies_.Clear();
   joints_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -2099,20 +2177,23 @@ void PbJoint::Clear() {
 
 bool PbJoint::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
+  // @@protoc_insertion_point(parse_start:box2d.PbJoint)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(16383);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // optional int64 tag = 1;
       case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 8) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
                  input, &tag_)));
           set_has_tag();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(16)) goto parse_type;
         break;
@@ -2120,8 +2201,7 @@ bool PbJoint::MergePartialFromCodedStream(
 
       // required .box2d.PbJointType type = 2;
       case 2: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 16) {
          parse_type:
           int value;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
@@ -2133,7 +2213,7 @@ bool PbJoint::MergePartialFromCodedStream(
             mutable_unknown_fields()->AddVarint(2, value);
           }
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(24)) goto parse_body_a;
         break;
@@ -2141,15 +2221,14 @@ bool PbJoint::MergePartialFromCodedStream(
 
       // optional int32 body_a = 3;
       case 3: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 24) {
          parse_body_a:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &body_a_)));
           set_has_body_a();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(32)) goto parse_body_b;
         break;
@@ -2157,15 +2236,14 @@ bool PbJoint::MergePartialFromCodedStream(
 
       // optional int32 body_b = 4;
       case 4: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 32) {
          parse_body_b:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &body_b_)));
           set_has_body_b();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(40)) goto parse_collideConnected;
         break;
@@ -2173,15 +2251,14 @@ bool PbJoint::MergePartialFromCodedStream(
 
       // optional bool collideConnected = 5;
       case 5: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 40) {
          parse_collideConnected:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
                  input, &collideconnected_)));
           set_has_collideconnected();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(50)) goto parse_local_anchor_a;
         break;
@@ -2189,13 +2266,12 @@ bool PbJoint::MergePartialFromCodedStream(
 
       // optional .box2d.PbVec2 local_anchor_a = 6;
       case 6: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 50) {
          parse_local_anchor_a:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_local_anchor_a()));
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(58)) goto parse_local_anchor_b;
         break;
@@ -2203,13 +2279,12 @@ bool PbJoint::MergePartialFromCodedStream(
 
       // optional .box2d.PbVec2 local_anchor_b = 7;
       case 7: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 58) {
          parse_local_anchor_b:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_local_anchor_b()));
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(85)) goto parse_ref_angle;
         break;
@@ -2217,15 +2292,14 @@ bool PbJoint::MergePartialFromCodedStream(
 
       // optional float ref_angle = 10;
       case 10: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+        if (tag == 85) {
          parse_ref_angle:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &ref_angle_)));
           set_has_ref_angle();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(96)) goto parse_enable_limit;
         break;
@@ -2233,15 +2307,14 @@ bool PbJoint::MergePartialFromCodedStream(
 
       // optional bool enable_limit = 12;
       case 12: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 96) {
          parse_enable_limit:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
                  input, &enable_limit_)));
           set_has_enable_limit();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(109)) goto parse_lower_limit;
         break;
@@ -2249,15 +2322,14 @@ bool PbJoint::MergePartialFromCodedStream(
 
       // optional float lower_limit = 13;
       case 13: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+        if (tag == 109) {
          parse_lower_limit:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &lower_limit_)));
           set_has_lower_limit();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(117)) goto parse_upper_limit;
         break;
@@ -2265,15 +2337,14 @@ bool PbJoint::MergePartialFromCodedStream(
 
       // optional float upper_limit = 14;
       case 14: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+        if (tag == 117) {
          parse_upper_limit:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &upper_limit_)));
           set_has_upper_limit();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(120)) goto parse_enable_motor;
         break;
@@ -2281,15 +2352,14 @@ bool PbJoint::MergePartialFromCodedStream(
 
       // optional bool enable_motor = 15;
       case 15: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 120) {
          parse_enable_motor:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
                  input, &enable_motor_)));
           set_has_enable_motor();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(133)) goto parse_motor_speed;
         break;
@@ -2297,15 +2367,14 @@ bool PbJoint::MergePartialFromCodedStream(
 
       // optional float motor_speed = 16;
       case 16: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+        if (tag == 133) {
          parse_motor_speed:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &motor_speed_)));
           set_has_motor_speed();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(141)) goto parse_max_motor_torque;
         break;
@@ -2313,15 +2382,14 @@ bool PbJoint::MergePartialFromCodedStream(
 
       // optional float max_motor_torque = 17;
       case 17: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+        if (tag == 141) {
          parse_max_motor_torque:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &max_motor_torque_)));
           set_has_max_motor_torque();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(162)) goto parse_local_axis_a;
         break;
@@ -2329,13 +2397,12 @@ bool PbJoint::MergePartialFromCodedStream(
 
       // optional .box2d.PbVec2 local_axis_a = 20;
       case 20: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 162) {
          parse_local_axis_a:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_local_axis_a()));
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(173)) goto parse_max_motor_force;
         break;
@@ -2343,15 +2410,14 @@ bool PbJoint::MergePartialFromCodedStream(
 
       // optional float max_motor_force = 21;
       case 21: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+        if (tag == 173) {
          parse_max_motor_force:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &max_motor_force_)));
           set_has_max_motor_force();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(245)) goto parse_length;
         break;
@@ -2359,15 +2425,14 @@ bool PbJoint::MergePartialFromCodedStream(
 
       // optional float length = 30;
       case 30: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+        if (tag == 245) {
          parse_length:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &length_)));
           set_has_length();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(253)) goto parse_frequency;
         break;
@@ -2375,15 +2440,14 @@ bool PbJoint::MergePartialFromCodedStream(
 
       // optional float frequency = 31;
       case 31: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+        if (tag == 253) {
          parse_frequency:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &frequency_)));
           set_has_frequency();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(261)) goto parse_damping_ratio;
         break;
@@ -2391,15 +2455,14 @@ bool PbJoint::MergePartialFromCodedStream(
 
       // optional float damping_ratio = 32;
       case 32: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+        if (tag == 261) {
          parse_damping_ratio:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &damping_ratio_)));
           set_has_damping_ratio();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(322)) goto parse_ground_anchor_a;
         break;
@@ -2407,13 +2470,12 @@ bool PbJoint::MergePartialFromCodedStream(
 
       // optional .box2d.PbVec2 ground_anchor_a = 40;
       case 40: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 322) {
          parse_ground_anchor_a:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_ground_anchor_a()));
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(330)) goto parse_ground_anchor_b;
         break;
@@ -2421,13 +2483,12 @@ bool PbJoint::MergePartialFromCodedStream(
 
       // optional .box2d.PbVec2 ground_anchor_b = 41;
       case 41: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 330) {
          parse_ground_anchor_b:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_ground_anchor_b()));
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(341)) goto parse_length_a;
         break;
@@ -2435,15 +2496,14 @@ bool PbJoint::MergePartialFromCodedStream(
 
       // optional float length_a = 42;
       case 42: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+        if (tag == 341) {
          parse_length_a:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &length_a_)));
           set_has_length_a();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(349)) goto parse_length_b;
         break;
@@ -2451,15 +2511,14 @@ bool PbJoint::MergePartialFromCodedStream(
 
       // optional float length_b = 43;
       case 43: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+        if (tag == 349) {
          parse_length_b:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &length_b_)));
           set_has_length_b();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(357)) goto parse_ratio;
         break;
@@ -2467,15 +2526,14 @@ bool PbJoint::MergePartialFromCodedStream(
 
       // optional float ratio = 44;
       case 44: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+        if (tag == 357) {
          parse_ratio:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &ratio_)));
           set_has_ratio();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(365)) goto parse_max_length_a;
         break;
@@ -2483,15 +2541,14 @@ bool PbJoint::MergePartialFromCodedStream(
 
       // optional float max_length_a = 45;
       case 45: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+        if (tag == 365) {
          parse_max_length_a:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &max_length_a_)));
           set_has_max_length_a();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(373)) goto parse_max_length_b;
         break;
@@ -2499,15 +2556,14 @@ bool PbJoint::MergePartialFromCodedStream(
 
       // optional float max_length_b = 46;
       case 46: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+        if (tag == 373) {
          parse_max_length_b:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &max_length_b_)));
           set_has_max_length_b();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(402)) goto parse_target;
         break;
@@ -2515,13 +2571,12 @@ bool PbJoint::MergePartialFromCodedStream(
 
       // optional .box2d.PbVec2 target = 50;
       case 50: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 402) {
          parse_target:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_target()));
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(413)) goto parse_max_force;
         break;
@@ -2529,15 +2584,14 @@ bool PbJoint::MergePartialFromCodedStream(
 
       // optional float max_force = 51;
       case 51: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+        if (tag == 413) {
          parse_max_force:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &max_force_)));
           set_has_max_force();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(488)) goto parse_joint1;
         break;
@@ -2545,15 +2599,14 @@ bool PbJoint::MergePartialFromCodedStream(
 
       // optional int32 joint1 = 61;
       case 61: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 488) {
          parse_joint1:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &joint1_)));
           set_has_joint1();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(496)) goto parse_joint2;
         break;
@@ -2561,15 +2614,14 @@ bool PbJoint::MergePartialFromCodedStream(
 
       // optional int32 joint2 = 62;
       case 62: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 496) {
          parse_joint2:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &joint2_)));
           set_has_joint2();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(565)) goto parse_spring_frequency;
         break;
@@ -2577,15 +2629,14 @@ bool PbJoint::MergePartialFromCodedStream(
 
       // optional float spring_frequency = 70;
       case 70: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+        if (tag == 565) {
          parse_spring_frequency:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &spring_frequency_)));
           set_has_spring_frequency();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(573)) goto parse_spring_damping_ratio;
         break;
@@ -2593,15 +2644,14 @@ bool PbJoint::MergePartialFromCodedStream(
 
       // optional float spring_damping_ratio = 71;
       case 71: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+        if (tag == 573) {
          parse_spring_damping_ratio:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &spring_damping_ratio_)));
           set_has_spring_damping_ratio();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(725)) goto parse_max_torque;
         break;
@@ -2609,15 +2659,14 @@ bool PbJoint::MergePartialFromCodedStream(
 
       // optional float max_torque = 90;
       case 90: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+        if (tag == 725) {
          parse_max_torque:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &max_torque_)));
           set_has_max_torque();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(805)) goto parse_max_length;
         break;
@@ -2625,15 +2674,14 @@ bool PbJoint::MergePartialFromCodedStream(
 
       // optional float max_length = 100;
       case 100: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+        if (tag == 805) {
          parse_max_length:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &max_length_)));
           set_has_max_length();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(880)) goto parse_bodies;
         break;
@@ -2641,20 +2689,17 @@ bool PbJoint::MergePartialFromCodedStream(
 
       // repeated int32 bodies = 110;
       case 110: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 880) {
          parse_bodies:
           DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  2, 880, input, this->mutable_bodies())));
-        } else if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag)
-                   == ::google::protobuf::internal::WireFormatLite::
-                      WIRETYPE_LENGTH_DELIMITED) {
+        } else if (tag == 882) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, this->mutable_bodies())));
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(880)) goto parse_bodies;
         if (input->ExpectTag(888)) goto parse_joints;
@@ -2663,20 +2708,17 @@ bool PbJoint::MergePartialFromCodedStream(
 
       // repeated int32 joints = 111;
       case 111: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 888) {
          parse_joints:
           DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  2, 888, input, this->mutable_joints())));
-        } else if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag)
-                   == ::google::protobuf::internal::WireFormatLite::
-                      WIRETYPE_LENGTH_DELIMITED) {
+        } else if (tag == 890) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, this->mutable_joints())));
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(888)) goto parse_joints;
         if (input->ExpectTag(901)) goto parse_target_volume;
@@ -2685,25 +2727,25 @@ bool PbJoint::MergePartialFromCodedStream(
 
       // optional float target_volume = 112;
       case 112: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+        if (tag == 901) {
          parse_target_volume:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &target_volume_)));
           set_has_target_volume();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
-        if (input->ExpectAtEnd()) return true;
+        if (input->ExpectAtEnd()) goto success;
         break;
       }
 
       default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
+          goto success;
         }
         DO_(::google::protobuf::internal::WireFormat::SkipField(
               input, tag, mutable_unknown_fields()));
@@ -2711,12 +2753,18 @@ bool PbJoint::MergePartialFromCodedStream(
       }
     }
   }
+success:
+  // @@protoc_insertion_point(parse_success:box2d.PbJoint)
   return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:box2d.PbJoint)
+  return false;
 #undef DO_
 }
 
 void PbJoint::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:box2d.PbJoint)
   // optional int64 tag = 1;
   if (has_tag()) {
     ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->tag(), output);
@@ -2915,10 +2963,12 @@ void PbJoint::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
+  // @@protoc_insertion_point(serialize_end:box2d.PbJoint)
 }
 
 ::google::protobuf::uint8* PbJoint::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:box2d.PbJoint)
   // optional int64 tag = 1;
   if (has_tag()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->tag(), target);
@@ -3123,6 +3173,7 @@ void PbJoint::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
+  // @@protoc_insertion_point(serialize_to_array_end:box2d.PbJoint)
   return target;
 }
 
@@ -3621,6 +3672,7 @@ const int PbBody::kFixturesFieldNumber;
 PbBody::PbBody()
   : ::google::protobuf::Message() {
   SharedCtor();
+  // @@protoc_insertion_point(constructor:box2d.PbBody)
 }
 
 void PbBody::InitAsDefaultInstance() {
@@ -3633,9 +3685,11 @@ PbBody::PbBody(const PbBody& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:box2d.PbBody)
 }
 
 void PbBody::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
   tag_ = GOOGLE_LONGLONG(0);
   type_ = 0;
@@ -3655,16 +3709,17 @@ void PbBody::SharedCtor() {
   awake_ = false;
   active_ = false;
   fixed_rotation_ = false;
-  uuid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  uuid_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
 PbBody::~PbBody() {
+  // @@protoc_insertion_point(destructor:box2d.PbBody)
   SharedDtor();
 }
 
 void PbBody::SharedDtor() {
-  if (uuid_ != &::google::protobuf::internal::kEmptyString) {
+  if (uuid_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     delete uuid_;
   }
   if (this != default_instance_) {
@@ -3696,41 +3751,46 @@ PbBody* PbBody::New() const {
 }
 
 void PbBody::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
+  &reinterpret_cast<PbBody*>(16)->f) - \
+   reinterpret_cast<char*>(16))
+
+#define ZR_(first, last) do {                              \
+    size_t f = OFFSET_OF_FIELD_(first);                    \
+    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
+    ::memset(&first, 0, n);                                \
+  } while (0)
+
+  if (_has_bits_[0 / 32] & 255) {
+    ZR_(type_, angle_);
+    ZR_(angular_velocity_, torque_);
     tag_ = GOOGLE_LONGLONG(0);
-    type_ = 0;
     if (has_position()) {
       if (position_ != NULL) position_->::box2d::PbVec2::Clear();
     }
-    angle_ = 0;
     if (has_linear_velocity()) {
       if (linear_velocity_ != NULL) linear_velocity_->::box2d::PbVec2::Clear();
     }
-    angular_velocity_ = 0;
     if (has_force()) {
       if (force_ != NULL) force_->::box2d::PbVec2::Clear();
     }
-    torque_ = 0;
   }
-  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
-    mass_ = 0;
-    i_ = 0;
-    linear_damping_ = 0;
-    angular_damping_ = 0;
-    gravity_scale_ = 0;
-    bullet_ = false;
-    allow_sleep_ = false;
-    awake_ = false;
+  if (_has_bits_[8 / 32] & 65280) {
+    ZR_(mass_, awake_);
   }
-  if (_has_bits_[16 / 32] & (0xffu << (16 % 32))) {
+  if (_has_bits_[16 / 32] & 458752) {
     active_ = false;
     fixed_rotation_ = false;
     if (has_uuid()) {
-      if (uuid_ != &::google::protobuf::internal::kEmptyString) {
+      if (uuid_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
         uuid_->clear();
       }
     }
   }
+
+#undef OFFSET_OF_FIELD_
+#undef ZR_
+
   fixtures_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -3738,20 +3798,23 @@ void PbBody::Clear() {
 
 bool PbBody::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
+  // @@protoc_insertion_point(parse_start:box2d.PbBody)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(16383);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // optional int64 tag = 1;
       case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 8) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
                  input, &tag_)));
           set_has_tag();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(16)) goto parse_type;
         break;
@@ -3759,8 +3822,7 @@ bool PbBody::MergePartialFromCodedStream(
 
       // required .box2d.PbBodyType type = 2;
       case 2: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 16) {
          parse_type:
           int value;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
@@ -3772,7 +3834,7 @@ bool PbBody::MergePartialFromCodedStream(
             mutable_unknown_fields()->AddVarint(2, value);
           }
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(82)) goto parse_position;
         break;
@@ -3780,13 +3842,12 @@ bool PbBody::MergePartialFromCodedStream(
 
       // optional .box2d.PbVec2 position = 10;
       case 10: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 82) {
          parse_position:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_position()));
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(93)) goto parse_angle;
         break;
@@ -3794,15 +3855,14 @@ bool PbBody::MergePartialFromCodedStream(
 
       // optional float angle = 11;
       case 11: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+        if (tag == 93) {
          parse_angle:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &angle_)));
           set_has_angle();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(98)) goto parse_linear_velocity;
         break;
@@ -3810,13 +3870,12 @@ bool PbBody::MergePartialFromCodedStream(
 
       // optional .box2d.PbVec2 linear_velocity = 12;
       case 12: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 98) {
          parse_linear_velocity:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_linear_velocity()));
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(109)) goto parse_angular_velocity;
         break;
@@ -3824,15 +3883,14 @@ bool PbBody::MergePartialFromCodedStream(
 
       // optional float angular_velocity = 13;
       case 13: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+        if (tag == 109) {
          parse_angular_velocity:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &angular_velocity_)));
           set_has_angular_velocity();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(114)) goto parse_force;
         break;
@@ -3840,13 +3898,12 @@ bool PbBody::MergePartialFromCodedStream(
 
       // optional .box2d.PbVec2 force = 14;
       case 14: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 114) {
          parse_force:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_force()));
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(125)) goto parse_torque;
         break;
@@ -3854,15 +3911,14 @@ bool PbBody::MergePartialFromCodedStream(
 
       // optional float torque = 15;
       case 15: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+        if (tag == 125) {
          parse_torque:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &torque_)));
           set_has_torque();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(133)) goto parse_mass;
         break;
@@ -3870,15 +3926,14 @@ bool PbBody::MergePartialFromCodedStream(
 
       // optional float mass = 16;
       case 16: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+        if (tag == 133) {
          parse_mass:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &mass_)));
           set_has_mass();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(141)) goto parse_I;
         break;
@@ -3886,15 +3941,14 @@ bool PbBody::MergePartialFromCodedStream(
 
       // optional float I = 17;
       case 17: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+        if (tag == 141) {
          parse_I:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &i_)));
           set_has_i();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(405)) goto parse_linear_damping;
         break;
@@ -3902,15 +3956,14 @@ bool PbBody::MergePartialFromCodedStream(
 
       // optional float linear_damping = 50;
       case 50: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+        if (tag == 405) {
          parse_linear_damping:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &linear_damping_)));
           set_has_linear_damping();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(413)) goto parse_angular_damping;
         break;
@@ -3918,15 +3971,14 @@ bool PbBody::MergePartialFromCodedStream(
 
       // optional float angular_damping = 51;
       case 51: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+        if (tag == 413) {
          parse_angular_damping:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &angular_damping_)));
           set_has_angular_damping();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(421)) goto parse_gravity_scale;
         break;
@@ -3934,15 +3986,14 @@ bool PbBody::MergePartialFromCodedStream(
 
       // optional float gravity_scale = 52;
       case 52: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+        if (tag == 421) {
          parse_gravity_scale:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &gravity_scale_)));
           set_has_gravity_scale();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(424)) goto parse_bullet;
         break;
@@ -3950,15 +4001,14 @@ bool PbBody::MergePartialFromCodedStream(
 
       // optional bool bullet = 53;
       case 53: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 424) {
          parse_bullet:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
                  input, &bullet_)));
           set_has_bullet();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(432)) goto parse_allow_sleep;
         break;
@@ -3966,15 +4016,14 @@ bool PbBody::MergePartialFromCodedStream(
 
       // optional bool allow_sleep = 54;
       case 54: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 432) {
          parse_allow_sleep:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
                  input, &allow_sleep_)));
           set_has_allow_sleep();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(440)) goto parse_awake;
         break;
@@ -3982,15 +4031,14 @@ bool PbBody::MergePartialFromCodedStream(
 
       // optional bool awake = 55;
       case 55: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 440) {
          parse_awake:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
                  input, &awake_)));
           set_has_awake();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(448)) goto parse_active;
         break;
@@ -3998,15 +4046,14 @@ bool PbBody::MergePartialFromCodedStream(
 
       // optional bool active = 56;
       case 56: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 448) {
          parse_active:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
                  input, &active_)));
           set_has_active();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(456)) goto parse_fixed_rotation;
         break;
@@ -4014,15 +4061,14 @@ bool PbBody::MergePartialFromCodedStream(
 
       // optional bool fixed_rotation = 57;
       case 57: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 456) {
          parse_fixed_rotation:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
                  input, &fixed_rotation_)));
           set_has_fixed_rotation();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(482)) goto parse_UUID;
         break;
@@ -4030,16 +4076,16 @@ bool PbBody::MergePartialFromCodedStream(
 
       // optional string UUID = 60;
       case 60: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 482) {
          parse_UUID:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_uuid()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->uuid().data(), this->uuid().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "uuid");
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(802)) goto parse_fixtures;
         break;
@@ -4047,24 +4093,24 @@ bool PbBody::MergePartialFromCodedStream(
 
       // repeated .box2d.PbFixture fixtures = 100;
       case 100: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 802) {
          parse_fixtures:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                 input, add_fixtures()));
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(802)) goto parse_fixtures;
-        if (input->ExpectAtEnd()) return true;
+        if (input->ExpectAtEnd()) goto success;
         break;
       }
 
       default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
+          goto success;
         }
         DO_(::google::protobuf::internal::WireFormat::SkipField(
               input, tag, mutable_unknown_fields()));
@@ -4072,12 +4118,18 @@ bool PbBody::MergePartialFromCodedStream(
       }
     }
   }
+success:
+  // @@protoc_insertion_point(parse_success:box2d.PbBody)
   return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:box2d.PbBody)
+  return false;
 #undef DO_
 }
 
 void PbBody::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:box2d.PbBody)
   // optional int64 tag = 1;
   if (has_tag()) {
     ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->tag(), output);
@@ -4174,10 +4226,11 @@ void PbBody::SerializeWithCachedSizes(
 
   // optional string UUID = 60;
   if (has_uuid()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->uuid().data(), this->uuid().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "uuid");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       60, this->uuid(), output);
   }
 
@@ -4191,10 +4244,12 @@ void PbBody::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
+  // @@protoc_insertion_point(serialize_end:box2d.PbBody)
 }
 
 ::google::protobuf::uint8* PbBody::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:box2d.PbBody)
   // optional int64 tag = 1;
   if (has_tag()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->tag(), target);
@@ -4294,9 +4349,10 @@ void PbBody::SerializeWithCachedSizes(
 
   // optional string UUID = 60;
   if (has_uuid()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->uuid().data(), this->uuid().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "uuid");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         60, this->uuid(), target);
@@ -4313,6 +4369,7 @@ void PbBody::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
+  // @@protoc_insertion_point(serialize_to_array_end:box2d.PbBody)
   return target;
 }
 
@@ -4555,9 +4612,7 @@ bool PbBody::IsInitialized() const {
   if (has_force()) {
     if (!this->force().IsInitialized()) return false;
   }
-  for (int i = 0; i < fixtures_size(); i++) {
-    if (!this->fixtures(i).IsInitialized()) return false;
-  }
+  if (!::google::protobuf::internal::AllAreInitialized(this->fixtures())) return false;
   return true;
 }
 
@@ -4615,6 +4670,7 @@ const int PbWorld::kJointsFieldNumber;
 PbWorld::PbWorld()
   : ::google::protobuf::Message() {
   SharedCtor();
+  // @@protoc_insertion_point(constructor:box2d.PbWorld)
 }
 
 void PbWorld::InitAsDefaultInstance() {
@@ -4625,6 +4681,7 @@ PbWorld::PbWorld(const PbWorld& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:box2d.PbWorld)
 }
 
 void PbWorld::SharedCtor() {
@@ -4640,6 +4697,7 @@ void PbWorld::SharedCtor() {
 }
 
 PbWorld::~PbWorld() {
+  // @@protoc_insertion_point(destructor:box2d.PbWorld)
   SharedDtor();
 }
 
@@ -4671,17 +4729,27 @@ PbWorld* PbWorld::New() const {
 }
 
 void PbWorld::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
+  &reinterpret_cast<PbWorld*>(16)->f) - \
+   reinterpret_cast<char*>(16))
+
+#define ZR_(first, last) do {                              \
+    size_t f = OFFSET_OF_FIELD_(first);                    \
+    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
+    ::memset(&first, 0, n);                                \
+  } while (0)
+
+  if (_has_bits_[0 / 32] & 127) {
+    ZR_(allow_sleep_, sub_stepping_);
     tag_ = GOOGLE_LONGLONG(0);
     if (has_gravity()) {
       if (gravity_ != NULL) gravity_->::box2d::PbVec2::Clear();
     }
-    allow_sleep_ = false;
-    auto_clear_forces_ = false;
-    warm_starting_ = false;
-    continuous_physics_ = false;
-    sub_stepping_ = false;
   }
+
+#undef OFFSET_OF_FIELD_
+#undef ZR_
+
   bodies_.Clear();
   joints_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -4690,20 +4758,23 @@ void PbWorld::Clear() {
 
 bool PbWorld::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
+  // @@protoc_insertion_point(parse_start:box2d.PbWorld)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(16383);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // optional int64 tag = 1;
       case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 8) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
                  input, &tag_)));
           set_has_tag();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(18)) goto parse_gravity;
         break;
@@ -4711,13 +4782,12 @@ bool PbWorld::MergePartialFromCodedStream(
 
       // optional .box2d.PbVec2 gravity = 2;
       case 2: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 18) {
          parse_gravity:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_gravity()));
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(24)) goto parse_allow_sleep;
         break;
@@ -4725,15 +4795,14 @@ bool PbWorld::MergePartialFromCodedStream(
 
       // optional bool allow_sleep = 3;
       case 3: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 24) {
          parse_allow_sleep:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
                  input, &allow_sleep_)));
           set_has_allow_sleep();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(32)) goto parse_auto_clear_forces;
         break;
@@ -4741,15 +4810,14 @@ bool PbWorld::MergePartialFromCodedStream(
 
       // optional bool auto_clear_forces = 4;
       case 4: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 32) {
          parse_auto_clear_forces:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
                  input, &auto_clear_forces_)));
           set_has_auto_clear_forces();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(40)) goto parse_warm_starting;
         break;
@@ -4757,15 +4825,14 @@ bool PbWorld::MergePartialFromCodedStream(
 
       // optional bool warm_starting = 5;
       case 5: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 40) {
          parse_warm_starting:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
                  input, &warm_starting_)));
           set_has_warm_starting();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(48)) goto parse_continuous_physics;
         break;
@@ -4773,15 +4840,14 @@ bool PbWorld::MergePartialFromCodedStream(
 
       // optional bool continuous_physics = 6;
       case 6: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 48) {
          parse_continuous_physics:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
                  input, &continuous_physics_)));
           set_has_continuous_physics();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(56)) goto parse_sub_stepping;
         break;
@@ -4789,15 +4855,14 @@ bool PbWorld::MergePartialFromCodedStream(
 
       // optional bool sub_stepping = 7;
       case 7: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 56) {
          parse_sub_stepping:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
                  input, &sub_stepping_)));
           set_has_sub_stepping();
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(162)) goto parse_bodies;
         break;
@@ -4805,13 +4870,12 @@ bool PbWorld::MergePartialFromCodedStream(
 
       // repeated .box2d.PbBody bodies = 20;
       case 20: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 162) {
          parse_bodies:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                 input, add_bodies()));
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(162)) goto parse_bodies;
         if (input->ExpectTag(170)) goto parse_joints;
@@ -4820,24 +4884,24 @@ bool PbWorld::MergePartialFromCodedStream(
 
       // repeated .box2d.PbJoint joints = 21;
       case 21: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 170) {
          parse_joints:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                 input, add_joints()));
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(170)) goto parse_joints;
-        if (input->ExpectAtEnd()) return true;
+        if (input->ExpectAtEnd()) goto success;
         break;
       }
 
       default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
+          goto success;
         }
         DO_(::google::protobuf::internal::WireFormat::SkipField(
               input, tag, mutable_unknown_fields()));
@@ -4845,12 +4909,18 @@ bool PbWorld::MergePartialFromCodedStream(
       }
     }
   }
+success:
+  // @@protoc_insertion_point(parse_success:box2d.PbWorld)
   return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:box2d.PbWorld)
+  return false;
 #undef DO_
 }
 
 void PbWorld::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:box2d.PbWorld)
   // optional int64 tag = 1;
   if (has_tag()) {
     ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->tag(), output);
@@ -4903,10 +4973,12 @@ void PbWorld::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
+  // @@protoc_insertion_point(serialize_end:box2d.PbWorld)
 }
 
 ::google::protobuf::uint8* PbWorld::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:box2d.PbWorld)
   // optional int64 tag = 1;
   if (has_tag()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->tag(), target);
@@ -4962,6 +5034,7 @@ void PbWorld::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
+  // @@protoc_insertion_point(serialize_to_array_end:box2d.PbWorld)
   return target;
 }
 
@@ -5095,12 +5168,8 @@ bool PbWorld::IsInitialized() const {
   if (has_gravity()) {
     if (!this->gravity().IsInitialized()) return false;
   }
-  for (int i = 0; i < bodies_size(); i++) {
-    if (!this->bodies(i).IsInitialized()) return false;
-  }
-  for (int i = 0; i < joints_size(); i++) {
-    if (!this->joints(i).IsInitialized()) return false;
-  }
+  if (!::google::protobuf::internal::AllAreInitialized(this->bodies())) return false;
+  if (!::google::protobuf::internal::AllAreInitialized(this->joints())) return false;
   return true;
 }
 

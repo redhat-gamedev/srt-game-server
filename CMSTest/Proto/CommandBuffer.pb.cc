@@ -143,6 +143,7 @@ const int CommandBuffer::kRawInputCommandBufferFieldNumber;
 CommandBuffer::CommandBuffer()
   : ::google::protobuf::Message() {
   SharedCtor();
+  // @@protoc_insertion_point(constructor:usx.geofactions.CommandBuffer)
 }
 
 void CommandBuffer::InitAsDefaultInstance() {
@@ -154,6 +155,7 @@ CommandBuffer::CommandBuffer(const CommandBuffer& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:usx.geofactions.CommandBuffer)
 }
 
 void CommandBuffer::SharedCtor() {
@@ -165,6 +167,7 @@ void CommandBuffer::SharedCtor() {
 }
 
 CommandBuffer::~CommandBuffer() {
+  // @@protoc_insertion_point(destructor:usx.geofactions.CommandBuffer)
   SharedDtor();
 }
 
@@ -197,7 +200,7 @@ CommandBuffer* CommandBuffer::New() const {
 }
 
 void CommandBuffer::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+  if (_has_bits_[0 / 32] & 7) {
     type_ = 0;
     if (has_securitycommandbuffer()) {
       if (securitycommandbuffer_ != NULL) securitycommandbuffer_->::usx::geofactions::SecurityCommandBuffer::Clear();
@@ -212,14 +215,17 @@ void CommandBuffer::Clear() {
 
 bool CommandBuffer::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
+  // @@protoc_insertion_point(parse_start:usx.geofactions.CommandBuffer)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required .usx.geofactions.CommandBuffer.CommandBufferType type = 1 [default = UNKNOWN];
       case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 8) {
           int value;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
@@ -230,7 +236,7 @@ bool CommandBuffer::MergePartialFromCodedStream(
             mutable_unknown_fields()->AddVarint(1, value);
           }
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(18)) goto parse_securityCommandBuffer;
         break;
@@ -238,13 +244,12 @@ bool CommandBuffer::MergePartialFromCodedStream(
 
       // optional .usx.geofactions.SecurityCommandBuffer securityCommandBuffer = 2;
       case 2: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 18) {
          parse_securityCommandBuffer:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_securitycommandbuffer()));
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(26)) goto parse_rawInputCommandBuffer;
         break;
@@ -252,23 +257,23 @@ bool CommandBuffer::MergePartialFromCodedStream(
 
       // optional .usx.geofactions.RawInputCommandBuffer rawInputCommandBuffer = 3;
       case 3: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 26) {
          parse_rawInputCommandBuffer:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_rawinputcommandbuffer()));
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
-        if (input->ExpectAtEnd()) return true;
+        if (input->ExpectAtEnd()) goto success;
         break;
       }
 
       default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
+          goto success;
         }
         DO_(::google::protobuf::internal::WireFormat::SkipField(
               input, tag, mutable_unknown_fields()));
@@ -276,12 +281,18 @@ bool CommandBuffer::MergePartialFromCodedStream(
       }
     }
   }
+success:
+  // @@protoc_insertion_point(parse_success:usx.geofactions.CommandBuffer)
   return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:usx.geofactions.CommandBuffer)
+  return false;
 #undef DO_
 }
 
 void CommandBuffer::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:usx.geofactions.CommandBuffer)
   // required .usx.geofactions.CommandBuffer.CommandBufferType type = 1 [default = UNKNOWN];
   if (has_type()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
@@ -304,10 +315,12 @@ void CommandBuffer::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
+  // @@protoc_insertion_point(serialize_end:usx.geofactions.CommandBuffer)
 }
 
 ::google::protobuf::uint8* CommandBuffer::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:usx.geofactions.CommandBuffer)
   // required .usx.geofactions.CommandBuffer.CommandBufferType type = 1 [default = UNKNOWN];
   if (has_type()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
@@ -332,6 +345,7 @@ void CommandBuffer::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
+  // @@protoc_insertion_point(serialize_to_array_end:usx.geofactions.CommandBuffer)
   return target;
 }
 

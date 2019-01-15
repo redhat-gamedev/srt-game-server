@@ -204,6 +204,7 @@ const int JoinSecurityGameEventBuffer::kUUIDFieldNumber;
 JoinSecurityGameEventBuffer::JoinSecurityGameEventBuffer()
   : ::google::protobuf::Message() {
   SharedCtor();
+  // @@protoc_insertion_point(constructor:usx.geofactions.JoinSecurityGameEventBuffer)
 }
 
 void JoinSecurityGameEventBuffer::InitAsDefaultInstance() {
@@ -213,20 +214,23 @@ JoinSecurityGameEventBuffer::JoinSecurityGameEventBuffer(const JoinSecurityGameE
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:usx.geofactions.JoinSecurityGameEventBuffer)
 }
 
 void JoinSecurityGameEventBuffer::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
-  uuid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  uuid_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
 JoinSecurityGameEventBuffer::~JoinSecurityGameEventBuffer() {
+  // @@protoc_insertion_point(destructor:usx.geofactions.JoinSecurityGameEventBuffer)
   SharedDtor();
 }
 
 void JoinSecurityGameEventBuffer::SharedDtor() {
-  if (uuid_ != &::google::protobuf::internal::kEmptyString) {
+  if (uuid_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     delete uuid_;
   }
   if (this != default_instance_) {
@@ -255,11 +259,9 @@ JoinSecurityGameEventBuffer* JoinSecurityGameEventBuffer::New() const {
 }
 
 void JoinSecurityGameEventBuffer::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (has_uuid()) {
-      if (uuid_ != &::google::protobuf::internal::kEmptyString) {
-        uuid_->clear();
-      }
+  if (has_uuid()) {
+    if (uuid_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+      uuid_->clear();
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -268,31 +270,36 @@ void JoinSecurityGameEventBuffer::Clear() {
 
 bool JoinSecurityGameEventBuffer::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
+  // @@protoc_insertion_point(parse_start:usx.geofactions.JoinSecurityGameEventBuffer)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required string UUID = 1;
       case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 10) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_uuid()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->uuid().data(), this->uuid().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "uuid");
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
-        if (input->ExpectAtEnd()) return true;
+        if (input->ExpectAtEnd()) goto success;
         break;
       }
 
       default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
+          goto success;
         }
         DO_(::google::protobuf::internal::WireFormat::SkipField(
               input, tag, mutable_unknown_fields()));
@@ -300,18 +307,25 @@ bool JoinSecurityGameEventBuffer::MergePartialFromCodedStream(
       }
     }
   }
+success:
+  // @@protoc_insertion_point(parse_success:usx.geofactions.JoinSecurityGameEventBuffer)
   return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:usx.geofactions.JoinSecurityGameEventBuffer)
+  return false;
 #undef DO_
 }
 
 void JoinSecurityGameEventBuffer::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:usx.geofactions.JoinSecurityGameEventBuffer)
   // required string UUID = 1;
   if (has_uuid()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->uuid().data(), this->uuid().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "uuid");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       1, this->uuid(), output);
   }
 
@@ -319,15 +333,18 @@ void JoinSecurityGameEventBuffer::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
+  // @@protoc_insertion_point(serialize_end:usx.geofactions.JoinSecurityGameEventBuffer)
 }
 
 ::google::protobuf::uint8* JoinSecurityGameEventBuffer::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:usx.geofactions.JoinSecurityGameEventBuffer)
   // required string UUID = 1;
   if (has_uuid()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->uuid().data(), this->uuid().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "uuid");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         1, this->uuid(), target);
@@ -337,6 +354,7 @@ void JoinSecurityGameEventBuffer::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
+  // @@protoc_insertion_point(serialize_to_array_end:usx.geofactions.JoinSecurityGameEventBuffer)
   return target;
 }
 
@@ -430,6 +448,7 @@ const int LeaveSecurityGameEventBuffer::kUUIDFieldNumber;
 LeaveSecurityGameEventBuffer::LeaveSecurityGameEventBuffer()
   : ::google::protobuf::Message() {
   SharedCtor();
+  // @@protoc_insertion_point(constructor:usx.geofactions.LeaveSecurityGameEventBuffer)
 }
 
 void LeaveSecurityGameEventBuffer::InitAsDefaultInstance() {
@@ -439,20 +458,23 @@ LeaveSecurityGameEventBuffer::LeaveSecurityGameEventBuffer(const LeaveSecurityGa
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:usx.geofactions.LeaveSecurityGameEventBuffer)
 }
 
 void LeaveSecurityGameEventBuffer::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
-  uuid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  uuid_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
 LeaveSecurityGameEventBuffer::~LeaveSecurityGameEventBuffer() {
+  // @@protoc_insertion_point(destructor:usx.geofactions.LeaveSecurityGameEventBuffer)
   SharedDtor();
 }
 
 void LeaveSecurityGameEventBuffer::SharedDtor() {
-  if (uuid_ != &::google::protobuf::internal::kEmptyString) {
+  if (uuid_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     delete uuid_;
   }
   if (this != default_instance_) {
@@ -481,11 +503,9 @@ LeaveSecurityGameEventBuffer* LeaveSecurityGameEventBuffer::New() const {
 }
 
 void LeaveSecurityGameEventBuffer::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (has_uuid()) {
-      if (uuid_ != &::google::protobuf::internal::kEmptyString) {
-        uuid_->clear();
-      }
+  if (has_uuid()) {
+    if (uuid_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+      uuid_->clear();
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -494,31 +514,36 @@ void LeaveSecurityGameEventBuffer::Clear() {
 
 bool LeaveSecurityGameEventBuffer::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
+  // @@protoc_insertion_point(parse_start:usx.geofactions.LeaveSecurityGameEventBuffer)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required string UUID = 1;
       case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 10) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_uuid()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->uuid().data(), this->uuid().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "uuid");
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
-        if (input->ExpectAtEnd()) return true;
+        if (input->ExpectAtEnd()) goto success;
         break;
       }
 
       default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
+          goto success;
         }
         DO_(::google::protobuf::internal::WireFormat::SkipField(
               input, tag, mutable_unknown_fields()));
@@ -526,18 +551,25 @@ bool LeaveSecurityGameEventBuffer::MergePartialFromCodedStream(
       }
     }
   }
+success:
+  // @@protoc_insertion_point(parse_success:usx.geofactions.LeaveSecurityGameEventBuffer)
   return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:usx.geofactions.LeaveSecurityGameEventBuffer)
+  return false;
 #undef DO_
 }
 
 void LeaveSecurityGameEventBuffer::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:usx.geofactions.LeaveSecurityGameEventBuffer)
   // required string UUID = 1;
   if (has_uuid()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->uuid().data(), this->uuid().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "uuid");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       1, this->uuid(), output);
   }
 
@@ -545,15 +577,18 @@ void LeaveSecurityGameEventBuffer::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
+  // @@protoc_insertion_point(serialize_end:usx.geofactions.LeaveSecurityGameEventBuffer)
 }
 
 ::google::protobuf::uint8* LeaveSecurityGameEventBuffer::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:usx.geofactions.LeaveSecurityGameEventBuffer)
   // required string UUID = 1;
   if (has_uuid()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->uuid().data(), this->uuid().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "uuid");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         1, this->uuid(), target);
@@ -563,6 +598,7 @@ void LeaveSecurityGameEventBuffer::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
+  // @@protoc_insertion_point(serialize_to_array_end:usx.geofactions.LeaveSecurityGameEventBuffer)
   return target;
 }
 
@@ -681,6 +717,7 @@ const int SecurityGameEventBuffer::kLeaveSecurityGameEventBufferFieldNumber;
 SecurityGameEventBuffer::SecurityGameEventBuffer()
   : ::google::protobuf::Message() {
   SharedCtor();
+  // @@protoc_insertion_point(constructor:usx.geofactions.SecurityGameEventBuffer)
 }
 
 void SecurityGameEventBuffer::InitAsDefaultInstance() {
@@ -692,6 +729,7 @@ SecurityGameEventBuffer::SecurityGameEventBuffer(const SecurityGameEventBuffer& 
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:usx.geofactions.SecurityGameEventBuffer)
 }
 
 void SecurityGameEventBuffer::SharedCtor() {
@@ -703,6 +741,7 @@ void SecurityGameEventBuffer::SharedCtor() {
 }
 
 SecurityGameEventBuffer::~SecurityGameEventBuffer() {
+  // @@protoc_insertion_point(destructor:usx.geofactions.SecurityGameEventBuffer)
   SharedDtor();
 }
 
@@ -735,7 +774,7 @@ SecurityGameEventBuffer* SecurityGameEventBuffer::New() const {
 }
 
 void SecurityGameEventBuffer::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+  if (_has_bits_[0 / 32] & 7) {
     type_ = 0;
     if (has_joinsecuritygameeventbuffer()) {
       if (joinsecuritygameeventbuffer_ != NULL) joinsecuritygameeventbuffer_->::usx::geofactions::JoinSecurityGameEventBuffer::Clear();
@@ -750,14 +789,17 @@ void SecurityGameEventBuffer::Clear() {
 
 bool SecurityGameEventBuffer::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
+  // @@protoc_insertion_point(parse_start:usx.geofactions.SecurityGameEventBuffer)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required .usx.geofactions.SecurityGameEventBuffer.SecurityGameEventBufferType type = 1 [default = UNKNOWN];
       case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 8) {
           int value;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
@@ -768,7 +810,7 @@ bool SecurityGameEventBuffer::MergePartialFromCodedStream(
             mutable_unknown_fields()->AddVarint(1, value);
           }
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(26)) goto parse_joinSecurityGameEventBuffer;
         break;
@@ -776,13 +818,12 @@ bool SecurityGameEventBuffer::MergePartialFromCodedStream(
 
       // optional .usx.geofactions.JoinSecurityGameEventBuffer joinSecurityGameEventBuffer = 3;
       case 3: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 26) {
          parse_joinSecurityGameEventBuffer:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_joinsecuritygameeventbuffer()));
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(34)) goto parse_leaveSecurityGameEventBuffer;
         break;
@@ -790,23 +831,23 @@ bool SecurityGameEventBuffer::MergePartialFromCodedStream(
 
       // optional .usx.geofactions.LeaveSecurityGameEventBuffer leaveSecurityGameEventBuffer = 4;
       case 4: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 34) {
          parse_leaveSecurityGameEventBuffer:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_leavesecuritygameeventbuffer()));
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
-        if (input->ExpectAtEnd()) return true;
+        if (input->ExpectAtEnd()) goto success;
         break;
       }
 
       default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
+          goto success;
         }
         DO_(::google::protobuf::internal::WireFormat::SkipField(
               input, tag, mutable_unknown_fields()));
@@ -814,12 +855,18 @@ bool SecurityGameEventBuffer::MergePartialFromCodedStream(
       }
     }
   }
+success:
+  // @@protoc_insertion_point(parse_success:usx.geofactions.SecurityGameEventBuffer)
   return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:usx.geofactions.SecurityGameEventBuffer)
+  return false;
 #undef DO_
 }
 
 void SecurityGameEventBuffer::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:usx.geofactions.SecurityGameEventBuffer)
   // required .usx.geofactions.SecurityGameEventBuffer.SecurityGameEventBufferType type = 1 [default = UNKNOWN];
   if (has_type()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
@@ -842,10 +889,12 @@ void SecurityGameEventBuffer::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
+  // @@protoc_insertion_point(serialize_end:usx.geofactions.SecurityGameEventBuffer)
 }
 
 ::google::protobuf::uint8* SecurityGameEventBuffer::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:usx.geofactions.SecurityGameEventBuffer)
   // required .usx.geofactions.SecurityGameEventBuffer.SecurityGameEventBufferType type = 1 [default = UNKNOWN];
   if (has_type()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
@@ -870,6 +919,7 @@ void SecurityGameEventBuffer::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
+  // @@protoc_insertion_point(serialize_to_array_end:usx.geofactions.SecurityGameEventBuffer)
   return target;
 }
 
@@ -1015,6 +1065,7 @@ const int GameEventBuffer::kSecurityGameEventBufferFieldNumber;
 GameEventBuffer::GameEventBuffer()
   : ::google::protobuf::Message() {
   SharedCtor();
+  // @@protoc_insertion_point(constructor:usx.geofactions.GameEventBuffer)
 }
 
 void GameEventBuffer::InitAsDefaultInstance() {
@@ -1026,6 +1077,7 @@ GameEventBuffer::GameEventBuffer(const GameEventBuffer& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:usx.geofactions.GameEventBuffer)
 }
 
 void GameEventBuffer::SharedCtor() {
@@ -1037,6 +1089,7 @@ void GameEventBuffer::SharedCtor() {
 }
 
 GameEventBuffer::~GameEventBuffer() {
+  // @@protoc_insertion_point(destructor:usx.geofactions.GameEventBuffer)
   SharedDtor();
 }
 
@@ -1069,7 +1122,7 @@ GameEventBuffer* GameEventBuffer::New() const {
 }
 
 void GameEventBuffer::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+  if (_has_bits_[0 / 32] & 7) {
     type_ = 0;
     if (has_entitygameeventbuffer()) {
       if (entitygameeventbuffer_ != NULL) entitygameeventbuffer_->::usx::geofactions::EntityGameEventBuffer::Clear();
@@ -1084,14 +1137,17 @@ void GameEventBuffer::Clear() {
 
 bool GameEventBuffer::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
+  // @@protoc_insertion_point(parse_start:usx.geofactions.GameEventBuffer)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required .usx.geofactions.GameEventBuffer.GameEventBufferType type = 1 [default = UNKNOWN];
       case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+        if (tag == 8) {
           int value;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
@@ -1102,7 +1158,7 @@ bool GameEventBuffer::MergePartialFromCodedStream(
             mutable_unknown_fields()->AddVarint(1, value);
           }
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(18)) goto parse_entityGameEventBuffer;
         break;
@@ -1110,13 +1166,12 @@ bool GameEventBuffer::MergePartialFromCodedStream(
 
       // optional .usx.geofactions.EntityGameEventBuffer entityGameEventBuffer = 2;
       case 2: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 18) {
          parse_entityGameEventBuffer:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_entitygameeventbuffer()));
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(26)) goto parse_securityGameEventBuffer;
         break;
@@ -1124,23 +1179,23 @@ bool GameEventBuffer::MergePartialFromCodedStream(
 
       // optional .usx.geofactions.SecurityGameEventBuffer securityGameEventBuffer = 3;
       case 3: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 26) {
          parse_securityGameEventBuffer:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_securitygameeventbuffer()));
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
-        if (input->ExpectAtEnd()) return true;
+        if (input->ExpectAtEnd()) goto success;
         break;
       }
 
       default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
+          goto success;
         }
         DO_(::google::protobuf::internal::WireFormat::SkipField(
               input, tag, mutable_unknown_fields()));
@@ -1148,12 +1203,18 @@ bool GameEventBuffer::MergePartialFromCodedStream(
       }
     }
   }
+success:
+  // @@protoc_insertion_point(parse_success:usx.geofactions.GameEventBuffer)
   return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:usx.geofactions.GameEventBuffer)
+  return false;
 #undef DO_
 }
 
 void GameEventBuffer::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:usx.geofactions.GameEventBuffer)
   // required .usx.geofactions.GameEventBuffer.GameEventBufferType type = 1 [default = UNKNOWN];
   if (has_type()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
@@ -1176,10 +1237,12 @@ void GameEventBuffer::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
+  // @@protoc_insertion_point(serialize_end:usx.geofactions.GameEventBuffer)
 }
 
 ::google::protobuf::uint8* GameEventBuffer::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:usx.geofactions.GameEventBuffer)
   // required .usx.geofactions.GameEventBuffer.GameEventBufferType type = 1 [default = UNKNOWN];
   if (has_type()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
@@ -1204,6 +1267,7 @@ void GameEventBuffer::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
+  // @@protoc_insertion_point(serialize_to_array_end:usx.geofactions.GameEventBuffer)
   return target;
 }
 

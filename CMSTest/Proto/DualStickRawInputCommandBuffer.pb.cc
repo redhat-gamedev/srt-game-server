@@ -110,6 +110,7 @@ const int DualStickRawInputCommandBuffer::kPbv2ShootFieldNumber;
 DualStickRawInputCommandBuffer::DualStickRawInputCommandBuffer()
   : ::google::protobuf::Message() {
   SharedCtor();
+  // @@protoc_insertion_point(constructor:usx.geofactions.DualStickRawInputCommandBuffer)
 }
 
 void DualStickRawInputCommandBuffer::InitAsDefaultInstance() {
@@ -121,6 +122,7 @@ DualStickRawInputCommandBuffer::DualStickRawInputCommandBuffer(const DualStickRa
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:usx.geofactions.DualStickRawInputCommandBuffer)
 }
 
 void DualStickRawInputCommandBuffer::SharedCtor() {
@@ -131,6 +133,7 @@ void DualStickRawInputCommandBuffer::SharedCtor() {
 }
 
 DualStickRawInputCommandBuffer::~DualStickRawInputCommandBuffer() {
+  // @@protoc_insertion_point(destructor:usx.geofactions.DualStickRawInputCommandBuffer)
   SharedDtor();
 }
 
@@ -163,7 +166,7 @@ DualStickRawInputCommandBuffer* DualStickRawInputCommandBuffer::New() const {
 }
 
 void DualStickRawInputCommandBuffer::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+  if (_has_bits_[0 / 32] & 3) {
     if (has_pbv2move()) {
       if (pbv2move_ != NULL) pbv2move_->::box2d::PbVec2::Clear();
     }
@@ -177,18 +180,21 @@ void DualStickRawInputCommandBuffer::Clear() {
 
 bool DualStickRawInputCommandBuffer::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
+  // @@protoc_insertion_point(parse_start:usx.geofactions.DualStickRawInputCommandBuffer)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required .box2d.PbVec2 pbv2Move = 1;
       case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 10) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_pbv2move()));
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
         if (input->ExpectTag(18)) goto parse_pbv2Shoot;
         break;
@@ -196,23 +202,23 @@ bool DualStickRawInputCommandBuffer::MergePartialFromCodedStream(
 
       // required .box2d.PbVec2 pbv2Shoot = 2;
       case 2: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+        if (tag == 18) {
          parse_pbv2Shoot:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_pbv2shoot()));
         } else {
-          goto handle_uninterpreted;
+          goto handle_unusual;
         }
-        if (input->ExpectAtEnd()) return true;
+        if (input->ExpectAtEnd()) goto success;
         break;
       }
 
       default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
+          goto success;
         }
         DO_(::google::protobuf::internal::WireFormat::SkipField(
               input, tag, mutable_unknown_fields()));
@@ -220,12 +226,18 @@ bool DualStickRawInputCommandBuffer::MergePartialFromCodedStream(
       }
     }
   }
+success:
+  // @@protoc_insertion_point(parse_success:usx.geofactions.DualStickRawInputCommandBuffer)
   return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:usx.geofactions.DualStickRawInputCommandBuffer)
+  return false;
 #undef DO_
 }
 
 void DualStickRawInputCommandBuffer::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:usx.geofactions.DualStickRawInputCommandBuffer)
   // required .box2d.PbVec2 pbv2Move = 1;
   if (has_pbv2move()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
@@ -242,10 +254,12 @@ void DualStickRawInputCommandBuffer::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
+  // @@protoc_insertion_point(serialize_end:usx.geofactions.DualStickRawInputCommandBuffer)
 }
 
 ::google::protobuf::uint8* DualStickRawInputCommandBuffer::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:usx.geofactions.DualStickRawInputCommandBuffer)
   // required .box2d.PbVec2 pbv2Move = 1;
   if (has_pbv2move()) {
     target = ::google::protobuf::internal::WireFormatLite::
@@ -264,6 +278,7 @@ void DualStickRawInputCommandBuffer::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
+  // @@protoc_insertion_point(serialize_to_array_end:usx.geofactions.DualStickRawInputCommandBuffer)
   return target;
 }
 
