@@ -9,8 +9,9 @@
 #ifndef __CMSTest__AB2DEntity__
 #define __CMSTest__AB2DEntity__
 
-#include "Poco/BasicEvent.h"
-#include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
+#include <Poco/BasicEvent.h>
+//#include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
+#include <Box2D/Box2D.h>
 
 namespace usx
 {

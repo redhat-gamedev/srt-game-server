@@ -9,7 +9,7 @@
 #ifndef __CMSTest__Heartbeat__
 #define __CMSTest__Heartbeat__
 
-#include "Poco/BasicEvent.h"
+#include <Poco/BasicEvent.h>
 #include <decaf/util/TimerTask.h>
 #include <list>
 

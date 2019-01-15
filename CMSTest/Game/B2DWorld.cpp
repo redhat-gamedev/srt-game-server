@@ -8,8 +8,8 @@
 
 #include "B2DWorld.h"
 #include "B2DBullet.h"
-#include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
-#include "Poco/ScopedLock.h"
+//#include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
+#include <Poco/ScopedLock.h>
 #include <assert.h>
 
 b2World*                            B2DWorld::s_pb2World = NULL;
@@ -85,9 +85,9 @@ B2DWorld::B2DWorld() :
     gravity(new b2Vec2(0.0f, 0.0f)),
     timeStep(1.0f / 66.0f),
     velocityIterations(6),
-    positionIterations(2),
+    positionIterations(2)
 //    world(new b2World(*gravity)),
-    m_pBox2DSerialDispatchQueue(new xdispatch::queue("box2d"))
+    //m_pBox2DSerialDispatchQueue(new xdispatch::queue("box2d"))
 {
     //gravity = new b2Vec2(0.0f, -9.81f);
 //    gravity = new b2Vec2(0.0f, 0.0f);
@@ -106,8 +106,8 @@ B2DWorld::B2DWorld() :
 // Destructor
 B2DWorld::~B2DWorld()
 {
-    delete m_pBox2DSerialDispatchQueue;
-    m_pBox2DSerialDispatchQueue = NULL;
+    //delete m_pBox2DSerialDispatchQueue;
+    //m_pBox2DSerialDispatchQueue = NULL;
 
     delete gravity;
     gravity = NULL;

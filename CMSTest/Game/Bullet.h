@@ -10,8 +10,9 @@
 #define __CMSTest__Bullet__
 
 #include "AEntity.h"
-#include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
-#include "Poco/BasicEvent.h"
+//#include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
+#include <Box2D/Box2D.h>
+#include <Poco/BasicEvent.h>
 #include <decaf/util/StlQueue.h>
 #include <string>
 

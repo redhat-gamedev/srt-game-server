@@ -11,10 +11,11 @@
 #include "B2DWorld.h"
 #include "AB2DEntity.h"
 #include "B2DBullet.h"
-#include "Timer.h"
-#include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
+#include "../Shared/Timer.h"
+//#include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
+#include <Box2D/Box2D.h>
 #include "../Shared/MakeT.h"
-#include "Poco/Delegate.h"
+#include <Poco/Delegate.h>
 //#include <iostream>
 //#include <iomanip>
 #include <string>

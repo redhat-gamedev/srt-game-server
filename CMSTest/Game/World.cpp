@@ -9,10 +9,12 @@
 #include "World.h"
 #include "B2DWorld.h"
 #include "AEntity.h"
-#include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
-#include "../../../ThirdParty/box2d/Box2D/Box2D/Common/b2Settings.h"
-#include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
-#include "Poco/Delegate.h"
+//#include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
+#include <Box2D/Box2D.h>
+//#include "../../../ThirdParty/box2d/Box2D/Box2D/Common/b2Settings.h"
+#include <Box2D/Common/b2Settings.h>
+//#include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
+#include <Poco/Delegate.h>
 #include <cms/CMSException.h>
 #include <decaf/lang/Thread.h>
 #include <assert.h>

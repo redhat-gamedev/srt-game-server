@@ -10,8 +10,9 @@
 #define __CMSTest__DualStickRawInputCommand__
 
 #include "RawInputCommand.h"
-#include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
-#include "Poco/BasicEvent.h"
+//#include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
+#include <Box2D/Box2D.h>
+#include <Poco/BasicEvent.h>
 #include <string>
 
 

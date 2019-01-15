@@ -10,7 +10,7 @@
 #include "B2DWorld.h"
 #include "AEntity.h"
 #include "../Proto/EntityGameEventBuffer.pb.h"
-#include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
+//#include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
 #include <assert.h>
 
 AB2DEntity::_Serializer                 AB2DEntity::Serializer;
