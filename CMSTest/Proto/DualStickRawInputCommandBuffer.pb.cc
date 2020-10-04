@@ -7,7 +7,6 @@
 
 #include <google/protobuf/stubs/common.h>
 #include <google/protobuf/stubs/port.h>
-#include <google/protobuf/stubs/once.h>
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/wire_format_lite_inl.h>
 #include <google/protobuf/descriptor.h>
@@ -19,6 +18,10 @@
 #include "third_party/protobuf/version.h"
 #endif
 // @@protoc_insertion_point(includes)
+
+namespace protobuf_box2d_2eproto {
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_box2d_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_PbVec2;
+}  // namespace protobuf_box2d_2eproto
 namespace usx {
 namespace geofactions {
 class DualStickRawInputCommandBufferDefaultTypeInternal {
@@ -29,15 +32,9 @@ class DualStickRawInputCommandBufferDefaultTypeInternal {
 }  // namespace geofactions
 }  // namespace usx
 namespace protobuf_DualStickRawInputCommandBuffer_2eproto {
-void InitDefaultsDualStickRawInputCommandBufferImpl() {
+static void InitDefaultsDualStickRawInputCommandBuffer() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  protobuf_box2d_2eproto::InitDefaultsPbVec2();
   {
     void* ptr = &::usx::geofactions::_DualStickRawInputCommandBuffer_default_instance_;
     new (ptr) ::usx::geofactions::DualStickRawInputCommandBuffer();
@@ -46,9 +43,12 @@ void InitDefaultsDualStickRawInputCommandBufferImpl() {
   ::usx::geofactions::DualStickRawInputCommandBuffer::InitAsDefaultInstance();
 }
 
-void InitDefaultsDualStickRawInputCommandBuffer() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsDualStickRawInputCommandBufferImpl);
+::google::protobuf::internal::SCCInfo<1> scc_info_DualStickRawInputCommandBuffer =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsDualStickRawInputCommandBuffer}, {
+      &protobuf_box2d_2eproto::scc_info_PbVec2.base,}};
+
+void InitDefaults() {
+  ::google::protobuf::internal::InitSCC(&scc_info_DualStickRawInputCommandBuffer.base);
 }
 
 ::google::protobuf::Metadata file_level_metadata[1];
@@ -74,15 +74,14 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
 
 void protobuf_AssignDescriptors() {
   AddDescriptors();
-  ::google::protobuf::MessageFactory* factory = NULL;
   AssignDescriptors(
-      "DualStickRawInputCommandBuffer.proto", schemas, file_default_instances, TableStruct::offsets, factory,
+      "DualStickRawInputCommandBuffer.proto", schemas, file_default_instances, TableStruct::offsets,
       file_level_metadata, NULL, NULL);
 }
 
 void protobuf_AssignDescriptorsOnce() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &protobuf_AssignDescriptors);
+  static ::google::protobuf::internal::once_flag once;
+  ::google::protobuf::internal::call_once(once, protobuf_AssignDescriptors);
 }
 
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
@@ -108,8 +107,8 @@ void AddDescriptorsImpl() {
 }
 
 void AddDescriptors() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &AddDescriptorsImpl);
+  static ::google::protobuf::internal::once_flag once;
+  ::google::protobuf::internal::call_once(once, AddDescriptorsImpl);
 }
 // Force AddDescriptors() to be called at dynamic initialization time.
 struct StaticDescriptorInitializer {
@@ -144,17 +143,15 @@ const int DualStickRawInputCommandBuffer::kPbv2ShootFieldNumber;
 
 DualStickRawInputCommandBuffer::DualStickRawInputCommandBuffer()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_DualStickRawInputCommandBuffer_2eproto::InitDefaultsDualStickRawInputCommandBuffer();
-  }
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_DualStickRawInputCommandBuffer_2eproto::scc_info_DualStickRawInputCommandBuffer.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:usx.geofactions.DualStickRawInputCommandBuffer)
 }
 DualStickRawInputCommandBuffer::DualStickRawInputCommandBuffer(const DualStickRawInputCommandBuffer& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
-      _cached_size_(0) {
+      _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   if (from.has_pbv2move()) {
     pbv2move_ = new ::box2d::PbVec2(*from.pbv2move_);
@@ -170,7 +167,6 @@ DualStickRawInputCommandBuffer::DualStickRawInputCommandBuffer(const DualStickRa
 }
 
 void DualStickRawInputCommandBuffer::SharedCtor() {
-  _cached_size_ = 0;
   ::memset(&pbv2move_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&pbv2shoot_) -
       reinterpret_cast<char*>(&pbv2move_)) + sizeof(pbv2shoot_));
@@ -187,9 +183,7 @@ void DualStickRawInputCommandBuffer::SharedDtor() {
 }
 
 void DualStickRawInputCommandBuffer::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  _cached_size_.Set(size);
 }
 const ::google::protobuf::Descriptor* DualStickRawInputCommandBuffer::descriptor() {
   ::protobuf_DualStickRawInputCommandBuffer_2eproto::protobuf_AssignDescriptorsOnce();
@@ -197,17 +191,10 @@ const ::google::protobuf::Descriptor* DualStickRawInputCommandBuffer::descriptor
 }
 
 const DualStickRawInputCommandBuffer& DualStickRawInputCommandBuffer::default_instance() {
-  ::protobuf_DualStickRawInputCommandBuffer_2eproto::InitDefaultsDualStickRawInputCommandBuffer();
+  ::google::protobuf::internal::InitSCC(&protobuf_DualStickRawInputCommandBuffer_2eproto::scc_info_DualStickRawInputCommandBuffer.base);
   return *internal_default_instance();
 }
 
-DualStickRawInputCommandBuffer* DualStickRawInputCommandBuffer::New(::google::protobuf::Arena* arena) const {
-  DualStickRawInputCommandBuffer* n = new DualStickRawInputCommandBuffer;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
 
 void DualStickRawInputCommandBuffer::Clear() {
 // @@protoc_insertion_point(message_clear_start:usx.geofactions.DualStickRawInputCommandBuffer)
@@ -236,7 +223,7 @@ bool DualStickRawInputCommandBuffer::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:usx.geofactions.DualStickRawInputCommandBuffer)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -294,13 +281,13 @@ void DualStickRawInputCommandBuffer::SerializeWithCachedSizes(
   // required .box2d.PbVec2 pbv2Move = 1;
   if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, *this->pbv2move_, output);
+      1, this->_internal_pbv2move(), output);
   }
 
   // required .box2d.PbVec2 pbv2Shoot = 2;
   if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, *this->pbv2shoot_, output);
+      2, this->_internal_pbv2shoot(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -322,14 +309,14 @@ void DualStickRawInputCommandBuffer::SerializeWithCachedSizes(
   if (cached_has_bits & 0x00000001u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        1, *this->pbv2move_, deterministic, target);
+        1, this->_internal_pbv2move(), deterministic, target);
   }
 
   // required .box2d.PbVec2 pbv2Shoot = 2;
   if (cached_has_bits & 0x00000002u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        2, *this->pbv2shoot_, deterministic, target);
+        2, this->_internal_pbv2shoot(), deterministic, target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -348,14 +335,14 @@ size_t DualStickRawInputCommandBuffer::RequiredFieldsByteSizeFallback() const {
     // required .box2d.PbVec2 pbv2Move = 1;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->pbv2move_);
+        *pbv2move_);
   }
 
   if (has_pbv2shoot()) {
     // required .box2d.PbVec2 pbv2Shoot = 2;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->pbv2shoot_);
+        *pbv2shoot_);
   }
 
   return total_size;
@@ -373,20 +360,18 @@ size_t DualStickRawInputCommandBuffer::ByteSizeLong() const {
     // required .box2d.PbVec2 pbv2Move = 1;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->pbv2move_);
+        *pbv2move_);
 
     // required .box2d.PbVec2 pbv2Shoot = 2;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->pbv2shoot_);
+        *pbv2shoot_);
 
   } else {
     total_size += RequiredFieldsByteSizeFallback();
   }
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  SetCachedSize(cached_size);
   return total_size;
 }
 
@@ -458,7 +443,6 @@ void DualStickRawInputCommandBuffer::InternalSwap(DualStickRawInputCommandBuffer
   swap(pbv2shoot_, other->pbv2shoot_);
   swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata DualStickRawInputCommandBuffer::GetMetadata() const {
@@ -470,5 +454,12 @@ void DualStickRawInputCommandBuffer::InternalSwap(DualStickRawInputCommandBuffer
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace geofactions
 }  // namespace usx
+namespace google {
+namespace protobuf {
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::usx::geofactions::DualStickRawInputCommandBuffer* Arena::CreateMaybeMessage< ::usx::geofactions::DualStickRawInputCommandBuffer >(Arena* arena) {
+  return Arena::CreateInternal< ::usx::geofactions::DualStickRawInputCommandBuffer >(arena);
+}
+}  // namespace protobuf
+}  // namespace google
 
 // @@protoc_insertion_point(global_scope)

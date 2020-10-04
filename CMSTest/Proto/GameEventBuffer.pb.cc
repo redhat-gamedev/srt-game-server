@@ -7,7 +7,6 @@
 
 #include <google/protobuf/stubs/common.h>
 #include <google/protobuf/stubs/port.h>
-#include <google/protobuf/stubs/once.h>
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/wire_format_lite_inl.h>
 #include <google/protobuf/descriptor.h>
@@ -19,6 +18,15 @@
 #include "third_party/protobuf/version.h"
 #endif
 // @@protoc_insertion_point(includes)
+
+namespace protobuf_EntityGameEventBuffer_2eproto {
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_EntityGameEventBuffer_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_EntityGameEventBuffer;
+}  // namespace protobuf_EntityGameEventBuffer_2eproto
+namespace protobuf_GameEventBuffer_2eproto {
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_GameEventBuffer_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_JoinSecurityGameEventBuffer;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_GameEventBuffer_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_LeaveSecurityGameEventBuffer;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_GameEventBuffer_2eproto ::google::protobuf::internal::SCCInfo<2> scc_info_SecurityGameEventBuffer;
+}  // namespace protobuf_GameEventBuffer_2eproto
 namespace usx {
 namespace geofactions {
 class JoinSecurityGameEventBufferDefaultTypeInternal {
@@ -44,14 +52,9 @@ class GameEventBufferDefaultTypeInternal {
 }  // namespace geofactions
 }  // namespace usx
 namespace protobuf_GameEventBuffer_2eproto {
-void InitDefaultsJoinSecurityGameEventBufferImpl() {
+static void InitDefaultsJoinSecurityGameEventBuffer() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
   {
     void* ptr = &::usx::geofactions::_JoinSecurityGameEventBuffer_default_instance_;
     new (ptr) ::usx::geofactions::JoinSecurityGameEventBuffer();
@@ -60,19 +63,12 @@ void InitDefaultsJoinSecurityGameEventBufferImpl() {
   ::usx::geofactions::JoinSecurityGameEventBuffer::InitAsDefaultInstance();
 }
 
-void InitDefaultsJoinSecurityGameEventBuffer() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsJoinSecurityGameEventBufferImpl);
-}
+::google::protobuf::internal::SCCInfo<0> scc_info_JoinSecurityGameEventBuffer =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsJoinSecurityGameEventBuffer}, {}};
 
-void InitDefaultsLeaveSecurityGameEventBufferImpl() {
+static void InitDefaultsLeaveSecurityGameEventBuffer() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
   {
     void* ptr = &::usx::geofactions::_LeaveSecurityGameEventBuffer_default_instance_;
     new (ptr) ::usx::geofactions::LeaveSecurityGameEventBuffer();
@@ -81,21 +77,12 @@ void InitDefaultsLeaveSecurityGameEventBufferImpl() {
   ::usx::geofactions::LeaveSecurityGameEventBuffer::InitAsDefaultInstance();
 }
 
-void InitDefaultsLeaveSecurityGameEventBuffer() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsLeaveSecurityGameEventBufferImpl);
-}
+::google::protobuf::internal::SCCInfo<0> scc_info_LeaveSecurityGameEventBuffer =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsLeaveSecurityGameEventBuffer}, {}};
 
-void InitDefaultsSecurityGameEventBufferImpl() {
+static void InitDefaultsSecurityGameEventBuffer() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  protobuf_GameEventBuffer_2eproto::InitDefaultsJoinSecurityGameEventBuffer();
-  protobuf_GameEventBuffer_2eproto::InitDefaultsLeaveSecurityGameEventBuffer();
   {
     void* ptr = &::usx::geofactions::_SecurityGameEventBuffer_default_instance_;
     new (ptr) ::usx::geofactions::SecurityGameEventBuffer();
@@ -104,21 +91,14 @@ void InitDefaultsSecurityGameEventBufferImpl() {
   ::usx::geofactions::SecurityGameEventBuffer::InitAsDefaultInstance();
 }
 
-void InitDefaultsSecurityGameEventBuffer() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsSecurityGameEventBufferImpl);
-}
+::google::protobuf::internal::SCCInfo<2> scc_info_SecurityGameEventBuffer =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 2, InitDefaultsSecurityGameEventBuffer}, {
+      &protobuf_GameEventBuffer_2eproto::scc_info_JoinSecurityGameEventBuffer.base,
+      &protobuf_GameEventBuffer_2eproto::scc_info_LeaveSecurityGameEventBuffer.base,}};
 
-void InitDefaultsGameEventBufferImpl() {
+static void InitDefaultsGameEventBuffer() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  protobuf_EntityGameEventBuffer_2eproto::InitDefaultsEntityGameEventBuffer();
-  protobuf_GameEventBuffer_2eproto::InitDefaultsSecurityGameEventBuffer();
   {
     void* ptr = &::usx::geofactions::_GameEventBuffer_default_instance_;
     new (ptr) ::usx::geofactions::GameEventBuffer();
@@ -127,9 +107,16 @@ void InitDefaultsGameEventBufferImpl() {
   ::usx::geofactions::GameEventBuffer::InitAsDefaultInstance();
 }
 
-void InitDefaultsGameEventBuffer() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsGameEventBufferImpl);
+::google::protobuf::internal::SCCInfo<2> scc_info_GameEventBuffer =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 2, InitDefaultsGameEventBuffer}, {
+      &protobuf_EntityGameEventBuffer_2eproto::scc_info_EntityGameEventBuffer.base,
+      &protobuf_GameEventBuffer_2eproto::scc_info_SecurityGameEventBuffer.base,}};
+
+void InitDefaults() {
+  ::google::protobuf::internal::InitSCC(&scc_info_JoinSecurityGameEventBuffer.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_LeaveSecurityGameEventBuffer.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_SecurityGameEventBuffer.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_GameEventBuffer.base);
 }
 
 ::google::protobuf::Metadata file_level_metadata[4];
@@ -189,15 +176,14 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
 
 void protobuf_AssignDescriptors() {
   AddDescriptors();
-  ::google::protobuf::MessageFactory* factory = NULL;
   AssignDescriptors(
-      "GameEventBuffer.proto", schemas, file_default_instances, TableStruct::offsets, factory,
+      "GameEventBuffer.proto", schemas, file_default_instances, TableStruct::offsets,
       file_level_metadata, file_level_enum_descriptors, NULL);
 }
 
 void protobuf_AssignDescriptorsOnce() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &protobuf_AssignDescriptors);
+  static ::google::protobuf::internal::once_flag once;
+  ::google::protobuf::internal::call_once(once, protobuf_AssignDescriptors);
 }
 
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
@@ -239,8 +225,8 @@ void AddDescriptorsImpl() {
 }
 
 void AddDescriptors() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &AddDescriptorsImpl);
+  static ::google::protobuf::internal::once_flag once;
+  ::google::protobuf::internal::call_once(once, AddDescriptorsImpl);
 }
 // Force AddDescriptors() to be called at dynamic initialization time.
 struct StaticDescriptorInitializer {
@@ -308,17 +294,15 @@ const int JoinSecurityGameEventBuffer::kUUIDFieldNumber;
 
 JoinSecurityGameEventBuffer::JoinSecurityGameEventBuffer()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_GameEventBuffer_2eproto::InitDefaultsJoinSecurityGameEventBuffer();
-  }
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_GameEventBuffer_2eproto::scc_info_JoinSecurityGameEventBuffer.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:usx.geofactions.JoinSecurityGameEventBuffer)
 }
 JoinSecurityGameEventBuffer::JoinSecurityGameEventBuffer(const JoinSecurityGameEventBuffer& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
-      _cached_size_(0) {
+      _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   uuid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.has_uuid()) {
@@ -328,7 +312,6 @@ JoinSecurityGameEventBuffer::JoinSecurityGameEventBuffer(const JoinSecurityGameE
 }
 
 void JoinSecurityGameEventBuffer::SharedCtor() {
-  _cached_size_ = 0;
   uuid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
@@ -342,9 +325,7 @@ void JoinSecurityGameEventBuffer::SharedDtor() {
 }
 
 void JoinSecurityGameEventBuffer::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  _cached_size_.Set(size);
 }
 const ::google::protobuf::Descriptor* JoinSecurityGameEventBuffer::descriptor() {
   ::protobuf_GameEventBuffer_2eproto::protobuf_AssignDescriptorsOnce();
@@ -352,17 +333,10 @@ const ::google::protobuf::Descriptor* JoinSecurityGameEventBuffer::descriptor() 
 }
 
 const JoinSecurityGameEventBuffer& JoinSecurityGameEventBuffer::default_instance() {
-  ::protobuf_GameEventBuffer_2eproto::InitDefaultsJoinSecurityGameEventBuffer();
+  ::google::protobuf::internal::InitSCC(&protobuf_GameEventBuffer_2eproto::scc_info_JoinSecurityGameEventBuffer.base);
   return *internal_default_instance();
 }
 
-JoinSecurityGameEventBuffer* JoinSecurityGameEventBuffer::New(::google::protobuf::Arena* arena) const {
-  JoinSecurityGameEventBuffer* n = new JoinSecurityGameEventBuffer;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
 
 void JoinSecurityGameEventBuffer::Clear() {
 // @@protoc_insertion_point(message_clear_start:usx.geofactions.JoinSecurityGameEventBuffer)
@@ -372,8 +346,7 @@ void JoinSecurityGameEventBuffer::Clear() {
 
   cached_has_bits = _has_bits_[0];
   if (cached_has_bits & 0x00000001u) {
-    GOOGLE_DCHECK(!uuid_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-    (*uuid_.UnsafeRawStringPointer())->clear();
+    uuid_.ClearNonDefaultToEmptyNoArena();
   }
   _has_bits_.Clear();
   _internal_metadata_.Clear();
@@ -385,7 +358,7 @@ bool JoinSecurityGameEventBuffer::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:usx.geofactions.JoinSecurityGameEventBuffer)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -492,9 +465,7 @@ size_t JoinSecurityGameEventBuffer::ByteSizeLong() const {
         this->uuid());
   }
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  SetCachedSize(cached_size);
   return total_size;
 }
 
@@ -551,10 +522,10 @@ void JoinSecurityGameEventBuffer::Swap(JoinSecurityGameEventBuffer* other) {
 }
 void JoinSecurityGameEventBuffer::InternalSwap(JoinSecurityGameEventBuffer* other) {
   using std::swap;
-  uuid_.Swap(&other->uuid_);
+  uuid_.Swap(&other->uuid_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
   swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata JoinSecurityGameEventBuffer::GetMetadata() const {
@@ -573,17 +544,15 @@ const int LeaveSecurityGameEventBuffer::kUUIDFieldNumber;
 
 LeaveSecurityGameEventBuffer::LeaveSecurityGameEventBuffer()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_GameEventBuffer_2eproto::InitDefaultsLeaveSecurityGameEventBuffer();
-  }
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_GameEventBuffer_2eproto::scc_info_LeaveSecurityGameEventBuffer.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:usx.geofactions.LeaveSecurityGameEventBuffer)
 }
 LeaveSecurityGameEventBuffer::LeaveSecurityGameEventBuffer(const LeaveSecurityGameEventBuffer& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
-      _cached_size_(0) {
+      _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   uuid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.has_uuid()) {
@@ -593,7 +562,6 @@ LeaveSecurityGameEventBuffer::LeaveSecurityGameEventBuffer(const LeaveSecurityGa
 }
 
 void LeaveSecurityGameEventBuffer::SharedCtor() {
-  _cached_size_ = 0;
   uuid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
@@ -607,9 +575,7 @@ void LeaveSecurityGameEventBuffer::SharedDtor() {
 }
 
 void LeaveSecurityGameEventBuffer::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  _cached_size_.Set(size);
 }
 const ::google::protobuf::Descriptor* LeaveSecurityGameEventBuffer::descriptor() {
   ::protobuf_GameEventBuffer_2eproto::protobuf_AssignDescriptorsOnce();
@@ -617,17 +583,10 @@ const ::google::protobuf::Descriptor* LeaveSecurityGameEventBuffer::descriptor()
 }
 
 const LeaveSecurityGameEventBuffer& LeaveSecurityGameEventBuffer::default_instance() {
-  ::protobuf_GameEventBuffer_2eproto::InitDefaultsLeaveSecurityGameEventBuffer();
+  ::google::protobuf::internal::InitSCC(&protobuf_GameEventBuffer_2eproto::scc_info_LeaveSecurityGameEventBuffer.base);
   return *internal_default_instance();
 }
 
-LeaveSecurityGameEventBuffer* LeaveSecurityGameEventBuffer::New(::google::protobuf::Arena* arena) const {
-  LeaveSecurityGameEventBuffer* n = new LeaveSecurityGameEventBuffer;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
 
 void LeaveSecurityGameEventBuffer::Clear() {
 // @@protoc_insertion_point(message_clear_start:usx.geofactions.LeaveSecurityGameEventBuffer)
@@ -637,8 +596,7 @@ void LeaveSecurityGameEventBuffer::Clear() {
 
   cached_has_bits = _has_bits_[0];
   if (cached_has_bits & 0x00000001u) {
-    GOOGLE_DCHECK(!uuid_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-    (*uuid_.UnsafeRawStringPointer())->clear();
+    uuid_.ClearNonDefaultToEmptyNoArena();
   }
   _has_bits_.Clear();
   _internal_metadata_.Clear();
@@ -650,7 +608,7 @@ bool LeaveSecurityGameEventBuffer::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:usx.geofactions.LeaveSecurityGameEventBuffer)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -757,9 +715,7 @@ size_t LeaveSecurityGameEventBuffer::ByteSizeLong() const {
         this->uuid());
   }
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  SetCachedSize(cached_size);
   return total_size;
 }
 
@@ -816,10 +772,10 @@ void LeaveSecurityGameEventBuffer::Swap(LeaveSecurityGameEventBuffer* other) {
 }
 void LeaveSecurityGameEventBuffer::InternalSwap(LeaveSecurityGameEventBuffer* other) {
   using std::swap;
-  uuid_.Swap(&other->uuid_);
+  uuid_.Swap(&other->uuid_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
   swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata LeaveSecurityGameEventBuffer::GetMetadata() const {
@@ -844,17 +800,15 @@ const int SecurityGameEventBuffer::kLeaveSecurityGameEventBufferFieldNumber;
 
 SecurityGameEventBuffer::SecurityGameEventBuffer()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_GameEventBuffer_2eproto::InitDefaultsSecurityGameEventBuffer();
-  }
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_GameEventBuffer_2eproto::scc_info_SecurityGameEventBuffer.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:usx.geofactions.SecurityGameEventBuffer)
 }
 SecurityGameEventBuffer::SecurityGameEventBuffer(const SecurityGameEventBuffer& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
-      _cached_size_(0) {
+      _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   if (from.has_joinsecuritygameeventbuffer()) {
     joinsecuritygameeventbuffer_ = new ::usx::geofactions::JoinSecurityGameEventBuffer(*from.joinsecuritygameeventbuffer_);
@@ -871,7 +825,6 @@ SecurityGameEventBuffer::SecurityGameEventBuffer(const SecurityGameEventBuffer& 
 }
 
 void SecurityGameEventBuffer::SharedCtor() {
-  _cached_size_ = 0;
   ::memset(&joinsecuritygameeventbuffer_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&type_) -
       reinterpret_cast<char*>(&joinsecuritygameeventbuffer_)) + sizeof(type_));
@@ -888,9 +841,7 @@ void SecurityGameEventBuffer::SharedDtor() {
 }
 
 void SecurityGameEventBuffer::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  _cached_size_.Set(size);
 }
 const ::google::protobuf::Descriptor* SecurityGameEventBuffer::descriptor() {
   ::protobuf_GameEventBuffer_2eproto::protobuf_AssignDescriptorsOnce();
@@ -898,17 +849,10 @@ const ::google::protobuf::Descriptor* SecurityGameEventBuffer::descriptor() {
 }
 
 const SecurityGameEventBuffer& SecurityGameEventBuffer::default_instance() {
-  ::protobuf_GameEventBuffer_2eproto::InitDefaultsSecurityGameEventBuffer();
+  ::google::protobuf::internal::InitSCC(&protobuf_GameEventBuffer_2eproto::scc_info_SecurityGameEventBuffer.base);
   return *internal_default_instance();
 }
 
-SecurityGameEventBuffer* SecurityGameEventBuffer::New(::google::protobuf::Arena* arena) const {
-  SecurityGameEventBuffer* n = new SecurityGameEventBuffer;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
 
 void SecurityGameEventBuffer::Clear() {
 // @@protoc_insertion_point(message_clear_start:usx.geofactions.SecurityGameEventBuffer)
@@ -938,7 +882,7 @@ bool SecurityGameEventBuffer::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:usx.geofactions.SecurityGameEventBuffer)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -1022,13 +966,13 @@ void SecurityGameEventBuffer::SerializeWithCachedSizes(
   // optional .usx.geofactions.JoinSecurityGameEventBuffer joinSecurityGameEventBuffer = 3;
   if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      3, *this->joinsecuritygameeventbuffer_, output);
+      3, this->_internal_joinsecuritygameeventbuffer(), output);
   }
 
   // optional .usx.geofactions.LeaveSecurityGameEventBuffer leaveSecurityGameEventBuffer = 4;
   if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      4, *this->leavesecuritygameeventbuffer_, output);
+      4, this->_internal_leavesecuritygameeventbuffer(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -1056,14 +1000,14 @@ void SecurityGameEventBuffer::SerializeWithCachedSizes(
   if (cached_has_bits & 0x00000001u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        3, *this->joinsecuritygameeventbuffer_, deterministic, target);
+        3, this->_internal_joinsecuritygameeventbuffer(), deterministic, target);
   }
 
   // optional .usx.geofactions.LeaveSecurityGameEventBuffer leaveSecurityGameEventBuffer = 4;
   if (cached_has_bits & 0x00000002u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        4, *this->leavesecuritygameeventbuffer_, deterministic, target);
+        4, this->_internal_leavesecuritygameeventbuffer(), deterministic, target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -1093,21 +1037,19 @@ size_t SecurityGameEventBuffer::ByteSizeLong() const {
     if (has_joinsecuritygameeventbuffer()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSize(
-          *this->joinsecuritygameeventbuffer_);
+          *joinsecuritygameeventbuffer_);
     }
 
     // optional .usx.geofactions.LeaveSecurityGameEventBuffer leaveSecurityGameEventBuffer = 4;
     if (has_leavesecuritygameeventbuffer()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSize(
-          *this->leavesecuritygameeventbuffer_);
+          *leavesecuritygameeventbuffer_);
     }
 
   }
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  SetCachedSize(cached_size);
   return total_size;
 }
 
@@ -1184,7 +1126,6 @@ void SecurityGameEventBuffer::InternalSwap(SecurityGameEventBuffer* other) {
   swap(type_, other->type_);
   swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata SecurityGameEventBuffer::GetMetadata() const {
@@ -1213,17 +1154,15 @@ const int GameEventBuffer::kSecurityGameEventBufferFieldNumber;
 
 GameEventBuffer::GameEventBuffer()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_GameEventBuffer_2eproto::InitDefaultsGameEventBuffer();
-  }
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_GameEventBuffer_2eproto::scc_info_GameEventBuffer.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:usx.geofactions.GameEventBuffer)
 }
 GameEventBuffer::GameEventBuffer(const GameEventBuffer& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
-      _cached_size_(0) {
+      _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   if (from.has_entitygameeventbuffer()) {
     entitygameeventbuffer_ = new ::usx::geofactions::EntityGameEventBuffer(*from.entitygameeventbuffer_);
@@ -1240,7 +1179,6 @@ GameEventBuffer::GameEventBuffer(const GameEventBuffer& from)
 }
 
 void GameEventBuffer::SharedCtor() {
-  _cached_size_ = 0;
   ::memset(&entitygameeventbuffer_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&type_) -
       reinterpret_cast<char*>(&entitygameeventbuffer_)) + sizeof(type_));
@@ -1257,9 +1195,7 @@ void GameEventBuffer::SharedDtor() {
 }
 
 void GameEventBuffer::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  _cached_size_.Set(size);
 }
 const ::google::protobuf::Descriptor* GameEventBuffer::descriptor() {
   ::protobuf_GameEventBuffer_2eproto::protobuf_AssignDescriptorsOnce();
@@ -1267,17 +1203,10 @@ const ::google::protobuf::Descriptor* GameEventBuffer::descriptor() {
 }
 
 const GameEventBuffer& GameEventBuffer::default_instance() {
-  ::protobuf_GameEventBuffer_2eproto::InitDefaultsGameEventBuffer();
+  ::google::protobuf::internal::InitSCC(&protobuf_GameEventBuffer_2eproto::scc_info_GameEventBuffer.base);
   return *internal_default_instance();
 }
 
-GameEventBuffer* GameEventBuffer::New(::google::protobuf::Arena* arena) const {
-  GameEventBuffer* n = new GameEventBuffer;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
 
 void GameEventBuffer::Clear() {
 // @@protoc_insertion_point(message_clear_start:usx.geofactions.GameEventBuffer)
@@ -1307,7 +1236,7 @@ bool GameEventBuffer::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:usx.geofactions.GameEventBuffer)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -1391,13 +1320,13 @@ void GameEventBuffer::SerializeWithCachedSizes(
   // optional .usx.geofactions.EntityGameEventBuffer entityGameEventBuffer = 2;
   if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, *this->entitygameeventbuffer_, output);
+      2, this->_internal_entitygameeventbuffer(), output);
   }
 
   // optional .usx.geofactions.SecurityGameEventBuffer securityGameEventBuffer = 3;
   if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      3, *this->securitygameeventbuffer_, output);
+      3, this->_internal_securitygameeventbuffer(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -1425,14 +1354,14 @@ void GameEventBuffer::SerializeWithCachedSizes(
   if (cached_has_bits & 0x00000001u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        2, *this->entitygameeventbuffer_, deterministic, target);
+        2, this->_internal_entitygameeventbuffer(), deterministic, target);
   }
 
   // optional .usx.geofactions.SecurityGameEventBuffer securityGameEventBuffer = 3;
   if (cached_has_bits & 0x00000002u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        3, *this->securitygameeventbuffer_, deterministic, target);
+        3, this->_internal_securitygameeventbuffer(), deterministic, target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -1462,21 +1391,19 @@ size_t GameEventBuffer::ByteSizeLong() const {
     if (has_entitygameeventbuffer()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSize(
-          *this->entitygameeventbuffer_);
+          *entitygameeventbuffer_);
     }
 
     // optional .usx.geofactions.SecurityGameEventBuffer securityGameEventBuffer = 3;
     if (has_securitygameeventbuffer()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSize(
-          *this->securitygameeventbuffer_);
+          *securitygameeventbuffer_);
     }
 
   }
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  SetCachedSize(cached_size);
   return total_size;
 }
 
@@ -1553,7 +1480,6 @@ void GameEventBuffer::InternalSwap(GameEventBuffer* other) {
   swap(type_, other->type_);
   swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata GameEventBuffer::GetMetadata() const {
@@ -1565,5 +1491,21 @@ void GameEventBuffer::InternalSwap(GameEventBuffer* other) {
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace geofactions
 }  // namespace usx
+namespace google {
+namespace protobuf {
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::usx::geofactions::JoinSecurityGameEventBuffer* Arena::CreateMaybeMessage< ::usx::geofactions::JoinSecurityGameEventBuffer >(Arena* arena) {
+  return Arena::CreateInternal< ::usx::geofactions::JoinSecurityGameEventBuffer >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::usx::geofactions::LeaveSecurityGameEventBuffer* Arena::CreateMaybeMessage< ::usx::geofactions::LeaveSecurityGameEventBuffer >(Arena* arena) {
+  return Arena::CreateInternal< ::usx::geofactions::LeaveSecurityGameEventBuffer >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::usx::geofactions::SecurityGameEventBuffer* Arena::CreateMaybeMessage< ::usx::geofactions::SecurityGameEventBuffer >(Arena* arena) {
+  return Arena::CreateInternal< ::usx::geofactions::SecurityGameEventBuffer >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::usx::geofactions::GameEventBuffer* Arena::CreateMaybeMessage< ::usx::geofactions::GameEventBuffer >(Arena* arena) {
+  return Arena::CreateInternal< ::usx::geofactions::GameEventBuffer >(arena);
+}
+}  // namespace protobuf
+}  // namespace google
 
 // @@protoc_insertion_point(global_scope)

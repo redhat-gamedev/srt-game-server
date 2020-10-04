@@ -7,7 +7,6 @@
 
 #include <google/protobuf/stubs/common.h>
 #include <google/protobuf/stubs/port.h>
-#include <google/protobuf/stubs/once.h>
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/wire_format_lite_inl.h>
 #include <google/protobuf/descriptor.h>
@@ -19,6 +18,15 @@
 #include "third_party/protobuf/version.h"
 #endif
 // @@protoc_insertion_point(includes)
+
+namespace protobuf_box2d_2eproto {
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_box2d_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_PbFilter;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_box2d_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_PbVec2;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_box2d_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_PbJoint;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_box2d_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_PbShape;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_box2d_2eproto ::google::protobuf::internal::SCCInfo<2> scc_info_PbBody;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_box2d_2eproto ::google::protobuf::internal::SCCInfo<2> scc_info_PbFixture;
+}  // namespace protobuf_box2d_2eproto
 namespace box2d {
 class PbVec2DefaultTypeInternal {
  public:
@@ -57,14 +65,9 @@ class PbWorldDefaultTypeInternal {
 } _PbWorld_default_instance_;
 }  // namespace box2d
 namespace protobuf_box2d_2eproto {
-void InitDefaultsPbVec2Impl() {
+static void InitDefaultsPbVec2() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
   {
     void* ptr = &::box2d::_PbVec2_default_instance_;
     new (ptr) ::box2d::PbVec2();
@@ -73,19 +76,12 @@ void InitDefaultsPbVec2Impl() {
   ::box2d::PbVec2::InitAsDefaultInstance();
 }
 
-void InitDefaultsPbVec2() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsPbVec2Impl);
-}
+::google::protobuf::internal::SCCInfo<0> scc_info_PbVec2 =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsPbVec2}, {}};
 
-void InitDefaultsPbFilterImpl() {
+static void InitDefaultsPbFilter() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
   {
     void* ptr = &::box2d::_PbFilter_default_instance_;
     new (ptr) ::box2d::PbFilter();
@@ -94,20 +90,12 @@ void InitDefaultsPbFilterImpl() {
   ::box2d::PbFilter::InitAsDefaultInstance();
 }
 
-void InitDefaultsPbFilter() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsPbFilterImpl);
-}
+::google::protobuf::internal::SCCInfo<0> scc_info_PbFilter =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsPbFilter}, {}};
 
-void InitDefaultsPbShapeImpl() {
+static void InitDefaultsPbShape() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  protobuf_box2d_2eproto::InitDefaultsPbVec2();
   {
     void* ptr = &::box2d::_PbShape_default_instance_;
     new (ptr) ::box2d::PbShape();
@@ -116,21 +104,13 @@ void InitDefaultsPbShapeImpl() {
   ::box2d::PbShape::InitAsDefaultInstance();
 }
 
-void InitDefaultsPbShape() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsPbShapeImpl);
-}
+::google::protobuf::internal::SCCInfo<1> scc_info_PbShape =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsPbShape}, {
+      &protobuf_box2d_2eproto::scc_info_PbVec2.base,}};
 
-void InitDefaultsPbFixtureImpl() {
+static void InitDefaultsPbFixture() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  protobuf_box2d_2eproto::InitDefaultsPbFilter();
-  protobuf_box2d_2eproto::InitDefaultsPbShape();
   {
     void* ptr = &::box2d::_PbFixture_default_instance_;
     new (ptr) ::box2d::PbFixture();
@@ -139,20 +119,14 @@ void InitDefaultsPbFixtureImpl() {
   ::box2d::PbFixture::InitAsDefaultInstance();
 }
 
-void InitDefaultsPbFixture() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsPbFixtureImpl);
-}
+::google::protobuf::internal::SCCInfo<2> scc_info_PbFixture =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 2, InitDefaultsPbFixture}, {
+      &protobuf_box2d_2eproto::scc_info_PbFilter.base,
+      &protobuf_box2d_2eproto::scc_info_PbShape.base,}};
 
-void InitDefaultsPbJointImpl() {
+static void InitDefaultsPbJoint() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  protobuf_box2d_2eproto::InitDefaultsPbVec2();
   {
     void* ptr = &::box2d::_PbJoint_default_instance_;
     new (ptr) ::box2d::PbJoint();
@@ -161,21 +135,13 @@ void InitDefaultsPbJointImpl() {
   ::box2d::PbJoint::InitAsDefaultInstance();
 }
 
-void InitDefaultsPbJoint() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsPbJointImpl);
-}
+::google::protobuf::internal::SCCInfo<1> scc_info_PbJoint =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsPbJoint}, {
+      &protobuf_box2d_2eproto::scc_info_PbVec2.base,}};
 
-void InitDefaultsPbBodyImpl() {
+static void InitDefaultsPbBody() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  protobuf_box2d_2eproto::InitDefaultsPbVec2();
-  protobuf_box2d_2eproto::InitDefaultsPbFixture();
   {
     void* ptr = &::box2d::_PbBody_default_instance_;
     new (ptr) ::box2d::PbBody();
@@ -184,22 +150,14 @@ void InitDefaultsPbBodyImpl() {
   ::box2d::PbBody::InitAsDefaultInstance();
 }
 
-void InitDefaultsPbBody() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsPbBodyImpl);
-}
+::google::protobuf::internal::SCCInfo<2> scc_info_PbBody =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 2, InitDefaultsPbBody}, {
+      &protobuf_box2d_2eproto::scc_info_PbVec2.base,
+      &protobuf_box2d_2eproto::scc_info_PbFixture.base,}};
 
-void InitDefaultsPbWorldImpl() {
+static void InitDefaultsPbWorld() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  protobuf_box2d_2eproto::InitDefaultsPbVec2();
-  protobuf_box2d_2eproto::InitDefaultsPbBody();
-  protobuf_box2d_2eproto::InitDefaultsPbJoint();
   {
     void* ptr = &::box2d::_PbWorld_default_instance_;
     new (ptr) ::box2d::PbWorld();
@@ -208,9 +166,20 @@ void InitDefaultsPbWorldImpl() {
   ::box2d::PbWorld::InitAsDefaultInstance();
 }
 
-void InitDefaultsPbWorld() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsPbWorldImpl);
+::google::protobuf::internal::SCCInfo<3> scc_info_PbWorld =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 3, InitDefaultsPbWorld}, {
+      &protobuf_box2d_2eproto::scc_info_PbVec2.base,
+      &protobuf_box2d_2eproto::scc_info_PbBody.base,
+      &protobuf_box2d_2eproto::scc_info_PbJoint.base,}};
+
+void InitDefaults() {
+  ::google::protobuf::internal::InitSCC(&scc_info_PbVec2.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_PbFilter.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_PbShape.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_PbFixture.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_PbJoint.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_PbBody.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_PbWorld.base);
 }
 
 ::google::protobuf::Metadata file_level_metadata[7];
@@ -445,15 +414,14 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
 
 void protobuf_AssignDescriptors() {
   AddDescriptors();
-  ::google::protobuf::MessageFactory* factory = NULL;
   AssignDescriptors(
-      "box2d.proto", schemas, file_default_instances, TableStruct::offsets, factory,
+      "box2d.proto", schemas, file_default_instances, TableStruct::offsets,
       file_level_metadata, file_level_enum_descriptors, NULL);
 }
 
 void protobuf_AssignDescriptorsOnce() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &protobuf_AssignDescriptors);
+  static ::google::protobuf::internal::once_flag once;
+  ::google::protobuf::internal::call_once(once, protobuf_AssignDescriptors);
 }
 
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
@@ -532,8 +500,8 @@ void AddDescriptorsImpl() {
 }
 
 void AddDescriptors() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &AddDescriptorsImpl);
+  static ::google::protobuf::internal::once_flag once;
+  ::google::protobuf::internal::call_once(once, AddDescriptorsImpl);
 }
 // Force AddDescriptors() to be called at dynamic initialization time.
 struct StaticDescriptorInitializer {
@@ -610,17 +578,15 @@ const int PbVec2::kYFieldNumber;
 
 PbVec2::PbVec2()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_box2d_2eproto::InitDefaultsPbVec2();
-  }
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_box2d_2eproto::scc_info_PbVec2.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:box2d.PbVec2)
 }
 PbVec2::PbVec2(const PbVec2& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
-      _cached_size_(0) {
+      _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::memcpy(&x_, &from.x_,
     static_cast<size_t>(reinterpret_cast<char*>(&y_) -
@@ -629,7 +595,6 @@ PbVec2::PbVec2(const PbVec2& from)
 }
 
 void PbVec2::SharedCtor() {
-  _cached_size_ = 0;
   ::memset(&x_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&y_) -
       reinterpret_cast<char*>(&x_)) + sizeof(y_));
@@ -644,9 +609,7 @@ void PbVec2::SharedDtor() {
 }
 
 void PbVec2::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  _cached_size_.Set(size);
 }
 const ::google::protobuf::Descriptor* PbVec2::descriptor() {
   ::protobuf_box2d_2eproto::protobuf_AssignDescriptorsOnce();
@@ -654,17 +617,10 @@ const ::google::protobuf::Descriptor* PbVec2::descriptor() {
 }
 
 const PbVec2& PbVec2::default_instance() {
-  ::protobuf_box2d_2eproto::InitDefaultsPbVec2();
+  ::google::protobuf::internal::InitSCC(&protobuf_box2d_2eproto::scc_info_PbVec2.base);
   return *internal_default_instance();
 }
 
-PbVec2* PbVec2::New(::google::protobuf::Arena* arena) const {
-  PbVec2* n = new PbVec2;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
 
 void PbVec2::Clear() {
 // @@protoc_insertion_point(message_clear_start:box2d.PbVec2)
@@ -688,7 +644,7 @@ bool PbVec2::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:box2d.PbVec2)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -826,9 +782,7 @@ size_t PbVec2::ByteSizeLong() const {
     total_size += RequiredFieldsByteSizeFallback();
   }
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  SetCachedSize(cached_size);
   return total_size;
 }
 
@@ -895,7 +849,6 @@ void PbVec2::InternalSwap(PbVec2* other) {
   swap(y_, other->y_);
   swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata PbVec2::GetMetadata() const {
@@ -916,17 +869,15 @@ const int PbFilter::kGroupIndexFieldNumber;
 
 PbFilter::PbFilter()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_box2d_2eproto::InitDefaultsPbFilter();
-  }
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_box2d_2eproto::scc_info_PbFilter.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:box2d.PbFilter)
 }
 PbFilter::PbFilter(const PbFilter& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
-      _cached_size_(0) {
+      _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::memcpy(&category_bits_, &from.category_bits_,
     static_cast<size_t>(reinterpret_cast<char*>(&group_index_) -
@@ -935,7 +886,6 @@ PbFilter::PbFilter(const PbFilter& from)
 }
 
 void PbFilter::SharedCtor() {
-  _cached_size_ = 0;
   ::memset(&category_bits_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&group_index_) -
       reinterpret_cast<char*>(&category_bits_)) + sizeof(group_index_));
@@ -950,9 +900,7 @@ void PbFilter::SharedDtor() {
 }
 
 void PbFilter::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  _cached_size_.Set(size);
 }
 const ::google::protobuf::Descriptor* PbFilter::descriptor() {
   ::protobuf_box2d_2eproto::protobuf_AssignDescriptorsOnce();
@@ -960,17 +908,10 @@ const ::google::protobuf::Descriptor* PbFilter::descriptor() {
 }
 
 const PbFilter& PbFilter::default_instance() {
-  ::protobuf_box2d_2eproto::InitDefaultsPbFilter();
+  ::google::protobuf::internal::InitSCC(&protobuf_box2d_2eproto::scc_info_PbFilter.base);
   return *internal_default_instance();
 }
 
-PbFilter* PbFilter::New(::google::protobuf::Arena* arena) const {
-  PbFilter* n = new PbFilter;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
 
 void PbFilter::Clear() {
 // @@protoc_insertion_point(message_clear_start:box2d.PbFilter)
@@ -994,7 +935,7 @@ bool PbFilter::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:box2d.PbFilter)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -1153,9 +1094,7 @@ size_t PbFilter::ByteSizeLong() const {
 
   }
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  SetCachedSize(cached_size);
   return total_size;
 }
 
@@ -1225,7 +1164,6 @@ void PbFilter::InternalSwap(PbFilter* other) {
   swap(group_index_, other->group_index_);
   swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata PbFilter::GetMetadata() const {
@@ -1254,9 +1192,8 @@ const int PbShape::kCentroidFieldNumber;
 
 PbShape::PbShape()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_box2d_2eproto::InitDefaultsPbShape();
-  }
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_box2d_2eproto::scc_info_PbShape.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:box2d.PbShape)
 }
@@ -1264,7 +1201,6 @@ PbShape::PbShape(const PbShape& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
       _has_bits_(from._has_bits_),
-      _cached_size_(0),
       points_(from.points_),
       normals_(from.normals_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
@@ -1285,7 +1221,6 @@ PbShape::PbShape(const PbShape& from)
 }
 
 void PbShape::SharedCtor() {
-  _cached_size_ = 0;
   ::memset(&center_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&radius_) -
       reinterpret_cast<char*>(&center_)) + sizeof(radius_));
@@ -1303,9 +1238,7 @@ void PbShape::SharedDtor() {
 }
 
 void PbShape::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  _cached_size_.Set(size);
 }
 const ::google::protobuf::Descriptor* PbShape::descriptor() {
   ::protobuf_box2d_2eproto::protobuf_AssignDescriptorsOnce();
@@ -1313,17 +1246,10 @@ const ::google::protobuf::Descriptor* PbShape::descriptor() {
 }
 
 const PbShape& PbShape::default_instance() {
-  ::protobuf_box2d_2eproto::InitDefaultsPbShape();
+  ::google::protobuf::internal::InitSCC(&protobuf_box2d_2eproto::scc_info_PbShape.base);
   return *internal_default_instance();
 }
 
-PbShape* PbShape::New(::google::protobuf::Arena* arena) const {
-  PbShape* n = new PbShape;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
 
 void PbShape::Clear() {
 // @@protoc_insertion_point(message_clear_start:box2d.PbShape)
@@ -1360,7 +1286,7 @@ bool PbShape::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:box2d.PbShape)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(16383u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(16383u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -1428,7 +1354,8 @@ bool PbShape::MergePartialFromCodedStream(
       case 20: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(162u /* 162 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(input, add_points()));
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+                input, add_points()));
         } else {
           goto handle_unusual;
         }
@@ -1439,7 +1366,8 @@ bool PbShape::MergePartialFromCodedStream(
       case 21: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(170u /* 170 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(input, add_normals()));
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+                input, add_normals()));
         } else {
           goto handle_unusual;
         }
@@ -1499,7 +1427,7 @@ void PbShape::SerializeWithCachedSizes(
   // optional .box2d.PbVec2 center = 10;
   if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      10, *this->center_, output);
+      10, this->_internal_center(), output);
   }
 
   // optional float radius = 11;
@@ -1511,20 +1439,24 @@ void PbShape::SerializeWithCachedSizes(
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->points_size()); i < n; i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      20, this->points(static_cast<int>(i)), output);
+      20,
+      this->points(static_cast<int>(i)),
+      output);
   }
 
   // repeated .box2d.PbVec2 normals = 21;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->normals_size()); i < n; i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      21, this->normals(static_cast<int>(i)), output);
+      21,
+      this->normals(static_cast<int>(i)),
+      output);
   }
 
   // optional .box2d.PbVec2 centroid = 22;
   if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      22, *this->centroid_, output);
+      22, this->_internal_centroid(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -1557,7 +1489,7 @@ void PbShape::SerializeWithCachedSizes(
   if (cached_has_bits & 0x00000001u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        10, *this->center_, deterministic, target);
+        10, this->_internal_center(), deterministic, target);
   }
 
   // optional float radius = 11;
@@ -1585,7 +1517,7 @@ void PbShape::SerializeWithCachedSizes(
   if (cached_has_bits & 0x00000002u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        22, *this->centroid_, deterministic, target);
+        22, this->_internal_centroid(), deterministic, target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -1637,14 +1569,14 @@ size_t PbShape::ByteSizeLong() const {
     if (has_center()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSize(
-          *this->center_);
+          *center_);
     }
 
     // optional .box2d.PbVec2 centroid = 22;
     if (has_centroid()) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::MessageSize(
-          *this->centroid_);
+          *centroid_);
     }
 
     // optional int64 tag = 1;
@@ -1661,9 +1593,7 @@ size_t PbShape::ByteSizeLong() const {
 
   }
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  SetCachedSize(cached_size);
   return total_size;
 }
 
@@ -1745,8 +1675,8 @@ void PbShape::Swap(PbShape* other) {
 }
 void PbShape::InternalSwap(PbShape* other) {
   using std::swap;
-  points_.InternalSwap(&other->points_);
-  normals_.InternalSwap(&other->normals_);
+  CastToBase(&points_)->InternalSwap(CastToBase(&other->points_));
+  CastToBase(&normals_)->InternalSwap(CastToBase(&other->normals_));
   swap(center_, other->center_);
   swap(centroid_, other->centroid_);
   swap(tag_, other->tag_);
@@ -1754,7 +1684,6 @@ void PbShape::InternalSwap(PbShape* other) {
   swap(type_, other->type_);
   swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata PbShape::GetMetadata() const {
@@ -1783,17 +1712,15 @@ const int PbFixture::kShapeFieldNumber;
 
 PbFixture::PbFixture()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_box2d_2eproto::InitDefaultsPbFixture();
-  }
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_box2d_2eproto::scc_info_PbFixture.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:box2d.PbFixture)
 }
 PbFixture::PbFixture(const PbFixture& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
-      _cached_size_(0) {
+      _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   if (from.has_filter()) {
     filter_ = new ::box2d::PbFilter(*from.filter_);
@@ -1812,7 +1739,6 @@ PbFixture::PbFixture(const PbFixture& from)
 }
 
 void PbFixture::SharedCtor() {
-  _cached_size_ = 0;
   ::memset(&filter_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&sensor_) -
       reinterpret_cast<char*>(&filter_)) + sizeof(sensor_));
@@ -1829,9 +1755,7 @@ void PbFixture::SharedDtor() {
 }
 
 void PbFixture::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  _cached_size_.Set(size);
 }
 const ::google::protobuf::Descriptor* PbFixture::descriptor() {
   ::protobuf_box2d_2eproto::protobuf_AssignDescriptorsOnce();
@@ -1839,17 +1763,10 @@ const ::google::protobuf::Descriptor* PbFixture::descriptor() {
 }
 
 const PbFixture& PbFixture::default_instance() {
-  ::protobuf_box2d_2eproto::InitDefaultsPbFixture();
+  ::google::protobuf::internal::InitSCC(&protobuf_box2d_2eproto::scc_info_PbFixture.base);
   return *internal_default_instance();
 }
 
-PbFixture* PbFixture::New(::google::protobuf::Arena* arena) const {
-  PbFixture* n = new PbFixture;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
 
 void PbFixture::Clear() {
 // @@protoc_insertion_point(message_clear_start:box2d.PbFixture)
@@ -1883,7 +1800,7 @@ bool PbFixture::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:box2d.PbFixture)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -2036,13 +1953,13 @@ void PbFixture::SerializeWithCachedSizes(
   // optional .box2d.PbFilter filter = 10;
   if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      10, *this->filter_, output);
+      10, this->_internal_filter(), output);
   }
 
   // optional .box2d.PbShape shape = 11;
   if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      11, *this->shape_, output);
+      11, this->_internal_shape(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -2089,14 +2006,14 @@ void PbFixture::SerializeWithCachedSizes(
   if (cached_has_bits & 0x00000001u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        10, *this->filter_, deterministic, target);
+        10, this->_internal_filter(), deterministic, target);
   }
 
   // optional .box2d.PbShape shape = 11;
   if (cached_has_bits & 0x00000002u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        11, *this->shape_, deterministic, target);
+        11, this->_internal_shape(), deterministic, target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -2121,14 +2038,14 @@ size_t PbFixture::ByteSizeLong() const {
     if (has_filter()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSize(
-          *this->filter_);
+          *filter_);
     }
 
     // optional .box2d.PbShape shape = 11;
     if (has_shape()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSize(
-          *this->shape_);
+          *shape_);
     }
 
     // optional int64 tag = 1;
@@ -2160,9 +2077,7 @@ size_t PbFixture::ByteSizeLong() const {
 
   }
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  SetCachedSize(cached_size);
   return total_size;
 }
 
@@ -2251,7 +2166,6 @@ void PbFixture::InternalSwap(PbFixture* other) {
   swap(sensor_, other->sensor_);
   swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata PbFixture::GetMetadata() const {
@@ -2318,9 +2232,8 @@ const int PbJoint::kTargetVolumeFieldNumber;
 
 PbJoint::PbJoint()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_box2d_2eproto::InitDefaultsPbJoint();
-  }
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_box2d_2eproto::scc_info_PbJoint.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:box2d.PbJoint)
 }
@@ -2329,8 +2242,7 @@ PbJoint::PbJoint(const PbJoint& from)
       _internal_metadata_(NULL),
       _has_bits_(from._has_bits_),
       bodies_(from.bodies_),
-      joints_(from.joints_),
-      _cached_size_(0) {
+      joints_(from.joints_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   if (from.has_local_anchor_a()) {
     local_anchor_a_ = new ::box2d::PbVec2(*from.local_anchor_a_);
@@ -2373,7 +2285,6 @@ void PbJoint::SharedCtor() {
       reinterpret_cast<char*>(&max_length_) -
       reinterpret_cast<char*>(&local_anchor_a_)) + sizeof(max_length_));
   type_ = 1;
-  _cached_size_ = 0;
 }
 
 PbJoint::~PbJoint() {
@@ -2391,9 +2302,7 @@ void PbJoint::SharedDtor() {
 }
 
 void PbJoint::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  _cached_size_.Set(size);
 }
 const ::google::protobuf::Descriptor* PbJoint::descriptor() {
   ::protobuf_box2d_2eproto::protobuf_AssignDescriptorsOnce();
@@ -2401,17 +2310,10 @@ const ::google::protobuf::Descriptor* PbJoint::descriptor() {
 }
 
 const PbJoint& PbJoint::default_instance() {
-  ::protobuf_box2d_2eproto::InitDefaultsPbJoint();
+  ::google::protobuf::internal::InitSCC(&protobuf_box2d_2eproto::scc_info_PbJoint.base);
   return *internal_default_instance();
 }
 
-PbJoint* PbJoint::New(::google::protobuf::Arena* arena) const {
-  PbJoint* n = new PbJoint;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
 
 void PbJoint::Clear() {
 // @@protoc_insertion_point(message_clear_start:box2d.PbJoint)
@@ -2485,7 +2387,7 @@ bool PbJoint::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:box2d.PbJoint)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(16383u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(16383u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -3069,13 +2971,13 @@ void PbJoint::SerializeWithCachedSizes(
   // optional .box2d.PbVec2 local_anchor_a = 6;
   if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      6, *this->local_anchor_a_, output);
+      6, this->_internal_local_anchor_a(), output);
   }
 
   // optional .box2d.PbVec2 local_anchor_b = 7;
   if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      7, *this->local_anchor_b_, output);
+      7, this->_internal_local_anchor_b(), output);
   }
 
   // optional float ref_angle = 10;
@@ -3116,7 +3018,7 @@ void PbJoint::SerializeWithCachedSizes(
   // optional .box2d.PbVec2 local_axis_a = 20;
   if (cached_has_bits & 0x00000004u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      20, *this->local_axis_a_, output);
+      20, this->_internal_local_axis_a(), output);
   }
 
   // optional float max_motor_force = 21;
@@ -3142,13 +3044,13 @@ void PbJoint::SerializeWithCachedSizes(
   // optional .box2d.PbVec2 ground_anchor_a = 40;
   if (cached_has_bits & 0x00000008u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      40, *this->ground_anchor_a_, output);
+      40, this->_internal_ground_anchor_a(), output);
   }
 
   // optional .box2d.PbVec2 ground_anchor_b = 41;
   if (cached_has_bits & 0x00000010u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      41, *this->ground_anchor_b_, output);
+      41, this->_internal_ground_anchor_b(), output);
   }
 
   // optional float length_a = 42;
@@ -3179,7 +3081,7 @@ void PbJoint::SerializeWithCachedSizes(
   // optional .box2d.PbVec2 target = 50;
   if (cached_has_bits & 0x00000020u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      50, *this->target_, output);
+      50, this->_internal_target(), output);
   }
 
   // optional float max_force = 51;
@@ -3283,14 +3185,14 @@ void PbJoint::SerializeWithCachedSizes(
   if (cached_has_bits & 0x00000001u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        6, *this->local_anchor_a_, deterministic, target);
+        6, this->_internal_local_anchor_a(), deterministic, target);
   }
 
   // optional .box2d.PbVec2 local_anchor_b = 7;
   if (cached_has_bits & 0x00000002u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        7, *this->local_anchor_b_, deterministic, target);
+        7, this->_internal_local_anchor_b(), deterministic, target);
   }
 
   // optional float ref_angle = 10;
@@ -3332,7 +3234,7 @@ void PbJoint::SerializeWithCachedSizes(
   if (cached_has_bits & 0x00000004u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        20, *this->local_axis_a_, deterministic, target);
+        20, this->_internal_local_axis_a(), deterministic, target);
   }
 
   // optional float max_motor_force = 21;
@@ -3359,14 +3261,14 @@ void PbJoint::SerializeWithCachedSizes(
   if (cached_has_bits & 0x00000008u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        40, *this->ground_anchor_a_, deterministic, target);
+        40, this->_internal_ground_anchor_a(), deterministic, target);
   }
 
   // optional .box2d.PbVec2 ground_anchor_b = 41;
   if (cached_has_bits & 0x00000010u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        41, *this->ground_anchor_b_, deterministic, target);
+        41, this->_internal_ground_anchor_b(), deterministic, target);
   }
 
   // optional float length_a = 42;
@@ -3398,7 +3300,7 @@ void PbJoint::SerializeWithCachedSizes(
   if (cached_has_bits & 0x00000020u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        50, *this->target_, deterministic, target);
+        50, this->_internal_target(), deterministic, target);
   }
 
   // optional float max_force = 51;
@@ -3496,42 +3398,42 @@ size_t PbJoint::ByteSizeLong() const {
     if (has_local_anchor_a()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSize(
-          *this->local_anchor_a_);
+          *local_anchor_a_);
     }
 
     // optional .box2d.PbVec2 local_anchor_b = 7;
     if (has_local_anchor_b()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSize(
-          *this->local_anchor_b_);
+          *local_anchor_b_);
     }
 
     // optional .box2d.PbVec2 local_axis_a = 20;
     if (has_local_axis_a()) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::MessageSize(
-          *this->local_axis_a_);
+          *local_axis_a_);
     }
 
     // optional .box2d.PbVec2 ground_anchor_a = 40;
     if (has_ground_anchor_a()) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::MessageSize(
-          *this->ground_anchor_a_);
+          *ground_anchor_a_);
     }
 
     // optional .box2d.PbVec2 ground_anchor_b = 41;
     if (has_ground_anchor_b()) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::MessageSize(
-          *this->ground_anchor_b_);
+          *ground_anchor_b_);
     }
 
     // optional .box2d.PbVec2 target = 50;
     if (has_target()) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::MessageSize(
-          *this->target_);
+          *target_);
     }
 
     // optional int64 tag = 1;
@@ -3694,9 +3596,7 @@ size_t PbJoint::ByteSizeLong() const {
 
   }
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  SetCachedSize(cached_size);
   return total_size;
 }
 
@@ -3931,7 +3831,6 @@ void PbJoint::InternalSwap(PbJoint* other) {
   swap(_has_bits_[0], other->_has_bits_[0]);
   swap(_has_bits_[1], other->_has_bits_[1]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata PbJoint::GetMetadata() const {
@@ -3975,9 +3874,8 @@ const int PbBody::kFixturesFieldNumber;
 
 PbBody::PbBody()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_box2d_2eproto::InitDefaultsPbBody();
-  }
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_box2d_2eproto::scc_info_PbBody.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:box2d.PbBody)
 }
@@ -3985,7 +3883,6 @@ PbBody::PbBody(const PbBody& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
       _has_bits_(from._has_bits_),
-      _cached_size_(0),
       fixtures_(from.fixtures_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   uuid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -4014,7 +3911,6 @@ PbBody::PbBody(const PbBody& from)
 }
 
 void PbBody::SharedCtor() {
-  _cached_size_ = 0;
   uuid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&position_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&active_) -
@@ -4034,9 +3930,7 @@ void PbBody::SharedDtor() {
 }
 
 void PbBody::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  _cached_size_.Set(size);
 }
 const ::google::protobuf::Descriptor* PbBody::descriptor() {
   ::protobuf_box2d_2eproto::protobuf_AssignDescriptorsOnce();
@@ -4044,17 +3938,10 @@ const ::google::protobuf::Descriptor* PbBody::descriptor() {
 }
 
 const PbBody& PbBody::default_instance() {
-  ::protobuf_box2d_2eproto::InitDefaultsPbBody();
+  ::google::protobuf::internal::InitSCC(&protobuf_box2d_2eproto::scc_info_PbBody.base);
   return *internal_default_instance();
 }
 
-PbBody* PbBody::New(::google::protobuf::Arena* arena) const {
-  PbBody* n = new PbBody;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
 
 void PbBody::Clear() {
 // @@protoc_insertion_point(message_clear_start:box2d.PbBody)
@@ -4066,8 +3953,7 @@ void PbBody::Clear() {
   cached_has_bits = _has_bits_[0];
   if (cached_has_bits & 15u) {
     if (cached_has_bits & 0x00000001u) {
-      GOOGLE_DCHECK(!uuid_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-      (*uuid_.UnsafeRawStringPointer())->clear();
+      uuid_.ClearNonDefaultToEmptyNoArena();
     }
     if (cached_has_bits & 0x00000002u) {
       GOOGLE_DCHECK(position_ != NULL);
@@ -4107,7 +3993,7 @@ bool PbBody::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:box2d.PbBody)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(16383u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(16383u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -4383,7 +4269,8 @@ bool PbBody::MergePartialFromCodedStream(
       case 100: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(34u /* 802 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(input, add_fixtures()));
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+                input, add_fixtures()));
         } else {
           goto handle_unusual;
         }
@@ -4431,7 +4318,7 @@ void PbBody::SerializeWithCachedSizes(
   // optional .box2d.PbVec2 position = 10;
   if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      10, *this->position_, output);
+      10, this->_internal_position(), output);
   }
 
   // optional float angle = 11;
@@ -4442,7 +4329,7 @@ void PbBody::SerializeWithCachedSizes(
   // optional .box2d.PbVec2 linear_velocity = 12;
   if (cached_has_bits & 0x00000004u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      12, *this->linear_velocity_, output);
+      12, this->_internal_linear_velocity(), output);
   }
 
   // optional float angular_velocity = 13;
@@ -4453,7 +4340,7 @@ void PbBody::SerializeWithCachedSizes(
   // optional .box2d.PbVec2 force = 14;
   if (cached_has_bits & 0x00000008u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      14, *this->force_, output);
+      14, this->_internal_force(), output);
   }
 
   // optional float torque = 15;
@@ -4525,7 +4412,9 @@ void PbBody::SerializeWithCachedSizes(
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->fixtures_size()); i < n; i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      100, this->fixtures(static_cast<int>(i)), output);
+      100,
+      this->fixtures(static_cast<int>(i)),
+      output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -4558,7 +4447,7 @@ void PbBody::SerializeWithCachedSizes(
   if (cached_has_bits & 0x00000002u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        10, *this->position_, deterministic, target);
+        10, this->_internal_position(), deterministic, target);
   }
 
   // optional float angle = 11;
@@ -4570,7 +4459,7 @@ void PbBody::SerializeWithCachedSizes(
   if (cached_has_bits & 0x00000004u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        12, *this->linear_velocity_, deterministic, target);
+        12, this->_internal_linear_velocity(), deterministic, target);
   }
 
   // optional float angular_velocity = 13;
@@ -4582,7 +4471,7 @@ void PbBody::SerializeWithCachedSizes(
   if (cached_has_bits & 0x00000008u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        14, *this->force_, deterministic, target);
+        14, this->_internal_force(), deterministic, target);
   }
 
   // optional float torque = 15;
@@ -4704,21 +4593,21 @@ size_t PbBody::ByteSizeLong() const {
     if (has_position()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSize(
-          *this->position_);
+          *position_);
     }
 
     // optional .box2d.PbVec2 linear_velocity = 12;
     if (has_linear_velocity()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSize(
-          *this->linear_velocity_);
+          *linear_velocity_);
     }
 
     // optional .box2d.PbVec2 force = 14;
     if (has_force()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSize(
-          *this->force_);
+          *force_);
     }
 
     // optional int64 tag = 1;
@@ -4801,9 +4690,7 @@ size_t PbBody::ByteSizeLong() const {
 
   }
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  SetCachedSize(cached_size);
   return total_size;
 }
 
@@ -4935,8 +4822,9 @@ void PbBody::Swap(PbBody* other) {
 }
 void PbBody::InternalSwap(PbBody* other) {
   using std::swap;
-  fixtures_.InternalSwap(&other->fixtures_);
-  uuid_.Swap(&other->uuid_);
+  CastToBase(&fixtures_)->InternalSwap(CastToBase(&other->fixtures_));
+  uuid_.Swap(&other->uuid_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
   swap(position_, other->position_);
   swap(linear_velocity_, other->linear_velocity_);
   swap(force_, other->force_);
@@ -4957,7 +4845,6 @@ void PbBody::InternalSwap(PbBody* other) {
   swap(active_, other->active_);
   swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata PbBody::GetMetadata() const {
@@ -4986,9 +4873,8 @@ const int PbWorld::kJointsFieldNumber;
 
 PbWorld::PbWorld()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_box2d_2eproto::InitDefaultsPbWorld();
-  }
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_box2d_2eproto::scc_info_PbWorld.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:box2d.PbWorld)
 }
@@ -4996,7 +4882,6 @@ PbWorld::PbWorld(const PbWorld& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
       _has_bits_(from._has_bits_),
-      _cached_size_(0),
       bodies_(from.bodies_),
       joints_(from.joints_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
@@ -5012,7 +4897,6 @@ PbWorld::PbWorld(const PbWorld& from)
 }
 
 void PbWorld::SharedCtor() {
-  _cached_size_ = 0;
   ::memset(&gravity_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&sub_stepping_) -
       reinterpret_cast<char*>(&gravity_)) + sizeof(sub_stepping_));
@@ -5028,9 +4912,7 @@ void PbWorld::SharedDtor() {
 }
 
 void PbWorld::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  _cached_size_.Set(size);
 }
 const ::google::protobuf::Descriptor* PbWorld::descriptor() {
   ::protobuf_box2d_2eproto::protobuf_AssignDescriptorsOnce();
@@ -5038,17 +4920,10 @@ const ::google::protobuf::Descriptor* PbWorld::descriptor() {
 }
 
 const PbWorld& PbWorld::default_instance() {
-  ::protobuf_box2d_2eproto::InitDefaultsPbWorld();
+  ::google::protobuf::internal::InitSCC(&protobuf_box2d_2eproto::scc_info_PbWorld.base);
   return *internal_default_instance();
 }
 
-PbWorld* PbWorld::New(::google::protobuf::Arena* arena) const {
-  PbWorld* n = new PbWorld;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
 
 void PbWorld::Clear() {
 // @@protoc_insertion_point(message_clear_start:box2d.PbWorld)
@@ -5078,7 +4953,7 @@ bool PbWorld::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:box2d.PbWorld)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(16383u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(16383u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -5182,7 +5057,8 @@ bool PbWorld::MergePartialFromCodedStream(
       case 20: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(162u /* 162 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(input, add_bodies()));
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+                input, add_bodies()));
         } else {
           goto handle_unusual;
         }
@@ -5193,7 +5069,8 @@ bool PbWorld::MergePartialFromCodedStream(
       case 21: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(170u /* 170 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(input, add_joints()));
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+                input, add_joints()));
         } else {
           goto handle_unusual;
         }
@@ -5235,7 +5112,7 @@ void PbWorld::SerializeWithCachedSizes(
   // optional .box2d.PbVec2 gravity = 2;
   if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, *this->gravity_, output);
+      2, this->_internal_gravity(), output);
   }
 
   // optional bool allow_sleep = 3;
@@ -5267,14 +5144,18 @@ void PbWorld::SerializeWithCachedSizes(
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->bodies_size()); i < n; i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      20, this->bodies(static_cast<int>(i)), output);
+      20,
+      this->bodies(static_cast<int>(i)),
+      output);
   }
 
   // repeated .box2d.PbJoint joints = 21;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->joints_size()); i < n; i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      21, this->joints(static_cast<int>(i)), output);
+      21,
+      this->joints(static_cast<int>(i)),
+      output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -5301,7 +5182,7 @@ void PbWorld::SerializeWithCachedSizes(
   if (cached_has_bits & 0x00000001u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        2, *this->gravity_, deterministic, target);
+        2, this->_internal_gravity(), deterministic, target);
   }
 
   // optional bool allow_sleep = 3;
@@ -5389,7 +5270,7 @@ size_t PbWorld::ByteSizeLong() const {
     if (has_gravity()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSize(
-          *this->gravity_);
+          *gravity_);
     }
 
     // optional int64 tag = 1;
@@ -5426,9 +5307,7 @@ size_t PbWorld::ByteSizeLong() const {
 
   }
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  SetCachedSize(cached_size);
   return total_size;
 }
 
@@ -5512,8 +5391,8 @@ void PbWorld::Swap(PbWorld* other) {
 }
 void PbWorld::InternalSwap(PbWorld* other) {
   using std::swap;
-  bodies_.InternalSwap(&other->bodies_);
-  joints_.InternalSwap(&other->joints_);
+  CastToBase(&bodies_)->InternalSwap(CastToBase(&other->bodies_));
+  CastToBase(&joints_)->InternalSwap(CastToBase(&other->joints_));
   swap(gravity_, other->gravity_);
   swap(tag_, other->tag_);
   swap(allow_sleep_, other->allow_sleep_);
@@ -5523,7 +5402,6 @@ void PbWorld::InternalSwap(PbWorld* other) {
   swap(sub_stepping_, other->sub_stepping_);
   swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata PbWorld::GetMetadata() const {
@@ -5534,5 +5412,30 @@ void PbWorld::InternalSwap(PbWorld* other) {
 
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace box2d
+namespace google {
+namespace protobuf {
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::box2d::PbVec2* Arena::CreateMaybeMessage< ::box2d::PbVec2 >(Arena* arena) {
+  return Arena::CreateInternal< ::box2d::PbVec2 >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::box2d::PbFilter* Arena::CreateMaybeMessage< ::box2d::PbFilter >(Arena* arena) {
+  return Arena::CreateInternal< ::box2d::PbFilter >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::box2d::PbShape* Arena::CreateMaybeMessage< ::box2d::PbShape >(Arena* arena) {
+  return Arena::CreateInternal< ::box2d::PbShape >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::box2d::PbFixture* Arena::CreateMaybeMessage< ::box2d::PbFixture >(Arena* arena) {
+  return Arena::CreateInternal< ::box2d::PbFixture >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::box2d::PbJoint* Arena::CreateMaybeMessage< ::box2d::PbJoint >(Arena* arena) {
+  return Arena::CreateInternal< ::box2d::PbJoint >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::box2d::PbBody* Arena::CreateMaybeMessage< ::box2d::PbBody >(Arena* arena) {
+  return Arena::CreateInternal< ::box2d::PbBody >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::box2d::PbWorld* Arena::CreateMaybeMessage< ::box2d::PbWorld >(Arena* arena) {
+  return Arena::CreateInternal< ::box2d::PbWorld >(arena);
+}
+}  // namespace protobuf
+}  // namespace google
 
 // @@protoc_insertion_point(global_scope)

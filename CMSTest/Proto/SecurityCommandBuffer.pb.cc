@@ -7,7 +7,6 @@
 
 #include <google/protobuf/stubs/common.h>
 #include <google/protobuf/stubs/port.h>
-#include <google/protobuf/stubs/once.h>
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/wire_format_lite_inl.h>
 #include <google/protobuf/descriptor.h>
@@ -19,6 +18,11 @@
 #include "third_party/protobuf/version.h"
 #endif
 // @@protoc_insertion_point(includes)
+
+namespace protobuf_SecurityCommandBuffer_2eproto {
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_SecurityCommandBuffer_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_JoinSecurityCommandBuffer;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_SecurityCommandBuffer_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_LeaveSecurityCommandBuffer;
+}  // namespace protobuf_SecurityCommandBuffer_2eproto
 namespace usx {
 namespace geofactions {
 class JoinSecurityCommandBufferDefaultTypeInternal {
@@ -39,14 +43,9 @@ class SecurityCommandBufferDefaultTypeInternal {
 }  // namespace geofactions
 }  // namespace usx
 namespace protobuf_SecurityCommandBuffer_2eproto {
-void InitDefaultsJoinSecurityCommandBufferImpl() {
+static void InitDefaultsJoinSecurityCommandBuffer() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
   {
     void* ptr = &::usx::geofactions::_JoinSecurityCommandBuffer_default_instance_;
     new (ptr) ::usx::geofactions::JoinSecurityCommandBuffer();
@@ -55,19 +54,12 @@ void InitDefaultsJoinSecurityCommandBufferImpl() {
   ::usx::geofactions::JoinSecurityCommandBuffer::InitAsDefaultInstance();
 }
 
-void InitDefaultsJoinSecurityCommandBuffer() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsJoinSecurityCommandBufferImpl);
-}
+::google::protobuf::internal::SCCInfo<0> scc_info_JoinSecurityCommandBuffer =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsJoinSecurityCommandBuffer}, {}};
 
-void InitDefaultsLeaveSecurityCommandBufferImpl() {
+static void InitDefaultsLeaveSecurityCommandBuffer() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
   {
     void* ptr = &::usx::geofactions::_LeaveSecurityCommandBuffer_default_instance_;
     new (ptr) ::usx::geofactions::LeaveSecurityCommandBuffer();
@@ -76,21 +68,12 @@ void InitDefaultsLeaveSecurityCommandBufferImpl() {
   ::usx::geofactions::LeaveSecurityCommandBuffer::InitAsDefaultInstance();
 }
 
-void InitDefaultsLeaveSecurityCommandBuffer() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsLeaveSecurityCommandBufferImpl);
-}
+::google::protobuf::internal::SCCInfo<0> scc_info_LeaveSecurityCommandBuffer =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsLeaveSecurityCommandBuffer}, {}};
 
-void InitDefaultsSecurityCommandBufferImpl() {
+static void InitDefaultsSecurityCommandBuffer() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  protobuf_SecurityCommandBuffer_2eproto::InitDefaultsJoinSecurityCommandBuffer();
-  protobuf_SecurityCommandBuffer_2eproto::InitDefaultsLeaveSecurityCommandBuffer();
   {
     void* ptr = &::usx::geofactions::_SecurityCommandBuffer_default_instance_;
     new (ptr) ::usx::geofactions::SecurityCommandBuffer();
@@ -99,9 +82,15 @@ void InitDefaultsSecurityCommandBufferImpl() {
   ::usx::geofactions::SecurityCommandBuffer::InitAsDefaultInstance();
 }
 
-void InitDefaultsSecurityCommandBuffer() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsSecurityCommandBufferImpl);
+::google::protobuf::internal::SCCInfo<2> scc_info_SecurityCommandBuffer =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 2, InitDefaultsSecurityCommandBuffer}, {
+      &protobuf_SecurityCommandBuffer_2eproto::scc_info_JoinSecurityCommandBuffer.base,
+      &protobuf_SecurityCommandBuffer_2eproto::scc_info_LeaveSecurityCommandBuffer.base,}};
+
+void InitDefaults() {
+  ::google::protobuf::internal::InitSCC(&scc_info_JoinSecurityCommandBuffer.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_LeaveSecurityCommandBuffer.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_SecurityCommandBuffer.base);
 }
 
 ::google::protobuf::Metadata file_level_metadata[3];
@@ -148,15 +137,14 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
 
 void protobuf_AssignDescriptors() {
   AddDescriptors();
-  ::google::protobuf::MessageFactory* factory = NULL;
   AssignDescriptors(
-      "SecurityCommandBuffer.proto", schemas, file_default_instances, TableStruct::offsets, factory,
+      "SecurityCommandBuffer.proto", schemas, file_default_instances, TableStruct::offsets,
       file_level_metadata, file_level_enum_descriptors, NULL);
 }
 
 void protobuf_AssignDescriptorsOnce() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &protobuf_AssignDescriptors);
+  static ::google::protobuf::internal::once_flag once;
+  ::google::protobuf::internal::call_once(once, protobuf_AssignDescriptors);
 }
 
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
@@ -188,8 +176,8 @@ void AddDescriptorsImpl() {
 }
 
 void AddDescriptors() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &AddDescriptorsImpl);
+  static ::google::protobuf::internal::once_flag once;
+  ::google::protobuf::internal::call_once(once, AddDescriptorsImpl);
 }
 // Force AddDescriptors() to be called at dynamic initialization time.
 struct StaticDescriptorInitializer {
@@ -233,23 +221,20 @@ void JoinSecurityCommandBuffer::InitAsDefaultInstance() {
 
 JoinSecurityCommandBuffer::JoinSecurityCommandBuffer()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_SecurityCommandBuffer_2eproto::InitDefaultsJoinSecurityCommandBuffer();
-  }
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_SecurityCommandBuffer_2eproto::scc_info_JoinSecurityCommandBuffer.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:usx.geofactions.JoinSecurityCommandBuffer)
 }
 JoinSecurityCommandBuffer::JoinSecurityCommandBuffer(const JoinSecurityCommandBuffer& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
-      _cached_size_(0) {
+      _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   // @@protoc_insertion_point(copy_constructor:usx.geofactions.JoinSecurityCommandBuffer)
 }
 
 void JoinSecurityCommandBuffer::SharedCtor() {
-  _cached_size_ = 0;
 }
 
 JoinSecurityCommandBuffer::~JoinSecurityCommandBuffer() {
@@ -261,9 +246,7 @@ void JoinSecurityCommandBuffer::SharedDtor() {
 }
 
 void JoinSecurityCommandBuffer::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  _cached_size_.Set(size);
 }
 const ::google::protobuf::Descriptor* JoinSecurityCommandBuffer::descriptor() {
   ::protobuf_SecurityCommandBuffer_2eproto::protobuf_AssignDescriptorsOnce();
@@ -271,17 +254,10 @@ const ::google::protobuf::Descriptor* JoinSecurityCommandBuffer::descriptor() {
 }
 
 const JoinSecurityCommandBuffer& JoinSecurityCommandBuffer::default_instance() {
-  ::protobuf_SecurityCommandBuffer_2eproto::InitDefaultsJoinSecurityCommandBuffer();
+  ::google::protobuf::internal::InitSCC(&protobuf_SecurityCommandBuffer_2eproto::scc_info_JoinSecurityCommandBuffer.base);
   return *internal_default_instance();
 }
 
-JoinSecurityCommandBuffer* JoinSecurityCommandBuffer::New(::google::protobuf::Arena* arena) const {
-  JoinSecurityCommandBuffer* n = new JoinSecurityCommandBuffer;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
 
 void JoinSecurityCommandBuffer::Clear() {
 // @@protoc_insertion_point(message_clear_start:usx.geofactions.JoinSecurityCommandBuffer)
@@ -299,7 +275,7 @@ bool JoinSecurityCommandBuffer::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:usx.geofactions.JoinSecurityCommandBuffer)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
   handle_unusual:
@@ -356,9 +332,7 @@ size_t JoinSecurityCommandBuffer::ByteSizeLong() const {
         _internal_metadata_.unknown_fields());
   }
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  SetCachedSize(cached_size);
   return total_size;
 }
 
@@ -412,7 +386,6 @@ void JoinSecurityCommandBuffer::InternalSwap(JoinSecurityCommandBuffer* other) {
   using std::swap;
   swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata JoinSecurityCommandBuffer::GetMetadata() const {
@@ -431,17 +404,15 @@ const int LeaveSecurityCommandBuffer::kUUIDFieldNumber;
 
 LeaveSecurityCommandBuffer::LeaveSecurityCommandBuffer()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_SecurityCommandBuffer_2eproto::InitDefaultsLeaveSecurityCommandBuffer();
-  }
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_SecurityCommandBuffer_2eproto::scc_info_LeaveSecurityCommandBuffer.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:usx.geofactions.LeaveSecurityCommandBuffer)
 }
 LeaveSecurityCommandBuffer::LeaveSecurityCommandBuffer(const LeaveSecurityCommandBuffer& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
-      _cached_size_(0) {
+      _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   uuid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.has_uuid()) {
@@ -451,7 +422,6 @@ LeaveSecurityCommandBuffer::LeaveSecurityCommandBuffer(const LeaveSecurityComman
 }
 
 void LeaveSecurityCommandBuffer::SharedCtor() {
-  _cached_size_ = 0;
   uuid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
@@ -465,9 +435,7 @@ void LeaveSecurityCommandBuffer::SharedDtor() {
 }
 
 void LeaveSecurityCommandBuffer::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  _cached_size_.Set(size);
 }
 const ::google::protobuf::Descriptor* LeaveSecurityCommandBuffer::descriptor() {
   ::protobuf_SecurityCommandBuffer_2eproto::protobuf_AssignDescriptorsOnce();
@@ -475,17 +443,10 @@ const ::google::protobuf::Descriptor* LeaveSecurityCommandBuffer::descriptor() {
 }
 
 const LeaveSecurityCommandBuffer& LeaveSecurityCommandBuffer::default_instance() {
-  ::protobuf_SecurityCommandBuffer_2eproto::InitDefaultsLeaveSecurityCommandBuffer();
+  ::google::protobuf::internal::InitSCC(&protobuf_SecurityCommandBuffer_2eproto::scc_info_LeaveSecurityCommandBuffer.base);
   return *internal_default_instance();
 }
 
-LeaveSecurityCommandBuffer* LeaveSecurityCommandBuffer::New(::google::protobuf::Arena* arena) const {
-  LeaveSecurityCommandBuffer* n = new LeaveSecurityCommandBuffer;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
 
 void LeaveSecurityCommandBuffer::Clear() {
 // @@protoc_insertion_point(message_clear_start:usx.geofactions.LeaveSecurityCommandBuffer)
@@ -495,8 +456,7 @@ void LeaveSecurityCommandBuffer::Clear() {
 
   cached_has_bits = _has_bits_[0];
   if (cached_has_bits & 0x00000001u) {
-    GOOGLE_DCHECK(!uuid_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-    (*uuid_.UnsafeRawStringPointer())->clear();
+    uuid_.ClearNonDefaultToEmptyNoArena();
   }
   _has_bits_.Clear();
   _internal_metadata_.Clear();
@@ -508,7 +468,7 @@ bool LeaveSecurityCommandBuffer::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:usx.geofactions.LeaveSecurityCommandBuffer)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -615,9 +575,7 @@ size_t LeaveSecurityCommandBuffer::ByteSizeLong() const {
         this->uuid());
   }
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  SetCachedSize(cached_size);
   return total_size;
 }
 
@@ -674,10 +632,10 @@ void LeaveSecurityCommandBuffer::Swap(LeaveSecurityCommandBuffer* other) {
 }
 void LeaveSecurityCommandBuffer::InternalSwap(LeaveSecurityCommandBuffer* other) {
   using std::swap;
-  uuid_.Swap(&other->uuid_);
+  uuid_.Swap(&other->uuid_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
   swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata LeaveSecurityCommandBuffer::GetMetadata() const {
@@ -703,17 +661,15 @@ const int SecurityCommandBuffer::kLeaveSecurityCommandBufferFieldNumber;
 
 SecurityCommandBuffer::SecurityCommandBuffer()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_SecurityCommandBuffer_2eproto::InitDefaultsSecurityCommandBuffer();
-  }
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_SecurityCommandBuffer_2eproto::scc_info_SecurityCommandBuffer.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:usx.geofactions.SecurityCommandBuffer)
 }
 SecurityCommandBuffer::SecurityCommandBuffer(const SecurityCommandBuffer& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
-      _cached_size_(0) {
+      _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   uuid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.has_uuid()) {
@@ -734,7 +690,6 @@ SecurityCommandBuffer::SecurityCommandBuffer(const SecurityCommandBuffer& from)
 }
 
 void SecurityCommandBuffer::SharedCtor() {
-  _cached_size_ = 0;
   uuid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&joinsecuritycommandbuffer_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&type_) -
@@ -753,9 +708,7 @@ void SecurityCommandBuffer::SharedDtor() {
 }
 
 void SecurityCommandBuffer::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  _cached_size_.Set(size);
 }
 const ::google::protobuf::Descriptor* SecurityCommandBuffer::descriptor() {
   ::protobuf_SecurityCommandBuffer_2eproto::protobuf_AssignDescriptorsOnce();
@@ -763,17 +716,10 @@ const ::google::protobuf::Descriptor* SecurityCommandBuffer::descriptor() {
 }
 
 const SecurityCommandBuffer& SecurityCommandBuffer::default_instance() {
-  ::protobuf_SecurityCommandBuffer_2eproto::InitDefaultsSecurityCommandBuffer();
+  ::google::protobuf::internal::InitSCC(&protobuf_SecurityCommandBuffer_2eproto::scc_info_SecurityCommandBuffer.base);
   return *internal_default_instance();
 }
 
-SecurityCommandBuffer* SecurityCommandBuffer::New(::google::protobuf::Arena* arena) const {
-  SecurityCommandBuffer* n = new SecurityCommandBuffer;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
 
 void SecurityCommandBuffer::Clear() {
 // @@protoc_insertion_point(message_clear_start:usx.geofactions.SecurityCommandBuffer)
@@ -784,8 +730,7 @@ void SecurityCommandBuffer::Clear() {
   cached_has_bits = _has_bits_[0];
   if (cached_has_bits & 7u) {
     if (cached_has_bits & 0x00000001u) {
-      GOOGLE_DCHECK(!uuid_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-      (*uuid_.UnsafeRawStringPointer())->clear();
+      uuid_.ClearNonDefaultToEmptyNoArena();
     }
     if (cached_has_bits & 0x00000002u) {
       GOOGLE_DCHECK(joinsecuritycommandbuffer_ != NULL);
@@ -807,7 +752,7 @@ bool SecurityCommandBuffer::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:usx.geofactions.SecurityCommandBuffer)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -917,13 +862,13 @@ void SecurityCommandBuffer::SerializeWithCachedSizes(
   // optional .usx.geofactions.JoinSecurityCommandBuffer joinSecurityCommandBuffer = 3;
   if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      3, *this->joinsecuritycommandbuffer_, output);
+      3, this->_internal_joinsecuritycommandbuffer(), output);
   }
 
   // optional .usx.geofactions.LeaveSecurityCommandBuffer leaveSecurityCommandBuffer = 4;
   if (cached_has_bits & 0x00000004u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      4, *this->leavesecuritycommandbuffer_, output);
+      4, this->_internal_leavesecuritycommandbuffer(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -962,14 +907,14 @@ void SecurityCommandBuffer::SerializeWithCachedSizes(
   if (cached_has_bits & 0x00000002u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        3, *this->joinsecuritycommandbuffer_, deterministic, target);
+        3, this->_internal_joinsecuritycommandbuffer(), deterministic, target);
   }
 
   // optional .usx.geofactions.LeaveSecurityCommandBuffer leaveSecurityCommandBuffer = 4;
   if (cached_has_bits & 0x00000004u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        4, *this->leavesecuritycommandbuffer_, deterministic, target);
+        4, this->_internal_leavesecuritycommandbuffer(), deterministic, target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -1006,21 +951,19 @@ size_t SecurityCommandBuffer::ByteSizeLong() const {
     if (has_joinsecuritycommandbuffer()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSize(
-          *this->joinsecuritycommandbuffer_);
+          *joinsecuritycommandbuffer_);
     }
 
     // optional .usx.geofactions.LeaveSecurityCommandBuffer leaveSecurityCommandBuffer = 4;
     if (has_leavesecuritycommandbuffer()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSize(
-          *this->leavesecuritycommandbuffer_);
+          *leavesecuritycommandbuffer_);
     }
 
   }
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  SetCachedSize(cached_size);
   return total_size;
 }
 
@@ -1093,13 +1036,13 @@ void SecurityCommandBuffer::Swap(SecurityCommandBuffer* other) {
 }
 void SecurityCommandBuffer::InternalSwap(SecurityCommandBuffer* other) {
   using std::swap;
-  uuid_.Swap(&other->uuid_);
+  uuid_.Swap(&other->uuid_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
   swap(joinsecuritycommandbuffer_, other->joinsecuritycommandbuffer_);
   swap(leavesecuritycommandbuffer_, other->leavesecuritycommandbuffer_);
   swap(type_, other->type_);
   swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata SecurityCommandBuffer::GetMetadata() const {
@@ -1111,5 +1054,18 @@ void SecurityCommandBuffer::InternalSwap(SecurityCommandBuffer* other) {
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace geofactions
 }  // namespace usx
+namespace google {
+namespace protobuf {
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::usx::geofactions::JoinSecurityCommandBuffer* Arena::CreateMaybeMessage< ::usx::geofactions::JoinSecurityCommandBuffer >(Arena* arena) {
+  return Arena::CreateInternal< ::usx::geofactions::JoinSecurityCommandBuffer >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::usx::geofactions::LeaveSecurityCommandBuffer* Arena::CreateMaybeMessage< ::usx::geofactions::LeaveSecurityCommandBuffer >(Arena* arena) {
+  return Arena::CreateInternal< ::usx::geofactions::LeaveSecurityCommandBuffer >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::usx::geofactions::SecurityCommandBuffer* Arena::CreateMaybeMessage< ::usx::geofactions::SecurityCommandBuffer >(Arena* arena) {
+  return Arena::CreateInternal< ::usx::geofactions::SecurityCommandBuffer >(arena);
+}
+}  // namespace protobuf
+}  // namespace google
 
 // @@protoc_insertion_point(global_scope)

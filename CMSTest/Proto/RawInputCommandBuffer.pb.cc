@@ -7,7 +7,6 @@
 
 #include <google/protobuf/stubs/common.h>
 #include <google/protobuf/stubs/port.h>
-#include <google/protobuf/stubs/once.h>
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/wire_format_lite_inl.h>
 #include <google/protobuf/descriptor.h>
@@ -19,6 +18,10 @@
 #include "third_party/protobuf/version.h"
 #endif
 // @@protoc_insertion_point(includes)
+
+namespace protobuf_DualStickRawInputCommandBuffer_2eproto {
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_DualStickRawInputCommandBuffer_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_DualStickRawInputCommandBuffer;
+}  // namespace protobuf_DualStickRawInputCommandBuffer_2eproto
 namespace usx {
 namespace geofactions {
 class RawInputCommandBufferDefaultTypeInternal {
@@ -29,15 +32,9 @@ class RawInputCommandBufferDefaultTypeInternal {
 }  // namespace geofactions
 }  // namespace usx
 namespace protobuf_RawInputCommandBuffer_2eproto {
-void InitDefaultsRawInputCommandBufferImpl() {
+static void InitDefaultsRawInputCommandBuffer() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  protobuf_DualStickRawInputCommandBuffer_2eproto::InitDefaultsDualStickRawInputCommandBuffer();
   {
     void* ptr = &::usx::geofactions::_RawInputCommandBuffer_default_instance_;
     new (ptr) ::usx::geofactions::RawInputCommandBuffer();
@@ -46,9 +43,12 @@ void InitDefaultsRawInputCommandBufferImpl() {
   ::usx::geofactions::RawInputCommandBuffer::InitAsDefaultInstance();
 }
 
-void InitDefaultsRawInputCommandBuffer() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsRawInputCommandBufferImpl);
+::google::protobuf::internal::SCCInfo<1> scc_info_RawInputCommandBuffer =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsRawInputCommandBuffer}, {
+      &protobuf_DualStickRawInputCommandBuffer_2eproto::scc_info_DualStickRawInputCommandBuffer.base,}};
+
+void InitDefaults() {
+  ::google::protobuf::internal::InitSCC(&scc_info_RawInputCommandBuffer.base);
 }
 
 ::google::protobuf::Metadata file_level_metadata[1];
@@ -77,15 +77,14 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
 
 void protobuf_AssignDescriptors() {
   AddDescriptors();
-  ::google::protobuf::MessageFactory* factory = NULL;
   AssignDescriptors(
-      "RawInputCommandBuffer.proto", schemas, file_default_instances, TableStruct::offsets, factory,
+      "RawInputCommandBuffer.proto", schemas, file_default_instances, TableStruct::offsets,
       file_level_metadata, file_level_enum_descriptors, NULL);
 }
 
 void protobuf_AssignDescriptorsOnce() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &protobuf_AssignDescriptors);
+  static ::google::protobuf::internal::once_flag once;
+  ::google::protobuf::internal::call_once(once, protobuf_AssignDescriptors);
 }
 
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
@@ -115,8 +114,8 @@ void AddDescriptorsImpl() {
 }
 
 void AddDescriptors() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &AddDescriptorsImpl);
+  static ::google::protobuf::internal::once_flag once;
+  ::google::protobuf::internal::call_once(once, AddDescriptorsImpl);
 }
 // Force AddDescriptors() to be called at dynamic initialization time.
 struct StaticDescriptorInitializer {
@@ -167,17 +166,15 @@ const int RawInputCommandBuffer::kDualStickRawInputCommandBufferFieldNumber;
 
 RawInputCommandBuffer::RawInputCommandBuffer()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_RawInputCommandBuffer_2eproto::InitDefaultsRawInputCommandBuffer();
-  }
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_RawInputCommandBuffer_2eproto::scc_info_RawInputCommandBuffer.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:usx.geofactions.RawInputCommandBuffer)
 }
 RawInputCommandBuffer::RawInputCommandBuffer(const RawInputCommandBuffer& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
-      _cached_size_(0) {
+      _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   uuid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.has_uuid()) {
@@ -193,7 +190,6 @@ RawInputCommandBuffer::RawInputCommandBuffer(const RawInputCommandBuffer& from)
 }
 
 void RawInputCommandBuffer::SharedCtor() {
-  _cached_size_ = 0;
   uuid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&dualstickrawinputcommandbuffer_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&type_) -
@@ -211,9 +207,7 @@ void RawInputCommandBuffer::SharedDtor() {
 }
 
 void RawInputCommandBuffer::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  _cached_size_.Set(size);
 }
 const ::google::protobuf::Descriptor* RawInputCommandBuffer::descriptor() {
   ::protobuf_RawInputCommandBuffer_2eproto::protobuf_AssignDescriptorsOnce();
@@ -221,17 +215,10 @@ const ::google::protobuf::Descriptor* RawInputCommandBuffer::descriptor() {
 }
 
 const RawInputCommandBuffer& RawInputCommandBuffer::default_instance() {
-  ::protobuf_RawInputCommandBuffer_2eproto::InitDefaultsRawInputCommandBuffer();
+  ::google::protobuf::internal::InitSCC(&protobuf_RawInputCommandBuffer_2eproto::scc_info_RawInputCommandBuffer.base);
   return *internal_default_instance();
 }
 
-RawInputCommandBuffer* RawInputCommandBuffer::New(::google::protobuf::Arena* arena) const {
-  RawInputCommandBuffer* n = new RawInputCommandBuffer;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
 
 void RawInputCommandBuffer::Clear() {
 // @@protoc_insertion_point(message_clear_start:usx.geofactions.RawInputCommandBuffer)
@@ -242,8 +229,7 @@ void RawInputCommandBuffer::Clear() {
   cached_has_bits = _has_bits_[0];
   if (cached_has_bits & 3u) {
     if (cached_has_bits & 0x00000001u) {
-      GOOGLE_DCHECK(!uuid_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-      (*uuid_.UnsafeRawStringPointer())->clear();
+      uuid_.ClearNonDefaultToEmptyNoArena();
     }
     if (cached_has_bits & 0x00000002u) {
       GOOGLE_DCHECK(dualstickrawinputcommandbuffer_ != NULL);
@@ -261,7 +247,7 @@ bool RawInputCommandBuffer::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:usx.geofactions.RawInputCommandBuffer)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -359,7 +345,7 @@ void RawInputCommandBuffer::SerializeWithCachedSizes(
   // optional .usx.geofactions.DualStickRawInputCommandBuffer dualStickRawInputCommandBuffer = 3;
   if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      3, *this->dualstickrawinputcommandbuffer_, output);
+      3, this->_internal_dualstickrawinputcommandbuffer(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -398,7 +384,7 @@ void RawInputCommandBuffer::SerializeWithCachedSizes(
   if (cached_has_bits & 0x00000002u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        3, *this->dualstickrawinputcommandbuffer_, deterministic, target);
+        3, this->_internal_dualstickrawinputcommandbuffer(), deterministic, target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -454,13 +440,11 @@ size_t RawInputCommandBuffer::ByteSizeLong() const {
   if (has_dualstickrawinputcommandbuffer()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->dualstickrawinputcommandbuffer_);
+        *dualstickrawinputcommandbuffer_);
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  SetCachedSize(cached_size);
   return total_size;
 }
 
@@ -530,12 +514,12 @@ void RawInputCommandBuffer::Swap(RawInputCommandBuffer* other) {
 }
 void RawInputCommandBuffer::InternalSwap(RawInputCommandBuffer* other) {
   using std::swap;
-  uuid_.Swap(&other->uuid_);
+  uuid_.Swap(&other->uuid_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
   swap(dualstickrawinputcommandbuffer_, other->dualstickrawinputcommandbuffer_);
   swap(type_, other->type_);
   swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata RawInputCommandBuffer::GetMetadata() const {
@@ -547,5 +531,12 @@ void RawInputCommandBuffer::InternalSwap(RawInputCommandBuffer* other) {
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace geofactions
 }  // namespace usx
+namespace google {
+namespace protobuf {
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::usx::geofactions::RawInputCommandBuffer* Arena::CreateMaybeMessage< ::usx::geofactions::RawInputCommandBuffer >(Arena* arena) {
+  return Arena::CreateInternal< ::usx::geofactions::RawInputCommandBuffer >(arena);
+}
+}  // namespace protobuf
+}  // namespace google
 
 // @@protoc_insertion_point(global_scope)
