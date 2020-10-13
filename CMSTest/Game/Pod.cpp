@@ -1,10 +1,16 @@
+//   Copyright 2020 Roddie Kieley
 //
-//  Pod.cpp
-//  CMSTest
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
 //
-//  Created by Roddie Kieley on 12-12-15.
-//  Copyright (c) 2012 Roddie Kieley. All rights reserved.
+//       http://www.apache.org/licenses/LICENSE-2.0
 //
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 
 #include "Pod.h"
 #include "Bullet.h"
@@ -26,6 +32,7 @@
 Poco::BasicEvent<Pod*&>      Pod::UpdatedEvent;
 uint32_t                     Pod::s_ui32Count = 1;
 int16_t                      Pod::s_i16GroupCount = 0;
+
 
 // Constructor(s)
 Pod::Pod(_Dependencies& theDependencies) :
