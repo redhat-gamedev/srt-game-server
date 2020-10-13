@@ -18,8 +18,8 @@
 #include "SecurityCommandBufferFactory.h"
 #include "../Proto/CommandBuffer.pb.h"
 #include "../Proto/SecurityCommandBuffer.pb.h"
-#include "Poco/BasicEvent.h"
-#include "Poco/Tuple.h"
+#include <Poco/BasicEvent.h>
+#include <Poco/Tuple.h>
 #include <decaf/util/StlQueue.h>
 #include <utility>
 

@@ -5,6 +5,7 @@
 project( CMSTest)
 
 cmake_minimum_required (VERSION 3.4)
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11") # enable C++11 standard
 
 #
 # mulle-bootstrap environment
@@ -162,8 +163,11 @@ ${RESOURCES}
 
 target_include_directories( CMSTest
    PUBLIC SYSTEM
-        /usr/include/activemq-cpp-3.9.4
+        /usr/local/include/activemq-cpp
         /usr/include/apr-1
+        /usr/local/include
+        /opt/local/include
+        /opt/local/include/apr-1
 )
 
 target_link_libraries( CMSTest

@@ -23,7 +23,7 @@
 #include "../Commands/JoinSecurityCommand.h"
 #include "../Commands/LeaveSecurityCommand.h"
 #include "../Shared/FactoryT.h"
-#include "Poco/Delegate.h"
+#include <Poco/Delegate.h>
 #include <assert.h>
 
 using namespace usx::geofactions;

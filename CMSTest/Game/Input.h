@@ -18,7 +18,7 @@
 #if 0
 #include "../Proto/DualStick.pb.h"
 #include "../Proto/box2d.pb.h"
-#include "Poco/BasicEvent.h"
+#include <Poco/BasicEvent.h>
 #include <cms/MessageListener.h>
 #include <string>
 #include <list>

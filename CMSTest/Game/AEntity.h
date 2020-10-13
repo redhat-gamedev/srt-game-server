@@ -24,7 +24,7 @@
 
 #include "../Proto/GameEventBuffer.pb.h"
 #include "../Proto/EntityGameEventBuffer.pb.h"
-#include "Poco/BasicEvent.h"
+#include <Poco/BasicEvent.h>
 #include <decaf/util/StlQueue.h>
 #include <string>
 #include <list>

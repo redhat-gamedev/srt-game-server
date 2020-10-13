@@ -1,8 +1,9 @@
+syntax = "proto2";
 package box2d;
-//package usx.geofactions;
 
 //option java_package = "org.box2d.proto";
 //option java_outer_classname = "Box2D";
+
 
 // Math classes
 

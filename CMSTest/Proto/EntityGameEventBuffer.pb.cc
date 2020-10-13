@@ -5,132 +5,98 @@
 
 #include <algorithm>
 
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/port.h>
 #include <google/protobuf/io/coded_stream.h>
-#include <google/protobuf/wire_format_lite_inl.h>
+#include <google/protobuf/extension_set.h>
+#include <google/protobuf/wire_format_lite.h>
 #include <google/protobuf/descriptor.h>
 #include <google/protobuf/generated_message_reflection.h>
 #include <google/protobuf/reflection_ops.h>
 #include <google/protobuf/wire_format.h>
-// This is a temporary google only hack
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-#include "third_party/protobuf/version.h"
-#endif
 // @@protoc_insertion_point(includes)
-
-namespace protobuf_box2d_2eproto {
-extern PROTOBUF_INTERNAL_EXPORT_protobuf_box2d_2eproto ::google::protobuf::internal::SCCInfo<2> scc_info_PbBody;
-}  // namespace protobuf_box2d_2eproto
+#include <google/protobuf/port_def.inc>
+extern PROTOBUF_INTERNAL_EXPORT_box2d_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_PbBody_box2d_2eproto;
 namespace usx {
 namespace geofactions {
 class EntityGameEventBufferDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<EntityGameEventBuffer>
-      _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<EntityGameEventBuffer> _instance;
 } _EntityGameEventBuffer_default_instance_;
 }  // namespace geofactions
 }  // namespace usx
-namespace protobuf_EntityGameEventBuffer_2eproto {
-static void InitDefaultsEntityGameEventBuffer() {
+static void InitDefaultsscc_info_EntityGameEventBuffer_EntityGameEventBuffer_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
     void* ptr = &::usx::geofactions::_EntityGameEventBuffer_default_instance_;
     new (ptr) ::usx::geofactions::EntityGameEventBuffer();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
   }
   ::usx::geofactions::EntityGameEventBuffer::InitAsDefaultInstance();
 }
 
-::google::protobuf::internal::SCCInfo<1> scc_info_EntityGameEventBuffer =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsEntityGameEventBuffer}, {
-      &protobuf_box2d_2eproto::scc_info_PbBody.base,}};
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_EntityGameEventBuffer_EntityGameEventBuffer_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_EntityGameEventBuffer_EntityGameEventBuffer_2eproto}, {
+      &scc_info_PbBody_box2d_2eproto.base,}};
 
-void InitDefaults() {
-  ::google::protobuf::internal::InitSCC(&scc_info_EntityGameEventBuffer.base);
-}
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_EntityGameEventBuffer_2eproto[1];
+static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_EntityGameEventBuffer_2eproto[1];
+static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_EntityGameEventBuffer_2eproto = nullptr;
 
-::google::protobuf::Metadata file_level_metadata[1];
-const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[1];
-
-const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::usx::geofactions::EntityGameEventBuffer, _has_bits_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::usx::geofactions::EntityGameEventBuffer, _internal_metadata_),
+const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_EntityGameEventBuffer_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+  PROTOBUF_FIELD_OFFSET(::usx::geofactions::EntityGameEventBuffer, _has_bits_),
+  PROTOBUF_FIELD_OFFSET(::usx::geofactions::EntityGameEventBuffer, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::usx::geofactions::EntityGameEventBuffer, type_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::usx::geofactions::EntityGameEventBuffer, entitytag_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::usx::geofactions::EntityGameEventBuffer, uuid_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::usx::geofactions::EntityGameEventBuffer, body_),
+  PROTOBUF_FIELD_OFFSET(::usx::geofactions::EntityGameEventBuffer, type_),
+  PROTOBUF_FIELD_OFFSET(::usx::geofactions::EntityGameEventBuffer, entitytag_),
+  PROTOBUF_FIELD_OFFSET(::usx::geofactions::EntityGameEventBuffer, uuid_),
+  PROTOBUF_FIELD_OFFSET(::usx::geofactions::EntityGameEventBuffer, body_),
   3,
   2,
   0,
   1,
 };
-static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
+static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, 9, sizeof(::usx::geofactions::EntityGameEventBuffer)},
 };
 
-static ::google::protobuf::Message const * const file_default_instances[] = {
-  reinterpret_cast<const ::google::protobuf::Message*>(&::usx::geofactions::_EntityGameEventBuffer_default_instance_),
+static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::usx::geofactions::_EntityGameEventBuffer_default_instance_),
 };
 
-void protobuf_AssignDescriptors() {
-  AddDescriptors();
-  AssignDescriptors(
-      "EntityGameEventBuffer.proto", schemas, file_default_instances, TableStruct::offsets,
-      file_level_metadata, file_level_enum_descriptors, NULL);
-}
+const char descriptor_table_protodef_EntityGameEventBuffer_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
+  "\n\033EntityGameEventBuffer.proto\022\017usx.geofa"
+  "ctions\032\013box2d.proto\"\213\002\n\025EntityGameEventB"
+  "uffer\022W\n\004type\030\001 \002(\0162@.usx.geofactions.En"
+  "tityGameEventBuffer.EntityGameEventBuffe"
+  "rType:\007UNKNOWN\022\021\n\tentityTag\030\002 \002(\004\022\014\n\004UUI"
+  "D\030\003 \001(\t\022\033\n\004body\030\004 \001(\0132\r.box2d.PbBody\"[\n\031"
+  "EntityGameEventBufferType\022\013\n\007UNKNOWN\020\000\022\n"
+  "\n\006CREATE\020\001\022\014\n\010RETRIEVE\020\002\022\n\n\006UPDATE\020\003\022\013\n\007"
+  "DESTROY\020\004"
+  ;
+static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_EntityGameEventBuffer_2eproto_deps[1] = {
+  &::descriptor_table_box2d_2eproto,
+};
+static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_EntityGameEventBuffer_2eproto_sccs[1] = {
+  &scc_info_EntityGameEventBuffer_EntityGameEventBuffer_2eproto.base,
+};
+static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_EntityGameEventBuffer_2eproto_once;
+const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_EntityGameEventBuffer_2eproto = {
+  false, false, descriptor_table_protodef_EntityGameEventBuffer_2eproto, "EntityGameEventBuffer.proto", 329,
+  &descriptor_table_EntityGameEventBuffer_2eproto_once, descriptor_table_EntityGameEventBuffer_2eproto_sccs, descriptor_table_EntityGameEventBuffer_2eproto_deps, 1, 1,
+  schemas, file_default_instances, TableStruct_EntityGameEventBuffer_2eproto::offsets,
+  file_level_metadata_EntityGameEventBuffer_2eproto, 1, file_level_enum_descriptors_EntityGameEventBuffer_2eproto, file_level_service_descriptors_EntityGameEventBuffer_2eproto,
+};
 
-void protobuf_AssignDescriptorsOnce() {
-  static ::google::protobuf::internal::once_flag once;
-  ::google::protobuf::internal::call_once(once, protobuf_AssignDescriptors);
-}
-
-void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
-void protobuf_RegisterTypes(const ::std::string&) {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 1);
-}
-
-void AddDescriptorsImpl() {
-  InitDefaults();
-  static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\033EntityGameEventBuffer.proto\022\017usx.geofa"
-      "ctions\032\013box2d.proto\"\213\002\n\025EntityGameEventB"
-      "uffer\022W\n\004type\030\001 \002(\0162@.usx.geofactions.En"
-      "tityGameEventBuffer.EntityGameEventBuffe"
-      "rType:\007UNKNOWN\022\021\n\tentityTag\030\002 \002(\004\022\014\n\004UUI"
-      "D\030\003 \001(\t\022\033\n\004body\030\004 \001(\0132\r.box2d.PbBody\"[\n\031"
-      "EntityGameEventBufferType\022\013\n\007UNKNOWN\020\000\022\n"
-      "\n\006CREATE\020\001\022\014\n\010RETRIEVE\020\002\022\n\n\006UPDATE\020\003\022\013\n\007"
-      "DESTROY\020\004"
-  };
-  ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 329);
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
-    "EntityGameEventBuffer.proto", &protobuf_RegisterTypes);
-  ::protobuf_box2d_2eproto::AddDescriptors();
-}
-
-void AddDescriptors() {
-  static ::google::protobuf::internal::once_flag once;
-  ::google::protobuf::internal::call_once(once, AddDescriptorsImpl);
-}
-// Force AddDescriptors() to be called at dynamic initialization time.
-struct StaticDescriptorInitializer {
-  StaticDescriptorInitializer() {
-    AddDescriptors();
-  }
-} static_descriptor_initializer;
-}  // namespace protobuf_EntityGameEventBuffer_2eproto
+// Force running AddDescriptors() at dynamic initialization time.
+static bool dynamic_init_dummy_EntityGameEventBuffer_2eproto = (static_cast<void>(::PROTOBUF_NAMESPACE_ID::internal::AddDescriptors(&descriptor_table_EntityGameEventBuffer_2eproto)), true);
 namespace usx {
 namespace geofactions {
-const ::google::protobuf::EnumDescriptor* EntityGameEventBuffer_EntityGameEventBufferType_descriptor() {
-  protobuf_EntityGameEventBuffer_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_EntityGameEventBuffer_2eproto::file_level_enum_descriptors[0];
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EntityGameEventBuffer_EntityGameEventBufferType_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_EntityGameEventBuffer_2eproto);
+  return file_level_enum_descriptors_EntityGameEventBuffer_2eproto[0];
 }
 bool EntityGameEventBuffer_EntityGameEventBufferType_IsValid(int value) {
   switch (value) {
@@ -145,16 +111,16 @@ bool EntityGameEventBuffer_EntityGameEventBufferType_IsValid(int value) {
   }
 }
 
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const EntityGameEventBuffer_EntityGameEventBufferType EntityGameEventBuffer::UNKNOWN;
-const EntityGameEventBuffer_EntityGameEventBufferType EntityGameEventBuffer::CREATE;
-const EntityGameEventBuffer_EntityGameEventBufferType EntityGameEventBuffer::RETRIEVE;
-const EntityGameEventBuffer_EntityGameEventBufferType EntityGameEventBuffer::UPDATE;
-const EntityGameEventBuffer_EntityGameEventBufferType EntityGameEventBuffer::DESTROY;
-const EntityGameEventBuffer_EntityGameEventBufferType EntityGameEventBuffer::EntityGameEventBufferType_MIN;
-const EntityGameEventBuffer_EntityGameEventBufferType EntityGameEventBuffer::EntityGameEventBufferType_MAX;
-const int EntityGameEventBuffer::EntityGameEventBufferType_ARRAYSIZE;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+#if (__cplusplus < 201703) && (!defined(_MSC_VER) || _MSC_VER >= 1900)
+constexpr EntityGameEventBuffer_EntityGameEventBufferType EntityGameEventBuffer::UNKNOWN;
+constexpr EntityGameEventBuffer_EntityGameEventBufferType EntityGameEventBuffer::CREATE;
+constexpr EntityGameEventBuffer_EntityGameEventBufferType EntityGameEventBuffer::RETRIEVE;
+constexpr EntityGameEventBuffer_EntityGameEventBufferType EntityGameEventBuffer::UPDATE;
+constexpr EntityGameEventBuffer_EntityGameEventBufferType EntityGameEventBuffer::DESTROY;
+constexpr EntityGameEventBuffer_EntityGameEventBufferType EntityGameEventBuffer::EntityGameEventBufferType_MIN;
+constexpr EntityGameEventBuffer_EntityGameEventBufferType EntityGameEventBuffer::EntityGameEventBufferType_MAX;
+constexpr int EntityGameEventBuffer::EntityGameEventBufferType_ARRAYSIZE;
+#endif  // (__cplusplus < 201703) && (!defined(_MSC_VER) || _MSC_VER >= 1900)
 
 // ===================================================================
 
@@ -162,37 +128,54 @@ void EntityGameEventBuffer::InitAsDefaultInstance() {
   ::usx::geofactions::_EntityGameEventBuffer_default_instance_._instance.get_mutable()->body_ = const_cast< ::box2d::PbBody*>(
       ::box2d::PbBody::internal_default_instance());
 }
-void EntityGameEventBuffer::clear_body() {
-  if (body_ != NULL) body_->Clear();
-  clear_has_body();
-}
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int EntityGameEventBuffer::kTypeFieldNumber;
-const int EntityGameEventBuffer::kEntityTagFieldNumber;
-const int EntityGameEventBuffer::kUUIDFieldNumber;
-const int EntityGameEventBuffer::kBodyFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+class EntityGameEventBuffer::_Internal {
+ public:
+  using HasBits = decltype(std::declval<EntityGameEventBuffer>()._has_bits_);
+  static void set_has_type(HasBits* has_bits) {
+    (*has_bits)[0] |= 8u;
+  }
+  static void set_has_entitytag(HasBits* has_bits) {
+    (*has_bits)[0] |= 4u;
+  }
+  static void set_has_uuid(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
+  }
+  static const ::box2d::PbBody& body(const EntityGameEventBuffer* msg);
+  static void set_has_body(HasBits* has_bits) {
+    (*has_bits)[0] |= 2u;
+  }
+  static bool MissingRequiredFields(const HasBits& has_bits) {
+    return ((has_bits[0] & 0x0000000c) ^ 0x0000000c) != 0;
+  }
+};
 
-EntityGameEventBuffer::EntityGameEventBuffer()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_EntityGameEventBuffer_2eproto::scc_info_EntityGameEventBuffer.base);
+const ::box2d::PbBody&
+EntityGameEventBuffer::_Internal::body(const EntityGameEventBuffer* msg) {
+  return *msg->body_;
+}
+void EntityGameEventBuffer::clear_body() {
+  if (body_ != nullptr) body_->Clear();
+  _has_bits_[0] &= ~0x00000002u;
+}
+EntityGameEventBuffer::EntityGameEventBuffer(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:usx.geofactions.EntityGameEventBuffer)
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:usx.geofactions.EntityGameEventBuffer)
 }
 EntityGameEventBuffer::EntityGameEventBuffer(const EntityGameEventBuffer& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
       _has_bits_(from._has_bits_) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  uuid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_uuid()) {
-    uuid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.uuid_);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  uuid_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (from._internal_has_uuid()) {
+    uuid_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_uuid(),
+      GetArena());
   }
-  if (from.has_body()) {
+  if (from._internal_has_body()) {
     body_ = new ::box2d::PbBody(*from.body_);
   } else {
-    body_ = NULL;
+    body_ = nullptr;
   }
   ::memcpy(&entitytag_, &from.entitytag_,
     static_cast<size_t>(reinterpret_cast<char*>(&type_) -
@@ -201,7 +184,8 @@ EntityGameEventBuffer::EntityGameEventBuffer(const EntityGameEventBuffer& from)
 }
 
 void EntityGameEventBuffer::SharedCtor() {
-  uuid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_EntityGameEventBuffer_EntityGameEventBuffer_2eproto.base);
+  uuid_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   ::memset(&body_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&type_) -
       reinterpret_cast<char*>(&body_)) + sizeof(type_));
@@ -210,225 +194,166 @@ void EntityGameEventBuffer::SharedCtor() {
 EntityGameEventBuffer::~EntityGameEventBuffer() {
   // @@protoc_insertion_point(destructor:usx.geofactions.EntityGameEventBuffer)
   SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 void EntityGameEventBuffer::SharedDtor() {
-  uuid_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  GOOGLE_DCHECK(GetArena() == nullptr);
+  uuid_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (this != internal_default_instance()) delete body_;
 }
 
+void EntityGameEventBuffer::ArenaDtor(void* object) {
+  EntityGameEventBuffer* _this = reinterpret_cast< EntityGameEventBuffer* >(object);
+  (void)_this;
+}
+void EntityGameEventBuffer::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
 void EntityGameEventBuffer::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* EntityGameEventBuffer::descriptor() {
-  ::protobuf_EntityGameEventBuffer_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_EntityGameEventBuffer_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
 const EntityGameEventBuffer& EntityGameEventBuffer::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_EntityGameEventBuffer_2eproto::scc_info_EntityGameEventBuffer.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_EntityGameEventBuffer_EntityGameEventBuffer_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void EntityGameEventBuffer::Clear() {
 // @@protoc_insertion_point(message_clear_start:usx.geofactions.EntityGameEventBuffer)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 3u) {
+  if (cached_has_bits & 0x00000003u) {
     if (cached_has_bits & 0x00000001u) {
-      uuid_.ClearNonDefaultToEmptyNoArena();
+      uuid_.ClearNonDefaultToEmpty();
     }
     if (cached_has_bits & 0x00000002u) {
-      GOOGLE_DCHECK(body_ != NULL);
+      GOOGLE_DCHECK(body_ != nullptr);
       body_->Clear();
     }
   }
-  if (cached_has_bits & 12u) {
+  if (cached_has_bits & 0x0000000cu) {
     ::memset(&entitytag_, 0, static_cast<size_t>(
         reinterpret_cast<char*>(&type_) -
         reinterpret_cast<char*>(&entitytag_)) + sizeof(type_));
   }
   _has_bits_.Clear();
-  _internal_metadata_.Clear();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
-bool EntityGameEventBuffer::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:usx.geofactions.EntityGameEventBuffer)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+const char* EntityGameEventBuffer::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  _Internal::HasBits has_bits{};
+  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArena(); (void)arena;
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
       // required .usx.geofactions.EntityGameEventBuffer.EntityGameEventBufferType type = 1 [default = UNKNOWN];
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-          int value;
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
-                 input, &value)));
-          if (::usx::geofactions::EntityGameEventBuffer_EntityGameEventBufferType_IsValid(value)) {
-            set_type(static_cast< ::usx::geofactions::EntityGameEventBuffer_EntityGameEventBufferType >(value));
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+          if (PROTOBUF_PREDICT_TRUE(::usx::geofactions::EntityGameEventBuffer_EntityGameEventBufferType_IsValid(val))) {
+            _internal_set_type(static_cast<::usx::geofactions::EntityGameEventBuffer_EntityGameEventBufferType>(val));
           } else {
-            mutable_unknown_fields()->AddVarint(
-                1, static_cast< ::google::protobuf::uint64>(value));
+            ::PROTOBUF_NAMESPACE_ID::internal::WriteVarint(1, val, mutable_unknown_fields());
           }
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+        } else goto handle_unusual;
+        continue;
       // required uint64 entityTag = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
-          set_has_entitytag();
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
-                 input, &entitytag_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
+          _Internal::set_has_entitytag(&has_bits);
+          entitytag_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // optional string UUID = 3;
-      case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_uuid()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->uuid().data(), static_cast<int>(this->uuid().length()),
-            ::google::protobuf::internal::WireFormat::PARSE,
-            "usx.geofactions.EntityGameEventBuffer.UUID");
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
+          auto str = _internal_mutable_uuid();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          #ifndef NDEBUG
+          ::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "usx.geofactions.EntityGameEventBuffer.UUID");
+          #endif  // !NDEBUG
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // optional .box2d.PbBody body = 4;
-      case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_body()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
+          ptr = ctx->ParseMessage(_internal_mutable_body(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
-        if (tag == 0) {
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
-    }
-  }
+    }  // switch
+  }  // while
 success:
-  // @@protoc_insertion_point(parse_success:usx.geofactions.EntityGameEventBuffer)
-  return true;
+  _has_bits_.Or(has_bits);
+  return ptr;
 failure:
-  // @@protoc_insertion_point(parse_failure:usx.geofactions.EntityGameEventBuffer)
-  return false;
-#undef DO_
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 
-void EntityGameEventBuffer::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:usx.geofactions.EntityGameEventBuffer)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  cached_has_bits = _has_bits_[0];
-  // required .usx.geofactions.EntityGameEventBuffer.EntityGameEventBufferType type = 1 [default = UNKNOWN];
-  if (cached_has_bits & 0x00000008u) {
-    ::google::protobuf::internal::WireFormatLite::WriteEnum(
-      1, this->type(), output);
-  }
-
-  // required uint64 entityTag = 2;
-  if (cached_has_bits & 0x00000004u) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt64(2, this->entitytag(), output);
-  }
-
-  // optional string UUID = 3;
-  if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->uuid().data(), static_cast<int>(this->uuid().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "usx.geofactions.EntityGameEventBuffer.UUID");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      3, this->uuid(), output);
-  }
-
-  // optional .box2d.PbBody body = 4;
-  if (cached_has_bits & 0x00000002u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      4, this->_internal_body(), output);
-  }
-
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        _internal_metadata_.unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:usx.geofactions.EntityGameEventBuffer)
-}
-
-::google::protobuf::uint8* EntityGameEventBuffer::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::PROTOBUF_NAMESPACE_ID::uint8* EntityGameEventBuffer::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:usx.geofactions.EntityGameEventBuffer)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
   // required .usx.geofactions.EntityGameEventBuffer.EntityGameEventBufferType type = 1 [default = UNKNOWN];
   if (cached_has_bits & 0x00000008u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
-      1, this->type(), target);
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
+      1, this->_internal_type(), target);
   }
 
   // required uint64 entityTag = 2;
   if (cached_has_bits & 0x00000004u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(2, this->entitytag(), target);
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(2, this->_internal_entitytag(), target);
   }
 
   // optional string UUID = 3;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->uuid().data(), static_cast<int>(this->uuid().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->_internal_uuid().data(), static_cast<int>(this->_internal_uuid().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
       "usx.geofactions.EntityGameEventBuffer.UUID");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        3, this->uuid(), target);
+    target = stream->WriteStringMaybeAliased(
+        3, this->_internal_uuid(), target);
   }
 
   // optional .box2d.PbBody body = 4;
   if (cached_has_bits & 0x00000002u) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        4, this->_internal_body(), deterministic, target);
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        4, _Internal::body(this), target, stream);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:usx.geofactions.EntityGameEventBuffer)
   return target;
@@ -438,17 +363,17 @@ size_t EntityGameEventBuffer::RequiredFieldsByteSizeFallback() const {
 // @@protoc_insertion_point(required_fields_byte_size_fallback_start:usx.geofactions.EntityGameEventBuffer)
   size_t total_size = 0;
 
-  if (has_entitytag()) {
+  if (_internal_has_entitytag()) {
     // required uint64 entityTag = 2;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt64Size(
-        this->entitytag());
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt64Size(
+        this->_internal_entitytag());
   }
 
-  if (has_type()) {
+  if (_internal_has_type()) {
     // required .usx.geofactions.EntityGameEventBuffer.EntityGameEventBufferType type = 1 [default = UNKNOWN];
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_type());
   }
 
   return total_size;
@@ -457,54 +382,58 @@ size_t EntityGameEventBuffer::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:usx.geofactions.EntityGameEventBuffer)
   size_t total_size = 0;
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        _internal_metadata_.unknown_fields());
-  }
   if (((_has_bits_[0] & 0x0000000c) ^ 0x0000000c) == 0) {  // All required fields are present.
     // required uint64 entityTag = 2;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt64Size(
-        this->entitytag());
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt64Size(
+        this->_internal_entitytag());
 
     // required .usx.geofactions.EntityGameEventBuffer.EntityGameEventBufferType type = 1 [default = UNKNOWN];
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_type());
 
   } else {
     total_size += RequiredFieldsByteSizeFallback();
   }
-  if (_has_bits_[0 / 32] & 3u) {
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  if (cached_has_bits & 0x00000003u) {
     // optional string UUID = 3;
-    if (has_uuid()) {
+    if (cached_has_bits & 0x00000001u) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->uuid());
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+          this->_internal_uuid());
     }
 
     // optional .box2d.PbBody body = 4;
-    if (has_body()) {
+    if (cached_has_bits & 0x00000002u) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::MessageSize(
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
           *body_);
     }
 
   }
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void EntityGameEventBuffer::MergeFrom(const ::google::protobuf::Message& from) {
+void EntityGameEventBuffer::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:usx.geofactions.EntityGameEventBuffer)
   GOOGLE_DCHECK_NE(&from, this);
   const EntityGameEventBuffer* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const EntityGameEventBuffer>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<EntityGameEventBuffer>(
           &from);
-  if (source == NULL) {
+  if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:usx.geofactions.EntityGameEventBuffer)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:usx.geofactions.EntityGameEventBuffer)
     MergeFrom(*source);
@@ -514,18 +443,17 @@ void EntityGameEventBuffer::MergeFrom(const ::google::protobuf::Message& from) {
 void EntityGameEventBuffer::MergeFrom(const EntityGameEventBuffer& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:usx.geofactions.EntityGameEventBuffer)
   GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 15u) {
+  if (cached_has_bits & 0x0000000fu) {
     if (cached_has_bits & 0x00000001u) {
-      set_has_uuid();
-      uuid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.uuid_);
+      _internal_set_uuid(from._internal_uuid());
     }
     if (cached_has_bits & 0x00000002u) {
-      mutable_body()->::box2d::PbBody::MergeFrom(from.body());
+      _internal_mutable_body()->::box2d::PbBody::MergeFrom(from._internal_body());
     }
     if (cached_has_bits & 0x00000004u) {
       entitytag_ = from.entitytag_;
@@ -537,7 +465,7 @@ void EntityGameEventBuffer::MergeFrom(const EntityGameEventBuffer& from) {
   }
 }
 
-void EntityGameEventBuffer::CopyFrom(const ::google::protobuf::Message& from) {
+void EntityGameEventBuffer::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:usx.geofactions.EntityGameEventBuffer)
   if (&from == this) return;
   Clear();
@@ -552,43 +480,39 @@ void EntityGameEventBuffer::CopyFrom(const EntityGameEventBuffer& from) {
 }
 
 bool EntityGameEventBuffer::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000000c) != 0x0000000c) return false;
-  if (has_body()) {
-    if (!this->body_->IsInitialized()) return false;
+  if (_Internal::MissingRequiredFields(_has_bits_)) return false;
+  if (_internal_has_body()) {
+    if (!body_->IsInitialized()) return false;
   }
   return true;
 }
 
-void EntityGameEventBuffer::Swap(EntityGameEventBuffer* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void EntityGameEventBuffer::InternalSwap(EntityGameEventBuffer* other) {
   using std::swap;
-  uuid_.Swap(&other->uuid_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
-  swap(body_, other->body_);
-  swap(entitytag_, other->entitytag_);
-  swap(type_, other->type_);
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
   swap(_has_bits_[0], other->_has_bits_[0]);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
+  uuid_.Swap(&other->uuid_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(EntityGameEventBuffer, type_)
+      + sizeof(EntityGameEventBuffer::type_)
+      - PROTOBUF_FIELD_OFFSET(EntityGameEventBuffer, body_)>(
+          reinterpret_cast<char*>(&body_),
+          reinterpret_cast<char*>(&other->body_));
 }
 
-::google::protobuf::Metadata EntityGameEventBuffer::GetMetadata() const {
-  protobuf_EntityGameEventBuffer_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_EntityGameEventBuffer_2eproto::file_level_metadata[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata EntityGameEventBuffer::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace geofactions
 }  // namespace usx
-namespace google {
-namespace protobuf {
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::usx::geofactions::EntityGameEventBuffer* Arena::CreateMaybeMessage< ::usx::geofactions::EntityGameEventBuffer >(Arena* arena) {
-  return Arena::CreateInternal< ::usx::geofactions::EntityGameEventBuffer >(arena);
+PROTOBUF_NAMESPACE_OPEN
+template<> PROTOBUF_NOINLINE ::usx::geofactions::EntityGameEventBuffer* Arena::CreateMaybeMessage< ::usx::geofactions::EntityGameEventBuffer >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::usx::geofactions::EntityGameEventBuffer >(arena);
 }
-}  // namespace protobuf
-}  // namespace google
+PROTOBUF_NAMESPACE_CLOSE
 
 // @@protoc_insertion_point(global_scope)
+#include <google/protobuf/port_undef.inc>

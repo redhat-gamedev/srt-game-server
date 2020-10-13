@@ -16,7 +16,7 @@
 #include "CommandConsumer.h"
 #include "ACommand.h"
 #include "../Proto/CommandBuffer.pb.h"
-#include "Poco/Delegate.h"
+#include <Poco/Delegate.h>
 
 
 // Constructor

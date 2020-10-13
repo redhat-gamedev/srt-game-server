@@ -14,7 +14,7 @@
 
 #include "CommandConsumer.h"
 #include "../Network/MessageConsumer.h"
-#include "Poco/Delegate.h"
+#include <Poco/Delegate.h>
 #include <cms/BytesMessage.h>
 #include <cms/CMSException.h>
 #include <vector>

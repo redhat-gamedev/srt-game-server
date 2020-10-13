@@ -15,8 +15,8 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-#include "Poco/BasicEvent.h"
-#include "Poco/Tuple.h"
+#include <Poco/BasicEvent.h>
+#include <Poco/Tuple.h>
 #include <cms/MessageListener.h>
 #include <decaf/util/StlQueue.h>
 #include <utility>
