@@ -19,6 +19,7 @@
 #include <Box2D/Box2D.h>
 //#include "../../../ThirdParty/box2d/Box2D/Box2D/Common/b2Settings.h"
 #include <Box2D/Common/b2Settings.h>
+//#include <Box2D/b2_Settings.h>
 //#include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
 #include <Poco/Delegate.h>
 #include <cms/CMSException.h>
@@ -144,7 +145,8 @@ void World::b2WorldToPbWorld(b2World* pb2World, PbWorld*& pPbWorldDefault)
         iPostCount = pPbWorldDefault->bodies_size();
         assert(iPostCount > iPreCount);
         
-        pPbBody->set_active(pBody->IsActive());
+//        pPbBody->set_active(pBody->IsActive());
+        pPbBody->set_active(pBody->IsAwake());
         pPbBody->set_bullet(pBody->IsBullet());
         pPbBody->set_type(DYNAMIC);
         ppbv2Position = new PbVec2();

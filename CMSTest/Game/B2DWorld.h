@@ -15,6 +15,7 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
+#include "../Shared/Types.h"
 //#include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include <Box2D/Box2D.h>
 //#include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"

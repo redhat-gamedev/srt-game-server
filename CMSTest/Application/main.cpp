@@ -36,6 +36,16 @@
 #include <iostream>
 
 
+void usage(char **argv) {
+    fprintf(stderr, "usage: %s [options]\n", argv[0]);
+    fprintf(stderr, "  --help: print usage\n");
+    fprintf(stderr, "  --broker-uri: broker uri with options e.g. tcp://127.0.0.1:61613?wireFormat=stomp&keepAlive=true\n");
+    fprintf(stderr, " ");
+    fprintf(stderr, "\n\n");
+//    fprintf(stderr, "bad argument: %s\n", *arg);
+//    exit(1);
+}
+
 int main(int argc, char* argv[])
 {
     //std::string     strSecurityInURI = "AAS.IN";
@@ -45,6 +55,20 @@ int main(int argc, char* argv[])
     std::string     strGameEventOutDestinationURI = "GAME.EVENT.OUT";
     
     std::cout << "Starting..." << std::endl;
+    for (int i = 1; i < argc; ++i)
+    {
+        if (0 == strcmp(argv[i], "--help"))
+        {
+            usage(argv);
+            exit(0);
+        }
+        else if (0 == strcmp(argv[i], "--broker-uri"))
+        {
+            // TODO: Error checking on arg
+            strBrokerURI = argv[++i];
+        }
+    }
+
     std::cout << "Initializing the ActiveMQCPP library" << std::endl;
     activemq::library::ActiveMQCPP::initializeLibrary();
     
@@ -54,7 +78,8 @@ int main(int argc, char* argv[])
     auto&                           theSecurityGameEventFactory = FactoryT<GameEventBuffer, SecurityGameEvent_Dependencies>::Instance();
     EventDispatcher::_Dependencies  theEventDispatcherDependencies(thePodFactory, theBulletFactory, theEntityGameEventFactory, theSecurityGameEventFactory);
     EventDispatcher&                theEventDispatcher = EventDispatcher::Instance(&theEventDispatcherDependencies);
-    
+
+    std::cout << "main creating SimpleAsyncProducer with strBrokerURI " << strBrokerURI << std::endl;
     SimpleAsyncProducer*                pSimpleAsyncProducer = new SimpleAsyncProducer(strBrokerURI, strGameEventOutDestinationURI, true);
     MessageDispatcher::_Dependencies    theMessageDispatcherDependencies(pSimpleAsyncProducer);
     MessageDispatcher&                  theMessageDispatcher = MessageDispatcher::Instance(&theMessageDispatcherDependencies);

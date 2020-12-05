@@ -29,6 +29,9 @@ typedef long long		LONGLONG;
 #ifndef BOOL
 typedef signed char		BOOL;
 #endif
+#ifndef float32
+typedef float           float32;
+#endif
 #ifndef NULL
 #define NULL 0
 #endif

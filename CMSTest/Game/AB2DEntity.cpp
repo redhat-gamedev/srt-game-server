@@ -51,7 +51,8 @@ void AB2DEntity::_Serializer::Serialize(const AB2DEntity* pB2DEntity, usx::geofa
     
     pPbBody = pEntityGameEvent->mutable_body();
 
-    pPbBody->set_active(pB2DEntity->m_pb2Body->IsActive());
+    //pPbBody->set_active(pB2DEntity->m_pb2Body->IsActive());
+    pPbBody->set_active(pB2DEntity->m_pb2Body->IsAwake());
     pPbBody->set_bullet(pB2DEntity->m_pb2Body->IsBullet());
     pPbBody->set_type(DYNAMIC);
     ppbv2Position = new PbVec2();
