@@ -7,7 +7,7 @@ echo "Executing entrypoint"
 
 if ! whoami &>/dev/null; then
   if [ -w /etc/passwd ]; then
-    echo "${USER_NAME:-cmstest}:x:$(id -u):$(id -g):${USER_NAME:-cmstest} user:${HOME}:/sbin/nologin" >> /etc/passwd
+    echo "${USER_NAME:-srt}:x:$(id -u):$(id -g):${USER_NAME:-srt} user:${HOME}:/sbin/nologin" >> /etc/passwd
   fi
 fi
 

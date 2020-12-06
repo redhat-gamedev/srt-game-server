@@ -1,8 +1,4 @@
-# Generated on 2019-1-11 22:36:30 by version 0.7.0 of mulle-xcode-to-cmake
-# Command line:
-#    mulle-xcode-to-cmake export CMSTest.xcodeproj
-
-project( CMSTest)
+project(srt-game-server)
 
 cmake_minimum_required (VERSION 3.4)
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11") # enable C++11 standard
@@ -70,50 +66,50 @@ endif()
 
 
 ##
-## CMSTest Files
+## srt-game-server Files
 ##
 
 # uncomment this for mulle-objc to search libraries first
 # set( CMAKE_FIND_FRAMEWORK "LAST")
 
 set( SOURCES
-CMSTest/Application/Heartbeat.cpp
-CMSTest/Application/Server.cpp
-CMSTest/Application/main.cpp
-CMSTest/Commands/ACommand.cpp
-CMSTest/Commands/CommandConsumer.cpp
-CMSTest/Commands/CommandQueue.cpp
-CMSTest/Commands/DualStickRawInputCommand.cpp
-CMSTest/Commands/JoinSecurityCommand.cpp
-CMSTest/Commands/LeaveSecurityCommand.cpp
-CMSTest/Commands/RawInputCommand.cpp
-CMSTest/Commands/SecurityCommand.cpp
-CMSTest/Commands/SecurityCommandBufferFactory.cpp
-CMSTest/Events/EntityGameEventFactory.cpp
-CMSTest/Events/EventDispatcher.cpp
-CMSTest/Events/SecurityGameEventFactory.cpp
-CMSTest/Game/AB2DEntity.cpp
-CMSTest/Game/AEntity.cpp
-CMSTest/Game/B2DBullet.cpp
-CMSTest/Game/B2DPod.cpp
-CMSTest/Game/B2DWorld.cpp
-CMSTest/Game/Bullet.cpp
-CMSTest/Game/BulletFactory.cpp
-CMSTest/Game/Pod.cpp
-CMSTest/Game/PodFactory.cpp
-CMSTest/Game/World.cpp
-CMSTest/Network/MessageConsumer.cpp
-CMSTest/Network/MessageDispatcher.cpp
-CMSTest/Network/SimpleAsyncConsumer.cpp
-CMSTest/Network/SimpleAsyncProducer.cpp
-CMSTest/Proto/CommandBuffer.pb.cc
-CMSTest/Proto/DualStickRawInputCommandBuffer.pb.cc
-CMSTest/Proto/EntityGameEventBuffer.pb.cc
-CMSTest/Proto/GameEventBuffer.pb.cc
-CMSTest/Proto/RawInputCommandBuffer.pb.cc
-CMSTest/Proto/SecurityCommandBuffer.pb.cc
-CMSTest/Proto/box2d.pb.cc
-CMSTest/Shared/Timer.cpp
+src/Application/Heartbeat.cpp
+src/Application/Server.cpp
+src/Application/main.cpp
+src/Commands/ACommand.cpp
+src/Commands/CommandConsumer.cpp
+src/Commands/CommandQueue.cpp
+src/Commands/DualStickRawInputCommand.cpp
+src/Commands/JoinSecurityCommand.cpp
+src/Commands/LeaveSecurityCommand.cpp
+src/Commands/RawInputCommand.cpp
+src/Commands/SecurityCommand.cpp
+src/Commands/SecurityCommandBufferFactory.cpp
+src/Events/EntityGameEventFactory.cpp
+src/Events/EventDispatcher.cpp
+src/Events/SecurityGameEventFactory.cpp
+src/Game/AB2DEntity.cpp
+src/Game/AEntity.cpp
+src/Game/B2DBullet.cpp
+src/Game/B2DPod.cpp
+src/Game/B2DWorld.cpp
+src/Game/Bullet.cpp
+src/Game/BulletFactory.cpp
+src/Game/Pod.cpp
+src/Game/PodFactory.cpp
+src/Game/World.cpp
+src/Network/MessageConsumer.cpp
+src/Network/MessageDispatcher.cpp
+src/Network/SimpleAsyncConsumer.cpp
+src/Network/SimpleAsyncProducer.cpp
+src/Proto/CommandBuffer.pb.cc
+src/Proto/DualStickRawInputCommandBuffer.pb.cc
+src/Proto/EntityGameEventBuffer.pb.cc
+src/Proto/GameEventBuffer.pb.cc
+src/Proto/RawInputCommandBuffer.pb.cc
+src/Proto/SecurityCommandBuffer.pb.cc
+src/Proto/box2d.pb.cc
+src/Shared/Timer.cpp
 )
 
 find_library( BOX2_D_LIBRARY Box2D)
@@ -150,10 +146,10 @@ ${SSL_1_0_2_LIBRARY}
 
 
 ##
-## CMSTest
+## srt-game-server
 ##
 
-add_executable( CMSTest MACOSX_BUNDLE
+add_executable(srt-game-server MACOSX_BUNDLE
 ${SOURCES}
 ${PUBLIC_HEADERS}
 ${PROJECT_HEADERS}
@@ -161,7 +157,7 @@ ${PRIVATE_HEADERS}
 ${RESOURCES}
 )
 
-target_include_directories( CMSTest
+target_include_directories(srt-game-server
    PUBLIC SYSTEM
         /usr/local/include/activemq-cpp
         /usr/include/activemq-cpp-3.9.4
@@ -171,7 +167,7 @@ target_include_directories( CMSTest
         /opt/local/include/apr-1
 )
 
-target_link_libraries( CMSTest
+target_link_libraries(srt-game-server
 ${BEGIN_ALL_LOAD}
 ${STATIC_DEPENDENCIES}
 ${END_ALL_LOAD}
