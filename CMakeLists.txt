@@ -164,6 +164,7 @@ ${RESOURCES}
 target_include_directories( CMSTest
    PUBLIC SYSTEM
         /usr/local/include/activemq-cpp
+        /usr/include/activemq-cpp-3.9.4
         /usr/include/apr-1
         /usr/local/include
         /opt/local/include

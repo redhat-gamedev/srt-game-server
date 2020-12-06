@@ -9,6 +9,7 @@ ENV USER_UID=1000
 ENV USER_NAME=cmstest
 ENV EXECUTABLE_NAME=CMSTest.bin
 ENV EXECUTABLE=/home/${USER_NAME}/bin/${EXECUTABLE_NAME}
+ENV BROKER_URI="tcp://127.0.0.1:61613?wireFormat=stomp"
 
 WORKDIR /
 
@@ -18,7 +19,7 @@ COPY bin/entrypoint /home/${USER_NAME}/bin
 
 RUN chown -R `id -u`:0 /home/${USER_NAME}/bin && chmod -R 755 /home/${USER_NAME}/bin
 USER ${USER_UID}:0
-ENTRYPOINT ["/home/cmstest/bin/entrypoint"]
+ENTRYPOINT "/home/cmstest/bin/entrypoint" "--broker-uri" "$BROKER_URI"
 
 LABEL \
       com.srt.component="srt-game-server" \
