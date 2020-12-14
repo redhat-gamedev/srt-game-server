@@ -1,7 +1,23 @@
 #Build
+FROM fedora:30 as build-env
+
+RUN sudo dnf install activemq-cpp activemq-cpp-devel apr apr-util apr-util-devel Box2D Box2D-devel compat-openssl10 openssl crypto-utils poco-devel poco-foundation protobuf protobuf-devel gcc g++ cmake git --assumeyes --verbose
+#RUN mkdir -p /tmp/srt-game-server/build
+
+ADD . /tmp/srt-game-server
+RUN mkdir /tmp/build
+WORKDIR /tmp/build
+
+RUN echo `pwd`
+RUN ls -lR /tmp/srt-game-server
+RUN echo "Running cmake /tmp/srt-game-server"
+RUN cmake /tmp/srt-game-server
+RUN echo "Running cmake --build ."
+RUN cmake --build .
+
 
 # Run
-FROM fedora:30
+FROM fedora:30 as base-env
 
 RUN sudo dnf install activemq-cpp activemq-cpp-devel apr apr-util Box2D Box2D-devel compat-openssl10 openssl crypto-utils poco-devel poco-foundation protobuf protobuf-devel --assumeyes --verbose
 
@@ -14,8 +30,9 @@ ENV BROKER_URI="tcp://127.0.0.1:61613?wireFormat=stomp"
 WORKDIR /
 
 RUN mkdir -p /home/${USER_NAME}/bin
-COPY bin/${EXECUTABLE_NAME} /home/${USER_NAME}/bin
-COPY bin/entrypoint /home/${USER_NAME}/bin
+#COPY bin/${EXECUTABLE_NAME} /home/${USER_NAME}/bin
+COPY --from=build-env /tmp/build/srt-game-server /home/${USER_NAME}/bin/${EXECUTABLE_NAME}
+COPY containerbuild/bin/entrypoint /home/${USER_NAME}/bin
 
 RUN chown -R `id -u`:0 /home/${USER_NAME}/bin && chmod -R 755 /home/${USER_NAME}/bin
 USER ${USER_UID}:0
