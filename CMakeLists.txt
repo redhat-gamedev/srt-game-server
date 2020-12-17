@@ -110,7 +110,7 @@ src/Proto/RawInputCommandBuffer.pb.cc
 src/Proto/SecurityCommandBuffer.pb.cc
 src/Proto/box2d.pb.cc
 src/Shared/Timer.cpp
-)
+        src/Application/Configuration.cpp src/Application/Configuration.h)
 
 find_library( BOX2_D_LIBRARY Box2D)
 message( STATUS "BOX2_D_LIBRARY is ${BOX2_D_LIBRARY}")

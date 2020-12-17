@@ -14,6 +14,7 @@
 
 #include "Input.h"
 #if 0
+#include "../Application/Configuration.h"
 #include "../Proto/DualStick.pb.h"
 #include "../Proto/box2d.pb.h"
 #include "../Network/SimpleAsyncConsumer.h"
@@ -40,11 +41,10 @@ Input::Input() :
     bool            useTopics = false;
     bool            clientAck = false;
     std::string     strInputURI = "CLIENT.INPUT";
-    std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp&keepAlive=true";
 
     std::cout << "Input::Input()..." << std::endl;
     
-    m_pSimpleAsyncConsumer = new SimpleAsyncConsumer(strBrokerURI, strInputURI, useTopics, clientAck);
+    m_pSimpleAsyncConsumer = new SimpleAsyncConsumer(Configuration::Instance().BrokerURI, strInputURI, useTopics, clientAck);
     m_pSimpleAsyncConsumer->runConsumer();
     m_pSimpleAsyncConsumer->SetMessageListener(this);
 }

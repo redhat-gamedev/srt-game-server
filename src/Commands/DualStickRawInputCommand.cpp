@@ -39,7 +39,6 @@ void DualStickRawInputCommand::Execute()
     assert(m_pBytesMessage);
     assert(m_pCommandBuffer);
     
-    std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp&keepAlive=true";
     std::string     strUUID = "";
     //b2Vec2          b2v2Move;
     //b2Vec2          b2v2Shoot;
