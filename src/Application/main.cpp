@@ -12,6 +12,7 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
+#include "Configuration.h"
 #include "Server.h"
 #include "../Network/MessageDispatcher.h"
 #include "../Network/MessageConsumer.h"
@@ -69,6 +70,8 @@ int main(int argc, char* argv[])
         }
     }
 
+    Configuration::Instance().BrokerURI = strBrokerURI;
+
     std::cout << "Initializing the ActiveMQCPP library" << std::endl;
     activemq::library::ActiveMQCPP::initializeLibrary();
     
@@ -79,12 +82,12 @@ int main(int argc, char* argv[])
     EventDispatcher::_Dependencies  theEventDispatcherDependencies(thePodFactory, theBulletFactory, theEntityGameEventFactory, theSecurityGameEventFactory);
     EventDispatcher&                theEventDispatcher = EventDispatcher::Instance(&theEventDispatcherDependencies);
 
-    std::cout << "main creating SimpleAsyncProducer with strBrokerURI " << strBrokerURI << std::endl;
-    SimpleAsyncProducer*                pSimpleAsyncProducer = new SimpleAsyncProducer(strBrokerURI, strGameEventOutDestinationURI, true);
+    std::cout << "main creating SimpleAsyncProducer with strBrokerURI " << Configuration::Instance().BrokerURI << std::endl;
+    SimpleAsyncProducer*                pSimpleAsyncProducer = new SimpleAsyncProducer(Configuration::Instance().BrokerURI, strGameEventOutDestinationURI, true);
     MessageDispatcher::_Dependencies    theMessageDispatcherDependencies(pSimpleAsyncProducer);
     MessageDispatcher&                  theMessageDispatcher = MessageDispatcher::Instance(&theMessageDispatcherDependencies);
     
-    SimpleAsyncConsumer*                pSimpleAsyncConsumer = new SimpleAsyncConsumer(strBrokerURI, strCommandInDestinationURI);
+    SimpleAsyncConsumer*                pSimpleAsyncConsumer = new SimpleAsyncConsumer(Configuration::Instance().BrokerURI, strCommandInDestinationURI);
     MessageConsumer::_Dependencies      theMessageConsumerDependencies(pSimpleAsyncConsumer);
     MessageConsumer&                    theMessageConsumer = MessageConsumer::Instance(&theMessageConsumerDependencies);
 

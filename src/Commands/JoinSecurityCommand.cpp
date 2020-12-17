@@ -13,6 +13,7 @@
 //   limitations under the License.
 
 #include "JoinSecurityCommand.h"
+#include "../Application/Configuration.h"
 #include "../Proto/CommandBuffer.pb.h"
 #include "../Proto/SecurityCommandBuffer.pb.h"
 #include "../Network/SimpleAsyncProducer.h"
@@ -44,7 +45,6 @@ void JoinSecurityCommand::Execute()
     assert(m_pBytesMessage);
     assert(m_pCommandBuffer);
     
-    std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp&keepAlive=true";
     std::string     strUUID = "";
     const SecurityCommandBuffer& aSecurityCommandBuffer = m_pCommandBuffer->securitycommandbuffer();
     
@@ -54,7 +54,7 @@ void JoinSecurityCommand::Execute()
     assert(pReplyToDestination);
     
     // TODO: Make not super inefficient
-    SimpleAsyncProducer* pSimpleAsyncProducer = new SimpleAsyncProducer(strBrokerURI, pReplyToDestination, false, true);
+    SimpleAsyncProducer* pSimpleAsyncProducer = new SimpleAsyncProducer(Configuration::Instance().BrokerURI, pReplyToDestination, false, true);
     pSimpleAsyncProducer->Send(strUUID);
     delete pSimpleAsyncProducer;
     

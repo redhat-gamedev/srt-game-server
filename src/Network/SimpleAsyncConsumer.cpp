@@ -13,6 +13,7 @@
 //   limitations under the License.
 
 #include "SimpleAsyncConsumer.h"
+#include "../Application/Configuration.h"
 #include <decaf/lang/Thread.h>
 //#include <decaf/lang/Runnable.h>
 #include <decaf/util/concurrent/CountDownLatch.h>
@@ -74,12 +75,11 @@ void SimpleAsyncConsumer::runConsumer()
 {
     try {
         
-        const std::string& strBrokerURI = brokerURI;
         // Create a ConnectionFactory
         //ActiveMQConnectionFactory* connectionFactory = new ActiveMQConnectionFactory( brokerURI );
-        ActiveMQConnectionFactory* connectionFactory = new ActiveMQConnectionFactory();// strBrokerURI );
+        ActiveMQConnectionFactory* connectionFactory = new ActiveMQConnectionFactory();;
         //connectionFactory->setBrokerURI(strBrokerURI);
-        decaf::net::URI* uriBroker = new decaf::net::URI(strBrokerURI);
+        decaf::net::URI* uriBroker = new decaf::net::URI(Configuration::Instance().BrokerURI);
         connectionFactory->setBrokerURI(*uriBroker);
 
         // Create a Connection
