@@ -21,6 +21,7 @@
 //#include <cms/TemporaryQueue.h>
 #include <decaf/util/UUID.h>
 #include <assert.h>
+#include <iostream>
 
 
 // Constructor
@@ -54,7 +55,11 @@ void JoinSecurityCommand::Execute()
     assert(pReplyToDestination);
     
     // TODO: Make not super inefficient
+    std::cout << "creating Simple Async Producer" << std::endl;
+    std::cout << "destination URI: " << strBrokerURI << std::endl;
     SimpleAsyncProducer* pSimpleAsyncProducer = new SimpleAsyncProducer(strBrokerURI, pReplyToDestination, false, true);
+
+    std::cout << "sending UUID: " << strUUID << std::endl;
     pSimpleAsyncProducer->Send(strUUID);
     delete pSimpleAsyncProducer;
     

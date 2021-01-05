@@ -88,16 +88,17 @@ void CommandQueue::HandleCommandConsumedEvent(const void* pSender, Poco::Tuple<c
     ACommand* pCommand = NULL;
 
     std::cout << "command event received" << std::endl;
-    std::cout << "command buffer type " << pCommandBuffer->type() << std::endl;
+    std::cout << "received command buffer type: " << pCommandBuffer->type() << std::endl;
 
     if (redhatgamedev::srt::CommandBuffer_CommandBufferType_SECURITY == pCommandBuffer->type())
     {
         const SecurityCommandBuffer& aSecurityCommandBuffer = pCommandBuffer->securitycommandbuffer();
         std::cout << "security command" << std::endl;
-        std::cout << "security command type " << aSecurityCommandBuffer.type() << std::endl;
+        std::cout << "received security command type: " << aSecurityCommandBuffer.type() << std::endl;
 
         if (redhatgamedev::srt::SecurityCommandBuffer_SecurityCommandBufferType_JOIN == aSecurityCommandBuffer.type())
         {
+            std::cout << "join message received" << std::endl;
             JoinSecurityCommand::_SecurityDependencies theJoinSecurityCommandDependencies(pCommandBuffer, pBytesMessage);
             pCommand = m_aJoinSecurityCommandFactory.Create(theJoinSecurityCommandDependencies);
         }
