@@ -1,7 +1,7 @@
 project(srt-game-server)
 
 cmake_minimum_required (VERSION 3.4)
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11") # enable C++11 standard
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -lpthread -ldl") # enable C++11 standard
 
 #
 # mulle-bootstrap environment

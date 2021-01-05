@@ -21,6 +21,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <assert.h>
+#include "../Logging/loguru.hpp"
 
 
 // Constructor(s)
@@ -50,7 +51,7 @@ Server::~Server()
 // Helper(s)
 void Server::Setup()
 {
-    std::cout << "Server::Setup()..." << std::endl;
+    LOG_SCOPE_F(INFO, "Setting up Server");
 
     std::string     strMainThreadName = "ServerThread";
     
@@ -59,14 +60,14 @@ void Server::Setup()
     m_pWorld = new World();
     //m_pInput = new Input();
 
-    std::cout << "Starting the world producer" << std::endl;
+    LOG_SCOPE_F(INFO, "Starting the world producer");
     m_pMainThread = new decaf::lang::Thread(this, strMainThreadName);
     m_pMainThread->start();
 }
 
 void Server::Teardown()
 {
-    std::cout << "Teardown()..." << std::endl;
+    LOG_SCOPE_F(INFO, "Tearing down the server...");
 
     delete m_pMainThread;
     m_pMainThread = NULL;

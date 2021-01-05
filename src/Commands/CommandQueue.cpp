@@ -18,7 +18,7 @@
 #include "../Proto/CommandBuffer.pb.h"
 #include <Poco/Delegate.h>
 #include <iostream>
-
+#include "../Logging/loguru.hpp"
 
 // Constructor
 CommandQueue::
@@ -87,18 +87,18 @@ void CommandQueue::HandleCommandConsumedEvent(const void* pSender, Poco::Tuple<c
     
     ACommand* pCommand = NULL;
 
-    std::cout << "command event received" << std::endl;
-    std::cout << "received command buffer type: " << pCommandBuffer->type() << std::endl;
+    LOG_SCOPE_F(1, "command event received");
+    LOG_SCOPE_F(1, "received command buffer type: %i", pCommandBuffer->type());
 
     if (redhatgamedev::srt::CommandBuffer_CommandBufferType_SECURITY == pCommandBuffer->type())
     {
         const SecurityCommandBuffer& aSecurityCommandBuffer = pCommandBuffer->securitycommandbuffer();
-        std::cout << "security command" << std::endl;
-        std::cout << "received security command type: " << aSecurityCommandBuffer.type() << std::endl;
+        LOG_SCOPE_F(1, "security command");
+        LOG_SCOPE_F(1, "received security command type: %i", aSecurityCommandBuffer.type());
 
         if (redhatgamedev::srt::SecurityCommandBuffer_SecurityCommandBufferType_JOIN == aSecurityCommandBuffer.type())
         {
-            std::cout << "join message received" << std::endl;
+            LOG_SCOPE_F(1, "join message received");
             JoinSecurityCommand::_SecurityDependencies theJoinSecurityCommandDependencies(pCommandBuffer, pBytesMessage);
             pCommand = m_aJoinSecurityCommandFactory.Create(theJoinSecurityCommandDependencies);
         }

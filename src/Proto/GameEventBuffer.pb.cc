@@ -5,241 +5,202 @@
 
 #include <algorithm>
 
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/port.h>
 #include <google/protobuf/io/coded_stream.h>
-#include <google/protobuf/wire_format_lite_inl.h>
+#include <google/protobuf/extension_set.h>
+#include <google/protobuf/wire_format_lite.h>
 #include <google/protobuf/descriptor.h>
 #include <google/protobuf/generated_message_reflection.h>
 #include <google/protobuf/reflection_ops.h>
 #include <google/protobuf/wire_format.h>
-// This is a temporary google only hack
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-#include "third_party/protobuf/version.h"
-#endif
 // @@protoc_insertion_point(includes)
-
-namespace protobuf_EntityGameEventBuffer_2eproto {
-extern PROTOBUF_INTERNAL_EXPORT_protobuf_EntityGameEventBuffer_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_EntityGameEventBuffer;
-}  // namespace protobuf_EntityGameEventBuffer_2eproto
-namespace protobuf_GameEventBuffer_2eproto {
-extern PROTOBUF_INTERNAL_EXPORT_protobuf_GameEventBuffer_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_JoinSecurityGameEventBuffer;
-extern PROTOBUF_INTERNAL_EXPORT_protobuf_GameEventBuffer_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_LeaveSecurityGameEventBuffer;
-extern PROTOBUF_INTERNAL_EXPORT_protobuf_GameEventBuffer_2eproto ::google::protobuf::internal::SCCInfo<2> scc_info_SecurityGameEventBuffer;
-}  // namespace protobuf_GameEventBuffer_2eproto
+#include <google/protobuf/port_def.inc>
+extern PROTOBUF_INTERNAL_EXPORT_EntityGameEventBuffer_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_EntityGameEventBuffer_EntityGameEventBuffer_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_GameEventBuffer_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_JoinSecurityGameEventBuffer_GameEventBuffer_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_GameEventBuffer_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_LeaveSecurityGameEventBuffer_GameEventBuffer_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_GameEventBuffer_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_SecurityGameEventBuffer_GameEventBuffer_2eproto;
 namespace redhatgamedev {
 namespace srt {
 class JoinSecurityGameEventBufferDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<JoinSecurityGameEventBuffer>
-      _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<JoinSecurityGameEventBuffer> _instance;
 } _JoinSecurityGameEventBuffer_default_instance_;
 class LeaveSecurityGameEventBufferDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<LeaveSecurityGameEventBuffer>
-      _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<LeaveSecurityGameEventBuffer> _instance;
 } _LeaveSecurityGameEventBuffer_default_instance_;
 class SecurityGameEventBufferDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<SecurityGameEventBuffer>
-      _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<SecurityGameEventBuffer> _instance;
 } _SecurityGameEventBuffer_default_instance_;
 class GameEventBufferDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<GameEventBuffer>
-      _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<GameEventBuffer> _instance;
 } _GameEventBuffer_default_instance_;
 }  // namespace srt
 }  // namespace redhatgamedev
-namespace protobuf_GameEventBuffer_2eproto {
-static void InitDefaultsJoinSecurityGameEventBuffer() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::redhatgamedev::srt::_JoinSecurityGameEventBuffer_default_instance_;
-    new (ptr) ::redhatgamedev::srt::JoinSecurityGameEventBuffer();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::redhatgamedev::srt::JoinSecurityGameEventBuffer::InitAsDefaultInstance();
-}
-
-::google::protobuf::internal::SCCInfo<0> scc_info_JoinSecurityGameEventBuffer =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsJoinSecurityGameEventBuffer}, {}};
-
-static void InitDefaultsLeaveSecurityGameEventBuffer() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::redhatgamedev::srt::_LeaveSecurityGameEventBuffer_default_instance_;
-    new (ptr) ::redhatgamedev::srt::LeaveSecurityGameEventBuffer();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::redhatgamedev::srt::LeaveSecurityGameEventBuffer::InitAsDefaultInstance();
-}
-
-::google::protobuf::internal::SCCInfo<0> scc_info_LeaveSecurityGameEventBuffer =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsLeaveSecurityGameEventBuffer}, {}};
-
-static void InitDefaultsSecurityGameEventBuffer() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::redhatgamedev::srt::_SecurityGameEventBuffer_default_instance_;
-    new (ptr) ::redhatgamedev::srt::SecurityGameEventBuffer();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::redhatgamedev::srt::SecurityGameEventBuffer::InitAsDefaultInstance();
-}
-
-::google::protobuf::internal::SCCInfo<2> scc_info_SecurityGameEventBuffer =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 2, InitDefaultsSecurityGameEventBuffer}, {
-      &protobuf_GameEventBuffer_2eproto::scc_info_JoinSecurityGameEventBuffer.base,
-      &protobuf_GameEventBuffer_2eproto::scc_info_LeaveSecurityGameEventBuffer.base,}};
-
-static void InitDefaultsGameEventBuffer() {
+static void InitDefaultsscc_info_GameEventBuffer_GameEventBuffer_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
     void* ptr = &::redhatgamedev::srt::_GameEventBuffer_default_instance_;
     new (ptr) ::redhatgamedev::srt::GameEventBuffer();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
   }
   ::redhatgamedev::srt::GameEventBuffer::InitAsDefaultInstance();
 }
 
-::google::protobuf::internal::SCCInfo<2> scc_info_GameEventBuffer =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 2, InitDefaultsGameEventBuffer}, {
-      &protobuf_EntityGameEventBuffer_2eproto::scc_info_EntityGameEventBuffer.base,
-      &protobuf_GameEventBuffer_2eproto::scc_info_SecurityGameEventBuffer.base,}};
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_GameEventBuffer_GameEventBuffer_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_GameEventBuffer_GameEventBuffer_2eproto}, {
+      &scc_info_EntityGameEventBuffer_EntityGameEventBuffer_2eproto.base,
+      &scc_info_SecurityGameEventBuffer_GameEventBuffer_2eproto.base,}};
 
-void InitDefaults() {
-  ::google::protobuf::internal::InitSCC(&scc_info_JoinSecurityGameEventBuffer.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_LeaveSecurityGameEventBuffer.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_SecurityGameEventBuffer.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_GameEventBuffer.base);
+static void InitDefaultsscc_info_JoinSecurityGameEventBuffer_GameEventBuffer_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::redhatgamedev::srt::_JoinSecurityGameEventBuffer_default_instance_;
+    new (ptr) ::redhatgamedev::srt::JoinSecurityGameEventBuffer();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::redhatgamedev::srt::JoinSecurityGameEventBuffer::InitAsDefaultInstance();
 }
 
-::google::protobuf::Metadata file_level_metadata[4];
-const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[2];
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_JoinSecurityGameEventBuffer_GameEventBuffer_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_JoinSecurityGameEventBuffer_GameEventBuffer_2eproto}, {}};
 
-const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::redhatgamedev::srt::JoinSecurityGameEventBuffer, _has_bits_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::redhatgamedev::srt::JoinSecurityGameEventBuffer, _internal_metadata_),
+static void InitDefaultsscc_info_LeaveSecurityGameEventBuffer_GameEventBuffer_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::redhatgamedev::srt::_LeaveSecurityGameEventBuffer_default_instance_;
+    new (ptr) ::redhatgamedev::srt::LeaveSecurityGameEventBuffer();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::redhatgamedev::srt::LeaveSecurityGameEventBuffer::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_LeaveSecurityGameEventBuffer_GameEventBuffer_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_LeaveSecurityGameEventBuffer_GameEventBuffer_2eproto}, {}};
+
+static void InitDefaultsscc_info_SecurityGameEventBuffer_GameEventBuffer_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::redhatgamedev::srt::_SecurityGameEventBuffer_default_instance_;
+    new (ptr) ::redhatgamedev::srt::SecurityGameEventBuffer();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::redhatgamedev::srt::SecurityGameEventBuffer::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_SecurityGameEventBuffer_GameEventBuffer_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_SecurityGameEventBuffer_GameEventBuffer_2eproto}, {
+      &scc_info_JoinSecurityGameEventBuffer_GameEventBuffer_2eproto.base,
+      &scc_info_LeaveSecurityGameEventBuffer_GameEventBuffer_2eproto.base,}};
+
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_GameEventBuffer_2eproto[4];
+static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_GameEventBuffer_2eproto[2];
+static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_GameEventBuffer_2eproto = nullptr;
+
+const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_GameEventBuffer_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+  PROTOBUF_FIELD_OFFSET(::redhatgamedev::srt::JoinSecurityGameEventBuffer, _has_bits_),
+  PROTOBUF_FIELD_OFFSET(::redhatgamedev::srt::JoinSecurityGameEventBuffer, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::redhatgamedev::srt::JoinSecurityGameEventBuffer, uuid_),
+  PROTOBUF_FIELD_OFFSET(::redhatgamedev::srt::JoinSecurityGameEventBuffer, uuid_),
   0,
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::redhatgamedev::srt::LeaveSecurityGameEventBuffer, _has_bits_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::redhatgamedev::srt::LeaveSecurityGameEventBuffer, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::redhatgamedev::srt::LeaveSecurityGameEventBuffer, _has_bits_),
+  PROTOBUF_FIELD_OFFSET(::redhatgamedev::srt::LeaveSecurityGameEventBuffer, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::redhatgamedev::srt::LeaveSecurityGameEventBuffer, uuid_),
+  PROTOBUF_FIELD_OFFSET(::redhatgamedev::srt::LeaveSecurityGameEventBuffer, uuid_),
   0,
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::redhatgamedev::srt::SecurityGameEventBuffer, _has_bits_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::redhatgamedev::srt::SecurityGameEventBuffer, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::redhatgamedev::srt::SecurityGameEventBuffer, _has_bits_),
+  PROTOBUF_FIELD_OFFSET(::redhatgamedev::srt::SecurityGameEventBuffer, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::redhatgamedev::srt::SecurityGameEventBuffer, type_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::redhatgamedev::srt::SecurityGameEventBuffer, joinsecuritygameeventbuffer_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::redhatgamedev::srt::SecurityGameEventBuffer, leavesecuritygameeventbuffer_),
+  PROTOBUF_FIELD_OFFSET(::redhatgamedev::srt::SecurityGameEventBuffer, type_),
+  PROTOBUF_FIELD_OFFSET(::redhatgamedev::srt::SecurityGameEventBuffer, joinsecuritygameeventbuffer_),
+  PROTOBUF_FIELD_OFFSET(::redhatgamedev::srt::SecurityGameEventBuffer, leavesecuritygameeventbuffer_),
   2,
   0,
   1,
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::redhatgamedev::srt::GameEventBuffer, _has_bits_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::redhatgamedev::srt::GameEventBuffer, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::redhatgamedev::srt::GameEventBuffer, _has_bits_),
+  PROTOBUF_FIELD_OFFSET(::redhatgamedev::srt::GameEventBuffer, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::redhatgamedev::srt::GameEventBuffer, type_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::redhatgamedev::srt::GameEventBuffer, entitygameeventbuffer_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::redhatgamedev::srt::GameEventBuffer, securitygameeventbuffer_),
+  PROTOBUF_FIELD_OFFSET(::redhatgamedev::srt::GameEventBuffer, type_),
+  PROTOBUF_FIELD_OFFSET(::redhatgamedev::srt::GameEventBuffer, entitygameeventbuffer_),
+  PROTOBUF_FIELD_OFFSET(::redhatgamedev::srt::GameEventBuffer, securitygameeventbuffer_),
   2,
   0,
   1,
 };
-static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
+static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, 6, sizeof(::redhatgamedev::srt::JoinSecurityGameEventBuffer)},
   { 7, 13, sizeof(::redhatgamedev::srt::LeaveSecurityGameEventBuffer)},
   { 14, 22, sizeof(::redhatgamedev::srt::SecurityGameEventBuffer)},
   { 25, 33, sizeof(::redhatgamedev::srt::GameEventBuffer)},
 };
 
-static ::google::protobuf::Message const * const file_default_instances[] = {
-  reinterpret_cast<const ::google::protobuf::Message*>(&::redhatgamedev::srt::_JoinSecurityGameEventBuffer_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::redhatgamedev::srt::_LeaveSecurityGameEventBuffer_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::redhatgamedev::srt::_SecurityGameEventBuffer_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::redhatgamedev::srt::_GameEventBuffer_default_instance_),
+static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::redhatgamedev::srt::_JoinSecurityGameEventBuffer_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::redhatgamedev::srt::_LeaveSecurityGameEventBuffer_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::redhatgamedev::srt::_SecurityGameEventBuffer_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::redhatgamedev::srt::_GameEventBuffer_default_instance_),
 };
 
-void protobuf_AssignDescriptors() {
-  AddDescriptors();
-  AssignDescriptors(
-      "GameEventBuffer.proto", schemas, file_default_instances, TableStruct::offsets,
-      file_level_metadata, file_level_enum_descriptors, NULL);
-}
+const char descriptor_table_protodef_GameEventBuffer_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
+  "\n\025GameEventBuffer.proto\022\021redhatgamedev.s"
+  "rt\032\033EntityGameEventBuffer.proto\"+\n\033JoinS"
+  "ecurityGameEventBuffer\022\014\n\004UUID\030\001 \002(\t\",\n\034"
+  "LeaveSecurityGameEventBuffer\022\014\n\004UUID\030\001 \002"
+  "(\t\"\345\002\n\027SecurityGameEventBuffer\022]\n\004type\030\001"
+  " \002(\0162F.redhatgamedev.srt.SecurityGameEve"
+  "ntBuffer.SecurityGameEventBufferType:\007UN"
+  "KNOWN\022S\n\033joinSecurityGameEventBuffer\030\003 \001"
+  "(\0132..redhatgamedev.srt.JoinSecurityGameE"
+  "ventBuffer\022U\n\034leaveSecurityGameEventBuff"
+  "er\030\004 \001(\0132/.redhatgamedev.srt.LeaveSecuri"
+  "tyGameEventBuffer\"\?\n\033SecurityGameEventBu"
+  "fferType\022\013\n\007UNKNOWN\020\000\022\010\n\004JOIN\020\001\022\t\n\005LEAVE"
+  "\020\002\"\264\002\n\017GameEventBuffer\022M\n\004type\030\001 \002(\01626.r"
+  "edhatgamedev.srt.GameEventBuffer.GameEve"
+  "ntBufferType:\007UNKNOWN\022G\n\025entityGameEvent"
+  "Buffer\030\002 \001(\0132(.redhatgamedev.srt.EntityG"
+  "ameEventBuffer\022K\n\027securityGameEventBuffe"
+  "r\030\003 \001(\0132*.redhatgamedev.srt.SecurityGame"
+  "EventBuffer\"<\n\023GameEventBufferType\022\013\n\007UN"
+  "KNOWN\020\000\022\n\n\006ENTITY\020\001\022\014\n\010SECURITY\020\002"
+  ;
+static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_GameEventBuffer_2eproto_deps[1] = {
+  &::descriptor_table_EntityGameEventBuffer_2eproto,
+};
+static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_GameEventBuffer_2eproto_sccs[4] = {
+  &scc_info_GameEventBuffer_GameEventBuffer_2eproto.base,
+  &scc_info_JoinSecurityGameEventBuffer_GameEventBuffer_2eproto.base,
+  &scc_info_LeaveSecurityGameEventBuffer_GameEventBuffer_2eproto.base,
+  &scc_info_SecurityGameEventBuffer_GameEventBuffer_2eproto.base,
+};
+static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_GameEventBuffer_2eproto_once;
+const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_GameEventBuffer_2eproto = {
+  false, false, descriptor_table_protodef_GameEventBuffer_2eproto, "GameEventBuffer.proto", 833,
+  &descriptor_table_GameEventBuffer_2eproto_once, descriptor_table_GameEventBuffer_2eproto_sccs, descriptor_table_GameEventBuffer_2eproto_deps, 4, 1,
+  schemas, file_default_instances, TableStruct_GameEventBuffer_2eproto::offsets,
+  file_level_metadata_GameEventBuffer_2eproto, 4, file_level_enum_descriptors_GameEventBuffer_2eproto, file_level_service_descriptors_GameEventBuffer_2eproto,
+};
 
-void protobuf_AssignDescriptorsOnce() {
-  static ::google::protobuf::internal::once_flag once;
-  ::google::protobuf::internal::call_once(once, protobuf_AssignDescriptors);
-}
-
-void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
-void protobuf_RegisterTypes(const ::std::string&) {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 4);
-}
-
-void AddDescriptorsImpl() {
-  InitDefaults();
-  static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\025GameEventBuffer.proto\022\021redhatgamedev.s"
-      "rt\032\033EntityGameEventBuffer.proto\"+\n\033JoinS"
-      "ecurityGameEventBuffer\022\014\n\004UUID\030\001 \002(\t\",\n\034"
-      "LeaveSecurityGameEventBuffer\022\014\n\004UUID\030\001 \002"
-      "(\t\"\345\002\n\027SecurityGameEventBuffer\022]\n\004type\030\001"
-      " \002(\0162F.redhatgamedev.srt.SecurityGameEve"
-      "ntBuffer.SecurityGameEventBufferType:\007UN"
-      "KNOWN\022S\n\033joinSecurityGameEventBuffer\030\003 \001"
-      "(\0132..redhatgamedev.srt.JoinSecurityGameE"
-      "ventBuffer\022U\n\034leaveSecurityGameEventBuff"
-      "er\030\004 \001(\0132/.redhatgamedev.srt.LeaveSecuri"
-      "tyGameEventBuffer\"\?\n\033SecurityGameEventBu"
-      "fferType\022\013\n\007UNKNOWN\020\000\022\010\n\004JOIN\020\001\022\t\n\005LEAVE"
-      "\020\002\"\264\002\n\017GameEventBuffer\022M\n\004type\030\001 \002(\01626.r"
-      "edhatgamedev.srt.GameEventBuffer.GameEve"
-      "ntBufferType:\007UNKNOWN\022G\n\025entityGameEvent"
-      "Buffer\030\002 \001(\0132(.redhatgamedev.srt.EntityG"
-      "ameEventBuffer\022K\n\027securityGameEventBuffe"
-      "r\030\003 \001(\0132*.redhatgamedev.srt.SecurityGame"
-      "EventBuffer\"<\n\023GameEventBufferType\022\013\n\007UN"
-      "KNOWN\020\000\022\n\n\006ENTITY\020\001\022\014\n\010SECURITY\020\002"
-  };
-  ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 833);
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
-    "GameEventBuffer.proto", &protobuf_RegisterTypes);
-  ::protobuf_EntityGameEventBuffer_2eproto::AddDescriptors();
-}
-
-void AddDescriptors() {
-  static ::google::protobuf::internal::once_flag once;
-  ::google::protobuf::internal::call_once(once, AddDescriptorsImpl);
-}
-// Force AddDescriptors() to be called at dynamic initialization time.
-struct StaticDescriptorInitializer {
-  StaticDescriptorInitializer() {
-    AddDescriptors();
-  }
-} static_descriptor_initializer;
-}  // namespace protobuf_GameEventBuffer_2eproto
+// Force running AddDescriptors() at dynamic initialization time.
+static bool dynamic_init_dummy_GameEventBuffer_2eproto = (static_cast<void>(::PROTOBUF_NAMESPACE_ID::internal::AddDescriptors(&descriptor_table_GameEventBuffer_2eproto)), true);
 namespace redhatgamedev {
 namespace srt {
-const ::google::protobuf::EnumDescriptor* SecurityGameEventBuffer_SecurityGameEventBufferType_descriptor() {
-  protobuf_GameEventBuffer_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_GameEventBuffer_2eproto::file_level_enum_descriptors[0];
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* SecurityGameEventBuffer_SecurityGameEventBufferType_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_GameEventBuffer_2eproto);
+  return file_level_enum_descriptors_GameEventBuffer_2eproto[0];
 }
 bool SecurityGameEventBuffer_SecurityGameEventBufferType_IsValid(int value) {
   switch (value) {
@@ -252,17 +213,17 @@ bool SecurityGameEventBuffer_SecurityGameEventBufferType_IsValid(int value) {
   }
 }
 
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const SecurityGameEventBuffer_SecurityGameEventBufferType SecurityGameEventBuffer::UNKNOWN;
-const SecurityGameEventBuffer_SecurityGameEventBufferType SecurityGameEventBuffer::JOIN;
-const SecurityGameEventBuffer_SecurityGameEventBufferType SecurityGameEventBuffer::LEAVE;
-const SecurityGameEventBuffer_SecurityGameEventBufferType SecurityGameEventBuffer::SecurityGameEventBufferType_MIN;
-const SecurityGameEventBuffer_SecurityGameEventBufferType SecurityGameEventBuffer::SecurityGameEventBufferType_MAX;
-const int SecurityGameEventBuffer::SecurityGameEventBufferType_ARRAYSIZE;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-const ::google::protobuf::EnumDescriptor* GameEventBuffer_GameEventBufferType_descriptor() {
-  protobuf_GameEventBuffer_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_GameEventBuffer_2eproto::file_level_enum_descriptors[1];
+#if (__cplusplus < 201703) && (!defined(_MSC_VER) || _MSC_VER >= 1900)
+constexpr SecurityGameEventBuffer_SecurityGameEventBufferType SecurityGameEventBuffer::UNKNOWN;
+constexpr SecurityGameEventBuffer_SecurityGameEventBufferType SecurityGameEventBuffer::JOIN;
+constexpr SecurityGameEventBuffer_SecurityGameEventBufferType SecurityGameEventBuffer::LEAVE;
+constexpr SecurityGameEventBuffer_SecurityGameEventBufferType SecurityGameEventBuffer::SecurityGameEventBufferType_MIN;
+constexpr SecurityGameEventBuffer_SecurityGameEventBufferType SecurityGameEventBuffer::SecurityGameEventBufferType_MAX;
+constexpr int SecurityGameEventBuffer::SecurityGameEventBufferType_ARRAYSIZE;
+#endif  // (__cplusplus < 201703) && (!defined(_MSC_VER) || _MSC_VER >= 1900)
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GameEventBuffer_GameEventBufferType_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_GameEventBuffer_2eproto);
+  return file_level_enum_descriptors_GameEventBuffer_2eproto[1];
 }
 bool GameEventBuffer_GameEventBufferType_IsValid(int value) {
   switch (value) {
@@ -275,175 +236,156 @@ bool GameEventBuffer_GameEventBufferType_IsValid(int value) {
   }
 }
 
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const GameEventBuffer_GameEventBufferType GameEventBuffer::UNKNOWN;
-const GameEventBuffer_GameEventBufferType GameEventBuffer::ENTITY;
-const GameEventBuffer_GameEventBufferType GameEventBuffer::SECURITY;
-const GameEventBuffer_GameEventBufferType GameEventBuffer::GameEventBufferType_MIN;
-const GameEventBuffer_GameEventBufferType GameEventBuffer::GameEventBufferType_MAX;
-const int GameEventBuffer::GameEventBufferType_ARRAYSIZE;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+#if (__cplusplus < 201703) && (!defined(_MSC_VER) || _MSC_VER >= 1900)
+constexpr GameEventBuffer_GameEventBufferType GameEventBuffer::UNKNOWN;
+constexpr GameEventBuffer_GameEventBufferType GameEventBuffer::ENTITY;
+constexpr GameEventBuffer_GameEventBufferType GameEventBuffer::SECURITY;
+constexpr GameEventBuffer_GameEventBufferType GameEventBuffer::GameEventBufferType_MIN;
+constexpr GameEventBuffer_GameEventBufferType GameEventBuffer::GameEventBufferType_MAX;
+constexpr int GameEventBuffer::GameEventBufferType_ARRAYSIZE;
+#endif  // (__cplusplus < 201703) && (!defined(_MSC_VER) || _MSC_VER >= 1900)
 
 // ===================================================================
 
 void JoinSecurityGameEventBuffer::InitAsDefaultInstance() {
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int JoinSecurityGameEventBuffer::kUUIDFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+class JoinSecurityGameEventBuffer::_Internal {
+ public:
+  using HasBits = decltype(std::declval<JoinSecurityGameEventBuffer>()._has_bits_);
+  static void set_has_uuid(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
+  }
+  static bool MissingRequiredFields(const HasBits& has_bits) {
+    return ((has_bits[0] & 0x00000001) ^ 0x00000001) != 0;
+  }
+};
 
-JoinSecurityGameEventBuffer::JoinSecurityGameEventBuffer()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_GameEventBuffer_2eproto::scc_info_JoinSecurityGameEventBuffer.base);
+JoinSecurityGameEventBuffer::JoinSecurityGameEventBuffer(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:redhatgamedev.srt.JoinSecurityGameEventBuffer)
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:redhatgamedev.srt.JoinSecurityGameEventBuffer)
 }
 JoinSecurityGameEventBuffer::JoinSecurityGameEventBuffer(const JoinSecurityGameEventBuffer& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
       _has_bits_(from._has_bits_) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  uuid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_uuid()) {
-    uuid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.uuid_);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  uuid_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (from._internal_has_uuid()) {
+    uuid_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_uuid(),
+      GetArena());
   }
   // @@protoc_insertion_point(copy_constructor:redhatgamedev.srt.JoinSecurityGameEventBuffer)
 }
 
 void JoinSecurityGameEventBuffer::SharedCtor() {
-  uuid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_JoinSecurityGameEventBuffer_GameEventBuffer_2eproto.base);
+  uuid_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 JoinSecurityGameEventBuffer::~JoinSecurityGameEventBuffer() {
   // @@protoc_insertion_point(destructor:redhatgamedev.srt.JoinSecurityGameEventBuffer)
   SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 void JoinSecurityGameEventBuffer::SharedDtor() {
-  uuid_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  GOOGLE_DCHECK(GetArena() == nullptr);
+  uuid_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
+void JoinSecurityGameEventBuffer::ArenaDtor(void* object) {
+  JoinSecurityGameEventBuffer* _this = reinterpret_cast< JoinSecurityGameEventBuffer* >(object);
+  (void)_this;
+}
+void JoinSecurityGameEventBuffer::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
 void JoinSecurityGameEventBuffer::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* JoinSecurityGameEventBuffer::descriptor() {
-  ::protobuf_GameEventBuffer_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_GameEventBuffer_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
 const JoinSecurityGameEventBuffer& JoinSecurityGameEventBuffer::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_GameEventBuffer_2eproto::scc_info_JoinSecurityGameEventBuffer.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_JoinSecurityGameEventBuffer_GameEventBuffer_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void JoinSecurityGameEventBuffer::Clear() {
 // @@protoc_insertion_point(message_clear_start:redhatgamedev.srt.JoinSecurityGameEventBuffer)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
   if (cached_has_bits & 0x00000001u) {
-    uuid_.ClearNonDefaultToEmptyNoArena();
+    uuid_.ClearNonDefaultToEmpty();
   }
   _has_bits_.Clear();
-  _internal_metadata_.Clear();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
-bool JoinSecurityGameEventBuffer::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:redhatgamedev.srt.JoinSecurityGameEventBuffer)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+const char* JoinSecurityGameEventBuffer::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  _Internal::HasBits has_bits{};
+  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArena(); (void)arena;
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
       // required string UUID = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_uuid()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->uuid().data(), static_cast<int>(this->uuid().length()),
-            ::google::protobuf::internal::WireFormat::PARSE,
-            "redhatgamedev.srt.JoinSecurityGameEventBuffer.UUID");
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          auto str = _internal_mutable_uuid();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          #ifndef NDEBUG
+          ::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "redhatgamedev.srt.JoinSecurityGameEventBuffer.UUID");
+          #endif  // !NDEBUG
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
-        if (tag == 0) {
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
-    }
-  }
+    }  // switch
+  }  // while
 success:
-  // @@protoc_insertion_point(parse_success:redhatgamedev.srt.JoinSecurityGameEventBuffer)
-  return true;
+  _has_bits_.Or(has_bits);
+  return ptr;
 failure:
-  // @@protoc_insertion_point(parse_failure:redhatgamedev.srt.JoinSecurityGameEventBuffer)
-  return false;
-#undef DO_
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 
-void JoinSecurityGameEventBuffer::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:redhatgamedev.srt.JoinSecurityGameEventBuffer)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  cached_has_bits = _has_bits_[0];
-  // required string UUID = 1;
-  if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->uuid().data(), static_cast<int>(this->uuid().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "redhatgamedev.srt.JoinSecurityGameEventBuffer.UUID");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->uuid(), output);
-  }
-
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        _internal_metadata_.unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:redhatgamedev.srt.JoinSecurityGameEventBuffer)
-}
-
-::google::protobuf::uint8* JoinSecurityGameEventBuffer::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::PROTOBUF_NAMESPACE_ID::uint8* JoinSecurityGameEventBuffer::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:redhatgamedev.srt.JoinSecurityGameEventBuffer)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
   // required string UUID = 1;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->uuid().data(), static_cast<int>(this->uuid().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->_internal_uuid().data(), static_cast<int>(this->_internal_uuid().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
       "redhatgamedev.srt.JoinSecurityGameEventBuffer.UUID");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->uuid(), target);
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_uuid(), target);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:redhatgamedev.srt.JoinSecurityGameEventBuffer)
   return target;
@@ -453,31 +395,34 @@ size_t JoinSecurityGameEventBuffer::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:redhatgamedev.srt.JoinSecurityGameEventBuffer)
   size_t total_size = 0;
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        _internal_metadata_.unknown_fields());
-  }
   // required string UUID = 1;
-  if (has_uuid()) {
+  if (_internal_has_uuid()) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->uuid());
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_uuid());
   }
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void JoinSecurityGameEventBuffer::MergeFrom(const ::google::protobuf::Message& from) {
+void JoinSecurityGameEventBuffer::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:redhatgamedev.srt.JoinSecurityGameEventBuffer)
   GOOGLE_DCHECK_NE(&from, this);
   const JoinSecurityGameEventBuffer* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const JoinSecurityGameEventBuffer>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<JoinSecurityGameEventBuffer>(
           &from);
-  if (source == NULL) {
+  if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:redhatgamedev.srt.JoinSecurityGameEventBuffer)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:redhatgamedev.srt.JoinSecurityGameEventBuffer)
     MergeFrom(*source);
@@ -487,17 +432,16 @@ void JoinSecurityGameEventBuffer::MergeFrom(const ::google::protobuf::Message& f
 void JoinSecurityGameEventBuffer::MergeFrom(const JoinSecurityGameEventBuffer& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:redhatgamedev.srt.JoinSecurityGameEventBuffer)
   GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from.has_uuid()) {
-    set_has_uuid();
-    uuid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.uuid_);
+  if (from._internal_has_uuid()) {
+    _internal_set_uuid(from._internal_uuid());
   }
 }
 
-void JoinSecurityGameEventBuffer::CopyFrom(const ::google::protobuf::Message& from) {
+void JoinSecurityGameEventBuffer::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:redhatgamedev.srt.JoinSecurityGameEventBuffer)
   if (&from == this) return;
   Clear();
@@ -512,25 +456,19 @@ void JoinSecurityGameEventBuffer::CopyFrom(const JoinSecurityGameEventBuffer& fr
 }
 
 bool JoinSecurityGameEventBuffer::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+  if (_Internal::MissingRequiredFields(_has_bits_)) return false;
   return true;
 }
 
-void JoinSecurityGameEventBuffer::Swap(JoinSecurityGameEventBuffer* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void JoinSecurityGameEventBuffer::InternalSwap(JoinSecurityGameEventBuffer* other) {
   using std::swap;
-  uuid_.Swap(&other->uuid_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
   swap(_has_bits_[0], other->_has_bits_[0]);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
+  uuid_.Swap(&other->uuid_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
 
-::google::protobuf::Metadata JoinSecurityGameEventBuffer::GetMetadata() const {
-  protobuf_GameEventBuffer_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_GameEventBuffer_2eproto::file_level_metadata[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata JoinSecurityGameEventBuffer::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -538,162 +476,143 @@ void JoinSecurityGameEventBuffer::InternalSwap(JoinSecurityGameEventBuffer* othe
 
 void LeaveSecurityGameEventBuffer::InitAsDefaultInstance() {
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int LeaveSecurityGameEventBuffer::kUUIDFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+class LeaveSecurityGameEventBuffer::_Internal {
+ public:
+  using HasBits = decltype(std::declval<LeaveSecurityGameEventBuffer>()._has_bits_);
+  static void set_has_uuid(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
+  }
+  static bool MissingRequiredFields(const HasBits& has_bits) {
+    return ((has_bits[0] & 0x00000001) ^ 0x00000001) != 0;
+  }
+};
 
-LeaveSecurityGameEventBuffer::LeaveSecurityGameEventBuffer()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_GameEventBuffer_2eproto::scc_info_LeaveSecurityGameEventBuffer.base);
+LeaveSecurityGameEventBuffer::LeaveSecurityGameEventBuffer(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:redhatgamedev.srt.LeaveSecurityGameEventBuffer)
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:redhatgamedev.srt.LeaveSecurityGameEventBuffer)
 }
 LeaveSecurityGameEventBuffer::LeaveSecurityGameEventBuffer(const LeaveSecurityGameEventBuffer& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
       _has_bits_(from._has_bits_) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  uuid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_uuid()) {
-    uuid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.uuid_);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  uuid_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (from._internal_has_uuid()) {
+    uuid_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_uuid(),
+      GetArena());
   }
   // @@protoc_insertion_point(copy_constructor:redhatgamedev.srt.LeaveSecurityGameEventBuffer)
 }
 
 void LeaveSecurityGameEventBuffer::SharedCtor() {
-  uuid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_LeaveSecurityGameEventBuffer_GameEventBuffer_2eproto.base);
+  uuid_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 LeaveSecurityGameEventBuffer::~LeaveSecurityGameEventBuffer() {
   // @@protoc_insertion_point(destructor:redhatgamedev.srt.LeaveSecurityGameEventBuffer)
   SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 void LeaveSecurityGameEventBuffer::SharedDtor() {
-  uuid_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  GOOGLE_DCHECK(GetArena() == nullptr);
+  uuid_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
+void LeaveSecurityGameEventBuffer::ArenaDtor(void* object) {
+  LeaveSecurityGameEventBuffer* _this = reinterpret_cast< LeaveSecurityGameEventBuffer* >(object);
+  (void)_this;
+}
+void LeaveSecurityGameEventBuffer::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
 void LeaveSecurityGameEventBuffer::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* LeaveSecurityGameEventBuffer::descriptor() {
-  ::protobuf_GameEventBuffer_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_GameEventBuffer_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
 const LeaveSecurityGameEventBuffer& LeaveSecurityGameEventBuffer::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_GameEventBuffer_2eproto::scc_info_LeaveSecurityGameEventBuffer.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_LeaveSecurityGameEventBuffer_GameEventBuffer_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void LeaveSecurityGameEventBuffer::Clear() {
 // @@protoc_insertion_point(message_clear_start:redhatgamedev.srt.LeaveSecurityGameEventBuffer)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
   if (cached_has_bits & 0x00000001u) {
-    uuid_.ClearNonDefaultToEmptyNoArena();
+    uuid_.ClearNonDefaultToEmpty();
   }
   _has_bits_.Clear();
-  _internal_metadata_.Clear();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
-bool LeaveSecurityGameEventBuffer::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:redhatgamedev.srt.LeaveSecurityGameEventBuffer)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+const char* LeaveSecurityGameEventBuffer::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  _Internal::HasBits has_bits{};
+  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArena(); (void)arena;
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
       // required string UUID = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_uuid()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->uuid().data(), static_cast<int>(this->uuid().length()),
-            ::google::protobuf::internal::WireFormat::PARSE,
-            "redhatgamedev.srt.LeaveSecurityGameEventBuffer.UUID");
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          auto str = _internal_mutable_uuid();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          #ifndef NDEBUG
+          ::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "redhatgamedev.srt.LeaveSecurityGameEventBuffer.UUID");
+          #endif  // !NDEBUG
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
-        if (tag == 0) {
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
-    }
-  }
+    }  // switch
+  }  // while
 success:
-  // @@protoc_insertion_point(parse_success:redhatgamedev.srt.LeaveSecurityGameEventBuffer)
-  return true;
+  _has_bits_.Or(has_bits);
+  return ptr;
 failure:
-  // @@protoc_insertion_point(parse_failure:redhatgamedev.srt.LeaveSecurityGameEventBuffer)
-  return false;
-#undef DO_
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 
-void LeaveSecurityGameEventBuffer::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:redhatgamedev.srt.LeaveSecurityGameEventBuffer)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  cached_has_bits = _has_bits_[0];
-  // required string UUID = 1;
-  if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->uuid().data(), static_cast<int>(this->uuid().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "redhatgamedev.srt.LeaveSecurityGameEventBuffer.UUID");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->uuid(), output);
-  }
-
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        _internal_metadata_.unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:redhatgamedev.srt.LeaveSecurityGameEventBuffer)
-}
-
-::google::protobuf::uint8* LeaveSecurityGameEventBuffer::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::PROTOBUF_NAMESPACE_ID::uint8* LeaveSecurityGameEventBuffer::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:redhatgamedev.srt.LeaveSecurityGameEventBuffer)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
   // required string UUID = 1;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->uuid().data(), static_cast<int>(this->uuid().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->_internal_uuid().data(), static_cast<int>(this->_internal_uuid().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
       "redhatgamedev.srt.LeaveSecurityGameEventBuffer.UUID");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->uuid(), target);
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_uuid(), target);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:redhatgamedev.srt.LeaveSecurityGameEventBuffer)
   return target;
@@ -703,31 +622,34 @@ size_t LeaveSecurityGameEventBuffer::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:redhatgamedev.srt.LeaveSecurityGameEventBuffer)
   size_t total_size = 0;
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        _internal_metadata_.unknown_fields());
-  }
   // required string UUID = 1;
-  if (has_uuid()) {
+  if (_internal_has_uuid()) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->uuid());
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_uuid());
   }
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void LeaveSecurityGameEventBuffer::MergeFrom(const ::google::protobuf::Message& from) {
+void LeaveSecurityGameEventBuffer::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:redhatgamedev.srt.LeaveSecurityGameEventBuffer)
   GOOGLE_DCHECK_NE(&from, this);
   const LeaveSecurityGameEventBuffer* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const LeaveSecurityGameEventBuffer>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<LeaveSecurityGameEventBuffer>(
           &from);
-  if (source == NULL) {
+  if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:redhatgamedev.srt.LeaveSecurityGameEventBuffer)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:redhatgamedev.srt.LeaveSecurityGameEventBuffer)
     MergeFrom(*source);
@@ -737,17 +659,16 @@ void LeaveSecurityGameEventBuffer::MergeFrom(const ::google::protobuf::Message& 
 void LeaveSecurityGameEventBuffer::MergeFrom(const LeaveSecurityGameEventBuffer& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:redhatgamedev.srt.LeaveSecurityGameEventBuffer)
   GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from.has_uuid()) {
-    set_has_uuid();
-    uuid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.uuid_);
+  if (from._internal_has_uuid()) {
+    _internal_set_uuid(from._internal_uuid());
   }
 }
 
-void LeaveSecurityGameEventBuffer::CopyFrom(const ::google::protobuf::Message& from) {
+void LeaveSecurityGameEventBuffer::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:redhatgamedev.srt.LeaveSecurityGameEventBuffer)
   if (&from == this) return;
   Clear();
@@ -762,25 +683,19 @@ void LeaveSecurityGameEventBuffer::CopyFrom(const LeaveSecurityGameEventBuffer& 
 }
 
 bool LeaveSecurityGameEventBuffer::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+  if (_Internal::MissingRequiredFields(_has_bits_)) return false;
   return true;
 }
 
-void LeaveSecurityGameEventBuffer::Swap(LeaveSecurityGameEventBuffer* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void LeaveSecurityGameEventBuffer::InternalSwap(LeaveSecurityGameEventBuffer* other) {
   using std::swap;
-  uuid_.Swap(&other->uuid_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
   swap(_has_bits_[0], other->_has_bits_[0]);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
+  uuid_.Swap(&other->uuid_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
 
-::google::protobuf::Metadata LeaveSecurityGameEventBuffer::GetMetadata() const {
-  protobuf_GameEventBuffer_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_GameEventBuffer_2eproto::file_level_metadata[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata LeaveSecurityGameEventBuffer::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -792,39 +707,59 @@ void SecurityGameEventBuffer::InitAsDefaultInstance() {
   ::redhatgamedev::srt::_SecurityGameEventBuffer_default_instance_._instance.get_mutable()->leavesecuritygameeventbuffer_ = const_cast< ::redhatgamedev::srt::LeaveSecurityGameEventBuffer*>(
       ::redhatgamedev::srt::LeaveSecurityGameEventBuffer::internal_default_instance());
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int SecurityGameEventBuffer::kTypeFieldNumber;
-const int SecurityGameEventBuffer::kJoinSecurityGameEventBufferFieldNumber;
-const int SecurityGameEventBuffer::kLeaveSecurityGameEventBufferFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+class SecurityGameEventBuffer::_Internal {
+ public:
+  using HasBits = decltype(std::declval<SecurityGameEventBuffer>()._has_bits_);
+  static void set_has_type(HasBits* has_bits) {
+    (*has_bits)[0] |= 4u;
+  }
+  static const ::redhatgamedev::srt::JoinSecurityGameEventBuffer& joinsecuritygameeventbuffer(const SecurityGameEventBuffer* msg);
+  static void set_has_joinsecuritygameeventbuffer(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
+  }
+  static const ::redhatgamedev::srt::LeaveSecurityGameEventBuffer& leavesecuritygameeventbuffer(const SecurityGameEventBuffer* msg);
+  static void set_has_leavesecuritygameeventbuffer(HasBits* has_bits) {
+    (*has_bits)[0] |= 2u;
+  }
+  static bool MissingRequiredFields(const HasBits& has_bits) {
+    return ((has_bits[0] & 0x00000004) ^ 0x00000004) != 0;
+  }
+};
 
-SecurityGameEventBuffer::SecurityGameEventBuffer()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_GameEventBuffer_2eproto::scc_info_SecurityGameEventBuffer.base);
+const ::redhatgamedev::srt::JoinSecurityGameEventBuffer&
+SecurityGameEventBuffer::_Internal::joinsecuritygameeventbuffer(const SecurityGameEventBuffer* msg) {
+  return *msg->joinsecuritygameeventbuffer_;
+}
+const ::redhatgamedev::srt::LeaveSecurityGameEventBuffer&
+SecurityGameEventBuffer::_Internal::leavesecuritygameeventbuffer(const SecurityGameEventBuffer* msg) {
+  return *msg->leavesecuritygameeventbuffer_;
+}
+SecurityGameEventBuffer::SecurityGameEventBuffer(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:redhatgamedev.srt.SecurityGameEventBuffer)
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:redhatgamedev.srt.SecurityGameEventBuffer)
 }
 SecurityGameEventBuffer::SecurityGameEventBuffer(const SecurityGameEventBuffer& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
       _has_bits_(from._has_bits_) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.has_joinsecuritygameeventbuffer()) {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  if (from._internal_has_joinsecuritygameeventbuffer()) {
     joinsecuritygameeventbuffer_ = new ::redhatgamedev::srt::JoinSecurityGameEventBuffer(*from.joinsecuritygameeventbuffer_);
   } else {
-    joinsecuritygameeventbuffer_ = NULL;
+    joinsecuritygameeventbuffer_ = nullptr;
   }
-  if (from.has_leavesecuritygameeventbuffer()) {
+  if (from._internal_has_leavesecuritygameeventbuffer()) {
     leavesecuritygameeventbuffer_ = new ::redhatgamedev::srt::LeaveSecurityGameEventBuffer(*from.leavesecuritygameeventbuffer_);
   } else {
-    leavesecuritygameeventbuffer_ = NULL;
+    leavesecuritygameeventbuffer_ = nullptr;
   }
   type_ = from.type_;
   // @@protoc_insertion_point(copy_constructor:redhatgamedev.srt.SecurityGameEventBuffer)
 }
 
 void SecurityGameEventBuffer::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_SecurityGameEventBuffer_GameEventBuffer_2eproto.base);
   ::memset(&joinsecuritygameeventbuffer_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&type_) -
       reinterpret_cast<char*>(&joinsecuritygameeventbuffer_)) + sizeof(type_));
@@ -833,186 +768,143 @@ void SecurityGameEventBuffer::SharedCtor() {
 SecurityGameEventBuffer::~SecurityGameEventBuffer() {
   // @@protoc_insertion_point(destructor:redhatgamedev.srt.SecurityGameEventBuffer)
   SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 void SecurityGameEventBuffer::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
   if (this != internal_default_instance()) delete joinsecuritygameeventbuffer_;
   if (this != internal_default_instance()) delete leavesecuritygameeventbuffer_;
 }
 
+void SecurityGameEventBuffer::ArenaDtor(void* object) {
+  SecurityGameEventBuffer* _this = reinterpret_cast< SecurityGameEventBuffer* >(object);
+  (void)_this;
+}
+void SecurityGameEventBuffer::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
 void SecurityGameEventBuffer::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* SecurityGameEventBuffer::descriptor() {
-  ::protobuf_GameEventBuffer_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_GameEventBuffer_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
 const SecurityGameEventBuffer& SecurityGameEventBuffer::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_GameEventBuffer_2eproto::scc_info_SecurityGameEventBuffer.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_SecurityGameEventBuffer_GameEventBuffer_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void SecurityGameEventBuffer::Clear() {
 // @@protoc_insertion_point(message_clear_start:redhatgamedev.srt.SecurityGameEventBuffer)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 3u) {
+  if (cached_has_bits & 0x00000003u) {
     if (cached_has_bits & 0x00000001u) {
-      GOOGLE_DCHECK(joinsecuritygameeventbuffer_ != NULL);
+      GOOGLE_DCHECK(joinsecuritygameeventbuffer_ != nullptr);
       joinsecuritygameeventbuffer_->Clear();
     }
     if (cached_has_bits & 0x00000002u) {
-      GOOGLE_DCHECK(leavesecuritygameeventbuffer_ != NULL);
+      GOOGLE_DCHECK(leavesecuritygameeventbuffer_ != nullptr);
       leavesecuritygameeventbuffer_->Clear();
     }
   }
   type_ = 0;
   _has_bits_.Clear();
-  _internal_metadata_.Clear();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
-bool SecurityGameEventBuffer::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:redhatgamedev.srt.SecurityGameEventBuffer)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+const char* SecurityGameEventBuffer::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  _Internal::HasBits has_bits{};
+  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArena(); (void)arena;
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
       // required .redhatgamedev.srt.SecurityGameEventBuffer.SecurityGameEventBufferType type = 1 [default = UNKNOWN];
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-          int value;
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
-                 input, &value)));
-          if (::redhatgamedev::srt::SecurityGameEventBuffer_SecurityGameEventBufferType_IsValid(value)) {
-            set_type(static_cast< ::redhatgamedev::srt::SecurityGameEventBuffer_SecurityGameEventBufferType >(value));
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+          if (PROTOBUF_PREDICT_TRUE(::redhatgamedev::srt::SecurityGameEventBuffer_SecurityGameEventBufferType_IsValid(val))) {
+            _internal_set_type(static_cast<::redhatgamedev::srt::SecurityGameEventBuffer_SecurityGameEventBufferType>(val));
           } else {
-            mutable_unknown_fields()->AddVarint(
-                1, static_cast< ::google::protobuf::uint64>(value));
+            ::PROTOBUF_NAMESPACE_ID::internal::WriteVarint(1, val, mutable_unknown_fields());
           }
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+        } else goto handle_unusual;
+        continue;
       // optional .redhatgamedev.srt.JoinSecurityGameEventBuffer joinSecurityGameEventBuffer = 3;
-      case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_joinsecuritygameeventbuffer()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
+          ptr = ctx->ParseMessage(_internal_mutable_joinsecuritygameeventbuffer(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // optional .redhatgamedev.srt.LeaveSecurityGameEventBuffer leaveSecurityGameEventBuffer = 4;
-      case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_leavesecuritygameeventbuffer()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
+          ptr = ctx->ParseMessage(_internal_mutable_leavesecuritygameeventbuffer(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
-        if (tag == 0) {
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
-    }
-  }
+    }  // switch
+  }  // while
 success:
-  // @@protoc_insertion_point(parse_success:redhatgamedev.srt.SecurityGameEventBuffer)
-  return true;
+  _has_bits_.Or(has_bits);
+  return ptr;
 failure:
-  // @@protoc_insertion_point(parse_failure:redhatgamedev.srt.SecurityGameEventBuffer)
-  return false;
-#undef DO_
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 
-void SecurityGameEventBuffer::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:redhatgamedev.srt.SecurityGameEventBuffer)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  cached_has_bits = _has_bits_[0];
-  // required .redhatgamedev.srt.SecurityGameEventBuffer.SecurityGameEventBufferType type = 1 [default = UNKNOWN];
-  if (cached_has_bits & 0x00000004u) {
-    ::google::protobuf::internal::WireFormatLite::WriteEnum(
-      1, this->type(), output);
-  }
-
-  // optional .redhatgamedev.srt.JoinSecurityGameEventBuffer joinSecurityGameEventBuffer = 3;
-  if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      3, this->_internal_joinsecuritygameeventbuffer(), output);
-  }
-
-  // optional .redhatgamedev.srt.LeaveSecurityGameEventBuffer leaveSecurityGameEventBuffer = 4;
-  if (cached_has_bits & 0x00000002u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      4, this->_internal_leavesecuritygameeventbuffer(), output);
-  }
-
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        _internal_metadata_.unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:redhatgamedev.srt.SecurityGameEventBuffer)
-}
-
-::google::protobuf::uint8* SecurityGameEventBuffer::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::PROTOBUF_NAMESPACE_ID::uint8* SecurityGameEventBuffer::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:redhatgamedev.srt.SecurityGameEventBuffer)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
   // required .redhatgamedev.srt.SecurityGameEventBuffer.SecurityGameEventBufferType type = 1 [default = UNKNOWN];
   if (cached_has_bits & 0x00000004u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
-      1, this->type(), target);
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
+      1, this->_internal_type(), target);
   }
 
   // optional .redhatgamedev.srt.JoinSecurityGameEventBuffer joinSecurityGameEventBuffer = 3;
   if (cached_has_bits & 0x00000001u) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        3, this->_internal_joinsecuritygameeventbuffer(), deterministic, target);
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        3, _Internal::joinsecuritygameeventbuffer(this), target, stream);
   }
 
   // optional .redhatgamedev.srt.LeaveSecurityGameEventBuffer leaveSecurityGameEventBuffer = 4;
   if (cached_has_bits & 0x00000002u) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        4, this->_internal_leavesecuritygameeventbuffer(), deterministic, target);
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        4, _Internal::leavesecuritygameeventbuffer(this), target, stream);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:redhatgamedev.srt.SecurityGameEventBuffer)
   return target;
@@ -1022,46 +914,50 @@ size_t SecurityGameEventBuffer::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:redhatgamedev.srt.SecurityGameEventBuffer)
   size_t total_size = 0;
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        _internal_metadata_.unknown_fields());
-  }
   // required .redhatgamedev.srt.SecurityGameEventBuffer.SecurityGameEventBufferType type = 1 [default = UNKNOWN];
-  if (has_type()) {
+  if (_internal_has_type()) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_type());
   }
-  if (_has_bits_[0 / 32] & 3u) {
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  if (cached_has_bits & 0x00000003u) {
     // optional .redhatgamedev.srt.JoinSecurityGameEventBuffer joinSecurityGameEventBuffer = 3;
-    if (has_joinsecuritygameeventbuffer()) {
+    if (cached_has_bits & 0x00000001u) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::MessageSize(
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
           *joinsecuritygameeventbuffer_);
     }
 
     // optional .redhatgamedev.srt.LeaveSecurityGameEventBuffer leaveSecurityGameEventBuffer = 4;
-    if (has_leavesecuritygameeventbuffer()) {
+    if (cached_has_bits & 0x00000002u) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::MessageSize(
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
           *leavesecuritygameeventbuffer_);
     }
 
   }
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void SecurityGameEventBuffer::MergeFrom(const ::google::protobuf::Message& from) {
+void SecurityGameEventBuffer::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:redhatgamedev.srt.SecurityGameEventBuffer)
   GOOGLE_DCHECK_NE(&from, this);
   const SecurityGameEventBuffer* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const SecurityGameEventBuffer>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<SecurityGameEventBuffer>(
           &from);
-  if (source == NULL) {
+  if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:redhatgamedev.srt.SecurityGameEventBuffer)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:redhatgamedev.srt.SecurityGameEventBuffer)
     MergeFrom(*source);
@@ -1071,17 +967,17 @@ void SecurityGameEventBuffer::MergeFrom(const ::google::protobuf::Message& from)
 void SecurityGameEventBuffer::MergeFrom(const SecurityGameEventBuffer& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:redhatgamedev.srt.SecurityGameEventBuffer)
   GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 7u) {
+  if (cached_has_bits & 0x00000007u) {
     if (cached_has_bits & 0x00000001u) {
-      mutable_joinsecuritygameeventbuffer()->::redhatgamedev::srt::JoinSecurityGameEventBuffer::MergeFrom(from.joinsecuritygameeventbuffer());
+      _internal_mutable_joinsecuritygameeventbuffer()->::redhatgamedev::srt::JoinSecurityGameEventBuffer::MergeFrom(from._internal_joinsecuritygameeventbuffer());
     }
     if (cached_has_bits & 0x00000002u) {
-      mutable_leavesecuritygameeventbuffer()->::redhatgamedev::srt::LeaveSecurityGameEventBuffer::MergeFrom(from.leavesecuritygameeventbuffer());
+      _internal_mutable_leavesecuritygameeventbuffer()->::redhatgamedev::srt::LeaveSecurityGameEventBuffer::MergeFrom(from._internal_leavesecuritygameeventbuffer());
     }
     if (cached_has_bits & 0x00000004u) {
       type_ = from.type_;
@@ -1090,7 +986,7 @@ void SecurityGameEventBuffer::MergeFrom(const SecurityGameEventBuffer& from) {
   }
 }
 
-void SecurityGameEventBuffer::CopyFrom(const ::google::protobuf::Message& from) {
+void SecurityGameEventBuffer::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:redhatgamedev.srt.SecurityGameEventBuffer)
   if (&from == this) return;
   Clear();
@@ -1105,32 +1001,30 @@ void SecurityGameEventBuffer::CopyFrom(const SecurityGameEventBuffer& from) {
 }
 
 bool SecurityGameEventBuffer::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000004) != 0x00000004) return false;
-  if (has_joinsecuritygameeventbuffer()) {
-    if (!this->joinsecuritygameeventbuffer_->IsInitialized()) return false;
+  if (_Internal::MissingRequiredFields(_has_bits_)) return false;
+  if (_internal_has_joinsecuritygameeventbuffer()) {
+    if (!joinsecuritygameeventbuffer_->IsInitialized()) return false;
   }
-  if (has_leavesecuritygameeventbuffer()) {
-    if (!this->leavesecuritygameeventbuffer_->IsInitialized()) return false;
+  if (_internal_has_leavesecuritygameeventbuffer()) {
+    if (!leavesecuritygameeventbuffer_->IsInitialized()) return false;
   }
   return true;
 }
 
-void SecurityGameEventBuffer::Swap(SecurityGameEventBuffer* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void SecurityGameEventBuffer::InternalSwap(SecurityGameEventBuffer* other) {
   using std::swap;
-  swap(joinsecuritygameeventbuffer_, other->joinsecuritygameeventbuffer_);
-  swap(leavesecuritygameeventbuffer_, other->leavesecuritygameeventbuffer_);
-  swap(type_, other->type_);
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
   swap(_has_bits_[0], other->_has_bits_[0]);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(SecurityGameEventBuffer, type_)
+      + sizeof(SecurityGameEventBuffer::type_)
+      - PROTOBUF_FIELD_OFFSET(SecurityGameEventBuffer, joinsecuritygameeventbuffer_)>(
+          reinterpret_cast<char*>(&joinsecuritygameeventbuffer_),
+          reinterpret_cast<char*>(&other->joinsecuritygameeventbuffer_));
 }
 
-::google::protobuf::Metadata SecurityGameEventBuffer::GetMetadata() const {
-  protobuf_GameEventBuffer_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_GameEventBuffer_2eproto::file_level_metadata[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata SecurityGameEventBuffer::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -1142,43 +1036,63 @@ void GameEventBuffer::InitAsDefaultInstance() {
   ::redhatgamedev::srt::_GameEventBuffer_default_instance_._instance.get_mutable()->securitygameeventbuffer_ = const_cast< ::redhatgamedev::srt::SecurityGameEventBuffer*>(
       ::redhatgamedev::srt::SecurityGameEventBuffer::internal_default_instance());
 }
-void GameEventBuffer::clear_entitygameeventbuffer() {
-  if (entitygameeventbuffer_ != NULL) entitygameeventbuffer_->Clear();
-  clear_has_entitygameeventbuffer();
-}
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int GameEventBuffer::kTypeFieldNumber;
-const int GameEventBuffer::kEntityGameEventBufferFieldNumber;
-const int GameEventBuffer::kSecurityGameEventBufferFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+class GameEventBuffer::_Internal {
+ public:
+  using HasBits = decltype(std::declval<GameEventBuffer>()._has_bits_);
+  static void set_has_type(HasBits* has_bits) {
+    (*has_bits)[0] |= 4u;
+  }
+  static const ::redhatgamedev::srt::EntityGameEventBuffer& entitygameeventbuffer(const GameEventBuffer* msg);
+  static void set_has_entitygameeventbuffer(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
+  }
+  static const ::redhatgamedev::srt::SecurityGameEventBuffer& securitygameeventbuffer(const GameEventBuffer* msg);
+  static void set_has_securitygameeventbuffer(HasBits* has_bits) {
+    (*has_bits)[0] |= 2u;
+  }
+  static bool MissingRequiredFields(const HasBits& has_bits) {
+    return ((has_bits[0] & 0x00000004) ^ 0x00000004) != 0;
+  }
+};
 
-GameEventBuffer::GameEventBuffer()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_GameEventBuffer_2eproto::scc_info_GameEventBuffer.base);
+const ::redhatgamedev::srt::EntityGameEventBuffer&
+GameEventBuffer::_Internal::entitygameeventbuffer(const GameEventBuffer* msg) {
+  return *msg->entitygameeventbuffer_;
+}
+const ::redhatgamedev::srt::SecurityGameEventBuffer&
+GameEventBuffer::_Internal::securitygameeventbuffer(const GameEventBuffer* msg) {
+  return *msg->securitygameeventbuffer_;
+}
+void GameEventBuffer::clear_entitygameeventbuffer() {
+  if (entitygameeventbuffer_ != nullptr) entitygameeventbuffer_->Clear();
+  _has_bits_[0] &= ~0x00000001u;
+}
+GameEventBuffer::GameEventBuffer(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:redhatgamedev.srt.GameEventBuffer)
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:redhatgamedev.srt.GameEventBuffer)
 }
 GameEventBuffer::GameEventBuffer(const GameEventBuffer& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
       _has_bits_(from._has_bits_) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.has_entitygameeventbuffer()) {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  if (from._internal_has_entitygameeventbuffer()) {
     entitygameeventbuffer_ = new ::redhatgamedev::srt::EntityGameEventBuffer(*from.entitygameeventbuffer_);
   } else {
-    entitygameeventbuffer_ = NULL;
+    entitygameeventbuffer_ = nullptr;
   }
-  if (from.has_securitygameeventbuffer()) {
+  if (from._internal_has_securitygameeventbuffer()) {
     securitygameeventbuffer_ = new ::redhatgamedev::srt::SecurityGameEventBuffer(*from.securitygameeventbuffer_);
   } else {
-    securitygameeventbuffer_ = NULL;
+    securitygameeventbuffer_ = nullptr;
   }
   type_ = from.type_;
   // @@protoc_insertion_point(copy_constructor:redhatgamedev.srt.GameEventBuffer)
 }
 
 void GameEventBuffer::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_GameEventBuffer_GameEventBuffer_2eproto.base);
   ::memset(&entitygameeventbuffer_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&type_) -
       reinterpret_cast<char*>(&entitygameeventbuffer_)) + sizeof(type_));
@@ -1187,186 +1101,143 @@ void GameEventBuffer::SharedCtor() {
 GameEventBuffer::~GameEventBuffer() {
   // @@protoc_insertion_point(destructor:redhatgamedev.srt.GameEventBuffer)
   SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 void GameEventBuffer::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
   if (this != internal_default_instance()) delete entitygameeventbuffer_;
   if (this != internal_default_instance()) delete securitygameeventbuffer_;
 }
 
+void GameEventBuffer::ArenaDtor(void* object) {
+  GameEventBuffer* _this = reinterpret_cast< GameEventBuffer* >(object);
+  (void)_this;
+}
+void GameEventBuffer::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
 void GameEventBuffer::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* GameEventBuffer::descriptor() {
-  ::protobuf_GameEventBuffer_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_GameEventBuffer_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
 const GameEventBuffer& GameEventBuffer::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_GameEventBuffer_2eproto::scc_info_GameEventBuffer.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_GameEventBuffer_GameEventBuffer_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void GameEventBuffer::Clear() {
 // @@protoc_insertion_point(message_clear_start:redhatgamedev.srt.GameEventBuffer)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 3u) {
+  if (cached_has_bits & 0x00000003u) {
     if (cached_has_bits & 0x00000001u) {
-      GOOGLE_DCHECK(entitygameeventbuffer_ != NULL);
+      GOOGLE_DCHECK(entitygameeventbuffer_ != nullptr);
       entitygameeventbuffer_->Clear();
     }
     if (cached_has_bits & 0x00000002u) {
-      GOOGLE_DCHECK(securitygameeventbuffer_ != NULL);
+      GOOGLE_DCHECK(securitygameeventbuffer_ != nullptr);
       securitygameeventbuffer_->Clear();
     }
   }
   type_ = 0;
   _has_bits_.Clear();
-  _internal_metadata_.Clear();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
-bool GameEventBuffer::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:redhatgamedev.srt.GameEventBuffer)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+const char* GameEventBuffer::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  _Internal::HasBits has_bits{};
+  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArena(); (void)arena;
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
       // required .redhatgamedev.srt.GameEventBuffer.GameEventBufferType type = 1 [default = UNKNOWN];
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-          int value;
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
-                 input, &value)));
-          if (::redhatgamedev::srt::GameEventBuffer_GameEventBufferType_IsValid(value)) {
-            set_type(static_cast< ::redhatgamedev::srt::GameEventBuffer_GameEventBufferType >(value));
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+          if (PROTOBUF_PREDICT_TRUE(::redhatgamedev::srt::GameEventBuffer_GameEventBufferType_IsValid(val))) {
+            _internal_set_type(static_cast<::redhatgamedev::srt::GameEventBuffer_GameEventBufferType>(val));
           } else {
-            mutable_unknown_fields()->AddVarint(
-                1, static_cast< ::google::protobuf::uint64>(value));
+            ::PROTOBUF_NAMESPACE_ID::internal::WriteVarint(1, val, mutable_unknown_fields());
           }
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+        } else goto handle_unusual;
+        continue;
       // optional .redhatgamedev.srt.EntityGameEventBuffer entityGameEventBuffer = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_entitygameeventbuffer()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+          ptr = ctx->ParseMessage(_internal_mutable_entitygameeventbuffer(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // optional .redhatgamedev.srt.SecurityGameEventBuffer securityGameEventBuffer = 3;
-      case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_securitygameeventbuffer()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
+          ptr = ctx->ParseMessage(_internal_mutable_securitygameeventbuffer(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
-        if (tag == 0) {
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
-    }
-  }
+    }  // switch
+  }  // while
 success:
-  // @@protoc_insertion_point(parse_success:redhatgamedev.srt.GameEventBuffer)
-  return true;
+  _has_bits_.Or(has_bits);
+  return ptr;
 failure:
-  // @@protoc_insertion_point(parse_failure:redhatgamedev.srt.GameEventBuffer)
-  return false;
-#undef DO_
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 
-void GameEventBuffer::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:redhatgamedev.srt.GameEventBuffer)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  cached_has_bits = _has_bits_[0];
-  // required .redhatgamedev.srt.GameEventBuffer.GameEventBufferType type = 1 [default = UNKNOWN];
-  if (cached_has_bits & 0x00000004u) {
-    ::google::protobuf::internal::WireFormatLite::WriteEnum(
-      1, this->type(), output);
-  }
-
-  // optional .redhatgamedev.srt.EntityGameEventBuffer entityGameEventBuffer = 2;
-  if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, this->_internal_entitygameeventbuffer(), output);
-  }
-
-  // optional .redhatgamedev.srt.SecurityGameEventBuffer securityGameEventBuffer = 3;
-  if (cached_has_bits & 0x00000002u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      3, this->_internal_securitygameeventbuffer(), output);
-  }
-
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        _internal_metadata_.unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:redhatgamedev.srt.GameEventBuffer)
-}
-
-::google::protobuf::uint8* GameEventBuffer::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::PROTOBUF_NAMESPACE_ID::uint8* GameEventBuffer::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:redhatgamedev.srt.GameEventBuffer)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
   // required .redhatgamedev.srt.GameEventBuffer.GameEventBufferType type = 1 [default = UNKNOWN];
   if (cached_has_bits & 0x00000004u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
-      1, this->type(), target);
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
+      1, this->_internal_type(), target);
   }
 
   // optional .redhatgamedev.srt.EntityGameEventBuffer entityGameEventBuffer = 2;
   if (cached_has_bits & 0x00000001u) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        2, this->_internal_entitygameeventbuffer(), deterministic, target);
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        2, _Internal::entitygameeventbuffer(this), target, stream);
   }
 
   // optional .redhatgamedev.srt.SecurityGameEventBuffer securityGameEventBuffer = 3;
   if (cached_has_bits & 0x00000002u) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        3, this->_internal_securitygameeventbuffer(), deterministic, target);
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        3, _Internal::securitygameeventbuffer(this), target, stream);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:redhatgamedev.srt.GameEventBuffer)
   return target;
@@ -1376,46 +1247,50 @@ size_t GameEventBuffer::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:redhatgamedev.srt.GameEventBuffer)
   size_t total_size = 0;
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        _internal_metadata_.unknown_fields());
-  }
   // required .redhatgamedev.srt.GameEventBuffer.GameEventBufferType type = 1 [default = UNKNOWN];
-  if (has_type()) {
+  if (_internal_has_type()) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_type());
   }
-  if (_has_bits_[0 / 32] & 3u) {
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  if (cached_has_bits & 0x00000003u) {
     // optional .redhatgamedev.srt.EntityGameEventBuffer entityGameEventBuffer = 2;
-    if (has_entitygameeventbuffer()) {
+    if (cached_has_bits & 0x00000001u) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::MessageSize(
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
           *entitygameeventbuffer_);
     }
 
     // optional .redhatgamedev.srt.SecurityGameEventBuffer securityGameEventBuffer = 3;
-    if (has_securitygameeventbuffer()) {
+    if (cached_has_bits & 0x00000002u) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::MessageSize(
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
           *securitygameeventbuffer_);
     }
 
   }
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void GameEventBuffer::MergeFrom(const ::google::protobuf::Message& from) {
+void GameEventBuffer::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:redhatgamedev.srt.GameEventBuffer)
   GOOGLE_DCHECK_NE(&from, this);
   const GameEventBuffer* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const GameEventBuffer>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<GameEventBuffer>(
           &from);
-  if (source == NULL) {
+  if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:redhatgamedev.srt.GameEventBuffer)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:redhatgamedev.srt.GameEventBuffer)
     MergeFrom(*source);
@@ -1425,17 +1300,17 @@ void GameEventBuffer::MergeFrom(const ::google::protobuf::Message& from) {
 void GameEventBuffer::MergeFrom(const GameEventBuffer& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:redhatgamedev.srt.GameEventBuffer)
   GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 7u) {
+  if (cached_has_bits & 0x00000007u) {
     if (cached_has_bits & 0x00000001u) {
-      mutable_entitygameeventbuffer()->::redhatgamedev::srt::EntityGameEventBuffer::MergeFrom(from.entitygameeventbuffer());
+      _internal_mutable_entitygameeventbuffer()->::redhatgamedev::srt::EntityGameEventBuffer::MergeFrom(from._internal_entitygameeventbuffer());
     }
     if (cached_has_bits & 0x00000002u) {
-      mutable_securitygameeventbuffer()->::redhatgamedev::srt::SecurityGameEventBuffer::MergeFrom(from.securitygameeventbuffer());
+      _internal_mutable_securitygameeventbuffer()->::redhatgamedev::srt::SecurityGameEventBuffer::MergeFrom(from._internal_securitygameeventbuffer());
     }
     if (cached_has_bits & 0x00000004u) {
       type_ = from.type_;
@@ -1444,7 +1319,7 @@ void GameEventBuffer::MergeFrom(const GameEventBuffer& from) {
   }
 }
 
-void GameEventBuffer::CopyFrom(const ::google::protobuf::Message& from) {
+void GameEventBuffer::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:redhatgamedev.srt.GameEventBuffer)
   if (&from == this) return;
   Clear();
@@ -1459,53 +1334,50 @@ void GameEventBuffer::CopyFrom(const GameEventBuffer& from) {
 }
 
 bool GameEventBuffer::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000004) != 0x00000004) return false;
-  if (has_entitygameeventbuffer()) {
-    if (!this->entitygameeventbuffer_->IsInitialized()) return false;
+  if (_Internal::MissingRequiredFields(_has_bits_)) return false;
+  if (_internal_has_entitygameeventbuffer()) {
+    if (!entitygameeventbuffer_->IsInitialized()) return false;
   }
-  if (has_securitygameeventbuffer()) {
-    if (!this->securitygameeventbuffer_->IsInitialized()) return false;
+  if (_internal_has_securitygameeventbuffer()) {
+    if (!securitygameeventbuffer_->IsInitialized()) return false;
   }
   return true;
 }
 
-void GameEventBuffer::Swap(GameEventBuffer* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void GameEventBuffer::InternalSwap(GameEventBuffer* other) {
   using std::swap;
-  swap(entitygameeventbuffer_, other->entitygameeventbuffer_);
-  swap(securitygameeventbuffer_, other->securitygameeventbuffer_);
-  swap(type_, other->type_);
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
   swap(_has_bits_[0], other->_has_bits_[0]);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(GameEventBuffer, type_)
+      + sizeof(GameEventBuffer::type_)
+      - PROTOBUF_FIELD_OFFSET(GameEventBuffer, entitygameeventbuffer_)>(
+          reinterpret_cast<char*>(&entitygameeventbuffer_),
+          reinterpret_cast<char*>(&other->entitygameeventbuffer_));
 }
 
-::google::protobuf::Metadata GameEventBuffer::GetMetadata() const {
-  protobuf_GameEventBuffer_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_GameEventBuffer_2eproto::file_level_metadata[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata GameEventBuffer::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace srt
 }  // namespace redhatgamedev
-namespace google {
-namespace protobuf {
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::redhatgamedev::srt::JoinSecurityGameEventBuffer* Arena::CreateMaybeMessage< ::redhatgamedev::srt::JoinSecurityGameEventBuffer >(Arena* arena) {
-  return Arena::CreateInternal< ::redhatgamedev::srt::JoinSecurityGameEventBuffer >(arena);
+PROTOBUF_NAMESPACE_OPEN
+template<> PROTOBUF_NOINLINE ::redhatgamedev::srt::JoinSecurityGameEventBuffer* Arena::CreateMaybeMessage< ::redhatgamedev::srt::JoinSecurityGameEventBuffer >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::redhatgamedev::srt::JoinSecurityGameEventBuffer >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::redhatgamedev::srt::LeaveSecurityGameEventBuffer* Arena::CreateMaybeMessage< ::redhatgamedev::srt::LeaveSecurityGameEventBuffer >(Arena* arena) {
-  return Arena::CreateInternal< ::redhatgamedev::srt::LeaveSecurityGameEventBuffer >(arena);
+template<> PROTOBUF_NOINLINE ::redhatgamedev::srt::LeaveSecurityGameEventBuffer* Arena::CreateMaybeMessage< ::redhatgamedev::srt::LeaveSecurityGameEventBuffer >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::redhatgamedev::srt::LeaveSecurityGameEventBuffer >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::redhatgamedev::srt::SecurityGameEventBuffer* Arena::CreateMaybeMessage< ::redhatgamedev::srt::SecurityGameEventBuffer >(Arena* arena) {
-  return Arena::CreateInternal< ::redhatgamedev::srt::SecurityGameEventBuffer >(arena);
+template<> PROTOBUF_NOINLINE ::redhatgamedev::srt::SecurityGameEventBuffer* Arena::CreateMaybeMessage< ::redhatgamedev::srt::SecurityGameEventBuffer >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::redhatgamedev::srt::SecurityGameEventBuffer >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::redhatgamedev::srt::GameEventBuffer* Arena::CreateMaybeMessage< ::redhatgamedev::srt::GameEventBuffer >(Arena* arena) {
-  return Arena::CreateInternal< ::redhatgamedev::srt::GameEventBuffer >(arena);
+template<> PROTOBUF_NOINLINE ::redhatgamedev::srt::GameEventBuffer* Arena::CreateMaybeMessage< ::redhatgamedev::srt::GameEventBuffer >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::redhatgamedev::srt::GameEventBuffer >(arena);
 }
-}  // namespace protobuf
-}  // namespace google
+PROTOBUF_NAMESPACE_CLOSE
 
 // @@protoc_insertion_point(global_scope)
+#include <google/protobuf/port_undef.inc>

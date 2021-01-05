@@ -35,6 +35,8 @@
 #include "../Shared/FactoryT.h"
 #include "activemq/library/ActiveMQCPP.h"
 #include <iostream>
+#include "../Logging/loguru.cpp"
+
 
 
 void usage(char **argv) {
@@ -49,13 +51,16 @@ void usage(char **argv) {
 
 int main(int argc, char* argv[])
 {
+	loguru::init(argc, argv);
+	LOG_F(INFO, "Space Ring Things - Game Server");
+
     //std::string     strSecurityInURI = "AAS.IN";
     //std::string     strSecurityOutURI = "AAS.OUT";
     std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp&keepAlive=true";
     std::string     strCommandInDestinationURI = "COMMAND.IN";
     std::string     strGameEventOutDestinationURI = "GAME.EVENT.OUT";
     
-    std::cout << "Starting..." << std::endl;
+    LOG_F(INFO, "Starting...");
     for (int i = 1; i < argc; ++i)
     {
         if (0 == strcmp(argv[i], "--help"))
@@ -72,7 +77,7 @@ int main(int argc, char* argv[])
 
     Configuration::Instance().BrokerURI = strBrokerURI;
 
-    std::cout << "Initializing the ActiveMQCPP library" << std::endl;
+    LOG_F(INFO, "Initializing the ActiveMQCPP library");
     activemq::library::ActiveMQCPP::initializeLibrary();
     
     PodFactory&                     thePodFactory = PodFactory::Instance();
@@ -82,7 +87,7 @@ int main(int argc, char* argv[])
     EventDispatcher::_Dependencies  theEventDispatcherDependencies(thePodFactory, theBulletFactory, theEntityGameEventFactory, theSecurityGameEventFactory);
     EventDispatcher&                theEventDispatcher = EventDispatcher::Instance(&theEventDispatcherDependencies);
 
-    std::cout << "main creating SimpleAsyncProducer with strBrokerURI " << Configuration::Instance().BrokerURI << std::endl;
+    LOG_F(INFO, "main creating SimpleAsyncProducer with strBrokerURI: %s", Configuration::Instance().BrokerURI.c_str());
     SimpleAsyncProducer*                pSimpleAsyncProducer = new SimpleAsyncProducer(Configuration::Instance().BrokerURI, strGameEventOutDestinationURI, true);
     MessageDispatcher::_Dependencies    theMessageDispatcherDependencies(pSimpleAsyncProducer);
     MessageDispatcher&                  theMessageDispatcher = MessageDispatcher::Instance(&theMessageDispatcherDependencies);
@@ -106,11 +111,12 @@ int main(int argc, char* argv[])
     //pServer->run();
     
     // Wait to exit.
-    std::cout << "Press 'q' to quit" << std::endl;
+    LOG_F(INFO, "press 'q' to quit");
     while( std::cin.get() != 'q') {}
 
     delete pServer;
     pServer = NULL;
     
     activemq::library::ActiveMQCPP::shutdownLibrary();
+    return 0;
 }

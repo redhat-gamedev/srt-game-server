@@ -23,6 +23,7 @@
 #include <decaf/util/UUID.h>
 #include <assert.h>
 #include <iostream>
+#include "../Logging/loguru.hpp"
 
 
 // Constructor
@@ -55,11 +56,10 @@ void JoinSecurityCommand::Execute()
     assert(pReplyToDestination);
     
     // TODO: Make not super inefficient
-    std::cout << "creating Simple Async Producer" << std::endl;
-    std::cout << "destination URI: " << strBrokerURI << std::endl;
+    LOG_SCOPE_F(1, "creating Simple Async Producer");
     SimpleAsyncProducer* pSimpleAsyncProducer = new SimpleAsyncProducer(Configuration::Instance().BrokerURI, pReplyToDestination, false, true);
 
-    std::cout << "sending UUID: " << strUUID << std::endl;
+    LOG_SCOPE_F(INFO, "sending player UUID: %s", strUUID.c_str());
     pSimpleAsyncProducer->Send(strUUID);
     delete pSimpleAsyncProducer;
     
