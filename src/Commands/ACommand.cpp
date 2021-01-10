@@ -19,7 +19,7 @@
 // Constructor
 ACommand::
 _Dependencies::
-_Dependencies(redhatgamedev::srt::CommandBuffer* pCommandBuffer, const cms::BytesMessage* pBytesMessage) :
+_Dependencies(redhatgamedev::srt::CommandBuffer* pCommandBuffer, const proton::message* pBytesMessage) :
     m_pCommandBuffer(pCommandBuffer),
     m_pBytesMessage(pBytesMessage)
 {

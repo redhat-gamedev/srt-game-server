@@ -15,18 +15,15 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
+#include <proton/messaging_handler.hpp>
 #include <Poco/BasicEvent.h>
 #include <Poco/Tuple.h>
-#include <cms/MessageListener.h>
-#include <decaf/util/StlQueue.h>
 #include <utility>
 #include <string>
+#include <queue>
+#include <mutex>
+#include <thread>
 
-namespace cms
-{
-    class Message;
-    class BytesMessage;
-}
 namespace google
 {
     namespace protobuf
@@ -34,12 +31,11 @@ namespace google
         class Message;
     }
 }
-class SimpleAsyncConsumer;
+class receiver;
 class AEntity;
 
 
-class MessageConsumer :
-    cms::MessageListener
+class MessageConsumer
 {
 public:
     class _Dependencies
@@ -47,10 +43,10 @@ public:
     private:
     protected:
     public:
-        SimpleAsyncConsumer*                m_pSimpleAsyncConsumer;
+        receiver*                m_preceiver;
         
         // Constructor
-        _Dependencies(SimpleAsyncConsumer* pSimpleAsyncConsumer);
+        _Dependencies(receiver* preceiver);
         
         // Destructor
         ~_Dependencies();
@@ -58,11 +54,13 @@ public:
     
 private:
 protected:
-    decaf::util::StlQueue<Poco::Tuple<cms::BytesMessage*>* >          m_aTupleQueue;
-    SimpleAsyncConsumer*                                              m_pSimpleAsyncConsumer;
+    std::queue<Poco::Tuple<proton::message*>* >                       m_aTupleQueue;
+    std::mutex                                                        m_aTupleQueueMutex;
+    receiver*                                                         m_preceiver;
+    std::thread*                                                      m_pReceiverThread;
     
     // Helper(s)
-    void                                                Enqueue(cms::BytesMessage* pBytesMessage);
+    void                                                Enqueue(proton::message* pBytesMessage);
     
     // Constructor
     MessageConsumer(_Dependencies* pDependencies);
@@ -71,7 +69,7 @@ protected:
     ~MessageConsumer();
     
 public:
-    Poco::BasicEvent<Poco::Tuple<cms::BytesMessage*>*& >              ReceivedCMSMessageEvent;
+    Poco::BasicEvent<Poco::Tuple<proton::message*>*& >              ReceivedCMSMessageEvent;
     
     // Singleton
     static MessageConsumer& Instance(_Dependencies* pDependencies)//unsigned int uiCapacity)
@@ -81,12 +79,11 @@ public:
     }
     
     // Method(s)
+    void receive_thread(receiver& r);
+
     // Dispatches all the messages it has received to the network
     // via the configured simple async producer
     void Dispatch();
-    
-    // MessageListener implementation
-    virtual void onMessage(const cms::Message* pMessage);
 };
 
 #endif /* defined(__SRT__MessageConsumer__) */

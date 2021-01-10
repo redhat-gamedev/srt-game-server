@@ -26,9 +26,9 @@ namespace google
         class Message;
     }
 }
-namespace cms
+namespace proton
 {
-    class BytesMessage;
+    class message;
 }
 
 
@@ -43,7 +43,7 @@ public:
     protected:
     public:
         // Constructor
-        _SecurityDependencies(redhatgamedev::srt::CommandBuffer* pCommandBuffer, const cms::BytesMessage* pBytesMessage);
+        _SecurityDependencies(redhatgamedev::srt::CommandBuffer* pCommandBuffer, const proton::message* pBytesMessage);
         
         // Destructor
         ~_SecurityDependencies();

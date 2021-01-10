@@ -21,7 +21,8 @@
 #include "SecurityGameEventFactory.h"
 //#include "../Shared/FactoryT.h"
 #include <Poco/BasicEvent.h>
-#include <decaf/util/StlQueue.h>
+#include <queue>
+#include <mutex>
 
 namespace google
 {
@@ -71,8 +72,9 @@ protected:
     BulletFactory&                  m_aBulletFactory;
     FactoryT<redhatgamedev::srt::GameEventBuffer, EntityGameEvent_Dependencies>&              m_anEntityGameEventFactory;
     FactoryT<redhatgamedev::srt::GameEventBuffer, SecurityGameEvent_Dependencies>&            m_aSecurityGameEventFactory;
-    
-    decaf::util::StlQueue<google::protobuf::Message*>       m_anEventQueue;
+
+    std::queue<google::protobuf::Message*>       m_anEventQueue;
+    std::mutex                                   m_anEventQueueMutex;
 
     // Helper(s)
     void                            Enqueue(google::protobuf::Message* pMessage);

@@ -107,18 +107,19 @@ EventDispatcher::~EventDispatcher()
 // Helper(s)
 void EventDispatcher::Enqueue(Message* pMessage)
 {
-    m_anEventQueue.lock();
+    m_anEventQueueMutex.lock();
     m_anEventQueue.push(pMessage);
-    m_anEventQueue.unlock();
+    m_anEventQueueMutex.unlock();
 }
 
 Message* EventDispatcher::Dequeue()
 {
     Message* pMessage = NULL;
 
-    m_anEventQueue.lock();
-    pMessage = m_anEventQueue.pop();
-    m_anEventQueue.unlock();
+    m_anEventQueueMutex.lock();
+    pMessage = m_anEventQueue.front();
+    m_anEventQueue.pop();
+    m_anEventQueueMutex.unlock();
     
     return pMessage;
 }
@@ -143,13 +144,14 @@ GameEventBuffer* EventDispatcher::CreateGameEvent(SecurityGameEventBuffer_Securi
 void EventDispatcher::Dispatch()
 {
     Message* pMessage = NULL;
-    m_anEventQueue.lock();
+    m_anEventQueueMutex.lock();
     while (!m_anEventQueue.empty())
     {
-        pMessage = m_anEventQueue.pop();
+        pMessage = m_anEventQueue.front();
+        m_anEventQueue.pop();
         EventDispatchedEvent(this, pMessage);
     }
-    m_anEventQueue.unlock();
+    m_anEventQueueMutex.unlock();
 }
 
 // Entity event response

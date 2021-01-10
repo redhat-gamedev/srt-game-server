@@ -19,9 +19,8 @@
 #include "../Commands/SecurityCommand.h"
 #include "../Commands/JoinSecurityCommand.h"
 #include "../Commands/LeaveSecurityCommand.h"
-#include "../Network/SimpleAsyncProducer.h"
-#include "../Network/SimpleAsyncConsumer.h"
-#include "../Network/ProtonConsumer.h"
+#include "../Network/sender.h"
+#include "../Network/receiver.h"
 #include "../Events/EventDispatcher.h"
 #include "../Commands/CommandConsumer.h"
 #include "../Commands/CommandQueue.h"
@@ -34,10 +33,8 @@
 #include "../Proto/RawInputCommandBuffer.pb.h"
 #include "../Commands/SecurityCommandBufferFactory.h"
 #include "../Shared/FactoryT.h"
-#include "activemq/library/ActiveMQCPP.h"
 #include <iostream>
 #include "../Logging/loguru.cpp"
-
 
 
 void usage(char **argv) {
@@ -56,13 +53,11 @@ int main(int argc, char* argv[])
 	loguru::init(argc, argv);
 	LOG_F(INFO, "Space Ring Things - Game Server");
 
-    //std::string     strSecurityInURI = "AAS.IN";
-    //std::string     strSecurityOutURI = "AAS.OUT";
-    std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp&keepAlive=true";
+    std::string     strBrokerURI = "tcp://127.0.0.1:5672";
     std::string     strCommandInDestinationURI = "COMMAND.IN";
     std::string     strGameEventOutDestinationURI = "GAME.EVENT.OUT";
     std::string     strServerSleepCycle = "1500";
-    std::string     strProtonURI = "amqp://127.0.0.1:5672//queue/COMMAND.IN";
+    std::string     strProtonURI = "amqp://127.0.0.1:5672/queue/COMMAND.IN";
     
     LOG_F(INFO, "Starting...");
     for (int i = 1; i < argc; ++i)
@@ -74,7 +69,7 @@ int main(int argc, char* argv[])
         }
         else if (0 == strcmp(argv[i], "--broker-uri"))
         {
-            // TODO: Error checking on arg
+            // TODO: Process -> Usage Error checking on arg
             strBrokerURI = argv[++i];
         }
         else if (0 == strcmp(argv[i], "--sleep-cycle"))
@@ -86,9 +81,15 @@ int main(int argc, char* argv[])
     Configuration::Instance().BrokerURI = strBrokerURI;
     Configuration::Instance().ServerSleepCycle = strtol(strServerSleepCycle.c_str(), nullptr, 0);
 
-    LOG_F(INFO, "Initializing the ActiveMQCPP library");
-    activemq::library::ActiveMQCPP::initializeLibrary();
-    
+    // Run the proton container
+    proton::container container;
+    auto container_thread = std::thread([&]() { container.run(); });
+
+    // A single sender and receiver to be shared by all the threads
+    // TODO: Proton TESTME
+    sender send(container, strBrokerURI, strGameEventOutDestinationURI);
+    receiver recv(container, strBrokerURI, strCommandInDestinationURI);
+
     PodFactory&                     thePodFactory = PodFactory::Instance();
     BulletFactory&                  theBulletFactory = BulletFactory::Instance();
     auto&                           theEntityGameEventFactory = FactoryT<GameEventBuffer, EntityGameEvent_Dependencies>::Instance();
@@ -96,14 +97,12 @@ int main(int argc, char* argv[])
     EventDispatcher::_Dependencies  theEventDispatcherDependencies(thePodFactory, theBulletFactory, theEntityGameEventFactory, theSecurityGameEventFactory);
     EventDispatcher&                theEventDispatcher = EventDispatcher::Instance(&theEventDispatcherDependencies);
 
-    LOG_F(INFO, "main creating SimpleAsyncProducer with strBrokerURI: %s", Configuration::Instance().BrokerURI.c_str());
-    SimpleAsyncProducer*                pSimpleAsyncProducer = new SimpleAsyncProducer(Configuration::Instance().BrokerURI, strGameEventOutDestinationURI, true);
-    MessageDispatcher::_Dependencies    theMessageDispatcherDependencies(pSimpleAsyncProducer);
+    LOG_F(INFO, "main creating MessageDispatcher with strBrokerURI: %s", Configuration::Instance().BrokerURI.c_str());
+    MessageDispatcher::_Dependencies    theMessageDispatcherDependencies(&send);
     MessageDispatcher&                  theMessageDispatcher = MessageDispatcher::Instance(&theMessageDispatcherDependencies);
-    
-    LOG_F(INFO, "main creating SimpleAsyncConsumer with strBrokerURI: %s", Configuration::Instance().BrokerURI.c_str());
-    SimpleAsyncConsumer*                pSimpleAsyncConsumer = new SimpleAsyncConsumer(Configuration::Instance().BrokerURI, strCommandInDestinationURI);
-    MessageConsumer::_Dependencies      theMessageConsumerDependencies(pSimpleAsyncConsumer);
+
+    LOG_F(INFO, "main creating MessageConsumer with strBrokerURI: %s", Configuration::Instance().BrokerURI.c_str());
+    MessageConsumer::_Dependencies      theMessageConsumerDependencies(&recv);
     MessageConsumer&                    theMessageConsumer = MessageConsumer::Instance(&theMessageConsumerDependencies);
 
     auto&                               theSecurityCommandBufferFactory = FactoryT<redhatgamedev::srt::CommandBuffer, SecurityCommand_Dependencies>::Instance();
@@ -118,18 +117,17 @@ int main(int argc, char* argv[])
     
     Server* pServer = new Server(theEventDispatcher, theMessageDispatcher, theMessageConsumer, theCommandConsumer, theCommandQueue);
 
-    LOG_F(INFO, "Starting simple Proton consumer");
-    ProtonConsumer pProtonConsumer(strProtonURI);
-    proton::container(pProtonConsumer).run();
-    //pServer->run();
-    
     // Wait to exit.
     LOG_F(INFO, "press 'q' to quit");
     while( std::cin.get() != 'q') {}
 
+    pServer->stop();
+
+    send.close();
+    recv.close();
+
     delete pServer;
     pServer = NULL;
-    
-    activemq::library::ActiveMQCPP::shutdownLibrary();
+
     return 0;
 }

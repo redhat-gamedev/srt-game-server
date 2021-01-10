@@ -22,9 +22,9 @@ namespace redhatgamedev
         class CommandBuffer;
     }
 }
-namespace cms
+namespace proton
 {
-    class BytesMessage;
+    class message;
 }
 
 
@@ -44,18 +44,18 @@ public:
     private:
     protected:
     public:
-        const cms::BytesMessage*                        m_pBytesMessage;
+        const proton::message*                            m_pBytesMessage;
         redhatgamedev::srt::CommandBuffer*                m_pCommandBuffer;
         
         // Constructor
-        _Dependencies(redhatgamedev::srt::CommandBuffer* pCommandBuffer, const cms::BytesMessage* pBytesMessage);
+        _Dependencies(redhatgamedev::srt::CommandBuffer* pCommandBuffer, const proton::message* pBytesMessage);
         
         // Destructor
         virtual ~_Dependencies();
     };
     
 protected:
-    const cms::BytesMessage*                        m_pBytesMessage;
+    const proton::message*                            m_pBytesMessage;
     redhatgamedev::srt::CommandBuffer*                m_pCommandBuffer;
     
     // Constructor

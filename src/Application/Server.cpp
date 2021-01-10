@@ -16,11 +16,11 @@
 #include "Server.h"
 #include "../Game/World.h"
 #include "../Game/AEntity.h"
-#include "decaf/lang/Thread.h"
-#include "decaf/lang/Runnable.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <iostream>
+#include <chrono>
+#include <thread>
 #include <assert.h>
 #include "../Logging/loguru.hpp"
 
@@ -32,8 +32,8 @@ Server::Server(EventDispatcher& theEventDispatcher,
                CommandConsumer& theCommandConsumer,
                CommandQueue& theCommandQueue) :
     m_pWorld(NULL),
-    //m_pInput(NULL),
     m_pMainThread(NULL),
+    m_bStop(false),
     m_theEventDispatcher(theEventDispatcher),
     m_theMessageDispatcher(theMessageDispatcher),
     m_theMessageConsumer(theMessageConsumer),
@@ -59,23 +59,19 @@ void Server::Setup()
     AEntity::ClassSetup();
 
     m_pWorld = new World();
-    //m_pInput = new Input();
 
-    LOG_SCOPE_F(INFO, "Starting the server thread?");
-    m_pMainThread = new decaf::lang::Thread(this, strMainThreadName);
-    m_pMainThread->start();
+    LOG_SCOPE_F(INFO, "Starting the world producer");
+    m_pMainThread = new std::thread([this]() {run();});
 }
 
 void Server::Teardown()
 {
     LOG_SCOPE_F(INFO, "Tearing down the server...");
 
+    m_pMainThread->join();
     delete m_pMainThread;
     m_pMainThread = NULL;
     
-//    delete m_pInput;
-//    m_pInput = NULL;
-
     delete m_pWorld;
     m_pWorld = NULL;
     
@@ -85,7 +81,7 @@ void Server::Teardown()
 // Method(s)
 void Server::run()
 {
-    while (true)
+    while (!m_bStop)
     {
 		LOG_SCOPE_FUNCTION(2);
         // Receive incoming user commands
@@ -110,6 +106,11 @@ void Server::run()
         m_theEventDispatcher.Dispatch();
         m_theMessageDispatcher.Dispatch();
         
-        decaf::lang::Thread::currentThread()->sleep(Configuration::Instance().ServerSleepCycle);
+        std::this_thread::sleep_for(std::chrono::milliseconds(Configuration::Instance().ServerSleepCycle));
     }
+}
+
+void Server::stop()
+{
+    m_bStop = true;
 }

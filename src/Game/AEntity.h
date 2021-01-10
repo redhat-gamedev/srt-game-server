@@ -25,9 +25,10 @@
 #include "../Proto/GameEventBuffer.pb.h"
 #include "../Proto/EntityGameEventBuffer.pb.h"
 #include <Poco/BasicEvent.h>
-#include <decaf/util/StlQueue.h>
 #include <string>
 #include <list>
+#include <queue>
+#include <mutex>
 
 class AB2DEntity;
 class Pod;
@@ -81,7 +82,8 @@ protected:
     };
     
     // Class data
-    static decaf::util::StlQueue<AEntity*>          s_EntityQueue;
+    static std::queue<AEntity*>          s_EntityQueue;
+    static std::mutex                    s_EntityQueueMutex;
     
     std::string             m_strUUID;
     uint64_t                m_ui64Tag;

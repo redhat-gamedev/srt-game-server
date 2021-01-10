@@ -276,7 +276,7 @@ public:
         
         redhatgamedev::srt::LeaveSecurityCommandBuffer* pLeaveSecurityCommand = pSecurityCommand->mutable_leavesecuritycommandbuffer();
         
-        // TODO: 071413 Add UUID to the SecurityCommandDependencies and fix this!
+        // TODO: Player UUID -> Add UUID to the SecurityCommandDependencies and fix this 071413!
         //pLeaveSecurityCommand->set_uuid("test");
         pLeaveSecurityCommand->set_uuid(theLeaveSecurityCommand_Dependencies.m_strUUID);
         

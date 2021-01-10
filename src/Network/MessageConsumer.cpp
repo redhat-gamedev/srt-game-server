@@ -13,9 +13,8 @@
 //   limitations under the License.
 
 #include "MessageConsumer.h"
-#include "SimpleAsyncConsumer.h"
-#include <cms/BytesMessage.h>
-#include <cms/CMSException.h>
+#include "receiver.h"
+#include "../Logging/loguru.hpp"
 #include <google/protobuf/message.h>
 #include <string.h>
 #include <string>
@@ -25,10 +24,10 @@
 // Constructor
 MessageConsumer::
 _Dependencies::
-_Dependencies(SimpleAsyncConsumer* pSimpleAsyncConsumer) :
-    m_pSimpleAsyncConsumer(pSimpleAsyncConsumer)
+_Dependencies(receiver* preceiver) :
+    m_preceiver(preceiver)
 {
-    assert(m_pSimpleAsyncConsumer);
+    assert(m_preceiver);
 }
 
 // Destructor
@@ -44,45 +43,63 @@ _Dependencies::
 MessageConsumer::MessageConsumer(_Dependencies* pDependencies)
 {
     assert(pDependencies);
+
+    m_preceiver = pDependencies->m_preceiver;
     
-    m_pSimpleAsyncConsumer = pDependencies->m_pSimpleAsyncConsumer;
-    
-    assert(m_pSimpleAsyncConsumer);
-    m_pSimpleAsyncConsumer->runConsumer();
-    m_pSimpleAsyncConsumer->SetMessageListener(this);
+    assert(m_preceiver);
+
+    // TODO: Proton TESTME -> kick off the receiver thread in the MessageConsumer
+    m_pReceiverThread = new std::thread([&]() { receive_thread(*m_preceiver); });
 }
 
 // Destructor
 MessageConsumer::~MessageConsumer()
 {
-    m_pSimpleAsyncConsumer->close();
-    delete m_pSimpleAsyncConsumer;
-    m_pSimpleAsyncConsumer = NULL;
+    m_pReceiverThread->join();
+    delete m_pReceiverThread;
+    m_pReceiverThread = NULL;
+
+    m_preceiver->close();
+    delete m_preceiver;
+    m_preceiver = NULL;
 }
 
 // Helper(s)
-void MessageConsumer::Enqueue(cms::BytesMessage* pBytesMessage)
+void MessageConsumer::Enqueue(proton::message* pBytesMessage)
 {
     assert(pBytesMessage);
     
-    Poco::Tuple<cms::BytesMessage*>*    pTuple = new Poco::Tuple<cms::BytesMessage*>(pBytesMessage);
-    m_aTupleQueue.lock();
+    Poco::Tuple<proton::message*>*    pTuple = new Poco::Tuple<proton::message*>(pBytesMessage);
+    m_aTupleQueueMutex.lock();
     m_aTupleQueue.push(pTuple);
-    m_aTupleQueue.unlock();
-}
-
-// cms::MessageListener implementation
-void MessageConsumer::onMessage(const cms::Message* pMessage)
-{
-    assert(pMessage);
-    
-    cms::Message* pMessageClone = pMessage->clone();
-    cms::BytesMessage* pBytesMessage = dynamic_cast<cms::BytesMessage*>(pMessageClone);
-
-    Enqueue(pBytesMessage);
+    m_aTupleQueueMutex.unlock();
 }
 
 // Method(s)
+void MessageConsumer::receive_thread(receiver& r) {
+    std::mutex out_lock;
+    #define OUT(x) do { std::lock_guard<std::mutex> l(out_lock); x; } while (false)
+
+    OUT(std::cerr << "unexpected error in receive_thread " << std::endl);
+
+    try {
+        auto id = std::this_thread::get_id();
+        int n = 0;
+        // atomically check and decrement remaining *before* receiving.
+        // If it is 0 or less then return, as there are no more
+        // messages to receive so calling r.receive() would block forever.
+        while (true) {
+            auto m = r.receive();
+            // TODO: Proton TESTME -> does this do a deep copy? if so who deletes it and when?
+            proton::message* pMessage = new proton::message(m);
+            Enqueue(pMessage);
+//            ++n;
+//            OUT(std::cout << id << " received \"" << m.body() << '"' << std::endl);
+        }
+//        OUT(std::cout << id << " received " << n << " messages" << std::endl);
+    } catch (const closed&) {}
+}
+
 // Dispatches all the messages it has received from the network
 // via the configured simple async consumer
 void MessageConsumer::Dispatch()
@@ -90,16 +107,17 @@ void MessageConsumer::Dispatch()
     // TODO: Used ScopedLock (?)
     try
     {
-        m_aTupleQueue.lock();
+        m_aTupleQueueMutex.lock();
         while (!m_aTupleQueue.empty())
         {
-            Poco::Tuple<cms::BytesMessage*>*  pTuple = m_aTupleQueue.pop();
+            Poco::Tuple<proton::message*>*  pTuple = m_aTupleQueue.front();
+            m_aTupleQueue.pop();
             ReceivedCMSMessageEvent(this, pTuple);
         }
-        m_aTupleQueue.unlock();
+        m_aTupleQueueMutex.unlock();
     }
-    catch ( cms::CMSException& e )
+    catch ( std::exception& e )
     {
-        e.printStackTrace();
+        LOG_F(INFO, e.what());
     }
 }

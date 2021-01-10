@@ -22,9 +22,10 @@
 #include "../Commands/RawInputCommand.h"
 #include "../Commands/DualStickRawInputCommand.h"
 #include <Poco/BasicEvent.h>
-#include <decaf/util/StlQueue.h>
 #include <string>
 #include <list>
+#include <deque>
+#include <mutex>
 
 namespace Rock2D
 {
@@ -46,10 +47,13 @@ private:
     
 protected:
     Rock2D::Timer*                      m_pBulletTimer;
-    decaf::util::StlQueue<Bullet*>      m_BulletQueue;
-    
-    decaf::util::StlQueue<b2Vec2>       m_b2v2MoveQueue;
-    decaf::util::StlQueue<b2Vec2>       m_b2v2ShootQueue;
+    std::deque<Bullet*>                 m_BulletQueue;
+    std::mutex                          m_BulletQueueMutex;
+
+    std::deque<b2Vec2>                  m_b2v2MoveQueue;
+    std::mutex                          m_b2v2MoveQueueMutex;
+    std::deque<b2Vec2>                  m_b2v2ShootQueue;
+    std::mutex                          m_b2v2ShootQueueMutex;
     
     int16_t                 m_i16GroupCount;
     

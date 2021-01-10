@@ -18,7 +18,8 @@
 #include "AB2DEntity.h"
 //#include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include <Box2D/Box2D.h>
-#include <decaf/util/StlQueue.h>
+#include <queue>
+#include <mutex>
 
 class AEntity;
 
@@ -43,7 +44,8 @@ public:
     };
     
 protected:
-    decaf::util::StlQueue<b2Vec2>       m_b2v2MoveQueue;
+    std::queue<b2Vec2>       m_b2v2MoveQueue;
+    std::mutex               m_b2v2MoveQueueMutex;
     
 public:
     // Constructor(s)

@@ -63,24 +63,25 @@ void B2DPod::Move(float fX, float fY)
     b2v2Move.x = fX;
     b2v2Move.y = fY;
     
-    m_b2v2MoveQueue.lock();
+    m_b2v2MoveQueueMutex.lock();
     m_b2v2MoveQueue.push(b2v2Move);
-    m_b2v2MoveQueue.unlock();
+    m_b2v2MoveQueueMutex.unlock();
 }
 
 void B2DPod::Update()
 {
-    m_b2v2MoveQueue.lock();
+    m_b2v2MoveQueueMutex.lock();
     LOG_F(4, "Our current linear velocity: %f x %f", m_pb2Body->GetLinearVelocity().x, m_pb2Body->GetLinearVelocity().y);
     LOG_F(4, "Our current position: %f x %f", m_pb2Body->GetPosition().x, m_pb2Body->GetPosition().y);
     LOG_F(3, "Emptying the b2v2 move queue");
     while (!(m_b2v2MoveQueue.empty()))
     {
-        b2Vec2 ab2Vec2Move = m_b2v2MoveQueue.pop();
+        b2Vec2 ab2Vec2Move = m_b2v2MoveQueue.front();
+        m_b2v2MoveQueue.pop();
         LOG_F(3, "Calculating the forces");
         ab2Vec2Move.x *= 50.0f;
         ab2Vec2Move.y *= 50.0f;
         m_pb2Body->ApplyForceToCenter(ab2Vec2Move, true);
     }
-    m_b2v2MoveQueue.unlock();    
+    m_b2v2MoveQueueMutex.unlock();
 }

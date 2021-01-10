@@ -31,8 +31,8 @@
 #include <assert.h>
 #include "../Logging/loguru.hpp"
 
-decaf::util::StlQueue<AEntity*>     AEntity::s_EntityQueue;
-AEntity::_Serializer                AEntity::Serializer;
+std::queue<AEntity*>            AEntity::s_EntityQueue;
+AEntity::_Serializer            AEntity::Serializer;
 std::list<Pod*>                 AEntity::s_listPods;
 std::list<Pod*>                 AEntity::s_listPodsSwap;
 uint64_t                        AEntity::s_ui64Count = 1;

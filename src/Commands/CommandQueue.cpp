@@ -20,6 +20,7 @@
 #include <iostream>
 #include "../Logging/loguru.hpp"
 
+
 // Constructor
 CommandQueue::
 _Dependencies::
@@ -52,38 +53,39 @@ CommandQueue::CommandQueue(_Dependencies* pDependencies) :
     m_aCommandConsumer(pDependencies->m_aCommandConsumer)
 {
     using namespace Poco;
-    using namespace cms;
+//    using namespace cms;
     
-    m_aCommandConsumer.CommandConsumedEvent += Delegate<CommandQueue, Tuple<BytesMessage*, google::protobuf::Message*>*& >(this, &CommandQueue::HandleCommandConsumedEvent);
+    m_aCommandConsumer.CommandConsumedEvent += Delegate<CommandQueue, Tuple<proton::message*, google::protobuf::Message*>*& >(this, &CommandQueue::HandleCommandConsumedEvent);
 }
 
 // Destructor
 CommandQueue::~CommandQueue()
 {
     using namespace Poco;
-    using namespace cms;
-    
-    m_aCommandConsumer.CommandConsumedEvent -= Delegate<CommandQueue, Tuple<BytesMessage*, google::protobuf::Message*>*& >(this, &CommandQueue::HandleCommandConsumedEvent);
+//    using namespace cms;
+
+    m_aCommandConsumer.CommandConsumedEvent -= Delegate<CommandQueue, Tuple<proton::message*, google::protobuf::Message*>*& >(this, &CommandQueue::HandleCommandConsumedEvent);
 }
 
 // Method(s)
 void CommandQueue::Execute()
 {
     ACommand* pCommand = NULL;
-    m_aCommandQueue.lock();
+    m_aCommandQueueMutex.lock();
     while (!m_aCommandQueue.empty())
     {
-        pCommand = m_aCommandQueue.pop();
+        pCommand = m_aCommandQueue.front();
+        m_aCommandQueue.pop();
         pCommand->Execute();
     }
-    m_aCommandQueue.unlock();
+    m_aCommandQueueMutex.unlock();
 }
 
 // CommandConsumer Event response
-void CommandQueue::HandleCommandConsumedEvent(const void* pSender, Poco::Tuple<cms::BytesMessage*, google::protobuf::Message*>*& pTuple)
+void CommandQueue::HandleCommandConsumedEvent(const void* pSender, Poco::Tuple<proton::message*, google::protobuf::Message*>*& pTuple)
 {
     redhatgamedev::srt::CommandBuffer* pCommandBuffer = dynamic_cast<redhatgamedev::srt::CommandBuffer*>(pTuple->get<1>());
-    cms::BytesMessage* pBytesMessage = pTuple->get<0>();
+    proton::message* pBytesMessage = pTuple->get<0>();
     
     ACommand* pCommand = NULL;
 
@@ -131,7 +133,7 @@ void CommandQueue::HandleCommandConsumedEvent(const void* pSender, Poco::Tuple<c
     }
     
     assert(pCommand);
-    m_aCommandQueue.lock();
+    m_aCommandQueueMutex.lock();
     m_aCommandQueue.push(pCommand);
-    m_aCommandQueue.unlock();
+    m_aCommandQueueMutex.unlock();
 }

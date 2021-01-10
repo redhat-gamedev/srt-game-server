@@ -16,11 +16,7 @@
 #include "../Application/Configuration.h"
 #include "../Proto/CommandBuffer.pb.h"
 #include "../Proto/SecurityCommandBuffer.pb.h"
-#include "../Network/SimpleAsyncProducer.h"
-#include <cms/Destination.h>
-#include <cms/BytesMessage.h>
-//#include <cms/TemporaryQueue.h>
-#include <decaf/util/UUID.h>
+#include <proton/message.hpp>
 #include <assert.h>
 #include <iostream>
 #include "../Logging/loguru.hpp"
@@ -54,19 +50,22 @@ void JoinSecurityCommand::Execute()
     // we used to generate a UUID for the player to use to identify them inside the server
     // but we're moving to using a provided player identity instead
     // this will eventually be validated via JWT or some other mechanism
-    // TODO: would this be the place to validate it?
+    // TODO: Player UUID -> would this be the place to validate it?
     //decaf::util::UUID aNewUUID = decaf::util::UUID::randomUUID();
     strUUID = aSecurityCommandBuffer.uuid();
-    const cms::Destination* pReplyToDestination = m_pBytesMessage->getCMSReplyTo();
-    assert(pReplyToDestination);
-    
-    // TODO: Make not super inefficient
-    LOG_SCOPE_F(1, "creating Simple Async Producer");
-    SimpleAsyncProducer* pSimpleAsyncProducer = new SimpleAsyncProducer(Configuration::Instance().BrokerURI, pReplyToDestination, false, true);
 
-    LOG_SCOPE_F(INFO, "sending player identity: %s", strUUID.c_str());
-    pSimpleAsyncProducer->Send(strUUID);
-    delete pSimpleAsyncProducer;
-    
+    LOG_F(INFO, "JointSecurityCommand::Execute TODO");
+
+    // TODO: Proton update needed -> Reply on join; Make not super inefficient
+//    const cms::Destination* pReplyToDestination = m_pBytesMessage->getCMSReplyTo();
+//    assert(pReplyToDestination);
+//
+//    LOG_SCOPE_F(1, "creating Simple Async Producer");
+//    SimpleAsyncProducer* pSimpleAsyncProducer = new SimpleAsyncProducer(Configuration::Instance().BrokerURI, pReplyToDestination, false, true);
+//
+//    LOG_SCOPE_F(INFO, "sending player identity: %s", strUUID.c_str());
+//    pSimpleAsyncProducer->Send(strUUID);
+//    delete pSimpleAsyncProducer;
+//
     ExecutedEvent(this, strUUID);
 }

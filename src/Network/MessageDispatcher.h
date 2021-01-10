@@ -15,8 +15,9 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-#include <decaf/util/StlQueue.h>
 #include <utility>
+#include <queue>
+#include <mutex>
 
 namespace google
 {
@@ -25,7 +26,7 @@ namespace google
         class Message;
     }
 }
-class SimpleAsyncProducer;
+class sender;
 
 
 class MessageDispatcher
@@ -36,10 +37,10 @@ public:
     private:
     protected:
     public:
-        SimpleAsyncProducer*                m_pSimpleAsyncProducer;
+        sender*                m_psender;
         
         // Constructor
-        _Dependencies(SimpleAsyncProducer* pSimpleAsyncProducer);
+        _Dependencies(sender* psender);
         
         // Destructor
         ~_Dependencies();
@@ -47,8 +48,9 @@ public:
 
 private:
 protected:
-    decaf::util::StlQueue<std::pair<const unsigned char*, unsigned long>* >         m_aMessageQueue;
-    SimpleAsyncProducer*                                                            m_pSimpleAsyncProducer;
+    std::queue<std::pair<const unsigned char*, unsigned long>* >         m_aMessageQueue;
+    std::mutex                                                           m_aMessageQueueMutex;
+    sender*                                                            m_psender;
     
     // Helper(s)
     void                                                Enqueue(google::protobuf::Message* pMessage);

@@ -16,12 +16,12 @@
 //   limitations under the License.
 
 #include <Poco/BasicEvent.h>
-#include <decaf/util/TimerTask.h>
+//#include <decaf/util/TimerTask.h>
 #include <list>
 
 
-class Heartbeat :
-    public decaf::util::TimerTask
+class Heartbeat// :
+//    public decaf::util::TimerTask
 {
 protected:
     class _EventPublisher

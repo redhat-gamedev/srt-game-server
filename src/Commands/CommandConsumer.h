@@ -20,13 +20,14 @@
 #include "../Proto/SecurityCommandBuffer.pb.h"
 #include <Poco/BasicEvent.h>
 #include <Poco/Tuple.h>
-#include <decaf/util/StlQueue.h>
 #include <utility>
+#include <queue>
+#include <mutex>
 
-namespace cms
+namespace proton
 {
-    class Message;
-    class BytesMessage;
+    class message;
+    //class BytesMessage;
 }
 class MessageConsumer;
 
@@ -39,7 +40,7 @@ public:
     private:
     protected:
     public:
-        MessageConsumer*                                                                m_pMessageConsumer;
+        MessageConsumer*                                                                  m_pMessageConsumer;
         FactoryT<redhatgamedev::srt::CommandBuffer, SecurityCommand_Dependencies>&        m_aSecurityCommandFactory;
         
         // Constructor
@@ -51,14 +52,14 @@ public:
 
 private:
 protected:
-    MessageConsumer*                                                                        m_pMessageConsumer;
+    MessageConsumer*                                                                          m_pMessageConsumer;
     FactoryT<redhatgamedev::srt::CommandBuffer, SecurityCommand_Dependencies>&                m_aSecurityCommandFactory;
-    decaf::util::StlQueue<Poco::Tuple<cms::BytesMessage*, google::protobuf::Message*>* >    m_aTupleQueue;
-    
+    std::queue<Poco::Tuple<proton::message*, google::protobuf::Message*>* >      m_aTupleQueue;
+    std::mutex                                                                   m_aTupleQueueMutex;
     
     // Helper(s)
-    void                                                Enqueue(Poco::Tuple<cms::BytesMessage*>* pTuple);
-    std::pair<unsigned char*, unsigned long>*           MessageToPair(cms::BytesMessage* pBytesMessage);
+    void                                                Enqueue(Poco::Tuple<proton::message*>* pTuple);
+    std::pair<unsigned char*, unsigned long>*           MessageToPair(proton::message* pMessage);
     
     // Constructor(s)
     CommandConsumer(_Dependencies* pDependencies);
@@ -68,7 +69,7 @@ protected:
     
 public:
     // Event(s)
-    Poco::BasicEvent<Poco::Tuple<cms::BytesMessage*, google::protobuf::Message*>*& >   CommandConsumedEvent;
+    Poco::BasicEvent<Poco::Tuple<proton::message*, google::protobuf::Message*>*& >   CommandConsumedEvent;
     
     // Singleton
     static CommandConsumer& Instance(_Dependencies* pDependencies = NULL)//unsigned int uiCapacity)
@@ -81,7 +82,7 @@ public:
     void Consume();
     
     // Event response
-    void HandleReceivedCMSMessageEvent(const void* pSender, Poco::Tuple<cms::BytesMessage*>*& pTuple);
+    void HandleReceivedCMSMessageEvent(const void* pSender, Poco::Tuple<proton::message*>*& pTuple);
 };
 
 #endif /* defined(__SRT__CommandConsumer__) */

@@ -1,7 +1,7 @@
 #Build
 FROM fedora:30 as build-env
 
-RUN sudo dnf install activemq-cpp activemq-cpp-devel apr apr-util apr-util-devel Box2D Box2D-devel compat-openssl10 openssl crypto-utils poco-devel poco-foundation protobuf protobuf-devel gcc g++ cmake git --assumeyes --verbose
+RUN sudo dnf install Box2D Box2D-devel compat-openssl10 openssl crypto-utils poco-devel poco-foundation protobuf protobuf-devel gcc g++ cmake git qpid-proton-cpp qpid-proton-cpp-devel --assumeyes --verbose
 #RUN mkdir -p /tmp/srt-game-server/build
 
 ADD . /tmp/srt-game-server
@@ -19,13 +19,14 @@ RUN cmake --build .
 # Run
 FROM fedora:30 as base-env
 
-RUN sudo dnf install activemq-cpp activemq-cpp-devel apr apr-util Box2D Box2D-devel compat-openssl10 openssl crypto-utils poco-devel poco-foundation protobuf protobuf-devel --assumeyes --verbose
+RUN sudo dnf install Box2D Box2D-devel compat-openssl10 openssl crypto-utils poco-devel poco-foundation protobuf protobuf-devel qpid-proton-cpp qpid-proton-cpp-devel --assumeyes --verbose
 
 ENV USER_UID=1000
 ENV USER_NAME=srt
 ENV EXECUTABLE_NAME=srt-game-server.bin
 ENV EXECUTABLE=/home/${USER_NAME}/bin/${EXECUTABLE_NAME}
-ENV BROKER_URI="tcp://127.0.0.1:61613?wireFormat=stomp"
+ENV BROKER_URI="tcp://127.0.0.1:5672"
+ENV LOG_LEVEL="1"
 
 WORKDIR /
 
@@ -36,14 +37,14 @@ COPY containerbuild/bin/entrypoint /home/${USER_NAME}/bin
 
 RUN chown -R `id -u`:0 /home/${USER_NAME}/bin && chmod -R 755 /home/${USER_NAME}/bin
 USER ${USER_UID}:0
-ENTRYPOINT "/home/srt/bin/entrypoint" "--broker-uri" "$BROKER_URI"
+ENTRYPOINT "/home/srt/bin/entrypoint" "--broker-uri" "$BROKER_URI" "-v" "$LOG_LEVEL"
 
 LABEL \
       com.srt.component="srt-game-server" \
       description="Space Ring Things game physics server" \
       io.k8s.description="Main game simulation container for Space Ring Things" \
-      io.k8s.display-name="Space Ring Things 0.1" \
+      io.k8s.display-name="Space Ring Things 0.2" \
       maintainer="Roddie Kieley <rkieley@apache.org>" \
       name="roddiekieley/srt-game-server" \
       summary="Space Ring Things game physics server" \
-      version="0.1"
+      version="0.2"

@@ -166,7 +166,6 @@ namespace Rock2D
         static const long	LastCounts() { return s_liLastCounts; };
 
         // Get the counts change between frames
-        //TODO
         //static const LONGLONG	CountsChange() { return s_liThisCounts.QuadPart - s_liLastCounts.QuadPart); };
         static const LONGLONG	CountsChange() { return (s_liThisCounts - s_liLastCounts); };
 
@@ -241,7 +240,6 @@ namespace Rock2D
         static DWORD		timeGetTime();
 
         // Constructor(s)
-        //TODO
         Timer(	const DWORD& dwDuration,
                 const BYTE&	byteFlags = 0,
                 const DWORD& dwStartTime = 0); // where 0 is now

@@ -112,7 +112,6 @@ namespace Rock2D
     // if one is available
     void Timer::Initialize()
     {	
-        //TODO
         s_liCountsPerSecond = 0;
         // Ensure we have a count frequency
         //if (QueryPerformanceFrequency(&s_liCountsPerSecond)) {
@@ -224,7 +223,6 @@ namespace Rock2D
         Timer::QueryPerformanceCounter(&s_liThisCounts);
         
         // Calculate this frames speed factor
-        //TODO
         //s_fSpeedFactor = static_cast<float>(s_liThisCounts.QuadPart - s_liLastCounts.QuadPart)/(static_cast<float>(s_liCountsPerSecond.QuadPart)/s_fTargetFPS);
         s_fSpeedFactor = static_cast<float>(s_liThisCounts - s_liLastCounts)/(static_cast<float>(s_liCountsPerSecond)/s_fTargetFPS);
         s_fActualFPS = s_fTargetFPS/s_fSpeedFactor;

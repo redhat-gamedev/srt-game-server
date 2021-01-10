@@ -13,11 +13,11 @@
 //   limitations under the License.
 
 #include "MessageDispatcher.h"
-#include "SimpleAsyncProducer.h"
+#include "sender.h"
 #include "../Events/EventDispatcher.h"
 #include "../Proto/GameEventBuffer.pb.h"
+#include "../Logging/loguru.hpp"
 #include <Poco/Delegate.h>
-#include <cms/CMSException.h>
 #include <google/protobuf/message.h>
 #include <string>
 #include <assert.h>
@@ -26,10 +26,10 @@
 // Constructor
 MessageDispatcher::
 _Dependencies::
-_Dependencies(SimpleAsyncProducer* pSimpleAsyncProducer) :
-    m_pSimpleAsyncProducer(pSimpleAsyncProducer)
+_Dependencies(sender* psender) :
+    m_psender(psender)
 {
-    assert(m_pSimpleAsyncProducer);
+    assert(m_psender);
 }
 
 // Destructor
@@ -46,13 +46,13 @@ MessageDispatcher::MessageDispatcher(_Dependencies* pDependencies)
 {
     assert(pDependencies);
     
-    m_pSimpleAsyncProducer = pDependencies->m_pSimpleAsyncProducer;
+    m_psender = pDependencies->m_psender;
     
     EventDispatcher& theEventDispatcher = EventDispatcher::Instance();
     theEventDispatcher.EventDispatchedEvent += Poco::Delegate<MessageDispatcher, google::protobuf::Message*&>(this, &MessageDispatcher::HandleEventDispatchedEvent);
     
     
-    assert(m_pSimpleAsyncProducer);
+    assert(m_psender);
 }
 
 // Destructor
@@ -65,9 +65,9 @@ MessageDispatcher::~MessageDispatcher()
 // Helper(s)
 void MessageDispatcher::Enqueue(std::pair<const unsigned char*, unsigned long>* pMessagePair)
 {
-    m_aMessageQueue.lock();
+    m_aMessageQueueMutex.lock();
     m_aMessageQueue.push(pMessagePair);
-    m_aMessageQueue.unlock();
+    m_aMessageQueueMutex.unlock();
 }
 
 void MessageDispatcher::Enqueue(google::protobuf::Message* pEventMessage)
@@ -129,23 +129,27 @@ std::pair<const unsigned char*, unsigned long>* MessageDispatcher::MessageToPair
 // via the configured simple async producer
 void MessageDispatcher::Dispatch()
 {
-    m_aMessageQueue.lock();
+    m_aMessageQueueMutex.lock();
     while (!m_aMessageQueue.empty())
     {
         try
         {
-            std::pair<const unsigned char*, unsigned long>* pMessagePair = m_aMessageQueue.pop();
+            std::pair<const unsigned char*, unsigned long>* pMessagePair = m_aMessageQueue.front();
+            m_aMessageQueue.pop();
             if (pMessagePair->second > 0)
             {
-                m_pSimpleAsyncProducer->Send(pMessagePair->first, (int)pMessagePair->second);
+                // TODO: Proton TESTME
+                proton::message msg((const char*)pMessagePair->first);
+                m_psender->send(msg);
             }
         }
-        catch ( cms::CMSException& e )
+        catch ( std::exception& e )
         {
-            e.printStackTrace();
+//            std::cout << e.what() << std::endl;
+            LOG_F(INFO, e.what());
         }
     }
-    m_aMessageQueue.unlock();
+    m_aMessageQueueMutex.unlock();
 }
 
 // EventDispatcher event response
