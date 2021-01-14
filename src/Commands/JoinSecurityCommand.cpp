@@ -46,12 +46,13 @@ void JoinSecurityCommand::Execute()
     
     assert(m_pBytesMessage);
     assert(m_pCommandBuffer);
-    
+
     std::string     strUUID = "";
     const SecurityCommandBuffer& aSecurityCommandBuffer = m_pCommandBuffer->securitycommandbuffer();
+    LOG_SCOPE_F(INFO, "provided player identity: %s", aSecurityCommandBuffer.uuid().c_str());
     
-    decaf::util::UUID aNewUUID = decaf::util::UUID::randomUUID();
-    strUUID = aNewUUID.toString();
+    //decaf::util::UUID aNewUUID = decaf::util::UUID::randomUUID();
+    strUUID = aSecurityCommandBuffer.uuid();
     const cms::Destination* pReplyToDestination = m_pBytesMessage->getCMSReplyTo();
     assert(pReplyToDestination);
     
