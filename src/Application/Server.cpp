@@ -60,7 +60,7 @@ void Server::Setup()
     m_pWorld = new World();
     //m_pInput = new Input();
 
-    LOG_SCOPE_F(INFO, "Starting the world producer");
+    LOG_SCOPE_F(INFO, "Starting the server thread?");
     m_pMainThread = new decaf::lang::Thread(this, strMainThreadName);
     m_pMainThread->start();
 }
@@ -86,24 +86,29 @@ void Server::run()
 {
     while (true)
     {
+		LOG_SCOPE_FUNCTION(2);
         // Receive incoming user commands
+        LOG_F(2, "Handling incoming commands");
         m_theMessageConsumer.Dispatch();
         m_theCommandConsumer.Consume();
         m_theCommandQueue.Execute();
         
         // Run simulation step
+        LOG_F(2, "Simulating");
         m_pWorld->Simulate();
         
         // Check game rules
         
         // Update all object states
+        LOG_F(2, "Update the objects");
         AEntity::Update();
 
         // if any client needs a world update take world snapshot
         // Update clients if required
+        LOG_F(2, "Telling the clients what's going on");
         m_theEventDispatcher.Dispatch();
         m_theMessageDispatcher.Dispatch();
         
-        decaf::lang::Thread::currentThread()->sleep(15);
+        decaf::lang::Thread::currentThread()->sleep(5000);
     }
 }

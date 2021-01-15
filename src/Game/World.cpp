@@ -26,6 +26,7 @@
 #include <decaf/lang/Thread.h>
 #include <assert.h>
 #include <iostream>
+#include "../Logging/loguru.hpp"
 
 B2DWorld*               World::m_pB2DWorld = NULL;
 
@@ -62,45 +63,16 @@ void World::Simulation::run()
 void World::Setup()
 {
     std::string     strWorldSimulationName = "WorldSimulationThread";
-
-    //m_pB2DWorld = new B2DWorld();
-//    m_pSimulationSerialDispatchQueue = new xdispatch::queue("box2d");
-    
-    //std::cout << "Starting the world box2d simulation" << std::endl;
-    //m_pWorldSimulation = new World::Simulation(this);
-//    m_pWorldSimulationThread = new decaf::lang::Thread(m_pWorldSimulation, strWorldSimulationName);
-//    m_pWorldSimulationThread->start();
-    
-    //std::cout << "Starting the simulation dispatch timer" << std::endl;
-    //m_pSimulationDispatchTimer = new xdispatch::timer(15 * NSEC_PER_MSEC, *m_pSimulationSerialDispatchQueue);
-    //m_pSimulationDispatchTimer->start();
 }
 
 void World::Teardown()
 {
-//    delete m_pWorldSimulationThread;
-//    m_pWorldSimulationThread = NULL;
-    
-//    delete m_pWorldSimulation;
-//    m_pWorldSimulation = NULL;
-    
-    //delete m_pSimulationDispatchTimer;
-    //m_pSimulationDispatchTimer = NULL;
-    
-//    delete m_pSimulationSerialDispatchQueue;
-//    m_pSimulationSerialDispatchQueue = NULL;
- 
-//    delete m_pB2DWorld;
-//    m_pB2DWorld = NULL;
 }
 
 // Constructor(s)
 World::World()// :
-//    m_pSimulationSerialDispatchQueue(NULL),
-    //m_pSimulationDispatchTimer(NULL),
-//    m_pWorldSimulation(NULL)//,
-//    m_pWorldSimulationThread(NULL)
 {
+    LOG_SCOPE_F(1, "Constructing the World");
     Setup();
 }
 
@@ -117,6 +89,7 @@ void World::b2Vec2ToPbVec2(b2Vec2* pb2Vec2)
 
 void World::b2WorldToPbWorld(b2World* pb2World, PbWorld*& pPbWorldDefault)
 {
+    LOG_SCOPE_F(2, "Doing the world to world thing");
     assert(NULL != pb2World);
     assert(NULL != pPbWorldDefault);
     
