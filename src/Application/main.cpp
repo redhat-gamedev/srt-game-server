@@ -43,6 +43,7 @@ void usage(char **argv) {
     fprintf(stderr, "usage: %s [options]\n", argv[0]);
     fprintf(stderr, "  --help: print usage\n");
     fprintf(stderr, "  --broker-uri: broker uri with options e.g. tcp://127.0.0.1:61613?wireFormat=stomp&keepAlive=true\n");
+    fprintf(stderr, "  --sleep-cycle: the time (in milliseconds) of the server sleep (default 15) \n");
     fprintf(stderr, " ");
     fprintf(stderr, "\n\n");
 //    fprintf(stderr, "bad argument: %s\n", *arg);
@@ -59,6 +60,7 @@ int main(int argc, char* argv[])
     std::string     strBrokerURI = "tcp://127.0.0.1:61613?wireFormat=stomp&keepAlive=true";
     std::string     strCommandInDestinationURI = "COMMAND.IN";
     std::string     strGameEventOutDestinationURI = "GAME.EVENT.OUT";
+    std::string     strServerSleepCycle = "1500";
     
     LOG_F(INFO, "Starting...");
     for (int i = 1; i < argc; ++i)
@@ -73,9 +75,14 @@ int main(int argc, char* argv[])
             // TODO: Error checking on arg
             strBrokerURI = argv[++i];
         }
+        else if (0 == strcmp(argv[i], "--sleep-cycle"))
+        {
+            strServerSleepCycle = argv[++i];
+        }
     }
 
     Configuration::Instance().BrokerURI = strBrokerURI;
+    Configuration::Instance().ServerSleepCycle = strtol(strServerSleepCycle.c_str(), nullptr, 0);
 
     LOG_F(INFO, "Initializing the ActiveMQCPP library");
     activemq::library::ActiveMQCPP::initializeLibrary();
