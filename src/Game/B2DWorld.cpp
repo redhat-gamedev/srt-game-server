@@ -17,6 +17,7 @@
 //#include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
 #include <Poco/ScopedLock.h>
 #include <assert.h>
+#include "../Logging/loguru.hpp"
 
 b2World*                            B2DWorld::s_pb2World = NULL;
 Poco::Mutex                         B2DWorld::s_aMutex;
@@ -90,31 +91,18 @@ void B2DWorld::_Factory::DestroyJoint(b2Joint* pb2Joint)
 B2DWorld::B2DWorld() :
     gravity(new b2Vec2(0.0f, 0.0f)),
     timeStep(1.0f / 66.0f),
-    velocityIterations(6),
-    positionIterations(2)
-//    world(new b2World(*gravity)),
-    //m_pBox2DSerialDispatchQueue(new xdispatch::queue("box2d"))
-{
-    //gravity = new b2Vec2(0.0f, -9.81f);
-//    gravity = new b2Vec2(0.0f, 0.0f);
-    s_pb2World = new b2World(*gravity);
-    
     // As per https://developer.valvesoftware.com/wiki/Source_Multiplayer_Networking
     // resulting in 15ms per timeStep or tick
-//	timeStep = 1.0f / 66.0f;
-    
-//	velocityIterations = 6;
-//	positionIterations = 2;
-    
-//    m_pBox2DSerialDispatchQueue = new xdispatch::queue("box2d");
+    velocityIterations(6),
+    positionIterations(2)
+{
+    LOG_SCOPE_F(1, "Constructing the Box2D world");
+    s_pb2World = new b2World(*gravity);
 }
 
 // Destructor
 B2DWorld::~B2DWorld()
 {
-    //delete m_pBox2DSerialDispatchQueue;
-    //m_pBox2DSerialDispatchQueue = NULL;
-
     delete gravity;
     gravity = NULL;
     
@@ -126,7 +114,7 @@ B2DWorld::~B2DWorld()
 void B2DWorld::Step()
 {
     using namespace Poco;
-    
     ScopedLock<Mutex> aScopedLock(s_aMutex);
+    LOG_SCOPE_F(2, "Stepping the game world");
     s_pb2World->Step(timeStep, velocityIterations, positionIterations);
 }

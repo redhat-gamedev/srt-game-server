@@ -29,6 +29,7 @@
 //#include <iostream>
 //#include <bitset>
 #include <assert.h>
+#include "../Logging/loguru.hpp"
 
 decaf::util::StlQueue<AEntity*>     AEntity::s_EntityQueue;
 AEntity::_Serializer                AEntity::Serializer;
@@ -149,6 +150,8 @@ void AEntity::RemovePod(const std::string& strUUID)
 
 void AEntity::Update()
 {
+    LOG_SCOPE_FUNCTION(3);
+    LOG_SCOPE_F(3, "Doing the AEntity update");
     s_listPodsSwap = s_listPods;
     Pod*     pPod = NULL;
     
@@ -157,6 +160,7 @@ void AEntity::Update()
         pPod = s_listPodsSwap.front();
         s_listPodsSwap.pop_front();
         assert(pPod);
+        LOG_F(3, "Updating a specific Pod");
         pPod->Update();
     }
 }

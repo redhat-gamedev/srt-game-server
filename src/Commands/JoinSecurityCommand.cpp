@@ -50,7 +50,11 @@ void JoinSecurityCommand::Execute()
     std::string     strUUID = "";
     const SecurityCommandBuffer& aSecurityCommandBuffer = m_pCommandBuffer->securitycommandbuffer();
     LOG_SCOPE_F(INFO, "provided player identity: %s", aSecurityCommandBuffer.uuid().c_str());
-    
+
+    // we used to generate a UUID for the player to use to identify them inside the server
+    // but we're moving to using a provided player identity instead
+    // this will eventually be validated via JWT or some other mechanism
+    // TODO: would this be the place to validate it?
     //decaf::util::UUID aNewUUID = decaf::util::UUID::randomUUID();
     strUUID = aSecurityCommandBuffer.uuid();
     const cms::Destination* pReplyToDestination = m_pBytesMessage->getCMSReplyTo();
@@ -60,7 +64,7 @@ void JoinSecurityCommand::Execute()
     LOG_SCOPE_F(1, "creating Simple Async Producer");
     SimpleAsyncProducer* pSimpleAsyncProducer = new SimpleAsyncProducer(Configuration::Instance().BrokerURI, pReplyToDestination, false, true);
 
-    LOG_SCOPE_F(INFO, "sending player UUID: %s", strUUID.c_str());
+    LOG_SCOPE_F(INFO, "sending player identity: %s", strUUID.c_str());
     pSimpleAsyncProducer->Send(strUUID);
     delete pSimpleAsyncProducer;
     
