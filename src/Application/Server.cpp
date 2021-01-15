@@ -12,6 +12,7 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
+#include "Configuration.h"
 #include "Server.h"
 #include "../Game/World.h"
 #include "../Game/AEntity.h"
@@ -109,6 +110,7 @@ void Server::run()
         m_theEventDispatcher.Dispatch();
         m_theMessageDispatcher.Dispatch();
         
-        decaf::lang::Thread::currentThread()->sleep(5000);
+        //decaf::lang::Thread::currentThread()->sleep(Configuration::Instance().ServerSleepCycle);
+        decaf::lang::Thread::currentThread()->sleep(1500);
     }
 }

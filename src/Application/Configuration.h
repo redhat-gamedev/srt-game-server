@@ -21,6 +21,7 @@
 class Configuration {
 private:
     std::string         m_strBrokerURI;
+    int                 m_intServerSleepCycle = 15;
 
 protected:
     // Constructor(s)
@@ -31,6 +32,8 @@ protected:
 
 public:
     std::string&        BrokerURI = m_strBrokerURI;
+    int&                ServerSleepCycle = m_intServerSleepCycle;
+
 
     // Singleton(s)
     static Configuration& Instance()
