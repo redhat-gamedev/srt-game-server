@@ -1,7 +1,6 @@
 project(srt-game-server)
 
 cmake_minimum_required (VERSION 3.4)
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -lpthread -ldl") # enable C++11 standard
 
 #
 # mulle-bootstrap environment
@@ -52,8 +51,10 @@ if( APPLE)
 
    set( BEGIN_ALL_LOAD "-all_load")
    set( END_ALL_LOAD)
+   set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11") # enable C++11 standard
 else()
    set( CMAKE_POSITION_INDEPENDENT_CODE TRUE)
+   set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -lpthread -ldl") # enable C++11 standard; include pthread and dynamic loading
 
    if( WIN32)
    # windows
