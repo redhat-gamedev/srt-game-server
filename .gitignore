@@ -1,1 +1,9 @@
 build
+
+Makefile
+cmake_install.cmake
+CMakeFiles/
+CMakeCache.txt
+
+#FIXME: have the binary of the game server move to bin/ type target directory?
+srt-game-server
