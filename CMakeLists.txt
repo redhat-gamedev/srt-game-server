@@ -69,6 +69,7 @@ endif()
 ## Debug
 ##
 set(CMAKE_BUILD_TYPE Debug)
+message(STATUS, "CXXFLAGS: ${CMAKE_CXX_FLAGS}")
 
 ##
 ## srt-game-server Files
@@ -107,6 +108,7 @@ src/Network/MessageConsumer.cpp
 src/Network/MessageDispatcher.cpp
 src/Network/SimpleAsyncConsumer.cpp
 src/Network/SimpleAsyncProducer.cpp
+src/Network/ProtonConsumer.cpp
 src/Proto/CommandBuffer.pb.cc
 src/Proto/DualStickRawInputCommandBuffer.pb.cc
 src/Proto/EntityGameEventBuffer.pb.cc
@@ -115,7 +117,9 @@ src/Proto/RawInputCommandBuffer.pb.cc
 src/Proto/SecurityCommandBuffer.pb.cc
 src/Proto/box2d.pb.cc
 src/Shared/Timer.cpp
-        src/Application/Configuration.cpp src/Application/Configuration.h)
+src/Shared/fake_cpp11.hpp
+src/Application/Configuration.cpp
+src/Application/Configuration.h)
 
 find_library( BOX2_D_LIBRARY Box2D)
 message( STATUS "BOX2_D_LIBRARY is ${BOX2_D_LIBRARY}")
@@ -123,9 +127,14 @@ find_library( PROTOCOL_BUFFERS_LIBRARY protobuf)
 message( STATUS "PROTOCOL_BUFFERS_LIBRARY is ${PROTOCOL_BUFFERS_LIBRARY}")
 find_library( ACTIVEMQ_CPP_LIBRARY activemq-cpp)
 message( STATUS "ACTIVEMQ_CPP_LIBRARY is ${ACTIVEMQ_CPP_LIBRARY}")
+find_library( QPID_PROTON_CPP_LIBRARY qpid-proton)
+message( STATUS "QPID_PROTON_CPP_LIBRARY is ${QPID_PROTON_CPP_LIBRARY}")
+
+find_package(ProtonCpp REQUIRED)
 
 set( STATIC_DEPENDENCIES
 ${ACTIVEMQ_CPP_LIBRARY}
+${QPID_PROTON_CPP_LIBRARY}
 ${BOX2_D_LIBRARY}
 ${PROTOCOL_BUFFERS_LIBRARY}
 )
@@ -165,6 +174,7 @@ ${RESOURCES}
 target_include_directories(srt-game-server
    PUBLIC SYSTEM
         /usr/local/include/activemq-cpp
+        /usr/inlude/proton
         /usr/include/activemq-cpp-3.9.4
         /usr/include/apr-1
         /usr/local/include
@@ -177,4 +187,5 @@ ${BEGIN_ALL_LOAD}
 ${STATIC_DEPENDENCIES}
 ${END_ALL_LOAD}
 ${DEPENDENCIES}
+Proton::cpp
 )

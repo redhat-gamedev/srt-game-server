@@ -21,6 +21,7 @@
 #include "../Commands/LeaveSecurityCommand.h"
 #include "../Network/SimpleAsyncProducer.h"
 #include "../Network/SimpleAsyncConsumer.h"
+#include "../Network/ProtonConsumer.h"
 #include "../Events/EventDispatcher.h"
 #include "../Commands/CommandConsumer.h"
 #include "../Commands/CommandQueue.h"
@@ -61,6 +62,7 @@ int main(int argc, char* argv[])
     std::string     strCommandInDestinationURI = "COMMAND.IN";
     std::string     strGameEventOutDestinationURI = "GAME.EVENT.OUT";
     std::string     strServerSleepCycle = "1500";
+    std::string     strProtonURI = "amqp://127.0.0.1:5672//queue/COMMAND.IN";
     
     LOG_F(INFO, "Starting...");
     for (int i = 1; i < argc; ++i)
@@ -99,6 +101,7 @@ int main(int argc, char* argv[])
     MessageDispatcher::_Dependencies    theMessageDispatcherDependencies(pSimpleAsyncProducer);
     MessageDispatcher&                  theMessageDispatcher = MessageDispatcher::Instance(&theMessageDispatcherDependencies);
     
+    LOG_F(INFO, "main creating SimpleAsyncConsumer with strBrokerURI: %s", Configuration::Instance().BrokerURI.c_str());
     SimpleAsyncConsumer*                pSimpleAsyncConsumer = new SimpleAsyncConsumer(Configuration::Instance().BrokerURI, strCommandInDestinationURI);
     MessageConsumer::_Dependencies      theMessageConsumerDependencies(pSimpleAsyncConsumer);
     MessageConsumer&                    theMessageConsumer = MessageConsumer::Instance(&theMessageConsumerDependencies);
@@ -115,6 +118,9 @@ int main(int argc, char* argv[])
     
     Server* pServer = new Server(theEventDispatcher, theMessageDispatcher, theMessageConsumer, theCommandConsumer, theCommandQueue);
 
+    LOG_F(INFO, "Starting simple Proton consumer");
+    ProtonConsumer pProtonConsumer(strProtonURI);
+    proton::container(pProtonConsumer).run();
     //pServer->run();
     
     // Wait to exit.
