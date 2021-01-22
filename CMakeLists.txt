@@ -65,6 +65,10 @@ else()
    endif()
 endif()
 
+##
+## Debug
+##
+set(CMAKE_BUILD_TYPE Debug)
 
 ##
 ## srt-game-server Files
