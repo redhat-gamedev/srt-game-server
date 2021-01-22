@@ -1,0 +1,23 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Create Makefile",
+            "type": "shell",
+            "command": "cmake .",
+            "group": "build"
+        },
+        {
+            "label": "Build Game Server",
+            "type": "shell",
+            "command": "cmake --build .",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        }
+    ]
+}

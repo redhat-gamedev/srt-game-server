@@ -5,7 +5,7 @@ RUN sudo dnf install activemq-cpp activemq-cpp-devel apr apr-util apr-util-devel
 
 USER root
 
-RUN dnf install -y skopeo wget zsh jq iputils httpd-tools procps
+RUN dnf install -y skopeo wget zsh jq iputils httpd-tools procps unzip rsync gdb
 
 RUN dnf -y install dnf-plugins-core && \
     dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo && \
@@ -23,9 +23,6 @@ RUN cd /usr/local/bin && \
 # install istioctl
     curl -L https://github.com/istio/istio/releases/download/1.4.7/istioctl-1.4.7-linux.tar.gz | tar -zxvf - -C /usr/local/bin && chmod 755 /usr/local/bin/istioctl
 
-# FIXME: move with other dnf packages
-RUN dnf -y install unzip
-
 # install AWS cli
 RUN curl "https://d1vvhvl2y92vvt.cloudfront.net/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
     unzip awscliv2.zip && ./aws/install && rm awscliv2.zip && rm -rf ./aws 
@@ -42,7 +39,6 @@ RUN curl -L https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/ope
 # Add latest helm 3.0 client
 RUN wget https://mirror.openshift.com/pub/openshift-v4/clients/helm/latest/helm-linux-amd64 -O /usr/local/bin/helm && \
     chmod 755 /usr/local/bin/helm
-
 
 ENV USER_UID=1000
 ENV USER_NAME=srt
