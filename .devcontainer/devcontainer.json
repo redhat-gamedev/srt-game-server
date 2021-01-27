@@ -1,0 +1,50 @@
+// For format details, see https://aka.ms/vscode-remote/devcontainer.json or this file's README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.134.0/containers/cpp
+{
+	"name": "C++",
+	"build": {
+		"dockerfile": "Dockerfile",
+	},
+	"runArgs": [ 
+		// FIXME: Due to issues with docker for mac, need to mount the docker socket in this .raw way
+		// see: https://github.com/docker/for-mac/issues/4755
+		"-v", "/var/run/docker.sock.raw:/var/run/docker.sock",
+		"-v", "${env:HOME}/.aws:/home/srt/.aws",
+		"-v", "${env:HOME}/.kube:/home/srt/.kube",
+		"-v", "${env:HOME}/.vs-kubernetes:/home/srt/.vs-kubernetes",
+
+		// use local .oh-my-zsh configuration if it exists (overwriting one in container).
+		// comment the following line out if you want to use local installation on container instead
+		"-v", "${env:HOME}/.oh-my-zsh:/home/srt/.oh-my-zsh",
+		"-v", "${env:HOME}/.helm:/home/srt/.helm",
+		"-v", "${env:HOME}/.ssh:/home/srt/.ssh",
+
+		"--cap-add=SYS_PTRACE", 
+		"--security-opt", 
+		"seccomp=unconfined"],
+
+	// Set *default* container specific settings.json values on container create.
+	"settings": { 
+		"terminal.integrated.shell.linux": "/bin/zsh"
+	},
+
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		"ms-vscode.cpptools",
+		"asciidoctor.asciidoctor-vscode",
+		"yzhang.markdown-all-in-one",
+		"twxs.cmake"
+	],
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postStartCommand": "rsync -a .devcontainer/workspace-setup/ ${containerWorkspaceFolder}/.vscode/ --ignore-existing",
+
+	// "postCreateCommand": "gcc -v",
+
+	// Comment out this line to run as root instead.
+	"remoteUser": "srt"
+
+}

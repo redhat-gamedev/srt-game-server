@@ -1,0 +1,43 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Main",
+            "type": "cppdbg",
+            "request": "launch",
+            "symbolSearchPath": "${workspaceFolder}/CMakeFiles/srt-game-server.dir/src",
+            "program": "${workspaceFolder}/srt-game-server",
+            "args": [
+                "--broker-uri",
+                "tcp://${input:brokerHost}:${input:brokerPort}?wireFormat=stomp"
+            ],
+            "stopAtEntry": true,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "Build"
+        }
+    ],
+    "inputs": [
+        {
+          "id": "brokerHost",
+          "type": "promptString",
+          "description": "The name or IP address of the broker",
+          "default": "docker.for.mac.localhost"
+        },
+        {
+            "id": "brokerPort",
+            "type": "promptString",
+            "description": "The port of the broker",
+            "default": "61613"
+        }
+    ]
+}
