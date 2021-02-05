@@ -14,7 +14,6 @@
 
 #include "B2DWorld.h"
 #include "B2DBullet.h"
-//#include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
 #include <Poco/ScopedLock.h>
 #include <assert.h>
 #include "../Logging/loguru.hpp"
@@ -22,18 +21,6 @@
 b2World*                            B2DWorld::s_pb2World = NULL;
 Poco::Mutex                         B2DWorld::s_aMutex;
 
-
-// Constructor(s)
-//B2DWorld::_Factory::_Factory()
-//{
-//
-//}
-
-// Destructor(s)
-//B2DWorld::_Factory::~_Factory()
-//{
-//
-//}
 
 b2Body* B2DWorld::_Factory::CreateBody(const b2BodyDef* pb2BodyDef)
 {

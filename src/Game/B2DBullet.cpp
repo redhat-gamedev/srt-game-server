@@ -14,9 +14,7 @@
 
 #include "B2DBullet.h"
 #include "B2DWorld.h"
-//#include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include <Box2D/Box2D.h>
-#include <assert.h>
 
 
 // Constructor
@@ -52,7 +50,7 @@ B2DBullet::B2DBullet(B2DBullet::_Dependencies& theDependencies) :
 // Destructor(s)
 B2DBullet::~B2DBullet()
 {
-    //std::cout << "B2DBullet::~B2DBullet()..." << std::endl;
+
 }
 
 // Method(s)
@@ -62,8 +60,6 @@ void B2DBullet::Fire(b2Vec2& b2v2FiringDirection)
     
     b2v2FiringDirection.Normalize();
     b2Vec2 b2v2Force = b2v2FiringDirection;
-    //cout << "b2v2FiringDirection x " << b2v2FiringDirection.x << " y " << b2v2FiringDirection.y << endl;
     b2v2Force *= 40.0f;
-    //cout << "b2v2Force x " << b2v2Force.x << " y " << b2v2Force.y << endl;
     m_pb2Body->ApplyForceToCenter(b2v2Force, false);
 }

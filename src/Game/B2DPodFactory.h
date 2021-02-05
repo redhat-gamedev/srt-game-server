@@ -34,7 +34,7 @@ protected:
     
 public:
     // Singleton
-    static B2DPodFactory& Instance()//unsigned int uiCapacity)
+    static B2DPodFactory& Instance()
     {
         static B2DPodFactory  aB2DPodFactory;
         return aB2DPodFactory;

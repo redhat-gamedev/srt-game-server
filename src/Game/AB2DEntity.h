@@ -23,7 +23,6 @@
 #define __SRT__AB2DEntity__
 
 #include <Poco/BasicEvent.h>
-//#include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include <Box2D/Box2D.h>
 
 namespace redhatgamedev
@@ -108,7 +107,6 @@ public:
     virtual void Move(float fX, float fY) {}
     virtual void Update() {}
 };
-
 
 
 #endif /* defined(__SRT__AB2DEntity__) */

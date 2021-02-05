@@ -33,7 +33,7 @@ protected:
     
 public:
     // Singleton
-    static PodFactory& Instance()//unsigned int uiCapacity)
+    static PodFactory& Instance()
     {
         static PodFactory  aPodFactory;
         return aPodFactory;
@@ -42,5 +42,6 @@ public:
     // Method(s)
     void Destroy(Pod*& pPod);
 };
+
 
 #endif

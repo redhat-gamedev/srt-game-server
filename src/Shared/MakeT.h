@@ -29,4 +29,5 @@ MakeT (const SINGLE lo, const SINGLE hi)
     return ((static_cast<DOUBLE> (hi) << (CHAR_BIT * sizeof (SINGLE))) | lo);
 }
 
+
 #endif

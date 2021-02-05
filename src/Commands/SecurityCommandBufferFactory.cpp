@@ -13,7 +13,6 @@
 //   limitations under the License.
 
 #include "SecurityCommandBufferFactory.h"
-#include <assert.h>
 
 
 // Constructor
@@ -30,14 +29,6 @@ SecurityCommand_Dependencies::
     
 }
 
-
-//SecurityCommand* SecurityCommandFactory::Create(SecurityCommand_Dependencies& anSecurityCommand_Dependencies)
-//{
-//    SecurityCommand* pSecurityCommand = NULL;
-//
-//    CreatedEvent(this, pSecurityCommand);
-//    return pSecurityCommand;
-//}
 
 // Constructor
 LeaveSecurityCommand_Dependencies::

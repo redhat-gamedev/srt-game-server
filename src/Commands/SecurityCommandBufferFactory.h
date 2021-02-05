@@ -56,14 +56,6 @@ public:
 };
 
 
-//template<class T, class D>
-//class FactoryT<T*, D*> :
-//    public FactoryT<SecurityCommand*, SecurityCommand_Dependencies>
-//
-//template<>
-//class FactoryT<SecurityCommand*, SecurityCommand_Dependencies>
-//
-
 template<>
 class FactoryT<CommandBuffer, SecurityCommand_Dependencies>
 {
@@ -71,7 +63,7 @@ private:
     
 protected:
     // Constructor(s)
-    FactoryT<CommandBuffer, SecurityCommand_Dependencies>() {};//unsigned int uiCapacity, unsigned int uiPeakCapacity) {};
+    FactoryT<CommandBuffer, SecurityCommand_Dependencies>() {};
     
     // Destructor(s)
     virtual ~FactoryT<CommandBuffer, SecurityCommand_Dependencies>() {};
@@ -115,13 +107,6 @@ public:
         assert(iBodyBytes > 0);
         
         pCommand->ParseFromArray(pucBodyBytes, iBodyBytes);
-        //assert(CommandBuffer_CommandBufferType_SECURITY == pCommand->type());
-        //const SecurityCommandBuffer& aSecurityCommand = pCommand->securitycommandbuffer();
-        //if (SecurityCommandBuffer_SecurityCommandBufferType_JOIN == aSecurityCommand.type())
-        //{
-        //    int i = 0;
-        //    ++i;
-        //}
         delete[] pucBodyBytes;
         pucBodyBytes = NULL;
         delete pRawBytesPair;
@@ -140,28 +125,6 @@ public:
     Poco::BasicEvent<CommandBuffer*&>    DestroyedEvent;
 };
 
-class SecurityCommandFactory :
-    public FactoryT<CommandBuffer, SecurityCommand_Dependencies>
-{
-private:
-protected:
-    //    // Constructor(s)
-    //    SecurityCommandFactory() {};
-    //
-    //    // Destructor(s)
-    //    ~SecurityCommandFactory() {};
-    //
-    //public:
-    //    // Singleton
-    //    static SecurityCommandFactory& Instance()
-    //    {
-    //        static SecurityCommandFactory  anSecurityCommandFactory;
-    //        return anSecurityCommandFactory;
-    //    }
-    //
-    //    virtual SecurityCommand* Create(SecurityCommand_Dependencies& anSecurityCommand_Dependencies);
-};
-
 template<>
 class FactoryT<JoinSecurityCommandBuffer, SecurityCommand_Dependencies>
 {
@@ -169,14 +132,14 @@ private:
     
 protected:
     // Constructor(s)
-    FactoryT<JoinSecurityCommandBuffer, SecurityCommand_Dependencies>() {};//unsigned int uiCapacity, unsigned int uiPeakCapacity) {};
+    FactoryT<JoinSecurityCommandBuffer, SecurityCommand_Dependencies>() {};
     
     // Destructor(s)
     virtual ~FactoryT<JoinSecurityCommandBuffer, SecurityCommand_Dependencies>() {};
     
 public:
     // Singleton
-    static FactoryT<JoinSecurityCommandBuffer, SecurityCommand_Dependencies>& Instance()//unsigned int uiCapacity)
+    static FactoryT<JoinSecurityCommandBuffer, SecurityCommand_Dependencies>& Instance()
     {
         static FactoryT<JoinSecurityCommandBuffer, SecurityCommand_Dependencies>  aCommandFactory;
         return aCommandFactory;
@@ -192,10 +155,7 @@ public:
         
         redhatgamedev::srt::SecurityCommandBuffer* pSecurityCommand = pCommand->mutable_securitycommandbuffer();
         assert(NULL != pSecurityCommand);
-        //pSecurityCommand->set_type(theSecurityCommand_Dependencies.m_anSecurityCommandBufferType);
         pSecurityCommand->set_type(SecurityCommandBuffer_SecurityCommandBufferType_JOIN);
-        
-        redhatgamedev::srt::JoinSecurityCommandBuffer* pJoinSecurityCommand = pSecurityCommand->mutable_joinsecuritycommandbuffer();
         
         CreatedEvent(this, pCommand);
         return pCommand;
@@ -218,11 +178,7 @@ public:
         pCommand->ParseFromArray(pucBodyBytes, iBodyBytes);
         assert(CommandBuffer_CommandBufferType_SECURITY == pCommand->type());
         const SecurityCommandBuffer& aSecurityCommand = pCommand->securitycommandbuffer();
-        if (SecurityCommandBuffer_SecurityCommandBufferType_JOIN == aSecurityCommand.type())
-        {
-            int i = 0;
-            ++i;
-        }
+
         delete[] pucBodyBytes;
         pucBodyBytes = NULL;
         delete pRawBytesPair;
@@ -248,14 +204,14 @@ private:
     
 protected:
     // Constructor(s)
-    FactoryT<LeaveSecurityCommandBuffer, LeaveSecurityCommand_Dependencies>() {};//unsigned int uiCapacity, unsigned int uiPeakCapacity) {};
+    FactoryT<LeaveSecurityCommandBuffer, LeaveSecurityCommand_Dependencies>() {};
     
     // Destructor(s)
     virtual ~FactoryT<LeaveSecurityCommandBuffer, LeaveSecurityCommand_Dependencies>() {};
     
 public:
     // Singleton
-    static FactoryT<LeaveSecurityCommandBuffer, LeaveSecurityCommand_Dependencies>& Instance()//unsigned int uiCapacity)
+    static FactoryT<LeaveSecurityCommandBuffer, LeaveSecurityCommand_Dependencies>& Instance()
     {
         static FactoryT<LeaveSecurityCommandBuffer, LeaveSecurityCommand_Dependencies>  aCommandFactory;
         return aCommandFactory;
@@ -271,13 +227,11 @@ public:
         
         redhatgamedev::srt::SecurityCommandBuffer* pSecurityCommand = pCommand->mutable_securitycommandbuffer();
         assert(NULL != pSecurityCommand);
-        //pSecurityCommand->set_type(theSecurityCommand_Dependencies.m_anSecurityCommandBufferType);
         pSecurityCommand->set_type(SecurityCommandBuffer_SecurityCommandBufferType_LEAVE);
         
         redhatgamedev::srt::LeaveSecurityCommandBuffer* pLeaveSecurityCommand = pSecurityCommand->mutable_leavesecuritycommandbuffer();
         
-        // TODO: Player UUID -> Add UUID to the SecurityCommandDependencies and fix this 071413!
-        //pLeaveSecurityCommand->set_uuid("test");
+        // TODO: Review Player UUID in context of web client auth -> Add UUID to the SecurityCommandDependencies and fix this 071413!
         pLeaveSecurityCommand->set_uuid(theLeaveSecurityCommand_Dependencies.m_strUUID);
         
         CreatedEvent(this, pCommand);
@@ -301,11 +255,7 @@ public:
         pCommand->ParseFromArray(pucBodyBytes, iBodyBytes);
         assert(CommandBuffer_CommandBufferType_SECURITY == pCommand->type());
         const SecurityCommandBuffer& aSecurityCommand = pCommand->securitycommandbuffer();
-        if (SecurityCommandBuffer_SecurityCommandBufferType_LEAVE == aSecurityCommand.type())
-        {
-            int i = 0;
-            ++i;
-        }
+
         delete[] pucBodyBytes;
         pucBodyBytes = NULL;
         delete pRawBytesPair;
@@ -323,5 +273,6 @@ public:
     Poco::BasicEvent<CommandBuffer*&>    CreatedEvent;
     Poco::BasicEvent<CommandBuffer*&>    DestroyedEvent;
 };
+
 
 #endif /* defined(__SRT__CommandBufferFactory__) */

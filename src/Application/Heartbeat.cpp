@@ -41,7 +41,6 @@ void Heartbeat::FireBeatEvent(const int& iBeat)
 void Heartbeat::run()
 {
     static int iBeat = 0;
-    //printf("%i", i);
     FireBeatEvent(iBeat);
     ++iBeat;
 }

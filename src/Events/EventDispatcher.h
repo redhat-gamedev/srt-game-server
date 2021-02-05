@@ -19,7 +19,6 @@
 #include "../Proto/EntityGameEventBuffer.pb.h"
 #include "EntityGameEventFactory.h"
 #include "SecurityGameEventFactory.h"
-//#include "../Shared/FactoryT.h"
 #include <Poco/BasicEvent.h>
 #include <queue>
 #include <mutex>
@@ -36,7 +35,6 @@ class Pod;
 class Bullet;
 class PodFactory;
 class BulletFactory;
-//class EntityGameEventFactory;
 class EntityGameEvent_Dependencies;
 class SecurityGameEvent_Dependencies;
 class JoinSecurityCommand;
@@ -94,7 +92,7 @@ public:
     Poco::BasicEvent<google::protobuf::Message*&>   EventDispatchedEvent;
     
     // Singleton
-    static EventDispatcher& Instance(_Dependencies* pDependencies = NULL)//unsigned int uiCapacity)
+    static EventDispatcher& Instance(_Dependencies* pDependencies = NULL)
     {
         static EventDispatcher  anEventDispatcher(pDependencies);
         return anEventDispatcher;
@@ -122,5 +120,6 @@ public:
     void HandleJoinSecurityCommandExecutedEvent(const void* pSender, const std::string& strUUID);
     void HandleLeaveSecurityCommandExecutedEvent(const void* pSender, const std::string& strUUID);
 };
+
 
 #endif /* defined(__SRT__EventDispatcher__) */

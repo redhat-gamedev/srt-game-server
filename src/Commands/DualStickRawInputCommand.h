@@ -16,7 +16,6 @@
 //   limitations under the License.
 
 #include "RawInputCommand.h"
-//#include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include <Box2D/Box2D.h>
 #include <Poco/BasicEvent.h>
 #include <string>
@@ -33,8 +32,7 @@ public:
     
     // Event(s)
     Poco::BasicEvent<const std::string&>      ExecutedEvent;
-    //Poco::BasicEvent<const std::string&, b2Vec2& b2v2Move, b2Vec2& b2v2Shoot>      ExecutedEvent;
-    
+
     // Constructor
     DualStickRawInputCommand(_RawInputDependencies& theDependencies);
     

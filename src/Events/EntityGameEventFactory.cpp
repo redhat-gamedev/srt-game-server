@@ -31,12 +31,3 @@ EntityGameEvent_Dependencies::
 {
     
 }
-
-
-//EntityGameEvent* EntityGameEventFactory::Create(EntityGameEvent_Dependencies& anEntityGameEvent_Dependencies)
-//{
-//    EntityGameEvent* pEntityGameEvent = NULL;
-//    
-//    CreatedEvent(this, pEntityGameEvent);
-//    return pEntityGameEvent;
-//}

@@ -34,13 +34,12 @@ protected:
     
 public:
     // Singleton
-    static B2DBulletFactory& Instance()//unsigned int uiCapacity)
+    static B2DBulletFactory& Instance()
     {
         static B2DBulletFactory  aB2DBulletFactory;
         return aB2DBulletFactory;
     }
 };
-
 
 
 #endif

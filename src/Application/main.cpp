@@ -44,8 +44,6 @@ void usage(char **argv) {
     fprintf(stderr, "  --sleep-cycle: the time (in milliseconds) of the server sleep (default 15) \n");
     fprintf(stderr, " ");
     fprintf(stderr, "\n\n");
-//    fprintf(stderr, "bad argument: %s\n", *arg);
-//    exit(1);
 }
 
 int main(int argc, char* argv[])
@@ -57,8 +55,7 @@ int main(int argc, char* argv[])
     std::string     strCommandInDestinationURI = "COMMAND.IN";
     std::string     strGameEventOutDestinationURI = "GAME.EVENT.OUT";
     std::string     strServerSleepCycle = "1500";
-    std::string     strProtonURI = "amqp://127.0.0.1:5672/queue/COMMAND.IN";
-    
+
     LOG_F(INFO, "Starting...");
     for (int i = 1; i < argc; ++i)
     {

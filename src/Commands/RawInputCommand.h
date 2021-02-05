@@ -28,7 +28,6 @@ namespace proton
 {
     class message;
 }
-//struct b2Vec2;
 
 
 class RawInputCommand :
@@ -60,5 +59,6 @@ public:
     // Method(s)
     virtual void Execute() = 0;
 };
+
 
 #endif /* defined(__SRT__RawInputCommand__) */

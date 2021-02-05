@@ -27,7 +27,6 @@
 namespace proton
 {
     class message;
-    //class BytesMessage;
 }
 class MessageConsumer;
 
@@ -72,7 +71,7 @@ public:
     Poco::BasicEvent<Poco::Tuple<proton::message*, google::protobuf::Message*>*& >   CommandConsumedEvent;
     
     // Singleton
-    static CommandConsumer& Instance(_Dependencies* pDependencies = NULL)//unsigned int uiCapacity)
+    static CommandConsumer& Instance(_Dependencies* pDependencies = NULL)
     {
         static CommandConsumer  anCommandConsumer(pDependencies);
         return anCommandConsumer;

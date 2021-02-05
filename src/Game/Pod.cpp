@@ -24,9 +24,6 @@
 #include <Poco/Delegate.h>
 #include "../Proto/box2d.pb.h"
 #include "../Shared/MakeT.h"
-//#include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
-#include <iostream>
-#include <iomanip>
 #include <assert.h>
 #include "../Logging/loguru.hpp"
 
@@ -43,9 +40,7 @@ Pod::Pod(_Dependencies& theDependencies) :
     m_i16GroupCount(0)
 {
     assert(m_pB2DEntity);
-    
-    //cout << hex << "Pod::Pod() " << m_ui64Tag << endl;
-    
+
     ++s_ui32Count;
     --s_i16GroupCount;
     if (s_i16GroupCount < -32767)
@@ -72,10 +67,6 @@ Pod::~Pod()
     theDualStickRawInputCommandFactory.CreatedEvent -= Poco::Delegate<Pod, DualStickRawInputCommand*&>(this, &Pod::HandleDualStickRawInputCommandFactoryCreatedEvent);
 
     BulletFactory& aBulletFactory = BulletFactory::Instance();
-    
-    //cout << hex << "Pod::~Pod() " << m_ui64Tag << endl;
-    
-    //--s_ui32Count;
 
     m_BulletQueueMutex.lock();
     Bullet* pBullet = NULL;
@@ -89,8 +80,6 @@ Pod::~Pod()
     
     delete m_pBulletTimer;
     m_pBulletTimer = NULL;
-    
-    //EventPublisher.DestroyedEvent(this, AEntity::POD);
 }
 
 // Method(s)
@@ -105,13 +94,8 @@ void Pod::Update()
 
     m_b2v2MoveQueueMutex.lock();
     LOG_F(3, "Grabbing movement commands off the queue");
-//    std::vector<b2Vec2> vecb2v2Move = m_b2v2MoveQueue.toArray();
     std::vector<b2Vec2> vecb2v2Move = {m_b2v2MoveQueue.begin(), m_b2v2MoveQueue.end()};
     m_b2v2MoveQueue.clear();
-//    while(!m_b2v2MoveQueue.empty())
-//    {
-//        m_b2v2MoveQueue.pop();
-//    }
     m_b2v2MoveQueueMutex.unlock();
     
     for (int i = 0; i < vecb2v2Move.size(); ++i)
@@ -122,13 +106,8 @@ void Pod::Update()
     
     m_b2v2ShootQueueMutex.lock();
     LOG_F(3, "Grabbing shooting commands off the queue");
-//    std::vector<b2Vec2> vecb2v2Shoot = m_b2v2ShootQueue.toArray();
     std::vector<b2Vec2> vecb2v2Shoot = { m_b2v2ShootQueue.begin(), m_b2v2ShootQueue.end()};
     m_b2v2ShootQueue.clear();
-//    while(!m_b2v2MoveQueue.empty())
-//    {
-//        m_b2v2MoveQueue.pop();
-//    }
     m_b2v2ShootQueueMutex.unlock();
 
     for (int i = 0; i < vecb2v2Shoot.size(); ++i)

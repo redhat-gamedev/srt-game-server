@@ -65,7 +65,7 @@ protected:
 
 public:
     // Singleton
-    static MessageDispatcher& Instance(_Dependencies* pDependencies)//unsigned int uiCapacity)
+    static MessageDispatcher& Instance(_Dependencies* pDependencies)
     {
         static MessageDispatcher  theMessageDispatcher(pDependencies);
         return theMessageDispatcher;
@@ -79,5 +79,6 @@ public:
     // EventDispatcher event response
     void HandleEventDispatchedEvent(const void* pSender, google::protobuf::Message*& pEventMessage);
 };
+
 
 #endif /* defined(__SRT__MessageDispatcher__) */

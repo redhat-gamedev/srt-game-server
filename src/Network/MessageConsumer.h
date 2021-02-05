@@ -72,7 +72,7 @@ public:
     Poco::BasicEvent<Poco::Tuple<proton::message*>*& >              ReceivedCMSMessageEvent;
     
     // Singleton
-    static MessageConsumer& Instance(_Dependencies* pDependencies)//unsigned int uiCapacity)
+    static MessageConsumer& Instance(_Dependencies* pDependencies)
     {
         static MessageConsumer  theMessageConsumer(pDependencies);
         return theMessageConsumer;
@@ -85,5 +85,6 @@ public:
     // via the configured simple async producer
     void Dispatch();
 };
+
 
 #endif /* defined(__SRT__MessageConsumer__) */

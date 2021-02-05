@@ -23,11 +23,8 @@
 #include "../Commands/JoinSecurityCommand.h"
 #include "../Commands/LeaveSecurityCommand.h"
 #include "../Shared/FactoryT.h"
-//#include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include <Box2D/Box2D.h>
 #include <Poco/FunctionDelegate.h>
-//#include <iostream>
-//#include <bitset>
 #include <assert.h>
 #include "../Logging/loguru.hpp"
 
@@ -49,7 +46,6 @@ AEntity::_Dependencies::_Dependencies(const std::string& strUUID, AB2DEntity* pB
 
 void AEntity::_Serializer::Serialize(const AEntity* pEntity, redhatgamedev::srt::EntityGameEventBuffer* pEntityGameEvent)
 {
-    //using namespace std;
     using namespace box2d;
     using namespace redhatgamedev::srt;
     
@@ -59,16 +55,7 @@ void AEntity::_Serializer::Serialize(const AEntity* pEntity, redhatgamedev::srt:
 
     pEntityGameEvent->set_uuid(pEntity->m_strUUID);
     pEntityGameEvent->set_entitytag(pEntity->m_ui64Tag);
-    //EntityGameEvent* pEntityGameEvent = static_cast<EntityGameEvent*>(pMessage);
-    //cout << hex << pEntityGameEvent->type() << endl;
-//    if (pEntityGameEvent)
-//    {
-//        uint64_t ui64Tag = pEntityGameEvent->entitytag();
-//        bitset<sizeof(uint64_t)*8>    aBitSet(ui64Tag);
-//        //cout << hex << pEntityGameEvent->entitytag() << endl;
-//        cout << aBitSet << endl;
-//    }
-    
+
     pBody = pEntityGameEvent->mutable_body();
     pEntity->m_pB2DEntity->Serializer.Serialize(pEntity->m_pB2DEntity, pEntityGameEvent);
 }
@@ -82,8 +69,6 @@ void AEntity::_Serializer::Deserialisze(const redhatgamedev::srt::EntityGameEven
 //// Class
 void AEntity::ClassSetup()
 {
-    //CommandConsumer::Instance().EventConsumedEvent += Poco::FunctionDelegate<google::protobuf::Message*&>(&AEntity::HandleEventConsumedEvent);
-    
     auto& theJoinSecurityCommandFactory = FactoryT<JoinSecurityCommand, SecurityCommand::_SecurityDependencies>::Instance();
     auto& theLeaveSecurityCommandFactory = FactoryT<LeaveSecurityCommand, SecurityCommand::_SecurityDependencies>::Instance();
     
@@ -96,8 +81,6 @@ void AEntity::ClassSetup()
 
 void AEntity::ClassTeardown()
 {
-    //CommandConsumer::Instance().EventConsumedEvent -= Poco::FunctionDelegate<google::protobuf::Message*&>(&AEntity::HandleEventConsumedEvent);
-    
     auto& theJoinSecurityCommandFactory = FactoryT<JoinSecurityCommand, SecurityCommand::_SecurityDependencies>::Instance();
     auto& theLeaveSecurityCommandFactory = FactoryT<LeaveSecurityCommand, SecurityCommand::_SecurityDependencies>::Instance();
     
@@ -177,35 +160,9 @@ void AEntity::OnSecurityRequestLeave(const void* pSender, const std::string& str
 {
     assert(!strUUID.empty());
     
-//    m_pSimulationSerialDispatchQueue->sync([=]
-//    {
-        RemovePod(strUUID);
-//    });
+    RemovePod(strUUID);
 }
 
-// Event Consumer event response
-//void AEntity::HandleEventConsumedEvent(const void* pSender, google::protobuf::Message*& pMessage)
-//{
-//    GameEvent* pGameEvent = NULL;
-//    
-//    pGameEvent = dynamic_cast<GameEvent*>(pMessage);
-//}
-
-//void AEntity::HandleSecurityCommandFactoryCreated(const void* pSender, SecurityCommand*& pSecurityCommand)
-//{
-//    assert(pSecurityCommand);
-//    
-//    pSecurityCommand->JoinedEvent += Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestJoin);
-//    pSecurityCommand->LeftEvent += Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestLeave);
-//}
-//
-//void AEntity::HandleSecurityCommandFactoryDestroyed(const void* pSender, SecurityCommand*& pSecurityCommand)
-//{
-//    assert(pSecurityCommand);
-//    
-//    pSecurityCommand->LeftEvent -= Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestLeave);
-//    pSecurityCommand->JoinedEvent -= Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestJoin);
-//}
 void AEntity::HandleJoinSecurityCommandFactoryCreated(const void* pSender, JoinSecurityCommand*& pJoinSecurityCommand)
 {
     assert(pJoinSecurityCommand);
@@ -238,7 +195,7 @@ void AEntity::HandleLeaveSecurityCommandFactoryDestroyed(const void* pSender, Le
 // Constructor(s)
 AEntity::AEntity()
 {
-    // Necessary due to xdispatch sync compile errors? /// rnk 061413
+
 }
 
 AEntity::AEntity(const std::string& strUUID, uint64_t ui64Tag) :
@@ -265,8 +222,6 @@ AEntity::AEntity(const std::string& strUUID, uint64_t ui64Tag, AB2DEntity* pAB2D
 // Destructor(s)
 AEntity::~AEntity()
 {
-    //std::cout << "AEntity::~AEntity() " << m_ui64Tag << std::endl;
-
     m_strUUID.clear();
     m_ui64Tag = 0;
     --s_ui64Count;

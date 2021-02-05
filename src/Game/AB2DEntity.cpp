@@ -22,7 +22,6 @@
 #include "B2DWorld.h"
 #include "AEntity.h"
 #include "../Proto/EntityGameEventBuffer.pb.h"
-//#include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
 #include <assert.h>
 
 AB2DEntity::_Serializer                 AB2DEntity::Serializer;
@@ -35,9 +34,6 @@ void AB2DEntity::_Serializer::Serialize(const AB2DEntity* pB2DEntity, redhatgame
     using namespace box2d;
     
     assert(pEntityGameEvent);
-    
-    //int iPreCount = 0;
-    //int iPostCount = 0;
     
     b2Fixture*  pFixtureList = NULL;
     PbBody*     pPbBody = NULL;
@@ -83,8 +79,7 @@ void AB2DEntity::_Serializer::Serialize(const AB2DEntity* pB2DEntity, redhatgame
         pPbFixture = pPbBody->add_fixtures();
         assert(NULL != pPbFixture);
         //iPostCount = pPbBody->fixtures_size();
-        //assert(iPostCount > iPreCount);
-        
+
         pPbFixture->set_density(pFixture->GetDensity());
         pPbFixture->set_friction(pFixture->GetFriction());
     }
@@ -162,8 +157,6 @@ void AB2DEntity::SetGroupIndex(int16_t i16GroupIndex)
 // Destructor
 AB2DEntity::~AB2DEntity()
 {
-    //std::cout << "AB2DEntity::~AB2DEntity()..." << std::endl;
-    
     B2DWorld::Factory().DestroyBody(m_pb2Body);
     m_pb2Body = NULL;
 }

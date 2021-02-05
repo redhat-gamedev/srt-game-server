@@ -56,7 +56,7 @@ void JoinSecurityCommand::Execute()
 
     LOG_F(INFO, "JointSecurityCommand::Execute TODO");
 
-    // TODO: Proton update needed -> Reply on join; Make not super inefficient
+    // TODO: Review whether Reply on join will be needed in context of web client auth; Make not super inefficient
 //    const cms::Destination* pReplyToDestination = m_pBytesMessage->getCMSReplyTo();
 //    assert(pReplyToDestination);
 //

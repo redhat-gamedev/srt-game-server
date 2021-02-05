@@ -16,7 +16,6 @@
 //   limitations under the License.
 
 #include "AEntity.h"
-//#include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include <Box2D/Box2D.h>
 #include <Poco/BasicEvent.h>
 #include <string>
@@ -58,5 +57,6 @@ public:
     // Override(s)
     void Update();
 };
+
 
 #endif /* defined(__SRT__Bullet__) */

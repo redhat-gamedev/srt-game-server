@@ -62,7 +62,6 @@ CommandQueue::CommandQueue(_Dependencies* pDependencies) :
 CommandQueue::~CommandQueue()
 {
     using namespace Poco;
-//    using namespace cms;
 
     m_aCommandConsumer.CommandConsumedEvent -= Delegate<CommandQueue, Tuple<proton::message*, google::protobuf::Message*>*& >(this, &CommandQueue::HandleCommandConsumedEvent);
 }

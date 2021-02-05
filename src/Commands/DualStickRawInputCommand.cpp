@@ -40,8 +40,6 @@ void DualStickRawInputCommand::Execute()
     assert(m_pCommandBuffer);
     
     std::string     strUUID = "";
-    //b2Vec2          b2v2Move;
-    //b2Vec2          b2v2Shoot;
     const RawInputCommandBuffer& aRawInputCommandBuffer = m_pCommandBuffer->rawinputcommandbuffer();
     const DualStickRawInputCommandBuffer& aDualStickRawInputCommandBuffer = aRawInputCommandBuffer.dualstickrawinputcommandbuffer();
     
@@ -52,5 +50,4 @@ void DualStickRawInputCommand::Execute()
     m_b2v2Shoot.y = aDualStickRawInputCommandBuffer.pbv2shoot().y();
     
     ExecutedEvent(this, strUUID);
-    //ExecutedEvent(this, strUUID, b2v2Move, b2v2Shoot);
 }

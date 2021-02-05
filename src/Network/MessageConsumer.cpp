@@ -93,7 +93,6 @@ void MessageConsumer::receive_thread(receiver& r) {
             // TODO: Proton TESTME -> does this do a deep copy? if so who deletes it and when?
             proton::message* pMessage = new proton::message(m);
             Enqueue(pMessage);
-//            ++n;
 //            OUT(std::cout << id << " received \"" << m.body() << '"' << std::endl);
         }
 //        OUT(std::cout << id << " received " << n << " messages" << std::endl);

@@ -33,7 +33,7 @@ protected:
     
 public:
     // Singleton
-    static BulletFactory& Instance()//unsigned int uiCapacity)
+    static BulletFactory& Instance()
     {
         static BulletFactory  aBulletFactory;
         return aBulletFactory;
@@ -42,5 +42,6 @@ public:
     // Method(s)
     void Destroy(Bullet*& pBullet);
 };
+
 
 #endif /* defined(__SRT__Bullet_Factory__) */

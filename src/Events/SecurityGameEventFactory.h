@@ -17,13 +17,10 @@
 
 #include "../Shared/FactoryT.h"
 #include "../Proto/GameEventBuffer.pb.h"
-//#include "../Proto/SecurityGameEventBuffer.pb.h"
 #include <string>
 #include <assert.h>
 
 using namespace redhatgamedev::srt;
-
-//class ASecurity;
 
 
 class SecurityGameEvent_Dependencies
@@ -48,14 +45,14 @@ private:
     
 protected:
     // Constructor(s)
-    FactoryT<GameEventBuffer, SecurityGameEvent_Dependencies>() {};//unsigned int uiCapacity, unsigned int uiPeakCapacity) {};
+    FactoryT<GameEventBuffer, SecurityGameEvent_Dependencies>() {};
     
     // Destructor(s)
     virtual ~FactoryT<GameEventBuffer, SecurityGameEvent_Dependencies>() {};
     
 public:
     // Singleton
-    static FactoryT<GameEventBuffer, SecurityGameEvent_Dependencies>& Instance()//unsigned int uiCapacity)
+    static FactoryT<GameEventBuffer, SecurityGameEvent_Dependencies>& Instance()
     {
         static FactoryT<GameEventBuffer, SecurityGameEvent_Dependencies>  aGameEventFactory;
         return aGameEventFactory;
@@ -121,26 +118,5 @@ public:
     Poco::BasicEvent<GameEventBuffer*&>    DestroyedEvent;
 };
 
-class SecurityGameEventFactory :
-    public FactoryT<GameEventBuffer, SecurityGameEvent_Dependencies>
-{
-private:
-protected:
-    //    // Constructor(s)
-    //    SecurityGameEventFactory() {};
-    //
-    //    // Destructor(s)
-    //    ~SecurityGameEventFactory() {};
-    //
-    //public:
-    //    // Singleton
-    //    static SecurityGameEventFactory& Instance()
-    //    {
-    //        static SecurityGameEventFactory  anSecurityGameEventFactory;
-    //        return anSecurityGameEventFactory;
-    //    }
-    //
-    //    virtual SecurityGameEvent* Create(SecurityGameEvent_Dependencies& anSecurityGameEvent_Dependencies);
-};
 
 #endif /* defined(__SRT__SecurityGameEventFactory__) */

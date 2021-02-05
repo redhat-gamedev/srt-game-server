@@ -14,8 +14,6 @@
 
 #include "RawInputCommand.h"
 #include "../Proto/CommandBuffer.pb.h"
-//#include <cms/BytesMessage.h>
-#include <assert.h>
 
 
 // Constructor

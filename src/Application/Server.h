@@ -25,7 +25,6 @@
 #include <string>
 #include <thread>
 
-//class Security;
 class World;
 class Pod;
 

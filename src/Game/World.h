@@ -16,12 +16,7 @@
 //   limitations under the License.
 
 #include "B2DWorld.h"
-//#include "AEntity.h"
 #include "../Proto/box2d.pb.h"
-//#include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
-//#include "../../../ThirdParty/xdispatch/include/xdispatch/timer.h"
-//#include <decaf/lang/Runnable.h>
-//#include <decaf/util/StlQueue.h>
 #include <string>
 
 class B2DWorld;
@@ -47,16 +42,12 @@ private:
     };
 
 protected:
-//    xdispatch::queue*               m_pSimulationSerialDispatchQueue;
-//    xdispatch::timer*               m_pSimulationDispatchTimer;
-
 //    World::Simulation*              m_pWorldSimulation;
 
     // Helper(s)
     void Setup();
     void Teardown();
     void b2Vec2ToPbVec2(b2Vec2* pb2Vec2);
-    //void b2WorldToPbWorld(b2World* pb2World, ::box2d::PbWorld*& pPbWorldDefault);
     void b2WorldToPbWorld(b2World* pb2World, box2d::PbWorld*& pPbWorldDefault);
     
 public:
@@ -70,5 +61,6 @@ public:
 
     void Simulate();
 };
+
 
 #endif /* defined(__SRT__World__) */

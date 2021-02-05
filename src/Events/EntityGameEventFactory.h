@@ -48,14 +48,14 @@ private:
     
 protected:
     // Constructor(s)
-    FactoryT<GameEventBuffer, EntityGameEvent_Dependencies>() {};//unsigned int uiCapacity, unsigned int uiPeakCapacity) {};
+    FactoryT<GameEventBuffer, EntityGameEvent_Dependencies>() {};
     
     // Destructor(s)
     virtual ~FactoryT<GameEventBuffer, EntityGameEvent_Dependencies>() {};
     
 public:
     // Singleton
-    static FactoryT<GameEventBuffer, EntityGameEvent_Dependencies>& Instance()//unsigned int uiCapacity)
+    static FactoryT<GameEventBuffer, EntityGameEvent_Dependencies>& Instance()
     {
         static FactoryT<GameEventBuffer, EntityGameEvent_Dependencies>  aGameEventFactory;
         return aGameEventFactory;
@@ -112,26 +112,5 @@ public:
     Poco::BasicEvent<GameEventBuffer*&>    DestroyedEvent;
 };
 
-class EntityGameEventFactory :
-    public FactoryT<GameEventBuffer, EntityGameEvent_Dependencies>
-{
-private:
-protected:
-//    // Constructor(s)
-//    EntityGameEventFactory() {};
-//    
-//    // Destructor(s)
-//    ~EntityGameEventFactory() {};
-//    
-//public:
-//    // Singleton
-//    static EntityGameEventFactory& Instance()
-//    {
-//        static EntityGameEventFactory  anEntityGameEventFactory;
-//        return anEntityGameEventFactory;
-//    }
-//    
-//    virtual EntityGameEvent* Create(EntityGameEvent_Dependencies& anEntityGameEvent_Dependencies);
-};
 
 #endif /* defined(__SRT__GameEventFactory__) */

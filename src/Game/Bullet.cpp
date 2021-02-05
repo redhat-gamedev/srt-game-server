@@ -18,12 +18,9 @@
 #include "AB2DEntity.h"
 #include "B2DBullet.h"
 #include "../Shared/Timer.h"
-//#include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include <Box2D/Box2D.h>
 #include "../Shared/MakeT.h"
 #include <Poco/Delegate.h>
-//#include <iostream>
-//#include <iomanip>
 #include <string>
 #include <assert.h>
 
@@ -40,8 +37,6 @@ Bullet::Bullet(_Dependencies& theDependencies) :
 {
     assert(m_pB2DEntity);
 
-    //cout << hex << "Bullet::Bullet() " << m_ui64Tag << endl;
-    
     ++s_ui32Count;
     
     m_pB2DEntity->SetParentEntity(this);
@@ -50,9 +45,6 @@ Bullet::Bullet(_Dependencies& theDependencies) :
 // Destructor(s)
 Bullet::~Bullet()
 {
-    //cout << hex << "Bullet::~Bullet() " << m_ui64Tag << endl;
-    
-    //--s_ui32Count;
     delete m_pLifeTimer;
     m_pLifeTimer = NULL;
 }
@@ -64,7 +56,6 @@ void Bullet::Fire(b2Vec2& b2v2FiringDirection)
     
     ((B2DBullet*)m_pB2DEntity)->Fire(b2v2FiringDirection);
 }
-
 
 // Override(s)
 void Bullet::Update()
@@ -79,6 +70,4 @@ void Bullet::Update()
     
     Bullet* pBullet = this;
     UpdatedEvent(this, pBullet);
-    
-    //std::cout << "Bullet Position x " << ((B2DBullet*)m_pB2DEntity)->GetPosition().x << " y " << ((B2DBullet*)m_pB2DEntity)->GetPosition().y << std::endl;
 }

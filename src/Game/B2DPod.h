@@ -16,7 +16,6 @@
 //   limitations under the License.
 
 #include "AB2DEntity.h"
-//#include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include <Box2D/Box2D.h>
 #include <queue>
 #include <mutex>
@@ -58,5 +57,6 @@ public:
     void Move(float fX, float fY);
     void Update();
 };
+
 
 #endif /* defined(__SRT__B2DPod__) */

@@ -16,7 +16,6 @@
 //   limitations under the License.
 
 #include "AEntity.h"
-//#include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include <Box2D/Box2D.h>
 #include "../Commands/ACommand.h"
 #include "../Commands/RawInputCommand.h"

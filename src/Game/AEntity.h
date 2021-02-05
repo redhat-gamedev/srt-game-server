@@ -17,8 +17,6 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-//
-
 #ifndef __SRT__Entity__
 #define __SRT__Entity__
 
@@ -69,10 +67,7 @@ private:
     static uint64_t                      s_ui64Count;
     static std::list<Pod*>               s_listPods;
     static std::list<Pod*>               s_listPodsSwap;
-    
-    //std::list<AEntity*>             m_listEntities;
-    //std::list<AEntity*>             m_listEntitiesSwap;
-    
+
 protected:
     class _Serializer
     {
@@ -90,7 +85,6 @@ protected:
     AB2DEntity*             m_pB2DEntity;
 
     // Constructor(s)
-    //AEntity(AB2DEntity* pB2DEntity, uint64_t ui64Tag);
     AEntity(const std::string& strUUID, uint64_t ui64Tag, AB2DEntity* pAB2DEntity  /* sink */);
 
 public:

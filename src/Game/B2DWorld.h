@@ -16,18 +16,10 @@
 //   limitations under the License.
 
 #include "../Shared/Types.h"
-//#include "../../../ThirdParty/box2d/Box2D/Box2D/Box2D.h"
 #include <Box2D/Box2D.h>
-//#include "../../../ThirdParty/xdispatch/include/xdispatch/dispatch.h"
-//#include "../../../ThirdParty/xdispatch/include/xdispatch/timer.h"
 #include <Poco/Mutex.h>
 #include <string>
 #include <list>
-
-namespace xdispatch
-{
-    class queue;
-}
 
 
 class B2DWorld
@@ -71,8 +63,6 @@ protected:
 	int32           velocityIterations;
     int32           positionIterations;
     
-    //xdispatch::queue*               m_pBox2DSerialDispatchQueue;
-
     // Constructor(s)
     B2DWorld();
     
@@ -96,5 +86,6 @@ public:
     // Method(s)
     void Step();
 };
+
 
 #endif /* defined(__SRT__B2DWorld__) */

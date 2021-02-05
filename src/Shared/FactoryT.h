@@ -26,7 +26,7 @@ private:
     
 protected:
     // Constructor(s)
-    FactoryT<T, D>() {};//unsigned int uiCapacity, unsigned int uiPeakCapacity) {};
+    FactoryT<T, D>() {};
     
     // Destructor(s)
     virtual ~FactoryT<T, D>() {};
@@ -37,7 +37,7 @@ public:
     Poco::BasicEvent<T*&>    DestroyedEvent;
     
     // Singleton
-    static FactoryT<T, D>& Instance()//unsigned int uiCapacity)
+    static FactoryT<T, D>& Instance()
     {
         static FactoryT<T, D>  aTFactory;
         return aTFactory;
@@ -60,5 +60,6 @@ public:
         pT = NULL;
     }
 };
+
 
 #endif
