@@ -1,7 +1,7 @@
 #Build
 FROM fedora:30 as build-env
 
-RUN sudo dnf install activemq-cpp activemq-cpp-devel apr apr-util apr-util-devel Box2D Box2D-devel compat-openssl10 openssl crypto-utils poco-devel poco-foundation protobuf protobuf-devel gcc g++ cmake git --assumeyes --verbose
+RUN sudo dnf install Box2D Box2D-devel compat-openssl10 openssl crypto-utils poco-devel poco-foundation protobuf protobuf-devel gcc g++ cmake git qpid-proton-cpp qpid-proton-cpp-devel --assumeyes --verbose
 
 USER root
 
@@ -44,7 +44,7 @@ ENV USER_UID=1000
 ENV USER_NAME=srt
 ENV EXECUTABLE_NAME=srt-game-server.bin
 ENV EXECUTABLE=/home/${USER_NAME}/bin/${EXECUTABLE_NAME}
-ENV BROKER_URI="tcp://127.0.0.1:61613?wireFormat=stomp"
+ENV BROKER_URI="tcp://127.0.0.1:5672"
 
 # Add $USER_NAME as $USER_UID to root group
 RUN useradd -u $USER_UID -g 0 $USER_NAME

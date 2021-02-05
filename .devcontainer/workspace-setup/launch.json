@@ -1,5 +1,5 @@
 {
-    "version": "0.2.0",
+    "version": "0.3.0",
     "configurations": [
         {
             "name": "Launch Main",
@@ -9,7 +9,7 @@
             "program": "${workspaceFolder}/srt-game-server",
             "args": [
                 "--broker-uri",
-                "tcp://${input:brokerHost}:${input:brokerPort}?wireFormat=stomp"
+                "tcp://${input:brokerHost}:${input:brokerPort}"
             ],
             "stopAtEntry": true,
             "cwd": "${workspaceFolder}",
@@ -37,7 +37,7 @@
             "id": "brokerPort",
             "type": "promptString",
             "description": "The port of the broker",
-            "default": "61613"
+            "default": "5672"
         }
     ]
 }
