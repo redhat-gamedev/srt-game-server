@@ -40,7 +40,7 @@
 void usage(char **argv) {
     fprintf(stderr, "usage: %s [options]\n", argv[0]);
     fprintf(stderr, "  --help: print usage\n");
-    fprintf(stderr, "  --broker-uri: broker uri with options e.g. tcp://127.0.0.1:61613?wireFormat=stomp&keepAlive=true\n");
+    fprintf(stderr, "  --broker-uri: broker uri with options e.g. tcp://127.0.0.1:5672\n");
     fprintf(stderr, "  --sleep-cycle: the time (in milliseconds) of the server sleep (default 15) \n");
     fprintf(stderr, " ");
     fprintf(stderr, "\n\n");

@@ -5,10 +5,10 @@
 srt-game-server originated as a proof of concept backend multiplayer game server with the end goal of supporting clients in web browsers via a messaging broker.
 
 It is written in C++ and depends on the following libraries:
-* [Apache CMS v3.9.4](https://activemq.apache.org/components/cms) - messaging API
 * [Box2D v2.3.0](https://box2d.org) - 2D physics engine
 * [POCO C++ Libraries v1.9.0](https://pocoproject.org) - cross-platform C++ libraries for building network and internet-based applications
-* [Protocol Buffers v3.6.1](https://developers.google.com/protocol-buffers) - language-neutral, platform-neutral extensible mechanism for serializing structured data
+* [Protocol Buffers v3.y](https://developers.google.com/protocol-buffers) - language-neutral, platform-neutral extensible mechanism for serializing structured data
+* [Qpid Proton v0.31](http://qpid.apache.org/proton/index.html) - [AMQP v1.0](http://docs.oasis-open.org/amqp/core/v1.0/os/amqp-core-overview-v1.0-os.html#toc) / [ISO 19464:2014](https://www.iso.org/standard/64955.html) messaging protocol
 
 And has traditionally been using [Apache ActiveMQ](activemq.apache.org) as the message broker. Original development took place in Xcode, 
 with an unsophisticated CMake based build more recently added.
@@ -34,13 +34,14 @@ The container has docker installed and mounts the hosts /var/run/docker.sock so 
 
 1. Open a terminal and run the Artemis broker in a container
 ```
-docker run --name artemis -it --rm -p 61613:61613 \
+docker run --name artemis -it --rm -p 5672:5672 \
 -e AMQ_USER=admin -e AMQ_PASSWORD=admin -e AMQ_ALLOW_ANONYMOUS=true \
 quay.io/artemiscloud/activemq-artemis-broker:latest
 ```
 2. Go to the Debug tab
 3. Click the play button for "Launch Main" 
-   * When prompted enter the hostname or IP address of the artemis broker and also the port number (e.g. 61613)
+   * When prompted enter the hostname or IP address of the artemis broker and also the port number 
+     (e.g. 5672 - the default insecure AMQP port)
 4. The game server should start up and connect to the broker
 
 ## Containerization
@@ -56,7 +57,7 @@ container (via `sudo`).
 In one terminal:
 
 ```
-sudo podman run --name artemis -it --rm -p 61613:61613 \
+sudo podman run --name artemis -it --rm -p 5672:5672 \
 -e AMQ_USER=admin -e AMQ_PASSWORD=admin -e AMQ_ALLOW_ANONYMOUS=true \
 quay.io/artemiscloud/activemq-artemis-broker:latest
 ```
@@ -66,6 +67,6 @@ In another terminal:
 ```
 export BROKER_IP=`sudo podman inspect artemis | grep IPAddress | cut -d: -f2 | cut -d\" -f2`
 podman run --name srt-game-server \
--e BROKER_URI="tcp://$BROKER_IP:61613?wireFormat=stomp" \
+-e BROKER_URI="tcp://$BROKER_IP:5672" \
 -it --rm quay.io/redhat-gamedev/srt-game-server:latest
 ```
