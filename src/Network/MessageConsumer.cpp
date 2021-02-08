@@ -19,6 +19,8 @@
 #include <string.h>
 #include <string>
 #include <assert.h>
+#include <iomanip>
+#include <iostream>
 
 
 // Constructor

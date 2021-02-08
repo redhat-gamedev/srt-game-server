@@ -16,10 +16,12 @@
 #include "sender.h"
 #include "../Events/EventDispatcher.h"
 #include "../Proto/GameEventBuffer.pb.h"
+#include <proton/type_id.hpp>
 #include "../Logging/loguru.hpp"
 #include <Poco/Delegate.h>
 #include <google/protobuf/message.h>
 #include <string>
+#include <vector>
 #include <assert.h>
 
 
@@ -129,6 +131,7 @@ std::pair<const unsigned char*, unsigned long>* MessageDispatcher::MessageToPair
 // via the configured simple async producer
 void MessageDispatcher::Dispatch()
 {
+    LOG_SCOPE_FUNCTION(3);
     m_aMessageQueueMutex.lock();
     while (!m_aMessageQueue.empty())
     {
@@ -140,12 +143,19 @@ void MessageDispatcher::Dispatch()
             {
                 // TODO: Proton TESTME
                 proton::message msg((const char*)pMessagePair->first);
+                msg.content_type("proton::BINARY");
+                msg.content_encoding("proton::BINARY");
+
+                LOG_F(7, "proton msg body type is %s", proton::type_name(msg.body().type()).c_str());
+                LOG_F(7, "proton msg content_type is %s", msg.content_type().c_str());
+                LOG_F(8, "proton msg content_encoding is %s", msg.content_encoding().c_str());
+                LOG_F(7, "proton msg body is %s", proton::coerce<std::string>(msg.body()).c_str());
+
                 m_psender->send(msg);
             }
         }
         catch ( std::exception& e )
         {
-//            std::cout << e.what() << std::endl;
             LOG_F(INFO, e.what());
         }
     }
