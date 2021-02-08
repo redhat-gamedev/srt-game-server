@@ -130,6 +130,7 @@ Message* EventDispatcher::Dequeue()
 GameEventBuffer* EventDispatcher::CreateGameEvent(EntityGameEventBuffer_EntityGameEventBufferType eEntityGameEvent_EntityGameEventBufferType, AEntity* pEntity)
 {
     LOG_SCOPE_FUNCTION(8);
+    LOG_F(8, "Entity Game Event");
     EntityGameEvent_Dependencies anEntityGameEvent_Dependencies(eEntityGameEvent_EntityGameEventBufferType, pEntity);
     GameEventBuffer* pGameEvent = m_anEntityGameEventFactory.Create(anEntityGameEvent_Dependencies);
     
@@ -139,6 +140,7 @@ GameEventBuffer* EventDispatcher::CreateGameEvent(EntityGameEventBuffer_EntityGa
 GameEventBuffer* EventDispatcher::CreateGameEvent(SecurityGameEventBuffer_SecurityGameEventBufferType eSecurityGameEvent_SecurityGameEventBufferType, const std::string& strUUID)
 {
     LOG_SCOPE_FUNCTION(8);
+    LOG_F(8, "Security Game Event");
     SecurityGameEvent_Dependencies aSecurityGameEvent_Dependencies(eSecurityGameEvent_SecurityGameEventBufferType, strUUID);
     GameEventBuffer* pGameEvent = m_aSecurityGameEventFactory.Create(aSecurityGameEvent_Dependencies);
     
