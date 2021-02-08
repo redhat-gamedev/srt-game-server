@@ -144,7 +144,10 @@ void MessageDispatcher::Dispatch()
             if (pMessagePair->second > 0)
             {
                 // TODO: Proton TESTME
-                proton::message msg((const char*)pMessagePair->first);
+//                proton::message msg((const unsigned char*)pMessagePair->first);
+                proton::binary* body = new proton::binary(std::string((const char*)pMessagePair->first));
+                proton::message msg(*body);
+//                msg->body(*body);
                 msg.content_type("proton::BINARY");
                 msg.content_encoding("proton::BINARY");
 
