@@ -145,7 +145,10 @@ void MessageDispatcher::Dispatch()
             {
                 // TODO: Proton TESTME
 //                proton::message msg((const unsigned char*)pMessagePair->first);
-                proton::binary* body = new proton::binary(std::string((const char*)pMessagePair->first));
+                std::string pre_proton = (const char*)(pMessagePair->first);
+                LOG_F(8, "pMessagePair length(): %i", pre_proton.length());
+                LOG_F(8, "pMessagePair second(): %i", pMessagePair->second);
+                proton::binary* body = new proton::binary(std::string((const char*)pMessagePair->first, pMessagePair->second));
                 proton::message msg(*body);
 //                msg->body(*body);
                 msg.content_type("proton::BINARY");
