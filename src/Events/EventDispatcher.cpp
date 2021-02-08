@@ -23,6 +23,7 @@
 #include "../Commands/JoinSecurityCommand.h"
 #include "../Commands/LeaveSecurityCommand.h"
 #include "../Shared/FactoryT.h"
+#include "../Logging/loguru.hpp"
 #include <Poco/Delegate.h>
 #include <assert.h>
 
@@ -107,6 +108,7 @@ EventDispatcher::~EventDispatcher()
 // Helper(s)
 void EventDispatcher::Enqueue(Message* pMessage)
 {
+    LOG_SCOPE_FUNCTION(8);
     m_anEventQueueMutex.lock();
     m_anEventQueue.push(pMessage);
     m_anEventQueueMutex.unlock();
@@ -114,6 +116,7 @@ void EventDispatcher::Enqueue(Message* pMessage)
 
 Message* EventDispatcher::Dequeue()
 {
+    LOG_SCOPE_FUNCTION(8);
     Message* pMessage = NULL;
 
     m_anEventQueueMutex.lock();
@@ -126,6 +129,7 @@ Message* EventDispatcher::Dequeue()
 
 GameEventBuffer* EventDispatcher::CreateGameEvent(EntityGameEventBuffer_EntityGameEventBufferType eEntityGameEvent_EntityGameEventBufferType, AEntity* pEntity)
 {
+    LOG_SCOPE_FUNCTION(8);
     EntityGameEvent_Dependencies anEntityGameEvent_Dependencies(eEntityGameEvent_EntityGameEventBufferType, pEntity);
     GameEventBuffer* pGameEvent = m_anEntityGameEventFactory.Create(anEntityGameEvent_Dependencies);
     
@@ -134,6 +138,7 @@ GameEventBuffer* EventDispatcher::CreateGameEvent(EntityGameEventBuffer_EntityGa
 
 GameEventBuffer* EventDispatcher::CreateGameEvent(SecurityGameEventBuffer_SecurityGameEventBufferType eSecurityGameEvent_SecurityGameEventBufferType, const std::string& strUUID)
 {
+    LOG_SCOPE_FUNCTION(8);
     SecurityGameEvent_Dependencies aSecurityGameEvent_Dependencies(eSecurityGameEvent_SecurityGameEventBufferType, strUUID);
     GameEventBuffer* pGameEvent = m_aSecurityGameEventFactory.Create(aSecurityGameEvent_Dependencies);
     
@@ -143,6 +148,7 @@ GameEventBuffer* EventDispatcher::CreateGameEvent(SecurityGameEventBuffer_Securi
 // Dispatches all the events it has received to it's listeners
 void EventDispatcher::Dispatch()
 {
+    LOG_SCOPE_FUNCTION(8);
     Message* pMessage = NULL;
     m_anEventQueueMutex.lock();
     while (!m_anEventQueue.empty())
@@ -157,34 +163,40 @@ void EventDispatcher::Dispatch()
 // Entity event response
 void EventDispatcher::HandlePodCreatedEvent(const void* pSender, Pod*& pPod)
 {
+    LOG_SCOPE_FUNCTION(8);
     GameEventBuffer* pGameEvent = CreateGameEvent(EntityGameEventBuffer_EntityGameEventBufferType_CREATE, static_cast<AEntity*>(pPod));
     Enqueue(pGameEvent);
 }
 
 void EventDispatcher::HandlePodUpdatedEvent(const void* pSender, Pod*& pPod)
 {
+    LOG_SCOPE_FUNCTION(8);
     GameEventBuffer* pGameEvent = CreateGameEvent(EntityGameEventBuffer_EntityGameEventBufferType_UPDATE, static_cast<AEntity*>(pPod));
     Enqueue(pGameEvent);}
 
 void EventDispatcher::HandlePodDestroyedEvent(const void* pSender, Pod*& pPod)
 {
+    LOG_SCOPE_FUNCTION(8);
     GameEventBuffer* pGameEvent = CreateGameEvent(EntityGameEventBuffer_EntityGameEventBufferType_DESTROY, static_cast<AEntity*>(pPod));
     Enqueue(pGameEvent);}
 
 void EventDispatcher::HandleBulletCreatedEvent(const void* pSender, Bullet*& pBullet)
 {
+    LOG_SCOPE_FUNCTION(8);
     GameEventBuffer* pGameEvent = CreateGameEvent(EntityGameEventBuffer_EntityGameEventBufferType_CREATE, static_cast<AEntity*>(pBullet));
     Enqueue(pGameEvent);
 }
 
 void EventDispatcher::HandleBulletUpdatedEvent(const void* pSender, Bullet*& pBullet)
 {
+    LOG_SCOPE_FUNCTION(8);
     GameEventBuffer* pGameEvent = CreateGameEvent(EntityGameEventBuffer_EntityGameEventBufferType_UPDATE, static_cast<AEntity*>(pBullet));
     Enqueue(pGameEvent);
 }
 
 void EventDispatcher::HandleBulletDestroyedEvent(const void* pSender, Bullet*& pBullet)
 {
+    LOG_SCOPE_FUNCTION(8);
     GameEventBuffer* pGameEvent = CreateGameEvent(EntityGameEventBuffer_EntityGameEventBufferType_DESTROY, static_cast<AEntity*>(pBullet));
     Enqueue(pGameEvent);
 }
@@ -192,6 +204,7 @@ void EventDispatcher::HandleBulletDestroyedEvent(const void* pSender, Bullet*& p
 // Event Consumer event response
 void EventDispatcher::HandleJoinSecurityCommandFactoryCreatedEvent(const void* pSender, JoinSecurityCommand*& pJoinSecurityCommand)
 {
+    LOG_SCOPE_FUNCTION(8);
     assert(pJoinSecurityCommand);
     
     pJoinSecurityCommand->ExecutedEvent += Poco::Delegate<EventDispatcher, const std::string&>(this, &EventDispatcher::HandleJoinSecurityCommandExecutedEvent);
@@ -199,6 +212,7 @@ void EventDispatcher::HandleJoinSecurityCommandFactoryCreatedEvent(const void* p
 
 void EventDispatcher::HandleJoinSecurityCommandFactoryDestroyedEvent(const void* pSender, JoinSecurityCommand*& pJoinSecurityCommand)
 {
+    LOG_SCOPE_FUNCTION(8);
     assert(pJoinSecurityCommand);
     
     pJoinSecurityCommand->ExecutedEvent -= Poco::Delegate<EventDispatcher, const std::string&>(this, &EventDispatcher::HandleJoinSecurityCommandExecutedEvent);
@@ -206,6 +220,7 @@ void EventDispatcher::HandleJoinSecurityCommandFactoryDestroyedEvent(const void*
 
 void EventDispatcher::HandleLeaveSecurityCommandFactoryCreatedEvent(const void* pSender, LeaveSecurityCommand*& pLeaveSecurityCommand)
 {
+    LOG_SCOPE_FUNCTION(8);
     assert(pLeaveSecurityCommand);
     
     pLeaveSecurityCommand->ExecutedEvent += Poco::Delegate<EventDispatcher, const std::string&>(this, &EventDispatcher::HandleLeaveSecurityCommandExecutedEvent);
@@ -213,6 +228,7 @@ void EventDispatcher::HandleLeaveSecurityCommandFactoryCreatedEvent(const void* 
 
 void EventDispatcher::HandleLeaveSecurityCommandFactoryDestroyedEvent(const void* pSender, LeaveSecurityCommand*& pLeaveSecurityCommand)
 {
+    LOG_SCOPE_FUNCTION(8);
     assert(pLeaveSecurityCommand);
     
     pLeaveSecurityCommand->ExecutedEvent -= Poco::Delegate<EventDispatcher, const std::string&>(this, &EventDispatcher::HandleLeaveSecurityCommandExecutedEvent);
@@ -220,12 +236,14 @@ void EventDispatcher::HandleLeaveSecurityCommandFactoryDestroyedEvent(const void
 
 void EventDispatcher::HandleJoinSecurityCommandExecutedEvent(const void* pSender, const std::string& strUUID)
 {
+    LOG_SCOPE_FUNCTION(8);
     GameEventBuffer* pGameEvent = CreateGameEvent(SecurityGameEventBuffer_SecurityGameEventBufferType_JOIN, strUUID);
     Enqueue(pGameEvent);
 }
 
 void EventDispatcher::HandleLeaveSecurityCommandExecutedEvent(const void* pSender, const std::string& strUUID)
 {
+    LOG_SCOPE_FUNCTION(8);
     GameEventBuffer* pGameEvent = CreateGameEvent(SecurityGameEventBuffer_SecurityGameEventBufferType_LEAVE, strUUID);
     Enqueue(pGameEvent);
 }
