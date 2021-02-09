@@ -74,6 +74,7 @@ void MessageDispatcher::Enqueue(std::pair<const unsigned char*, unsigned long>* 
 
 void MessageDispatcher::Enqueue(google::protobuf::Message* pEventMessage)
 {
+    LOG_SCOPE_FUNCTION(4);
     assert(pEventMessage);
     
     std::pair<const unsigned char*, unsigned long>* pMessagePair = MessageToPair(pEventMessage);
@@ -131,6 +132,7 @@ std::pair<const unsigned char*, unsigned long>* MessageDispatcher::MessageToPair
 // via the configured simple async producer
 void MessageDispatcher::Dispatch()
 {
+    int x = 1;
     LOG_SCOPE_FUNCTION(3);
     m_aMessageQueueMutex.lock();
     while (!m_aMessageQueue.empty())
@@ -143,18 +145,23 @@ void MessageDispatcher::Dispatch()
             {
                 // TODO: Proton TESTME
 //                proton::message msg((const unsigned char*)pMessagePair->first);
-                proton::binary* body = new proton::binary(std::string((const char*)pMessagePair->first));
+                std::string pre_proton = (const char*)(pMessagePair->first);
+                LOG_F(8, "pMessagePair length(): %i", pre_proton.length());
+                LOG_F(8, "pMessagePair second(): %i", pMessagePair->second);
+                proton::binary* body = new proton::binary(std::string((const char*)pMessagePair->first, pMessagePair->second));
                 proton::message msg(*body);
 //                msg->body(*body);
                 msg.content_type("proton::BINARY");
                 msg.content_encoding("proton::BINARY");
 
+                LOG_F(7, "message #: %i", x);
                 LOG_F(7, "proton msg body type is %s", proton::type_name(msg.body().type()).c_str());
                 LOG_F(7, "proton msg content_type is %s", msg.content_type().c_str());
                 LOG_F(8, "proton msg content_encoding is %s", msg.content_encoding().c_str());
                 LOG_F(7, "proton msg body is %s", proton::coerce<std::string>(msg.body()).c_str());
 
                 m_psender->send(msg);
+                x++;
             }
         }
         catch ( std::exception& e )
