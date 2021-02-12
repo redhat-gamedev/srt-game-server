@@ -45,9 +45,16 @@ quay.io/artemiscloud/activemq-artemis-broker:latest
 4. The game server should start up and connect to the broker
 
 ## Containerization
+In the containerbuild directory is a Fedora 33-based Dockerfile for running
+the srt-game-server via your favorite container runtime. Build and run
+testing was performed using podman on a Fedora 33 host.
 
-In the containerbuild directory is a Fedora 30 based Dockerfile for running the srt-game-server via your favorite container runtime.
-Build and run testing was performed using podman on a Fedora 30 host.
+You can build the container using the following command, ensuring first that
+you are in the root folder of this repo:
+
+```
+podman build -v `pwd`:/tmp/srt-game-server:Z -t localhost/redhat-gamedev/srt-game-server:latest .
+```
 
 ## Quick and Dirty Local Testing
 You can run an Artemis broker locally in a container, and then connect the
