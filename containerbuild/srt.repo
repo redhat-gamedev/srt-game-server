@@ -1,0 +1,5 @@
+[srt-repo]
+name=Space Ring Things F33 packages
+enabled=1
+gpgcheck=0
+baseurl=https://www.erikjacobs.com/srt-repo/
