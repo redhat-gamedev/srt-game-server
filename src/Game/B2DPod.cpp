@@ -23,7 +23,7 @@ B2DPod::_Dependencies::_Dependencies(const b2Vec2& b2v2Position) :
 {
     // Override the defaults where appropriate
     // Set the size of our shape
-    m_b2CircleShape.m_radius = 2.0f;
+    m_b2CircleShape.m_radius = 11.0f;
     
     // Set the fixture and use the shape
 //    m_ab2FixtureDef.density = 1.0f;
@@ -77,8 +77,9 @@ void B2DPod::Update()
         b2Vec2 ab2Vec2Move = m_b2v2MoveQueue.front();
         m_b2v2MoveQueue.pop();
         LOG_F(3, "Calculating the forces");
-        ab2Vec2Move.x *= 50.0f;
-        ab2Vec2Move.y *= 50.0f;
+        ab2Vec2Move.x *= 5000.0f;
+        ab2Vec2Move.y *= 5000.0f;
+
         m_pb2Body->ApplyForceToCenter(ab2Vec2Move, true);
     }
     m_b2v2MoveQueueMutex.unlock();
