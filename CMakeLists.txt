@@ -133,6 +133,9 @@ message( STATUS "QPID_PROTON_CPP_LIBRARY is ${QPID_PROTON_CPP_LIBRARY}")
 
 find_package(ProtonCpp REQUIRED)
 
+find_package(PkgConfig)
+pkg_check_modules(YAMLCPP REQUIRED yaml-cpp>=0.6)
+
 set( STATIC_DEPENDENCIES
 ${QPID_PROTON_CPP_LIBRARY}
 ${BOX2_D_LIBRARY}
@@ -170,6 +173,7 @@ target_include_directories(srt-game-server
         /usr/include/proton
         /usr/local/include
         /opt/local/include
+        /usr/include/yaml-cpp
 )
 
 target_link_libraries(srt-game-server
@@ -178,4 +182,5 @@ ${STATIC_DEPENDENCIES}
 ${END_ALL_LOAD}
 ${DEPENDENCIES}
 Proton::cpp
+${YAMLCPP_LIBRARIES}
 )

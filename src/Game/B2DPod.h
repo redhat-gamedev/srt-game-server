@@ -19,6 +19,7 @@
 #include <Box2D/Box2D.h>
 #include <queue>
 #include <mutex>
+#include "yaml-cpp/node/node.h"
 
 class AEntity;
 
@@ -45,6 +46,7 @@ public:
 protected:
     std::queue<b2Vec2>       m_b2v2MoveQueue;
     std::mutex               m_b2v2MoveQueueMutex;
+    YAML::Node               m_config;
     
 public:
     // Constructor(s)
