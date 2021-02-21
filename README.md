@@ -13,6 +13,35 @@ It is written in C++ and depends on the following libraries:
 And has traditionally been using [Apache ActiveMQ](activemq.apache.org) as the message broker. Original development took place in Xcode, 
 with an unsophisticated CMake based build more recently added.
 
+## Building from scratch on Fedora 33
+
+If you're on linux (fedora) you're going to need to install some dependencies and packages before you can build locally
+
+### Install dependant packages
+
+    sudo cp ./containerbuild/srt.repo /etc/yum.repos.d/
+    sudo dnf install gcc gcc-c++ cmake Box2D-2.3.1-12.fc32.x86_64 Box2D-devel-2.3.1-12.fc32.x86_64 compat-openssl10 openssl poco-devel poco-foundation protobuf protobuf-devel gcc g++ cmake git qpid-proton-cpp qpid-proton-cpp-devel --assumeyes --verbose
+
+### Rebuild the .proto bindings
+
+    cd ./src/Proto
+    for i in $(ls -lC1 *.proto); do protoc $i --cpp_out=.; done;
+
+### Build with cmake
+From the project root run:
+
+    cmake .
+    cmake --build .
+
+## Start the server
+After you've run the build steps above it will output a `srt-game-server` executable in your project root.
+Run this with the following arguments:
+
+    ./srt-game-server --broker-uri "tcp://${BROKER_IP}:5672" -v 8 --sleep-cycle 2000
+
+Where $BROKER_IP is the IP address of the running Artemis broker see [Start Artemis Broker](#start-the-artemis-broker) 
+
+
 ## Visual Studio Remote Container Support
 
 If you have [Visual Studio Code](https://code.visualstudio.com/) with the [Remote Container extension](https://code.visualstudio.com/docs/remote/containers), you are able to build, run, and debug the game server without having to install anything additional on your laptop.
@@ -61,6 +90,7 @@ You can run an Artemis broker locally in a container, and then connect the
 game server to it. Currently, the broker must be run with a root-ful
 container (via `sudo`).
 
+### Start the Artemis broker
 In one terminal:
 
 ```
@@ -69,6 +99,7 @@ sudo podman run --name artemis -it --rm -p 5672:5672 \
 quay.io/artemiscloud/activemq-artemis-broker:latest
 ```
 
+### Start the server
 In another terminal:
 
 ```
