@@ -57,7 +57,7 @@ void Config::init(int &argc, char *argv[]) {
     }
 
     // TODO: Process -> Usage Error checking on arg
-    // Override yamlConfig.yaml and default values with any matching command line args
+    // Override yaml config and default values with any matching command line args
     for (int i = 1; i < argc; ++i) {
         if (0 == strcmp(argv[i], "--broker-uri")) {
             inst_->brokerUri = argv[++i];
@@ -76,7 +76,7 @@ void Config::init(int &argc, char *argv[]) {
 Config *Config::Instance() {
     if (inst_ == nullptr) {
         LOG_F(WARNING, "Config::Instance() called without calling Config::init() first. Using default values.");
-        LOG_F(MAX, "Constructing a fresh yamlConfig instance");
+        LOG_F(MAX, "Constructing a fresh Config instance");
         inst_ = new Config();
     }
 
