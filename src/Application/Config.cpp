@@ -42,13 +42,17 @@ void Config::init(int &argc, char *argv[]) {
     YAML::Node yamlConfig = inst_->yamlConfig = YAML::LoadFile("config.yaml");
     if (yamlConfig["broker-uri"]) {
         inst_->brokerUri = yamlConfig["broker-uri"].as<std::string>();
-    } else if (yamlConfig["sleep-cycle"]) {
+    }
+    if (yamlConfig["sleep-cycle"]) {
         inst_->sleepCycle = yamlConfig["sleep-cycle"].as<long>();
-    } else if (yamlConfig["sleep-cycle"]) {
+    }
+    if (yamlConfig["command-in"]) {
         inst_->commandIn = yamlConfig["command-in"].as<std::string>();
-    } else if (yamlConfig["game-event-out"]) {
+    }
+    if (yamlConfig["game-event-out"]) {
         inst_->gameEventOut = yamlConfig["game-event-out"].as<std::string>();
-    } else if (yamlConfig["force-multiplier"]) {
+    }
+    if (yamlConfig["force-multiplier"]) {
         inst_->forceMultiplier = yamlConfig["force-multiplier"].as<float>();
     }
 

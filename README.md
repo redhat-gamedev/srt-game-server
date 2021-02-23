@@ -20,7 +20,7 @@ If you're on linux (fedora) you're going to need to install some dependencies an
 ### Install dependant packages
 
     sudo cp ./containerbuild/srt.repo /etc/yum.repos.d/
-    sudo dnf install gcc gcc-c++ cmake Box2D-2.3.1-12.fc32.x86_64 Box2D-devel-2.3.1-12.fc32.x86_64 compat-openssl10 openssl poco-devel poco-foundation protobuf protobuf-devel gcc g++ cmake git qpid-proton-cpp qpid-proton-cpp-devel --assumeyes --verbose
+    sudo dnf install gcc gcc-c++ cmake yaml-cpp yaml-cpp-devel Box2D-2.3.1-12.fc32.x86_64 Box2D-devel-2.3.1-12.fc32.x86_64 compat-openssl10 openssl poco-devel poco-foundation protobuf protobuf-devel gcc g++ cmake git qpid-proton-cpp qpid-proton-cpp-devel --assumeyes --verbose
 
 ### Rebuild the .proto bindings
 
@@ -39,7 +39,19 @@ Run this with the following arguments:
 
     ./srt-game-server --broker-uri "tcp://${BROKER_IP}:5672" -v 8 --sleep-cycle 2000
 
-Where $BROKER_IP is the IP address of the running Artemis broker see [Start Artemis Broker](#start-the-artemis-broker) 
+Where $BROKER_IP is the IP address of the running Artemis broker see [Start Artemis Broker](#start-the-artemis-broker)
+
+## Configuration options
+You can configure the server either with command line arguments or in a config.yaml file.
+Command line args take precedence.
+
+| Command line args  | config.yaml | Defaults |
+| ------------- | ------------- | ------------- | 
+| --broker-uri  | broker-uri  | "tcp://127.0.0.1:5672"  |
+| --sleep-cycle  | sleep-cycle  | 50  |
+| --command-in  | command-in  | "COMMAND.IN"  |
+| --game-event-out  | game-event-out  | "GAME.EVENT.OUT"  |
+| --force-multiplier  | force-multiplier  | 5000.0  |
 
 
 ## Visual Studio Remote Container Support

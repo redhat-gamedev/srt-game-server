@@ -19,7 +19,6 @@
 #include <Box2D/Box2D.h>
 #include <queue>
 #include <mutex>
-#include "yaml-cpp/node/node.h"
 
 class AEntity;
 
