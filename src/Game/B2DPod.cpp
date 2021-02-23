@@ -15,8 +15,7 @@
 #include "B2DPod.h"
 #include "B2DWorld.h"
 #include "../Logging/loguru.hpp"
-#include "yaml-cpp/yaml.h"
-#include "yaml-cpp/node/parse.h"
+#include "../Application/Config.h"
 
 
 // Constructor
@@ -47,9 +46,6 @@ B2DPod::B2DPod(B2DPod::_Dependencies& theDependencies) :
 {
     m_pb2Body->CreateFixture(&theDependencies.FixtureDef);
     m_pb2Fixture = m_pb2Body->GetFixtureList();
-
-    // Load the config file
-    m_config = YAML::LoadFile("config.yaml");
 }
 
 // Destructor(s)
@@ -73,6 +69,8 @@ void B2DPod::Move(float fX, float fY)
 
 void B2DPod::Update()
 {
+    Config *config = Config::Instance();
+
     m_b2v2MoveQueueMutex.lock();
     LOG_F(4, "Our current linear velocity: %f x %f", m_pb2Body->GetLinearVelocity().x, m_pb2Body->GetLinearVelocity().y);
     LOG_F(4, "Our current position: %f x %f", m_pb2Body->GetPosition().x, m_pb2Body->GetPosition().y);
@@ -82,8 +80,8 @@ void B2DPod::Update()
         b2Vec2 ab2Vec2Move = m_b2v2MoveQueue.front();
         m_b2v2MoveQueue.pop();
         LOG_F(3, "Calculating the forces");
-        ab2Vec2Move.x *= m_config["force-multiplier"].as<float>();
-        ab2Vec2Move.y *= m_config["force-multiplier"].as<float>();
+        ab2Vec2Move.x *= config->forceMultiplier;
+        ab2Vec2Move.y *= config->forceMultiplier;
 
         m_pb2Body->ApplyForceToCenter(ab2Vec2Move, true);
     }

@@ -13,7 +13,7 @@
 //   limitations under the License.
 
 #include "JoinSecurityCommand.h"
-#include "../Application/Configuration.h"
+#include "../Application/Config.h"
 #include "../Proto/CommandBuffer.pb.h"
 #include "../Proto/SecurityCommandBuffer.pb.h"
 #include <proton/message.hpp>
@@ -61,7 +61,7 @@ void JoinSecurityCommand::Execute()
 //    assert(pReplyToDestination);
 //
 //    LOG_SCOPE_F(1, "creating Simple Async Producer");
-//    SimpleAsyncProducer* pSimpleAsyncProducer = new SimpleAsyncProducer(Configuration::Instance().BrokerURI, pReplyToDestination, false, true);
+//    SimpleAsyncProducer* pSimpleAsyncProducer = new SimpleAsyncProducer(Config::Instance()->brokerUri, pReplyToDestination, false, true);
 //
 //    LOG_SCOPE_F(INFO, "sending player identity: %s", strUUID.c_str());
 //    pSimpleAsyncProducer->Send(strUUID);

@@ -1,5 +1,5 @@
-#ifndef SRT_GAME_SERVER_CONFIGURATION_H
-#define SRT_GAME_SERVER_CONFIGURATION_H
+#ifndef SRT_GAME_SERVER_CONFIG_H
+#define SRT_GAME_SERVER_CONFIG_H
 
 //   Copyright 2020 Roddie Kieley
 //
@@ -16,32 +16,31 @@
 //   limitations under the License.
 
 #include <string>
+#include "yaml-cpp/yaml.h"
+#include "yaml-cpp/node/node.h"
 
-
-class Configuration {
+class Config {
 private:
-    std::string         m_strBrokerURI;
-    int                 m_intServerSleepCycle = 15;
+    // Private constructor per singleton pattern
+    Config();
 
-protected:
-    // Constructor(s)
-    Configuration() {};
+    static Config *inst_;   // The one, single instance
 
-    // Destructor
-    ~Configuration() {};
+    // holds the contents of the config.yaml file
+    YAML::Node yamlConfig;
 
 public:
-    std::string&        BrokerURI = m_strBrokerURI;
-    int&                ServerSleepCycle = m_intServerSleepCycle;
+    // Config variables
+    std::string brokerUri;
+    long sleepCycle;
+    std::string commandIn;
+    std::string gameEventOut;
+    float forceMultiplier;
 
+    static void init(int &argc, char *argv[]);
 
-    // Singleton(s)
-    static Configuration& Instance()
-    {
-        static Configuration theConfiguration;
-        return theConfiguration;
-    }
+    // Singleton
+    static Config *Instance();
 };
 
-
-#endif //SRT_GAME_SERVER_CONFIGURATION_H
+#endif //SRT_GAME_SERVER_CONFIG_H

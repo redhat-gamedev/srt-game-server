@@ -46,7 +46,6 @@ public:
 protected:
     std::queue<b2Vec2>       m_b2v2MoveQueue;
     std::mutex               m_b2v2MoveQueueMutex;
-    YAML::Node               m_config;
     
 public:
     // Constructor(s)
