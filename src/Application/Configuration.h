@@ -24,11 +24,11 @@ private:
     static Configuration *m_pConInstance;  // The instance
 
     // Config variables default values
-    std::string m_strBrokerUri = "tcp://127.0.0.1:5672";
-    long m_lSleepCycle = 50;
-    std::string m_strCommandIn = "COMMAND.IN";
-    std::string m_strGameEventOut = "GAME.EVENT.OUT";
-    float m_fForceMultiplier = 5000.0;
+    std::string m_strBrokerUri     = "tcp://127.0.0.1:5672";
+    long        m_lSleepCycle      = 50;
+    std::string m_strCommandIn     = "COMMAND.IN";
+    std::string m_strGameEventOut  = "GAME.EVENT.OUT";
+    float       m_fForceMultiplier = 5000.0;
 
 protected:
     // Constructor
@@ -39,11 +39,11 @@ protected:
 
 public:
     // Config variables references to protected members for convenience
-    std::string &BrokerUri = m_strBrokerUri;
-    long &SleepCycle = m_lSleepCycle;
-    std::string &CommandIn = m_strCommandIn;
-    std::string &GameEventOut = m_strGameEventOut;
-    float &ForceMultiplier = m_fForceMultiplier;
+    std::string &BrokerUri       = m_strBrokerUri;
+    long        &SleepCycle      = m_lSleepCycle;
+    std::string &CommandIn       = m_strCommandIn;
+    std::string &GameEventOut    = m_strGameEventOut;
+    float       &ForceMultiplier = m_fForceMultiplier;
 
     void Init(int &argc, char *argv[]);
 
