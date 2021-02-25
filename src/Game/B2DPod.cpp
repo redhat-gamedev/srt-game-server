@@ -15,7 +15,7 @@
 #include "B2DPod.h"
 #include "B2DWorld.h"
 #include "../Logging/loguru.hpp"
-#include "../Application/Config.h"
+#include "../Application/Configuration.h"
 
 
 // Constructor
@@ -69,7 +69,7 @@ void B2DPod::Move(float fX, float fY)
 
 void B2DPod::Update()
 {
-    Config *config = Config::Instance();
+    Configuration &config = Configuration::Instance();
 
     m_b2v2MoveQueueMutex.lock();
     LOG_F(4, "Our current linear velocity: %f x %f", m_pb2Body->GetLinearVelocity().x, m_pb2Body->GetLinearVelocity().y);
@@ -80,8 +80,8 @@ void B2DPod::Update()
         b2Vec2 ab2Vec2Move = m_b2v2MoveQueue.front();
         m_b2v2MoveQueue.pop();
         LOG_F(3, "Calculating the forces");
-        ab2Vec2Move.x *= config->forceMultiplier;
-        ab2Vec2Move.y *= config->forceMultiplier;
+        ab2Vec2Move.x *= config.ForceMultiplier;
+        ab2Vec2Move.y *= config.ForceMultiplier;
 
         m_pb2Body->ApplyForceToCenter(ab2Vec2Move, true);
     }

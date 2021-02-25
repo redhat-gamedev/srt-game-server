@@ -12,7 +12,7 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-#include "Config.h"
+#include "Configuration.h"
 #include "Server.h"
 #include "../Game/World.h"
 #include "../Game/AEntity.h"
@@ -106,7 +106,7 @@ void Server::run()
         m_theEventDispatcher.Dispatch();
         m_theMessageDispatcher.Dispatch();
         
-        std::this_thread::sleep_for(std::chrono::milliseconds(Config::Instance()->sleepCycle));
+        std::this_thread::sleep_for(std::chrono::milliseconds(Configuration::Instance().SleepCycle));
     }
 }
 

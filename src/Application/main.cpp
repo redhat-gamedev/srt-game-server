@@ -12,7 +12,7 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-#include "Config.h"
+#include "Configuration.h"
 #include "Server.h"
 #include "../Network/MessageDispatcher.h"
 #include "../Network/MessageConsumer.h"
@@ -58,8 +58,8 @@ int main(int argc, char* argv[])
 	loguru::init(argc, argv);
 	LOG_F(INFO, "Space Ring Things - Game Server");
 
-	Config::init(argc, argv);
-	Config *config = Config::Instance();
+	Configuration &config = Configuration::Instance();
+	config.Init(argc, argv);
 
     // Run the proton container
     proton::container container;
@@ -67,8 +67,8 @@ int main(int argc, char* argv[])
 
     // A single sender and receiver to be shared by all the threads
     // TODO: Proton TEST ME
-    sender send(container, config->brokerUri, config->gameEventOut);
-    receiver recv(container, config->brokerUri, config->commandIn);
+    sender send(container, config.BrokerUri, config.GameEventOut);
+    receiver recv(container, config.BrokerUri, config.CommandIn);
 
     PodFactory&                     thePodFactory = PodFactory::Instance();
     BulletFactory&                  theBulletFactory = BulletFactory::Instance();
@@ -77,11 +77,11 @@ int main(int argc, char* argv[])
     EventDispatcher::_Dependencies  theEventDispatcherDependencies(thePodFactory, theBulletFactory, theEntityGameEventFactory, theSecurityGameEventFactory);
     EventDispatcher&                theEventDispatcher = EventDispatcher::Instance(&theEventDispatcherDependencies);
 
-    LOG_F(INFO, "main creating MessageDispatcher with strBrokerURI: %s", Config::Instance()->brokerUri.c_str());
+    LOG_F(INFO, "main creating MessageDispatcher with strBrokerURI: %s", Configuration::Instance().BrokerUri.c_str());
     MessageDispatcher::_Dependencies    theMessageDispatcherDependencies(&send);
     MessageDispatcher&                  theMessageDispatcher = MessageDispatcher::Instance(&theMessageDispatcherDependencies);
 
-    LOG_F(INFO, "main creating MessageConsumer with strBrokerURI: %s", Config::Instance()->brokerUri.c_str());
+    LOG_F(INFO, "main creating MessageConsumer with strBrokerURI: %s", Configuration::Instance().BrokerUri.c_str());
     MessageConsumer::_Dependencies      theMessageConsumerDependencies(&recv);
     MessageConsumer&                    theMessageConsumer = MessageConsumer::Instance(&theMessageConsumerDependencies);
 

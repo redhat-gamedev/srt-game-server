@@ -30,7 +30,8 @@ If you're on linux (fedora) you're going to need to install some dependencies an
 ### Build with cmake
 From the project root run:
 
-    cmake .
+    mkdir build && cd build
+    cmake ../
     cmake --build .
 
 ## Start the server

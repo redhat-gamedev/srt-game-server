@@ -115,8 +115,8 @@ src/Proto/SecurityCommandBuffer.pb.cc
 src/Proto/box2d.pb.cc
 src/Shared/Timer.cpp
 src/Shared/fake_cpp11.hpp
-src/Application/Config.cpp
-src/Application/Config.h
+src/Application/Configuration.cpp
+src/Application/Configuration.h
 src/Network/sender.cpp
 src/Network/sender.h
 src/Network/receiver.cpp
