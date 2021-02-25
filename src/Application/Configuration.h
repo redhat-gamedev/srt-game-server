@@ -21,18 +21,21 @@
 
 class Configuration {
 private:
-    // Private constructor per singleton pattern
-    Configuration();
+    static Configuration *m_pConInstance;  // The instance
 
-    static Configuration *m_pConInstance;   // The one, single instance
+    // Config variables default values
+    std::string m_strBrokerUri = "tcp://127.0.0.1:5672";
+    long m_lSleepCycle = 50;
+    std::string m_strCommandIn = "COMMAND.IN";
+    std::string m_strGameEventOut = "GAME.EVENT.OUT";
+    float m_fForceMultiplier = 5000.0;
 
 protected:
-    // Config variables
-    std::string m_strBrokerUri;
-    long m_lSleepCycle;
-    std::string m_strCommandIn;
-    std::string m_strGameEventOut;
-    float m_fForceMultiplier;
+    // Constructor
+    Configuration() = default;
+
+    // Destructor
+    ~Configuration() = default;
 
 public:
     // Config variables references to protected members for convenience

@@ -21,15 +21,6 @@
 // Define the static Singleton pointer
 Configuration *Configuration::m_pConInstance = nullptr;
 
-Configuration::Configuration() {
-    // Default values
-    m_strBrokerUri = "tcp://127.0.0.1:5672";
-    m_lSleepCycle = 50;
-    m_strCommandIn = "COMMAND.IN";
-    m_strGameEventOut = "GAME.EVENT.OUT";
-    m_fForceMultiplier = 5000.0;
-}
-
 void Configuration::Init(int &argc, char *argv[]) {
     LOG_F(INFO, "Initializing configuration ...");
 
