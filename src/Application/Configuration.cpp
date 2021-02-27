@@ -25,21 +25,26 @@ void Configuration::Init(int &argc, char *argv[]) {
     LOG_F(INFO, "Initializing configuration ...");
 
     // Load the config.yaml file
-    YAML::Node config = YAML::LoadFile("config.yaml");
-    if (config["broker-uri"]) {
-        m_pConInstance->BrokerUri = config["broker-uri"].as<std::string>();
+    try {
+        YAML::Node config = YAML::LoadFile("config.yaml");
+        if (config["broker-uri"]) {
+            m_pConInstance->BrokerUri = config["broker-uri"].as<std::string>();
+        }
+        if (config["sleep-cycle"]) {
+            m_pConInstance->SleepCycle = config["sleep-cycle"].as<long>();
+        }
+        if (config["command-in"]) {
+            m_pConInstance->CommandIn = config["command-in"].as<std::string>();
+        }
+        if (config["game-event-out"]) {
+            m_pConInstance->GameEventOut = config["game-event-out"].as<std::string>();
+        }
+        if (config["force-multiplier"]) {
+            m_pConInstance->ForceMultiplier = config["force-multiplier"].as<float>();
+        }
     }
-    if (config["sleep-cycle"]) {
-        m_pConInstance->SleepCycle = config["sleep-cycle"].as<long>();
-    }
-    if (config["command-in"]) {
-        m_pConInstance->CommandIn = config["command-in"].as<std::string>();
-    }
-    if (config["game-event-out"]) {
-        m_pConInstance->GameEventOut = config["game-event-out"].as<std::string>();
-    }
-    if (config["force-multiplier"]) {
-        m_pConInstance->ForceMultiplier = config["force-multiplier"].as<float>();
+    catch (YAML::BadFile &e) {
+        LOG_F(INFO, "No config.yaml found..skipping");
     }
 
     // TODO: Process -> Usage Error checking on arg
