@@ -48,44 +48,27 @@ void usage(char **argv) {
 
 int main(int argc, char* argv[])
 {
+    // First see if they are looking to display usage via --help as first argument
+    if (0 == strcmp(argv[0], "--help"))
+    {
+        usage(argv);
+        exit(0);
+    }
+
 	loguru::init(argc, argv);
 	LOG_F(INFO, "Space Ring Things - Game Server");
 
-    std::string     strBrokerURI = "tcp://127.0.0.1:5672";
-    std::string     strCommandInDestinationURI = "COMMAND.IN";
-    std::string     strGameEventOutDestinationURI = "GAME.EVENT.OUT";
-    std::string     strServerSleepCycle = "1500";
-
-    LOG_F(INFO, "Starting...");
-    for (int i = 1; i < argc; ++i)
-    {
-        if (0 == strcmp(argv[i], "--help"))
-        {
-            usage(argv);
-            exit(0);
-        }
-        else if (0 == strcmp(argv[i], "--broker-uri"))
-        {
-            // TODO: Process -> Usage Error checking on arg
-            strBrokerURI = argv[++i];
-        }
-        else if (0 == strcmp(argv[i], "--sleep-cycle"))
-        {
-            strServerSleepCycle = argv[++i];
-        }
-    }
-
-    Configuration::Instance().BrokerURI = strBrokerURI;
-    Configuration::Instance().ServerSleepCycle = strtol(strServerSleepCycle.c_str(), nullptr, 0);
+	Configuration &config = Configuration::Instance();
+	config.Init(argc, argv);
 
     // Run the proton container
     proton::container container;
     auto container_thread = std::thread([&]() { container.run(); });
 
     // A single sender and receiver to be shared by all the threads
-    // TODO: Proton TESTME
-    sender send(container, strBrokerURI, strGameEventOutDestinationURI);
-    receiver recv(container, strBrokerURI, strCommandInDestinationURI);
+    // TODO: Proton TEST ME
+    sender send(container, config.BrokerUri, config.GameEventOut);
+    receiver recv(container, config.BrokerUri, config.CommandIn);
 
     PodFactory&                     thePodFactory = PodFactory::Instance();
     BulletFactory&                  theBulletFactory = BulletFactory::Instance();
@@ -94,11 +77,11 @@ int main(int argc, char* argv[])
     EventDispatcher::_Dependencies  theEventDispatcherDependencies(thePodFactory, theBulletFactory, theEntityGameEventFactory, theSecurityGameEventFactory);
     EventDispatcher&                theEventDispatcher = EventDispatcher::Instance(&theEventDispatcherDependencies);
 
-    LOG_F(INFO, "main creating MessageDispatcher with strBrokerURI: %s", Configuration::Instance().BrokerURI.c_str());
+    LOG_F(INFO, "main creating MessageDispatcher with strBrokerURI: %s", Configuration::Instance().BrokerUri.c_str());
     MessageDispatcher::_Dependencies    theMessageDispatcherDependencies(&send);
     MessageDispatcher&                  theMessageDispatcher = MessageDispatcher::Instance(&theMessageDispatcherDependencies);
 
-    LOG_F(INFO, "main creating MessageConsumer with strBrokerURI: %s", Configuration::Instance().BrokerURI.c_str());
+    LOG_F(INFO, "main creating MessageConsumer with strBrokerURI: %s", Configuration::Instance().BrokerUri.c_str());
     MessageConsumer::_Dependencies      theMessageConsumerDependencies(&recv);
     MessageConsumer&                    theMessageConsumer = MessageConsumer::Instance(&theMessageConsumerDependencies);
 

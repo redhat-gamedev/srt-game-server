@@ -1,6 +1,7 @@
 .DS_Store
 .idea
 build
+*.log
 
 Makefile
 cmake_install.cmake
@@ -9,6 +10,8 @@ CMakeCache.txt
 
 #FIXME: have the binary of the game server move to bin/ type target directory?
 srt-game-server
+
+srt-game-server.cbp
 
 # VSCode 
 .vscode/

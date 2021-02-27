@@ -106,7 +106,7 @@ void Server::run()
         m_theEventDispatcher.Dispatch();
         m_theMessageDispatcher.Dispatch();
         
-        std::this_thread::sleep_for(std::chrono::milliseconds(Configuration::Instance().ServerSleepCycle));
+        std::this_thread::sleep_for(std::chrono::milliseconds(Configuration::Instance().SleepCycle));
     }
 }
 

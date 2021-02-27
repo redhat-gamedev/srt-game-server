@@ -61,7 +61,7 @@ void JoinSecurityCommand::Execute()
 //    assert(pReplyToDestination);
 //
 //    LOG_SCOPE_F(1, "creating Simple Async Producer");
-//    SimpleAsyncProducer* pSimpleAsyncProducer = new SimpleAsyncProducer(Configuration::Instance().BrokerURI, pReplyToDestination, false, true);
+//    SimpleAsyncProducer* pSimpleAsyncProducer = new SimpleAsyncProducer(Configuration::Instance().BrokerUri, pReplyToDestination, false, true);
 //
 //    LOG_SCOPE_F(INFO, "sending player identity: %s", strUUID.c_str());
 //    pSimpleAsyncProducer->Send(strUUID);

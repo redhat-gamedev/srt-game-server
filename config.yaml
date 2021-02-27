@@ -1,0 +1,6 @@
+---
+broker-uri: "tcp://10.88.0.15:5672"
+sleep-cycle: 1500
+command-in: "COMMAND.IN"
+game-event-out: "GAME.EVENT.OUT"
+force-multiplier: 5000.0
