@@ -23,7 +23,7 @@
 #include "../Commands/JoinSecurityCommand.h"
 #include "../Commands/LeaveSecurityCommand.h"
 #include "../Shared/FactoryT.h"
-#include <Box2D/Box2D.h>
+#include <box2d/box2d.h>
 #include <Poco/FunctionDelegate.h>
 #include <assert.h>
 #include "../Logging/loguru.hpp"

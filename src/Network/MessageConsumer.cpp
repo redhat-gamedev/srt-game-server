@@ -82,8 +82,6 @@ void MessageConsumer::receive_thread(receiver& r) {
     std::mutex out_lock;
     #define OUT(x) do { std::lock_guard<std::mutex> l(out_lock); x; } while (false)
 
-    OUT(std::cerr << "unexpected error in receive_thread " << std::endl);
-
     try {
         auto id = std::this_thread::get_id();
         int n = 0;

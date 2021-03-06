@@ -69,7 +69,7 @@ endif()
 ## Debug
 ##
 set(CMAKE_BUILD_TYPE Debug)
-message(STATUS, "CXXFLAGS: ${CMAKE_CXX_FLAGS}")
+#message(STATUS, "CXXFLAGS: ${CMAKE_CXX_FLAGS}")
 
 ##
 ## srt-game-server Files
@@ -124,7 +124,7 @@ src/Network/receiver.h
 src/Network/closed.cpp
 src/Network/closed.h)
 
-find_library( BOX2_D_LIBRARY Box2D)
+find_library( BOX2_D_LIBRARY box2d)
 message( STATUS "BOX2_D_LIBRARY is ${BOX2_D_LIBRARY}")
 find_library( PROTOCOL_BUFFERS_LIBRARY protobuf)
 message( STATUS "PROTOCOL_BUFFERS_LIBRARY is ${PROTOCOL_BUFFERS_LIBRARY}")
