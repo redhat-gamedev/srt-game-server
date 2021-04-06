@@ -18,7 +18,6 @@
 #include "../Proto/SecurityCommandBuffer.pb.h"
 #include <proton/message.hpp>
 #include <assert.h>
-#include <iostream>
 #include "../Logging/loguru.hpp"
 
 
