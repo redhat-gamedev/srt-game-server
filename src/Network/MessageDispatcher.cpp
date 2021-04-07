@@ -133,7 +133,7 @@ std::pair<const unsigned char*, unsigned long>* MessageDispatcher::MessageToPair
 void MessageDispatcher::Dispatch()
 {
     int x = 1;
-    LOG_SCOPE_FUNCTION(3);
+    LOG_SCOPE_FUNCTION(4);
     m_aMessageQueueMutex.lock();
     while (!m_aMessageQueue.empty())
     {
@@ -154,9 +154,9 @@ void MessageDispatcher::Dispatch()
                 msg.content_type("proton::BINARY");
                 msg.content_encoding("proton::BINARY");
 
-                LOG_F(7, "message #: %i", x);
-                LOG_F(7, "proton msg body type is %s", proton::type_name(msg.body().type()).c_str());
-                LOG_F(7, "proton msg content_type is %s", msg.content_type().c_str());
+                LOG_F(8, "message #: %i", x);
+                LOG_F(8, "proton msg body type is %s", proton::type_name(msg.body().type()).c_str());
+                LOG_F(8, "proton msg content_type is %s", msg.content_type().c_str());
                 LOG_F(8, "proton msg content_encoding is %s", msg.content_encoding().c_str());
                 LOG_F(7, "proton msg body is %s", proton::coerce<std::string>(msg.body()).c_str());
 
