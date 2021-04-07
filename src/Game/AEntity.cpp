@@ -26,6 +26,7 @@
 #include <box2d/box2d.h>
 #include <Poco/FunctionDelegate.h>
 #include <assert.h>
+#include <random>
 #include "../Logging/loguru.hpp"
 
 std::queue<AEntity*>            AEntity::s_EntityQueue;
@@ -91,6 +92,13 @@ void AEntity::ClassTeardown()
     theLeaveSecurityCommandFactory.CreatedEvent -= Poco::FunctionDelegate<LeaveSecurityCommand*&>(&AEntity::HandleLeaveSecurityCommandFactoryCreated);
 }
 
+float get_random()
+{
+    static std::default_random_engine e;
+    static std::uniform_real_distribution<> dis(-1, 1); // rage 0 - 1
+    return dis(e);
+}
+
 void AEntity::AddPod(const std::string& strUUID)
 {
     LOG_SCOPE_FUNCTION(4);
@@ -98,10 +106,14 @@ void AEntity::AddPod(const std::string& strUUID)
     
     B2DPodFactory& aB2DPodFactory = B2DPodFactory::Instance();
     PodFactory& aPodFactory = PodFactory::Instance();
-    
+
+    // initialize a random X and Y position
+    // TODO: make the scaling constant a config option
+    // TODO: we need to figure out how to reasonably distribute players, as opposed to
+    //       just randomly plopping them on the board
     b2Vec2 b2v2Position;
-    b2v2Position.x = 0.0f;
-    b2v2Position.y = 0.0f;
+    b2v2Position.x = 600.0f * get_random();
+    b2v2Position.y = 600.0f * get_random();
     const b2Vec2& b2v2PositionRef = b2v2Position;
     B2DPod::_Dependencies aB2DPodDependencies(b2v2PositionRef);
     B2DPod* pB2DPod = aB2DPodFactory.Create(aB2DPodDependencies);
