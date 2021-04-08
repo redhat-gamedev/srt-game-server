@@ -24,17 +24,23 @@ B2DPod::_Dependencies::_Dependencies(const b2Vec2& b2v2Position) :
 {
     // Override the defaults where appropriate
     // Set the size of our shape
-    m_b2CircleShape.m_radius = 90.0f;
+    //m_b2CircleShape.m_radius = 90.0f;
+    // half width and half height which makes this initial size 20w x 150h
+    m_b2PolygonShape.SetAsBox(10.0f, 75.0f);
     
     // Set the fixture and use the shape
-//    m_ab2FixtureDef.density = 1.0f;
+
+    // the density multiplied by the area produces the resultant mass of the fixture
+    //
+    m_ab2FixtureDef.density = 6.66667f;
+
 //    m_ab2FixtureDef.friction = 0.3f;
 //    m_ab2FixtureDef.restitution = 0.3f;
     //m_ab2FixtureDef.filter.groupIndex = -1;
     m_ab2FixtureDef.filter.categoryBits = POD;//0x0002;
     //m_ab2FixtureDef.filter.maskBits = BOUNDARY | BULLET;//0x0004;
     m_ab2FixtureDef.filter.maskBits = BOUNDARY | POD | BULLET;
-    m_ab2FixtureDef.shape = &m_b2CircleShape;
+    m_ab2FixtureDef.shape = &m_b2PolygonShape;
     
     m_ab2BodyDef.position = b2v2Position;
 }
@@ -44,6 +50,7 @@ B2DPod::_Dependencies::_Dependencies(const b2Vec2& b2v2Position) :
 B2DPod::B2DPod(B2DPod::_Dependencies& theDependencies) :
     AB2DEntity(B2DWorld::Factory().CreateBody(&theDependencies.BodyDef))
 {
+    LOG_SCOPE_FUNCTION(4);
     b2Fixture* pbFixture = m_pb2Body->CreateFixture(&theDependencies.FixtureDef);
     m_pb2Fixture = m_pb2Body->GetFixtureList();
 }
@@ -58,7 +65,7 @@ void B2DPod::Move(float fX, float fY)
 {
     b2Vec2 b2v2Move;
     
-    LOG_F(4, "Force being applied: %f x %f", fX, fY);
+    LOG_F(6, "Force being applied: %f x %f", fX, fY);
     b2v2Move.x = fX;
     b2v2Move.y = fY;
     
@@ -73,16 +80,18 @@ void B2DPod::Update()
 
     m_b2v2MoveQueueMutex.lock();
     LOG_F(4, "Our current linear velocity: %f x %f", m_pb2Body->GetLinearVelocity().x, m_pb2Body->GetLinearVelocity().y);
+    LOG_F(4, "Our current angular velocity: %f", m_pb2Body->GetAngularVelocity());
     LOG_F(4, "Our current position: %f x %f", m_pb2Body->GetPosition().x, m_pb2Body->GetPosition().y);
-    LOG_F(3, "Emptying the b2v2 move queue");
+    LOG_F(6, "Emptying the b2v2 move queue");
     while (!(m_b2v2MoveQueue.empty()))
     {
         b2Vec2 ab2Vec2Move = m_b2v2MoveQueue.front();
         m_b2v2MoveQueue.pop();
-        LOG_F(3, "Calculating the forces");
+        LOG_SCOPE_F(6, "Calculating the forces");
         ab2Vec2Move.x *= config.ForceMultiplier;
         ab2Vec2Move.y *= config.ForceMultiplier;
 
+        // TODO: need to apply force to the "end" so that we rotate
         m_pb2Body->ApplyForceToCenter(ab2Vec2Move, true);
     }
     m_b2v2MoveQueueMutex.unlock();
