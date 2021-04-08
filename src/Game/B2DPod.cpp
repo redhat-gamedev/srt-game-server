@@ -79,20 +79,36 @@ void B2DPod::Update()
     Configuration &config = Configuration::Instance();
 
     m_b2v2MoveQueueMutex.lock();
-    LOG_F(4, "Our current linear velocity: %f x %f", m_pb2Body->GetLinearVelocity().x, m_pb2Body->GetLinearVelocity().y);
-    LOG_F(4, "Our current angular velocity: %f", m_pb2Body->GetAngularVelocity());
-    LOG_F(4, "Our current position: %f x %f", m_pb2Body->GetPosition().x, m_pb2Body->GetPosition().y);
+    LOG_F(3, "Our current linear velocity: %f x %f", m_pb2Body->GetLinearVelocity().x, m_pb2Body->GetLinearVelocity().y);
+    LOG_F(3, "Our current angular velocity: %f", m_pb2Body->GetAngularVelocity());
+    LOG_F(3, "Our current position: %f x %f", m_pb2Body->GetPosition().x, m_pb2Body->GetPosition().y);
+    LOG_F(3, "Our current angle: %f", m_pb2Body->GetAngle());
     LOG_F(6, "Emptying the b2v2 move queue");
     while (!(m_b2v2MoveQueue.empty()))
     {
         b2Vec2 ab2Vec2Move = m_b2v2MoveQueue.front();
         m_b2v2MoveQueue.pop();
         LOG_SCOPE_F(6, "Calculating the forces");
-        ab2Vec2Move.x *= config.ForceMultiplier;
-        ab2Vec2Move.y *= config.ForceMultiplier;
 
-        // TODO: need to apply force to the "end" so that we rotate
-        m_pb2Body->ApplyForceToCenter(ab2Vec2Move, true);
+        // a thrust vector for applying in the direction the ship is facing
+        // using sin/cos on the angle of the ship
+        // https://gamedev.stackexchange.com/questions/56881/moving-a-box2d-object-in-the-direction-it-is-facing-using-applyforce
+        b2Vec2 m_b2v2_thrust;
+
+        // if the x portion of the input is zero, then this ends up zeroed out
+        m_b2v2_thrust.x = cos(m_pb2Body->GetAngle()) * ab2Vec2Move.x;
+        m_b2v2_thrust.y = sin(m_pb2Body->GetAngle()) * ab2Vec2Move.x;
+        m_b2v2_thrust.x *= config.ForceMultiplier;
+        m_b2v2_thrust.y *= config.ForceMultiplier;
+
+        LOG_F(6, "Force applied to center: %f x %f", m_b2v2_thrust.x, m_b2v2_thrust.y);
+        m_pb2Body->ApplyForceToCenter(m_b2v2_thrust, true);
+
+        // a rotation vector for applying the rotation for use with box2d apply torque
+        float m_torque = (ab2Vec2Move.y * config.ForceMultiplier) / 2;
+        LOG_F(6, "Torque applied: %f", m_torque);
+        m_pb2Body->ApplyTorque(m_torque, true);
+
     }
     m_b2v2MoveQueueMutex.unlock();
 }
