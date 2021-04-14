@@ -13,9 +13,12 @@
 //   limitations under the License.
 
 #include "LeaveSecurityCommand.h"
+#include "../Application/Configuration.h"
 #include "../Proto/CommandBuffer.pb.h"
 #include "../Proto/SecurityCommandBuffer.pb.h"
+#include <proton/message.hpp>
 #include <assert.h>
+#include "../Logging/loguru.hpp"
 
 
 // Constructor
@@ -36,11 +39,15 @@ void LeaveSecurityCommand::Execute()
 {
     using namespace redhatgamedev::srt;
     
+    assert(m_pBytesMessage);
     assert(m_pCommandBuffer);
     
+    std::string     strUUID = "";
     const SecurityCommandBuffer& aSecurityCommandBuffer = m_pCommandBuffer->securitycommandbuffer();
-    const LeaveSecurityCommandBuffer& aLeaveSecurityCommandBuffer = aSecurityCommandBuffer.leavesecuritycommandbuffer();
-    const std::string& strUUID = aLeaveSecurityCommandBuffer.uuid();
+    LOG_SCOPE_F(INFO, "provided player identity: %s", aSecurityCommandBuffer.uuid().c_str());
+
+    //const LeaveSecurityCommandBuffer& aLeaveSecurityCommandBuffer = aSecurityCommandBuffer.leavesecuritycommandbuffer();
+    strUUID = aSecurityCommandBuffer.uuid();
     
     ExecutedEvent(this, strUUID);
 }

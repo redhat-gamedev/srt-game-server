@@ -88,23 +88,24 @@ void CommandQueue::HandleCommandConsumedEvent(const void* pSender, Poco::Tuple<p
     
     ACommand* pCommand = NULL;
 
-    LOG_SCOPE_F(1, "command event received");
-    LOG_SCOPE_F(1, "received command buffer type: %i", pCommandBuffer->type());
+    LOG_SCOPE_F(4, "command event received");
+    LOG_SCOPE_F(8, "received command buffer type: %i", pCommandBuffer->type());
 
     if (redhatgamedev::srt::CommandBuffer_CommandBufferType_SECURITY == pCommandBuffer->type())
     {
         const SecurityCommandBuffer& aSecurityCommandBuffer = pCommandBuffer->securitycommandbuffer();
-        LOG_SCOPE_F(1, "security command");
-        LOG_SCOPE_F(1, "received security command type: %i", aSecurityCommandBuffer.type());
+        LOG_SCOPE_F(4, "security command");
+        LOG_SCOPE_F(8, "received security command type: %i", aSecurityCommandBuffer.type());
 
         if (redhatgamedev::srt::SecurityCommandBuffer_SecurityCommandBufferType_JOIN == aSecurityCommandBuffer.type())
         {
-            LOG_SCOPE_F(1, "join message received");
+            LOG_SCOPE_F(4, "join message received");
             JoinSecurityCommand::_SecurityDependencies theJoinSecurityCommandDependencies(pCommandBuffer, pBytesMessage);
             pCommand = m_aJoinSecurityCommandFactory.Create(theJoinSecurityCommandDependencies);
         }
         else if (redhatgamedev::srt::SecurityCommandBuffer_SecurityCommandBufferType_LEAVE == aSecurityCommandBuffer.type())
         {
+            LOG_SCOPE_F(4, "leave message received");
             LeaveSecurityCommand::_SecurityDependencies theLeaveSecurityCommandDependencies(pCommandBuffer, pBytesMessage);
             pCommand = m_aLeaveSecurityCommandFactory.Create(theLeaveSecurityCommandDependencies);
         }

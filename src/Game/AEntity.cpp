@@ -93,6 +93,7 @@ void AEntity::ClassTeardown()
 
 void AEntity::AddPod(const std::string& strUUID)
 {
+    LOG_SCOPE_FUNCTION(4);
     assert(strUUID.length() > 0);
     
     B2DPodFactory& aB2DPodFactory = B2DPodFactory::Instance();
@@ -112,6 +113,7 @@ void AEntity::AddPod(const std::string& strUUID)
 
 void AEntity::RemovePod(const std::string& strUUID)
 {
+    LOG_SCOPE_FUNCTION(4);
     assert(strUUID.length() > 0);
     
     PodFactory& aPodFactory = PodFactory::Instance();
@@ -133,8 +135,8 @@ void AEntity::RemovePod(const std::string& strUUID)
 
 void AEntity::Update()
 {
-    LOG_SCOPE_FUNCTION(3);
-    LOG_SCOPE_F(3, "Doing the AEntity update");
+    LOG_SCOPE_FUNCTION(4);
+    LOG_SCOPE_F(4, "Doing the AEntity update");
     s_listPodsSwap = s_listPods;
     Pod*     pPod = NULL;
     
@@ -151,6 +153,7 @@ void AEntity::Update()
 // Security::ICallbacks implementation
 void AEntity::OnSecurityRequestJoin(const void* pSender, const std::string& strUUID)
 {
+    LOG_SCOPE_FUNCTION(4);
     assert(!strUUID.empty());
     
     AddPod(strUUID);
@@ -158,6 +161,7 @@ void AEntity::OnSecurityRequestJoin(const void* pSender, const std::string& strU
 
 void AEntity::OnSecurityRequestLeave(const void* pSender, const std::string& strUUID)
 {
+    LOG_SCOPE_FUNCTION(4);
     assert(!strUUID.empty());
     
     RemovePod(strUUID);
@@ -165,6 +169,7 @@ void AEntity::OnSecurityRequestLeave(const void* pSender, const std::string& str
 
 void AEntity::HandleJoinSecurityCommandFactoryCreated(const void* pSender, JoinSecurityCommand*& pJoinSecurityCommand)
 {
+    LOG_SCOPE_FUNCTION(4);
     assert(pJoinSecurityCommand);
     
     pJoinSecurityCommand->ExecutedEvent += Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestJoin);
@@ -172,6 +177,7 @@ void AEntity::HandleJoinSecurityCommandFactoryCreated(const void* pSender, JoinS
 
 void AEntity::HandleJoinSecurityCommandFactoryDestroyed(const void* pSender, JoinSecurityCommand*& pJoinSecurityCommand)
 {
+    LOG_SCOPE_FUNCTION(4);
     assert(pJoinSecurityCommand);
     
     pJoinSecurityCommand->ExecutedEvent -= Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestJoin);
@@ -179,6 +185,7 @@ void AEntity::HandleJoinSecurityCommandFactoryDestroyed(const void* pSender, Joi
 
 void AEntity::HandleLeaveSecurityCommandFactoryCreated(const void* pSender, LeaveSecurityCommand*& pLeaveSecurityCommand)
 {
+    LOG_SCOPE_FUNCTION(4);
     assert(pLeaveSecurityCommand);
     
     pLeaveSecurityCommand->ExecutedEvent += Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestLeave);
@@ -186,6 +193,7 @@ void AEntity::HandleLeaveSecurityCommandFactoryCreated(const void* pSender, Leav
 
 void AEntity::HandleLeaveSecurityCommandFactoryDestroyed(const void* pSender, LeaveSecurityCommand*& pLeaveSecurityCommand)
 {
+    LOG_SCOPE_FUNCTION(4);
     assert(pLeaveSecurityCommand);
     
     pLeaveSecurityCommand->ExecutedEvent -= Poco::FunctionDelegate<const std::string&>(&AEntity::OnSecurityRequestLeave);

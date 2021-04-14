@@ -86,8 +86,11 @@ void Server::run()
 		LOG_SCOPE_FUNCTION(2);
         // Receive incoming user commands
         LOG_F(2, "Handling incoming commands");
+        LOG_F(4, "Message Consumer Dispatch");
         m_theMessageConsumer.Dispatch();
+        LOG_F(4, "Command Consumer Consume");
         m_theCommandConsumer.Consume();
+        LOG_F(4, "Command Queue Execute");
         m_theCommandQueue.Execute();
         
         // Run simulation step
@@ -103,9 +106,12 @@ void Server::run()
         // if any client needs a world update take world snapshot
         // Update clients if required
         LOG_F(2, "Telling the clients what's going on");
+        LOG_F(4, "Event Dispatcher Dispatch");
         m_theEventDispatcher.Dispatch();
+        LOG_F(4, "Message Dispatcher Dispatch");
         m_theMessageDispatcher.Dispatch();
         
+        LOG_F(4, "Game Sleep");
         std::this_thread::sleep_for(std::chrono::milliseconds(Configuration::Instance().SleepCycle));
     }
 }
