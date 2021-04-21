@@ -25,10 +25,13 @@ private:
 
     // Config variables default values
     std::string m_strBrokerUri     = "tcp://127.0.0.1:5672";
-    long        m_lSleepCycle      = 50;
+    long        m_lSleepCycle      = 50; // milliseconds
     std::string m_strCommandIn     = "COMMAND.IN";
     std::string m_strGameEventOut  = "GAME.EVENT.OUT";
-    float       m_fForceMultiplier = 5000.0;
+    float       m_fForceMultiplier = 3000000.0; // newtons
+    float       m_fShipWidth       = 20.0; // meters
+    float       m_fShipLength      = 150.0; // meters
+    float       m_fFixtureDensity  = 6.66667;
 
 protected:
     // Constructor
@@ -44,6 +47,9 @@ public:
     std::string &CommandIn       = m_strCommandIn;
     std::string &GameEventOut    = m_strGameEventOut;
     float       &ForceMultiplier = m_fForceMultiplier;
+    float       &ShipWidth       = m_fShipWidth;
+    float       &ShipLength      = m_fShipLength;
+    float       &FixtureDensity  = m_fFixtureDensity;
 
     void Init(int &argc, char *argv[]);
 

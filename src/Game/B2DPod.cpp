@@ -25,14 +25,14 @@ B2DPod::_Dependencies::_Dependencies(const b2Vec2& b2v2Position) :
     // Override the defaults where appropriate
     // Set the size of our shape
     //m_b2CircleShape.m_radius = 90.0f;
-    // half width and half height which makes this initial size 20w x 150h
-    m_b2PolygonShape.SetAsBox(10.0f, 75.0f);
+    // half width and half height
+    m_b2PolygonShape.SetAsBox(Configuration::Instance().ShipWidth / 2, Configuration::Instance().ShipLength / 2);
     
     // Set the fixture and use the shape
 
     // the density multiplied by the area produces the resultant mass of the fixture
     //
-    m_ab2FixtureDef.density = 6.66667f;
+    m_ab2FixtureDef.density = Configuration::Instance().FixtureDensity;
 
 //    m_ab2FixtureDef.friction = 0.3f;
 //    m_ab2FixtureDef.restitution = 0.3f;
@@ -104,10 +104,35 @@ void B2DPod::Update()
         LOG_F(6, "Force applied to center: %f x %f", m_b2v2_thrust.x, m_b2v2_thrust.y);
         m_pb2Body->ApplyForceToCenter(m_b2v2_thrust, true);
 
-        // a rotation vector for applying the rotation for use with box2d apply torque
-        float m_torque = (ab2Vec2Move.y * config.ForceMultiplier) / 2;
-        LOG_F(6, "Torque applied: %f", m_torque);
-        m_pb2Body->ApplyTorque(m_torque, true);
+
+        // TODO: change to 180deg / 4sec in some calculation against the server cycle
+        // TODO: config base turn rate
+
+        // turn rate is in degrees per second
+        // server cycle is in milliseconds, so divide it by 1000
+        // effective turn per tick = turn rate * server cycle / 1000
+        float m_fDegreesPerTick = 45 * Configuration::Instance().SleepCycle / 1000;
+
+        // for really high sleep cycles, even with a single button press, this
+        // ends up being a really high value, so max it out at 5 degrees
+
+        if (m_fDegreesPerTick > 5) {
+            m_fDegreesPerTick = 5;
+        }
+        LOG_F(6, "Turn degrees per tick: %f", m_fDegreesPerTick);
+
+        // depending on whether the player is requesting left or right rotation, multiply by
+        // the received y value
+        m_fDegreesPerTick *= ab2Vec2Move.y;
+        LOG_F(6, "Turn in Degrees: %f", ab2Vec2Move.y);
+
+        // convert to radians
+        m_fDegreesPerTick *= ((22.0 / 7.0) / 180.0); // Pi is 22/7 
+        LOG_F(6, "Turn amount in radians: %f", m_fDegreesPerTick);
+        LOG_F(6, "Current angle: %f", m_pb2Body->GetAngle());
+
+        // rotate the ship by the effective degrees every tick
+        m_pb2Body->SetTransform(m_pb2Body->GetPosition(), m_pb2Body->GetAngle() + m_fDegreesPerTick);
 
     }
     m_b2v2MoveQueueMutex.unlock();
