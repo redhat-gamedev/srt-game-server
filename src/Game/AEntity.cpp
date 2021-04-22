@@ -104,22 +104,39 @@ void AEntity::AddPod(const std::string& strUUID)
     LOG_SCOPE_FUNCTION(4);
     assert(strUUID.length() > 0);
     
+    LOG_F(6, "Create a B2DPodFactory instance");
     B2DPodFactory& aB2DPodFactory = B2DPodFactory::Instance();
+    LOG_F(6, "Create a PodFactory instance");
     PodFactory& aPodFactory = PodFactory::Instance();
 
     // initialize a random X and Y position
     // TODO: make the scaling constant a config option
     // TODO: we need to figure out how to reasonably distribute players, as opposed to
     //       just randomly plopping them on the board
+    LOG_F(6, "Create a random pod position");
     b2Vec2 b2v2Position;
     b2v2Position.x = 600.0f * get_random();
     b2v2Position.y = 600.0f * get_random();
     const b2Vec2& b2v2PositionRef = b2v2Position;
+
+    LOG_F(6, "Set the B2D Pod dependencies using the random position");
     B2DPod::_Dependencies aB2DPodDependencies(b2v2PositionRef);
+
+    LOG_F(6, "Create the B2D Pod using the dependencies");
     B2DPod* pB2DPod = aB2DPodFactory.Create(aB2DPodDependencies);
-    
+
+    LOG_F(6, "Set the Pod dependencies using the B2D Pod");
     Pod::_Dependencies aPodDependencies(strUUID, pB2DPod);
+
+    LOG_F(6, "Create the Pod using the dependencies");
     Pod* pPod = aPodFactory.Create(aPodDependencies);
+
+    LOG_F(6, "Reset the mass data (pPod -> B2D Entity -> B2D Pod");
+    pPod->m_pB2DEntity->m_pb2Body->ResetMassData();
+    LOG_F(6, "The Pod's current mass: %f", pPod->m_pB2DEntity->m_pb2Body->GetMass());
+    LOG_F(6, "The Pod's current inertia: %f", pPod->m_pB2DEntity->m_pb2Body->GetInertia());
+
+    LOG_F(6, "Push the Pod onto the list of pods");
     s_listPods.push_front(pPod);
 }
 
@@ -148,7 +165,7 @@ void AEntity::RemovePod(const std::string& strUUID)
 void AEntity::Update()
 {
     LOG_SCOPE_FUNCTION(4);
-    LOG_SCOPE_F(4, "Doing the AEntity update");
+    LOG_SCOPE_F(6, "Doing the AEntity update");
     s_listPodsSwap = s_listPods;
     Pod*     pPod = NULL;
     
@@ -157,7 +174,7 @@ void AEntity::Update()
         pPod = s_listPodsSwap.front();
         s_listPodsSwap.pop_front();
         assert(pPod);
-        LOG_F(3, "Updating a specific Pod");
+        LOG_F(6, "Updating a specific Pod");
         pPod->Update();
     }
 }

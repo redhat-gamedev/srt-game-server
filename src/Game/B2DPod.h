@@ -32,7 +32,7 @@ public:
     {
     protected:
         const b2Vec2&           m_b2v2Position;
-        b2CircleShape           m_b2CircleShape;
+        b2PolygonShape          m_b2PolygonShape;
         
     public:
         // Constructor

@@ -22,6 +22,7 @@
 #include "B2DWorld.h"
 #include "AEntity.h"
 #include "../Proto/EntityGameEventBuffer.pb.h"
+#include "../Logging/loguru.hpp"
 #include <assert.h>
 
 AB2DEntity::_Serializer                 AB2DEntity::Serializer;
@@ -31,6 +32,7 @@ using namespace redhatgamedev::srt;
 
 void AB2DEntity::_Serializer::Serialize(const AB2DEntity* pB2DEntity, redhatgamedev::srt::EntityGameEventBuffer* pEntityGameEvent)
 {
+    LOG_SCOPE_FUNCTION(4);
     using namespace box2d;
     
     assert(pEntityGameEvent);
@@ -110,12 +112,14 @@ AB2DEntity::_AB2DDefinition::_AB2DDefinition()
 // Constructor(s)
 AB2DEntity::AB2DEntity()
 {
+    LOG_SCOPE_FUNCTION(4);
     assert(false);
 }
 
 AB2DEntity::AB2DEntity(b2Body* pb2Body) :
     m_pb2Body(pb2Body)
 {
+    LOG_SCOPE_FUNCTION(4);
     assert(m_pb2Body);
 }
 
@@ -123,6 +127,7 @@ AB2DEntity::AB2DEntity(const _AB2DDefinition& aAB2DDefinition, AEntity* pEntity)
     m_pb2Body(NULL),
     m_pb2Fixture(NULL)
 {
+    LOG_SCOPE_FUNCTION(4);
     assert(pEntity);
     
     m_pb2Body = B2DWorld::Factory().CreateBody(&aAB2DDefinition.BodyDef);

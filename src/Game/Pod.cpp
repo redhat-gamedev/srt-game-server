@@ -39,6 +39,7 @@ Pod::Pod(_Dependencies& theDependencies) :
             (uint64_t)MakeT<uint64_t>((uint32_t)AEntity::POD, s_ui32Count), theDependencies.pB2DEntity),
     m_i16GroupCount(0)
 {
+    LOG_SCOPE_FUNCTION(4);
     assert(m_pB2DEntity);
 
     ++s_ui32Count;
@@ -86,7 +87,7 @@ Pod::~Pod()
 void Pod::Update()
 {
     LOG_SCOPE_FUNCTION(4);
-    LOG_SCOPE_F(4, "Updating the pod: %s", UUID.c_str());
+    LOG_SCOPE_F(6, "Updating the pod: %s", UUID.c_str());
     assert(m_pB2DEntity);
     assert(m_pBulletTimer);
 
@@ -94,26 +95,26 @@ void Pod::Update()
     BulletFactory& aBulletFactory = BulletFactory::Instance();
 
     m_b2v2MoveQueueMutex.lock();
-    LOG_F(4, "Grabbing movement commands off the queue");
+    LOG_F(6, "Grabbing movement commands off the queue");
     std::vector<b2Vec2> vecb2v2Move = {m_b2v2MoveQueue.begin(), m_b2v2MoveQueue.end()};
     m_b2v2MoveQueue.clear();
     m_b2v2MoveQueueMutex.unlock();
     
     for (int i = 0; i < vecb2v2Move.size(); ++i)
     {
-        LOG_SCOPE_F(4, "Moving the pod with a queued command vector");
+        LOG_SCOPE_F(6, "Moving the pod with a queued command vector");
         m_pB2DEntity->Move(vecb2v2Move[i].x, vecb2v2Move[i].y);
     }
     
     m_b2v2ShootQueueMutex.lock();
-    LOG_F(4, "Grabbing shooting commands off the queue");
+    LOG_F(6, "Grabbing shooting commands off the queue");
     std::vector<b2Vec2> vecb2v2Shoot = { m_b2v2ShootQueue.begin(), m_b2v2ShootQueue.end()};
     m_b2v2ShootQueue.clear();
     m_b2v2ShootQueueMutex.unlock();
 
     for (int i = 0; i < vecb2v2Shoot.size(); ++i)
     {
-        LOG_SCOPE_F(4, "Check if the bullet timer is expired");
+        LOG_SCOPE_F(6, "Check if the bullet timer is expired");
         if (m_pBulletTimer->Status() == Rock2D::Timer::EXPIRED)
         {
             m_pBulletTimer->Restart();
@@ -132,9 +133,9 @@ void Pod::Update()
         }
     }
     
-    LOG_F(4, "Update our Rock2D timer");
+    LOG_F(6, "Update our Rock2D timer");
     Rock2D::Timer::Update();
-    LOG_F(4, "Update our B2D Pod to apply forces");
+    LOG_F(6, "Update our B2D Pod to apply forces");
     m_pB2DEntity->Update();
 
     Pod* pPod = this;

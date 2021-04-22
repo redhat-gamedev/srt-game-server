@@ -42,6 +42,15 @@ void Configuration::Init(int &argc, char *argv[]) {
         if (config["force-multiplier"]) {
             m_pConInstance->ForceMultiplier = config["force-multiplier"].as<float>();
         }
+        if (config["ship-width"]) {
+            m_pConInstance->ShipWidth = config["ship-width"].as<float>();
+        }
+        if (config["ship-length"]) {
+            m_pConInstance->ShipLength = config["ship-length"].as<float>();
+        }
+        if (config["fixture-density"]) {
+            m_pConInstance->FixtureDensity = config["fixture-density"].as<float>();
+        }
     }
     catch (YAML::BadFile &e) {
         LOG_F(INFO, "No config.yaml found..skipping");
@@ -60,8 +69,24 @@ void Configuration::Init(int &argc, char *argv[]) {
             m_pConInstance->GameEventOut = argv[++i];
         } else if (0 == strcmp(argv[i], "--force-multiplier")) {
             m_pConInstance->ForceMultiplier = strtof(argv[++i], nullptr);
+        } else if (0 == strcmp(argv[i], "--ship-width")) {
+            m_pConInstance->ShipWidth = strtof(argv[++i], nullptr);
+        } else if (0 == strcmp(argv[i], "--ship-length")) {
+            m_pConInstance->ShipLength = strtof(argv[++i], nullptr);
+        } else if (0 == strcmp(argv[i], "--fixture-density")) {
+            m_pConInstance->FixtureDensity = strtof(argv[++i], nullptr);
         }
     }
+
+    // Output the final configuration
+    LOG_F(INFO, "Broker URI         : %s", m_pConInstance->BrokerUri.c_str());
+    LOG_F(INFO, "Sleep Cycle        : %d", m_pConInstance->SleepCycle);
+    LOG_F(INFO, "Command IN         : %s", m_pConInstance->CommandIn.c_str());
+    LOG_F(INFO, "Game Event OUT     : %s", m_pConInstance->GameEventOut.c_str());
+    LOG_F(INFO, "Force Multiplier   : %f", m_pConInstance->ForceMultiplier);
+    LOG_F(INFO, "Ship Width         : %f", m_pConInstance->ShipWidth);
+    LOG_F(INFO, "Ship Length        : %f", m_pConInstance->ShipLength);
+    LOG_F(INFO, "Fixture Density    : %f", m_pConInstance->FixtureDensity);
 }
 
 Configuration &Configuration::Instance() {
