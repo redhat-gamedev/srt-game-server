@@ -111,19 +111,19 @@ void B2DPod::Update()
         // turn rate is in degrees per second
         // server cycle is in milliseconds, so divide it by 1000
         // effective turn per tick = turn rate * server cycle / 1000
-        float m_fDegreesPerTick = 45 * Configuration::Instance().SleepCycle / 1000;
+        float m_fDegreesPerTick = 45.0f * float(Configuration::Instance().SleepCycle) / 1000.0f;
 
         // for really high sleep cycles, even with a single button press, this
         // ends up being a really high value, so max it out at 5 degrees
 
-        if (m_fDegreesPerTick > 5) {
-            m_fDegreesPerTick = 5;
+        if (m_fDegreesPerTick > 5.0f) {
+            m_fDegreesPerTick = 5.0f;
         }
         LOG_F(6, "Turn degrees per tick: %f", m_fDegreesPerTick);
 
         // depending on whether the player is requesting left or right rotation, multiply by
         // the received y value
-        m_fDegreesPerTick *= ab2Vec2Move.y;
+        m_fDegreesPerTick *= float(ab2Vec2Move.y);
         LOG_F(6, "Turn in Degrees: %f", ab2Vec2Move.y);
 
         // convert to radians
