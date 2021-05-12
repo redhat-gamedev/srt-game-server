@@ -133,6 +133,10 @@ void AEntity::AddPod(const std::string& strUUID)
 
     LOG_F(6, "Reset the mass data (pPod -> B2D Entity -> B2D Pod");
     pPod->m_pB2DEntity->m_pb2Body->ResetMassData();
+
+    pPod->m_pB2DEntity->m_pb2Body->SetLinearDamping(0.0f);
+    pPod->m_pB2DEntity->m_pb2Body->SetAngularDamping(0.0f);
+
     LOG_F(6, "The Pod's current mass: %f", pPod->m_pB2DEntity->m_pb2Body->GetMass());
     LOG_F(6, "The Pod's current inertia: %f", pPod->m_pB2DEntity->m_pb2Body->GetInertia());
 
