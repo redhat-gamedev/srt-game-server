@@ -30,7 +30,7 @@ RUN echo `pwd`; \
   echo "Running cmake /tmp/srt-game-server\n"; \
   cmake /tmp/srt-game-server
 RUN echo "Running cmake --build .\n"; \
-  cmake --build .
+  cmake --build . --parallel -j $(($(grep -c ^processor /proc/cpuinfo)+1))
 
 # Run
 FROM fedora:${fedora_version} as base-env
