@@ -4,6 +4,10 @@ FROM fedora:${fedora_version} as build-env
 
 RUN sudo dnf install Box2D.x86_64 Box2D-devel.x86_64 compat-openssl10 openssl poco-devel poco-foundation protobuf protobuf-devel gcc g++ cmake git qpid-proton-cpp qpid-proton-cpp-devel yaml-cpp-devel --assumeyes --verbose
 
+COPY CMakeLists.txt /tmp/srt-game-server/
+COPY config.yaml /tmp/srt-game-server/
+COPY src/ /tmp/srt-game-server/src/
+
 WORKDIR /tmp/srt-game-server/src/Proto
 RUN for i in `ls -lC1 *.proto`; do `echo protoc $i --cpp_out=.`; done;
 RUN mkdir /tmp/build
@@ -25,9 +29,9 @@ ENV USER_UID=1000
 ENV USER_NAME=srt
 ENV EXECUTABLE_NAME=srt-game-server.bin
 ENV EXECUTABLE=/home/${USER_NAME}/bin/${EXECUTABLE_NAME}
-ENV BROKER_URI="tcp://127.0.0.1:5672"
-ENV LOG_LEVEL="1"
-ENV SLEEP_CYCLE="1500"
+ENV BROKER_URI=tcp://artemiscloud:5672
+ENV LOG_LEVEL=1
+ENV SLEEP_CYCLE=1500
 
 WORKDIR /
 
@@ -39,7 +43,8 @@ COPY containerbuild/bin/entrypoint /home/${USER_NAME}/bin
 
 RUN chown -R `id -u`:0 /home/${USER_NAME}/bin && chmod -R 755 /home/${USER_NAME}/bin
 USER ${USER_UID}:0
-ENTRYPOINT "/home/srt/bin/entrypoint" "--broker-uri" "$BROKER_URI" "-v" "$LOG_LEVEL" "--sleep-cycle" "$SLEEP_CYCLE"
+ENTRYPOINT /home/srt/bin/entrypoint --broker-uri ${BROKER_URI} --sleep-cycle ${SLEEP_CYCLE}
+CMD [-v, ${LOG_LEVEL}]
 
 LABEL \
       com.srt.component="srt-game-server" \

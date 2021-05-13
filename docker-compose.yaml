@@ -1,0 +1,24 @@
+version: '3.3'
+services:
+    artemiscloud:
+        container_name: artemis
+        ports:
+            - '5672:5672'
+        environment:
+            - AMQ_USER=admin
+            - AMQ_PASSWORD=admin
+            - AMQ_ALLOW_ANONYMOUS=true
+        image: 'quay.io/artemiscloud/activemq-artemis-broker:latest'
+        restart: unless-stopped
+    srt-game-server:
+        container_name: srt-game-server
+        build:
+            context: .
+            args:
+                fedora_version: 33
+        environment:
+            - BROKER_URI=tcp://artemiscloud:5672
+        image: 'srt-game-server:latest'
+        links:
+            - artemiscloud
+        restart: unless-stopped
