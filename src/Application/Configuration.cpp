@@ -12,11 +12,13 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-#include "Configuration.h"
-#include "../Logging/loguru.hpp"
+#include <cstring>
 #include <yaml-cpp/node/node.h>
 #include <yaml-cpp/node/parse.h>
-#include <cstring>
+
+#include "Configuration.h"
+#include "../Logging/loguru.hpp"
+#include "../Shared/Strings.h"
 
 // Define the static Singleton pointer
 Configuration *Configuration::m_pConInstance = nullptr;
@@ -60,7 +62,9 @@ void Configuration::Init(int &argc, char *argv[]) {
     // Override yaml config and default values with any matching command line args
     for (int i = 1; i < argc; ++i) {
         if (0 == strcmp(argv[i], "--broker-uri")) {
-            m_pConInstance->BrokerUri = argv[++i];
+            std::string m_strBrokerUri(argv[++i]);
+            trim(m_strBrokerUri);
+            m_pConInstance->BrokerUri = m_strBrokerUri;
         } else if (0 == strcmp(argv[i], "--sleep-cycle")) {
             m_pConInstance->SleepCycle = strtol(argv[++i], nullptr, 0);
         } else if (0 == strcmp(argv[i], "--command-in")) {
