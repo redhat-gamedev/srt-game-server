@@ -9,12 +9,12 @@ RUN for i in `ls -lC1 *.proto`; do `echo protoc $i --cpp_out=.`; done;
 RUN mkdir /tmp/build
 WORKDIR /tmp/build
 
-RUN echo `pwd`
-RUN ls -lR /tmp/srt-game-server
-RUN echo "Running cmake /tmp/srt-game-server"
-RUN cmake /tmp/srt-game-server
-RUN echo "Running cmake --build ."
-RUN cmake --build .
+RUN echo `pwd`; \
+  ls -lR /tmp/srt-game-server; \
+  echo "Running cmake /tmp/srt-game-server\n"; \
+  cmake /tmp/srt-game-server
+RUN echo "Running cmake --build .\n"; \
+  cmake --build . --parallel -j $(($(grep -c ^processor /proc/cpuinfo)+1))
 
 # Run
 FROM fedora:${fedora_version} as base-env
