@@ -11,5 +11,5 @@ if ! whoami &>/dev/null; then
   fi
 fi
 
-echo "exec ${EXECUTABLE}"
-exec ${EXECUTABLE} $@
+echo "exec ${EXECUTABLE} ${@}"
+exec "${EXECUTABLE}" "${@}"

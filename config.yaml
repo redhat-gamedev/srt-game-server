@@ -1,5 +1,5 @@
 ---
-broker-uri: "tcp://10.88.0.5:5672"
+broker-uri: "tcp://artemiscloud:5672"
 sleep-cycle: 1500
 command-in: "COMMAND.IN"
 game-event-out: "GAME.EVENT.OUT"
