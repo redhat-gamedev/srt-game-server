@@ -124,8 +124,8 @@ src/Network/receiver.h
 src/Network/closed.cpp
 src/Network/closed.h)
 
-find_library( BOX2_D_LIBRARY box2d)
-message( STATUS "BOX2_D_LIBRARY is ${BOX2_D_LIBRARY}")
+find_library( BOX2D_LIBRARY box2d)
+message( STATUS "BOX2D_LIBRARY is ${BOX2D_LIBRARY}")
 find_library( PROTOCOL_BUFFERS_LIBRARY protobuf)
 message( STATUS "PROTOCOL_BUFFERS_LIBRARY is ${PROTOCOL_BUFFERS_LIBRARY}")
 find_library( QPID_PROTON_CPP_LIBRARY qpid-proton)
@@ -137,7 +137,7 @@ find_package(ProtonCpp REQUIRED)
 
 set( STATIC_DEPENDENCIES
 ${QPID_PROTON_CPP_LIBRARY}
-${BOX2_D_LIBRARY}
+${BOX2D_LIBRARY}
 ${PROTOCOL_BUFFERS_LIBRARY}
 )
 
