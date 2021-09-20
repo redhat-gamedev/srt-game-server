@@ -61,12 +61,9 @@ int main(int argc, char* argv[])
 	Configuration &config = Configuration::Instance();
 	config.Init(argc, argv);
 
-    // Run the proton container
-    proton::container container;
-    auto container_thread = std::thread([&]() { container.run(); });
-
     // A single sender and receiver to be shared by all the threads
     // TODO: Proton TEST ME
+    proton::container container;
     sender send(container, config.BrokerUri, config.GameEventOut);
     receiver recv(container, config.BrokerUri, config.CommandIn);
 
@@ -97,17 +94,33 @@ int main(int argc, char* argv[])
     
     Server* pServer = new Server(theEventDispatcher, theMessageDispatcher, theMessageConsumer, theCommandConsumer, theCommandQueue);
 
-    // Wait to exit.
-    LOG_F(INFO, "press 'q' to quit");
+    // Start the main thread and wait to exit.
+    std::thread* pContainerThread = new std::thread([&]() { container.run(); });
+    pServer->Launch();
+    LOG_F(INFO, "Press 'q' to quit");
     while( std::cin.get() != 'q') {}
+    LOG_F(INFO, "Waiting for server to stop");
+    pServer->Stop();
 
-    pServer->stop();
+    // TODO: Add timer as well
+    while (!pServer->IsStopped) {}
+    LOG_F(INFO, "Server stopped, closing sender and receiver");
 
+    // Clean up the shared sender and receiver
     send.close();
     recv.close();
+    LOG_F(INFO, "Sender and receiver closed");
+    LOG_F(INFO, "Stopping the proton container");
+    container.stop();
 
+    pContainerThread->join();
+    delete pContainerThread;
+    pContainerThread = NULL;
+
+    LOG_F(INFO, "Destructing server");
     delete pServer;
     pServer = NULL;
 
+    LOG_F(INFO, "Returning from main");
     return 0;
 }

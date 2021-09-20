@@ -34,6 +34,7 @@ class Server
 // Class
 private:
     bool                    m_bStop;
+    bool                    m_bIsStopped;
     
 protected:
 
@@ -57,7 +58,8 @@ protected:
     // Helper(s)
     void Setup();
     void Teardown();
-    
+    void run();
+
 public:
     // Constructor(s)
     Server(EventDispatcher& theEventDispatcher,
@@ -70,8 +72,11 @@ public:
     ~Server();
     
     // Method(s)
-    void run();
-    void stop();
+    void Stop();
+    void Launch();
+
+    // Accessor(s)
+    bool& IsStopped = m_bIsStopped;
 };
 
 #endif /* defined(__SRT__Server__) */

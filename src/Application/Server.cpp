@@ -34,6 +34,7 @@ Server::Server(EventDispatcher& theEventDispatcher,
     m_pWorld(NULL),
     m_pMainThread(NULL),
     m_bStop(false),
+    m_bIsStopped(false),
     m_theEventDispatcher(theEventDispatcher),
     m_theMessageDispatcher(theMessageDispatcher),
     m_theMessageConsumer(theMessageConsumer),
@@ -59,9 +60,6 @@ void Server::Setup()
     AEntity::ClassSetup();
 
     m_pWorld = new World();
-
-    LOG_SCOPE_F(INFO, "Starting the world producer");
-    m_pMainThread = new std::thread([this]() {run();});
 }
 
 void Server::Teardown()
@@ -114,9 +112,16 @@ void Server::run()
         LOG_F(4, "Game Sleep");
         std::this_thread::sleep_for(std::chrono::milliseconds(Configuration::Instance().SleepCycle));
     }
+    m_bIsStopped = true;
 }
 
-void Server::stop()
+void Server::Stop()
 {
     m_bStop = true;
+}
+
+void Server::Launch()
+{
+    LOG_SCOPE_F(INFO, "Starting the main Server thread");
+    m_pMainThread = new std::thread([this]() {run();});
 }

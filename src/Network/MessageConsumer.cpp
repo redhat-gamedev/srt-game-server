@@ -60,10 +60,6 @@ MessageConsumer::~MessageConsumer()
     m_pReceiverThread->join();
     delete m_pReceiverThread;
     m_pReceiverThread = NULL;
-
-    m_preceiver->close();
-    delete m_preceiver;
-    m_preceiver = NULL;
 }
 
 // Helper(s)
