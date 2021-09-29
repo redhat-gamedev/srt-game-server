@@ -110,7 +110,7 @@ void Server::run()
         m_theMessageDispatcher.Dispatch();
         
         LOG_F(4, "Game Sleep");
-        std::this_thread::sleep_for(std::chrono::milliseconds(Configuration::Instance().SleepCycle));
+        std::this_thread::sleep_for(std::chrono::milliseconds(int64_t(Configuration::Instance().SleepCycle)));
     }
     m_bIsStopped = true;
 }

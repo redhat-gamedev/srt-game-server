@@ -28,12 +28,14 @@ void Configuration::Init(int &argc, char *argv[]) {
 
     // Load the config.yaml file
     try {
-        YAML::Node config = YAML::LoadFile("config.yaml");
+        // We assume our starting point is the bin directory for the container image layout
+        // We may need to adjust the build locally
+        YAML::Node config = YAML::LoadFile("../etc/config.yaml");
         if (config["broker-uri"]) {
             m_pConInstance->BrokerUri = config["broker-uri"].as<std::string>();
         }
         if (config["sleep-cycle"]) {
-            m_pConInstance->SleepCycle = config["sleep-cycle"].as<long>();
+            m_pConInstance->SleepCycle = config["sleep-cycle"].as<float>();
         }
         if (config["command-in"]) {
             m_pConInstance->CommandIn = config["command-in"].as<std::string>();
@@ -62,9 +64,13 @@ void Configuration::Init(int &argc, char *argv[]) {
     // Override yaml config and default values with any matching command line args
     for (int i = 1; i < argc; ++i) {
         if (0 == strcmp(argv[i], "--broker-uri")) {
+
             std::string m_strBrokerUri(argv[++i]);
+            LOG_F(INFO, "m_strBrokerUri: %s", m_strBrokerUri.c_str());
             trim(m_strBrokerUri);
+            LOG_F(INFO, "m_strBrokerUri trimmed: %s", m_strBrokerUri.c_str());
             m_pConInstance->BrokerUri = m_strBrokerUri;
+            LOG_F(INFO, "Broker URI         : %s", m_pConInstance->BrokerUri.c_str());
         } else if (0 == strcmp(argv[i], "--sleep-cycle")) {
             m_pConInstance->SleepCycle = strtol(argv[++i], nullptr, 0);
         } else if (0 == strcmp(argv[i], "--command-in")) {
@@ -84,13 +90,13 @@ void Configuration::Init(int &argc, char *argv[]) {
 
     // Output the final configuration
     LOG_F(INFO, "Broker URI         : %s", m_pConInstance->BrokerUri.c_str());
-    LOG_F(INFO, "Sleep Cycle        : %d", m_pConInstance->SleepCycle);
+    LOG_F(INFO, "Sleep Cycle        : %2.4f", m_pConInstance->SleepCycle);
     LOG_F(INFO, "Command IN         : %s", m_pConInstance->CommandIn.c_str());
     LOG_F(INFO, "Game Event OUT     : %s", m_pConInstance->GameEventOut.c_str());
-    LOG_F(INFO, "Force Multiplier   : %f", m_pConInstance->ForceMultiplier);
-    LOG_F(INFO, "Ship Width         : %f", m_pConInstance->ShipWidth);
-    LOG_F(INFO, "Ship Length        : %f", m_pConInstance->ShipLength);
-    LOG_F(INFO, "Fixture Density    : %f", m_pConInstance->FixtureDensity);
+    LOG_F(INFO, "Force Multiplier   : %2.4f", m_pConInstance->ForceMultiplier);
+    LOG_F(INFO, "Ship Width         : %2.4f", m_pConInstance->ShipWidth);
+    LOG_F(INFO, "Ship Length        : %2.4f", m_pConInstance->ShipLength);
+    LOG_F(INFO, "Fixture Density    : %2.4f", m_pConInstance->FixtureDensity);
 }
 
 Configuration &Configuration::Instance() {

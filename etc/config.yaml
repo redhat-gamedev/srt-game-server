@@ -1,6 +1,6 @@
 ---
 broker-uri: "tcp://artemiscloud:5672"
-sleep-cycle: 1500
+sleep-cycle: 16.666667 # 1 frame at 60fps
 command-in: "COMMAND.IN"
 game-event-out: "GAME.EVENT.OUT"
 force-multiplier: 3000000.0 # newtons

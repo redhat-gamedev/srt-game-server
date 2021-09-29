@@ -1,0 +1,222 @@
+﻿kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: srt-game-server
+  namespace: srt
+  uid: f264ea3e-4c4b-452d-a48d-604134fee809
+  resourceVersion: '764954'
+  generation: 20
+  creationTimestamp: '2021-09-28T12:49:58Z'
+  annotations:
+    deployment.kubernetes.io/revision: '4'
+  managedFields:
+    - manager: kubectl-create
+      operation: Update
+      apiVersion: apps/v1
+      time: '2021-09-28T12:49:58Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:spec':
+          'f:progressDeadlineSeconds': {}
+          'f:revisionHistoryLimit': {}
+          'f:selector': {}
+          'f:strategy':
+            'f:rollingUpdate':
+              .: {}
+              'f:maxSurge': {}
+              'f:maxUnavailable': {}
+            'f:type': {}
+          'f:template':
+            'f:metadata':
+              'f:labels':
+                .: {}
+                'f:name': {}
+            'f:spec':
+              'f:containers':
+                'k:{"name":"srt-game-server"}':
+                  'f:image': {}
+                  'f:terminationMessagePolicy': {}
+                  .: {}
+                  'f:resources': {}
+                  'f:args': {}
+                  'f:command': {}
+                  'f:env':
+                    .: {}
+                    'k:{"name":"BROKER_URI"}':
+                      .: {}
+                      'f:name': {}
+                    'k:{"name":"OPERAND_NAME"}':
+                      .: {}
+                      'f:name': {}
+                      'f:valueFrom':
+                        .: {}
+                        'f:fieldRef':
+                          .: {}
+                          'f:apiVersion': {}
+                          'f:fieldPath': {}
+                    'k:{"name":"POD_NAME"}':
+                      .: {}
+                      'f:name': {}
+                      'f:valueFrom':
+                        .: {}
+                        'f:fieldRef':
+                          .: {}
+                          'f:apiVersion': {}
+                          'f:fieldPath': {}
+                    'k:{"name":"SLEEP_CYCLE"}':
+                      .: {}
+                      'f:name': {}
+                  'f:terminationMessagePath': {}
+                  'f:imagePullPolicy': {}
+                  'f:name': {}
+              'f:dnsPolicy': {}
+              'f:restartPolicy': {}
+              'f:schedulerName': {}
+              'f:securityContext': {}
+              'f:terminationGracePeriodSeconds': {}
+    - manager: Mozilla
+      operation: Update
+      apiVersion: apps/v1
+      time: '2021-09-28T18:55:22Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:spec':
+          'f:replicas': {}
+          'f:template':
+            'f:spec':
+              'f:containers':
+                'k:{"name":"srt-game-server"}':
+                  'f:env':
+                    'k:{"name":"BROKER_URI"}':
+                      'f:value': {}
+                    'k:{"name":"SLEEP_CYCLE"}':
+                      'f:value': {}
+                  'f:volumeMounts':
+                    .: {}
+                    'k:{"mountPath":"/home/srt-game-server/etc"}':
+                      .: {}
+                      'f:mountPath': {}
+                      'f:name': {}
+              'f:volumes':
+                .: {}
+                'k:{"name":"srt-game-server-etc-volume"}':
+                  .: {}
+                  'f:configMap':
+                    .: {}
+                    'f:defaultMode': {}
+                    'f:name': {}
+                  'f:name': {}
+    - manager: kube-controller-manager
+      operation: Update
+      apiVersion: apps/v1
+      time: '2021-09-28T20:34:36Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            .: {}
+            'f:deployment.kubernetes.io/revision': {}
+        'f:status':
+          'f:availableReplicas': {}
+          'f:conditions':
+            .: {}
+            'k:{"type":"Available"}':
+              .: {}
+              'f:lastTransitionTime': {}
+              'f:lastUpdateTime': {}
+              'f:message': {}
+              'f:reason': {}
+              'f:status': {}
+              'f:type': {}
+            'k:{"type":"Progressing"}':
+              .: {}
+              'f:lastTransitionTime': {}
+              'f:lastUpdateTime': {}
+              'f:message': {}
+              'f:reason': {}
+              'f:status': {}
+              'f:type': {}
+          'f:observedGeneration': {}
+          'f:readyReplicas': {}
+          'f:replicas': {}
+          'f:updatedReplicas': {}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: srt-game-server
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        name: srt-game-server
+    spec:
+      volumes:
+        - name: srt-game-server-etc-volume
+          configMap:
+            name: srt-game-server-config
+            defaultMode: 420
+      containers:
+        - resources: {}
+          terminationMessagePath: /dev/termination-log
+          name: srt-game-server
+          command:
+            - /home/srt-game-server/bin/entrypoint
+          env:
+            - name: OPERAND_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: 'metadata.labels[''name'']'
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.name
+            - name: BROKER_URI
+              value: 'tcp://10.217.0.58:5672'
+            - name: SLEEP_CYCLE
+              value: '1600'
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: srt-game-server-etc-volume
+              mountPath: /home/srt-game-server/etc
+          terminationMessagePolicy: File
+          image: >-
+            image-registry.openshift-image-registry.svc:5000/srt/srt-game-server:latest
+          args:
+            - '--broker_uri tcp://10.217.0.58:5672'
+            - '--sleep_cycle 16'
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+      imagePullSecrets: []
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
+  paused: false
+status:
+  observedGeneration: 20
+  replicas: 1
+  updatedReplicas: 1
+  readyReplicas: 1
+  availableReplicas: 1
+  conditions:
+    - type: Available
+      status: 'True'
+      lastUpdateTime: '2021-09-28T12:49:58Z'
+      lastTransitionTime: '2021-09-28T12:49:58Z'
+      reason: MinimumReplicasAvailable
+      message: Deployment has minimum availability.
+    - type: Progressing
+      status: 'True'
+      lastUpdateTime: '2021-09-28T18:55:26Z'
+      lastTransitionTime: '2021-09-28T12:49:58Z'
+      reason: NewReplicaSetAvailable
+      message: ReplicaSet "srt-game-server-c874bc56f" has successfully progressed.

@@ -25,7 +25,7 @@ private:
 
     // Config variables default values
     std::string m_strBrokerUri     = "tcp://127.0.0.1:5672";
-    long        m_lSleepCycle      = 50; // milliseconds
+    float       m_fSleepCycle      = 16.666667; // 1000ms / 60fps
     std::string m_strCommandIn     = "COMMAND.IN";
     std::string m_strGameEventOut  = "GAME.EVENT.OUT";
     float       m_fForceMultiplier = 3000000.0; // newtons
@@ -43,7 +43,7 @@ protected:
 public:
     // Config variables references to protected members for convenience
     std::string &BrokerUri       = m_strBrokerUri;
-    long        &SleepCycle      = m_lSleepCycle;
+    float       &SleepCycle      = m_fSleepCycle;
     std::string &CommandIn       = m_strCommandIn;
     std::string &GameEventOut    = m_strGameEventOut;
     float       &ForceMultiplier = m_fForceMultiplier;

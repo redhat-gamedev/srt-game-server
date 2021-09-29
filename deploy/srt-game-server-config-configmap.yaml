@@ -1,0 +1,15 @@
+﻿kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: srt-game-server-config
+  namespace: srt
+data:
+  config.yaml: |
+    ---
+    broker-uri: 'tcp://srt-broker-amqp-0-svc:5672'
+    command-in: COMMAND.IN
+    force-multiplier: '3000000.0'
+    game-event-out: GAME.EVENT.OUT
+    ship-length: '150.0'
+    ship-width: '20.0'
+    sleep-cycle: '16.666667'

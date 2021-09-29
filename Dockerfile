@@ -22,7 +22,7 @@ RUN sudo dnf update --assumeyes --verbose && dnf install --assumeyes --verbose \
   && rm -rf /var/cache/yum
 
 COPY CMakeLists.txt /tmp/srt-game-server/
-COPY config.yaml /tmp/srt-game-server/
+#COPY config.yaml /tmp/srt-game-server/
 COPY src/ /tmp/srt-game-server/src/
 
 WORKDIR /tmp/srt-game-server/src/Proto
@@ -55,32 +55,35 @@ RUN sudo dnf update --assumeyes --verbose && dnf install  --assumeyes --verbose 
   && rm -rf /var/cache/yum
 
 ENV USER_UID=1000
-ENV USER_NAME=srt
+ENV USER_NAME=srt-game-server
 ENV EXECUTABLE_NAME=srt-game-server.bin
 ENV EXECUTABLE=/home/${USER_NAME}/bin/${EXECUTABLE_NAME}
 ENV BROKER_URI=tcp://artemiscloud:5672
 ENV LOG_LEVEL=1
-ENV SLEEP_CYCLE=1500
+ENV SLEEP_CYCLE=1400
 
 WORKDIR /
 
 RUN mkdir -p /home/${USER_NAME}/bin
+RUN mkdir -p /home/${USER_NAME}/etc
 #COPY bin/${EXECUTABLE_NAME} /home/${USER_NAME}/bin
 COPY --from=build-env /tmp/build/srt-game-server /home/${USER_NAME}/bin/${EXECUTABLE_NAME}
-COPY config.yaml /
+#COPY config.yaml /home/${USER_NAME}/etc
 COPY containerbuild/bin/entrypoint /home/${USER_NAME}/bin
 
 RUN chown -R `id -u`:0 /home/${USER_NAME}/bin && chmod -R 755 /home/${USER_NAME}/bin
+RUN chown -R `id -u`:0 /home/${USER_NAME}/etc && chmod -R 755 /home/${USER_NAME}/etc
 USER ${USER_UID}:0
-ENTRYPOINT /home/srt/bin/entrypoint --broker-uri ${BROKER_URI} --sleep-cycle ${SLEEP_CYCLE}
+WORKDIR /home/${USER_NAME}/bin
+ENTRYPOINT /home/${USER_NAME}/bin/entrypoint --broker-uri ${BROKER_URI} --sleep-cycle ${SLEEP_CYCLE}
 CMD [-v, ${LOG_LEVEL}]
 
 LABEL \
       com.srt.component="srt-game-server" \
       description="Space Ring Things game physics server" \
       io.k8s.description="Main game simulation container for Space Ring Things" \
-      io.k8s.display-name="Space Ring Things 0.3" \
+      io.k8s.display-name="Space Ring Things 0.4" \
       maintainer="Roddie Kieley <rkieley@apache.org>" \
       name="roddiekieley/srt-game-server" \
       summary="Space Ring Things game physics server" \
-      version="0.3"
+      version="0.4"
